@@ -12,3 +12,65 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.pointer-text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.dont-select-text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.link{
+  margin-left: 16px;
+  color: #000;
+  text-decoration: none;
+}
+
+.MUIDataTableSelectCell-root-720{
+  display: block;
+}
+
+.blog{
+  padding: 5px;
+  border: solid 1px darkgrey;
+   width: 90%;
+   max-width: 400px;
+   word-wrap: break-word;
+    overflow: hidden;
+ }
+
+.blog-image{
+  width: 100%;
+
+}
+
+.blog-title{
+  margin: 5px;
+  display: flex;
+  text-align: left;
+  width: 100%;
+
+}
+
+.blog-text{
+  margin: 5px;
+  display: flex;
+  text-align: left;
+  width: 100%;
+
+}
+
+@media screen and (min-width: 400px) {
+}
+
+@media screen and (max-width: 400px) {
+}
+

@@ -7,6 +7,29 @@
   height: 40vmin;
 }
 
+.App-body {
+  position: fixed;
+  width: calc(100%);
+  overflow: auto;
+}
+
+@media (min-width: 800px){
+  .App-body {
+    left: 240px;
+    width: calc(100% - 240px);
+    top: 64px;
+    height: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 800px){
+  .App-body {
+    top: 56px;
+    height: calc(100% - 56px);
+  }
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
