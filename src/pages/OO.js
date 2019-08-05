@@ -75,245 +75,319 @@ const styles = theme => ({
 
 const Plan = React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if (!(status.status==='active'&&['admin', 'организатор'].includes(status.role))) {
+        useEffect( ()=>{
+            async function fetchData() {
+                if (!(status.status==='active'&&['admin', 'организатор'].includes(status.role))) {
                 props.history.push('/')
             }
-            let _data = await tableActions.getDataSimple({name: 'Номера авто'})
-            setAutos(_data)
-            _data = await tableActions.getDataSimple({name: 'Цена1'})
-            setPrice(_data)
-            if(selected===-1) {
-                _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
-                if(_data!==undefined){
-                    setRegion(_data.region)
-                    setOrganizator(_data.name)
-                    let date = new Date()
-                    date = JSON.stringify(date).split('-')
-                    date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
-                    setDate(date)
+                let _data = await tableActions.getDataSimple({name: 'Номера авто'})
+                setAutos(_data)
+                _data = await tableActions.getDataSimple({name: 'Цена1'})
+                setPrice(_data)
+                if(selected===-1) {
+                    _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
+                    if(_data!==undefined){
+                        let date = new Date()
+                        date = JSON.stringify(date).split('-')
+                        date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                        let _data1 = await tableActions.getDataSimple({name: 'Отчет организатора по данным', data: {
+                            data: date, organizator: _data.guid, region: _data.guidRegion}})
+                        if(_data1!==undefined&&_data1!==''){
+                            setDate(_data1.data)
+                            setOrganizator(_data1.organizator)
+                            setRegion(_data1.region)
+                            setNakladnaya(JSON.parse(_data1.dataTable))
+                            setId(_data1._id)
+                            setGuidOrganizator(_data1.guidOrganizator)
+                            setGuidRegion(_data1.guidRegion)
+                        } else {
 
-                    _data = await tableActions.getDataSimple({name: 'Все отчеты реализаторов по дате', data: {data: date, organizator: _data.name, region: _data.region}})
-                    if(_data!=undefined){
-                        nakladnaya.r.otr = 100 * _data.length
-                        let dolivkiM = [], dolivkiCh = [], dolivkiK = [], dolivkiSl = [], dolivkiS02 = [], dolivkiS04 = [], dolivkiB = []
+                            setRegion(_data.region)
+                            setOrganizator(_data.name)
+                            setGuidOrganizator(_data.guid)
+                            setGuidRegion(_data.guidRegion)
+                            let date = new Date()
+                            date = JSON.stringify(date).split('-')
+                            date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                            setDate(date)
 
-                        nakladnaya['time'] = {
-                            'r': '',
-                            'd1': '',
-                            'd2': '',
-                            'd3': '',
-                            's': '',
+                            _data = await tableActions.getDataSimple({name: 'Все отчеты реализаторов по дате',
+                                data: {data: date, organizator: _data.guid, region: _data.guidRegion}
+                            })
+                            if(_data!=undefined){
+                                nakladnaya.r.otr = 100 * _data.length
+                                let dolivkiM = [], dolivkiCh = [], dolivkiK = [], dolivkiSl = [], dolivkiS02 = [], dolivkiS04 = [], dolivkiB = []
+
+                                nakladnaya['time'] = {
+                                    'r': '',
+                                    'd1': '',
+                                    'd2': '',
+                                    'd3': '',
+                                    's': '',
+                                }
+
+                                for(let i=0; i<_data.length; i++){
+                                    let dataTable = JSON.parse(_data[i].dataTable)
+
+                                    if(nakladnaya['time']['r'].length===0&&dataTable.vydano.r.time.length>0){
+                                        nakladnaya['time']['r'] = dataTable.vydano.r.time
+                                    }
+                                    if(nakladnaya['time']['d1'].length===0&&dataTable.vydano.d1.time.length>0){
+                                        nakladnaya['time']['d1'] = dataTable.vydano.d1.time
+                                    }
+                                    if(nakladnaya['time']['d2'].length===0&&dataTable.vydano.d2.time.length>0){
+                                        nakladnaya['time']['d2'] = dataTable.vydano.d2.time
+                                    }
+                                    if(nakladnaya['time']['d3'].length===0&&dataTable.vydano.d3.time.length>0){
+                                        nakladnaya['time']['d3'] = dataTable.vydano.d3.time
+                                    }
+                                    if(nakladnaya['time']['s'].length===0&&dataTable.vozvrat.v.time.length>0){
+                                        nakladnaya['time']['s'] = dataTable.vozvrat.v.time
+                                    }
+
+                                    if(dataTable.vydano.d3.ml.length>0){
+                                        dolivkiM[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.ml.length>0){
+                                        dolivkiM[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.ml.length>0){
+                                        dolivkiM[i]=1
+                                    }
+                                    else {
+                                        dolivkiM[i]=0
+                                    }
+
+                                    if(dataTable.vydano.d3.kl.length>0){
+                                        dolivkiK[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.kl.length>0){
+                                        dolivkiK[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.kl.length>0){
+                                        dolivkiK[i]=1
+                                    }
+                                    else {
+                                        dolivkiK[i]=0
+                                    }
+
+                                    if(dataTable.vydano.d3.chl.length>0){
+                                        dolivkiCh[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.chl.length>0){
+                                        dolivkiCh[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.chl.length>0){
+                                        dolivkiCh[i]=1
+                                    }
+                                    else {
+                                        dolivkiCh[i]=0
+                                    }
+
+                                    if(dataTable.vydano.d3.sl.length>0){
+                                        dolivkiSl[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.sl.length>0){
+                                        dolivkiSl[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.sl.length>0){
+                                        dolivkiSl[i]=1
+                                    }
+                                    else {
+                                        dolivkiSl[i]=0
+                                    }
+
+
+                                    if(dataTable.vydano.d3.s02.length>0){
+                                        dolivkiS02[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.s02.length>0){
+                                        dolivkiS02[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.s02.length>0){
+                                        dolivkiS02[i]=1
+                                    }
+                                    else {
+                                        dolivkiS02[i]=0
+                                    }
+
+                                    if(dataTable.vydano.d3.s04.length>0){
+                                        dolivkiS04[i]=3
+                                    }
+                                    else if(dataTable.vydano.d2.s04.length>0){
+                                        dolivkiS04[i]=2
+                                    }
+                                    else if(dataTable.vydano.d1.s04.length>0){
+                                        dolivkiS04[i]=1
+                                    }
+                                    else {
+                                        dolivkiS04[i]=0
+                                    }
+
+                                    if(dataTable.vydano.d3.b!==0){
+                                        dolivkiB[i]=3
+                                    }
+                                    if(dataTable.vydano.d1.b){
+                                        dolivkiB[i]=1
+                                    }
+                                    if(dataTable.vydano.d2.b!==0){
+                                        dolivkiB[i]=2
+                                    }
+
+                                    nakladnaya.p.m.v += checkInt(dataTable.vydano.i.ml)
+                                    nakladnaya.p.ch.v += checkInt(dataTable.vydano.i.chl)
+                                    nakladnaya.p.k.v += checkInt(dataTable.vydano.i.kl)
+                                    nakladnaya.p.sl.v += checkInt(dataTable.vydano.i.sl)
+                                    nakladnaya.p.s02.v += checkInt(dataTable.vydano.i.s02)
+                                    nakladnaya.p.s04.v += checkInt(dataTable.vydano.i.s04)
+                                    nakladnaya.p.b.v += checkInt(dataTable.vydano.i.b)
+
+                                    nakladnaya.p.m.o += checkInt(dataTable.vozvrat.v.ml)
+                                    nakladnaya.p.ch.o += checkInt(dataTable.vozvrat.v.chl)
+                                    nakladnaya.p.k.o += checkInt(dataTable.vozvrat.v.kl)
+                                    nakladnaya.p.m.o += checkInt(dataTable.vozvrat.v.ml1)
+                                    nakladnaya.p.ch.o += checkInt(dataTable.vozvrat.v.chl1)
+                                    nakladnaya.p.k.o += checkInt(dataTable.vozvrat.v.kl1)
+                                    nakladnaya.p.sl.o += checkInt(dataTable.vozvrat.v.sl)
+                                    nakladnaya.p.s02.o += checkInt(dataTable.vozvrat.v.s02)
+                                    nakladnaya.p.s04.o += checkInt(dataTable.vozvrat.v.s04)
+                                    nakladnaya.p.b.o += checkInt(dataTable.vozvrat.v.b)
+
+                                    nakladnaya.p.m.s += checkInt(dataTable.vozvrat.s.ml)
+                                    nakladnaya.p.ch.s += checkInt(dataTable.vozvrat.s.chl)
+                                    nakladnaya.p.k.s += checkInt(dataTable.vozvrat.s.kl)
+                                    nakladnaya.p.sl.s += checkInt(dataTable.vozvrat.s.sl)
+                                    nakladnaya.p.s02.s += checkInt(dataTable.vozvrat.s.s02)
+                                    nakladnaya.p.s04.s += checkInt(dataTable.vozvrat.s.s04)
+                                    nakladnaya.p.b.s += checkInt(dataTable.vozvrat.s.b)
+
+                                    nakladnaya.p.m.pl += checkInt(dataTable.vozvrat.p.ml)
+                                    nakladnaya.p.ch.pl += checkInt(dataTable.vozvrat.p.chl)
+                                    nakladnaya.p.k.pl += checkInt(dataTable.vozvrat.p.kl)
+                                    nakladnaya.p.sl.pl += checkInt(dataTable.vozvrat.p.sl)
+                                    nakladnaya.p.s02.pl += checkInt(dataTable.vozvrat.p.s02)
+                                    nakladnaya.p.s04.pl += checkInt(dataTable.vozvrat.p.s04)
+                                    nakladnaya.p.b.pl += checkInt(dataTable.vozvrat.p.b)
+
+                                    nakladnaya.p.m.ps += checkInt(dataTable.vozvrat.virychka.ml)
+                                    nakladnaya.p.ch.ps += checkInt(dataTable.vozvrat.virychka.chl)
+                                    nakladnaya.p.k.ps += checkInt(dataTable.vozvrat.virychka.kl)
+                                    nakladnaya.p.sl.ps += checkInt(dataTable.vozvrat.virychka.sl)
+                                    nakladnaya.p.s02.ps += checkInt(dataTable.vozvrat.virychka.s02)
+                                    nakladnaya.p.s04.ps += checkInt(dataTable.vozvrat.virychka.s04)
+                                    nakladnaya.p.b.ps += checkInt(dataTable.vozvrat.virychka.b)
+
+                                    nakladnaya.p.m.ktt = _data.length
+                                    nakladnaya.p.ch.ktt = _data.length
+                                    nakladnaya.p.k.ktt = _data.length
+                                    nakladnaya.p.sl.ktt = _data.length
+                                    nakladnaya.p.s02.ktt = _data.length
+                                    nakladnaya.p.s04.ktt = _data.length
+                                    nakladnaya.p.b.ktt = _data.length
+
+                                    nakladnaya.r.ntp += checkInt(dataTable.vozvrat.virychka.sl)
+                                }
+                                nakladnaya.p.m.kd = dolivkiM.length>0?Math.max.apply(Math, dolivkiM):0;
+                                nakladnaya.p.k.kd = dolivkiK.length>0?Math.max.apply(Math, dolivkiK):0;
+                                nakladnaya.p.ch.kd = dolivkiCh.length>0?Math.max.apply(Math, dolivkiCh):0;
+                                nakladnaya.p.sl.kd = dolivkiSl.length>0?Math.max.apply(Math, dolivkiSl):0;
+                                nakladnaya.p.s02.kd = dolivkiS02.length>0?Math.max.apply(Math, dolivkiS02):0;
+                                nakladnaya.p.s04.kd = dolivkiS04.length>0?Math.max.apply(Math, dolivkiS04):0;
+                                nakladnaya.p.b.kd = dolivkiB.length>0?Math.max.apply(Math, dolivkiB):0;
+
+                                nakladnaya['p']['i'] = checkInt(nakladnaya['p']['m']['ps']) + checkInt(nakladnaya['p']['ch']['ps']) + checkInt(nakladnaya['p']['k']['ps']) + checkInt(nakladnaya['p']['sl']['ps'])
+                                nakladnaya['i'] = checkInt(nakladnaya['p']['i']) - checkInt(nakladnaya['r']['otr']) - checkInt(nakladnaya['r']['oo']) - checkInt(nakladnaya['r']['ntp']) - checkInt(nakladnaya['r']['att']) - checkInt(nakladnaya['r']['at']) - checkInt(nakladnaya['r']['vs'])
+                            }
+
+                            setNakladnaya(nakladnaya)
                         }
 
-                        for(let i=0; i<_data.length; i++){
-                            let dataTable = JSON.parse(_data[i].dataTable)
-
-                            if(nakladnaya['time']['r'].length===0&&dataTable.vydano.r.time.length>0){
-                                nakladnaya['time']['r'] = dataTable.vydano.r.time
-                            }
-                            if(nakladnaya['time']['d1'].length===0&&dataTable.vydano.d1.time.length>0){
-                                nakladnaya['time']['d1'] = dataTable.vydano.d1.time
-                            }
-                            if(nakladnaya['time']['d2'].length===0&&dataTable.vydano.d2.time.length>0){
-                                nakladnaya['time']['d2'] = dataTable.vydano.d2.time
-                            }
-                            if(nakladnaya['time']['d3'].length===0&&dataTable.vydano.d3.time.length>0){
-                                nakladnaya['time']['d3'] = dataTable.vydano.d3.time
-                            }
-                            if(nakladnaya['time']['s'].length===0&&dataTable.vozvrat.v.time.length>0){
-                                nakladnaya['time']['s'] = dataTable.vozvrat.v.time
-                            }
-
-                            if(dataTable.vydano.d3.ml.length>0){
-                                dolivkiM[i]=3
-                            }
-                            else if(dataTable.vydano.d2.ml.length>0){
-                                dolivkiM[i]=2
-                            }
-                            else if(dataTable.vydano.d1.ml.length>0){
-                                dolivkiM[i]=1
-                            }
-                            else {
-                                dolivkiM[i]=0
-                            }
-
-                            if(dataTable.vydano.d3.kl.length>0){
-                                dolivkiK[i]=3
-                            }
-                            else if(dataTable.vydano.d2.kl.length>0){
-                                dolivkiK[i]=2
-                            }
-                            else if(dataTable.vydano.d1.kl.length>0){
-                                dolivkiK[i]=1
-                            }
-                            else {
-                                dolivkiK[i]=0
-                            }
-
-                            if(dataTable.vydano.d3.chl.length>0){
-                                dolivkiCh[i]=3
-                            }
-                            else if(dataTable.vydano.d2.chl.length>0){
-                                dolivkiCh[i]=2
-                            }
-                            else if(dataTable.vydano.d1.chl.length>0){
-                                dolivkiCh[i]=1
-                            }
-                            else {
-                                dolivkiCh[i]=0
-                            }
-
-                            if(dataTable.vydano.d3.sl.length>0){
-                                dolivkiSl[i]=3
-                            }
-                            else if(dataTable.vydano.d2.sl.length>0){
-                                dolivkiSl[i]=2
-                            }
-                            else if(dataTable.vydano.d1.sl.length>0){
-                                dolivkiSl[i]=1
-                            }
-                            else {
-                                dolivkiSl[i]=0
-                            }
-
-
-                            if(dataTable.vydano.d3.s02.length>0){
-                                dolivkiS02[i]=3
-                            }
-                            else if(dataTable.vydano.d2.s02.length>0){
-                                dolivkiS02[i]=2
-                            }
-                            else if(dataTable.vydano.d1.s02.length>0){
-                                dolivkiS02[i]=1
-                            }
-                            else {
-                                dolivkiS02[i]=0
-                            }
-
-                            if(dataTable.vydano.d3.s04.length>0){
-                                dolivkiS04[i]=3
-                            }
-                            else if(dataTable.vydano.d2.s04.length>0){
-                                dolivkiS04[i]=2
-                            }
-                            else if(dataTable.vydano.d1.s04.length>0){
-                                dolivkiS04[i]=1
-                            }
-                            else {
-                                dolivkiS04[i]=0
-                            }
-
-                            if(dataTable.vydano.d3.b!==0){
-                                dolivkiB[i]=3
-                            }
-                            if(dataTable.vydano.d1.b){
-                                dolivkiB[i]=1
-                            }
-                            if(dataTable.vydano.d2.b!==0){
-                                dolivkiB[i]=2
-                            }
-
-                            nakladnaya.p.m.v += checkInt(dataTable.vydano.i.ml)
-                            nakladnaya.p.ch.v += checkInt(dataTable.vydano.i.chl)
-                            nakladnaya.p.k.v += checkInt(dataTable.vydano.i.kl)
-                            nakladnaya.p.sl.v += checkInt(dataTable.vydano.i.sl)
-                            nakladnaya.p.s02.v += checkInt(dataTable.vydano.i.s02)
-                            nakladnaya.p.s04.v += checkInt(dataTable.vydano.i.s04)
-                            nakladnaya.p.b.v += checkInt(dataTable.vydano.i.b)
-
-                            nakladnaya.p.m.o += checkInt(dataTable.vozvrat.v.ml)
-                            nakladnaya.p.ch.o += checkInt(dataTable.vozvrat.v.chl)
-                            nakladnaya.p.k.o += checkInt(dataTable.vozvrat.v.kl)
-                            nakladnaya.p.m.o += checkInt(dataTable.vozvrat.v.ml1)
-                            nakladnaya.p.ch.o += checkInt(dataTable.vozvrat.v.chl1)
-                            nakladnaya.p.k.o += checkInt(dataTable.vozvrat.v.kl1)
-                            nakladnaya.p.sl.o += checkInt(dataTable.vozvrat.v.sl)
-                            nakladnaya.p.s02.o += checkInt(dataTable.vozvrat.v.s02)
-                            nakladnaya.p.s04.o += checkInt(dataTable.vozvrat.v.s04)
-                            nakladnaya.p.b.o += checkInt(dataTable.vozvrat.v.b)
-
-                            nakladnaya.p.m.s += checkInt(dataTable.vozvrat.s.ml)
-                            nakladnaya.p.ch.s += checkInt(dataTable.vozvrat.s.chl)
-                            nakladnaya.p.k.s += checkInt(dataTable.vozvrat.s.kl)
-                            nakladnaya.p.sl.s += checkInt(dataTable.vozvrat.s.sl)
-                            nakladnaya.p.s02.s += checkInt(dataTable.vozvrat.s.s02)
-                            nakladnaya.p.s04.s += checkInt(dataTable.vozvrat.s.s04)
-                            nakladnaya.p.b.s += checkInt(dataTable.vozvrat.s.b)
-
-                            nakladnaya.p.m.pl += checkInt(dataTable.vozvrat.p.ml)
-                            nakladnaya.p.ch.pl += checkInt(dataTable.vozvrat.p.chl)
-                            nakladnaya.p.k.pl += checkInt(dataTable.vozvrat.p.kl)
-                            nakladnaya.p.sl.pl += checkInt(dataTable.vozvrat.p.sl)
-                            nakladnaya.p.s02.pl += checkInt(dataTable.vozvrat.p.s02)
-                            nakladnaya.p.s04.pl += checkInt(dataTable.vozvrat.p.s04)
-                            nakladnaya.p.b.pl += checkInt(dataTable.vozvrat.p.b)
-
-                            nakladnaya.p.m.ps += checkInt(dataTable.vozvrat.virychka.ml)
-                            nakladnaya.p.ch.ps += checkInt(dataTable.vozvrat.virychka.chl)
-                            nakladnaya.p.k.ps += checkInt(dataTable.vozvrat.virychka.kl)
-                            nakladnaya.p.sl.ps += checkInt(dataTable.vozvrat.virychka.sl)
-                            nakladnaya.p.s02.ps += checkInt(dataTable.vozvrat.virychka.s02)
-                            nakladnaya.p.s04.ps += checkInt(dataTable.vozvrat.virychka.s04)
-                            nakladnaya.p.b.ps += checkInt(dataTable.vozvrat.virychka.b)
-
-                            nakladnaya.p.m.ktt = _data.length
-                            nakladnaya.p.ch.ktt = _data.length
-                            nakladnaya.p.k.ktt = _data.length
-                            nakladnaya.p.sl.ktt = _data.length
-                            nakladnaya.p.s02.ktt = _data.length
-                            nakladnaya.p.s04.ktt = _data.length
-                            nakladnaya.p.b.ktt = _data.length
-
-                            nakladnaya.r.ntp += checkInt(dataTable.vozvrat.virychka.sl)
-                        }
-                        nakladnaya.p.m.kd = dolivkiM.length>0?Math.max.apply(Math, dolivkiM):0;
-                        nakladnaya.p.k.kd = dolivkiK.length>0?Math.max.apply(Math, dolivkiK):0;
-                        nakladnaya.p.ch.kd = dolivkiCh.length>0?Math.max.apply(Math, dolivkiCh):0;
-                        nakladnaya.p.sl.kd = dolivkiSl.length>0?Math.max.apply(Math, dolivkiSl):0;
-                        nakladnaya.p.s02.kd = dolivkiS02.length>0?Math.max.apply(Math, dolivkiS02):0;
-                        nakladnaya.p.s04.kd = dolivkiS04.length>0?Math.max.apply(Math, dolivkiS04):0;
-                        nakladnaya.p.b.kd = dolivkiB.length>0?Math.max.apply(Math, dolivkiB):0;
-
-                        nakladnaya['p']['i'] = checkInt(nakladnaya['p']['m']['ps']) + checkInt(nakladnaya['p']['ch']['ps']) + checkInt(nakladnaya['p']['k']['ps']) + checkInt(nakladnaya['p']['sl']['ps'])
-                        nakladnaya['i'] = checkInt(nakladnaya['p']['i']) - checkInt(nakladnaya['r']['otr']) - checkInt(nakladnaya['r']['oo']) - checkInt(nakladnaya['r']['ntp']) - checkInt(nakladnaya['r']['att']) - checkInt(nakladnaya['r']['at']) - checkInt(nakladnaya['r']['vs'])
                     }
-
-                    setNakladnaya(nakladnaya)
-
+                }
+                else {
+                    _data = await tableActions.getDataSimple({name: 'Отчет организатора по данным',
+                        data: {data: data[selected][1], organizator: data[selected][2], region: data[selected][3]}})
+                    if(_data!==undefined){
+                        setDate(_data.data)
+                        setOrganizator(_data.organizator)
+                        setRegion(_data.region)
+                        setGuidOrganizator(_data.guidOrganizator)
+                        setGuidRegion(_data.guidRegion)
+                        setNakladnaya(JSON.parse(_data.dataTable))
+                        setId(_data._id)
+                    }
+                    let date1 = new Date()
+                    date1 = JSON.stringify(date1).split('-')
+                    date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
+                    setCheckDate(date1!==_data.data)
                 }
             }
-            else {
-                _data = await tableActions.getDataSimple({name: 'Отчет организатора по данным', data: {data: data[selected][1], organizator: data[selected][0].split(':')[0], region: data[selected][0].split(':')[1].trim()}})
-                if(_data!==undefined){
-                    setDate(_data.data)
-                    setOrganizator(_data.organizator)
-                    setRegion(_data.region)
-                    setNakladnaya(JSON.parse(_data.dataTable))
-                    setId(_data._id)
-                }
-                let date1 = new Date()
-                date1 = JSON.stringify(date1).split('-')
-                date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
-                setCheckDate(date1!==_data.data)
-            }
+            fetchData();
         },[])
         let [checkDate, setCheckDate] = useState(false);
-        const { setSelected, addData, setData } = props.tableActions;
+        const { setSelected, addData, setData, setSelectedRegion } = props.tableActions;
         const { selected, data } = props.table;
         const { classes } = props;
         const { status } = props.user;
         let [organizator, setOrganizator] = useState('');
         let [region, setRegion] = useState('');
+        let [guidOrganizator, setGuidOrganizator] = useState('');
+        let [guidRegion, setGuidRegion] = useState('');
+        useEffect( ()=>{
+            if(guidRegion!==undefined&&guidRegion.length>0)
+                setSelectedRegion(guidRegion)
+        },[guidRegion])
         let [date, setDate] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
+            setNakladnaya({
+                'p': {
+                    'i': 0,
+                    'm': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    'ch': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    'k': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    'sl': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    's02': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    's04': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                    'b': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
+                },
+                'r': {
+                    'otr': 0,
+                    'oo': 100,
+                    'ntp': 0,
+                    'att': 0,
+                    'at': '',
+                    'vs': '',
+                    'inc': 0
+                },
+                'time': {
+                    'r': '',
+                    'd1': '',
+                    'd2': '',
+                    'd3': '',
+                    's': '',
+                },
+                'a': {
+                    'n': '',
+                    'r': '',
+                    'd1': '',
+                    'd2': '',
+                    'd3': '',
+                    's': '',
+                    'lkm': '',
+                },
+                'i': -100,
+                'm': false,
+            });
+            setId('')
             setDate1(date)
             date = JSON.stringify(date).split('-')
             date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
             setDate(date)
 
-            let _data = await tableActions.getDataSimple({name: 'Все отчеты реализаторов по дате', data: {data: date, organizator: organizator, region: region}})
+            let _data = await tableActions.getDataSimple({name: 'Все отчеты реализаторов по дате',
+                data: {data: date, organizator: guidOrganizator, region: guidRegion}
+            })
             if(_data!=undefined){
                 nakladnaya.r.otr = 100 * _data.length
                 let dolivkiM = [], dolivkiCh = [], dolivkiK = [], dolivkiSl = [], dolivkiS02 = [], dolivkiS04 = [], dolivkiB = []
@@ -1125,7 +1199,7 @@ const Plan = React.memo(
                             <div style={{display: 'inline-block'}}>Нтп: <b style={{color: 'black'}}>{nakladnaya.r.ntp}</b>&nbsp;&nbsp;</div>
                             <div style={{display: 'inline-block'}}>Атт: <b style={{color: 'black'}}>{nakladnaya.r.att}</b>&nbsp;&nbsp;</div>
                             <div style={{display: 'inline-block'}}>Ат: <b style={{color: 'black'}}>{nakladnaya.r.at}</b>&nbsp;&nbsp;</div>
-                            <div style={{display: 'inline-block'}}>В: <b style={{color: 'black'}}>{nakladnaya.r.fv}</b>&nbsp;&nbsp;</div>
+                            <div style={{display: 'inline-block'}}>В: <b style={{color: 'black'}}>{nakladnaya.r.vs}</b>&nbsp;&nbsp;</div>
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails style={{padding: '0px'}}>
@@ -1405,23 +1479,29 @@ const Plan = React.memo(
                 <div>
                     <Link className='link' to={''}>
                         <Button variant='contained' color='primary' onClick={()=>{
-                            if(selected===-1)
-                                addData({search: '', sort: '', page: 0, name: 'Отчет организатора', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            else
-                                setData({id: id, search: '', sort: '', page: 0, name: 'Отчет организатора', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            setSelected(-1)}} className={classes.button}>
+                            if(guidRegion!=='lol'){
+                                if(selected===-1)
+                                    addData({search: '', sort: '', page: 0, name: 'Отчет организатора', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                else
+                                    setData({id: id, search: '', sort: '', page: 0, name: 'Отчет организатора', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                setSelected(-1)
+                            }}} className={classes.button}>
                             Сохранить
                         </Button>
                     </Link>

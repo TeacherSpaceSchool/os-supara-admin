@@ -15,8 +15,8 @@
 
 @media (min-width: 800px){
   .App-body {
-    left: 240px;
-    width: calc(100% - 240px);
+    left: 300px;
+    width: calc(100% - 300px);
     top: 64px;
     height: calc(100% - 64px);
   }

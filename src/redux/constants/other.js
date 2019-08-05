@@ -59,5 +59,12 @@ export const getYesterday = (day) => {
 }
 
 export const checkInt = (int) => {
-    return int===''||int===undefined?0:int
+    return isNaN(parseInt(int))?0:parseInt(int)
+}
+
+export const getname = (arr) => {
+    for(let i=0; i<arr.length; i++){
+        arr[i] = arr[i].name
+    }
+    return arr
 }

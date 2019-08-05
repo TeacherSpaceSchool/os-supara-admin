@@ -60,6 +60,9 @@ const Sign =  React.memo(
                     margin='normal'
                     value={name}
                     onChange={handleName}
+                    InputProps={{
+                        readOnly: true,
+                    }}
                 />
                 <br/>
                 <div>

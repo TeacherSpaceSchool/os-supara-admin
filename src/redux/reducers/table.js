@@ -5,7 +5,9 @@ import {
     SET_POINT,
     SET_OLD_FILE,
     SET_DELETED_ID,
-    SET_TYPE_STATISTIC
+    SET_TYPE_STATISTIC,
+    SET_SELECTED_POINT,
+    SET_SELECTED_REGION
 } from '../constants/table'
 
 const initialState = {
@@ -22,7 +24,9 @@ const initialState = {
     point1: {},
     deletedId: '',
     oldFile: '',
-    typeStatistic: {what: 'Выбрать'}
+    region: 'region',
+    point: 'point',
+    typeStatistic: {what: '', name: 'Выбрать'}
 }
 
 export default function user(state = initialState, action) {
@@ -41,7 +45,7 @@ export default function user(state = initialState, action) {
             };
 
         case GET_DATA:
-            return {
+            let a = {
                 ...state,
                 count: action.payload.count,
                 page: action.payload.page,
@@ -51,7 +55,15 @@ export default function user(state = initialState, action) {
                 search: action.payload.search,
                 name: action.payload.name,
                 sort: action.payload.sort
-            };
+            }
+            if(action.payload.region!==undefined){
+                a.region = action.payload.region
+            }
+            if(action.payload.point!==undefined){
+                a.point = action.payload.point
+            }
+
+            return a;
 
         case SET_POINT:
             return {
@@ -75,6 +87,18 @@ export default function user(state = initialState, action) {
             return {
                 ...state,
                 typeStatistic: action.payload,
+            };
+
+        case SET_SELECTED_POINT:
+            return {
+                ...state,
+                point: action.payload,
+            };
+
+        case SET_SELECTED_REGION:
+            return {
+                ...state,
+                region: action.payload,
             };
 
         default:

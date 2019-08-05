@@ -71,40 +71,50 @@ const styles = theme => ({
 
 const Plan = React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if (!(status.status==='active'&&['admin', 'организатор'].includes(status.role))) {
+        useEffect( ()=>{
+            async function fetchData() {
+                if (!(status.status==='active'&&['admin', 'организатор'].includes(status.role))) {
                 props.history.push('/')
             }
-            if(selected===-1) {
-                let regions = [], _data = await tableActions.getDataSimple({name: 'РегионИмя'})
-                for (let i = 0; i < _data.length; i++) {
-                    let points = [], _data1 = await tableActions.getDataSimple({name: 'ТочкаПоРегиону', data: {region: _data[i]}})
-                    for (let i1 = 0; i1 < _data1.length; i1++) {
-                        points[i1] = {name: _data1[i1], plan: '', current: 0}
-                    }
-                    regions[i] = {name: _data[i], plan: 0, current: 0, points: points}
-                }
-                setRegions(regions)
-            } else {
-                let _data = await tableActions.getDataSimple({name: 'ПланПоДате', data: {date: data[selected][0]}})
-                setRegions(JSON.parse(_data.regions))
-                setDate(_data.date)
-                setPlan(_data.norma)
-                setCurrent(_data.current)
-                setId(_data._id)
-                if('организатор'===status.role) {
-                    let or = JSON.parse(_data.regions)
-                    for (let i = 0; i < or.length; i++) {
-                        if (profile.region === or[i].name){
-                            setPlan(JSON.parse(_data.regions)[0].plan)
-                            setCurrent(JSON.parse(_data.regions)[0].current)
+                if(selected===-1) {
+                    let regions = [], _data = await tableActions.getDataSimple({name: 'РегионИмя'})
+                    console.log(_data)
+                    if(_data!==undefined){
+                        for (let i = 0; i < _data.length; i++) {
+                            let points = [], _data1 = await tableActions.getDataSimple({name: 'ТочкаПоРегиону', data: {region: _data[i].guid}})
+                            console.log(_data1)
+                            for (let i1 = 0; i1 < _data1.length; i1++) {
+                                points[i1] = {name: _data1[i1].name, guidPoint: _data1[i1].guid, plan: '', current: 0}
+                            }
+                            regions[i] = {name: _data[i].name, guidRegion: _data[i].guid, plan: 0, current: 0, points: points}
                         }
+                        setRegions(regions)
                     }
+                }
+                else {
+                let _data = await tableActions.getDataSimple({name: 'ПланПоДате', data: {date: data[selected][0]}})
+                if(_data!==undefined) {
+                    setRegions(JSON.parse(_data.regions))
+                    setDate(_data.date)
+                    setPlan(_data.norma)
+                    setCurrent(_data.current)
+                    setId(_data._id)
+                    if ('организатор' === status.role) {
+                        let or = JSON.parse(_data.regions)
+                        for (let i = 0; i < or.length; i++) {
+                            if (profile.region === or[i].name) {
+                                setPlan(JSON.parse(_data.regions)[0].plan)
+                                setCurrent(JSON.parse(_data.regions)[0].current)
+                            }
+                        }
 
-                    _data = await tableActions.getDataSimple({name: 'Профиль'})
-                    setProfile(_data)
+                        _data = await tableActions.getDataSimple({name: 'Профиль'})
+                        setProfile(_data)
+                    }
                 }
             }
+            }
+            fetchData();
         },[])
         const { setSelected, addData, setData } = props.tableActions;
         const { selected, data } = props.table;
@@ -112,6 +122,7 @@ const Plan = React.memo(
         const { status } = props.user;
         let [date, setDate] = useState('2019-01-01');
         let [profile, setProfile] = useState({});
+        let [virtualList, setVirtualList] = useState({});
         let [id, setId] = useState('2019-01-01');
         let [current, setCurrent] = useState(0);
         let [plan, setPlan] = useState(0);
@@ -166,7 +177,7 @@ const Plan = React.memo(
                     regions.map((element, idx)=>{
                     if(status.role=='admin'||(status.role=='организатор'&&profile.region===element.name))
                         return(
-                            <ExpansionPanel>
+                            <ExpansionPanel onClick={()=>{virtualList[element.name]=true; setVirtualList(virtualList)}}>
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                     <Typography className={classes.heading}>{element.name}</Typography>
                                     <Typography className={classes.secondaryHeading}>
@@ -174,7 +185,7 @@ const Plan = React.memo(
                                         Прогресс: <b style={{color: 'black'}}>{element.plan!==0&&element.plan!==''?Math.round(element.current*100/element.plan)+'%':element.current}</b>
                                     </Typography>
                                 </ExpansionPanelSummary>
-                                 {element.points!=undefined&&element.points.length>0?
+                                 {virtualList[element.name]===true&&element.points!=undefined&&element.points.length>0?
                                      element.points.map((element, idx1)=>{
                                          return(
                                              <ExpansionPanelDetails>

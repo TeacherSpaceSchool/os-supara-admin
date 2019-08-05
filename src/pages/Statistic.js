@@ -87,29 +87,85 @@ const Plan = React.memo(
         const { typeStatistic } = props.table;
         let [date, setDate] = useState(new Date());
         let [list, setList] = useState([]);
-        useEffect(async ()=>{
-            if(typeStatistic.what!=='Выбрать'){
-                date = JSON.stringify(date).split('-')
-                date = month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
-                let _data = await tableActions.getDataSimple({name: 'Статистика', data: {date: date, what: typeStatistic.what, type: typeStatistic.type}})
-                setList(_data)
+        let statuses = ['по годам', 'по месяцам', 'по дням']
+        let [status, setStatus] = useState('по дням');
+        let handleStatus =  (event) => {
+            setStatus(event.target.value)
+        };
+        useEffect( ()=>{
+            async function fetchData() {
+                if(typeStatistic.what!=='Выбрать'){
+                    date = JSON.stringify(date).split('-')
+                    if(status === 'по годам')
+                        date = ''
+                    else if(status === 'по месяцам')
+                        date = date[0].replace('"', '')
+                    else if(status === 'по дням')
+                        date = month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                    let _data = await tableActions.getDataSimple({name: 'Статистика', data: {date: date, what: typeStatistic.what, type: typeStatistic.type, status: status}})
+                    setList(_data)
+                }
             }
-        },[typeStatistic])
+            fetchData();
+        },[typeStatistic, status, date])
 
          return (
             <div>
                 <br/>
                 <h1>Статистика</h1>
-                <DatePicker
-                    views={['year', 'month']}
-                    label='Дата'
+                <br/>
+                <TextField
+                    select
+                    SelectProps={{
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    label='статус'
+                    type='login'
                     className={classes.textFieldDate}
-                    value={date}
-                    onChange={setDate}
-                />
+                    margin='normal'
+                    value={status}
+                    onChange={handleStatus}
+                >
+                    {statuses != undefined?
+                        statuses.map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))
+                        :
+                        null
+                    }
+                </TextField>
+                <br/>
+                { status === 'по месяцам'?
+                    <DatePicker
+                        views={['year']}
+                        label='Дата'
+                        className={classes.textFieldDate}
+                        value={date}
+                        onChange={setDate}
+                    />
+                    :
+                    null
+
+                }
+                { status === 'по дням'?
+                    <DatePicker
+                        views={['year', 'month']}
+                        label='Дата'
+                        className={classes.textFieldDate}
+                        value={date}
+                        onChange={setDate}
+                    />
+                    :
+                    null
+
+                }
                 <br/>
                 <Button variant='outlined' onClick={()=>{showSelectStatistic()}} className={classes.button}>
-                    {typeStatistic.what}
+                    {typeStatistic.name}
                 </Button>
 
                 {list!=undefined&&list.length>0?

@@ -62,25 +62,40 @@ const Sign =  React.memo(
         let handleSearch =  (event) => {
             setSearch(event.target.value)
         };
-        useEffect(async ()=>{
-            let data = [];
-            if(type==='регион'){
-                data = await tableActions.getDataSimple({name: 'РегионИмя'})
-                data.unshift('все')
+        useEffect(()=>{
+            async function fetchData() {
+                let data = [];
+                if(type==='регион'){
+                    let _data = await tableActions.getDataSimple({name: 'РегионИмя'})
+                    if (_data!==undefined) {
+                        data = _data
+                        data.unshift({name: 'все', guid: ''})
+                    }
+                }
+                else if(type==='точка'){
+                    let _data = await tableActions.getDataSimple({name: 'ТочкаИмя'})
+                    if (_data!==undefined) {
+                        data = _data
+                        data.unshift({name: 'все', guid: ''})
+                    }
+                }
+                else if(type==='организатор'){
+                    let _data = await tableActions.getDataSimple({name: 'ОрганизаторИмя'})
+                    if (_data!==undefined) {
+                        data = _data
+                        data.unshift({name: 'все', guid: ''})
+                    }
+                }
+                else if(type==='реализатор'){
+                    let _data = await tableActions.getDataSimple({name: 'РеализаторИмя'})
+                    if (_data!==undefined) {
+                        data = _data
+                        data.unshift({name: 'все', guid: ''})
+                    }
+                }
+                setList(data)
             }
-            else if(type==='точка'){
-                data = await tableActions.getDataSimple({name: 'ТочкаИмя'})
-                data.unshift('все')
-            }
-            else if(type==='организатор'){
-                data = await tableActions.getDataSimple({name: 'ОрганизаторИмя'})
-                data.unshift('все')
-            }
-            else if(type==='реализатор'){
-                data = await tableActions.getDataSimple({name: 'РеализаторИмя'})
-                data.unshift('все')
-            }
-            setList(data)
+            fetchData();
         },[type])
         return (
             <div>
@@ -117,10 +132,10 @@ const Sign =  React.memo(
                 <div className={classes.list} >
                     {list!=undefined&&list.length>0?
                         list.map((element)=> {
-                            if(element.toLowerCase().includes(search.toLowerCase()))
+                            if(element.name.toLowerCase().includes(search.toLowerCase()))
                                 return (
-                                    <Button variant="outlined" onClick={()=>{setTypeStatistic({type: type, what: element}); showMiniDialog(false)}} className={classes.button}>
-                                        {element}
+                                    <Button variant="outlined" onClick={()=>{setTypeStatistic({type: type, name: element.name, what: element.guid}); showMiniDialog(false)}} className={classes.button}>
+                                        {element.name}
                                     </Button>
                                 )
                         }):null

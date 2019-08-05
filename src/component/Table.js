@@ -12,6 +12,7 @@ import { mainWindow } from '../App'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import logo from '../logo.png';
+import gora from '../gora.jpg';
 
 const message = mainWindow===undefined||mainWindow.current.offsetWidth>800?
     <>
@@ -28,7 +29,7 @@ const message = mainWindow===undefined||mainWindow.current.offsetWidth>800?
 const width = mainWindow===undefined||mainWindow.current.offsetWidth>800? 500: 240;
 const styles = theme => ({
     mainMessage: {
-        backgroundImage: "url('/gora.jpg')",
+        backgroundImage: "url('"+gora+"')",
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
         width: '100%',
@@ -121,9 +122,9 @@ const Table = React.memo(
                         deletedId.push(data[rowsDeleted.data[i].index][0])
                     } else if(name === 'Цена'){
                         deletedId.push(data[rowsDeleted.data[i].index][0])
-                    } else if(name === 'Накладная на пустую тару'||name === 'Накладная склад №1'||name === 'Накладная склад №2'||name === 'Накладная на вечерний возврат'||name === 'Отчет организатора'){
-                        deletedId.push('|'+data[rowsDeleted.data[i].index][0]+'|'+data[rowsDeleted.data[i].index][1])
-                    } else if(name === 'Отчет реализатора'){
+                    } else if(name === 'Накладная на пустую тару'||name === 'Накладная склад №1'||name === 'Накладная склад №2'||name === 'Накладная на вечерний возврат'||name === 'Отчет организатора'||name === 'Накладная на пустую тару сегодня'||name === 'Накладная склад №1 сегодня'||name === 'Накладная склад №2 сегодня'||name === 'Накладная на вечерний возврат сегодня'||name === 'Отчет организатора сегодня'){
+                        deletedId.push('|'+data[rowsDeleted.data[i].index][2]+': '+data[rowsDeleted.data[i].index][3]+'|'+data[rowsDeleted.data[i].index][1])
+                    } else if(name === 'Отчет реализатора'||name === 'Отчет реализатора сегодня'){
                         deletedId.push('|'+'|'+data[rowsDeleted.data[i].index][0]+'|'+data[rowsDeleted.data[i].index][1])
                     } else
                         deletedId.push(data[rowsDeleted.data[i].index][data[rowsDeleted.data[i].index].length-1])
@@ -153,6 +154,18 @@ const Table = React.memo(
                     } else if(name === 'Отчет реализатора'){
                         props.history.push('/or')
                     } else if(name === 'Отчет организатора'){
+                        props.history.push('/oo')
+                    } else if(name === 'Накладная на пустую тару сегодня'){
+                        props.history.push('/nnpt')
+                    } else if(name === 'Накладная склад №1 сегодня'){
+                        props.history.push('/ns1')
+                    } else if(name === 'Накладная склад №2 сегодня'){
+                        props.history.push('/ns2')
+                    } else if(name === 'Накладная на вечерний возврат сегодня'){
+                        props.history.push('/nnvv')
+                    } else if(name === 'Отчет реализатора сегодня'){
+                        props.history.push('/or')
+                    } else if(name === 'Отчет организатора сегодня'){
                         props.history.push('/oo')
                     } else {
                         showAddMiniDialog()
@@ -190,7 +203,7 @@ const Table = React.memo(
                             <div className={classes.message}>
                                 <img style={{width:'200px'}} src={logo} /><br/>
                                 <br/>
-                                {status.role===undefined||status.role==='admin'||status.role==='завсклада'?
+                                {!authenticated||status.role===undefined||status.role==='admin'||status.role==='завсклада'?
                                     message
                                     :
                                     <div style={{background: '#ffffff8f', color: 'black', paddingTop: '20px', paddingBottom: '20px', borderRadius: '20px', fontWeight: '600'}}>

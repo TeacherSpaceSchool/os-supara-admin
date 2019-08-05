@@ -52,7 +52,7 @@ const Sign =  React.memo(
             setName(value)
         };
         let [region, setRegion] = useState(selected!==-1?data[selected][1]:'');
-        let handleRegion =  (event) => {
+        /*let handleRegion =  (event) => {
             setRegion(event.target.value)
         };
         let [regions, setRegions] = useState([]);
@@ -60,7 +60,7 @@ const Sign =  React.memo(
             let data = await tableActions.getDataSimple({name: 'РегионИмя'})
             setRegions(data)
             if(props.user.status.role==='организатор') setRegion(profile.region)
-        },[])
+        },[])*/
         const { classes } = props;
         return (
             <div>
@@ -71,32 +71,20 @@ const Sign =  React.memo(
                     margin='normal'
                     value={name}
                     onChange={handleName}
+                    InputProps={{
+                        readOnly: true,
+                    }}
                 />
                 <br/>
-                {selected!==-1||props.user.status.role==='организатор'?
-                    <div className="textField">{region}</div>
-                    :
-                    <TextField
-                        select
-                        label='регион'
-                        className={classes.textField}
-                        value={region}
-                        onChange={handleRegion}
-                        SelectProps={{
-                            MenuProps: {
-                                className: classes.menu,
-                            },
-                        }}
-                        margin='normal'
-                    >
-                        {regions.map(option => (
-                            <MenuItem key={option} value={option}>
-                                {option}
-                            </MenuItem>
-                        ))
-                        }
-                    </TextField>
-                }
+                <TextField
+                    label='регион'
+                    type='login'
+                    className={classes.textField}
+                    margin='normal'
+                    value={region}
+                    InputProps={{
+                        readOnly: true,
+                    }}/>
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={()=>{

@@ -7,6 +7,8 @@ import * as tableActions from '../redux/actions/table'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import Button from '@material-ui/core/Button';
 import { mainWindow } from '../App'
+import renderHTML from 'react-render-html';
+
 export const datePicker = React.createRef();
 
 const width = mainWindow===undefined||mainWindow.current.offsetWidth>800? 500: 240;
@@ -75,6 +77,7 @@ const Plan = React.memo(
             }
         }
         const { classes } = props;
+        const { status } = props.user;
         let [list, setList] = useState([]);
         useEffect(()=>{
             window.addEventListener('scroll', handleScroll);
@@ -82,9 +85,16 @@ const Plan = React.memo(
                 window.removeEventListener('scroll', handleScroll);
             }
         });
-        useEffect(async ()=>{
-            let _data = await tableActions.getDataSimple({name: 'FAQ', skip: list.length})
-            setList(_data)
+        useEffect( ()=>{
+            async function fetchData() {
+                if (!(status.status==='active'&&['admin', 'организатор', 'реализатор'].includes(status.role))) {
+                    props.history.push('/')
+                }
+                let _data = await tableActions.getDataSimple({name: 'FAQ', skip: list.length})
+                if(_data!==undefined)
+                    setList(_data)
+            }
+            fetchData();
         },[])
         let show = (id, show)=> {
             list[id].show = show
@@ -106,10 +116,10 @@ const Plan = React.memo(
                                         </b>
                                         <br/>
                                         <div>
-                                            {element.show!==undefined&&element.show?
+                                            {element.text!==undefined&&element.show!==undefined&&element.show?
                                                 <>
                                                 <div className='blog-text'>
-                                                    {element.text}
+                                                    {renderHTML(element.text)}
                                                 </div>
                                                 <Button variant='outlined' onClick={()=>{show(idx, false)}} className={classes.button}>
                                                     спрятать

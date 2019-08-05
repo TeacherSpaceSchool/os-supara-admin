@@ -41,15 +41,18 @@ const styles = theme => ({
 
 const Sign =  React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if(selected!==-1){
-                let _data = await tableActions.getDataSimple({name: 'ЗавскладаПоИмени', data: {phone: data[selected][1]}})
-                setStatus(_data.status);
-                setName(_data.name);
-                setPhone(_data.phone);
-                setId(_data._id)
-                setUser(_data.user)
+        useEffect(()=>{
+            async function fetchData() {
+                if(selected!==-1){
+                    let _data = await tableActions.getDataSimple({name: 'ЗавскладаПоИмени', data: {phone: data[selected][1]}})
+                    setStatus(_data.status);
+                    setName(_data.name);
+                    setPhone(_data.phone);
+                    setId(_data._id)
+                    setUser(_data.user)
+                }
             }
+            fetchData();
         },[])
         const { showMiniDialog } = props.mini_dialogActions;
         const { setSelected, addData, setData } = props.tableActions;

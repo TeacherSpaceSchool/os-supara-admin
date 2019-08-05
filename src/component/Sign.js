@@ -66,7 +66,7 @@ const Sign =  React.memo(
                 />
                 <br/>
                 <FormControl className={classNames(classes.margin, classes.textField)}>
-                    <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="adornment-password">Пароль</InputLabel>
                     <Input
                         id="adornment-password"
                         type={hide ? 'password' : 'text' }
@@ -88,10 +88,10 @@ const Sign =  React.memo(
                     null
                 }
                 <div>
-                    <Button variant="contained" color="primary" onClick={()=>{console.log({email: login, password: pass});signin({email: login, password: pass})}} className={classes.button}>
+                    <Button variant="contained" color="primary" onClick={()=>{signin({email: login, password: pass})}} className={classes.button}>
                         Войти
                     </Button>
-                    <Button variant="contained" color="secondary" onClick={()=>{showMiniDialog(false); logout()}} className={classes.button}>
+                    <Button variant="contained" color="secondary" onClick={()=>{showMiniDialog(false);}} className={classes.button}>
                         Отмена
                     </Button>
                 </div>

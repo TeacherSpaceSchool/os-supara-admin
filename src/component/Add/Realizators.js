@@ -46,13 +46,18 @@ const Sign =  React.memo(
         const { setPoint } = props.tableActions;
         let [realizators, setRealizators] = useState([]);
         let [realizator, setRealizator] = useState('');
+        let [guidRealizator, setGuidRealizator] = useState('');
         let handleRealizator =  (event) => {
-            setRealizator(event.target.value)
+            setGuidRealizator(event.target.value)
+            setRealizator((realizators.find((element)=>{return element.guid===event.target.value})).name)
         };
-        useEffect(async ()=>{
-            let _data
-            _data = await tableActions.getDataSimple({name: 'ТочкаВсе'})
-            setRealizators(_data)
+        useEffect(()=>{
+            async function fetchData() {
+                let _data
+                _data = await tableActions.getDataSimple({name: 'ТочкаВсе'})
+                setRealizators(_data)
+            }
+            fetchData();
         },[])
         return (
             <div>
@@ -60,7 +65,7 @@ const Sign =  React.memo(
                     select
                     label='точка'
                     className={classes.textField}
-                    value={realizator}
+                    value={guidRealizator}
                     onChange={handleRealizator}
                     SelectProps={{
                         MenuProps: {
@@ -70,8 +75,8 @@ const Sign =  React.memo(
                     margin='normal'
                 >
                     {realizators.map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
+                        <MenuItem key={option.guid} value={option.guid}>
+                            {option.name}
                         </MenuItem>
                     ))
                     }
@@ -80,7 +85,7 @@ const Sign =  React.memo(
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
                         if(realizator!==''){
-                            let _data = await tableActions.getDataSimple({name: 'РеализаторПоТочке', data: {point: realizator}})
+                            let _data = await tableActions.getDataSimple({name: 'РеализаторПоТочке', data: {point: guidRealizator}})
                             setPoint(_data)
                         }
                         showMiniDialog(false)

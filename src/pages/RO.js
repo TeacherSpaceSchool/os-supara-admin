@@ -6,19 +6,7 @@ import { bindActionCreators } from 'redux'
 import * as tableActions from '../redux/actions/table'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom'
 import { mainWindow } from '../App'
-import { month } from '../redux/constants/other'
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { DatePicker } from 'material-ui-pickers';
 export const datePicker = React.createRef();
@@ -83,14 +71,19 @@ const styles = theme => ({
 const Plan = React.memo(
     (props) =>{
         const { classes } = props;
-        const { showSelectStatistic } = props.mini_dialogActions;
-        const { typeStatistic } = props.table;
         const { status } = props.user;
         let [list, setList] = useState([]);
         let [date, setDate] = useState(new Date());
-        useEffect(async ()=>{
-            let _data = await tableActions.getDataSimple({name: 'Рейтинг организаторов', data:{date: date}})
-            setList(_data)
+        useEffect(()=>{
+            async function fetchData() {
+                if (!(status.status==='active'&&['admin', 'организатор', 'реализатор'].includes(status.role))) {
+                    props.history.push('/')
+                }
+                let _data = await tableActions.getDataSimple({name: 'Рейтинг организаторов', data:{date: date}})
+                if(_data!==undefined)
+                    setList(_data)
+            }
+            fetchData();
         },[date])
         let [search, setSearch] = useState('');
         let handleSearch =  (event) => {

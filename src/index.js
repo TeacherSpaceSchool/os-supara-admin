@@ -10,8 +10,9 @@ import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import DateFnsUtils from '@date-io/date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import { start } from './service/idb';
 
-
+start()
 
 const materialTheme = createMuiTheme({
     overrides: {
@@ -62,4 +63,4 @@ ReactDOM.hydrate(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

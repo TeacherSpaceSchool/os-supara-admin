@@ -41,7 +41,7 @@ const MyAppBar = React.memo(
         const { authenticated, status } = props.user;
         const { classes, location } = props;
         const { logout } = props.userActions;
-        const { selected, name } = props.table;
+        const { selected, name, region, point } = props.table;
         const { drawer, profile } = props.app;
         const { showDrawer } = props.appActions;
         const { setMiniDialog, showMiniDialog, showAddMiniDialog, showSelectRealizators } = props.mini_dialogActions;
@@ -83,7 +83,7 @@ const MyAppBar = React.memo(
                                 {mainWindow.current.offsetWidth>450?
                                     authenticated ?
                                         <div>
-                                            {name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && name!=='Отчет реализатора' && name!=='Отчет организатора' && name!=='Накладная на вечерний возврат' && name!=='Накладная склад №2' && name!=='Накладная склад №1' && name!=='Накладная на пустую тару' && status.role==='admin' ?
+                                            {navigator.onLine && !['', 'Организатор', 'Регион', 'Точка', 'Отчет реализатора', 'Отчет организатора', 'Накладная на вечерний возврат', 'Накладная склад №2', 'Накладная склад №1', 'Накладная на пустую тару' , 'Отчет реализатора сегодня' , 'Отчет организатора сегодня', 'Накладная на вечерний возврат сегодня', 'Накладная склад №2 сегодня', 'Накладная склад №1 сегодня', 'Накладная на пустую тару сегодня'].includes(name) && !['blog','FAQ', 'plan', 'nnpt', 'nnvv', 'ns1', 'ns2', 'oo', 'or'].includes(currentPath)  && status.role==='admin' ?
                                                     <Button  variant="outlined" color="inherit" onClick={()=>{
                                                         if(name==='План')
                                                             props.history.push('/plan')
@@ -91,7 +91,7 @@ const MyAppBar = React.memo(
                                                             showAddMiniDialog()}
                                                     } style={{marginRight: '20px'}}>Добавить</Button>
                                                     :
-                                                    name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Отчет реализатора' && status.role==='организатор') || (name==='Реализатор' && status.role==='организатор') || (name==='Точка' && status.role==='организатор') || (name==='Отчет организатора' && status.role==='организатор') || (name==='Накладная на вечерний возврат' && status.role==='организатор') || (name==='Накладная склад №2' && status.role==='организатор') || (name==='Накладная склад №1' && status.role==='организатор') || (name==='Накладная на пустую тару' && status.role==='организатор')) ?
+                                                navigator.onLine && name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Отчет реализатора сегодня' && status.role==='организатор') || (name==='Отчет реализатора' && status.role==='организатор') || (name==='Отчет организатора' && status.role==='организатор') || (name==='Накладная на вечерний возврат' && status.role==='организатор') || (name==='Накладная склад №2' && status.role==='организатор') || (name==='Накладная склад №1' && status.role==='организатор') || (name==='Накладная на пустую тару' && status.role==='организатор')) ?
                                                         <Button  variant="outlined" color="inherit" onClick={()=>{
                                                             if(name==='Накладная на пустую тару')
                                                                 props.history.push('/nnpt')
@@ -103,14 +103,14 @@ const MyAppBar = React.memo(
                                                                 props.history.push('/nnvv')
                                                             else if(name==='Отчет организатора')
                                                                 props.history.push('/oo')
-                                                            else if(name==='Отчет реализатора')
+                                                            else if(name==='Отчет реализатора'||name==='Отчет реализатора сегодня')
                                                                 props.history.push('/or')
                                                             else
                                                                 showAddMiniDialog()
                                                         }
                                                         } style={{marginRight: '20px'}}>Добавить</Button>
                                                         :
-                                                        name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or' && ((name==='Отчет реализатора' && status.role==='реализатор')) ?
+                                                    navigator.onLine && name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or' && ((name==='Отчет реализатора' && status.role==='реализатор')) ?
                                                             <Button  variant="outlined" color="inherit" onClick={()=>{
                                                                 if(name==='Отчет реализатора')
                                                                     props.history.push('/or')
@@ -155,7 +155,7 @@ const MyAppBar = React.memo(
                                         >
                                             {authenticated ?
                                                 <>
-                                                {name!=='' && currentPath!=='plan' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && name!=='Отчет реализатора'  && name!=='Отчет организатора' && name!=='Накладная на вечерний возврат' && name!=='Накладная склад №2' && name!=='Накладная склад №1' && name!=='Накладная на пустую тару' && status.role==='admin' ?
+                                                {navigator.onLine && !['', 'Организатор', 'Регион', 'Точка', 'Отчет реализатора', 'Отчет организатора', 'Накладная на вечерний возврат', 'Накладная склад №2', 'Накладная склад №1', 'Накладная на пустую тару' , 'Отчет реализатора сегодня' , 'Отчет организатора сегодня', 'Накладная на вечерний возврат сегодня', 'Накладная склад №2 сегодня', 'Накладная склад №1 сегодня', 'Накладная на пустую тару сегодня'].includes(name) && !['blog','FAQ', 'plan', 'nnpt', 'nnvv', 'ns1', 'ns2', 'oo', 'or'].includes(currentPath)  && status.role==='admin' ?
                                                     <MenuItem onClick={()=>
                                                     {handleClose();
                                                         if(name==='План')
@@ -164,7 +164,7 @@ const MyAppBar = React.memo(
                                                             showAddMiniDialog()
                                                     }}>Добавить</MenuItem>
                                                     :
-                                                    name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Реализатор' && status.role==='организатор') || (name==='Точка' && status.role==='организатор') || (name==='Отчет реализатора' && status.role==='организатор') || (name==='Отчет организатора' && status.role==='организатор') || (name==='Накладная на вечерний возврат' && status.role==='организатор') || (name==='Накладная склад №2' && status.role==='организатор') || (name==='Накладная склад №1' && status.role==='организатор') || (name==='Накладная на пустую тару' && status.role==='организатор')) ?
+                                                    navigator.onLine && name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Отчет реализатора' && status.role==='организатор') || (name==='Отчет организатора' && status.role==='организатор') || (name==='Накладная на вечерний возврат' && status.role==='организатор') || (name==='Накладная склад №2' && status.role==='организатор') || (name==='Накладная склад №1' && status.role==='организатор') || (name==='Накладная на пустую тару' && status.role==='организатор')) ?
                                                         <MenuItem onClick={()=>
                                                         {handleClose();
                                                             if(name==='Накладная на пустую тару')
@@ -183,7 +183,7 @@ const MyAppBar = React.memo(
                                                                 showAddMiniDialog()
                                                         }}>Добавить</MenuItem>
                                                         :
-                                                        name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Отчет реализатора' && status.role==='реализатор')) ?
+                                                        navigator.onLine && name!=='' && currentPath!=='blog' && currentPath!=='FAQ' && currentPath!=='plan' && currentPath!=='nnpt' && currentPath!=='nnvv' && currentPath!=='ns1' && currentPath!=='ns2' && currentPath!=='oo' && currentPath!=='or'  && ((name==='Отчет реализатора' && status.role==='реализатор')) ?
                                                             <MenuItem  variant="outlined" color="inherit" onClick={()=>{
                                                                 if(name==='Отчет реализатора')
                                                                     props.history.push('/or')

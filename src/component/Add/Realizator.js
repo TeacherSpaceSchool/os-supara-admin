@@ -41,19 +41,24 @@ const styles = theme => ({
 
 const Sign =  React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            let _data = await tableActions.getDataSimple({name: 'РегионИмя'})
-            setRegions(_data)
-            if(selected!==-1){
-                _data = await tableActions.getDataSimple({name: 'РеализаторПоИмени', data: {phone: data[selected][3], name: data[selected][0], point: data[selected][1], region: data[selected][2]}})
-                setStatus(_data.status);
-                setName(_data.name);
-                setPhone(_data.phone);
-                setRegion(_data.region);
-                setPoint(_data.point);
-                setId(_data._id)
-                setUser(_data.user)
+        useEffect(()=>{
+            async function fetchData() {
+                let _data = await tableActions.getDataSimple({name: 'РегионИмя'})
+                setRegions(_data)
+                if(selected!==-1){
+                    _data = await tableActions.getDataSimple({name: 'РеализаторПоИмени', data: {phone: data[selected][3], name: data[selected][0], point: data[selected][1], region: data[selected][2]}})
+                    setStatus(_data.status);
+                    setName(_data.name);
+                    setPhone(_data.phone);
+                    setRegion(_data.region);
+                    setPoint(_data.point);
+                    setId(_data._id)
+                    setUser(_data.user)
+                    setGuidRegion(_data.guidRegion);
+                    setGuidPoint(_data.guidPoint);
+                }
             }
+            fetchData();
         },[])
         const { showMiniDialog } = props.mini_dialogActions;
         const { setSelected, addData, setData } = props.tableActions;
@@ -68,14 +73,18 @@ const Sign =  React.memo(
             setPhone(event.target.value)
         };
         let [points, setPoints] = useState([]);
+        let [guidPoint, setGuidPoint] = useState(selected!==-1?data[selected][6]:'');
         let [point, setPoint] = useState(selected!==-1?data[selected][1]:'');
         let handlePoint =  (event) => {
-            setPoint(event.target.value)
+            setGuidPoint(event.target.value)
+            setPoint((points.find((element)=>{return element.guid===event.target.value})).name)
         };
+        let [guidRegion, setGuidRegion] = useState(selected!==-1?data[selected][5]:'');
         let [regions, setRegions] = useState([]);
         let [region, setRegion] = useState(selected!==-1?data[selected][2]:'');
         let handleRegion =  (event) => {
-            setRegion(event.target.value)
+            setGuidRegion(event.target.value)
+            setRegion((regions.find((element)=>{return element.guid===event.target.value})).name)
         };
         let [password, setPassword] = useState('');
         let handlePassword =  (event) => {
@@ -89,10 +98,13 @@ const Sign =  React.memo(
         };
         let [user, setUser] = useState('');
         const { classes } = props;
-        useEffect(async ()=>{
-            let _data = await tableActions.getDataSimple({name: 'ТочкаПоРегиону', data: {region: region}})
+        useEffect(()=>{
+            async function fetchData() {
+                let _data = await tableActions.getDataSimple({name: 'ТочкаПоРегиону', data: {region: guidRegion}})
             setPoints(_data)
-        },[region])
+            }
+            fetchData();
+        },[guidRegion])
         return (
             <div>
                 <TextField
@@ -102,6 +114,9 @@ const Sign =  React.memo(
                     margin='normal'
                     value={name}
                     onChange={handleName}
+                    InputProps={{
+                        readOnly: true,
+                    }}
                 />
                 <br/>
                 <TextField
@@ -117,7 +132,7 @@ const Sign =  React.memo(
                     select
                     label='регион'
                     className={classes.textField}
-                    value={region}
+                    value={guidRegion}
                     onChange={handleRegion}
                     SelectProps={{
                         MenuProps: {
@@ -127,8 +142,8 @@ const Sign =  React.memo(
                     margin='normal'
                 >
                     {regions.map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
+                        <MenuItem key={option.guid} value={option.guid}>
+                            {option.name}
                         </MenuItem>
                     ))
                     }
@@ -138,7 +153,7 @@ const Sign =  React.memo(
                     select
                     label='точка'
                     className={classes.textField}
-                    value={point}
+                    value={guidPoint}
                     onChange={handlePoint}
                     SelectProps={{
                         MenuProps: {
@@ -148,8 +163,8 @@ const Sign =  React.memo(
                     margin='normal'
                 >
                     {points.map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
+                        <MenuItem key={option.guid} value={option.guid}>
+                            {option.name}
                         </MenuItem>
                     ))
                     }
@@ -194,7 +209,7 @@ const Sign =  React.memo(
                         if(selected===-1)
                             addData({search: search, sort: sort, page: page, name: 'Реализатор', data: {name:name.trim(), phone: phone.trim(), status: status, point: point, region: region, password: password}});
                         else
-                            setData({id: id, search: search, sort: sort, page: page, name: 'Реализатор', data: {user: user, name:name.trim(), status: status, phone: phone.trim(), point: point, region: region, password: password}});
+                            setData({id: id, search: search, sort: sort, page: page, name: 'Реализатор', data: {user: user, name:name.trim(), status: status, phone: phone.trim(), point: point, region: region, password: password, guidRegion: guidRegion, guidPoint: guidPoint}});
                         setSelected(-1)
                         showMiniDialog(false)}} className={classes.button}>
                         Сохранить

@@ -7,19 +7,24 @@ import {
 } from '../constants/user'
 import { SHOW_MINI_DIALOG } from '../constants/mini_dialog'
 import axios from 'axios';
+import { putStatusByKey, getStatusByKey } from '../../service/idb/status'
 
 export function signin(payload) {
     return async (dispatch) => {
         try {
             const res = await axios.post('/users/signin?email='+payload.email+'&password='+payload.password);
-            localStorage.userShoroAdmin = res.data
-            await dispatch({ type: AUTHENTICATED });
-            await dispatch({
-                type: SHOW_MINI_DIALOG,
-                payload: false
-            })
-            window.location.reload()
+            console.log(res.data)
+            if(res.data!==undefined) {
+                localStorage.userShoroAdmin = res.data
+                await dispatch({type: AUTHENTICATED});
+                await dispatch({
+                    type: SHOW_MINI_DIALOG,
+                    payload: false
+                })
+                window.location.reload()
+            }
         } catch(error) {
+            console.log(error)
             await dispatch({
                 type: ERROR_AUTHENTICATED,
                 payload: true
@@ -62,21 +67,39 @@ export function logout() {
 export function setStatus() {
     return async (dispatch) => {
         try {
-            const res = await axios.post(
-                '/users/status',
-                {},
-                {headers: {
-                    'accept': 'application/json',
-                    'Accept-Language': 'en-US,en;q=0.8',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Authorization':'Bearer '+localStorage.userShoroAdmin,
-                }});
-            await dispatch({
-                type: SET_STATUS,
-                payload: res.data
-            })
+            let res = {data: undefined}
+            if(navigator.onLine){
+                res = await axios.post(
+                    '/users/status',
+                    {},
+                    {headers: {
+                        'accept': 'application/json',
+                        'Accept-Language': 'en-US,en;q=0.8',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Authorization':'Bearer '+localStorage.userShoroAdmin,
+                    }});
+                if((res===undefined||res.data===undefined)&&await getStatusByKey(1)!==undefined) {
+                    res = await getStatusByKey(1)
+                }
+                await putStatusByKey(1, res.data)
+            } else {
+                res = await getStatusByKey(1)
+            }
+            if(res.data!==undefined) {
+                await dispatch({
+                    type: SET_STATUS,
+                    payload: res.data
+                })
+            }
         } catch(error) {
-            console.error(error)
+            let res = await getStatusByKey(1)
+            if(res!==undefined) {
+                res = res.data
+                await dispatch({
+                    type: SET_STATUS,
+                    payload: res
+                })
+            }
         }
     };
 }

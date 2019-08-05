@@ -78,24 +78,46 @@ const Plan = React.memo(
         if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
             props.history.push('/')
         }
-        useEffect(async ()=>{
-             if(selected===-1) {
+        useEffect( ()=>{
+            async function fetchData() {
+                if(selected===-1) {
                 let _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
                  if(_data!==undefined){
-                    setRegion(_data.region)
-                    setOrganizator(_data.name)
-                    let date = new Date()
-                    date = JSON.stringify(date).split('-')
-                    date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
-                    setDate(date)
-                     check(date, _data.name, _data.region)
+                     let date = new Date()
+                     date = JSON.stringify(date).split('-')
+                     date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                     let _data1 = await tableActions.getDataSimple({name: 'Накладная на пустую тару по данным', data: {
+                         data: date, organizator: _data.guid, region: _data.guidRegion}})
+                     if(_data1!==undefined&&_data1!==''){
+                         setDate(_data1.data)
+                         setOrganizator(_data1.organizator)
+                         setRegion(_data1.region)
+                         setGuidOrganizator(_data1.guidOrganizator)
+                         setGuidRegion(_data1.guidRegion)
+                         setNakladnaya(JSON.parse(_data1.dataTable))
+                         setId(_data1._id)
+                     } else {
+                         setRegion(_data.region)
+                         setOrganizator(_data.name)
+                         setGuidOrganizator(_data.guid)
+                         setGuidRegion(_data.guidRegion)
+                         let date = new Date()
+                         date = JSON.stringify(date).split('-')
+                         date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                         setDate(date)
+                         check(date, _data.guid, _data.guidRegion)
+                 }
                 }
-            } else {
-                let _data = await tableActions.getDataSimple({name: 'Накладная на пустую тару по данным', data: {data: data[selected][1], organizator: data[selected][0].split(':')[0], region: data[selected][0].split(':')[1].trim()}})
+            }
+                else {
+                let _data = await tableActions.getDataSimple({name: 'Накладная на пустую тару по данным',
+                    data: {data: data[selected][1], organizator: data[selected][2], region: data[selected][3]}})
                  if(_data!==undefined){
                     setDate(_data.data)
                     setOrganizator(_data.organizator)
                     setRegion(_data.region)
+                     setGuidOrganizator(_data.guidOrganizator)
+                     setGuidRegion(_data.guidRegion)
                     setNakladnaya(JSON.parse(_data.dataTable))
                     setId(_data._id)
                 }
@@ -104,16 +126,34 @@ const Plan = React.memo(
                  date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
                  setCheckDate(date1!==_data.data)
              }
+            }
+            fetchData();
         },[])
-        const { setSelected, addData, setData } = props.tableActions;
-        const { selected, data } = props.table;
+        const { setSelected, addData, setData, setSelectedRegion } = props.tableActions;
+        const { selected, data, name } = props.table;
         const { classes } = props;
         let [organizator, setOrganizator] = useState('');
         let [region, setRegion] = useState('');
+        let [guidOrganizator, setGuidOrganizator] = useState('');
+        let [guidRegion, setGuidRegion] = useState('');
+        useEffect( ()=>{
+            if(region!==undefined&&region.length>0)
+                setSelectedRegion(guidRegion)
+        },[guidRegion])
         let [checkDate, setCheckDate] = useState(false);
         let [date, setDate] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
+            setNakladnaya({
+                'r': {'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                'd1':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                'd2':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                'd3':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                's':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                'i':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false},
+                'ostalos':{'m25':'', 'm10':'', 'ch25':'', 'ch10':'', 'k25':'', 'k10':'', 'o': false, 'p': false}
+            });
+            setId('')
             setDate1(date)
             date = JSON.stringify(date).split('-')
             date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
@@ -132,6 +172,7 @@ const Plan = React.memo(
         });
         let handleLitr = async (event, type, what) => {
             if(!nakladnaya[type]['o']) {
+                nakladnaya= {...nakladnaya}
                 let litr = parseInt(event.target.value)
                 if (isNaN(litr)) {
                     nakladnaya[type][what] = ''
@@ -140,16 +181,18 @@ const Plan = React.memo(
                 }
                 nakladnaya['i'][what] = checkInt(nakladnaya['r'][what]) + checkInt(nakladnaya['d1'][what]) + checkInt(nakladnaya['d2'][what]) + checkInt(nakladnaya['d3'][what]) + checkInt(nakladnaya['s'][what])
                 setNakladnaya(nakladnaya)
-                check(date, organizator, region)
+                check(date, guidOrganizator, guidRegion)
             }
         };
         let handlePodpis =  (event, type, what) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya[type][what] = event.target.checked
             setNakladnaya(nakladnaya)
         };
         let check = async (date, organizator, region) => {
             let _data1 = await tableActions.getDataSimple({name: 'Накладная склад №1 по данным', data: {data: date, organizator: organizator, region: region}})
-            if(_data1.dataTable!==undefined){
+            if(_data1!==undefined&&_data1.dataTable!==undefined){
+                nakladnaya= {...nakladnaya}
                 let dataTable = JSON.parse(_data1.dataTable)
                 nakladnaya['ostalos']['m25'] = checkInt(dataTable['vozvrat']['i']['m25']) - checkInt(nakladnaya['i']['m25'])
                 nakladnaya['ostalos']['ch10'] = checkInt(dataTable['vozvrat']['i']['ch10']) - checkInt(nakladnaya['i']['ch10'])
@@ -777,23 +820,30 @@ const Plan = React.memo(
                 <div>
                     <Link className='link' to={''}>
                         <Button variant='contained' color='primary' onClick={()=>{
-                            if(selected===-1)
-                                addData({search: '', sort: '', page: 0, name: 'Накладная на пустую тару', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            else
-                                setData({id: id, search: '', sort: '', page: 0, name: 'Накладная на пустую тару', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            setSelected(-1)}} className={classes.button}>
+                            if(guidRegion!=='lol'){
+                                if(selected===-1)
+                                    addData({search: '', sort: '', page: 0, name: 'Накладная на пустую тару', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                else
+                                    setData({id: id, search: '', sort: '', page: 0, name: status.role === 'admin'?name:'Накладная на пустую тару', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                setSelected(-1)
+                            }
+                        }} className={classes.button}>
                             Сохранить
                         </Button>
                     </Link>

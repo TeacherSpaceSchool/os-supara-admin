@@ -74,64 +74,148 @@ const styles = theme => ({
 
 const Plan = React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if (!(status.status==='active'&&['admin', 'организатор', 'реализатор'].includes(status.role))) {
+        useEffect( ()=>{
+            async function fetchData() {
+                if (!(status.status==='active'&&['admin', 'организатор', 'реализатор'].includes(status.role))) {
                 props.history.push('/')
             }
-            let _data
-            _data = await tableActions.getDataSimple({name: 'Цена1'})
-            setPrice(_data)
-            if(selected===-1) {
-                if(status.role==='реализатор'){
-                    _data = await tableActions.getDataSimple({name: 'РеализаторПоID'})
-                    if(_data!==undefined){
-                        setRegion(_data.region)
-                        setPoint(_data.point)
-                        setRealizator(_data.name)
-                        setOrganizator(_data.organizator)
+                let _data
+                _data = await tableActions.getDataSimple({name: 'Цена1'})
+                setPrice(_data)
+                if(selected===-1) {
+                    if(status.role==='реализатор'){
+                        _data = await tableActions.getDataSimple({name: 'РеализаторПоID'})
+                        if(_data!==undefined) {
+                            let date = new Date()
+                            date = JSON.stringify(date).split('-')
+                            date = date[2].split('T')[0] + ' ' + month[parseInt(date[1]) - 1] + ' ' + date[0].replace('"', '')
+                            let _data1 = await tableActions.getDataSimple({
+                                name: 'Отчет реализатора по данным',
+                                data: {data: date, realizator: _data.guid, region: _data.guidRegion, point: _data.guidPoint}})
+                            if (_data1 !== undefined && _data1 !== '') {
+                                setDate(_data1.data)
+                                setRealizator(_data1.realizator)
+                                setOrganizator(_data1.organizator)
+                                setRegion(_data1.region)
+                                setPoint(_data1.point)
+                                setGuidOrganizator(_data1.guidOrganizator)
+                                setGuidRegion(_data1.guidRegion)
+                                setGuidRealizator(_data1.guidRealizator)
+                                setGuidPoint(_data1.guidPoint)
+                                setNakladnaya(JSON.parse(_data1.dataTable))
+                                setId(_data1._id)
+
+
+                            } else {
+                                setRegion(_data.region)
+                                setPoint(_data.point)
+                                setRealizator(_data.name)
+                                setOrganizator(_data.organizator)
+                                setGuidOrganizator(_data.guidOrganizator)
+                                setGuidRegion(_data.guidRegion)
+                                setGuidRealizator(_data.guid)
+                                setGuidPoint(_data.guidPoint)
+                                let date = new Date()
+                                date = JSON.stringify(date).split('-')
+                                date = date[2].split('T')[0] + ' ' + month[parseInt(date[1]) - 1] + ' ' + date[0].replace('"', '')
+                                setDate(date)
+                            }
+
+                        }
+
+                    } else if (status.role==='организатор') {
                         let date = new Date()
                         date = JSON.stringify(date).split('-')
                         date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
                         setDate(date)
                     }
-                } else if (status.role==='организатор') {
-                    let date = new Date()
-                    date = JSON.stringify(date).split('-')
-                    date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
-                    setDate(date)
                 }
-            } else {
-                _data = await tableActions.getDataSimple({name: 'Отчет реализатора по данным', data: {data: data[selected][1], realizator: data[selected][0].split(': ')[0], region: data[selected][0].split(': ')[1].split(' - ')[0], point: data[selected][0].split(': ')[1].split(' - ')[1]}})
-                if(_data!==undefined){
-                    setDate(_data.data)
-                    setRealizator(_data.realizator)
-                    setOrganizator(_data.organizator)
-                    setRegion(_data.region)
-                    setPoint(_data.point)
-                    setNakladnaya(JSON.parse(_data.dataTable))
-                    setId(_data._id)
+                else {
+                    _data = await tableActions.getDataSimple({name: 'Отчет реализатора по данным',
+                        data: {data: data[selected][1], realizator:  data[selected][4], region: data[selected][2], point: data[selected][3]}})
+                    if(_data!==undefined){
+                        setDate(_data.data)
+                        setRealizator(_data.realizator)
+                        setOrganizator(_data.organizator)
+                        setRegion(_data.region)
+                        setPoint(_data.point)
+                        setGuidOrganizator(_data.guidOrganizator)
+                        setGuidRegion(_data.guidRegion)
+                        setGuidRealizator(_data.guidRealizator)
+                        setGuidPoint(_data.guidPoint)
+                        setNakladnaya(JSON.parse(_data.dataTable))
+                        setId(_data._id)
+                    }
+                    let date1 = new Date()
+                    date1 = JSON.stringify(date1).split('-')
+                    date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
+                    setCheckDate(date1!==_data.data)
                 }
-                let date1 = new Date()
-                date1 = JSON.stringify(date1).split('-')
-                date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
-                setCheckDate(date1!==_data.data)
             }
+            fetchData();
         },[])
         let [checkDate, setCheckDate] = useState(false);
-        const { setSelected, addData, setData } = props.tableActions;
+        const { setSelected, addData, setData, setSelectedRegion, setSelectedPoint} = props.tableActions;
         const { selected, data, point1 } = props.table;
         const { classes } = props;
         const { status } = props.user;
         let [realizator, setRealizator] = useState('');
         let [organizator, setOrganizator] = useState('');
         let [region, setRegion] = useState('');
+        let [guidOrganizator, setGuidOrganizator] = useState('');
+        let [guidRegion, setGuidRegion] = useState('');
+        let [guidRealizator, setGuidRealizator] = useState('');
+        let [guidPoint, setGuidPoint] = useState('');
         let [price, setPrice] = useState({});
         let [point, setPoint] = useState('');
+        useEffect( ()=>{
+            if(guidRegion!==undefined&&guidRegion.length>0)
+                setSelectedRegion(guidRegion)
+        },[guidRegion])
+        useEffect( ()=>{
+            if(guidPoint!==undefined&&guidPoint.length>0)
+                setSelectedPoint(guidPoint)
+        },[guidPoint])
         let [date, setDate] = useState('');
         let [disabled, setDisabled] = useState(false);
         let [id, setId] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
+            setNakladnaya({
+                'vydano': {
+                    'r':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'd1':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'd2':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'd3':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'i':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                },
+                'vozvrat': {
+                    'v':
+                        {'time':'', 'mn1':'', 'ml1':'', 'mn':'', 'ml':'', 'chn25':'', 'chn10':'', 'chl':'', 'chn251':'', 'chn101':'', 'chl1':'', 'kn':'', 'kl':'', 'kn1':'', 'kl1':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    's':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'p':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                    'virychka':
+                        {'time':'', 'ml':'', 'chl':'', 'kl':'', 'sl':'', 's02':'', 's04':'', 'b':'', 'o': false, 'p': false},
+                },
+                'i': {
+                    'iv':'',
+                    'm':'',
+                    'o': 100,
+                    'n':'',
+                    'inc':'',
+                    'fv': -100,
+                },
+                'r':'',
+                'm': false,
+            });
+            setId('')
             setDate1(date)
             date = JSON.stringify(date).split('-')
             date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
@@ -302,13 +386,17 @@ const Plan = React.memo(
             nakladnaya['m'] = event.target.checked
             setNakladnaya(nakladnaya)
         };
-        useEffect(async ()=>{
+        useEffect(()=>{
             if(selected===-1) {
-                    if(point1.name!==undefined){
+                    if(point1!==undefined&&point1.name!==undefined){
                         setRegion(point1.region)
                         setPoint(point1.point)
                         setRealizator(point1.name)
                         setOrganizator(point1.organizator)
+                        setGuidOrganizator(point1.guidOrganizator)
+                        setGuidRegion(point1.guidRegion)
+                        setGuidRealizator(point1.guid)
+                        setGuidPoint(point1.guidPoint)
                      }
             }
         },[point1])
@@ -1599,7 +1687,7 @@ const Plan = React.memo(
                 <div>
                     <Link className='link' to={''}>
                         <Button variant='contained' color='primary' onClick={()=>{
-                            if(realizator.length>0) {
+                            if(realizator.length>0&&guidRegion!=='lol'&&guidPoint!=='lol') {
                                 if (selected === -1)
                                     addData({
                                         search: '', sort: '', page: 0, name: 'Отчет реализатора', data: {
@@ -1609,6 +1697,10 @@ const Plan = React.memo(
                                             realizator: realizator,
                                             region: region,
                                             point: point,
+                                            guidRegion: guidRegion,
+                                            guidOrganizator: guidOrganizator,
+                                            guidPoint: guidPoint,
+                                            guidRealizator: guidRealizator,
                                             disabled: disabled
                                         }
                                     });
@@ -1621,6 +1713,10 @@ const Plan = React.memo(
                                             realizator: realizator,
                                             region: region,
                                             point: point,
+                                            guidRegion: guidRegion,
+                                            guidOrganizator: guidOrganizator,
+                                            guidPoint: guidPoint,
+                                            guidRealizator: guidRealizator,
                                             disabled: disabled
                                         }
                                     });

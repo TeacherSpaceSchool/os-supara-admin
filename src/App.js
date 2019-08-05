@@ -7,12 +7,12 @@ import * as appActions from './redux/actions/app'
 import { Switch, withRouter, Route } from 'react-router-dom'
 import { getDataSimple } from './redux/actions/table'
 
-
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Main = lazy(() => import('./pages/Main'));
 const AppBar = lazy(() => import('./component/AppBar'));
 const Drawer = lazy(() => import('./component/Drawer'));
 const Dialog = lazy(() => import('./component/Dialog'));
+const SnackBar = lazy(() => import('./component/SnackBar'));
 const Plan = lazy(() => import('./pages/Plan'));
 const NNPT = lazy(() => import('./pages/NNPT'));
 const NS1 = lazy(() => import('./pages/NS1'));
@@ -31,12 +31,24 @@ const App = (
     (props) =>{
         const { checkAuthenticated, setStatus, setReiting } = props.userActions;
         const { setProfile } = props.appActions;
-        useEffect(async ()=>{
-            await checkAuthenticated();
-            await setStatus()
-            setProfile(await getDataSimple({name: 'Профиль'}))
-            setReiting(await getDataSimple({name: 'Рейтинг свой'}))
+        const { authenticated } = props.user;
+        useEffect(()=>{
+            checkAuthenticated();
         },[])
+        useEffect( ()=>{
+            async function fetchData() {
+                if(authenticated) {
+                    await setStatus()
+                    let data = await getDataSimple({name: 'Профиль'})
+                    if (data !== undefined)
+                        setProfile(data)
+                    data = await getDataSimple({name: 'Рейтинг свой'})
+                    if (data !== undefined)
+                        setReiting(data)
+                }
+            }
+            fetchData();
+        },[authenticated])
         return (
               <div ref={mainWindow} className='App'>
                   <Suspense fallback={null}>
@@ -65,6 +77,9 @@ const App = (
                   </div>
                   <Suspense fallback={null}>
                       <Dialog/>
+                  </Suspense>
+                  <Suspense fallback={null}>
+                      <SnackBar/>
                   </Suspense>
               </div>
         );

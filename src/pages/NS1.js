@@ -74,124 +74,155 @@ const styles = theme => ({
 
 const Plan = React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
+        useEffect( ()=>{
+            async function fetchData() {
+                nakladnaya= {...nakladnaya}
+                if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
                 props.history.push('/')
             }
-            if(selected===-1) {
-                let _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
-                if(_data!==undefined){
-                    setRegion(_data.region)
-                    setOrganizator(_data.name)
-                    let date = new Date()
-                    date = JSON.stringify(date).split('-')
-                    date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
-                    setDate(date)
-
-                    let _data1 = await tableActions.getDataSimple({
-                        name: 'Все отчеты реализаторов по дате',
-                        data: {data: date, organizator: _data.name, region: _data.region}
-                    })
-                    if (_data1 != undefined) {
-                        nakladnaya['vozvrat']['n']['ch25'] = 0
-                        nakladnaya['vozvrat']['n']['ch10'] = 0
-                        nakladnaya['vozvrat']['n']['chl'] = 0
-
-                        for(let i = 0; i<_data1.length; i++){
-                            let addDataTable = JSON.parse(_data1[i].dataTable)
-                            if(checkInt(addDataTable.vozvrat.v.chl)>0){
-                                nakladnaya['vozvrat']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl)
-                                if(addDataTable.vozvrat.v.chn25.length>0){
-                                    nakladnaya['vozvrat']['n']['ch25'] += 1
-
-                                }
-                                if(addDataTable.vozvrat.v.chn10.length>0){
-                                    nakladnaya['vozvrat']['n']['ch10'] += 1
-
-                                }
-                            }
-                            if(checkInt(addDataTable.vozvrat.v.chl1)>0){
-                                nakladnaya['vozvrat']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl1)
-                                if(addDataTable.vozvrat.v.chn251.length>0){
-                                    nakladnaya['vozvrat']['n']['ch25'] += 1
-
-                                }
-                                if(addDataTable.vozvrat.v.chn101.length>0){
-                                    nakladnaya['vozvrat']['n']['ch10'] += 1
-
-                                }
-                            }
+                if(selected===-1) {
+                    let _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
+                    if(_data!==undefined){
+                        let date = new Date()
+                        date = JSON.stringify(date).split('-')
+                        date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                        let _data1 = await tableActions.getDataSimple({name: 'Накладная склад №1 по данным', data:
+                            {data: date, organizator: _data.guid, region: _data.guidRegion}})
+                        if(_data1!==undefined&&_data1!==''){
+                            setDate(_data1.data)
+                            setOrganizator(_data1.organizator)
+                            setRegion(_data1.region)
+                            setNakladnaya(JSON.parse(_data1.dataTable))
+                            setGuidOrganizator(_data1.guidOrganizator)
+                            setGuidRegion(_data1.guidRegion)
+                            setId(_data1._id)
                         }
-                        nakladnaya['vozvrat']['i']['chl'] = checkInt(nakladnaya['vozvrat']['n']['chl']) + checkInt(nakladnaya['vozvrat']['r']['chl']) + checkInt(nakladnaya['vozvrat']['d1']['chl']) + checkInt(nakladnaya['vozvrat']['d2']['chl']) + checkInt(nakladnaya['vozvrat']['d3']['chl']) + checkInt(nakladnaya['vozvrat']['s']['chl'])
-                        nakladnaya['vozvrat']['i']['ch10'] = checkInt(nakladnaya['vozvrat']['n']['ch10']) + checkInt(nakladnaya['vozvrat']['r']['ch10']) + checkInt(nakladnaya['vozvrat']['d1']['ch10']) + checkInt(nakladnaya['vozvrat']['d2']['ch10']) + checkInt(nakladnaya['vozvrat']['d3']['ch10']) + checkInt(nakladnaya['vozvrat']['s']['ch10'])
-                        nakladnaya['vozvrat']['i']['ch25'] = checkInt(nakladnaya['vozvrat']['n']['ch25']) + checkInt(nakladnaya['vozvrat']['r']['ch25']) + checkInt(nakladnaya['vozvrat']['d1']['ch25']) + checkInt(nakladnaya['vozvrat']['d2']['ch25']) + checkInt(nakladnaya['vozvrat']['d3']['ch25']) + checkInt(nakladnaya['vozvrat']['s']['ch25'])
+                        else {
+                            setRegion(_data.region)
+                            setOrganizator(_data.name)
+                            setGuidOrganizator(_data.guid)
+                            setGuidRegion(_data.guidRegion)
+                            let date = new Date()
+                            date = JSON.stringify(date).split('-')
+                            date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                            setDate(date)
 
-                    }
+                            let _data1 = await tableActions.getDataSimple({
+                                name: 'Все отчеты реализаторов по дате',
+                                data: {data: date, organizator: _data.name, region: _data.guidRegion}
+                            })
+                            if (_data1 != undefined) {
+                                nakladnaya['vozvrat']['n']['ch25'] = 0
+                                nakladnaya['vozvrat']['n']['ch10'] = 0
+                                nakladnaya['vozvrat']['n']['chl'] = 0
 
-                    date = getYesterday(date)
-                    _data1 = await tableActions.getDataSimple({
-                        name: 'Все отчеты реализаторов по дате',
-                        data: {data: date, organizator: _data.name, region: _data.region}
-                    })
-                    if (_data1 != undefined) {
-                        nakladnaya['vydano']['n']['ch25'] = 0
-                        nakladnaya['vydano']['n']['ch10'] = 0
-                        nakladnaya['vydano']['n']['chl'] = 0
+                                for(let i = 0; i<_data1.length; i++){
+                                    let addDataTable = JSON.parse(_data1[i].dataTable)
+                                    if(checkInt(addDataTable.vozvrat.v.chl)>0){
+                                        nakladnaya['vozvrat']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl)
+                                        if(addDataTable.vozvrat.v.chn25.length>0){
+                                            nakladnaya['vozvrat']['n']['ch25'] += 1
 
-                        for(let i = 0; i<_data1.length; i++){
-                            let addDataTable = JSON.parse(_data1[i].dataTable)
-                            if(checkInt(addDataTable.vozvrat.v.chl)>0){
-                                nakladnaya['vydano']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl)
-                                if(addDataTable.vozvrat.v.chn25.length>0){
-                                    nakladnaya['vydano']['n']['ch25'] += 1
+                                        }
+                                        if(addDataTable.vozvrat.v.chn10.length>0){
+                                            nakladnaya['vozvrat']['n']['ch10'] += 1
 
+                                        }
+                                    }
+                                    if(checkInt(addDataTable.vozvrat.v.chl1)>0){
+                                        nakladnaya['vozvrat']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl1)
+                                        if(addDataTable.vozvrat.v.chn251.length>0){
+                                            nakladnaya['vozvrat']['n']['ch25'] += 1
+
+                                        }
+                                        if(addDataTable.vozvrat.v.chn101.length>0){
+                                            nakladnaya['vozvrat']['n']['ch10'] += 1
+
+                                        }
+                                    }
                                 }
-                                if(addDataTable.vozvrat.v.chn10.length>0){
-                                    nakladnaya['vydano']['n']['ch10'] += 1
+                                nakladnaya['vozvrat']['i']['chl'] = checkInt(nakladnaya['vozvrat']['n']['chl']) + checkInt(nakladnaya['vozvrat']['r']['chl']) + checkInt(nakladnaya['vozvrat']['d1']['chl']) + checkInt(nakladnaya['vozvrat']['d2']['chl']) + checkInt(nakladnaya['vozvrat']['d3']['chl']) + checkInt(nakladnaya['vozvrat']['s']['chl'])
+                                nakladnaya['vozvrat']['i']['ch10'] = checkInt(nakladnaya['vozvrat']['n']['ch10']) + checkInt(nakladnaya['vozvrat']['r']['ch10']) + checkInt(nakladnaya['vozvrat']['d1']['ch10']) + checkInt(nakladnaya['vozvrat']['d2']['ch10']) + checkInt(nakladnaya['vozvrat']['d3']['ch10']) + checkInt(nakladnaya['vozvrat']['s']['ch10'])
+                                nakladnaya['vozvrat']['i']['ch25'] = checkInt(nakladnaya['vozvrat']['n']['ch25']) + checkInt(nakladnaya['vozvrat']['r']['ch25']) + checkInt(nakladnaya['vozvrat']['d1']['ch25']) + checkInt(nakladnaya['vozvrat']['d2']['ch25']) + checkInt(nakladnaya['vozvrat']['d3']['ch25']) + checkInt(nakladnaya['vozvrat']['s']['ch25'])
 
-                                }
                             }
-                            if(checkInt(addDataTable.vozvrat.v.chl1)>0){
-                                nakladnaya['vydano']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl1)
-                                if(addDataTable.vozvrat.v.chn251.length>0){
-                                    nakladnaya['vydano']['n']['ch25'] += 1
 
-                                }
-                                if(addDataTable.vozvrat.v.chn101.length>0){
-                                    nakladnaya['vydano']['n']['ch10'] += 1
+                            date = getYesterday(date)
+                            _data1 = await tableActions.getDataSimple({
+                                name: 'Все отчеты реализаторов по дате',
+                                data: {data: date, organizator: _data.name, region: _data.guidRegion}
+                            })
+                            if (_data1 != undefined) {
+                                nakladnaya['vydano']['n']['ch25'] = 0
+                                nakladnaya['vydano']['n']['ch10'] = 0
+                                nakladnaya['vydano']['n']['chl'] = 0
 
+                                for(let i = 0; i<_data1.length; i++){
+                                    let addDataTable = JSON.parse(_data1[i].dataTable)
+                                    if(checkInt(addDataTable.vozvrat.v.chl)>0){
+                                        nakladnaya['vydano']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl)
+                                        if(addDataTable.vozvrat.v.chn25.length>0){
+                                            nakladnaya['vydano']['n']['ch25'] += 1
+
+                                        }
+                                        if(addDataTable.vozvrat.v.chn10.length>0){
+                                            nakladnaya['vydano']['n']['ch10'] += 1
+
+                                        }
+                                    }
+                                    if(checkInt(addDataTable.vozvrat.v.chl1)>0){
+                                        nakladnaya['vydano']['n']['chl'] += checkInt(addDataTable.vozvrat.v.chl1)
+                                        if(addDataTable.vozvrat.v.chn251.length>0){
+                                            nakladnaya['vydano']['n']['ch25'] += 1
+
+                                        }
+                                        if(addDataTable.vozvrat.v.chn101.length>0){
+                                            nakladnaya['vydano']['n']['ch10'] += 1
+
+                                        }
+                                    }
                                 }
+                                nakladnaya['vydano']['i']['chl'] = checkInt(nakladnaya['vydano']['n']['chl']) + checkInt(nakladnaya['vydano']['r']['chl']) + checkInt(nakladnaya['vydano']['d1']['chl']) + checkInt(nakladnaya['vydano']['d2']['chl']) + checkInt(nakladnaya['vydano']['d3']['chl'])
+                                nakladnaya['vydano']['i']['ch10'] = checkInt(nakladnaya['vydano']['n']['ch10']) + checkInt(nakladnaya['vydano']['r']['ch10']) + checkInt(nakladnaya['vydano']['d1']['ch10']) + checkInt(nakladnaya['vydano']['d2']['ch10']) + checkInt(nakladnaya['vydano']['d3']['ch10'])
+                                nakladnaya['vydano']['i']['ch25'] = checkInt(nakladnaya['vydano']['n']['ch25']) + checkInt(nakladnaya['vydano']['r']['ch25']) + checkInt(nakladnaya['vydano']['d1']['ch25']) + checkInt(nakladnaya['vydano']['d2']['ch25']) + checkInt(nakladnaya['vydano']['d3']['ch25'])
+
                             }
+                            setNakladnaya(nakladnaya)
                         }
-                        nakladnaya['vydano']['i']['chl'] = checkInt(nakladnaya['vydano']['n']['chl']) + checkInt(nakladnaya['vydano']['r']['chl']) + checkInt(nakladnaya['vydano']['d1']['chl']) + checkInt(nakladnaya['vydano']['d2']['chl']) + checkInt(nakladnaya['vydano']['d3']['chl'])
-                        nakladnaya['vydano']['i']['ch10'] = checkInt(nakladnaya['vydano']['n']['ch10']) + checkInt(nakladnaya['vydano']['r']['ch10']) + checkInt(nakladnaya['vydano']['d1']['ch10']) + checkInt(nakladnaya['vydano']['d2']['ch10']) + checkInt(nakladnaya['vydano']['d3']['ch10'])
-                        nakladnaya['vydano']['i']['ch25'] = checkInt(nakladnaya['vydano']['n']['ch25']) + checkInt(nakladnaya['vydano']['r']['ch25']) + checkInt(nakladnaya['vydano']['d1']['ch25']) + checkInt(nakladnaya['vydano']['d2']['ch25']) + checkInt(nakladnaya['vydano']['d3']['ch25'])
-
                     }
-                    setNakladnaya(nakladnaya)
+                }
+                else {
+                    let _data = await tableActions.getDataSimple({name: 'Накладная склад №1 по данным',
+                        data: {data: data[selected][1], organizator: data[selected][2], region: data[selected][3]}})
+                    if(_data!==undefined){
+                        setDate(_data.data)
+                        setOrganizator(_data.organizator)
+                        setRegion(_data.region)
+                        setGuidOrganizator(_data.guidOrganizator)
+                        setGuidRegion(_data.guidRegion)
+                        setNakladnaya(JSON.parse(_data.dataTable))
+                        setId(_data._id)
+                        let date1 = new Date()
+                        date1 = JSON.stringify(date1).split('-')
+                        date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
+                        setCheckDate(date1!==_data.data)
+                    }
                 }
             }
-            else {
-                let _data = await tableActions.getDataSimple({name: 'Накладная склад №1 по данным', data: {data: data[selected][1], organizator: data[selected][0].split(':')[0], region: data[selected][0].split(':')[1].trim()}})
-                if(_data!==undefined){
-                    setDate(_data.data)
-                    setOrganizator(_data.organizator)
-                    setRegion(_data.region)
-                    setNakladnaya(JSON.parse(_data.dataTable))
-                    setId(_data._id)
-                }
-                let date1 = new Date()
-                date1 = JSON.stringify(date1).split('-')
-                date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
-                setCheckDate(date1!==_data.data)
-            }
+            fetchData();
         },[])
-        const { setSelected, addData, setData } = props.tableActions;
-        const { selected, data } = props.table;
+        const { setSelected, addData, setData, setSelectedRegion } = props.tableActions;
+        const { selected, data, name } = props.table;
         const { classes } = props;
         const { status } = props.user;
         let [organizator, setOrganizator] = useState('');
         let [region, setRegion] = useState('');
+        let [guidOrganizator, setGuidOrganizator] = useState('');
+        let [guidRegion, setGuidRegion] = useState('');
+        useEffect( ()=>{
+            if(guidRegion!==undefined&&guidRegion.length>0)
+                setSelectedRegion(guidRegion)
+        },[guidRegion])
         let [date, setDate] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
@@ -199,9 +230,43 @@ const Plan = React.memo(
             date = JSON.stringify(date).split('-')
             date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
             setDate(date)
+            nakladnaya = {
+                'vydano': {
+                    'n':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'r':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd1':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd2':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd3':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'i':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                },
+                'vozvrat': {
+                    'n':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'r':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd1':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd2':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'd3':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    's':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                    'i':
+                        {'m25':'', 'ml':'', 'ch25':'', 'ch10':'', 'chl':'', 'k25':'', 'k10':'', 'kl':'', 'o': false, 'p': false},
+                },
+            };
+                setId('')
+
             let _data1 = await tableActions.getDataSimple({
                 name: 'Все отчеты реализаторов по дате',
-                data: {data: date, organizator: organizator, region: region}
+                data: {data: date, organizator: guidOrganizator, region: guidRegion}
             })
             if (_data1 != undefined) {
                 nakladnaya['vozvrat']['n']['ch25'] = 0
@@ -242,7 +307,7 @@ const Plan = React.memo(
             date = getYesterday(date)
             _data1 = await tableActions.getDataSimple({
                 name: 'Все отчеты реализаторов по дате',
-                data: {data: date, organizator: organizator, region: region}
+                data: {data: date, organizator: guidOrganizator, region: guidRegion}
             })
             if (_data1 != undefined) {
                 nakladnaya['vydano']['n']['ch25'] = 0
@@ -281,7 +346,6 @@ const Plan = React.memo(
 
             }
             setNakladnaya(nakladnaya)
-
 
         };
         let [disabled, setDisabled] = useState(false);
@@ -322,6 +386,7 @@ const Plan = React.memo(
 
         let handleLitr =  (event, where, type, what) => {
             if(!nakladnaya[where][type]['o']) {
+                nakladnaya= {...nakladnaya}
                 let litr = parseInt(event.target.value)
                 if (isNaN(litr)) {
                     nakladnaya[where][type][what] = ''
@@ -350,6 +415,7 @@ const Plan = React.memo(
             }
         };
         let handlePodpis =  (event, where, type, what) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya[where][type][what] = event.target.checked
             setNakladnaya(nakladnaya)
         };
@@ -1841,23 +1907,30 @@ const Plan = React.memo(
                 <div>
                     <Link className='link' to={''}>
                         <Button variant='contained' color='primary' onClick={()=>{
-                            if(selected===-1)
-                                addData({search: '', sort: '', page: 0, name: 'Накладная склад №1', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            else
-                                setData({id: id, search: '', sort: '', page: 0, name: 'Накладная склад №1', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            setSelected(-1)}} className={classes.button}>
+                            if(guidRegion!=='lol'){
+                                if(selected===-1)
+                                    addData({search: '', sort: '', page: 0, name: 'Накладная склад №1', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                else
+                                    setData({id: id, search: '', sort: '', page: 0, name: status.role === 'admin'?name:'Накладная склад №1', data: {
+                                        dataTable: JSON.stringify(nakladnaya),
+                                        data: date,
+                                        organizator: organizator,
+                                        region: region,
+                                        guidOrganizator: guidOrganizator,
+                                        guidRegion: guidRegion,
+                                        disabled: disabled
+                                    }});
+                                setSelected(-1)
+                            }
+                        }} className={classes.button}>
                             Сохранить
                         </Button>
                     </Link>

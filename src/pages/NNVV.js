@@ -72,67 +72,100 @@ const styles = theme => ({
 
 const Plan = React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
+        useEffect( ()=>{
+            async function fetchData() {
+                nakladnaya= {...nakladnaya}
+                if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
                 props.history.push('/')
             }
-            if(selected===-1) {
-                let _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
-                if(_data!==undefined) {
-                    setRegion(_data.region)
-                    setOrganizator(_data.name)
-                    let date = new Date()
-                    date = JSON.stringify(date).split('-')
-                    date = date[2].split('T')[0] + ' ' + month[parseInt(date[1]) - 1] + ' ' + date[0].replace('"', '')
-                    setDate(date)
+                if(selected===-1) {
+                    let _data = await tableActions.getDataSimple({name: 'ОрганизаторПоID'})
+                    if(_data!==undefined) {
+                        if(status.role==='организатор'){
+                            let date = new Date()
+                            date = JSON.stringify(date).split('-')
+                            date = date[2].split('T')[0] + ' ' + month[parseInt(date[1]) - 1] + ' ' + date[0].replace('"', '')
+                            let _data1 = await tableActions.getDataSimple({name: 'Накладная на вечерний возврат по данным', data:
+                                {data: date, organizator: _data.guid, region: _data.guidRegion}})
+                            if(_data1!==undefined&&_data1!==''){
+                                setDate(_data1.data)
+                                setOrganizator(_data1.organizator)
+                                setRegion(_data1.region)
+                                setGuidOrganizator(_data1.guidOrganizator)
+                                setGuidRegion(_data1.guidRegion)
+                                setNakladnaya(JSON.parse(_data1.dataTable))
+                                setId(_data1._id)
+                            } else {
+                                setRegion(_data.region)
+                                setOrganizator(_data.name)
+                                setGuidOrganizator(_data.guid)
+                                setGuidRegion(_data.guidRegion)
+                                let date = new Date()
+                                date = JSON.stringify(date).split('-')
+                                date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
+                                setDate(date)
+                                _data = await tableActions.getDataSimple({
+                                    name: 'Все отчеты реализаторов по дате',
+                                    data: {data: date, organizator: _data.guid, region: _data.guidRegion}
+                                })
+                                if (_data != undefined) {
+                                    nakladnaya['m']['data'] = []
+                                    nakladnaya['ch']['data'] = []
+                                    nakladnaya['k']['data'] = []
+                                    nakladnaya['m']['all'] = 0
+                                    nakladnaya['ch']['all'] = 0
+                                    nakladnaya['k']['all'] = 0
+                                    for (let i = 0; i < _data.length; i++) {
+                                        let dataTable = JSON.parse(_data[i].dataTable)
+                                        if(dataTable.vozvrat.v.mn.length>0&&checkInt(dataTable.vozvrat.v.ml)>0) {
+                                            nakladnaya['m']['data'].push({'№': dataTable.vozvrat.v.mn, 'l': dataTable.vozvrat.v.ml})
+                                            nakladnaya['m']['all'] += dataTable.vozvrat.v.ml
+                                        }
+                                        if(dataTable.vozvrat.v.kn.length>0&&checkInt(dataTable.vozvrat.v.ml)>0) {
+                                            nakladnaya['k']['data'].push({'№': dataTable.vozvrat.v.kn, 'l': dataTable.vozvrat.v.kl})
+                                            nakladnaya['k']['all'] += dataTable.vozvrat.v.kl
+                                        }
+                                    }
+                                    setNakladnaya(nakladnaya)
+                                }}
 
-                    _data = await tableActions.getDataSimple({
-                        name: 'Все отчеты реализаторов по дате',
-                        data: {data: date, organizator: _data.name, region: _data.region}
-                    })
-                    if (_data != undefined) {
-                        nakladnaya['m']['data'] = []
-                        nakladnaya['ch']['data'] = []
-                        nakladnaya['k']['data'] = []
-                        nakladnaya['m']['all'] = 0
-                        nakladnaya['ch']['all'] = 0
-                        nakladnaya['k']['all'] = 0
-                        for (let i = 0; i < _data.length; i++) {
-                            let dataTable = JSON.parse(_data[i].dataTable)
-                            if(dataTable.vozvrat.v.mn.length>0&&checkInt(dataTable.vozvrat.v.ml)>0) {
-                                nakladnaya['m']['data'].push({'№': dataTable.vozvrat.v.mn, 'l': dataTable.vozvrat.v.ml})
-                                nakladnaya['m']['all'] += dataTable.vozvrat.v.ml
-                            }
-                            if(dataTable.vozvrat.v.kn.length>0&&checkInt(dataTable.vozvrat.v.ml)>0) {
-                                nakladnaya['k']['data'].push({'№': dataTable.vozvrat.v.kn, 'l': dataTable.vozvrat.v.kl})
-                                nakladnaya['k']['all'] += dataTable.vozvrat.v.kl
-                            }
                         }
-                        setNakladnaya(nakladnaya)
+
                     }
                 }
-            } else {
-                let _data = await tableActions.getDataSimple({name: 'Накладная на вечерний возврат по данным', data: {data: data[selected][1], organizator: data[selected][0].split(':')[0], region: data[selected][0].split(':')[1].trim()}})
-                if(_data!==undefined){
-                    setDate(_data.data)
-                    setOrganizator(_data.organizator)
-                    setRegion(_data.region)
-                    setNakladnaya(JSON.parse(_data.dataTable))
-                    setId(_data._id)
+                else {
+                    let _data = await tableActions.getDataSimple({name: 'Накладная на вечерний возврат по данным',
+                        data: {data: data[selected][1], organizator: data[selected][2], region: data[selected][3]}})
+                    if(_data!==undefined){
+                        setDate(_data.data)
+                        setOrganizator(_data.organizator)
+                        setRegion(_data.region)
+                        setGuidOrganizator(_data.guidOrganizator)
+                        setGuidRegion(_data.guidRegion)
+                        setNakladnaya(JSON.parse(_data.dataTable))
+                        setId(_data._id)
+                    }
+                    let date1 = new Date()
+                    date1 = JSON.stringify(date1).split('-')
+                    date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
+                    setCheckDate(date1!==_data.data)
                 }
-                let date1 = new Date()
-                date1 = JSON.stringify(date1).split('-')
-                date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
-                setCheckDate(date1!==_data.data)
             }
+            fetchData();
         },[])
-        const { setSelected, addData, setData } = props.tableActions;
-        const { selected, data } = props.table;
+        const { setSelected, addData, setData, setSelectedRegion } = props.tableActions;
+        const { selected, data, name } = props.table;
         const { classes } = props;
         const { status } = props.user;
         let [checkDate, setCheckDate] = useState(false);
         let [organizator, setOrganizator] = useState('');
         let [region, setRegion] = useState('');
+        let [guidOrganizator, setGuidOrganizator] = useState('');
+        let [guidRegion, setGuidRegion] = useState('');
+        useEffect(()=>{
+            if(guidRegion!==undefined&&guidRegion.length>0)
+                setSelectedRegion(guidRegion)
+        },[guidRegion])
         let [date, setDate] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
@@ -140,10 +173,16 @@ const Plan = React.memo(
             date = JSON.stringify(date).split('-')
             date = date[2].split('T')[0]+' '+month[parseInt(date[1])-1]+' '+date[0].replace('"', '')
             setDate(date)
+            setId('')
 
+            nakladnaya = {
+                'm': {'all': 0, 'data': [], 'o': false, 'p': false},
+                'ch': {'all': 0, 'data': [], 'o': false, 'p': false},
+                'k': {'all': 0, 'data': [], 'o': false, 'p': false},
+            };
             let _data = await tableActions.getDataSimple({
                 name: 'Все отчеты реализаторов по дате',
-                data: {data: date, organizator: organizator, region: region}
+                data: {data: date, organizator: guidOrganizator, region: guidRegion}
             })
             if (_data != undefined) {
                 nakladnaya['m']['data'] = []
@@ -164,8 +203,8 @@ const Plan = React.memo(
                         nakladnaya['k']['data'].push({'№': dataTable.vozvrat.v.kn, 'l': dataTable.vozvrat.v.kl})
                     }
                 }
-                setNakladnaya(nakladnaya)
             }
+            setNakladnaya(nakladnaya)
         };
         let [disabled, setDisabled] = useState(false);
         let [id, setId] = useState('');
@@ -174,43 +213,11 @@ const Plan = React.memo(
             'ch': {'all': 0, 'data': [], 'o': false, 'p': false},
             'k': {'all': 0, 'data': [], 'o': false, 'p': false},
         });
-        let handleNumber =  (event, type, number) => {
-            if(!nakladnaya[type]['o']) {
-                nakladnaya[type]['data'][number]['№'] = event.target.value
-                setNakladnaya(nakladnaya)
-            }
-        };
-        let handleLitr =  (event, type, number) => {
-            if(!nakladnaya[type]['o']) {
-                let litr = parseInt(event.target.value)
-                if (isNaN(litr)) {
-                    nakladnaya[type]['data'][number]['l'] = 0
-                } else {
-                    nakladnaya[type]['data'][number]['l'] = litr
-                }
-                let all = 0
-                for(let i=0; i<nakladnaya[type]['data'].length; i++){
-                    all += nakladnaya[type]['data'][i]['l']
-                }
-                nakladnaya[type]['all'] = all
-                setNakladnaya(nakladnaya)
-            }
-        };
         let handlePodpis =  (event, type, what) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya[type][what] = event.target.checked
             setNakladnaya(nakladnaya)
         };
-        let add =  (type) => {
-            nakladnaya[type]['data'].push({'№': '', 'l': 0})
-            setNakladnaya(nakladnaya)
-        };
-        let check = () => {
-            let date1 = new Date()
-            date1 = JSON.stringify(date1).split('-')
-            date1 = date1[2].split('T')[0]+' '+month[parseInt(date1[1])-1]+' '+date1[0].replace('"', '')
-            return status.role!=='admin' && date1!==date
-
-        }
          return (
             <div>
                 <br/>
@@ -345,24 +352,40 @@ const Plan = React.memo(
                 <br/>
                 <div>
                     <Link className='link' to={''}>
-                        <Button variant='contained' color='primary' onClick={()=>{
-                            if(selected===-1)
-                                addData({search: '', sort: '', page: 0, name: 'Накладная на вечерний возврат', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            else
-                                setData({id: id, search: '', sort: '', page: 0, name: 'Накладная на вечерний возврат', data: {
-                                    dataTable: JSON.stringify(nakladnaya),
-                                    data: date,
-                                    organizator: organizator,
-                                    region: region,
-                                    disabled: disabled
-                                }});
-                            setSelected(-1)}} className={classes.button}>
+                        <Button variant='contained' color='primary' onClick={async()=> {
+                            if(guidRegion!=='lol'){
+                                if (selected === -1)
+                                    await addData({
+                                        search: '', sort: '', page: 0, name: 'Накладная на вечерний возврат', data: {
+                                            dataTable: JSON.stringify(nakladnaya),
+                                            data: date,
+                                            organizator: organizator,
+                                            region: region,
+                                            guidOrganizator: guidOrganizator,
+                                            guidRegion: guidRegion,
+                                            disabled: disabled
+                                        }
+                                    });
+                                else
+                                    await setData({
+                                        id: id,
+                                        search: '',
+                                        sort: '',
+                                        page: 0,
+                                        name: status.role === 'admin' ? name : 'Накладная на вечерний возврат',
+                                        data: {
+                                            dataTable: JSON.stringify(nakladnaya),
+                                            data: date,
+                                            organizator: organizator,
+                                            region: region,
+                                            guidOrganizator: guidOrganizator,
+                                            guidRegion: guidRegion,
+                                            disabled: disabled
+                                        }
+                                    });
+                                setSelected(-1)
+                            }
+                        }} className={classes.button}>
                             Сохранить
                         </Button>
                     </Link>

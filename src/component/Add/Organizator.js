@@ -41,18 +41,22 @@ const styles = theme => ({
 
 const Sign =  React.memo(
     (props) =>{
-        useEffect(async ()=>{
-            let _data = await tableActions.getDataSimple({name: 'РегионИмя'})
-            setRegions(_data)
-            if(selected!==-1){
-                _data = await tableActions.getDataSimple({name: 'ОрганизаторПоИмени', data: {phone: data[selected][2]}})
-                setStatus(_data.status);
-                setName(_data.name);
-                setPhone(_data.phone);
-                setRegion(_data.region);
-                setId(_data._id)
-                setUser(_data.user)
+        useEffect( ()=>{
+            async function fetchData() {
+                let _data = await tableActions.getDataSimple({name: 'РегионИмя'})
+                setRegions(_data)
+                if(selected!==-1){
+                    _data = await tableActions.getDataSimple({name: 'ОрганизаторПоИмени', data: {phone: data[selected][2]}})
+                    setStatus(_data.status);
+                    setName(_data.name);
+                    setPhone(_data.phone);
+                    setRegion(_data.region);
+                    setRegionGuid(_data.guidRegion);
+                    setId(_data._id)
+                    setUser(_data.user)
+                }
             }
+            fetchData();
         },[])
         const { showMiniDialog } = props.mini_dialogActions;
         const { setSelected, addData, setData } = props.tableActions;
@@ -66,9 +70,11 @@ const Sign =  React.memo(
             setPhone(event.target.value)
         };
         let [regions, setRegions] = useState([]);
+        let [regionGuid, setRegionGuid] = useState(selected!==-1?data[selected][4]:'');
         let [region, setRegion] = useState(selected!==-1?data[selected][1]:'');
         let handleRegion =  (event) => {
-            setRegion(event.target.value)
+            setRegionGuid(event.target.value)
+            setRegion((regions.find((element)=>{return element.guid===event.target.value})).name)
         };
         let [password, setPassword] = useState('');
         let handlePassword =  (event) => {
@@ -91,6 +97,9 @@ const Sign =  React.memo(
                     margin='normal'
                     value={name}
                     onChange={handleName}
+                    InputProps={{
+                        readOnly: true,
+                    }}
                 />
                 <br/>
                 <TextField
@@ -106,7 +115,7 @@ const Sign =  React.memo(
                     select
                     label='регион'
                     className={classes.textField}
-                    value={region}
+                    value={regionGuid}
                     onChange={handleRegion}
                     SelectProps={{
                         MenuProps: {
@@ -116,8 +125,8 @@ const Sign =  React.memo(
                     margin='normal'
                 >
                     {regions.map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
+                        <MenuItem key={option.guid} value={option.guid}>
+                            {option.name}
                         </MenuItem>
                     ))
                     }
@@ -162,7 +171,7 @@ const Sign =  React.memo(
                         if(selected===-1)
                             addData({search: search, sort: sort, page: page, name: 'Организатор', data: {name:name.trim(), phone: phone.trim(), status: status, region: region, password: password}});
                         else
-                            setData({id: id, search: search, sort: sort, page: page, name: 'Организатор', data: {user: user, name:name.trim(), status: status, phone: phone.trim(), region: region, password: password}});
+                            setData({id: id, search: search, sort: sort, page: page, name: 'Организатор', data: {user: user, name:name.trim(), status: status, phone: phone.trim(), guidRegion: regionGuid, region: region, password: password}});
                         setSelected(-1)
                         showMiniDialog(false)}} className={classes.button}>
                         Сохранить
