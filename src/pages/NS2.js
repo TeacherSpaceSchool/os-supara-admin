@@ -88,14 +88,14 @@ const Plan = React.memo(
                         let _data1 = await tableActions.getDataSimple({name: 'Накладная склад №2 по данным', data:
                             {data: date, organizator: _data.guid, region: _data.guidRegion}})
                         if(_data1!==undefined&&_data1!==''){
-                            setDate(_data1.data)
+                             setDate(_data1.data)
                             setOrganizator(_data1.organizator)
                             setRegion(_data1.region)
                             setGuidOrganizator(_data1.guidOrganizator)
                             setGuidRegion(_data1.guidRegion)
                             setNakladnaya(JSON.parse(_data1.dataTable))
                             setId(_data1._id)
-                        } else {
+                         } else {
                             setRegion(_data.region)
                             setOrganizator(_data.name)
                             setGuidOrganizator(_data.guid)
@@ -218,13 +218,13 @@ const Plan = React.memo(
 
         let handleLitr =  (event, where, type, what) => {
             if(!nakladnaya[where][type]['o']) {
+                nakladnaya= {...nakladnaya}
                 let litr = parseInt(event.target.value)
                 if (isNaN(litr)) {
                     nakladnaya[where][type][what] = ''
                 } else {
                     nakladnaya[where][type][what] = litr
                 }
-
                 if(type === 's'){
                     nakladnaya[where][type]['sh02'] = checkInt(nakladnaya[where][type]['s02']) * 50 + checkInt(nakladnaya['vozvrat']['s']['s0502'])
                     nakladnaya[where][type]['sh04'] = checkInt(nakladnaya[where][type]['s04']) * 25 + checkInt(nakladnaya['vozvrat']['s']['s0504'])
@@ -232,23 +232,18 @@ const Plan = React.memo(
                     nakladnaya[where][type]['sh02'] = checkInt(nakladnaya[where][type]['s02']) * 50
                     nakladnaya[where][type]['sh04'] = checkInt(nakladnaya[where][type]['s04']) * 25
                 }
-
-
-
                 nakladnaya[where]['i'][what] = checkInt(nakladnaya[where]['r'][what]) + checkInt(nakladnaya[where]['d1'][what]) + checkInt(nakladnaya[where]['d2'][what]) + checkInt(nakladnaya[where]['d3'][what])
                 nakladnaya[where]['i']['sh02'] = checkInt(nakladnaya[where]['r']['sh02']) + checkInt(nakladnaya[where]['d1']['sh02']) + checkInt(nakladnaya[where]['d2']['sh02']) + checkInt(nakladnaya[where]['d3']['sh02'])
                 nakladnaya[where]['i']['sh04'] = checkInt(nakladnaya[where]['r']['sh04']) + checkInt(nakladnaya[where]['d1']['sh04']) + checkInt(nakladnaya[where]['d2']['sh04']) + checkInt(nakladnaya[where]['d3']['sh04'])
-
-
                 nakladnaya['vozvrat']['iv']['sh02'] = checkInt(nakladnaya['vozvrat']['i']['sh02']) + checkInt(nakladnaya['vozvrat']['v']['sh02']) + checkInt(nakladnaya['vozvrat']['s']['sh02'])
                 nakladnaya['vozvrat']['iv']['sh04'] = checkInt(nakladnaya['vozvrat']['i']['sh04']) + checkInt(nakladnaya['vozvrat']['v']['sh04']) + checkInt(nakladnaya['vozvrat']['s']['sh04'])
                 nakladnaya['vozvrat']['iv']['l'] = checkInt(nakladnaya['vozvrat']['i']['l']) + checkInt(nakladnaya['vozvrat']['v']['l']) + checkInt(nakladnaya['vozvrat']['s']['l'])
                 nakladnaya['vozvrat']['iv']['b'] = checkInt(nakladnaya['vozvrat']['i']['b']) + checkInt(nakladnaya['vozvrat']['v']['b']) + checkInt(nakladnaya['vozvrat']['s']['b'])
-
-                    setNakladnaya(nakladnaya)
+                setNakladnaya(nakladnaya)
             }
         };
         let handlePodpis =  (event, where, type, what) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya[where][type][what] = event.target.checked
             setNakladnaya(nakladnaya)
         };

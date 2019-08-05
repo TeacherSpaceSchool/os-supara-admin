@@ -13,7 +13,6 @@ export function signin(payload) {
     return async (dispatch) => {
         try {
             const res = await axios.post('/users/signin?email='+payload.email+'&password='+payload.password);
-            console.log(res.data)
             if(res.data!==undefined) {
                 localStorage.userShoroAdmin = res.data
                 await dispatch({type: AUTHENTICATED});
@@ -24,7 +23,6 @@ export function signin(payload) {
                 window.location.reload()
             }
         } catch(error) {
-            console.log(error)
             await dispatch({
                 type: ERROR_AUTHENTICATED,
                 payload: true

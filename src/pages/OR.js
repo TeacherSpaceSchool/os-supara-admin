@@ -257,6 +257,7 @@ const Plan = React.memo(
         });
         let handleVozvrat =  (event, type, what) => {
             if(!nakladnaya['vozvrat'][type]['o']||!nakladnaya['m']) {
+                nakladnaya= {...nakladnaya}
                 if(what!=='time'&&what!=='mn'&&what!=='chn25'&&what!=='chn10'&&what!=='kn'&&what!=='mn1'&&what!=='chn251'&&what!=='chn101'&&what!=='kn1'){
                     let litr = parseInt(event.target.value)
                     if (isNaN(litr)) {
@@ -289,9 +290,6 @@ const Plan = React.memo(
                         nakladnaya['vozvrat'][type][what] = litr
                     }
                     nakladnaya['vozvrat']['p'][what.substring(0,what.charAt(what.length-1)==='1'?what.length-1:what.length)] = checkInt(nakladnaya['vydano']['i'][what.substring(0,what.charAt(what.length-1)==='1'?what.length-1:what.length)]) - (checkInt(nakladnaya['vozvrat']['v'][what.substring(0,what.charAt(what.length-1)==='1'?what.length-1:what.length)]) + checkInt(nakladnaya['vozvrat']['v'][what.substring(0,what.charAt(what.length-1)==='1'?what.length-1:what.length)+'1']) + checkInt(nakladnaya['vozvrat']['s'][what.substring(0,what.charAt(what.length-1)==='1'?what.length-1:what.length)]))
-
-
-
                     let prodanolitrov =  checkInt(nakladnaya['vozvrat']['p']['ml']) + checkInt(nakladnaya['vozvrat']['p']['chl']) + checkInt(nakladnaya['vozvrat']['p']['kl'])
                     prodanolitrov =  prodanolitrov * 1.1
                     let prodanolitrovemk =  checkInt(nakladnaya['vozvrat']['p']['s02']*0.2) + checkInt(nakladnaya['vozvrat']['p']['s04']*0.4) + checkInt(nakladnaya['vozvrat']['p']['b'])
@@ -304,7 +302,6 @@ const Plan = React.memo(
                     nakladnaya['vozvrat']['virychka']['chl'] = checkInt(nakladnaya['vozvrat']['p']['chl']) * (price['Чалап']!==undefined?parseInt(price['Чалап']):0)
                     nakladnaya['vozvrat']['virychka']['kl'] = checkInt(nakladnaya['vozvrat']['p']['kl']) * (price['Квас']!==undefined?parseInt(price['Квас']):0)
                     nakladnaya['vozvrat']['virychka']['sl'] = checkInt(nakladnaya['vozvrat']['p']['sl']) * (price['Стакан Легенда']!==undefined?parseInt(price['Стакан Легенда']):0)
-
                     nakladnaya['i']['iv'] = checkInt(nakladnaya['vozvrat']['virychka']['ml']) + checkInt(nakladnaya['vozvrat']['virychka']['chl']) + checkInt(nakladnaya['vozvrat']['virychka']['kl']) + checkInt(nakladnaya['vozvrat']['virychka']['sl'])
                 }
                 else {
@@ -316,6 +313,7 @@ const Plan = React.memo(
         };
         let handleVydano =  (event, type, what) => {
             if(!nakladnaya['vydano'][type]['o']||!nakladnaya['m']) {
+                nakladnaya= {...nakladnaya}
                 if(what!=='time'){
                     let litr = parseInt(event.target.value)
                     if (isNaN(litr)) {
@@ -348,14 +346,11 @@ const Plan = React.memo(
                     }
                     nakladnaya['vydano']['i'][what] = checkInt(nakladnaya['vydano']['r'][what]) + checkInt(nakladnaya['vydano']['d1'][what]) + checkInt(nakladnaya['vydano']['d2'][what]) + checkInt(nakladnaya['vydano']['d3'][what])
                     nakladnaya['vozvrat']['p'][what] = checkInt(nakladnaya['vydano']['i'][what]) - (checkInt(nakladnaya['vozvrat']['v'][what]) + checkInt(nakladnaya['vozvrat']['v'][what+'1']) + checkInt(nakladnaya['vozvrat']['s'][what]))
-
                     nakladnaya['vozvrat']['virychka']['ml'] = checkInt(nakladnaya['vozvrat']['p']['ml']) * (price['Максым']!==undefined?parseInt(price['Максым']):0)
                     nakladnaya['vozvrat']['virychka']['chl'] = checkInt(nakladnaya['vozvrat']['p']['chl']) * (price['Чалап']!==undefined?parseInt(price['Чалап']):0)
                     nakladnaya['vozvrat']['virychka']['kl'] = checkInt(nakladnaya['vozvrat']['p']['kl']) * (price['Квас']!==undefined?parseInt(price['Квас']):0)
                     nakladnaya['vozvrat']['virychka']['sl'] = checkInt(nakladnaya['vozvrat']['p']['sl']) * (price['Стакан Легенда']!==undefined?parseInt(price['Стакан Легенда']):0)
-
                     nakladnaya['i']['iv'] = checkInt(nakladnaya['vozvrat']['virychka']['ml']) + checkInt(nakladnaya['vozvrat']['virychka']['chl']) + checkInt(nakladnaya['vozvrat']['virychka']['kl']) + checkInt(nakladnaya['vozvrat']['virychka']['sl'])
-
                     let prodanolitrov =  checkInt(nakladnaya['vozvrat']['p']['ml']) + checkInt(nakladnaya['vozvrat']['p']['chl']) + checkInt(nakladnaya['vozvrat']['p']['kl'])
                     prodanolitrov =  prodanolitrov * 1.1
                     let prodanolitrovemk =  checkInt(nakladnaya['vozvrat']['p']['s02'])*0.2 + checkInt(nakladnaya['vozvrat']['p']['s04'])*0.4 + checkInt(nakladnaya['vozvrat']['p']['b'])
@@ -372,6 +367,7 @@ const Plan = React.memo(
         };
         let handleItogo =  (event, type) => {
             if(!nakladnaya['m']) {
+                nakladnaya= {...nakladnaya}
                 let litr = parseInt(event.target.value)
                 if (isNaN(litr)) {
                     nakladnaya['i'][type] = ''
@@ -383,6 +379,7 @@ const Plan = React.memo(
             }
         };
         let handleMainPodpis = (event) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya['m'] = event.target.checked
             setNakladnaya(nakladnaya)
         };

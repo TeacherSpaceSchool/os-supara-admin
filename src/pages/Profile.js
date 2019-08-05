@@ -5,22 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as tableActions from '../redux/actions/table'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom'
 import { mainWindow } from '../App'
-import { month, getYesterday } from '../redux/constants/other'
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-import { DatePicker } from 'material-ui-pickers';
 export const datePicker = React.createRef();
 
 const width = mainWindow===undefined||mainWindow.current.offsetWidth>800? 500: 240;

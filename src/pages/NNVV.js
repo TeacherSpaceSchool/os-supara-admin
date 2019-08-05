@@ -74,7 +74,6 @@ const Plan = React.memo(
     (props) =>{
         useEffect( ()=>{
             async function fetchData() {
-                nakladnaya= {...nakladnaya}
                 if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
                 props.history.push('/')
             }
@@ -109,6 +108,7 @@ const Plan = React.memo(
                                     data: {data: date, organizator: _data.guid, region: _data.guidRegion}
                                 })
                                 if (_data != undefined) {
+                                    nakladnaya= {...nakladnaya}
                                     nakladnaya['m']['data'] = []
                                     nakladnaya['ch']['data'] = []
                                     nakladnaya['k']['data'] = []

@@ -115,6 +115,7 @@ const Plan = React.memo(
                                 data: {data: date, organizator: _data.guid, region: _data.guidRegion}
                             })
                             if(_data!=undefined){
+                                nakladnaya= {...nakladnaya}
                                 nakladnaya.r.otr = 100 * _data.length
                                 let dolivkiM = [], dolivkiCh = [], dolivkiK = [], dolivkiSl = [], dolivkiS02 = [], dolivkiS04 = [], dolivkiB = []
 
@@ -297,10 +298,10 @@ const Plan = React.memo(
 
                                 nakladnaya['p']['i'] = checkInt(nakladnaya['p']['m']['ps']) + checkInt(nakladnaya['p']['ch']['ps']) + checkInt(nakladnaya['p']['k']['ps']) + checkInt(nakladnaya['p']['sl']['ps'])
                                 nakladnaya['i'] = checkInt(nakladnaya['p']['i']) - checkInt(nakladnaya['r']['otr']) - checkInt(nakladnaya['r']['oo']) - checkInt(nakladnaya['r']['ntp']) - checkInt(nakladnaya['r']['att']) - checkInt(nakladnaya['r']['at']) - checkInt(nakladnaya['r']['vs'])
+                                setNakladnaya(nakladnaya)
                             }
 
-                            setNakladnaya(nakladnaya)
-                        }
+                         }
 
                     }
                 }
@@ -340,7 +341,7 @@ const Plan = React.memo(
         let [date, setDate] = useState('');
         let [date1, setDate1] = useState(new Date());
         let handleDate1 =  async (date) => {
-            setNakladnaya({
+            nakladnaya = {
                 'p': {
                     'i': 0,
                     'm': {'v': 0, 'o': 0, 's': 0, 'pl': 0, 'ktt': 0, 'kd': 0, 'ps': 0},
@@ -378,7 +379,7 @@ const Plan = React.memo(
                 },
                 'i': -100,
                 'm': false,
-            });
+            };
             setId('')
             setDate1(date)
             date = JSON.stringify(date).split('-')
@@ -570,8 +571,6 @@ const Plan = React.memo(
                 nakladnaya['p']['i'] = checkInt(nakladnaya['p']['m']['ps']) + checkInt(nakladnaya['p']['ch']['ps']) + checkInt(nakladnaya['p']['k']['ps']) + checkInt(nakladnaya['p']['sl']['ps'])
                 nakladnaya['i'] = checkInt(nakladnaya['p']['i']) - checkInt(nakladnaya['r']['otr']) - checkInt(nakladnaya['r']['oo']) - checkInt(nakladnaya['r']['ntp']) - checkInt(nakladnaya['r']['att']) - checkInt(nakladnaya['r']['at']) - checkInt(nakladnaya['r']['vs'])
             }
-
-
             setNakladnaya(nakladnaya)
         };
         let [autos, setAutos] = useState([]);
@@ -619,6 +618,7 @@ const Plan = React.memo(
         });
         let handleRashod =  (event, what) => {
             if(!nakladnaya['m']) {
+                nakladnaya= {...nakladnaya}
                 let litr = parseInt(event.target.value)
                 if (isNaN(litr)) {
                     nakladnaya['r'][what] = ''
@@ -631,11 +631,13 @@ const Plan = React.memo(
         };
         let handleAuto =  (event, what) => {
             if(!nakladnaya['m']) {
+                nakladnaya= {...nakladnaya}
                 nakladnaya['a'][what] = event.target.value
                 setNakladnaya(nakladnaya)
             }
         };
         let handlePodpis =  (event) => {
+            nakladnaya= {...nakladnaya}
             nakladnaya['m'] = event.target.checked
             setNakladnaya(nakladnaya)
         };

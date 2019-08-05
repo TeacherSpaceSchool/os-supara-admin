@@ -78,11 +78,9 @@ const Plan = React.memo(
             }
                 if(selected===-1) {
                     let regions = [], _data = await tableActions.getDataSimple({name: 'РегионИмя'})
-                    console.log(_data)
                     if(_data!==undefined){
                         for (let i = 0; i < _data.length; i++) {
                             let points = [], _data1 = await tableActions.getDataSimple({name: 'ТочкаПоРегиону', data: {region: _data[i].guid}})
-                            console.log(_data1)
                             for (let i1 = 0; i1 < _data1.length; i1++) {
                                 points[i1] = {name: _data1[i1].name, guidPoint: _data1[i1].guid, plan: '', current: 0}
                             }
@@ -177,7 +175,7 @@ const Plan = React.memo(
                     regions.map((element, idx)=>{
                     if(status.role=='admin'||(status.role=='организатор'&&profile.region===element.name))
                         return(
-                            <ExpansionPanel onClick={()=>{virtualList[element.name]=true; setVirtualList(virtualList)}}>
+                            <ExpansionPanel onClick={()=>{virtualList= {...virtualList}; virtualList[element.name]=true; setVirtualList(virtualList)}}>
                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                     <Typography className={classes.heading}>{element.name}</Typography>
                                     <Typography className={classes.secondaryHeading}>

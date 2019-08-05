@@ -76,7 +76,6 @@ const Plan = React.memo(
     (props) =>{
         useEffect( ()=>{
             async function fetchData() {
-                nakladnaya= {...nakladnaya}
                 if (!(status.status==='active'&&['admin', 'организатор', 'завсклада'].includes(status.role))) {
                 props.history.push('/')
             }

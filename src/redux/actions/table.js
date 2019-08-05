@@ -101,7 +101,6 @@ export function setData(payload) {
                     data.append('region', store.getState().table.region);
                 if (store.getState().table.point !== undefined)
                     data.append('point', store.getState().table.point);
-                console.log(store.getState().table.region)
                 if (payload.oldFile != undefined) {
                     data.append('oldFile', payload.oldFile);
                 }
