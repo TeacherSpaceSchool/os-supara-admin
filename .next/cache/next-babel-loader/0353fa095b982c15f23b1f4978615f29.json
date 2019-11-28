@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const AUTHENTICATED = 'AUTHENTICATED';\nexport const UNAUTHENTICATED = 'UNAUTHENTICATED';\nexport const ERROR_AUTHENTICATED = 'ERROR_AUTHENTICATED';\nexport const SET_PROFILE = 'SET_PROFILE';\nexport const SET_AUTH = 'SET_AUTH';","map":null,"metadata":{},"sourceType":"module"}
