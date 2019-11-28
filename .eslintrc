@@ -10,6 +10,7 @@
     "react-hooks"
   ],
   "rules": {
+    "includeExports": true,
     "no-debugger": 0,
     "no-console": 0,
     "new-cap": 0,
@@ -17,11 +18,10 @@
     "no-underscore-dangle": 0,
     "no-use-before-define": 0,
     "eol-last": 0,
-    "quotes": [2, "single"],
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
     "jsx-quotes": [1, "prefer-single"],
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
-    "react-hooks/rules-of-hooks": "error"
+    "react/jsx-uses-vars": 1
   }
 }

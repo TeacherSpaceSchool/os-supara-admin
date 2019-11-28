@@ -1,17 +1,832 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7632e864-3314-42a0-beaa-adf37cb4402a" name="Default" comment="">
+    <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/milk.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/milk.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.babelrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/BUILD_ID" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/build-manifest.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/dll.manifest.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/dll_9e2a3f9838424feeb96c.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/dll_9e2a3f9838424feeb96c.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/stats.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/package.json.hash" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/007a7c2782ed7e374e6a83b33f0135c2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/015aee14a75872fec6023559d6366f8e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/02a60243eb1ab6e683f7a02e414825ff.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/02c7a59bdd5ecd32a9e0769e241629d4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/02d994c4f04bc0823abafcbb6c6a4634.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/031c6267856c66b63a3b74282fa41803.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0346115948b10d648ef6b3d230ac4a45.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0353fa095b982c15f23b1f4978615f29.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/035413bb8e6d5c7818091d42e9abbf7b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/04113192ca4747eb556e9080f592bd92.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/04e71dd3c20056c8d52ac307222ef2a7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/05698034d61be3a14f449d7a45b34945.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/067fe5eef6a6eb31f2066d6650c2411c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/06976f10cc9ace8317a2d319d25c8500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/070d20193515465ea94b5a9ed9dd3ac2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/07c74343d667b5acd312ed7b111679af.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/087e80f5d0f8165876066962e2600ffa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/09659a7f1bdc5847ebe6f2ac24d9fecf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0967e90f4d60201549c7dfe4ee9994f3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/09e147c15e3d3c83fcff98b08538c84a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0acd7ed736524923b2b57fb74c0b0fb6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0bad948e1d9b5c94390df344f20d694c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0ca8a0abc4368db15e1fa5679e1b55a7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0d1c7ae7c151649109b2a7475dbdd0c1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0d5de943ab30b5a508a22940b85e594d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0d9f6ccc2499a2bdbe400c6edffabc88.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0e73d94ecc43fecc0c0aa4831aaf57ad.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0f2ae8521453b333ad8a937d58ed2a83.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/0fe69092832e9509855bd8d0391a6ce7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/10c424d1025d67aded2a561835a372b7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/110aa29c91d392c17ef866da29d69bcf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1200bfe1ce42de66180b64054355af19.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/14125a877d72a06989af410365465bd7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/14dffa192a270f31475774376b6e0118.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/16f292a9118b0e7e6125722dd3940e69.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/182b5240955ae54848a36892f0aee572.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/185527afa2e11e5a38f9ce8d9d28383d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/196cff5d699db44a69254d623bb2709d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1b2a867223af9ad5d590c24f6c2b76eb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1b7f785a26034bf534de56f5ab5c0273.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1c39fa06052558d9678a1da1b5d68e57.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1c6f801a984b7db3accebfc984edf4fa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1de10524e7b5a5fa6c34edc1eb80be83.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1df406bba261e2fad8655862200ed281.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1e1de6530a3fd7666778fc62d679a660.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1e40e090ca6ff4fe6a59129c13ce8a61.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1e5fb295aad0cee183f81a300befcff4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/1f5128766929d65c938eda9418a41e55.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/21f3ef0a94d11240bf8555511991c821.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/239f6f2aa3b007dde8751738075351dc.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/23b4a31ffe033a85d53ea8377dd48450.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/24a738a6012e1bd2ecb3327b24cbba9f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/257afbad37bc8f84780035eee41d805d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/26a1171ae2d5fdba5d9dbd4d90c8d876.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/276e337cecb71be60b1de890b7bd2c4d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/277c315fd069423d45bd2b5df4f291c4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/29810594f3d0c9ef6fec969fa1d357aa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2a17837e4e080d21d0ee2fa04ba971c6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2a946c7abb5cd99155c8c75a87e55785.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2ac956f84d6d9673e6f04866f7fc0cdb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2aec1307c5f885f7b395359aae3183be.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2b05e4d47eb6d6e0e72399016225aa2f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2b3c16610dc66e01c63e5948937a99de.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2b9bde060e0d4959462777370d4d618d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2c76a4d8cea2643680ea53ecfe1a34ba.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2c80576916fca5d9411bae915ac59a29.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2d10944f960a9e39f1123c050b86a16b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2efe69fb1e91d3d08077218187d3e379.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/2f82aaf072907e23c3f4a9204286b307.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/30a54e48d911d04a6bcfabc2c35c398f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/32c95dbe7c1078477365cda92a2ed815.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/33ff268681d1763fbdbad76263a73692.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3425d7eb9f54e1f92a9b59c5261d6984.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/34b933d4d01e47d1ed31b73759d8c335.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/357ad06f440bc1d1809922cff419035c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/36bc12061feaf138053c5e3fb2fd7c28.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/37537cda044fccfb0c62a181e403342d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/37b6086ad17966e0750607b93981b0fb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/38a3ab9fae3beca2db8f3c272585043f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/39563a9c21b6f88c3220dd5e9200b34f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3961f0d88b6aa68e9d95d3a0934bc110.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/39d2f2d1dc4f44f7ddbaa32fab42c472.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3ad6aa04c6ca2e1dfb9c44e60693708c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3b7cec557c03592478a222b1c4996ec1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3c44789c779c40f712c5e2e7362aaa29.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3fb8d78c3e62fc34ff7c33c513e9a96f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/3fbb92e033ace7a0d8bacb45977571d1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/40c0fcc6496ee730f9a11140c4dfaeae.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/41c7878aacd8125c866921924fd9db81.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/447ba3b90641ffe0af15a6c838da9f39.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4573f85ee0dc34cb912ed33a768d3454.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/47deb80a9018d576cb55f5b5cff50eae.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/486702b22542646f4207daa9187aa219.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/48a454ebcffd62e041b9b9adf1282856.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/48a63f8f24e72b79f003035b816db56d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/48a81efc453e3394073435813e4a3232.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/495f7e580894b711c99f7848851cf16a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4a732c01529699fa85cc0e381aa7c943.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4a81a4b12645f1320161bf02e15753ea.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4c1d080dcefb48ec1ac2aecf3d7c7a4a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4d0e9592ceb1a4bf9344a4866db378f1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4d954ab2433282d98be7320baa9feaa0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4ebd42678469255da05229c943aecab5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4ebe5f419af254635fd103d42c8e7d01.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/4f85e59a09de271f7ae5d5abd0e516fb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/50f22dac39b6ddd78316e95b68aa3420.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/51a2dcb55c86c2bb99f0edf0c033efd6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/51fc2acf4a2e35b33b0cff456a218e1a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/52195d837efa6f7b3a3cd4114d95a3a3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5307a7c1f4755f86a8cbf7989c0fa5c1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5434cc616121f216f7ecfc58a0eccca0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/543a02de777fe3537b780058d40d5411.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5662825d80e6346c10961a06d7f7af68.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/56a09b34e9fa38031ae0e5cc6f73c227.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/56db54db15c4e00ba027e6369189ed1b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/56efe49a34a307f332f99933e89bbf47.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/57444471688ea695d248cc19427b36f3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/57ae95fe9a25139001b4c314d810c601.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/57d6980697746a6a01d25553c68d5bc0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/58444f02a511e8082abb6304eb02e5d5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5890f478d4145453325fb6e584408457.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/589d1a3c5751c8ac598310b9fab88b60.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/599c247f154318b429d7de1d2da1316e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/59abe073c1c08f4c833960f0b4595afb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5a01dbd8ef4f7803203d7faacf582931.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5a31b50fd35e5cd68481ff5058f444ed.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5b5ff074eeb4974845627992e264c842.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5bf2761be706c49cee23ac3f52587652.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5bf7bd033770a699c1654c2ee92aa997.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5da5b6a530515ac6d0bf0e641c4190c2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5e006cd562f8a6417cbadc85e9b0c4c0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5f9cff5313f9a1e72ecaac01979b1db6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5fc99c10a34038fa643cfc6c921a1a94.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/5ff36206400760be811318ed96a27832.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/611e7b1264566bab37d02882e0a4a919.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/63874d1f6f1489e2bbc7c0e5a973eb3d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/6398428871354706d949081b7d4e986a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/63ac53b64defb8090f9e80208b17999a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/646839e3ba2d2886398300557e3b25b0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/64cb36e2ec6270cc8e9f00aa4d4d0ad9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/656c07ee370b71ca9e5a113afbc37755.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/65ce864ffc96699e0e1a6e6d442c75d9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/66237c08ca6b0a55c2fd516e623790e5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/66b34bc47afffa4dabfa9a578013dce3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/67c5b2d89955e70cb032ac6a97194ef1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/689f3705128770a755b6e2769fabbd19.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/69891cb0d0ac09424b55da05c3786e48.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/69cee57453e333a9e7eb8a3a32f1804b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/6b9f3c428110b2691778c973a1cfa836.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/6e9a144393f08b770a1575c283f00f76.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/705074aadce393e5a6c5cfae834b4c2a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7173c6866fec5aced43358284c8a09e0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/717983b21dbfa56acabb31a8226b5df9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/718b71568c9992ab17ac373f62405e90.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/72443d9e3f36e80287c3d7b7af3968b1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/725145a9b837b7de2849cc548ccd6980.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7325f12148d11c8b9cdadde40a6dfa7a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/734f1af5d7c4f222935db799778b4491.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/745cb28316cecfa2bdaa78d2dd5d9368.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/754fe36b631beb40fe1364b01fde669c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/75ae04dd3eae2fbadea6d448199c3e9d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/75d215567e619e8e8bfa1e7dcdc8c6b2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/75f7654e1b58c0f387960303e8cb67a7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7659e7810f7cf7d217de4777d8906475.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/769bacbc4c72a9f18f3a0f9e5bde557b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/76ae06f368ee2590396f6848c550c676.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/793814b48486e433d6431205f715e676.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/795af312b8b1e4704b239f44ab234476.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/796c58d84b3f0485eacd47f9555efec6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7ac13eca7535ecca14bf217d01e3110a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7b2cd5199e0f6f3acb13ba94d724fc07.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7b4b1ca71500e67a0fc9442a3e94073b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7bb783bd2675febfeb7b2623a9a1d550.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7c1630bd54c1db73f6cfcab13c25aa63.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7d57fa61d8818ba42ae2142dd004771f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7e49a9eb0769cfd5e5483e605dd992e9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7e78067e95a7f981dd7dbbec13e24eec.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7fbeba27b28de27b796bddef0dbc7066.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/7fd84df981cc079993b4e56146f9a8b4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/80008d9a1ddee4e5455b500ed3080d56.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/80689f2ae9b91c61ba2470027fc42a75.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/81a491ad782fe37c0961d03eeea07327.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/824ac4e04ff36c6ad507859f7683d44f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/829cc4fc9644be89dacf2ba2cbf2602d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/82db67afab3e7c96b47bcd010a32babb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/836c3fb352b2fae9e2cec30aa3030bbb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8371a6c9dccf685c11b4fe9ea9cd87cb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/83dadabfd19c34368ce99710f3262245.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/85fa95ef0370b8b957308026a18394d5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/88318fbaf955d60a3261b0218879b6d1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/88c9a1f3e16a16b354f507c46ae825aa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/88d6770a7f1f7272fb5fdc3b43045a12.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/890832ab5e5f55ae0a6cfa219cab9513.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/891c984f0c76f29e1df9e1e3a9065632.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8bfa9e05f7f091cfdff0ec3c4c61b598.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8c46e22aa7b2a00881dac88e38b8c01a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8cbcde758e167018a771d224a0472b65.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8d1a718979ded1739efc5b71b2b25b08.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8d9429aa81f6ea4ae88676245c3a574f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8dc2b85d37773fa37557b7ca3d4d45e9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8dcfef326cdd7021330dce64c027db0d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/8dfae9c490d324f5dd3a8eed88c3a728.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9124c01ceb8c0e43de7b54f294b469d5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/91b50a44c595240239ad0d436e9a550b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/91d55d9825db1ea5ecc01db4fb108150.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9262790c3fdb3dc6250dbdee62f696f4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/928412109f274b13ec55e0ca717a0c3e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/92a40b53f599b13ae8e111a9a67e3016.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/92bfff387fe41024c23378f354f84dd6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/950eb934e0a466642becf7f7495bf38f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/956a31845b2d35c02384985f7c1f0607.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/96985ec604aedb480e417657d88627a6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9942905c09e022b85404599f99dabba6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/99f73732daa41612524ac3690c6a1bfa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9a934dc862db755cc538962dced250e6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9c49b945b414f8473962e8451e30e8d6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9cc99169da393016d75f17cb561eef3f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9ccdcc43ed25f8a4986ab0074aa8b67f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/9f39c4d60f425b7c6d73f531cde2b3da.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a013273b61aa1d7a83f9405a90bed919.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a14d21f394983c45ca0fdd72f8987ef5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a20959abb4f254a1aa9e61d418d29079.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a21b7de8d8327b4021aeea317f2b62b6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a239ce98fdaf239ce0e9d80e027643da.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a366ee889c8b4894b653810c1efb9d19.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a3b6d50fb458dbd1254c1a9214e40da2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a4766a5e54d5709b36d3b29f0f0a6589.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a4b7c90dd76b1c92c7617b539e458fbe.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a51c9b9d5b482c602434ff952501e524.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a69190400b9f281759fb1e76d9e0ac10.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a6df47ccd5770db3d86325f1788c80cb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a706fa5c2d8ab5c1201f91fdec54c730.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a7d155f7405f04273668b7d7a8dc3e5f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a87a7ac9c3c0455d5a0c1a29b9f4fd16.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a8bc584f00097df04587c8e5a54e7aa1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a92328ee2068069239522a17716bc1fb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a94bae84220b387e89b73d031cca56e0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a9818619ff13a226adbdc5d56954a7d3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/a99ff774486338a1f67f54087d86ab24.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aa6f8c0cc05fec6adac3bb9a4b503236.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aa9e48e7d3f260db9946065da440f842.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aaca14df0ce54625c936e01f8e718604.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aaf92c984e1c6d4101676c286445358b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/abc35c059cf0f486ab2473bcd2f65d04.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ac2135883701bedb45e3081b35d5a3a1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ac40544cda088a916765c1670de6e276.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ac4d6ab8145e25f102977e523eea5130.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ad0cb4df87e3afe13d48223331c548e1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ad2d46a5978acd0768b6493f90bd4528.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ad4b13178deb23c438e8a93b3e6dca52.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/adaf6e0b61846ef401e3749eb91f8a11.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aef72672b14b30f10d47e833e6005ec0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/aefe29c3d3966c01d1a23a2e32bea67e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/af177dc40c346b0ceb575d2e94000e68.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/af93977cf0dbe10261505d832c925986.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/afb5c8c237774d81fe81fbd046d02397.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b10203f7df0480ef845478c744c0a1fe.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b1a677ceead329d67b44d18b45601cae.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b306b8a2c23616a3f0298b304b1a641b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b3c9fe000865b013a734e38ea3e32d0d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b437e9080029de3122040aa116ceb7b1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b442251157828594fa4aeed80ab544e1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b4d0221b26e2f6716b19a9b7ed9481e3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b51219c56f162b23bb0c3c48c1ef50d8.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b5fd3afe14f0f170f04c538eeb35344c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b66dafb653ebc030e6dff711be2356cf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b838a2538c3f9d999ece80d0a77a57f2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b87c42d9b15e86b7c1aaa6687e6d77ce.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b955033146662c8b5b12620d81c251a5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/b9604982bc2e3d1ce13fdfe17aad137d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ba1299533ef9bc2105379d83a98090f9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/bae7a4538bd26c2a2672d0ddbfe63e3b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/bba1171fe52aa81a2357e1a322a9daab.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/bbac2ebca4632d07a512b9f60a5102fc.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/bc152d3c6d744bdebe933e9910ef40d1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/be80e9301210d2030a078cb0b84c832d.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/be96b35014e10e5cf78459d62daf80eb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/bf0aad5ceb49cb2662418eac21f9c1f8.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c0c3fd64553065e5e423a690392177fe.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c15a629b0976aceff8bba32ac91c2425.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c1bfd4b6d8d7ffa771cda49ed121cc98.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c32ab34a1bae194b79095f4f4e7b71db.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c3721bcad9cd85220dd4eff7a20e8bfa.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c3801dff5e208fb9e67441ac864ccdfc.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c443134ef2b2f4a9a1ae29e627c91cab.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c47e08bedf2f5daf0fd796b3fa3b80d3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c48df999618f680001218b7d59455775.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c5212f56be7a7fc5af84b95753a41f18.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c5bfacbb85a6a9aeb838e7cf18594e79.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c72035dbade2fa396dde670cff25d90e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c7a396a79085df5a76cdf5303bb1e1ac.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c840e742df1ee5eb32ed2f2db36751c5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c891a14ee8ab9120fe20f7e8019fb117.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c912dc52553da342253039ca8b7dd045.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/c9b235ab36b9d5f4df49b5478ac6ad80.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ca4a25ce9e7e2358061f6fc430383b22.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cace6e9e3db781cb9c0c62e076718f73.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cb7f0556c2e262e7ccde897bb5e226fe.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cc374a50ab277181eba8cf627e65d8d1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ccc631761bc10172a5aaa3572249ff9b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cd6384d61b3e43c2b425fb4af219870f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cef4ea667015b220d8801db5304f9ad1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cf13be16354084888219d2ac8268940b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cf25bdc7e0353c85cefbdcf5c2cd9abd.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/cfd24f2c95226f4255db7527b1a2a4af.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d0172b6c90aca4219ec12fb7f17b5d13.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d01df5b398d6e50f174ad10ee8425298.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d2b0cc775a70d0a40b2fc337f798a9a6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d36106600eb95648b25f04dfcd5c9022.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d36b0630e78a4bb8516f562d071d5dbf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d3d76029be7b07fec9b93ea3cdc6dd40.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d4e310994aedeb8f3026a66f84c5e2e8.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d641d2434913dc051deba779e7b2fe18.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d6cc013dca4725ea53063994278ed2f4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d77dbb27e1c49d1c389154a814023400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d83265eada880448b9a2e59e26802c3e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/d984ed17971351b8194b443cf94f4a8c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dadfad6d922b6fa2c6137e79cbb5251b.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dcba5e3767fa4721900df7133b623a03.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dd2a11c8f869d3b05d46fe68437db1e4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dd4811c92d57cb653af47bb28998216c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dd71feaff3fb7090ed6ac49f2043c0ae.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ddcf3cafecd08e3a69d0e0a791cda681.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/de3b8fb27f235a1977cad6df330a8c90.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/de48189d9112b9f5db05cbfac9c60bd8.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/df03f30c94aada98e54910653073f1e4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/df31eb293faf628950a8f7946af6096a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dffc8dd92cfb3d4cc2cec2360e5a238a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/dfff979e7aabc323e8083d1aa78dd480.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e0b39e20af816a9a4accffe5154762c7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e1ed2cea1c34e7066db9e0fb20ecc8de.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e251656c08c63f960ee2ed4eea12cc2a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e3093ed1c4912531b2222ace431851fd.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e33217f337069c24b5438127b08a502a.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e46141189970ee24170a1a07ccd452ff.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e51d451d75f6174cba68c389fba55b76.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e5ec0a5a562458515f33fbd5c96fa4cc.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e7529f6b046cb7385e9e0cd2b36f0aa5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e8633e1413351cdd110f4ec00a6502ef.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/e9a5bcbffc893b4c0e92821dc981d710.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ea797c7cf535f609b1a6e8ddc7b00ae7.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ebd4115dd9ebfae7792280b0c3265e2e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ec193de2156d04b24d381d7d4c3c1202.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ec8054a0b799a94a6672079f777375fd.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ec89e64afbb292b49bb66ebbd2d504cb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ec905435af02239218a8e2029f297922.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ecc254eb456cbca58dcc4ac846b06ea4.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ed78377357c933b535871ee56479d929.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/edfa60284a6f5ca837fd14cd8abc3a41.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/eed111e91a185fe2899311cb2cde5feb.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/efed3d60dc2664fd9c36cc962b6eb287.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f0a5b3462a3b580af682a03deabd2f81.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f172667c40aba3644930bb6939b9cadf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f2bcb1040f335c0e202cfe448420ed84.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f34dd98c1c7251a26ad7b756272ec066.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f443ded79752ced265f459f1ad902ef0.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f480fbeab06362e0bd5531f1612d7b60.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f50c336c608e5bc3777a3b5d7fdcb5d3.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f771e25462f798cb3bba44e82dd0c818.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f7db14eac31c6fc8d63f1562395acb08.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f8d5c41a05d3c5da486353e01ffad8b9.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f91a5058c463f8da96244edf7ce41a4f.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/f9bf2e80e2d9594749de948d9389b1f6.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/faa2558a5648bd78bd5197e47529cf2c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/faa7545499d92fd4e4b1f67c587cf80e.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fba6fdd127e39f83ef46468cca9dbebe.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fbebe980e445f9603d8ed7f15aa81bad.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fc3e8195417fd8165ef446e53112f278.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fc62d78f6f56d2a289748c78c1bf01ec.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fca96f428e08a86e44c621e4a68a56e5.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/fe2f6ec0e69e5bb29740d21c67edc70c.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-babel-loader/ff24051765c3ca835a24a3961c1715ff.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1002142316" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1187131006" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1219336418" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1291172090" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1298254685" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1333388893" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1490660387" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1502177443" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1546342555" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1579179227" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1976823758" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1998908829" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a217179309" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2332646322" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a237130700" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2489169294" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2565223954" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2717769241" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2767057165" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2773966922" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2883841818" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2992459909" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3043521951" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3110006613" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3329832919" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3382006893" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3433023095" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3994956851" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a453524848" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a674432637" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a922521670" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/react-loadable-manifest.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/records.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/0.52b67b8692f90c0bbc2a.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/0.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/1.16150a9b969281c52d64.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/1.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/24.1efb470e322ec43e7a58.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/25.ae5b986675ca6de7cab4.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/26.b22da30023fc0daf85ef.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/27.59fdedf53c2f2d6f78f1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/records.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/ssr-module-cache.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/_document.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/client/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/clients.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/employment/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/employments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/favorite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/item/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/items/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/orders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/organization/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/organizations.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/route/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/routes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/QP1feGPBsXNwGYp0BrcvY/pages/subcategory/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/index.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/client/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/clients.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/employment/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/employments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/favorite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/item/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/items/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/orders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/organization/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/organizations.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/route/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/routes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/QP1feGPBsXNwGYp0BrcvY/pages/subcategory/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/0.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/1.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/2.ae81baf48aec12d565cc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/2.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/27.67edca2645776c97c70e.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/28.10158e7661b958444511.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/29.c117267b2141fe753699.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/3.b64b01eeb8717f9e53f6.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/30.412d995b7c4342cceb10.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/4.8a69fd0d11e198192c46.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/commons.5f1fd31db376d9b554eb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/css/commons.224123c4.chunk.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/css/styles.chunk.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/css/styles.chunk.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/dll/dll_9e2a3f9838424feeb96c.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/dll/dll_9e2a3f9838424feeb96c.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/ads.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/development/pages/index.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/amp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/amp.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/main-38cceb44badf0918b064.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/main.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack-9e420562b868751c53cd.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/webpack/50138de05b9aead7a08f.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.next/static/webpack/e724542807319936a008.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Dockerfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/ads/CardAds.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/app/AppBar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/app/Drawer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/blog/CardBlog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/category/CardCategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/client/CardClient.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/dialog/AddSocial.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/dialog/Confirmation.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/dialog/Order.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/dialog/Sign.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/employment/CardEmployment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/items/CardItem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/order/CardOrder.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/organization/CardOrganization.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/route/CardRoute.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/App.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/next.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/client/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/clients.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/employment/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/employments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/favorite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/item/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/items/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/orders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/organization/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/organizations.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/route/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/routes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/Tc4GiAuS1UkJRI1Mu_qry/pages/subcategory/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/0.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/1.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/2.ae81baf48aec12d565cc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/2.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/27.67edca2645776c97c70e.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/28.10158e7661b958444511.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/29.c117267b2141fe753699.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/3.b64b01eeb8717f9e53f6.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/30.412d995b7c4342cceb10.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/4.8a69fd0d11e198192c46.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/commons.5f1fd31db376d9b554eb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/styles.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/chunks/styles.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/css/commons.224123c4.chunk.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/css/styles.chunk.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/css/styles.chunk.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/dll/dll_9e2a3f9838424feeb96c.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/dll/dll_9e2a3f9838424feeb96c.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/_app.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/_error.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/index.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/development/pages/next/dist/pages/_error.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/amp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/amp.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/main-38cceb44badf0918b064.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/main.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/webpack-9e420562b868751c53cd.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/webpack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/runtime/webpack.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/075673566585ff2f1d8b.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/1609e66f11b48d331b23.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/18a26ff4b5b716c8de0f.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/2c22458fb1268f72fb2a.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/2dccd49b6f10b910b815.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/3c5367012833f8d8372a.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/7b2f61b03e235a295a57.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/b11ef3b854beb0dbee33.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/b24cc8aa2a130b2b9024.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/b857d570e3fe1d77010e.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/c132db9c155ac2d418bd.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/eba604d65c94e2fa4a1c.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/fc3cab6fb9d553e1975c.hot-update.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/_app.js.b24cc8aa2a130b2b9024.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/_app.js.b24cc8aa2a130b2b9024.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.075673566585ff2f1d8b.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.075673566585ff2f1d8b.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.2c22458fb1268f72fb2a.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.2c22458fb1268f72fb2a.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.2dccd49b6f10b910b815.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.2dccd49b6f10b910b815.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.3c5367012833f8d8372a.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.3c5367012833f8d8372a.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.c132db9c155ac2d418bd.hot-update.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/webpack/static/development/pages/index.js.c132db9c155ac2d418bd.hot-update.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/_error.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/client/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/clients.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/employment/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/employments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/favorite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/item/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/items/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/orders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/organization/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/organizations.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/route/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/routes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/_next/static/zL9bpNCU2hSXaXS0_jyje/pages/subcategory/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/clients.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/favorite.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/facebook.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/instagram.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/sitemap.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/telegram.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/static/twitter.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/_app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/_document.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/client/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/clients.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/employment/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/employments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/favorite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/item/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/items/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/orders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/organization/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/organizations.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/route/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/routes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/subcategory/[id].js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/actions/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/actions/mini_dialog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/actions/user.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/constants/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/constants/other.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/reducers/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/reducers/user.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/redux/with-redux-store.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/app.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/lib.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/value.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/ads.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/blog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/category.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/employment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/items.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/order.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/organization.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/route.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gql/subcategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/singleton/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/singleton/client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/singleton/store.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/ads/adsList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/ads/cardAds.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/appbar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/basket/basket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/blog/blogList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/blog/cardBlog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/category/categoryList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/client/cardClient.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/client/clientList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/contact.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/dialogContent.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/drawer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/employment/employment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/employment/employmentList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/favorite/favoriteList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/item/cardItem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/item/item.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/item/itemList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/orders/orderList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/organization/cardOrganization.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/organization/orgaizationsList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/organization/organization.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/pageList/cardCategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/pageList/cardItem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/pageList/cardPageList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/pageList/pageList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/route/route.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/route/routeList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/subcategory/cardItem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/subcategory/cardPageList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styleMUI/subcategory/subcategoryList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/theme.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/facebook.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/instagram.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/sitemap.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/telegram.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/twitter.svg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/museum-admin.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/debug.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/192XPNG.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/512XPNG.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/manifest.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/App.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/App.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/App.test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Blog.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Car.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Delete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/FAQ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Organizator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Point.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Price.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Realizator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Realizators.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Region.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/Statistic.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Add/ZavSklad.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/AppBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Drawer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Sign.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/component/Table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gora.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/index.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/logo.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/Blog.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/FAQ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/Main.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/NNPT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/NNVV.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/NS1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/NS2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/OO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/OR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/Plan.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/Profile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/RO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/RR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/Statistic.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/mini_dialog.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/constants/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/constants/other.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/constants/table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/table.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/service/idb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/service/idb/getSimple.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/service/idb/status.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/serviceWorker.js" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/Dialog.js" afterPath="$PROJECT_DIR$/components/app/Dialog.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/SnackBar.js" afterPath="$PROJECT_DIR$/components/app/SnackBar.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/actions/snackbar.js" afterPath="$PROJECT_DIR$/redux/actions/snackbar.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/configureStore.js" afterPath="$PROJECT_DIR$/redux/configureStore.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/constants/mini_dialog.js" afterPath="$PROJECT_DIR$/redux/constants/mini_dialog.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/constants/snackbar.js" afterPath="$PROJECT_DIR$/redux/constants/snackbar.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/constants/url.js" afterPath="$PROJECT_DIR$/lib/main.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/constants/user.js" afterPath="$PROJECT_DIR$/redux/constants/user.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" afterPath="$PROJECT_DIR$/redux/reducers/index.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/reducers/mini_dialog.js" afterPath="$PROJECT_DIR$/redux/reducers/mini_dialog.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/redux/reducers/snackbar.js" afterPath="$PROJECT_DIR$/redux/reducers/snackbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintrc" afterPath="$PROJECT_DIR$/.eslintrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/NNVV.js" afterPath="$PROJECT_DIR$/src/pages/NNVV.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/NS1.js" afterPath="$PROJECT_DIR$/src/pages/NS1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/NS2.js" afterPath="$PROJECT_DIR$/src/pages/NS2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/OO.js" afterPath="$PROJECT_DIR$/src/pages/OO.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/OR.js" afterPath="$PROJECT_DIR$/src/pages/OR.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/Plan.js" afterPath="$PROJECT_DIR$/src/pages/Plan.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/Profile.js" afterPath="$PROJECT_DIR$/src/pages/Profile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/table.js" afterPath="$PROJECT_DIR$/src/redux/actions/table.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/user.js" afterPath="$PROJECT_DIR$/src/redux/actions/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,29 +838,34 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="museum-admin" />
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NS2.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/NS2.js">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding>
-                <element signature="e#2621#2676#0" expanded="false" />
-                <element signature="e#4379#5335#0" expanded="false" />
-                <element signature="e#6215#8319#0" expanded="false" />
-                <element signature="e#8706#10686#0" expanded="false" />
-                <element signature="e#10746#13128#0" expanded="false" />
-                <element signature="e#13188#13342#0" expanded="false" />
-                <element signature="e#13370#13632#0" expanded="false" />
-                <element signature="e#13971#14503#0" expanded="false" />
-                <element signature="e#14554#14663#0" expanded="false" />
-                <element signature="e#14720#64384#0" expanded="false" />
-                <element signature="e#64402#140961#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="1683">
+              <caret line="112" column="8" lean-forward="false" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,75 +875,80 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>guir</find>
-      <find>guio</find>
-      <find>gui</find>
-      <find>.guid)</find>
-      <find>Отчет реализатора сегодня</find>
-      <find>regionGuid</find>
-      <find>Guid</find>
-      <find>data[</find>
-      <find>guiO</find>
-      <find>name==='Реализатор' &amp;&amp; status.role==='организатор')</find>
-      <find>Отчет реализатора'</find>
-      <find>console.error(error)</find>
-      <find>nakladnaya</find>
-      <find>setCheckDate</find>
-      <find>id</find>
-      <find>1</find>
-      <find>useEffect(</find>
-      <find>useEffect(async</find>
-      <find>async</find>
-      <find>useEffe</find>
+      <find>subscribe</find>
+      <find>Sort</find>
+      <find>bask</find>
+      <find>профиль</find>
+      <find>profile</find>
+      <find>userA</find>
+      <find>вы</find>
       <find>useEffect</find>
-      <find>map(</find>
-      <find>offsetWidth</find>
-      <find>secondMenuOpen</find>
-      <find>setNakladnaya</find>
-      <find>setNakladnaya(nakladnaya)</find>
-      <find>setVirtualList(virtualList)</find>
-      <find>useState({</find>
-      <find>console</find>
-      <find>console.log</find>
+      <find>rgba(0, 0, 0, 0.87)</find>
+      <find>countBasket</find>
+      <find>Badge</find>
+      <find>&lt;/Badge</find>
+      <find>ReorderIcon</find>
+      <find>.js</find>
+      <find>&quot;</find>
+      <find>img</find>
+      <find>выйти</find>
+      <find>Вход</find>
+      <find>logout</find>
+      <find>data</find>
+      <find>.ads</find>
+      <find>InMemoryCache</find>
+      <find>return res.data</find>
+      <find>borderRadius</find>
+      <find>app</find>
+      <find>checkAuthenticated</find>
+      <find>//</find>
+      <find>Cookies.set</find>
+      <find>WrappedApp.render</find>
+      <find>jwt</find>
     </findStrings>
     <replaceStrings>
-      <replace>status.role!=='реализатор'</replace>
-      <replace>организатор</replace>
-      <replace>s</replace>
-      <replace>* 24</replace>
-      <replace>disabled={status.role!=='организатор'||nakladnaya.d3.o||check()}</replace>
-      <replace>disabled={(status.role!=='организатор'||nakladnaya.s.o)&amp;&amp;check()}</replace>
-      <replace />
-      <replace>disabled={status.role==='admin'?false:checkDate||</replace>
-      <replace>&amp;&amp;</replace>
-      <replace>dataTable</replace>
-      <replace>payload.page*skip</replace>
-      <replace>s04</replace>
-      <replace>'</replace>
-      <replace>date2</replace>
-      <replace>date</replace>
-      <replace>element.data</replace>
-      <replace>type=&quot;number&quot;</replace>
-      <replace>checkInt(nakladnaya[</replace>
-      <replace>]) +</replace>
-      <replace>:''</replace>
-      <replace>vozvrat</replace>
-      <replace>_data1</replace>
-      <replace>+= checkInt(</replace>
-      <replace>nakladnaya</replace>
-      <replace>Face</replace>
-      <replace>data1 = JSON.parse(JSON.stringify(res.data.data))</replace>
-      <replace>getSimple</replace>
-      <replace>Data</replace>
+      <replace>employment</replace>
+      <replace>inputDF</replace>
+      <replace>Notification</replace>
+      <replace>notification</replace>
+      <replace>Items</replace>
+      <replace>CardItem</replace>
+      <replace>, $</replace>
       <replace>,</replace>
-      <replace>= await tac(</replace>
+      <replace>SubCategory</replace>
+      <replace>Contact</replace>
+      <replace>Social</replace>
+      <replace>AddSocial</replace>
+      <replace>email</replace>
+      <replace>contact</replace>
+      <replace>||</replace>
+      <replace>icons/Done</replace>
+      <replace>client</replace>
+      <replace>basket</replace>
+      <replace>coment</replace>
+      <replace />
+      <replace>Basket</replace>
+      <replace>Orders</replace>
+      <replace>CardOrder</replace>
+      <replace>Order</replace>
+      <replace>Route</replace>
+      <replace>Routes</replace>
+      <replace>600</replace>
+      <replace>#606060</replace>
+      <replace>Profile</replace>
+      <replace>'</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\projects\azyk\azyk-admin\node_modules\@material-ui\icons</dir>
+      <dir>C:\projects\azyk\azyk-admin\src\styleMUI\organization</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,57 +956,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/component/SnackBar.js" />
-        <option value="$PROJECT_DIR$/src/redux/constants/table.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Blog.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Car.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/FAQ.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/public/manifest.json" />
-        <option value="$PROJECT_DIR$/src/sw-build.js" />
-        <option value="$PROJECT_DIR$/src/sw-template.js" />
-        <option value="$PROJECT_DIR$/public/my-service-worker.js" />
-        <option value="$PROJECT_DIR$/config.js" />
-        <option value="$PROJECT_DIR$/src/serviceWorker.js" />
-        <option value="$PROJECT_DIR$/src/sw.js" />
-        <option value="$PROJECT_DIR$/src/service/idb/getData.js" />
-        <option value="$PROJECT_DIR$/src/service/idb.js" />
-        <option value="$PROJECT_DIR$/src/service/idb/status.js" />
-        <option value="$PROJECT_DIR$/src/service/idb/getSimple.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Region.js" />
-        <option value="$PROJECT_DIR$/src/redux/constants/other.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Point.js" />
-        <option value="$PROJECT_DIR$/src/component/Table.js" />
-        <option value="$PROJECT_DIR$/src/redux/reducers/table.js" />
-        <option value="$PROJECT_DIR$/src/component/Sign.js" />
-        <option value="$PROJECT_DIR$/src/component/Dialog.js" />
-        <option value="$PROJECT_DIR$/src/component/AppBar.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Organizator.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Realizator.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Realizators.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/Statistic.js" />
-        <option value="$PROJECT_DIR$/src/component/Add/ZavSklad.js" />
-        <option value="$PROJECT_DIR$/src/pages/Blog.js" />
-        <option value="$PROJECT_DIR$/src/pages/FAQ.js" />
-        <option value="$PROJECT_DIR$/src/pages/RO.js" />
-        <option value="$PROJECT_DIR$/src/pages/RR.js" />
-        <option value="$PROJECT_DIR$/src/pages/Statistic.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/.eslintrc" />
-        <option value="$PROJECT_DIR$/../../museum/museum-admin/.eslintrc" />
-        <option value="$PROJECT_DIR$/src/component/Drawer.js" />
-        <option value="$PROJECT_DIR$/src/pages/NNPT.js" />
-        <option value="$PROJECT_DIR$/src/pages/NNVV.js" />
-        <option value="$PROJECT_DIR$/src/pages/NS1.js" />
-        <option value="$PROJECT_DIR$/src/pages/OO.js" />
-        <option value="$PROJECT_DIR$/src/pages/OR.js" />
-        <option value="$PROJECT_DIR$/src/pages/Plan.js" />
-        <option value="$PROJECT_DIR$/src/pages/Profile.js" />
-        <option value="$PROJECT_DIR$/src/redux/actions/table.js" />
-        <option value="$PROJECT_DIR$/src/redux/actions/user.js" />
-        <option value="$PROJECT_DIR$/src/pages/NS2.js" />
+        <option value="$PROJECT_DIR$/pages/ads.js" />
+        <option value="$PROJECT_DIR$/pages/blog.js" />
+        <option value="$PROJECT_DIR$/pages/clients.js" />
+        <option value="$PROJECT_DIR$/pages/employments.js" />
+        <option value="$PROJECT_DIR$/pages/favorite.js" />
+        <option value="$PROJECT_DIR$/pages/employment/[id].js" />
+        <option value="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
+        <option value="$PROJECT_DIR$/redux/constants/app.js" />
+        <option value="$PROJECT_DIR$/redux/reducers/app.js" />
+        <option value="$PROJECT_DIR$/redux/actions/app.js" />
+        <option value="$PROJECT_DIR$/src/theme.js" />
+        <option value="$PROJECT_DIR$/components/app/Drawer.js" />
+        <option value="$PROJECT_DIR$/pages/subcategory/[id].js" />
+        <option value="$PROJECT_DIR$/components/category/CardCategory.js" />
+        <option value="$PROJECT_DIR$/components/client/CardClient.js" />
+        <option value="$PROJECT_DIR$/components/items/CardItem.js" />
+        <option value="$PROJECT_DIR$/components/organization/CardOrganization.js" />
+        <option value="$PROJECT_DIR$/components/route/CardRoute.js" />
+        <option value="$PROJECT_DIR$/pages/contact.js" />
+        <option value="$PROJECT_DIR$/pages/basket.js" />
+        <option value="$PROJECT_DIR$/pages/client/[id].js" />
+        <option value="$PROJECT_DIR$/pages/item/[id].js" />
+        <option value="$PROJECT_DIR$/pages/organization/[id].js" />
+        <option value="$PROJECT_DIR$/components/ads/CardAds.js" />
+        <option value="$PROJECT_DIR$/scss/app.scss" />
+        <option value="$PROJECT_DIR$/next.config.js" />
+        <option value="$PROJECT_DIR$/components/app/AppBar.js" />
+        <option value="$PROJECT_DIR$/pages/routes.js" />
+        <option value="$PROJECT_DIR$/src/gql/subcategory.js" />
+        <option value="$PROJECT_DIR$/src/gql/route.js" />
+        <option value="$PROJECT_DIR$/src/gql/organization.js" />
+        <option value="$PROJECT_DIR$/src/gql/order.js" />
+        <option value="$PROJECT_DIR$/src/gql/notification.js" />
+        <option value="$PROJECT_DIR$/src/gql/items.js" />
+        <option value="$PROJECT_DIR$/src/gql/employment.js" />
+        <option value="$PROJECT_DIR$/src/gql/contact.js" />
+        <option value="$PROJECT_DIR$/src/gql/client.js" />
+        <option value="$PROJECT_DIR$/src/gql/category.js" />
+        <option value="$PROJECT_DIR$/src/gql/blog.js" />
+        <option value="$PROJECT_DIR$/src/gql/basket.js" />
+        <option value="$PROJECT_DIR$/src/gql/ads.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" />
+        <option value="$PROJECT_DIR$/components/blog/CardBlog.js" />
+        <option value="$PROJECT_DIR$/pages/index.js" />
+        <option value="$PROJECT_DIR$/src/singleton/client.js" />
+        <option value="$PROJECT_DIR$/layouts/App.js" />
+        <option value="$PROJECT_DIR$/pages/_app.js" />
+        <option value="$PROJECT_DIR$/redux/reducers/user.js" />
+        <option value="$PROJECT_DIR$/redux/actions/user.js" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
       </list>
     </option>
   </component>
@@ -190,18 +1015,15 @@
     <package-json value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="JsFlowSettings">
-    <service-enabled>false</service-enabled>
+    <service-enabled>true</service-enabled>
     <exe-path />
     <annotation-enable>false</annotation-enable>
-    <other-services-enabled>false</other-services-enabled>
+    <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="172" />
@@ -209,7 +1031,7 @@
     <option name="height" value="688" />
   </component>
   <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -226,83 +1048,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="component" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="component" type="462c0819:PsiDirectoryNode" />
-              <item name="Add" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shoro-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shoro-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="idb" type="462c0819:PsiDirectoryNode" />
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -311,36 +1064,36 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="nodejs_interpreter_path" value="C:/Nodist/bin/node" />
+    <property name="javascript.nodejs.core.library.configured.version" value="11.4.0" />
+    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../teldov111" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="C:\projects\shoro\shoro-admin\node_modules\eslint" />
+    <property name="node.js.selected.package.eslint" value="C:\projects\azyk\azyk-admin\node_modules\eslint" />
     <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.detected.package.standard" value="true" />
-    <property name="node.js.selected.package.standard" value="C:\projects\shoro\shoro-admin\node_modules\eslint" />
-    <property name="node.js.path.for.package.jscs" value="project" />
-    <property name="node.js.detected.package.jscs" value="true" />
-    <property name="node.js.selected.package.jscs" value="" />
-    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
+    <property name="node.js.selected.package.standard" value="C:\projects\azyk\azyk-admin\node_modules\eslint" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/nextjs" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\projects\shoro\shoro-admin\src" />
-      <recent name="C:\projects\shoro\shoro-admin\public" />
-      <recent name="C:\projects\biletiki\biletiki-admin\src\component\Where" />
-      <recent name="C:\projects\biletiki\biletiki-admin\src\pages" />
-      <recent name="C:\projects\biletiki\biletiki-admin\src\component\Where\Part" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI\item" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI\employment" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI\organization" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI\ads" />
+      <recent name="C:\projects\azyk\azyk-admin\pages\subcategory" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\projects\shoro\shoro-admin\src\service\idb" />
-      <recent name="C:\projects\shoro\shoro-admin\public" />
-      <recent name="C:\projects\shoro\shoro-admin\src\redux\reducers" />
-      <recent name="C:\projects\shoro\shoro-admin\src\redux\constants" />
-      <recent name="C:\projects\shoro\shoro-admin\src\redux\actions" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI\route" />
+      <recent name="C:\projects\azyk\azyk-admin\pages" />
+      <recent name="C:\projects\azyk\azyk-admin\src\gql" />
+      <recent name="C:\projects\azyk\azyk-admin\src\styleMUI" />
+      <recent name="C:\projects\azyk\azyk-admin\components" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -355,28 +1108,30 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.App.test.js">
-    <configuration name="App.test.js" type="JavaScriptTestRunnerJest" factoryName="Jest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/src/App.test.js" />
-    </configuration>
-    <configuration name="analyze" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="analyze" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-    </configuration>
+  <component name="RunManager">
     <configuration name="build" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <configuration name="export" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="export" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -391,17 +1146,17 @@
       <envs />
     </configuration>
     <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="npm.start" />
-      <item index="1" class="java.lang.String" itemvalue="npm.analyze" />
+      <item index="0" class="java.lang.String" itemvalue="npm.dev" />
+      <item index="1" class="java.lang.String" itemvalue="npm.export" />
       <item index="2" class="java.lang.String" itemvalue="npm.build" />
-      <item index="3" class="java.lang.String" itemvalue="Jest.App.test.js" />
+      <item index="3" class="java.lang.String" itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="npm.build" />
-        <item index="1" class="java.lang.String" itemvalue="npm.start" />
-        <item index="2" class="java.lang.String" itemvalue="Jest.App.test.js" />
-        <item index="3" class="java.lang.String" itemvalue="npm.analyze" />
+        <item index="0" class="java.lang.String" itemvalue="npm.start" />
+        <item index="1" class="java.lang.String" itemvalue="npm.build" />
+        <item index="2" class="java.lang.String" itemvalue="npm.dev" />
+        <item index="3" class="java.lang.String" itemvalue="npm.export" />
       </list>
     </recent_temporary>
   </component>
@@ -410,194 +1165,45 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7632e864-3314-42a0-beaa-adf37cb4402a" name="Default" comment="" />
-      <created>1544868323494</created>
+      <changelist id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="" />
+      <created>1568266575905</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1544868323494</updated>
-      <workItem from="1544868334299" duration="472000" />
-      <workItem from="1544868853075" duration="455000" />
-      <workItem from="1544869337142" duration="327000" />
-      <workItem from="1544869983083" duration="952000" />
-      <workItem from="1545024844829" duration="7550000" />
-      <workItem from="1545050004505" duration="1313000" />
-      <workItem from="1545111595019" duration="21315000" />
-      <workItem from="1545205762256" duration="12497000" />
-      <workItem from="1545293031578" duration="27104000" />
-      <workItem from="1545367711087" duration="1667000" />
-      <workItem from="1545467570503" duration="34556000" />
-      <workItem from="1545717064150" duration="3629000" />
-      <workItem from="1545807271570" duration="13201000" />
-      <workItem from="1545882096965" duration="626000" />
-      <workItem from="1545893107868" duration="5355000" />
-      <workItem from="1545975656815" duration="21000" />
-      <workItem from="1545981235200" duration="7358000" />
-      <workItem from="1546066198453" duration="3499000" />
-      <workItem from="1546257058121" duration="450000" />
-      <workItem from="1546259104488" duration="14000" />
-      <workItem from="1546262433640" duration="10790000" />
-      <workItem from="1546627306082" duration="2514000" />
-      <workItem from="1546960034665" duration="697000" />
-      <workItem from="1547009787515" duration="2000" />
-      <workItem from="1547017146184" duration="67980000" />
-      <workItem from="1547196136093" duration="15124000" />
-      <workItem from="1547273056733" duration="9349000" />
-      <workItem from="1547395622949" duration="23893000" />
-      <workItem from="1547532072768" duration="100000" />
-      <workItem from="1547613749863" duration="25112000" />
-      <workItem from="1547792450093" duration="1195000" />
-      <workItem from="1547804708174" duration="11888000" />
-      <workItem from="1548004854308" duration="4978000" />
-      <workItem from="1548135631419" duration="9759000" />
-      <workItem from="1548216011400" duration="10761000" />
-      <workItem from="1548307759361" duration="7955000" />
-      <workItem from="1548354098998" duration="593000" />
-      <workItem from="1548419752613" duration="525000" />
-      <workItem from="1548493279892" duration="21373000" />
-      <workItem from="1548580046545" duration="38603000" />
-      <workItem from="1548766389956" duration="14310000" />
-      <workItem from="1548840647208" duration="26085000" />
-      <workItem from="1549007757605" duration="23255000" />
-      <workItem from="1549120477065" duration="4092000" />
-      <workItem from="1549209113755" duration="3206000" />
-      <workItem from="1549265267249" duration="5650000" />
-      <workItem from="1549344994650" duration="3695000" />
-      <workItem from="1549615772766" duration="1606000" />
-      <workItem from="1549626077974" duration="1097000" />
-      <workItem from="1550134854398" duration="2006000" />
-      <workItem from="1550152639406" duration="3455000" />
-      <workItem from="1550226676483" duration="828000" />
-      <workItem from="1550388661427" duration="10980000" />
-      <workItem from="1550471681074" duration="6302000" />
-      <workItem from="1550555022703" duration="1833000" />
-      <workItem from="1550577892740" duration="7335000" />
-      <workItem from="1550677237878" duration="7050000" />
-      <workItem from="1550721976449" duration="9017000" />
-      <workItem from="1550829541010" duration="600000" />
-      <workItem from="1550843455709" duration="688000" />
-      <workItem from="1551073493308" duration="9900000" />
-      <workItem from="1551164157805" duration="13665000" />
-      <workItem from="1551271468215" duration="5601000" />
-      <workItem from="1551415683203" duration="11284000" />
-      <workItem from="1551500107689" duration="7559000" />
-      <workItem from="1551766052406" duration="2124000" />
-      <workItem from="1551846473735" duration="2597000" />
-      <workItem from="1551931683690" duration="3259000" />
-      <workItem from="1551937368909" duration="15658000" />
-      <workItem from="1552296116860" duration="793000" />
-      <workItem from="1552369016362" duration="3880000" />
-      <workItem from="1552549326419" duration="8117000" />
-      <workItem from="1552729785483" duration="597000" />
-      <workItem from="1552731864918" duration="1186000" />
-      <workItem from="1552888149430" duration="7725000" />
-      <workItem from="1552973699387" duration="1079000" />
-      <workItem from="1552980139278" duration="3685000" />
-      <workItem from="1553235169518" duration="1193000" />
-      <workItem from="1553316362264" duration="659000" />
-      <workItem from="1553775224039" duration="737000" />
-      <workItem from="1553777892049" duration="2991000" />
-      <workItem from="1553922604595" duration="3125000" />
-      <workItem from="1554194106612" duration="377000" />
-      <workItem from="1554381287257" duration="840000" />
-      <workItem from="1554876579197" duration="1839000" />
-      <workItem from="1554965384459" duration="47000" />
-      <workItem from="1555317999852" duration="892000" />
-      <workItem from="1555396285471" duration="620000" />
-      <workItem from="1555583191577" duration="104000" />
-      <workItem from="1555583346563" duration="623000" />
-      <workItem from="1555652844136" duration="1354000" />
-      <workItem from="1556164978960" duration="814000" />
-      <workItem from="1556605308873" duration="37613000" />
-      <workItem from="1556776853706" duration="18871000" />
-      <workItem from="1557117407523" duration="11879000" />
-      <workItem from="1557207820417" duration="465000" />
-      <workItem from="1557237822241" duration="29649000" />
-      <workItem from="1557383564908" duration="1546000" />
-      <workItem from="1557392214353" duration="16294000" />
-      <workItem from="1557468209780" duration="20370000" />
-      <workItem from="1557561708270" duration="2924000" />
-      <workItem from="1557719338375" duration="370000" />
-      <workItem from="1557727519423" duration="3612000" />
-      <workItem from="1557812287140" duration="829000" />
-      <workItem from="1557911497127" duration="678000" />
-      <workItem from="1557927210659" duration="1179000" />
-      <workItem from="1558331375325" duration="2501000" />
-      <workItem from="1558418293504" duration="13394000" />
-      <workItem from="1558504412790" duration="602000" />
-      <workItem from="1558526371852" duration="602000" />
-      <workItem from="1558601586798" duration="1577000" />
-      <workItem from="1558675268314" duration="11480000" />
-      <workItem from="1558868379083" duration="138000" />
-      <workItem from="1559014449695" duration="1087000" />
-      <workItem from="1559026689061" duration="9000" />
-      <workItem from="1559033050736" duration="3601000" />
-      <workItem from="1559043976365" duration="4326000" />
-      <workItem from="1559112418047" duration="6785000" />
-      <workItem from="1559282213151" duration="602000" />
-      <workItem from="1559362341553" duration="184000" />
-      <workItem from="1559363112425" duration="115000" />
-      <workItem from="1559474844440" duration="127000" />
-      <workItem from="1559475698719" duration="4804000" />
-      <workItem from="1559554747494" duration="9086000" />
-      <workItem from="1559628234311" duration="1123000" />
-      <workItem from="1559635395097" duration="9588000" />
-      <workItem from="1559713874430" duration="168000" />
-      <workItem from="1559725095603" duration="8530000" />
-      <workItem from="1559799771788" duration="45000" />
-      <workItem from="1559827019471" duration="2004000" />
-      <workItem from="1559884383510" duration="8211000" />
-      <workItem from="1559972898936" duration="9990000" />
-      <workItem from="1560009108025" duration="1647000" />
-      <workItem from="1560049174659" duration="3993000" />
-      <workItem from="1560134723486" duration="8325000" />
-      <workItem from="1560154267048" duration="4742000" />
-      <workItem from="1560233193063" duration="7512000" />
-      <workItem from="1560323281710" duration="34826000" />
-      <workItem from="1560573665694" duration="2476000" />
-      <workItem from="1560746139675" duration="56040000" />
-      <workItem from="1561099748352" duration="7994000" />
-      <workItem from="1561186302494" duration="6396000" />
-      <workItem from="1561437591238" duration="6303000" />
-      <workItem from="1561455381060" duration="9133000" />
-      <workItem from="1561524232306" duration="607000" />
-      <workItem from="1561533721645" duration="50821000" />
-      <workItem from="1561963386275" duration="6250000" />
-      <workItem from="1562048146199" duration="2591000" />
-      <workItem from="1562230358488" duration="129000" />
-      <workItem from="1562312787166" duration="361000" />
-      <workItem from="1562428340322" duration="1598000" />
-      <workItem from="1562577695513" duration="7809000" />
-      <workItem from="1562650442150" duration="602000" />
-      <workItem from="1562665988021" duration="1824000" />
-      <workItem from="1562750236728" duration="4575000" />
-      <workItem from="1562760198139" duration="1229000" />
-      <workItem from="1562825154279" duration="2622000" />
-      <workItem from="1562906356914" duration="118000" />
-      <workItem from="1562918009252" duration="5254000" />
-      <workItem from="1562933888071" duration="1617000" />
-      <workItem from="1563087813912" duration="15636000" />
-      <workItem from="1563170792875" duration="34218000" />
-      <workItem from="1563342976349" duration="654000" />
-      <workItem from="1563452628002" duration="1623000" />
-      <workItem from="1563965698655" duration="2205000" />
-      <workItem from="1564028593395" duration="11894000" />
-      <workItem from="1564152829681" duration="12670000" />
-      <workItem from="1564226945221" duration="9219000" />
-      <workItem from="1564375398943" duration="13526000" />
-      <workItem from="1564981130096" duration="7541000" />
+      <updated>1568266575905</updated>
+      <workItem from="1568266578535" duration="19730000" />
+      <workItem from="1568360934531" duration="11687000" />
+      <workItem from="1568439488817" duration="2222000" />
+      <workItem from="1568523270476" duration="34001000" />
+      <workItem from="1568721126086" duration="100125000" />
+      <workItem from="1569223967543" duration="13932000" />
+      <workItem from="1569320667210" duration="2916000" />
+      <workItem from="1569412136713" duration="31232000" />
+      <workItem from="1569835436240" duration="1295000" />
+      <workItem from="1569837829938" duration="15630000" />
+      <workItem from="1569932829370" duration="26914000" />
+      <workItem from="1570255606242" duration="46000" />
+      <workItem from="1570261166431" duration="254000" />
+      <workItem from="1570264020541" duration="6658000" />
+      <workItem from="1570430476437" duration="687000" />
+      <workItem from="1570520680265" duration="1276000" />
+      <workItem from="1571634552578" duration="3397000" />
+      <workItem from="1571645012460" duration="1445000" />
+      <workItem from="1571816377330" duration="10541000" />
+      <workItem from="1571913258472" duration="13507000" />
+      <workItem from="1572242184638" duration="171000" />
+      <workItem from="1572247486917" duration="3442000" />
+      <workItem from="1572852970976" duration="23561000" />
+      <workItem from="1573031969379" duration="135645000" />
+      <workItem from="1574057743518" duration="49358000" />
+      <workItem from="1574404676855" duration="40574000" />
+      <workItem from="1574749480042" duration="28987000" />
+      <workItem from="1574931726929" duration="209000" />
+      <workItem from="1574933464017" duration="5305000" />
     </task>
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="App_test_js - 2019.07.14 at 13h 47m 23s.xml">
-      <configuration name="App.test.js" configurationId="JavaScriptTestRunnerJest" />
-    </history-entry>
-    <history-entry file="App_test_js - 2019.07.14 at 13h 50m 29s.xml">
-      <configuration name="App.test.js" configurationId="JavaScriptTestRunnerJest" />
-    </history-entry>
-  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1247104000" />
+    <option name="totallyTimeSpent" value="584747000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -611,14 +1217,14 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15525982" sideWeight="0.6567426" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.118504435" sideWeight="0.72321427" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23149395" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.50506973" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15525982" sideWeight="0.34325746" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.118504435" sideWeight="0.2767857" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -627,7 +1233,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -641,531 +1247,419 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/component/Where/Circus/CircusData.js</url>
-          <line>74</line>
+          <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
+          <line>122</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/_app.js</url>
+          <line>15</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/component/Drawer.js</url>
-          <line>203</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
+          <line>314</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/app/Drawer.js</url>
+          <line>53</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
+          <line>236</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/service/idb/getData.js" />
-    <entry file="file://$PROJECT_DIR$/src/service/idb.js">
+    <entry file="file://$PROJECT_DIR$/components/dialog/BuyBasket.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        <state relative-caret-position="-26">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/idb/getSimple.js">
+    <entry file="file://$PROJECT_DIR$/components/dialog/AddSocial.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="11" lean-forward="false" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="11" />
+        <state relative-caret-position="178">
+          <caret line="12" column="23" lean-forward="false" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/constants/other.js">
+    <entry file="file://$PROJECT_DIR$/components/dialog/Confirmation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="68" column="14" lean-forward="false" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
+        <state relative-caret-position="195">
+          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/idb/status.js">
+    <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="50" column="21" lean-forward="true" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/Sign.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/employment/CardEmployment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/items/CardItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2227">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/order/CardOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/organization/CardOrganization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="31" column="41" lean-forward="false" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/route/CardRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/subcategory/SubCardCategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="24" column="44" lean-forward="false" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/basket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="181" column="73" lean-forward="false" selection-start-line="181" selection-start-column="73" selection-end-line="181" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/organization/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="346" column="53" lean-forward="false" selection-start-line="346" selection-start-column="53" selection-end-line="346" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="365" column="73" lean-forward="false" selection-start-line="365" selection-start-column="73" selection-end-line="365" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/ads/cardAds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="11" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/item/[id].js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <caret line="78" column="85" lean-forward="false" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="85" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/table.js">
+    <entry file="file://$PROJECT_DIR$/scss/app.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+        <state relative-caret-position="422">
+          <caret line="54" column="18" lean-forward="false" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/app/Drawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="30" column="42" lean-forward="false" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/user.js">
+    <entry file="file://$PROJECT_DIR$/components/app/AppBar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="226">
+          <caret line="251" column="60" lean-forward="false" selection-start-line="251" selection-start-column="60" selection-end-line="251" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+            <element signature="e#11157#11856#0" expanded="false" />
+            <element signature="e#16971#17941#0" expanded="false" />
+            <element signature="e#18091#19742#0" expanded="false" />
+            <element signature="e#21707#22208#0" expanded="false" />
+            <element signature="e#22248#22991#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/constants/mini_dialog.js">
+    <entry file="file://$PROJECT_DIR$/src/gql/subcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="76" column="14" lean-forward="true" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/organization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="56" column="14" lean-forward="false" selection-start-line="56" selection-start-column="14" selection-end-line="56" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/notification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/items.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="45" column="14" lean-forward="false" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/employment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="33" column="14" lean-forward="false" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/category.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/blog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/basket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="22" column="14" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/ads.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="35" column="30" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/category/cardCategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/ads.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/blog/CardBlog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1315">
+          <caret line="41" column="35" lean-forward="false" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/ads/CardAds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/blog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/_document.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
+    <entry file="file://$PROJECT_DIR$/layouts/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="49" column="16" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
-          <folding>
-            <element signature="e#603#1305#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.eslintrc">
+    <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+        <state relative-caret-position="951">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/_app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="28" column="91" lean-forward="false" selection-start-line="28" selection-start-column="91" selection-end-line="29" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="112" column="8" lean-forward="false" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redux/reducers/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/next.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="17" column="29" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        <state relative-caret-position="17">
+          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../museum/museum-admin/.eslintrc">
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="51">
+          <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Blog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="54" column="38" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Car.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="53" column="12" lean-forward="false" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Delete.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/FAQ.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Organizator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Point.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Price.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Realizator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="105" column="16" lean-forward="false" selection-start-line="105" selection-start-column="16" selection-end-line="105" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Realizators.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Region.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="48" column="4" lean-forward="false" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/Statistic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="75" column="12" lean-forward="false" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Add/ZavSklad.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/AppBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="49" column="7" lean-forward="true" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Sign.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/SnackBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="17" column="15" lean-forward="false" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="204" column="3" lean-forward="false" selection-start-line="204" selection-start-column="3" selection-end-line="204" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Blog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="88" column="16" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/FAQ.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="89" column="10" lean-forward="false" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/Drawer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
-          <folding>
-            <element signature="e#1894#2603#0" expanded="false" />
-            <element signature="e#8256#23913#0" expanded="false" />
-            <element signature="e#8599#9262#0" expanded="false" />
-            <element signature="e#14669#15343#0" expanded="false" />
-            <element signature="e#14728#15200#0" expanded="false" />
-            <element signature="e#20929#21599#0" expanded="false" />
-            <element signature="e#21960#22618#0" expanded="false" />
-            <element signature="e#22979#23640#0" expanded="false" />
-            <element signature="e#24265#39399#0" expanded="false" />
-            <element signature="e#40617#45644#0" expanded="false" />
-            <element signature="e#46033#51007#0" expanded="false" />
-            <element signature="e#51396#56304#0" expanded="false" />
-            <element signature="e#56693#61600#0" expanded="false" />
-            <element signature="e#61989#66895#0" expanded="false" />
-            <element signature="e#62119#62821#0" expanded="false" />
-            <element signature="e#79298#84140#0" expanded="false" />
-            <element signature="e#84449#87516#0" expanded="false" />
-            <element signature="e#85204#86187#0" expanded="false" />
-            <element signature="e#86382#87047#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/NNPT.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="200" column="41" lean-forward="false" selection-start-line="200" selection-start-column="16" selection-end-line="200" selection-end-column="41" />
-          <folding>
-            <element signature="e#2734#4364#0" expanded="false" />
-            <element signature="e#2862#4350#0" expanded="false" />
-            <element signature="e#4386#5291#0" expanded="false" />
-            <element signature="e#11006#17279#0" expanded="false" />
-            <element signature="e#17297#23572#0" expanded="false" />
-            <element signature="e#23590#29894#0" expanded="false" />
-            <element signature="e#29911#36214#0" expanded="false" />
-            <element signature="e#36232#42507#0" expanded="false" />
-            <element signature="e#42525#45361#0" expanded="false" />
-            <element signature="e#45432#48491#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/NNVV.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="177" column="26" lean-forward="true" selection-start-line="177" selection-start-column="26" selection-end-line="177" selection-end-column="26" />
-          <folding>
-            <element signature="e#2567#2622#0" expanded="false" />
-            <element signature="e#6356#7322#0" expanded="false" />
-            <element signature="e#18092#18613#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/NS1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="386" column="47" lean-forward="true" selection-start-line="386" selection-start-column="47" selection-end-line="386" selection-end-column="47" />
-          <folding>
-            <element signature="e#2635#2690#0" expanded="false" />
-            <element signature="e#2725#10590#0" expanded="false" />
-            <element signature="e#4664#7457#0" expanded="false" />
-            <element signature="e#7583#7789#0" expanded="false" />
-            <element signature="e#7844#10470#0" expanded="false" />
-            <element signature="e#10612#11583#0" expanded="false" />
-            <element signature="e#12638#13590#0" expanded="false" />
-            <element signature="e#13619#14726#0" expanded="false" />
-            <element signature="e#14828#14985#0" expanded="false" />
-            <element signature="e#15024#17369#0" expanded="false" />
-            <element signature="e#17463#17620#0" expanded="false" />
-            <element signature="e#17659#19838#0" expanded="false" />
-            <element signature="e#20092#22099#0" expanded="false" />
-            <element signature="e#26109#72145#0" expanded="false" />
-            <element signature="e#72163#129338#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/OO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="573" column="0" lean-forward="false" selection-start-line="573" selection-start-column="0" selection-end-line="573" selection-end-column="0" />
-          <folding>
-            <element signature="e#2660#2715#0" expanded="false" />
-            <element signature="e#2972#16666#0" expanded="false" />
-            <element signature="e#4842#16597#0" expanded="false" />
-            <element signature="e#16688#17639#0" expanded="false" />
-            <element signature="e#18512#19969#0" expanded="false" />
-            <element signature="e#20430#29441#0" expanded="false" />
-            <element signature="e#29729#31034#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/OR.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="381" column="39" lean-forward="false" selection-start-line="381" selection-start-column="39" selection-end-line="381" selection-end-column="39" />
-          <folding>
-            <element signature="e#2622#2677#0" expanded="false" />
-            <element signature="e#2844#5581#0" expanded="false" />
-            <element signature="e#5603#6799#0" expanded="false" />
-            <element signature="e#7663#7780#0" expanded="false" />
-            <element signature="e#7818#7931#0" expanded="false" />
-            <element signature="e#8209#10078#0" expanded="false" />
-            <element signature="e#10370#12107#0" expanded="false" />
-            <element signature="e#12162#16603#0" expanded="false" />
-            <element signature="e#23450#66441#0" expanded="false" />
-            <element signature="e#23487#24812#0" expanded="false" />
-            <element signature="e#24833#33917#0" expanded="false" />
-            <element signature="e#33938#43052#0" expanded="false" />
-            <element signature="e#43073#52187#0" expanded="false" />
-            <element signature="e#52208#61322#0" expanded="false" />
-            <element signature="e#66458#104794#0" expanded="false" />
-            <element signature="e#104811#110235#0" expanded="false" />
-            <element signature="e#110252#110897#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Plan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="177" column="69" lean-forward="false" selection-start-line="177" selection-start-column="69" selection-end-line="177" selection-end-column="69" />
-          <folding>
-            <element signature="e#2445#2500#0" expanded="false" />
-            <element signature="e#3369#4384#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/RO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="78" column="11" lean-forward="false" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/RR.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="82" column="13" lean-forward="false" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Statistic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="105" column="4" lean-forward="true" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#57#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-165">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#59#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/mini_dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1525">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#76#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/snackbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="38" column="15" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="15" />
-          <folding>
-            <element signature="n#!!block;n#addData#0" expanded="false" />
-            <element signature="n#!!block;n#setSelected#0" expanded="false" />
-            <element signature="n#!!block;n#setTypeStatistic#0" expanded="false" />
-            <element signature="n#!!block;n#setPoint#0" expanded="false" />
-            <element signature="n#!!block;n#setSelectedPoint#0" expanded="false" />
-            <element signature="n#!!block;n#setSelectedRegion#0" expanded="false" />
-            <element signature="n#!!block;n#setDeletedId#0" expanded="false" />
-            <element signature="n#!!block;n#setOldFile#0" expanded="false" />
-            <element signature="e#13143#14429#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-990">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/NS2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding>
-            <element signature="e#2621#2676#0" expanded="false" />
-            <element signature="e#4379#5335#0" expanded="false" />
-            <element signature="e#6215#8319#0" expanded="false" />
-            <element signature="e#8706#10686#0" expanded="false" />
-            <element signature="e#10746#13128#0" expanded="false" />
-            <element signature="e#13188#13342#0" expanded="false" />
-            <element signature="e#13370#13632#0" expanded="false" />
-            <element signature="e#13971#14503#0" expanded="false" />
-            <element signature="e#14554#14663#0" expanded="false" />
-            <element signature="e#14720#64384#0" expanded="false" />
-            <element signature="e#64402#140961#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
