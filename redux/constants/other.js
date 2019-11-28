@@ -1,5 +1,5 @@
-export const urlGQL = 'http://localhost/graphql'
-export const urlGQLws = 'ws://localhost/graphql'
+export const urlGQL = `http://${process.env.URL}/graphql`
+export const urlGQLws = `ws://${process.env.URL}/graphql`
 export const validMail = (mail) =>
 {
     return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);

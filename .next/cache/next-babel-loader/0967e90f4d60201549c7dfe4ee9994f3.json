@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default (function (theme) {\n  return {\n    drawer: {\n      width: 300,\n      flexShrink: 0\n    },\n    drawerPaper: {\n      width: 300\n    },\n    toolbar: theme.mixins.toolbar\n  };\n});","map":null,"metadata":{},"sourceType":"module"}

@@ -6,6 +6,9 @@ sitemap({
     targetDirectory : 'static/'
 });*/
 module.exports = withSass({
+    env: {
+        URL: process.env.URL
+    },
     webpack: (config) => {
         return config
     },

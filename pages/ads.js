@@ -18,6 +18,7 @@ const Ads = React.memo((props) => {
             setList((await getAdss({search: search, sort: sort, filter: filter})).adss)
         })()
     },[filter, sort, search])
+    console.log((process.env.URL))
     return (
         <App filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>
             <Head>
