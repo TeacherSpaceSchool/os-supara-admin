@@ -30,8 +30,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+            <state relative-caret-position="153">
+              <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
               <folding>
                 <element signature="n#!!block;n#dependencies#0;n#!!top" expanded="false" />
               </folding>
@@ -436,12 +436,12 @@
       <workItem from="1574404676855" duration="40574000" />
       <workItem from="1574749480042" duration="28987000" />
       <workItem from="1574931726929" duration="209000" />
-      <workItem from="1574933464017" duration="11383000" />
+      <workItem from="1574933464017" duration="11661000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590825000" />
+    <option name="totallyTimeSpent" value="591103000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -886,8 +886,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="153">
+          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
           <folding>
             <element signature="n#!!block;n#dependencies#0;n#!!top" expanded="false" />
           </folding>

@@ -7,7 +7,7 @@
     "dev": "set URL=localhost&& next",
     "build": "set URL=localhost&& next build",
     "start": "next start",
-    "build-server": "URL=37.143.13.163 next start",
+    "build-server": "URL=37.143.13.163 next build",
     "start-server": "URL=37.143.13.163 next start",
     "export": "next export"
   },
