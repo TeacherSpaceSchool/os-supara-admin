@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
+import Router from 'next/router'
 
 const Routes = React.memo((props) => {
     const classes = pageListStyle();
@@ -19,7 +20,8 @@ const Routes = React.memo((props) => {
         (async()=>{
             setList((await getRoutes({search: search, sort: sort, filter: filter})).routes)
         })()
-    },[filter, sort, search])
+    },[filter, sort, search]);
+    if(!['admin', 'организация', 'менеджер'].includes(profile.role))Router.push('/')
     return (
         <App filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
