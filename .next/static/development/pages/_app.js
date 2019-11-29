@@ -3185,7 +3185,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34434,7 +34434,7 @@ function signup(payload) {
                 });
 
               case 8:
-                _context.next = 15;
+                _context.next = 16;
                 break;
 
               case 10:
@@ -34451,26 +34451,29 @@ function signup(payload) {
                 });
 
               case 14:
-                window.location.reload();
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
+                setTimeout(function () {
+                  return window.location.reload();
+                }, 1);
 
-              case 15:
-                _context.next = 20;
+              case 16:
+                _context.next = 21;
                 break;
 
-              case 17:
-                _context.prev = 17;
+              case 18:
+                _context.prev = 18;
                 _context.t0 = _context["catch"](0);
                 dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
                   payload: true
                 });
 
-              case 20:
+              case 21:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 17]]);
+        }, _callee, null, [[0, 18]]);
       }));
 
       return function (_x) {
@@ -34514,7 +34517,7 @@ function signin(payload) {
                 });
 
               case 8:
-                _context2.next = 14;
+                _context2.next = 16;
                 break;
 
               case 10:
@@ -34531,25 +34534,31 @@ function signin(payload) {
                 });
 
               case 14:
-                _context2.next = 21;
-                break;
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
+                setTimeout(function () {
+                  return window.location.reload();
+                }, 1);
 
               case 16:
-                _context2.prev = 16;
+                _context2.next = 23;
+                break;
+
+              case 18:
+                _context2.prev = 18;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
-                _context2.next = 21;
+                _context2.next = 23;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
                   payload: true
                 });
 
-              case 21:
+              case 23:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 16]]);
+        }, _callee2, null, [[0, 18]]);
       }));
 
       return function (_x2) {
@@ -34620,9 +34629,12 @@ function logout() {
                 dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["UNAUTHENTICATED"]
                 });
-                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/'); //setTimeout(()=>{window.location.reload()},1000)
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
+                setTimeout(function () {
+                  return window.location.reload();
+                }, 1);
 
-              case 3:
+              case 4:
               case "end":
                 return _context4.stop();
             }

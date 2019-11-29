@@ -56,6 +56,7 @@ const CardBlog = React.memo((props) => {
                     <CardActionArea>
                         <label htmlFor={element?element._id:'add'}>
                             <LazyLoadImage
+                                placeholderSrc='/static/add.png'
                                 effect='blur'
                                 className={isMobileApp?classes.mediaM:classes.mediaD}
                                 src={preview}
@@ -146,6 +147,7 @@ const CardBlog = React.memo((props) => {
                         <>
                         <CardActionArea>
                             <LazyLoadImage
+                                placeholderSrc='/static/add.png'
                                 effect='blur'
                                 className={isMobileApp?classes.mediaM:classes.mediaD}
                                 src={element.image}

@@ -36,7 +36,8 @@ export function signup(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                window.location.reload()
+                Router.push('/')
+                setTimeout(()=>window.location.reload(), 1)
             }
         } catch(error) {
             dispatch({
@@ -70,7 +71,8 @@ export function signin(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                //window.location.reload()
+                Router.push('/')
+                setTimeout(()=>window.location.reload(), 1)
             }
         } catch(error) {
             console.log(error)
@@ -110,7 +112,7 @@ export function logout() {
             type: UNAUTHENTICATED,
         })
         Router.push('/')
-        //setTimeout(()=>{window.location.reload()},1000)
+        setTimeout(()=>window.location.reload(),1)
 
 
     }

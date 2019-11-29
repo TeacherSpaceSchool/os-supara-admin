@@ -81,6 +81,7 @@ const Client = React.memo((props) => {
                                 <>
                                 <label htmlFor='contained-button-file'>
                                     <LazyLoadImage
+                                        placeholderSrc='/static/add.png'
                                         effect='blur'
                                         className={classes.media}
                                         src={preview}
@@ -234,6 +235,7 @@ const Client = React.memo((props) => {
                                 :
                                 <>
                                 <LazyLoadImage
+                                    placeholderSrc='/static/add.png'
                                     effect='blur'
                                     className={classes.media}
                                     src={preview}

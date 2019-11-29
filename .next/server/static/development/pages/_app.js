@@ -1019,7 +1019,8 @@ function signup(payload) {
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
         });
-        window.location.reload();
+        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
+        setTimeout(() => window.location.reload(), 1);
       }
     } catch (error) {
       dispatch({
@@ -1052,7 +1053,9 @@ function signin(payload) {
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        }); //window.location.reload()
+        });
+        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
+        setTimeout(() => window.location.reload(), 1);
       }
     } catch (error) {
       console.log(error);
@@ -1094,7 +1097,8 @@ function logout() {
     dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
     });
-    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/'); //setTimeout(()=>{window.location.reload()},1000)
+    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
+    setTimeout(() => window.location.reload(), 1);
   };
 }
 function setProfile() {

@@ -114,6 +114,7 @@ const Basket = React.memo((props) => {
                                                 <div className={classes.itemM}>
                                                 <div className={classes.divImage}>
                                                     <LazyLoadImage
+                                                        placeholderSrc='/static/add.png'
                                                         effect='blur' className={classes.mediaM} src={row.item.image}/>
                                                     <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.cancelM}>
                                                         <CancelIcon style={{height: 40, width: 40}} />
@@ -178,6 +179,7 @@ const Basket = React.memo((props) => {
                                                 <TableCell component="th" scope="row" >
                                                     <div className={classes.row}>
                                                         <LazyLoadImage
+                                                            placeholderSrc='/static/add.png'
                                                             effect='blur' className={classes.mediaD} src={row.item.image}/>
                                                         <div className={classes.nameD}>
                                                             {row.item.name}

@@ -33,21 +33,15 @@ const Order =  React.memo(
                     <div className={classes.nameField}>Статус:&nbsp;</div>
                     <div className={classes.value}>{
                             element.orders[0].status==='принят'&&(element.confirmationForwarder||element.confirmationClient)?
-                            route?
-                                element.confirmationForwarder?
-                                    'выполнен'
-                                    :
-                                    element.orders[0].status
-                                :
                                 element.confirmationClient?
-                                    'выполнен'
+                                    'подтвержден клиентом'
                                     :
                                     element.confirmationForwarder?
-                                        'доставлен'
+                                        'доставлен поставщиком'
                                         :
                                         element.orders[0].status
-                            :
-                            element.orders[0].status
+                                :
+                                element.orders[0].status
                     }</div>
                 </div>
                 <div className={classes.row}>

@@ -62,6 +62,7 @@ const App = React.memo(props => {
                         ads&&ads.url?
                             <a href={ads.url}>
                                 <LazyLoadImage
+                                    placeholderSrc='/static/add.png'
                                     src={ads.image}
                                     alt={ads.title}
                                     className='marketImg'

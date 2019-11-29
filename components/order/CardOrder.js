@@ -33,19 +33,13 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.date}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>&nbsp;&nbsp;
                         <div className={classes.status} style={{background: statusColor[element.orders[0].status]}}>{
                             element.orders[0].status==='принят'&&(element.confirmationForwarder||element.confirmationClient)?
-                                route?
+                                element.confirmationClient?
+                                    'подтвержден клиентом'
+                                    :
                                     element.confirmationForwarder?
-                                        'выполнен'
+                                        'доставлен поставщиком'
                                         :
                                         element.orders[0].status
-                                    :
-                                    element.confirmationClient?
-                                        'выполнен'
-                                        :
-                                        element.confirmationForwarder?
-                                            'доставлен'
-                                            :
-                                            element.orders[0].status
                                 :
                                 element.orders[0].status
                         }</div>

@@ -32,6 +32,7 @@ const CardOrganization = React.memo((props) => {
                     <CardContent className={classes.line}>
                         <label htmlFor='contained-button-file'>
                             <LazyLoadImage
+                                placeholderSrc='/static/add.png'
                                 effect='blur'
                                 className={classes.media}
                                 src={element.image}

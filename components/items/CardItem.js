@@ -76,6 +76,7 @@ const CardItem = React.memo((props) => {
                                         </div>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
                                             <LazyLoadImage
+                                                placeholderSrc='/static/add.png'
                                                 effect='blur'
                                                 className={classes.media}
                                                 src={element.image}

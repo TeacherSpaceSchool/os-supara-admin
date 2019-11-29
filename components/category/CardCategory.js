@@ -51,6 +51,7 @@ const CardCategory = React.memo((props) => {
                                         className={classes.media}
                                         src={preview}
                                         alt={'Изменить'}
+                                        placeholderSrc='/static/add.png'
                                     />
                                 </label>
                                <TextField
@@ -143,6 +144,7 @@ const CardCategory = React.memo((props) => {
                                             className={classes.media}
                                             src={element.image}
                                             alt={element.name}
+                                            placeholderSrc='/static/add.png'
                                         />
                                     </label>
                                     <h3 className={isMobileApp?classes.inputM:classes.inputD}>
@@ -162,6 +164,7 @@ const CardCategory = React.memo((props) => {
                                                 className={classes.media}
                                                 src={element.image}
                                                 alt={element.name}
+                                                placeholderSrc='/static/add.png'
                                             />
                                         </label>
                                         <h3 className={isMobileApp?classes.inputM:classes.inputD}>

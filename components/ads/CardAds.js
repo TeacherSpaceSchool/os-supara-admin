@@ -47,6 +47,7 @@ const CardAds = React.memo((props) => {
                         <CardActionArea>
                             <label htmlFor={element?element._id:'add'}>
                                 <LazyLoadImage
+                                    placeholderSrc='/static/add.png'
                                     effect='blur'
                                     className={isMobileApp?classes.mediaM:classes.mediaD}
                                     src={preview}
@@ -137,6 +138,7 @@ const CardAds = React.memo((props) => {
                         <div className={isMobileApp?classes.cardM:classes.cardD}>
                             <a href={element.url}>
                                 <LazyLoadImage
+                                    placeholderSrc='/static/add.png'
                                     effect='blur'
                                     className={isMobileApp?classes.mediaM:classes.mediaD}
                                     alt={element.title}

@@ -124,6 +124,7 @@ const Item = React.memo((props) => {
                                     <>
                                     <label htmlFor='contained-button-file'>
                                         <LazyLoadImage
+                                            placeholderSrc='/static/add.png'
                                             effect='blur'
                                             className={isMobileApp?classes.mediaM:classes.mediaD}
                                             src={preview}
@@ -324,6 +325,7 @@ const Item = React.memo((props) => {
                                     <>
                                     <div className={classes.divImage}>
                                         <LazyLoadImage
+                                            placeholderSrc='/static/add.png'
                                             effect='blur'
                                             className={isMobileApp?classes.mediaM:classes.mediaD}
                                             src={data.item.image}
