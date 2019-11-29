@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "set URL=localhost&& next -p 80",
-    "build": "set URL=localhost&& next build -p 80",
+    "build": "set URL=localhost&& next build",
     "start": "set URL=localhost&& next start -p 80",
-    "build-server": "URL=37.143.13.163 next build -p 80",
+    "build-server": "URL=37.143.13.163 next build",
     "start-server": "URL=37.143.13.163 next start -p 80",
     "export": "next export"
   },
