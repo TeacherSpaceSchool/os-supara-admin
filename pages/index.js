@@ -23,6 +23,12 @@ const Index = React.memo((props) => {
         <App filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
                 <title>Товары</title>
+                <meta name='description' content='Azyk' />
+                <meta property='og:title' content='Azyk' />
+                <meta property='og:description' content='Azyk' />
+                <meta property='og:type' content='website' />
+                <meta property='og:image' content='' />
+                <link rel='canonical' href={`http://${process.env.URL}`}/>
             </Head>
             <div className={classes.page}>
                 {profile.role==='admin'?

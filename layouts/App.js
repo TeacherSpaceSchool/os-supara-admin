@@ -21,7 +21,7 @@ const App = React.memo(props => {
     let { sorts, filters, getList, pageName } = props;
     let [ads, setAds] = useState({});
     useEffect( ()=>{
-        if(!profile||!profile.role)
+        if(authenticated&&(!profile||!profile.role))
             setProfile()
     },[])
     useEffect( ()=>{

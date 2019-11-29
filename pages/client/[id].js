@@ -199,7 +199,6 @@ const Client = React.memo((props) => {
                                             if(newPass.length>0)editElement.newPass = newPass
                                             if(phone.length>0)editElement.phone = phone
                                             const action = async() => {
-                                                console.log(editElement)
                                                 await setClient(editElement)
                                             }
                                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)

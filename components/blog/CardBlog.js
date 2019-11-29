@@ -5,11 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import cardPageListStyle from '../../src/styleMUI/blog/cardBlog'
 import { connect } from 'react-redux'
+import { pdDDMMYYYY } from '../../src/lib'
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import { deleteBlog, addBlog, setBlog } from '../../src/gql/blog'
 import TextField from '@material-ui/core/TextField';
-import moment from 'moment';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import dynamic from 'next/dynamic'
@@ -41,8 +41,7 @@ const CardBlog = React.memo((props) => {
     let handleText =  (event) => {
         setText(event.target.value)
     };
-    let date =element?new Date(element.updatedAt):new Date()
-    date = moment(date).format('DD.MM.YYYY HH:mm')
+    let date = pdDDMMYYYY(element?new Date(element.updatedAt):new Date())
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let [all, setAll] = useState(false);

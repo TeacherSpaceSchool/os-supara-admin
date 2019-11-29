@@ -10,9 +10,9 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import dynamic from 'next/dynamic'
-import moment from 'moment';
 import { deleteRoute } from '../../src/gql/route'
 import Link from 'next/link';
+import { pdDDMMYY } from '../../src/lib'
 
 const Confirmation = dynamic(
     () => import('../dialog/Confirmation')
@@ -43,7 +43,7 @@ const CardOrder = React.memo((props) => {
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Дата:&nbsp;</div>
-                            <div className={classes.value}>{moment(element.dateStart).format('DD.MM.YY')}</div>
+                            <div className={classes.value}>{pdDDMMYY(new Date(element.dateStart))}</div>
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Заказы:&nbsp;</div>

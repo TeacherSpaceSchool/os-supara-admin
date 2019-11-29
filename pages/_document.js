@@ -18,7 +18,10 @@ class MyDocument extends Document {
               <link
                   rel="stylesheet"
                   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-              />
+              /><meta property="fb:app_id" content="257953674358265" />
+                <meta name="format-detection" content="telephone=no" />
+                <meta http-equiv="x-dns-prefetch-control" content="on"/>
+                <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
             </Head>
             <body>
             <Main />

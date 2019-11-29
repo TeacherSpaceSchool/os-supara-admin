@@ -70,7 +70,7 @@ export function signin(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                window.location.reload()
+                //window.location.reload()
             }
         } catch(error) {
             console.log(error)
@@ -110,7 +110,8 @@ export function logout() {
             type: UNAUTHENTICATED,
         })
         Router.push('/')
-        window.location.reload()
+        //setTimeout(()=>{window.location.reload()},1000)
+
 
     }
 }

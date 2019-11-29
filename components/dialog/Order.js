@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
 import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
-import moment from 'moment';
+import { pdDDMMYYHHMM } from '../../src/lib'
 import dynamic from 'next/dynamic'
 
 const Confirmation = dynamic(
@@ -52,7 +52,7 @@ const Order =  React.memo(
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Время заказа: &nbsp;</div>
-                    <div className={classes.value}>{moment(element.updatedAt).format('DD.MM.YYYY HH:mm')}</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>
                 </div>
                 <a href={`/client/${element.client.user._id}`} target='_blank'>
                     <div className={classes.row}>

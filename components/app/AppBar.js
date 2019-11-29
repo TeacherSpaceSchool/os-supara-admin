@@ -250,7 +250,7 @@ const MyAppBar = React.memo((props) => {
                                     >
                                         {
                                             !authenticated||profile.role==='client'?
-                                                <>
+                                                [
                                                 <MenuItem>
                                                     <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>
@@ -260,7 +260,7 @@ const MyAppBar = React.memo((props) => {
                                                             </a>
                                                         </Link>
                                                     </Badge>
-                                                </MenuItem>
+                                                </MenuItem>,
                                                 <MenuItem>
                                                     <Link href='/favorite'>
                                                         <a style={{display: 'flex', color: '#606060'}}>
@@ -268,7 +268,7 @@ const MyAppBar = React.memo((props) => {
                                                         </a>
                                                     </Link>
                                                 </MenuItem>
-                                                </>
+                                                ]
                                                 :
                                                 null
                                         }
@@ -432,7 +432,7 @@ const MyAppBar = React.memo((props) => {
                                     >
                                         {
                                             !authenticated||profile.role==='client'?
-                                                <>
+                                                [
                                                     <MenuItem>
                                                         <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>
@@ -442,7 +442,7 @@ const MyAppBar = React.memo((props) => {
                                                             </a>
                                                         </Link>
                                                 </Badge>
-                                                    </MenuItem>
+                                                    </MenuItem>,
                                                 <MenuItem>
                                                     <Link href='/favorite'>
                                                         <a style={{display: 'flex', color: '#606060'}}>
@@ -450,7 +450,7 @@ const MyAppBar = React.memo((props) => {
                                                         </a>
                                                     </Link>
                                                 </MenuItem>
-                                                </>
+                                                ]
                                                 :
                                                 null
                                         }

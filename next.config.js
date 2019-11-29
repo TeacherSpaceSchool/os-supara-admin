@@ -1,10 +1,10 @@
 const withSass = require('@zeit/next-sass')
-/*const sitemap = require('nextjs-sitemap-generator');
+const sitemap = require('nextjs-sitemap-generator');
 sitemap({
-    baseUrl: '<your_website_base_url>',
+    baseUrl: 'https://azyk.store',
     pagesDirectory: __dirname + '/pages',
     targetDirectory : 'static/'
-});*/
+});
 module.exports = withSass({
     env: {
         URL: process.env.URL

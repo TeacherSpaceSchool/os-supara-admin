@@ -23,7 +23,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router'
-import moment from 'moment';
+import { pdDDMMYYYY } from '../../src/lib'
 
 const Confirmation = dynamic(
     () => import('../../components/dialog/Confirmation')
@@ -37,7 +37,7 @@ const Route = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     const { isMobileApp } = props.app;
-    let [dateStart, setDateStart] = useState(data.route!==null?moment(new Date(data.route.dateStart)).format('YYYY-MM-DD'):null);
+    let [dateStart, setDateStart] = useState(data.route!==null?pdDDMMYYYY(new Date(data.route.dateStart)):null);
     let [dateEnd, setDateEnd] = useState(data.route!==null?data.route.dateEnd:null);
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
     let handleEmployment =  (event) => {

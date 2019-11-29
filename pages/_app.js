@@ -9,8 +9,6 @@ import { Provider } from 'react-redux';
 import { SingletonApolloClient } from '../src/singleton/client'
 import { SingletonStore } from '../src/singleton/store'
 import { setProfile } from '../redux/actions/user'
-import moment from 'moment';
-moment.locale('ru')
 import { checkMobile, checkAuth } from '../src/lib'
 
 export default withRedux(configureStore, { debug: true })(

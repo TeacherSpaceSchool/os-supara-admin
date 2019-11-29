@@ -93,6 +93,17 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/json/stringify */ "core-js/library/fn/json/stringify");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
@@ -830,9 +841,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../src/singleton/client */ "./src/singleton/client.js");
 /* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../src/singleton/store */ "./src/singleton/store.js");
 /* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! moment */ "moment");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../src/lib */ "./src/lib.js");
+/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../src/lib */ "./src/lib.js");
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\_app.js";
@@ -848,8 +857,6 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
-
-moment__WEBPACK_IMPORTED_MODULE_13___default.a.locale('ru');
 
 /* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(_redux_configureStore__WEBPACK_IMPORTED_MODULE_8__["default"], {
   debug: true
@@ -870,8 +877,8 @@ moment__WEBPACK_IMPORTED_MODULE_13___default.a.locale('ru');
     new _src_singleton_client__WEBPACK_IMPORTED_MODULE_10__["SingletonApolloClient"](ctx.req);
 
     if (ctx.req) {
-      ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["checkMobile"])(ctx.req.headers['user-agent']);
-      ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["checkAuth"])(ctx.req.headers.cookie);
+      ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkMobile"])(ctx.req.headers['user-agent']);
+      ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkAuth"])(ctx.req.headers.cookie);
       ctx.store.dispatch(Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["setProfile"])());
     }
 
@@ -893,33 +900,33 @@ moment__WEBPACK_IMPORTED_MODULE_13___default.a.locale('ru');
     return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 46
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 47
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 49
       },
       __self: this
     }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 50
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 51
       },
       __self: this
     })))));
@@ -1045,8 +1052,7 @@ function signin(payload) {
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        });
-        window.location.reload();
+        }); //window.location.reload()
       }
     } catch (error) {
       console.log(error);
@@ -1088,8 +1094,7 @@ function logout() {
     dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
     });
-    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-    window.location.reload();
+    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/'); //setTimeout(()=>{window.location.reload()},1000)
   };
 }
 function setProfile() {
@@ -1208,8 +1213,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
 
-const urlGQL = `http://${"localhost"}/graphql`;
-const urlGQLws = `ws://${"localhost"}/graphql`;
+const urlGQL = `http://${"localhost"}:3000/graphql`;
+const urlGQLws = `ws://${"localhost"}:3000/graphql`;
 const validMail = mail => {
   return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
 };
@@ -1494,7 +1499,7 @@ function user(state = initialState, action) {
 /*!********************!*\
   !*** ./src/lib.js ***!
   \********************/
-/*! exports provided: checkMobile, checkAuth, getJWT, checkInt */
+/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDDMMYYHHMM */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1503,8 +1508,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkAuth", function() { return checkAuth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getJWT", function() { return getJWT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkInt", function() { return checkInt; });
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYYY", function() { return pdDDMMYYYY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYY", function() { return pdDDMMYY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYHHMM", function() { return pdDDMMYYHHMM; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1__);
+
 
 const regexpUA = /(Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|iOS|Mobile)/;
 const checkMobile = ua => {
@@ -1519,7 +1530,23 @@ const getJWT = auth => {
   return res !== null ? res[0].trim().replace('jwt=', '') : undefined;
 };
 const checkInt = int => {
-  return isNaN(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(int)) ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(int);
+  return isNaN(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1___default()(int)) ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1___default()(int);
+};
+const pdDDMMYYYY = date => {
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '');
+  return date;
+};
+const pdDDMMYY = date => {
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4);
+  return date;
+};
+const pdDDMMYYHHMM = date => {
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  console.log(date);
+  date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
+  return date;
 };
 
 /***/ }),
@@ -1878,6 +1905,17 @@ module.exports = require("apollo-utilities");
 
 /***/ }),
 
+/***/ "core-js/library/fn/json/stringify":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/json/stringify" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/json/stringify");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/assign":
 /*!***************************************************!*\
   !*** external "core-js/library/fn/object/assign" ***!
@@ -1963,17 +2001,6 @@ module.exports = require("core-js/library/fn/promise");
 /***/ (function(module, exports) {
 
 module.exports = require("js-cookie");
-
-/***/ }),
-
-/***/ "moment":
-/*!*************************!*\
-  !*** external "moment" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("moment");
 
 /***/ }),
 

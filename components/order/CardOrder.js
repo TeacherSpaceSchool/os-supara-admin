@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import dynamic from 'next/dynamic'
-import moment from 'moment';
+import { pdDDMMYYHHMM } from '../../src/lib'
 
 const Order = dynamic(
     () => import('../dialog/Order')
@@ -30,7 +30,7 @@ const CardOrder = React.memo((props) => {
                 <CardContent className={classes.column}>
                     <div className={classes.row}>
                         <div className={classes.number}>{element.number}</div>&nbsp;
-                        <div className={classes.date}>{moment(element.updatedAt).format('DD.MM.YY HH:mm')}</div>&nbsp;&nbsp;
+                        <div className={classes.date}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>&nbsp;&nbsp;
                         <div className={classes.status} style={{background: statusColor[element.orders[0].status]}}>{
                             element.orders[0].status==='принят'&&(element.confirmationForwarder||element.confirmationClient)?
                                 route?

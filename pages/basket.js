@@ -99,7 +99,6 @@ const Basket = React.memo((props) => {
         }
         setAllPrice(allPrice)
     };
-    console.log(list)
     return (
         <App getList={getList} pageName='Корзина'>
             <Head>

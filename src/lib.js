@@ -13,3 +13,22 @@ export const getJWT = (auth)=>{
 export const checkInt = (int) => {
     return isNaN(parseInt(int))?0:parseInt(int)
 }
+export const pdDDMMYYYY = (date) =>
+{
+    date = JSON.stringify(date).split('-')
+    date = date[2].split('T')[0]+'.'+date[1]+'.'+date[0].replace('"', '')
+    return date
+}
+export const pdDDMMYY = (date) =>
+{
+    date = JSON.stringify(date).split('-')
+    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)
+    return date
+}
+export const pdDDMMYYHHMM = (date) =>
+{
+    date = JSON.stringify(date).split('-')
+    console.log(date)
+    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
+    return date
+}
