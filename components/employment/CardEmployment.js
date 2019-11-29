@@ -7,14 +7,10 @@ import { connect } from 'react-redux'
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
-import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffEmployment, deleteEmployment  } from '../../src/gql/employment'
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const CardEmployment = React.memo((props) => {
     const classes = cardEmploymentStyle();

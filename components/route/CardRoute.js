@@ -9,14 +9,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import dynamic from 'next/dynamic'
 import { deleteRoute } from '../../src/gql/route'
 import Link from 'next/link';
 import { pdDDMMYY } from '../../src/lib'
-
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Confirmation from '../dialog/Confirmation'
 
 const CardOrder = React.memo((props) => {
     const classes = cardRouteStyle();

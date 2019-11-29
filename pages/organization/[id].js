@@ -15,7 +15,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import dynamic from 'next/dynamic'
 import { onoffOrganization, addOrganization, setOrganization, deleteOrganization } from '../../src/gql/organization'
 import { getEmployment } from '../../src/gql/employment'
 import Add from '@material-ui/icons/Done';
@@ -24,10 +23,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();

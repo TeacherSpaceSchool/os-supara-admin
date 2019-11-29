@@ -89,7 +89,7 @@ export const setClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $image: Upload, $name: String, $email: String, $address: [String], $info: String, $newPass: String) {
+                    mutation ($_id: ID!, $phone: String, $image: Upload, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
                         setClient(_id: $_id, phone: $phone, image: $image, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }

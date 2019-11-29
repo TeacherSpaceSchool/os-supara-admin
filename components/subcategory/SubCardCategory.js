@@ -10,7 +10,6 @@ import { onoffSubCategory, addSubCategory, setSubCategory} from '../../src/gql/s
 import Link from 'next/link';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import dynamic from 'next/dynamic'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';

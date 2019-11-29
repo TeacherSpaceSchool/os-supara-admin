@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 import pageListStyle from '../src/styleMUI/favorite/favoriteList'
 import CardItem from '../components/items/CardItem'
 import { favorites } from '../src/gql/items';
+import Router from 'next/router'
 
 const Items = React.memo((props) => {
+    const { authenticated } = props.user;
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.favorites);
     const { search } = props.app;
-    const { authenticated } = props.user;
     useEffect(()=>{
         (async()=>{
             if(!authenticated&&localStorage.favorites){
@@ -48,7 +49,15 @@ const Items = React.memo((props) => {
     )
 })
 
-Items.getInitialProps = async function() {
+Items.getInitialProps = async function(ctx) {
+    if('client'===ctx.store.getState().user.profile.role||!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await favorites({search: ''}),
     };

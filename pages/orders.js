@@ -5,13 +5,13 @@ import CardOrder from '../components/order/CardOrder'
 import pageListStyle from '../src/styleMUI/orders/orderList'
 import {getOrders} from '../src/gql/order'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 const Orders = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.invoices);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getOrders({search: search, sort: sort, filter: filter})).invoices)
@@ -31,7 +31,15 @@ const Orders = React.memo((props) => {
     )
 })
 
-Orders.getInitialProps = async function() {
+Orders.getInitialProps = async function(ctx) {
+    if(!['admin', 'организация', 'менеджер', 'client'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await getOrders({search: '', sort: '-updatedAt', filter: ''})
     };

@@ -5,7 +5,7 @@ import pageListStyle from '../src/styleMUI/client/clientList'
 import {getClients} from '../src/gql/client'
 import CardClient from '../components/client/CardClient'
 import { connect } from 'react-redux'
-
+import Router from 'next/router'
 
 const Client = React.memo((props) => {
     const classes = pageListStyle();
@@ -31,7 +31,17 @@ const Client = React.memo((props) => {
     )
 })
 
-Client.getInitialProps = async function() {
+Client.getInitialProps = async function(ctx) {
+    let role = ctx.store.getState().user.profile.role
+    let authenticated = ctx.store.getState().user.authenticated
+    if(authenticated&&!['admin', 'организация', 'менеджер'].includes(role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await getClients({search: '', sort: '-updatedAt', filter: ''})
     };
@@ -40,6 +50,7 @@ Client.getInitialProps = async function() {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

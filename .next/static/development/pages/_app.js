@@ -34192,33 +34192,33 @@ function (_App) {
       return __jsx(react__WEBPACK_IMPORTED_MODULE_9___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 47
         },
         __self: this
       }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_11__["ThemeProvider"], {
         theme: _src_theme__WEBPACK_IMPORTED_MODULE_13__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 48
         },
         __self: this
       }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_12__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 50
         },
         __self: this
       }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_16__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 51
         },
         __self: this
       }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 52
         },
         __self: this
       })))));
@@ -34247,12 +34247,26 @@ function (_App) {
                 Component = _ref.Component, ctx = _ref.ctx;
                 new _src_singleton_client__WEBPACK_IMPORTED_MODULE_17__["SingletonApolloClient"](ctx.req);
 
-                if (ctx.req) {
-                  ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkMobile"])(ctx.req.headers['user-agent']);
-                  ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkAuth"])(ctx.req.headers.cookie);
-                  ctx.store.dispatch(Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["setProfile"])());
+                if (!ctx.req) {
+                  _context.next = 9;
+                  break;
                 }
 
+                ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkMobile"])(ctx.req.headers['user-agent']);
+                ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkAuth"])(ctx.req.headers.cookie);
+
+                if (!ctx.store.getState().user.authenticated) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _context.next = 8;
+                return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
+
+              case 8:
+                ctx.store.getState().user.profile = _context.sent;
+
+              case 9:
                 ctx.store.getState().app.search = '';
                 ctx.store.getState().app.sort = '-updatedAt';
                 ctx.store.getState().app.filter = '';
@@ -34260,29 +34274,29 @@ function (_App) {
                 _context.t1 = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 14;
+                  _context.next = 20;
                   break;
                 }
 
-                _context.next = 11;
+                _context.next = 17;
                 return Component.getInitialProps(ctx);
 
-              case 11:
+              case 17:
                 _context.t2 = _context.sent;
-                _context.next = 15;
+                _context.next = 21;
                 break;
 
-              case 14:
+              case 20:
                 _context.t2 = {};
 
-              case 15:
+              case 21:
                 _context.t3 = _context.t2;
                 _context.t4 = (0, _context.t0)(_context.t1, _context.t3);
                 return _context.abrupt("return", {
                   pageProps: _context.t4
                 });
 
-              case 18:
+              case 24:
               case "end":
                 return _context.stop();
             }
@@ -34336,7 +34350,7 @@ function closeSnackBar() {
 /*!*******************************!*\
   !*** ./redux/actions/user.js ***!
   \*******************************/
-/*! exports provided: signup, signin, checkAuthenticated, setAuthenticated, logout, setProfile */
+/*! exports provided: signup, signin, checkAuthenticated, setAuthenticated, logout, setProfile, getProfile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34347,6 +34361,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthenticated", function() { return setAuthenticated; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProfile", function() { return setProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfile", function() { return getProfile; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
@@ -34362,6 +34377,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+function _templateObject4() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                   query {\n                       getStatus {\n                          role\n                          status\n                          phone\n                          organization\n                          _id\n                         }\n                   }"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject3() {
   var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query {\n                        getStatus {\n                           role\n                           status\n                           phone\n                           organization\n                           _id\n                          }\n                    }"]);
@@ -34434,46 +34459,41 @@ function signup(payload) {
                 });
 
               case 8:
-                _context.next = 16;
+                _context.next = 15;
                 break;
 
               case 10:
-                _context.next = 12;
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
+                _context.next = 13;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["AUTHENTICATED"]
                 });
 
-              case 12:
-                _context.next = 14;
+              case 13:
+                _context.next = 15;
                 return dispatch({
                   type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_4__["SHOW_MINI_DIALOG"],
                   payload: false
                 });
 
-              case 14:
-                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
-                setTimeout(function () {
-                  return window.location.reload();
-                }, 1);
-
-              case 16:
-                _context.next = 21;
+              case 15:
+                _context.next = 20;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](0);
                 dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
                   payload: true
                 });
 
-              case 21:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 18]]);
+        }, _callee, null, [[0, 17]]);
       }));
 
       return function (_x) {
@@ -34517,48 +34537,43 @@ function signin(payload) {
                 });
 
               case 8:
-                _context2.next = 16;
+                _context2.next = 15;
                 break;
 
               case 10:
-                _context2.next = 12;
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
+                _context2.next = 13;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["AUTHENTICATED"]
                 });
 
-              case 12:
-                _context2.next = 14;
+              case 13:
+                _context2.next = 15;
                 return dispatch({
                   type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_4__["SHOW_MINI_DIALOG"],
                   payload: false
                 });
 
-              case 14:
-                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
-                setTimeout(function () {
-                  return window.location.reload();
-                }, 1);
-
-              case 16:
-                _context2.next = 23;
+              case 15:
+                _context2.next = 22;
                 break;
 
-              case 18:
-                _context2.prev = 18;
+              case 17:
+                _context2.prev = 17;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
-                _context2.next = 23;
+                _context2.next = 22;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
                   payload: true
                 });
 
-              case 23:
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 18]]);
+        }, _callee2, null, [[0, 17]]);
       }));
 
       return function (_x2) {
@@ -34625,16 +34640,13 @@ function logout() {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
+                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
                 js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('jwt');
                 dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["UNAUTHENTICATED"]
-                });
-                next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push('/');
-                setTimeout(function () {
-                  return window.location.reload();
-                }, 1);
+                }); //setTimeout(()=>window.location.reload(),100)
 
-              case 4:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -34697,6 +34709,44 @@ function setProfile() {
       };
     }()
   );
+}
+function getProfile() {
+  return _getProfile.apply(this, arguments);
+}
+
+function _getProfile() {
+  _getProfile = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+    var client, result;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_7__["SingletonApolloClient"]().getClient();
+            _context6.next = 4;
+            return client.query({
+              query: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_6__["gql"])(_templateObject4())
+            });
+
+          case 4:
+            result = _context6.sent;
+            return _context6.abrupt("return", result.data.getStatus);
+
+          case 8:
+            _context6.prev = 8;
+            _context6.t0 = _context6["catch"](0);
+            console.error(_context6.t0);
+
+          case 11:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[0, 8]]);
+  }));
+  return _getProfile.apply(this, arguments);
 }
 
 /***/ }),

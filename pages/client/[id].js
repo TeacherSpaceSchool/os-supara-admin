@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getClient } from '../../src/gql/client'
-import organizationStyle from '../../src/styleMUI/organization/organization'
+import clientStyle from '../../src/styleMUI/client/client'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Input from '@material-ui/core/Input';
@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as userActions from '../../redux/actions/user'
-import dynamic from 'next/dynamic'
 import { onoffClient, setClient } from '../../src/gql/client'
 import Add from '@material-ui/icons/Done';
 import Remove from '@material-ui/icons/Delete';
@@ -23,34 +22,38 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Router from 'next/router'
+import Confirmation from '../../components/dialog/Confirmation'
 
 const Client = React.memo((props) => {
-    const classes = organizationStyle();
+    const { profile } = props.user;
+    const classes = clientStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
     let [status, setStatus] = useState(data.client!==null?data.client.user.status:'');
     let [name, setName] = useState(data.client!==null?data.client.name:'');
-    let [address, setAddress] = useState(data.client!==null?data.client.address:[]);
     let [email, setEmail] = useState(data.client!==null?data.client.email:'');
     let [phone, setPhone] = useState(data.client!==null?data.client.user.phone:'');
+
+    //привести к геолокации
+    if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
+
+    let [address, setAddress] = useState(data.client!==null?data.client.address:[]);
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
-        address = [...address, newAddress]
+        address = [...address, [newAddress]]
         setAddress(address)
         setNewAddress('')
     };
     let editAddress = (event, idx)=>{
-        address[idx] = event.target.value
+        address[idx][0] = event.target.value
         setAddress([...address])
     };
     let deleteAddress = (idx)=>{
         address.splice(idx, 1);
         setAddress([...address])
     };
+
     let [info, setInfo] = useState(data.client!==null?data.client.info:'');
     let [preview, setPreview] = useState(data.client!==null?data.client.image:'');
     let [image, setImage] = useState(undefined);
@@ -58,7 +61,6 @@ const Client = React.memo((props) => {
         setImage(event.target.files[0])
         setPreview(URL.createObjectURL(event.target.files[0]))
     })
-    const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { logout } = props.userActions;
     let [newPass, setNewPass] = useState('');
@@ -112,6 +114,7 @@ const Client = React.memo((props) => {
                                                 </InputAdornment>
                                             }
                                         />
+
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
                                         <InputLabel>Добавить адрес</InputLabel>
                                         <Input
@@ -135,11 +138,12 @@ const Client = React.memo((props) => {
                                     />
                                     </FormControl>
                                     {address?address.map((element, idx)=>
+                                        <>
                                         <FormControl key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
                                             <InputLabel>Адрес</InputLabel>
                                             <Input
                                                 placeholder='Адрес'
-                                                value={element}
+                                                value={element[0]}
                                                 className={isMobileApp?classes.inputM:classes.inputD}
                                                 onChange={(event)=>{editAddress(event, idx)}}
                                                 inputProps={{
@@ -159,7 +163,18 @@ const Client = React.memo((props) => {
                                                 }
                                             />
                                         </FormControl>
+                                        <div className={classes.geo}>
+                                            {console.log(element[1])}
+                                            {
+                                                element[1]?
+                                                    'Изменить геолокацию'
+                                                    :
+                                                    'Задайте геолокацию'
+                                            }
+                                        </div>
+                                        </>
                                     ):null}
+
                                     <TextField
                                         label='email'
                                         value={email}
@@ -295,6 +310,14 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
+    if(!['организация', 'менеджер', 'admin', 'экспедитор', 'client'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await getClient({_id: ctx.query.id})
     };

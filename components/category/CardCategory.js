@@ -11,13 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import Link from 'next/link';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import dynamic from 'next/dynamic'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Confirmation from '../dialog/Confirmation'
 
 const CardCategory = React.memo((props) => {
     const classes = cardCategoryStyle();

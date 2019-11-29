@@ -16,7 +16,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
@@ -24,15 +23,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router'
 import { pdDDMMYYYY } from '../../src/lib'
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const Route = React.memo((props) => {
-    const { profile, authenticated } = props.user;
-    if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(profile.role))
-        Router.push('/')
+    const { profile } = props.user;
     const classes = routeStyle();
     const { data } = props;
     const router = useRouter()
@@ -269,6 +263,14 @@ const Route = React.memo((props) => {
 })
 
 Route.getInitialProps = async function(ctx) {
+    if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+                Router.push('/')
     return {
         data: {
             ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}):{route: {invoices: [], employment: {}, status: '', dateStart: null, dateEnd: null, number: ''}},

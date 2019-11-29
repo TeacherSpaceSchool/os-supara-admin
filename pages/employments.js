@@ -8,13 +8,14 @@ import { connect } from 'react-redux'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
+import Router from 'next/router'
 
 const Employment = React.memo((props) => {
+    const { profile } = props.user;
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.employments);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getEmployments({search: search, sort: sort, filter: filter})).employments)
@@ -43,7 +44,15 @@ const Employment = React.memo((props) => {
     )
 })
 
-Employment.getInitialProps = async function() {
+Employment.getInitialProps = async function(ctx) {
+    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await getEmployments({search: '', sort: '-updatedAt', filter: ''})
     };

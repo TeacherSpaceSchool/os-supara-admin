@@ -7,12 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import dynamic from 'next/dynamic'
 import { pdDDMMYYHHMM } from '../../src/lib'
-
-const Order = dynamic(
-    () => import('../dialog/Order')
-)
+import Order from '../dialog/Order'
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();

@@ -12,26 +12,19 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
 import { getBasket, setBasket, deleteBasket } from '../src/gql/basket';
 import { getClient } from '../src/gql/client';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-
-const BuyBasket = dynamic(
-    () => import('../components/dialog/BuyBasket')
-)
-const Sign = dynamic(
-    () => import('../components/dialog/Sign')
-)
-const Confirmation = dynamic(
-    () => import('../components/dialog/Confirmation')
-)
+import Router from 'next/router'
+import BuyBasket from '../components/dialog/BuyBasket'
+import Sign from '../components/dialog/Sign'
+import Confirmation from '../components/dialog/Confirmation'
 
 const Basket = React.memo((props) => {
+    const { authenticated } = props.user;
     const classes = pageListStyle();
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
@@ -39,7 +32,6 @@ const Basket = React.memo((props) => {
     let [list, setList] = useState(data.baskets);
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
-    const { authenticated } = props.user;
     let increment = (idx)=>{
         list[idx].count+=1
         setBasketChange(idx, list[idx].count)
@@ -238,7 +230,14 @@ const Basket = React.memo((props) => {
 })
 
 Basket.getInitialProps = async function(ctx) {
-
+    if('client'===ctx.store.getState().user.profile.role||!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: {
             ...await getBasket(),

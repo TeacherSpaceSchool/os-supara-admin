@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import dynamic from 'next/dynamic'
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import Star from '@material-ui/icons/Star';
 import Link from 'next/link';
@@ -15,10 +14,7 @@ import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Confirmation from '../dialog/Confirmation'
 
 const CardItem = React.memo((props) => {
     const classes = cardItemStyle();

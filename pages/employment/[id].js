@@ -10,7 +10,6 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import dynamic from 'next/dynamic'
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
@@ -25,12 +24,10 @@ import Router from 'next/router'
 import * as userActions from '../../redux/actions/user'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const Client = React.memo((props) => {
+    const { profile } = props.user;
     const classes = organizationStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
@@ -55,7 +52,6 @@ const Client = React.memo((props) => {
     let handleHide =  () => {
         setHide(!hide)
     };
-    const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const router = useRouter()
     const { logout } = props.userActions;
@@ -252,6 +248,14 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
+    if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: {
             ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}):{employment:{name: '',email: '',user: {phone: '',status: '',role: '',},organization: {_id: ''},}},

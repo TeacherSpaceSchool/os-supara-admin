@@ -35,10 +35,14 @@ a {
   align-items: center; }
 
 .marketImg {
-  width: 100%;
-  height: calc(100% / 3);
+  height: calc(100vw / 3);
   object-fit: cover;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 90vw; }
+  @media screen and (min-width: 800px) {
+    .marketImg {
+      width: calc(100vw - 300px - 20px);
+      height: calc((100vw - 300px - 20px)/3); } }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -12,14 +12,9 @@ import { deleteBlog, addBlog, setBlog } from '../../src/gql/blog'
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import dynamic from 'next/dynamic'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Confirmation from '../dialog/Confirmation'
 
 const CardBlog = React.memo((props) => {
     const classes = cardPageListStyle();

@@ -10,11 +10,7 @@ import * as userActions from '../../redux/actions/user'
 import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDDMMYYHHMM } from '../../src/lib'
-import dynamic from 'next/dynamic'
-
-const Confirmation = dynamic(
-    () => import('./Confirmation')
-)
+import Confirmation from './Confirmation'
 
 const Order =  React.memo(
     (props) =>{

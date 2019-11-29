@@ -879,7 +879,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     if (ctx.req) {
       ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkMobile"])(ctx.req.headers['user-agent']);
       ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkAuth"])(ctx.req.headers.cookie);
-      ctx.store.dispatch(Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["setProfile"])());
+      if (ctx.store.getState().user.authenticated) ctx.store.getState().user.profile = await Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["getProfile"])();
     }
 
     ctx.store.getState().app.search = '';
@@ -900,33 +900,33 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 47
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 48
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 50
       },
       __self: this
     }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 51
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 52
       },
       __self: this
     })))));
@@ -969,7 +969,7 @@ function closeSnackBar() {
 /*!*******************************!*\
   !*** ./redux/actions/user.js ***!
   \*******************************/
-/*! exports provided: signup, signin, checkAuthenticated, setAuthenticated, logout, setProfile */
+/*! exports provided: signup, signin, checkAuthenticated, setAuthenticated, logout, setProfile, getProfile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -980,6 +980,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthenticated", function() { return setAuthenticated; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProfile", function() { return setProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfile", function() { return getProfile; });
 /* harmony import */ var _constants_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/user */ "./redux/constants/user.js");
 /* harmony import */ var _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/mini_dialog */ "./redux/constants/mini_dialog.js");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "js-cookie");
@@ -1012,15 +1013,14 @@ function signup(payload) {
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
+        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
         await dispatch({
           type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
         });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        });
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        setTimeout(() => window.location.reload(), 1);
+        }); //setTimeout(()=>window.location.reload(), 1)
       }
     } catch (error) {
       dispatch({
@@ -1047,15 +1047,14 @@ function signin(payload) {
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
+        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
         await dispatch({
           type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
         });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        });
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        setTimeout(() => window.location.reload(), 1);
+        }); //setTimeout(()=>window.location.reload(), 100)
       }
     } catch (error) {
       console.log(error);
@@ -1093,12 +1092,11 @@ function setAuthenticated(auth) {
 }
 function logout() {
   return async dispatch => {
+    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
     js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
     dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
-    });
-    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-    setTimeout(() => window.location.reload(), 1);
+    }); //setTimeout(()=>window.location.reload(),100)
   };
 }
 function setProfile() {
@@ -1125,6 +1123,26 @@ function setProfile() {
       console.error(error);
     }
   };
+}
+async function getProfile() {
+  try {
+    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+    let result = await client.query({
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+                   query {
+                       getStatus {
+                          role
+                          status
+                          phone
+                          organization
+                          _id
+                         }
+                   }`
+    });
+    return result.data.getStatus;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 /***/ }),

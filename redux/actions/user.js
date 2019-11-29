@@ -31,13 +31,13 @@ export function signup(payload) {
                     payload: true
                 })
             else {
+                Router.push('/')
                 await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                Router.push('/')
-                setTimeout(()=>window.location.reload(), 1)
+                //setTimeout(()=>window.location.reload(), 1)
             }
         } catch(error) {
             dispatch({
@@ -66,13 +66,13 @@ export function signin(payload) {
                     payload: true
                 })
             else {
+                Router.push('/')
                 await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                Router.push('/')
-                setTimeout(()=>window.location.reload(), 1)
+                //setTimeout(()=>window.location.reload(), 100)
             }
         } catch(error) {
             console.log(error)
@@ -107,12 +107,12 @@ export function setAuthenticated(auth) {
 
 export function logout() {
     return async (dispatch) => {
+        Router.push('/')
         Cookies.remove('jwt');
         dispatch({
             type: UNAUTHENTICATED,
         })
-        Router.push('/')
-        setTimeout(()=>window.location.reload(),1)
+        //setTimeout(()=>window.location.reload(),100)
 
 
     }
@@ -143,4 +143,26 @@ export function setProfile() {
             console.error(error)
         }
     };
+}
+
+export async function getProfile() {
+    try {
+        const client = new SingletonApolloClient().getClient()
+        let result = await client
+            .query({
+                query: gql`
+                   query {
+                       getStatus {
+                          role
+                          status
+                          phone
+                          organization
+                          _id
+                         }
+                   }`
+            })
+        return result.data.getStatus
+    } catch(error) {
+        console.error(error)
+    }
 }

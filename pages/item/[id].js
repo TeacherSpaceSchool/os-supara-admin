@@ -33,17 +33,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
 import Router from 'next/router'
-import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Star from '@material-ui/icons/Star';
 import TextField from '@material-ui/core/TextField';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const Item = React.memo((props) => {
     const classes = itemStyle();

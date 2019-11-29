@@ -49,8 +49,12 @@ a {
 }
 
 .marketImg {
-  width: 100%;
-  height: calc(100% / 3);
+  height: calc(100vw / 3);
   object-fit: cover;
   cursor: pointer;
+  width: 90vw;
+  @media screen and (min-width: $break-small) {
+    width: calc(100vw - #{$app-drawer-width} - 20px);
+    height: calc((100vw - #{$app-drawer-width} - 20px)/3);
+  }
 }

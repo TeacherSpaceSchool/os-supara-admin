@@ -30,15 +30,9 @@ import FilterList from '@material-ui/icons/FilterListRounded';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import dynamic from 'next/dynamic'
 import Badge from '@material-ui/core/Badge';
-
-const Sign = dynamic(
-    () => import('../dialog/Sign')
-)
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Sign from '../dialog/Sign'
+import Confirmation from '../dialog/Confirmation'
 
 const MyAppBar = React.memo((props) => {
     //props
@@ -287,6 +281,7 @@ const MyAppBar = React.memo((props) => {
                                         {
                                             authenticated?
                                                 <MenuItem onClick={()=>{
+                                                    handleCloseProfile()
                                                     const action = async() => {
                                                         logout()
                                                     }
@@ -299,6 +294,7 @@ const MyAppBar = React.memo((props) => {
                                                 </MenuItem>
                                             :
                                                 <MenuItem onClick={()=>{
+                                                    handleCloseProfile()
                                                     setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
                                                     showMiniDialog(true)
                                                 }}>
@@ -469,7 +465,7 @@ const MyAppBar = React.memo((props) => {
                                         {
                                             authenticated?
                                                 <MenuItem onClick={()=>{
-                                                    showDrawer(false);
+                                                    handleCloseProfile()
                                                     const action = async() => {
                                                         logout()
                                                     }
@@ -482,6 +478,7 @@ const MyAppBar = React.memo((props) => {
                                                 </MenuItem>
                                                 :
                                                 <MenuItem onClick={()=>{
+                                                    handleCloseProfile()
                                                     setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
                                                     showMiniDialog(true)
                                                 }}>

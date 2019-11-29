@@ -8,7 +8,7 @@ import configureStore from '../redux/configureStore'
 import { Provider } from 'react-redux';
 import { SingletonApolloClient } from '../src/singleton/client'
 import { SingletonStore } from '../src/singleton/store'
-import { setProfile } from '../redux/actions/user'
+import { getProfile } from '../redux/actions/user'
 import { checkMobile, checkAuth } from '../src/lib'
 
 export default withRedux(configureStore, { debug: true })(
@@ -25,7 +25,8 @@ export default withRedux(configureStore, { debug: true })(
             if(ctx.req){
                 ctx.store.getState().app.isMobileApp = checkMobile(ctx.req.headers['user-agent'])
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
-                ctx.store.dispatch(setProfile())
+                if(ctx.store.getState().user.authenticated)
+                    ctx.store.getState().user.profile = await getProfile()
             }
             ctx.store.getState().app.search = ''
             ctx.store.getState().app.sort = '-updatedAt'

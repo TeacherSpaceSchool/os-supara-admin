@@ -6,15 +6,11 @@ import cardOrganizationStyle from '../../src/styleMUI/organization/cardOrganizat
 import { connect } from 'react-redux'
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
-import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, deleteOrganization } from '../../src/gql/organization'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-const Confirmation = dynamic(
-    () => import('../../components/dialog/Confirmation')
-)
+import Confirmation from '../../components/dialog/Confirmation'
 
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();

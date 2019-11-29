@@ -11,17 +11,16 @@ import Link from 'next/link';
 import Router from 'next/router'
 
 const Routes = React.memo((props) => {
+    const { profile } = props.user;
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.routes);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getRoutes({search: search, sort: sort, filter: filter})).routes)
         })()
     },[filter, sort, search]);
-    if(!['admin', 'организация', 'менеджер'].includes(profile.role))Router.push('/')
     return (
         <App filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
@@ -45,7 +44,15 @@ const Routes = React.memo((props) => {
     )
 })
 
-Routes.getInitialProps = async function() {
+Routes.getInitialProps = async function(ctx) {
+    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: await getRoutes({search: '', sort: '-updatedAt', filter: ''})
     };
