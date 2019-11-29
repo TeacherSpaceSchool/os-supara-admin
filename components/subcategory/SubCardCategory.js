@@ -16,10 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
-
-const Confirmation = dynamic(
-    () => import('../dialog/Confirmation')
-)
+import Confirmation from '../dialog/Confirmation'
 
 const CardCategory = React.memo((props) => {
     const classes = cardCategoryStyle();
