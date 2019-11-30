@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\clients.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\subcategory\\[id].js"],{
 
 /***/ "./components/app/AppBar.js":
 /*!**********************************!*\
@@ -2017,275 +2017,6 @@ function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./components/client/CardClient.js":
-/*!*****************************************!*\
-  !*** ./components/client/CardClient.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "./node_modules/@material-ui/core/esm/CardActionArea/index.js");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
-/* harmony import */ var _src_styleMUI_client_cardClient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/styleMUI/client/cardClient */ "./src/styleMUI/client/cardClient.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _src_gql_client__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../src/gql/client */ "./src/gql/client.js");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
-/* harmony import */ var _components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/dialog/Confirmation */ "./components/dialog/Confirmation.js");
-
-
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\client\\CardClient.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-
-var CardOrganization = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (props) {
-  var classes = Object(_src_styleMUI_client_cardClient__WEBPACK_IMPORTED_MODULE_6__["default"])();
-  var element = props.element;
-  var isMobileApp = props.app.isMobileApp;
-  var profile = props.user.profile;
-  var _props$mini_dialogAct = props.mini_dialogActions,
-      setMiniDialog = _props$mini_dialogAct.setMiniDialog,
-      showMiniDialog = _props$mini_dialogAct.showMiniDialog;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(element.user.status),
-      status = _useState[0],
-      setStatus = _useState[1];
-
-  return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23
-    },
-    __self: this
-  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: this
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_8___default.a, {
-    href: "/client/[id]",
-    as: "/client/".concat(element.user._id),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: this
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: this
-  }, __jsx("label", {
-    htmlFor: "contained-button-file",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: this
-  }, __jsx("img", {
-    className: classes.media,
-    src: element.image,
-    alt: element.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: this
-  })), __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34
-    },
-    __self: this
-  }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35
-    },
-    __self: this
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36
-    },
-    __self: this
-  }, "\u0418\u043C\u044F:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39
-    },
-    __self: this
-  }, element.name)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 43
-    },
-    __self: this
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44
-    },
-    __self: this
-  }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: this
-  }, element.user.phone)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: this
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 52
-    },
-    __self: this
-  }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55
-    },
-    __self: this
-  }, element.address.map(function (addres, idx) {
-    return __jsx("div", {
-      key: idx,
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 57
-      },
-      __self: this
-    }, addres[0]);
-  }))))))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 67
-    },
-    __self: this
-  }, profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    onClick:
-    /*#__PURE__*/
-    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-    /*#__PURE__*/
-    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var action;
-      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              action =
-              /*#__PURE__*/
-              function () {
-                var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-                /*#__PURE__*/
-                _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-                  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          _context.next = 2;
-                          return Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_12__["onoffClient"])([element._id]);
-
-                        case 2:
-                          setStatus(status === 'active' ? 'deactive' : 'active');
-
-                        case 3:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  }, _callee);
-                }));
-
-                return function action() {
-                  return _ref2.apply(this, arguments);
-                };
-              }();
-
-              setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
-                action: action,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 75
-                },
-                __self: this
-              }));
-              showMiniDialog(true);
-
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, this);
-    })),
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 70
-    },
-    __self: this
-  }, status === 'active' ? 'Отключить' : 'Включить') : null));
-});
-
-function mapStateToProps(state) {
-  return {
-    app: state.app,
-    user: state.user
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_10__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(CardOrganization));
-
-/***/ }),
-
 /***/ "./components/dialog/Confirmation.js":
 /*!*******************************************!*\
   !*** ./components/dialog/Confirmation.js ***!
@@ -3017,6 +2748,455 @@ Sign.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_18__["default"])(Sign)));
+
+/***/ }),
+
+/***/ "./components/subcategory/SubCardCategory.js":
+/*!***************************************************!*\
+  !*** ./components/subcategory/SubCardCategory.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
+/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "./node_modules/@material-ui/core/esm/CardActionArea/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* harmony import */ var _src_styleMUI_subcategory_cardSubcategory__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/styleMUI/subcategory/cardSubcategory */ "./src/styleMUI/subcategory/cardSubcategory.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/CardActions */ "./node_modules/@material-ui/core/esm/CardActions/index.js");
+/* harmony import */ var _src_gql_subcategory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/gql/subcategory */ "./src/gql/subcategory.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/index.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
+
+
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\subcategory\\SubCardCategory.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (props) {
+  var classes = Object(_src_styleMUI_subcategory_cardSubcategory__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  var element = props.element,
+      setList = props.setList,
+      category = props.category,
+      categorys = props.categorys;
+  var profile = props.user.profile;
+  var isMobileApp = props.app.isMobileApp; //addCard
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(element ? element.name : ''),
+      name = _useState[0],
+      setName = _useState[1];
+
+  var handleName = function handleName(event) {
+    setName(event.target.value);
+  };
+
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(element ? element.category : {}),
+      selectCategory = _useState2[0],
+      setSelectCategory = _useState2[1];
+
+  var handleSelectCategory = function handleSelectCategory(event) {
+    setSelectCategory({
+      _id: event.target.value,
+      name: event.target.name
+    });
+  };
+
+  var _props$mini_dialogAct = props.mini_dialogActions,
+      setMiniDialog = _props$mini_dialogAct.setMiniDialog,
+      showMiniDialog = _props$mini_dialogAct.showMiniDialog;
+  var showSnackBar = props.snackbarActions.showSnackBar;
+  console.log(element);
+  return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: isMobileApp ? classes.cardM : classes.cardD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, profile.role === 'admin' && (!element || element._id !== 'all') ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    label: "\u0418\u043C\u044F",
+    value: name,
+    className: isMobileApp ? classes.inputM : classes.inputD,
+    onChange: handleName,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: this
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 54
+    },
+    __self: this
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: this
+  }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    className: isMobileApp ? classes.inputM : classes.inputD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: this
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: this
+  }, "\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    value: selectCategory._id,
+    onChange: handleSelectCategory,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: this
+  }, categorys ? categorys.map(function (element) {
+    return __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      key: element._id,
+      value: element._id,
+      ola: element.name,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      },
+      __self: this
+    }, element.name);
+  }) : null)))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: this
+  }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    onClick:
+    /*#__PURE__*/
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var editElement, action;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              editElement = {
+                _id: element._id
+              };
+              if (name.length > 0 && name !== element.name) editElement.name = name;
+              if (selectCategory._id !== undefined && selectCategory._id !== element.category._id) editElement.category = selectCategory._id;
+
+              action =
+              /*#__PURE__*/
+              function () {
+                var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+                /*#__PURE__*/
+                _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+                  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.t0 = setList;
+                          _context.next = 3;
+                          return Object(_src_gql_subcategory__WEBPACK_IMPORTED_MODULE_10__["setSubCategory"])(editElement, category);
+
+                        case 3:
+                          _context.t1 = _context.sent.subCategorys;
+                          (0, _context.t0)(_context.t1);
+
+                        case 5:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function action() {
+                  return _ref2.apply(this, arguments);
+                };
+              }();
+
+              setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_20__["default"], {
+                action: action,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 80
+                },
+                __self: this
+              }));
+              showMiniDialog(true);
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    })),
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: this
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    onClick:
+    /*#__PURE__*/
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var action;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              action =
+              /*#__PURE__*/
+              function () {
+                var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+                /*#__PURE__*/
+                _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+                  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          _context3.t0 = setList;
+                          _context3.next = 3;
+                          return Object(_src_gql_subcategory__WEBPACK_IMPORTED_MODULE_10__["onoffSubCategory"])([element._id], category);
+
+                        case 3:
+                          _context3.t1 = _context3.sent.subCategorys;
+                          (0, _context3.t0)(_context3.t1);
+
+                        case 5:
+                        case "end":
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3);
+                }));
+
+                return function action() {
+                  return _ref4.apply(this, arguments);
+                };
+              }();
+
+              setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_20__["default"], {
+                action: action,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 89
+                },
+                __self: this
+              }));
+              showMiniDialog(true);
+
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, this);
+    })),
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: this
+  }, element.status === 'active' ? 'Отключить' : 'Включить'), __jsx(next_link__WEBPACK_IMPORTED_MODULE_11___default.a, {
+    href: "/items/[id]",
+    as: "/items/".concat(element._id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94
+    },
+    __self: this
+  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 95
+    },
+    __self: this
+  }, "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"))) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    onClick:
+    /*#__PURE__*/
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+      var action;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              if (name.length > 0 && selectCategory._id) {
+                setName('');
+                setSelectCategory({});
+
+                action =
+                /*#__PURE__*/
+                function () {
+                  var _ref6 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+                  /*#__PURE__*/
+                  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+                    var subCategorys;
+                    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                      while (1) {
+                        switch (_context5.prev = _context5.next) {
+                          case 0:
+                            _context5.next = 2;
+                            return Object(_src_gql_subcategory__WEBPACK_IMPORTED_MODULE_10__["addSubCategory"])({
+                              name: name
+                            }, selectCategory._id);
+
+                          case 2:
+                            subCategorys = _context5.sent.subCategorys;
+                            setList(subCategorys);
+
+                          case 4:
+                          case "end":
+                            return _context5.stop();
+                        }
+                      }
+                    }, _callee5);
+                  }));
+
+                  return function action() {
+                    return _ref6.apply(this, arguments);
+                  };
+                }();
+
+                setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_20__["default"], {
+                  action: action,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 108
+                  },
+                  __self: this
+                }));
+                showMiniDialog(true);
+              } else {
+                showSnackBar('Заполните все поля');
+              }
+
+            case 1:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, this);
+    })),
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100
+    },
+    __self: this
+  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"))) : element !== undefined ? __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120
+    },
+    __self: this
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_11___default.a, {
+    href: "/items/[id]",
+    as: "/items/".concat(element._id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 121
+    },
+    __self: this
+  }, __jsx("div", {
+    className: classes.line,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 122
+    },
+    __self: this
+  }, __jsx("h3", {
+    className: isMobileApp ? classes.inputM : classes.inputD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123
+    },
+    __self: this
+  }, element.name)))) : null);
+});
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_12__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_13__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_12__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_18__, dispatch)
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(CardCategory));
 
 /***/ }),
 
@@ -45475,21 +45655,21 @@ exports.SUPPORTS_PERFORMANCE_USER_TIMING = exports.SUPPORTS_PERFORMANCE && typeo
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fclients&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cclients.js!./":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fclients&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cclients.js ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsubcategory%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Csubcategory%5C%5Bid%5D.js!./":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsubcategory%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Csubcategory%5C%5Bid%5D.js ***!
+  \**********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/clients", function() {
-      var page = __webpack_require__(/*! ./pages/clients.js */ "./pages/clients.js")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/subcategory/[id]", function() {
+      var page = __webpack_require__(/*! ./pages/subcategory/[id].js */ "./pages/subcategory/[id].js")
       if(true) {
-        module.hot.accept(/*! ./pages/clients.js */ "./pages/clients.js", function() {
-          if(!next.router.components["/clients"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/clients.js */ "./pages/clients.js")
-          next.router.update("/clients", updatedPage.default || updatedPage)
+        module.hot.accept(/*! ./pages/subcategory/[id].js */ "./pages/subcategory/[id].js", function() {
+          if(!next.router.components["/subcategory/[id]"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/subcategory/[id].js */ "./pages/subcategory/[id].js")
+          next.router.update("/subcategory/[id]", updatedPage.default || updatedPage)
         })
       }
       return { page: page.default || page }
@@ -59561,10 +59741,10 @@ if (hasSymbols()) {
 
 /***/ }),
 
-/***/ "./pages/clients.js":
-/*!**************************!*\
-  !*** ./pages/clients.js ***!
-  \**************************/
+/***/ "./pages/subcategory/[id].js":
+/*!***********************************!*\
+  !*** ./pages/subcategory/[id].js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -59577,16 +59757,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
-/* harmony import */ var _src_styleMUI_client_clientList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/styleMUI/client/clientList */ "./src/styleMUI/client/clientList.js");
-/* harmony import */ var _src_gql_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/gql/client */ "./src/gql/client.js");
-/* harmony import */ var _components_client_CardClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/client/CardClient */ "./components/client/CardClient.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../layouts/App */ "./layouts/App.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _src_gql_subcategory__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/gql/subcategory */ "./src/gql/subcategory.js");
+/* harmony import */ var _src_gql_category__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../src/gql/category */ "./src/gql/category.js");
+/* harmony import */ var _src_styleMUI_subcategory_subcategoryList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/styleMUI/subcategory/subcategoryList */ "./src/styleMUI/subcategory/subcategoryList.js");
+/* harmony import */ var _components_subcategory_SubCardCategory__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/subcategory/SubCardCategory */ "./components/subcategory/SubCardCategory.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_10__);
 
 
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\clients.js";
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\subcategory\\[id].js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
@@ -59596,18 +59777,25 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
-var Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
-  var classes = Object(_src_styleMUI_client_clientList__WEBPACK_IMPORTED_MODULE_5__["default"])();
-  var data = props.data;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(data.clients),
+var Subcategory = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
+  var classes = Object(_src_styleMUI_subcategory_subcategoryList__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  var data = props.data;
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_10__["useRouter"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(data.subCategorys),
       list = _useState[0],
       setList = _useState[1];
+
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])([]),
+      categorys = _useState2[0],
+      setCategorys = _useState2[1];
 
   var _props$app = props.app,
       search = _props$app.search,
       filter = _props$app.filter,
       sort = _props$app.sort;
+  var profile = props.user.profile;
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
@@ -59616,110 +59804,213 @@ var Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) 
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.t0 = setList;
-              _context.next = 3;
-              return Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_6__["getClients"])({
-                search: search,
-                sort: sort,
-                filter: filter
+              if (!(profile.role === 'admin')) {
+                _context.next = 6;
+                break;
+              }
+
+              _context.t0 = setCategorys;
+              _context.next = 4;
+              return Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_7__["getCategorys"])({
+                search: '',
+                sort: 'name',
+                filter: ''
               });
 
-            case 3:
-              _context.t1 = _context.sent.clients;
+            case 4:
+              _context.t1 = _context.sent.categorys;
               (0, _context.t0)(_context.t1);
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
     }))();
+  }, [profile]);
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.t0 = setList;
+              _context2.next = 3;
+              return Object(_src_gql_subcategory__WEBPACK_IMPORTED_MODULE_6__["getSubCategorys"])({
+                category: router.query.id,
+                search: search,
+                sort: sort,
+                filter: filter
+              });
+
+            case 3:
+              _context2.t1 = _context2.sent.subCategorys;
+              (0, _context2.t0)(_context2.t1);
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }, [filter, sort, search]);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    filters: data.filterClient,
-    sorts: data.sortClient,
-    pageName: "\u041A\u043B\u0438\u0435\u043D\u0442\u044B",
+    filters: data.filterSubCategory,
+    sorts: data.sortSubCategory,
+    pageName: router.query.id === 'all' ? 'Все' : data.category !== null ? data.category.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 31
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 32
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 33
     },
     __self: this
-  }, "\u041A\u043B\u0438\u0435\u043D\u0442\u044B")), __jsx("div", {
+  }, router.query.id === 'all' ? 'Все' : data.category !== null ? data.category.name : 'Ничего не найдено'), __jsx("meta", {
+    name: "description",
+    content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: this
+  }), __jsx("meta", {
+    property: "og:title",
+    content: router.query.id === 'all' ? 'Все' : data.category !== null ? data.category.name : 'Ничего не найдено',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: this
+  }), __jsx("meta", {
+    property: "og:description",
+    content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: this
+  }), __jsx("meta", {
+    property: "og:type",
+    content: "website",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: this
+  }), __jsx("meta", {
+    property: "og:image",
+    content: "http://".concat("localhost", "/static/512x512.png"),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: this
+  }), __jsx("meta", {
+    property: "og:url",
+    content: "http://".concat("localhost", "/subcategory/").concat(router.query.id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }), __jsx("link", {
+    rel: "canonical",
+    href: "http://".concat("localhost", "/subcategory/").concat(router.query.id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: this
+  })), __jsx("div", {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 42
     },
     __self: this
-  }, list ? list.map(function (element) {
-    return __jsx(_components_client_CardClient__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, profile.role === 'admin' ? __jsx(_components_subcategory_SubCardCategory__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    categorys: categorys,
+    category: router.query.id,
+    setList: setList,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }) : null, __jsx(_components_subcategory_SubCardCategory__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    element: {
+      _id: 'all',
+      name: 'Все товары'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }), data.subCategorys.length > 0 || router.query.id === 'all' ? list ? list.map(function (element) {
+    return __jsx(_components_subcategory_SubCardCategory__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      category: router.query.id,
+      categorys: categorys,
       key: element._id,
       setList: setList,
       element: element,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 27
+        lineNumber: 47
       },
       __self: this
     });
-  }) : null));
+  }) : null : null));
 });
 
-Client.getInitialProps =
+Subcategory.getInitialProps =
 /*#__PURE__*/
 function () {
-  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
   /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(ctx) {
-    var role, authenticated;
-    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(ctx) {
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            role = ctx.store.getState().user.profile.role;
-            authenticated = ctx.store.getState().user.authenticated;
-            if (authenticated && !['admin', 'организация', 'менеджер'].includes(role)) if (ctx.res) {
-              ctx.res.writeHead(302, {
-                Location: '/'
-              });
-              ctx.res.end();
-            } else next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/');
-            _context2.next = 5;
-            return Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_6__["getClients"])({
+            _context3.next = 2;
+            return Object(_src_gql_subcategory__WEBPACK_IMPORTED_MODULE_6__["getSubCategorys"])({
+              category: ctx.query.id,
               search: '',
               sort: '-updatedAt',
               filter: ''
             });
 
-          case 5:
-            _context2.t0 = _context2.sent;
-            return _context2.abrupt("return", {
-              data: _context2.t0
+          case 2:
+            _context3.t0 = _context3.sent;
+            return _context3.abrupt("return", {
+              data: _context3.t0
             });
 
-          case 7:
+          case 4:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2);
+    }, _callee3);
   }));
 
   return function (_x) {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -59730,7 +60021,7 @@ function mapStateToProps(state) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateToProps)(Client));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps)(Subcategory));
 
 /***/ }),
 
@@ -61012,19 +61303,20 @@ function () {
 
 /***/ }),
 
-/***/ "./src/gql/client.js":
-/*!***************************!*\
-  !*** ./src/gql/client.js ***!
-  \***************************/
-/*! exports provided: getClients, getClient, onoffClient, setClient */
+/***/ "./src/gql/category.js":
+/*!*****************************!*\
+  !*** ./src/gql/category.js ***!
+  \*****************************/
+/*! exports provided: getCategorys, deleteCategory, onoffCategory, addCategory, setCategory */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClients", function() { return getClients; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClient", function() { return getClient; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffClient", function() { return onoffClient; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setClient", function() { return setClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategorys", function() { return getCategorys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCategory", function() { return deleteCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffCategory", function() { return onoffCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCategory", function() { return addCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCategory", function() { return setCategory; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
@@ -61036,8 +61328,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function _templateObject5() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: ID!, $image: Upload, $name: String) {\n                        setCategory(_id: $_id, image: $image, name: $name) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: ID!, $phone: String, $image: Upload, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {\n                        setClient(_id: $_id, phone: $phone, image: $image, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {\n                             data\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($image: Upload!, $name: String!) {\n                        addCategory(image: $image, name: $name) {\n                             data\n                        }\n                    }"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -61047,7 +61349,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: [ID]!) {\n                        onoffClient(_id: $_id) {\n                             data\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: [ID]!) {\n                        onoffCategory(_id: $_id) {\n                             data\n                        }\n                    }"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -61057,7 +61359,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($_id: ID!) {\n                        client(_id: $_id) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            user \n                                {_id role status phone}\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: [ID]!) {\n                        deleteCategory(_id: $_id) {\n                             data\n                        }\n                    }"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -61067,7 +61369,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!) {\n                        clients(search: $search, sort: $sort, filter: $filter) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            user \n                                {_id role status phone}\n                          }\n                          sortClient {\n                           name\n                            field\n                          }\n                          filterClient {\n                           name\n                           value\n                          }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!) {\n                        categorys(search: $search, sort: $sort, filter: $filter) {\n                            _id\n                            image\n                            name\n                            status\n                            updatedAt\n                          }\n                          sortCategory {\n                           name\n                            field\n                          }\n                          filterCategory {\n                           name\n                           value\n                          }\n                    }"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -61079,7 +61381,7 @@ function _templateObject() {
 
 
 
-var getClients =
+var getCategorys =
 /*#__PURE__*/
 function () {
   var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
@@ -61120,40 +61422,41 @@ function () {
     }, _callee, null, [[1, 9]]);
   }));
 
-  return function getClients(_x) {
+  return function getCategorys(_x) {
     return _ref2.apply(this, arguments);
   };
 }();
-var getClient =
+var deleteCategory =
 /*#__PURE__*/
 function () {
-  var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3) {
-    var _id, client, res;
-
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(ids) {
+    var client;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _id = _ref3._id;
-            _context2.prev = 1;
+            _context2.prev = 0;
             client = new _singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
-            _context2.next = 5;
-            return client.query({
+            _context2.next = 4;
+            return client.mutate({
               variables: {
-                _id: _id
+                _id: ids
               },
-              query: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"])(_templateObject2())
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"])(_templateObject2())
             });
 
-          case 5:
-            res = _context2.sent;
-            return _context2.abrupt("return", res.data);
+          case 4:
+            _context2.next = 6;
+            return getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+
+          case 6:
+            return _context2.abrupt("return", _context2.sent);
 
           case 9:
             _context2.prev = 9;
-            _context2.t0 = _context2["catch"](1);
+            _context2.t0 = _context2["catch"](0);
             console.error(_context2.t0);
 
           case 12:
@@ -61161,17 +61464,17 @@ function () {
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[1, 9]]);
+    }, _callee2, null, [[0, 9]]);
   }));
 
-  return function getClient(_x2) {
-    return _ref4.apply(this, arguments);
+  return function deleteCategory(_x2) {
+    return _ref3.apply(this, arguments);
   };
 }();
-var onoffClient =
+var onoffCategory =
 /*#__PURE__*/
 function () {
-  var _ref5 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(ids) {
     var client;
@@ -61191,7 +61494,7 @@ function () {
 
           case 4:
             _context3.next = 6;
-            return getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+            return getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
 
           case 6:
             return _context3.abrupt("return", _context3.sent);
@@ -61209,17 +61512,17 @@ function () {
     }, _callee3, null, [[0, 9]]);
   }));
 
-  return function onoffClient(_x3) {
-    return _ref5.apply(this, arguments);
+  return function onoffCategory(_x3) {
+    return _ref4.apply(this, arguments);
   };
 }();
-var setClient =
+var addCategory =
 /*#__PURE__*/
 function () {
-  var _ref6 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  var _ref5 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(element) {
-    var client, list;
+    var client;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -61234,26 +61537,68 @@ function () {
 
           case 4:
             _context4.next = 6;
-            return getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+            return getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
 
           case 6:
-            list = _context4.sent;
-            return _context4.abrupt("return", list);
+            return _context4.abrupt("return", _context4.sent);
 
-          case 10:
-            _context4.prev = 10;
+          case 9:
+            _context4.prev = 9;
             _context4.t0 = _context4["catch"](0);
             console.error(_context4.t0);
 
-          case 13:
+          case 12:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 10]]);
+    }, _callee4, null, [[0, 9]]);
   }));
 
-  return function setClient(_x4) {
+  return function addCategory(_x4) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+var setCategory =
+/*#__PURE__*/
+function () {
+  var _ref6 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(element) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+            _context5.next = 4;
+            return client.mutate({
+              variables: element,
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"])(_templateObject5())
+            });
+
+          case 4:
+            _context5.next = 6;
+            return getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+
+          case 6:
+            return _context5.abrupt("return", _context5.sent);
+
+          case 9:
+            _context5.prev = 9;
+            _context5.t0 = _context5["catch"](0);
+            console.error(_context5.t0);
+
+          case 12:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 9]]);
+  }));
+
+  return function setCategory(_x5) {
     return _ref6.apply(this, arguments);
   };
 }();
@@ -61775,6 +62120,321 @@ function () {
 
 /***/ }),
 
+/***/ "./src/gql/subcategory.js":
+/*!********************************!*\
+  !*** ./src/gql/subcategory.js ***!
+  \********************************/
+/*! exports provided: getSubCategorys, deleteSubCategory, onoffSubCategory, addSubCategory, setSubCategory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSubCategorys", function() { return getSubCategorys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteSubCategory", function() { return deleteSubCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffSubCategory", function() { return onoffSubCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addSubCategory", function() { return addSubCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubCategory", function() { return setSubCategory; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! apollo-boost */ "./node_modules/apollo-boost/lib/bundle.esm.js");
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+
+
+function _templateObject5() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__["default"])(["\n                    mutation ($_id: ID!, $name: String, $category: ID) {\n                        setSubCategory(_id: $_id, name: $name, category: $category) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__["default"])(["\n                    mutation ($category: ID!, $name: String!) {\n                        addSubCategory(category: $category, name: $name) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__["default"])(["\n                    mutation ($_id: [ID]!) {\n                        onoffSubCategory(_id: $_id) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__["default"])(["\n                    mutation ($_id: [ID]!) {\n                        deleteSubCategory(_id: $_id) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_2__["default"])(["\n                    query ($category: ID!,$search: String!, $sort: String!, $filter: String!) {\n                        subCategorys(category: $category, search: $search, sort: $sort, filter: $filter) {\n                            _id\n                            category\n                                {_id name}\n                            name\n                            status\n                            updatedAt\n                          }\n                          sortSubCategory {\n                           name\n                            field\n                          }\n                          filterSubCategory {\n                           name\n                           value\n                          }\n                          category(_id: $category) {\n                                _id\n                                image\n                                name\n                                status\n                                updatedAt\n                          }\n                    }"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+var getSubCategorys =
+/*#__PURE__*/
+function () {
+  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee(_ref) {
+    var category, search, sort, filter, client, res;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            category = _ref.category, search = _ref.search, sort = _ref.sort, filter = _ref.filter;
+            _context.prev = 1;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+            _context.next = 5;
+            return client.query({
+              variables: {
+                category: category,
+                search: search,
+                sort: sort,
+                filter: filter
+              },
+              query: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"])(_templateObject())
+            });
+
+          case 5:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](1);
+            console.error(_context.t0);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 9]]);
+  }));
+
+  return function getSubCategorys(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var deleteSubCategory =
+/*#__PURE__*/
+function () {
+  var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2(ids, category) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+            _context2.next = 4;
+            return client.mutate({
+              variables: {
+                _id: ids
+              },
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"])(_templateObject2())
+            });
+
+          case 4:
+            _context2.next = 6;
+            return getSubCategorys(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({
+              category: category
+            }, new _singleton_store__WEBPACK_IMPORTED_MODULE_6__["SingletonStore"]().getStore().getState().app));
+
+          case 6:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](0);
+            console.error(_context2.t0);
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 9]]);
+  }));
+
+  return function deleteSubCategory(_x2, _x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var onoffSubCategory =
+/*#__PURE__*/
+function () {
+  var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee3(ids, category) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+            _context3.next = 4;
+            return client.mutate({
+              variables: {
+                _id: ids
+              },
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"])(_templateObject3())
+            });
+
+          case 4:
+            _context3.next = 6;
+            return getSubCategorys(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({
+              category: category
+            }, new _singleton_store__WEBPACK_IMPORTED_MODULE_6__["SingletonStore"]().getStore().getState().app));
+
+          case 6:
+            return _context3.abrupt("return", _context3.sent);
+
+          case 9:
+            _context3.prev = 9;
+            _context3.t0 = _context3["catch"](0);
+            console.error(_context3.t0);
+
+          case 12:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 9]]);
+  }));
+
+  return function onoffSubCategory(_x4, _x5) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+var addSubCategory =
+/*#__PURE__*/
+function () {
+  var _ref5 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee4(element, category) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+            _context4.next = 4;
+            return client.mutate({
+              variables: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, element, {
+                category: category
+              }),
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"])(_templateObject4())
+            });
+
+          case 4:
+            _context4.next = 6;
+            return getSubCategorys(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({
+              category: category
+            }, new _singleton_store__WEBPACK_IMPORTED_MODULE_6__["SingletonStore"]().getStore().getState().app));
+
+          case 6:
+            return _context4.abrupt("return", _context4.sent);
+
+          case 9:
+            _context4.prev = 9;
+            _context4.t0 = _context4["catch"](0);
+            console.error(_context4.t0);
+
+          case 12:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 9]]);
+  }));
+
+  return function addSubCategory(_x6, _x7) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+var setSubCategory =
+/*#__PURE__*/
+function () {
+  var _ref6 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee5(element, category) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+            _context5.next = 4;
+            return client.mutate({
+              variables: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, element),
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"])(_templateObject5())
+            });
+
+          case 4:
+            _context5.next = 6;
+            return getSubCategorys(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({
+              category: category
+            }, new _singleton_store__WEBPACK_IMPORTED_MODULE_6__["SingletonStore"]().getStore().getState().app));
+
+          case 6:
+            return _context5.abrupt("return", _context5.sent);
+
+          case 9:
+            _context5.prev = 9;
+            _context5.t0 = _context5["catch"](0);
+            console.error(_context5.t0);
+
+          case 12:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 9]]);
+  }));
+
+  return function setSubCategory(_x8, _x9) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./src/lib.js":
 /*!********************!*\
   !*** ./src/lib.js ***!
@@ -62058,109 +62718,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/styleMUI/client/cardClient.js":
-/*!*******************************************!*\
-  !*** ./src/styleMUI/client/cardClient.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  cardM: {
-    width: 'calc(100vw - 40px)',
-    marginBottom: 20
-  },
-  cardD: {
-    width: 400,
-    margin: 10
-  },
-  media: {
-    borderRadius: '30px',
-    objectFit: 'cover',
-    height: '60px',
-    width: '60px',
-    marginRight: 10
-  },
-  avatar: {
-    borderRadius: '50px',
-    objectFit: 'cover',
-    height: '100px',
-    width: '100px',
-    margin: 10
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  inputM: {
-    marginBottom: 5,
-    width: 'calc(100vw - 82px)',
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  inputD: {
-    marginBottom: 5,
-    width: 400 - 82,
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  line: {
-    display: 'flex',
-    alignItems: 'start',
-    justifyContent: 'start',
-    flexDirection: 'row'
-  },
-  nameField: {
-    marginBottom: 10,
-    fontWeight: 'bold',
-    fontSize: '0.875rem',
-    fontFamily: 'Roboto',
-    color: '#A0A0A0'
-  },
-  value: {
-    marginBottom: 10,
-    fontWeight: '500',
-    fontSize: '0.875rem',
-    fontFamily: 'Roboto'
-  },
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  }
-}));
-
-/***/ }),
-
-/***/ "./src/styleMUI/client/clientList.js":
-/*!*******************************************!*\
-  !*** ./src/styleMUI/client/clientList.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  page: {
-    paddingTop: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
-}));
-
-/***/ }),
-
 /***/ "./src/styleMUI/dialogContent.js":
 /*!***************************************!*\
   !*** ./src/styleMUI/dialogContent.js ***!
@@ -62283,14 +62840,100 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 7:
-/*!********************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fclients&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cclients.js ***!
-  \********************************************************************************************************************************/
+/***/ "./src/styleMUI/subcategory/cardSubcategory.js":
+/*!*****************************************************!*\
+  !*** ./src/styleMUI/subcategory/cardSubcategory.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  cardM: {
+    width: 'calc(100vw - 40px)',
+    marginBottom: 20
+  },
+  cardD: {
+    width: 400,
+    margin: 10
+  },
+  media: {
+    //borderRadius: '30px',
+    objectFit: 'cover',
+    height: '60px',
+    width: '60px',
+    marginRight: 10
+  },
+  avatar: {
+    borderRadius: '50px',
+    objectFit: 'cover',
+    height: '100px',
+    width: '100px',
+    margin: 10
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: '16px',
+    fontFamily: 'Roboto'
+  },
+  inputM: {
+    marginBottom: 5,
+    width: 'calc(100vw - 82px)',
+    fontSize: '16px',
+    fontFamily: 'Roboto'
+  },
+  inputD: {
+    marginBottom: 5,
+    width: 400 - 32,
+    fontSize: '16px',
+    fontFamily: 'Roboto'
+  },
+  line: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  }
+}));
+
+/***/ }),
+
+/***/ "./src/styleMUI/subcategory/subcategoryList.js":
+/*!*****************************************************!*\
+  !*** ./src/styleMUI/subcategory/subcategoryList.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  page: {
+    paddingTop: 20,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+}));
+
+/***/ }),
+
+/***/ 4:
+/*!**************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fsubcategory%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Csubcategory%5C%5Bid%5D.js ***!
+  \**************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fclients&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cclients.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fclients&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cclients.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fsubcategory%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Csubcategory%5C%5Bid%5D.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsubcategory%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Csubcategory%5C%5Bid%5D.js!./");
 
 
 /***/ }),
@@ -62306,5 +62949,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[7,"static/runtime/webpack.js","styles"]]]);
-//# sourceMappingURL=clients.js.map
+},[[4,"static/runtime/webpack.js","styles"]]]);
+//# sourceMappingURL=[id].js.map

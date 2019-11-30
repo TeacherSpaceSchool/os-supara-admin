@@ -97,7 +97,7 @@ export function signin(payload) {
                 })*/
             }
         } catch(error) {
-            console.log(error)
+            console.error(error)
             await dispatch({
                 type: ERROR_AUTHENTICATED,
                 payload: true

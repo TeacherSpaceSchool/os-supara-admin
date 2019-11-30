@@ -39,6 +39,13 @@ const Items = React.memo((props) => {
         <App getList={getList} pageName='Избранное'>
             <Head>
                 <title>Избранное</title>
+                <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
+                <meta property='og:title' content='Избранное' />
+                <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
+                <meta property='og:type' content='website' />
+                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
+                <meta property="og:url" content={`http://${process.env.URL}/favorite`} />
+                <link rel='canonical' href={`http://${process.env.URL}/favorite`}/>
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>

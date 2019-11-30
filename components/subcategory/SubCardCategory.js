@@ -34,7 +34,6 @@ const CardCategory = React.memo((props) => {
     };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
-    console.log(element)
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             {

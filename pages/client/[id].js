@@ -24,6 +24,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Router from 'next/router'
 import Confirmation from '../../components/dialog/Confirmation'
 import Geo from '../../components/dialog/Geo'
+import { useRouter } from 'next/router'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -55,7 +56,6 @@ const Client = React.memo((props) => {
     };
     let setAddressGeo = (geo, idx)=>{
         address[idx][1] = geo
-        console.log(address[idx])
         setAddress([...address])
     };
 
@@ -76,10 +76,18 @@ const Client = React.memo((props) => {
     let handleHide =  () => {
         setHide(!hide)
     };
+    const router = useRouter()
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client!==null?data.client.name:'Ничего не найдено'}>
             <Head>
                 <title>{data.client!==null?data.client.name:'Ничего не найдено'}</title>
+                <meta name='description' content={info}/>
+                <meta property='og:title' content={data.client!==null?data.client.name:'Ничего не найдено'} />
+                <meta property='og:description' content={info} />
+                <meta property='og:type' content='website' />
+                <meta property='og:image' content={preview} />
+                <meta property="og:url" content={`http://${process.env.URL}/client/${router.query.id}`} />
+                <link rel='canonical' href={`http://${process.env.URL}/client/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
@@ -326,14 +334,6 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
-    if(!['организация', 'менеджер', 'admin', 'экспедитор', 'client'].includes(ctx.store.getState().user.profile.role))
-        if(ctx.res) {
-            ctx.res.writeHead(302, {
-                Location: '/'
-            })
-            ctx.res.end()
-        } else
-            Router.push('/')
     return {
         data: await getClient({_id: ctx.query.id})
     };

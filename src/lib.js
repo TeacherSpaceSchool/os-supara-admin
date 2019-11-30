@@ -34,7 +34,6 @@ export const pdDatePicker = (date) =>
 export const pdDDMMYYHHMM = (date) =>
 {
     date = JSON.stringify(date).split('-')
-    console.log(date)
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
     return date
 }
