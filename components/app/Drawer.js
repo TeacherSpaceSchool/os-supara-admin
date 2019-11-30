@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import drawerStyle from '../../src/styleMUI/drawer'
 import * as appActions from '../../redux/actions/app'
 import * as userActions from '../../redux/actions/user'
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -40,6 +40,7 @@ const MyDrawer = React.memo((props) => {
             open={open}
             onClose={()=>showDrawer(false)}
             classes={{paper: classes.drawerPaper,}}
+            onOpen={()=>showDrawer(true)}
         >
             {
                 isMobileApp?

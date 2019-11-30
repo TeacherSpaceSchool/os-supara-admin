@@ -1310,7 +1310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_styleMUI_drawer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/styleMUI/drawer */ "./src/styleMUI/drawer.js");
 /* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/actions/app */ "./redux/actions/app.js");
 /* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/index.js");
+/* harmony import */ var _material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/SwipeableDrawer */ "./node_modules/@material-ui/core/esm/SwipeableDrawer/index.js");
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/index.js");
 /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Divider */ "./node_modules/@material-ui/core/esm/Divider/index.js");
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/index.js");
@@ -1379,7 +1379,7 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
   var variant = isMobileApp ? 'temporary' : 'permanent';
   var open = isMobileApp ? drawer : true;
   var router = Object(next_router__WEBPACK_IMPORTED_MODULE_23__["useRouter"])();
-  return __jsx(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return __jsx(_material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
     variant: variant,
     className: classes.drawer,
     open: open,
@@ -1388,6 +1388,9 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     classes: {
       paper: classes.drawerPaper
+    },
+    onOpen: function onOpen() {
+      return showDrawer(true);
     },
     __source: {
       fileName: _jsxFileName,
@@ -1398,19 +1401,19 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     className: classes.toolbar,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 49
     },
     __self: this
   }), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 51
     },
     __self: this
   }), __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 52
     },
     __self: this
   }, ['экспедитор', 'организация', 'менеджер'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
@@ -1418,7 +1421,7 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     as: "/items/all",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1431,34 +1434,34 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 56
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: this
   }, __jsx(_material_ui_icons_ViewList__WEBPACK_IMPORTED_MODULE_12___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 64
     },
     __self: this
   }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 68
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1471,40 +1474,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 69
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: this
   }, __jsx(_material_ui_icons_ViewList__WEBPACK_IMPORTED_MODULE_12___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 75
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 79
     },
     __self: this
   }), ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/ads",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 83
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1517,40 +1520,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 84
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 85
     },
     __self: this
   }, __jsx(_material_ui_icons_Whatshot__WEBPACK_IMPORTED_MODULE_13___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 85
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0410\u043A\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 86
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 89
     },
     __self: this
   })) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/clients',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 96
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1563,40 +1566,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96
+      lineNumber: 97
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 98
     },
     __self: this
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_15___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 98
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041A\u043B\u0438\u0435\u043D\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 99
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 102
     },
     __self: this
   })) : null, ['client', 'admin', 'организация', 'менеджер'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/orders",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 109
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1609,40 +1612,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 110
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 111
     },
     __self: this
   }, __jsx(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_16___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 111
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0417\u0430\u043A\u0430\u0437\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 111
+      lineNumber: 112
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 115
     },
     __self: this
   })) : null, ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/routes",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 122
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1655,33 +1658,33 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 123
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 124
     },
     __self: this
   }, __jsx(_material_ui_icons_FormatListNumbered__WEBPACK_IMPORTED_MODULE_19___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 124
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041C\u0430\u0440\u0448\u0440\u0443\u0442\u043D\u044B\u0435 \u043B\u0438\u0441\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 125
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 128
     },
     __self: this
   })) : null, ['экспедитор', 'организация', 'менеджер'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
@@ -1689,7 +1692,7 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     as: "/organization/".concat(profile.organization),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 134
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1702,34 +1705,34 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134
+      lineNumber: 135
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 136
     },
     __self: this
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_17___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 136
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136
+      lineNumber: 137
     },
     __self: this
   }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/organizations",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 141
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1742,40 +1745,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 142
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 142
+      lineNumber: 143
     },
     __self: this
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_17___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 142
+      lineNumber: 143
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 144
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 148
     },
     __self: this
   }), ['admin', 'организация'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/employments',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 152
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1788,40 +1791,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 153
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: this
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_15___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 155
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 158
     },
     __self: this
   })) : null, ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/blog",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 164
+      lineNumber: 165
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1834,40 +1837,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 166
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 167
     },
     __self: this
   }, __jsx(_material_ui_icons_ArtTrack__WEBPACK_IMPORTED_MODULE_18___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 167
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0411\u043B\u043E\u0433",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 168
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 171
     },
     __self: this
   })) : null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/contact',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 175
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1880,33 +1883,33 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 176
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 176
+      lineNumber: 177
     },
     __self: this
   }, __jsx(_material_ui_icons_Info__WEBPACK_IMPORTED_MODULE_14___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 176
+      lineNumber: 177
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 177
+      lineNumber: 178
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 180
+      lineNumber: 181
     },
     __self: this
   })));
@@ -2131,11 +2134,9 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     },
     __self: this
   }, __jsx("img", {
-    effect: "blur",
     className: classes.media,
     src: preview,
     alt: 'Изменить',
-    placeholderSrc: "/static/add.png",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 44
@@ -2151,13 +2152,13 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 50
     },
     __self: this
   })))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 62
     },
     __self: this
   }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2212,7 +2213,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
                 action: action,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 75
+                  lineNumber: 73
                 },
                 __self: this
               }));
@@ -2229,7 +2230,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 66
     },
     __self: this
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2278,7 +2279,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
                 action: action,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 84
+                  lineNumber: 82
                 },
                 __self: this
               }));
@@ -2295,7 +2296,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 78
     },
     __self: this
   }, element.status === 'active' ? 'Отключить' : 'Включить'), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2337,7 +2338,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 93
+          lineNumber: 91
         },
         __self: this
       }));
@@ -2345,7 +2346,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 87
     },
     __self: this
   }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2353,7 +2354,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     as: "/subcategory/".concat(element._id),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 96
     },
     __self: this
   }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2361,7 +2362,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 97
     },
     __self: this
   }, "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"))) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2418,7 +2419,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
                   action: action,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 112
+                    lineNumber: 110
                   },
                   __self: this
                 }));
@@ -2436,7 +2437,7 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 102
     },
     __self: this
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
@@ -2449,57 +2450,57 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 120
     },
     __self: this
   })) : name !== 'Не задано' ? __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 131
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
     href: "/subcategory/[id]",
     as: "/subcategory/".concat(element._id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 132
+    },
+    __self: this
+  }, __jsx("div", {
+    className: classes.line,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 133
+    },
+    __self: this
+  }, __jsx("label", {
+    htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 134
     },
     __self: this
-  }, __jsx("div", {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 135
-    },
-    __self: this
-  }, __jsx("label", {
-    htmlFor: "contained-button-file",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 136
-    },
-    __self: this
   }, __jsx("img", {
     className: classes.media,
     src: element.image,
     alt: element.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 135
     },
     __self: this
   })), __jsx("h3", {
     className: isMobileApp ? classes.inputM : classes.inputD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 141
     },
     __self: this
   }, element.name)))) : name === 'Не задано' && profile.role === 'admin' ? __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 149
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2507,21 +2508,21 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     as: "/subcategory/".concat(element._id),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 150
     },
     __self: this
   }, __jsx("div", {
     className: classes.line,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 151
     },
     __self: this
   }, __jsx("label", {
     htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 152
     },
     __self: this
   }, __jsx("img", {
@@ -2530,14 +2531,14 @@ var CardCategory = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (p
     alt: element.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 153
     },
     __self: this
   })), __jsx("h3", {
     className: isMobileApp ? classes.inputM : classes.inputD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161
+      lineNumber: 159
     },
     __self: this
   }, element.name)))) : null);
@@ -8863,22 +8864,6 @@ var Drawer = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function Dr
   name: 'MuiDrawer',
   flip: false
 })(Drawer));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/core/esm/Drawer/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/Drawer/index.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Drawer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Drawer */ "./node_modules/@material-ui/core/esm/Drawer/Drawer.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Drawer__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
 
 /***/ }),
 
@@ -18417,6 +18402,620 @@ SvgIcon.muiName = 'SvgIcon';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SvgIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SvgIcon */ "./node_modules/@material-ui/core/esm/SvgIcon/SvgIcon.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _SvgIcon__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeArea.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeArea.js ***!
+  \*************************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/esm/utils/helpers.js");
+/* harmony import */ var _Drawer_Drawer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Drawer/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/Drawer.js");
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      zIndex: theme.zIndex.drawer - 1
+    },
+    anchorLeft: {
+      right: 'auto'
+    },
+    anchorRight: {
+      left: 'auto',
+      right: 0
+    },
+    anchorTop: {
+      bottom: 'auto',
+      right: 0
+    },
+    anchorBottom: {
+      top: 'auto',
+      bottom: 0,
+      right: 0
+    }
+  };
+};
+/**
+ * @ignore - internal component.
+ */
+
+var SwipeArea = react__WEBPACK_IMPORTED_MODULE_3___default.a.forwardRef(function SwipeArea(props, ref) {
+  var anchor = props.anchor,
+      classes = props.classes,
+      className = props.className,
+      width = props.width,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["anchor", "classes", "className", "width"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_5__["default"])(classes.root, classes["anchor".concat(Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_7__["capitalize"])(anchor))], className),
+    ref: ref,
+    style: Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_8__["isHorizontal"])(anchor) ? 'width' : 'height', width)
+  }, other));
+});
+ true ? SwipeArea.propTypes = {
+  /**
+   * Side on which to attach the discovery area.
+   */
+  anchor: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(['left', 'top', 'right', 'bottom']).isRequired,
+
+  /**
+   * @ignore
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+
+  /**
+   * The width of the left most (or right most) area in pixels where the
+   * drawer can be swiped open from.
+   */
+  width: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number.isRequired
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__["default"])(styles, {
+  name: 'PrivateSwipeArea'
+})(SwipeArea));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeableDrawer.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeableDrawer.js ***!
+  \*******************************************************************************/
+/*! exports provided: reset, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
+/* harmony import */ var _Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Drawer/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/Drawer.js");
+/* harmony import */ var _styles_transitions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/transitions */ "./node_modules/@material-ui/core/esm/styles/transitions.js");
+/* harmony import */ var _styles_useTheme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/useTheme */ "./node_modules/@material-ui/core/esm/styles/useTheme.js");
+/* harmony import */ var _transitions_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../transitions/utils */ "./node_modules/@material-ui/core/esm/transitions/utils.js");
+/* harmony import */ var _NoSsr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../NoSsr */ "./node_modules/@material-ui/core/esm/NoSsr/index.js");
+/* harmony import */ var _SwipeArea__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SwipeArea */ "./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeArea.js");
+
+
+
+
+
+
+
+
+
+
+
+ // This value is closed to what browsers are using internally to
+// trigger a native scroll.
+
+var UNCERTAINTY_THRESHOLD = 3; // px
+// We can only have one node at the time claiming ownership for handling the swipe.
+// Otherwise, the UX would be confusing.
+// That's why we use a singleton here.
+
+var nodeThatClaimedTheSwipe = null; // Exported for test purposes.
+
+function reset() {
+  nodeThatClaimedTheSwipe = null;
+}
+
+function calculateCurrentX(anchor, touches) {
+  return anchor === 'right' ? document.body.offsetWidth - touches[0].pageX : touches[0].pageX;
+}
+
+function calculateCurrentY(anchor, touches) {
+  return anchor === 'bottom' ? window.innerHeight - touches[0].clientY : touches[0].clientY;
+}
+
+function getMaxTranslate(horizontalSwipe, paperInstance) {
+  return horizontalSwipe ? paperInstance.clientWidth : paperInstance.clientHeight;
+}
+
+function getTranslate(currentTranslate, startLocation, open, maxTranslate) {
+  return Math.min(Math.max(open ? startLocation - currentTranslate : maxTranslate + startLocation - currentTranslate, 0), maxTranslate);
+}
+
+var disableSwipeToOpenDefault = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+var transitionDurationDefault = {
+  enter: _styles_transitions__WEBPACK_IMPORTED_MODULE_7__["duration"].enteringScreen,
+  exit: _styles_transitions__WEBPACK_IMPORTED_MODULE_7__["duration"].leavingScreen
+};
+var useEnhancedEffect = typeof window !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_2___default.a.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_2___default.a.useEffect;
+var SwipeableDrawer = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function SwipeableDrawer(props, ref) {
+  var _props$anchor = props.anchor,
+      anchor = _props$anchor === void 0 ? 'left' : _props$anchor,
+      _props$disableBackdro = props.disableBackdropTransition,
+      disableBackdropTransition = _props$disableBackdro === void 0 ? false : _props$disableBackdro,
+      _props$disableDiscove = props.disableDiscovery,
+      disableDiscovery = _props$disableDiscove === void 0 ? false : _props$disableDiscove,
+      _props$disableSwipeTo = props.disableSwipeToOpen,
+      disableSwipeToOpen = _props$disableSwipeTo === void 0 ? disableSwipeToOpenDefault : _props$disableSwipeTo,
+      hideBackdrop = props.hideBackdrop,
+      _props$hysteresis = props.hysteresis,
+      hysteresis = _props$hysteresis === void 0 ? 0.55 : _props$hysteresis,
+      _props$minFlingVeloci = props.minFlingVelocity,
+      minFlingVelocity = _props$minFlingVeloci === void 0 ? 400 : _props$minFlingVeloci,
+      _props$ModalProps = props.ModalProps;
+  _props$ModalProps = _props$ModalProps === void 0 ? {} : _props$ModalProps;
+
+  var BackdropProps = _props$ModalProps.BackdropProps,
+      ModalPropsProp = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_props$ModalProps, ["BackdropProps"]),
+      onClose = props.onClose,
+      onOpen = props.onOpen,
+      open = props.open,
+      _props$PaperProps = props.PaperProps,
+      PaperProps = _props$PaperProps === void 0 ? {} : _props$PaperProps,
+      SwipeAreaProps = props.SwipeAreaProps,
+      _props$swipeAreaWidth = props.swipeAreaWidth,
+      swipeAreaWidth = _props$swipeAreaWidth === void 0 ? 20 : _props$swipeAreaWidth,
+      _props$transitionDura = props.transitionDuration,
+      transitionDuration = _props$transitionDura === void 0 ? transitionDurationDefault : _props$transitionDura,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'temporary' : _props$variant,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["anchor", "disableBackdropTransition", "disableDiscovery", "disableSwipeToOpen", "hideBackdrop", "hysteresis", "minFlingVelocity", "ModalProps", "onClose", "onOpen", "open", "PaperProps", "SwipeAreaProps", "swipeAreaWidth", "transitionDuration", "variant"]);
+
+  var theme = Object(_styles_useTheme__WEBPACK_IMPORTED_MODULE_8__["default"])();
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2___default.a.useState(false),
+      maybeSwiping = _React$useState[0],
+      setMaybeSwiping = _React$useState[1];
+
+  var swipeInstance = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef({
+    isSwiping: null
+  });
+  var swipeAreaRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef();
+  var backdropRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef();
+  var paperRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef();
+  var touchDetected = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef(false);
+  var openRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef(open); // Use a ref so the open value used is always up to date inside useCallback.
+
+  useEnhancedEffect(function () {
+    openRef.current = open;
+  }, [open]);
+  var setPosition = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (translate) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var _options$mode = options.mode,
+        mode = _options$mode === void 0 ? null : _options$mode,
+        _options$changeTransi = options.changeTransition,
+        changeTransition = _options$changeTransi === void 0 ? true : _options$changeTransi;
+    var anchorRtl = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["getAnchor"])(theme, anchor);
+    var rtlTranslateMultiplier = ['right', 'bottom'].indexOf(anchorRtl) !== -1 ? 1 : -1;
+    var horizontalSwipe = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["isHorizontal"])(anchor);
+    var transform = horizontalSwipe ? "translate(".concat(rtlTranslateMultiplier * translate, "px, 0)") : "translate(0, ".concat(rtlTranslateMultiplier * translate, "px)");
+    var drawerStyle = paperRef.current.style;
+    drawerStyle.webkitTransform = transform;
+    drawerStyle.transform = transform;
+    var transition = '';
+
+    if (mode) {
+      transition = theme.transitions.create('all', Object(_transitions_utils__WEBPACK_IMPORTED_MODULE_9__["getTransitionProps"])({
+        timeout: transitionDuration
+      }, {
+        mode: mode
+      }));
+    }
+
+    if (changeTransition) {
+      drawerStyle.webkitTransition = transition;
+      drawerStyle.transition = transition;
+    }
+
+    if (!disableBackdropTransition && !hideBackdrop) {
+      var backdropStyle = backdropRef.current.style;
+      backdropStyle.opacity = 1 - translate / getMaxTranslate(horizontalSwipe, paperRef.current);
+
+      if (changeTransition) {
+        backdropStyle.webkitTransition = transition;
+        backdropStyle.transition = transition;
+      }
+    }
+  }, [anchor, disableBackdropTransition, hideBackdrop, theme, transitionDuration]);
+  var handleBodyTouchEnd = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (event) {
+    if (!touchDetected.current) {
+      return;
+    }
+
+    nodeThatClaimedTheSwipe = null;
+    touchDetected.current = false;
+    setMaybeSwiping(false); // The swipe wasn't started.
+
+    if (!swipeInstance.current.isSwiping) {
+      swipeInstance.current.isSwiping = null;
+      return;
+    }
+
+    swipeInstance.current.isSwiping = null;
+    var anchorRtl = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["getAnchor"])(theme, anchor);
+    var horizontal = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["isHorizontal"])(anchor);
+    var current;
+
+    if (horizontal) {
+      current = calculateCurrentX(anchorRtl, event.changedTouches);
+    } else {
+      current = calculateCurrentY(anchorRtl, event.changedTouches);
+    }
+
+    var startLocation = horizontal ? swipeInstance.current.startX : swipeInstance.current.startY;
+    var maxTranslate = getMaxTranslate(horizontal, paperRef.current);
+    var currentTranslate = getTranslate(current, startLocation, openRef.current, maxTranslate);
+    var translateRatio = currentTranslate / maxTranslate;
+
+    if (openRef.current) {
+      if (swipeInstance.current.velocity > minFlingVelocity || translateRatio > hysteresis) {
+        onClose();
+      } else {
+        // Reset the position, the swipe was aborted.
+        setPosition(0, {
+          mode: 'exit'
+        });
+      }
+
+      return;
+    }
+
+    if (swipeInstance.current.velocity < -minFlingVelocity || 1 - translateRatio > hysteresis) {
+      onOpen();
+    } else {
+      // Reset the position, the swipe was aborted.
+      setPosition(getMaxTranslate(horizontal, paperRef.current), {
+        mode: 'enter'
+      });
+    }
+  }, [anchor, hysteresis, minFlingVelocity, onClose, onOpen, setPosition, theme]);
+  var handleBodyTouchMove = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (event) {
+    // the ref may be null when a parent component updates while swiping
+    if (!paperRef.current || !touchDetected.current) {
+      return;
+    }
+
+    var anchorRtl = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["getAnchor"])(theme, anchor);
+    var horizontalSwipe = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["isHorizontal"])(anchor);
+    var currentX = calculateCurrentX(anchorRtl, event.touches);
+    var currentY = calculateCurrentY(anchorRtl, event.touches); // We don't know yet.
+
+    if (swipeInstance.current.isSwiping == null) {
+      var dx = Math.abs(currentX - swipeInstance.current.startX);
+      var dy = Math.abs(currentY - swipeInstance.current.startY); // We are likely to be swiping, let's prevent the scroll event on iOS.
+
+      if (dx > dy) {
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+      }
+
+      var definitelySwiping = horizontalSwipe ? dx > dy && dx > UNCERTAINTY_THRESHOLD : dy > dx && dy > UNCERTAINTY_THRESHOLD;
+
+      if (definitelySwiping === true || (horizontalSwipe ? dy > UNCERTAINTY_THRESHOLD : dx > UNCERTAINTY_THRESHOLD)) {
+        swipeInstance.current.isSwiping = definitelySwiping;
+
+        if (!definitelySwiping) {
+          handleBodyTouchEnd(event);
+          return;
+        } // Shift the starting point.
+
+
+        swipeInstance.current.startX = currentX;
+        swipeInstance.current.startY = currentY; // Compensate for the part of the drawer displayed on touch start.
+
+        if (!disableDiscovery && !openRef.current) {
+          if (horizontalSwipe) {
+            swipeInstance.current.startX -= swipeAreaWidth;
+          } else {
+            swipeInstance.current.startY -= swipeAreaWidth;
+          }
+        }
+      }
+    }
+
+    if (!swipeInstance.current.isSwiping) {
+      return;
+    }
+
+    var startLocation = horizontalSwipe ? swipeInstance.current.startX : swipeInstance.current.startY;
+    var maxTranslate = getMaxTranslate(horizontalSwipe, paperRef.current);
+    var translate = getTranslate(horizontalSwipe ? currentX : currentY, startLocation, openRef.current, maxTranslate);
+
+    if (swipeInstance.current.lastTranslate === null) {
+      swipeInstance.current.lastTranslate = translate;
+      swipeInstance.current.lastTime = performance.now() + 1;
+    }
+
+    var velocity = (translate - swipeInstance.current.lastTranslate) / (performance.now() - swipeInstance.current.lastTime) * 1e3; // Low Pass filter.
+
+    swipeInstance.current.velocity = swipeInstance.current.velocity * 0.4 + velocity * 0.6;
+    swipeInstance.current.lastTranslate = translate;
+    swipeInstance.current.lastTime = performance.now(); // We are swiping, let's prevent the scroll event on iOS.
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    setPosition(translate);
+  }, [setPosition, handleBodyTouchEnd, anchor, disableDiscovery, swipeAreaWidth, theme]);
+  var handleBodyTouchStart = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (event) {
+    // We are not supposed to handle this touch move.
+    if (nodeThatClaimedTheSwipe !== null && nodeThatClaimedTheSwipe !== swipeInstance.current) {
+      return;
+    }
+
+    var anchorRtl = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["getAnchor"])(theme, anchor);
+    var horizontalSwipe = Object(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["isHorizontal"])(anchor);
+    var currentX = calculateCurrentX(anchorRtl, event.touches);
+    var currentY = calculateCurrentY(anchorRtl, event.touches);
+
+    if (!openRef.current) {
+      if (disableSwipeToOpen || event.target !== swipeAreaRef.current) {
+        return;
+      }
+
+      if (horizontalSwipe) {
+        if (currentX > swipeAreaWidth) {
+          return;
+        }
+      } else if (currentY > swipeAreaWidth) {
+        return;
+      }
+    }
+
+    nodeThatClaimedTheSwipe = swipeInstance.current;
+    swipeInstance.current.startX = currentX;
+    swipeInstance.current.startY = currentY;
+    setMaybeSwiping(true);
+
+    if (!openRef.current && paperRef.current) {
+      // The ref may be null when a parent component updates while swiping.
+      setPosition(getMaxTranslate(horizontalSwipe, paperRef.current) + (disableDiscovery ? 20 : -swipeAreaWidth), {
+        changeTransition: false
+      });
+    }
+
+    swipeInstance.current.velocity = 0;
+    swipeInstance.current.lastTime = null;
+    swipeInstance.current.lastTranslate = null;
+    touchDetected.current = true;
+  }, [setPosition, anchor, disableDiscovery, disableSwipeToOpen, swipeAreaWidth, theme]);
+  react__WEBPACK_IMPORTED_MODULE_2___default.a.useEffect(function () {
+    if (variant === 'temporary') {
+      document.body.addEventListener('touchstart', handleBodyTouchStart);
+      document.body.addEventListener('touchmove', handleBodyTouchMove, {
+        passive: false
+      });
+      document.body.addEventListener('touchend', handleBodyTouchEnd);
+      return function () {
+        document.body.removeEventListener('touchstart', handleBodyTouchStart);
+        document.body.removeEventListener('touchmove', handleBodyTouchMove, {
+          passive: false
+        });
+        document.body.removeEventListener('touchend', handleBodyTouchEnd);
+      };
+    }
+
+    return undefined;
+  }, [variant, handleBodyTouchStart, handleBodyTouchMove, handleBodyTouchEnd]);
+  react__WEBPACK_IMPORTED_MODULE_2___default.a.useEffect(function () {
+    return function () {
+      // We need to release the lock.
+      if (nodeThatClaimedTheSwipe === swipeInstance.current) {
+        nodeThatClaimedTheSwipe = null;
+      }
+    };
+  }, []);
+  react__WEBPACK_IMPORTED_MODULE_2___default.a.useEffect(function () {
+    if (!open) {
+      setMaybeSwiping(false);
+    }
+  }, [open]);
+  var handleBackdropRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (instance) {
+    // #StrictMode ready
+    backdropRef.current = react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.findDOMNode(instance);
+  }, []);
+  var handlePaperRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useCallback(function (instance) {
+    // #StrictMode ready
+    paperRef.current = react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.findDOMNode(instance);
+  }, []);
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Drawer_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    open: variant === 'temporary' && maybeSwiping ? true : open,
+    variant: variant,
+    ModalProps: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      BackdropProps: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, BackdropProps, {
+        ref: handleBackdropRef
+      })
+    }, ModalPropsProp),
+    PaperProps: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, PaperProps, {
+      style: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+        pointerEvents: variant === 'temporary' && !open ? 'none' : ''
+      }, PaperProps.style),
+      ref: handlePaperRef
+    }),
+    anchor: anchor,
+    transitionDuration: transitionDuration,
+    onClose: onClose,
+    ref: ref
+  }, other)), !disableSwipeToOpen && variant === 'temporary' && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_NoSsr__WEBPACK_IMPORTED_MODULE_10__["default"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_SwipeArea__WEBPACK_IMPORTED_MODULE_11__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    anchor: anchor,
+    ref: swipeAreaRef,
+    width: swipeAreaWidth
+  }, SwipeAreaProps))));
+});
+ true ? SwipeableDrawer.propTypes = {
+  /**
+   * @ignore
+   */
+  anchor: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['left', 'top', 'right', 'bottom']),
+
+  /**
+   * Disable the backdrop transition.
+   * This can improve the FPS on low-end devices.
+   */
+  disableBackdropTransition: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, touching the screen near the edge of the drawer will not slide in the drawer a bit
+   * to promote accidental discovery of the swipe gesture.
+   */
+  disableDiscovery: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, swipe to open is disabled. This is useful in browsers where swiping triggers
+   * navigation actions. Swipe to open is disabled on iOS browsers by default.
+   */
+  disableSwipeToOpen: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * @ignore
+   */
+  hideBackdrop: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * Affects how far the drawer must be opened/closed to change his state.
+   * Specified as percent (0-1) of the width of the drawer
+   */
+  hysteresis: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number,
+
+  /**
+   * Defines, from which (average) velocity on, the swipe is
+   * defined as complete although hysteresis isn't reached.
+   * Good threshold is between 250 - 1000 px/s
+   */
+  minFlingVelocity: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number,
+
+  /**
+   * @ignore
+   */
+  ModalProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+    BackdropProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+      component: _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["elementTypeAcceptingRef"]
+    })
+  }),
+
+  /**
+   * Callback fired when the component requests to be closed.
+   *
+   * @param {object} event The event source of the callback.
+   */
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+
+  /**
+   * Callback fired when the component requests to be opened.
+   *
+   * @param {object} event The event source of the callback.
+   */
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+
+  /**
+   * If `true`, the drawer is open.
+   */
+  open: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool.isRequired,
+
+  /**
+   * @ignore
+   */
+  PaperProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+    component: _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["elementTypeAcceptingRef"],
+    style: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object
+  }),
+
+  /**
+   * Props applied to the swipe area element.
+   */
+  SwipeAreaProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+
+  /**
+   * The width of the left most (or right most) area in pixels where the
+   * drawer can be swiped open from.
+   */
+  swipeAreaWidth: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number,
+
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+    enter: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number,
+    exit: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number
+  })]),
+
+  /**
+   * @ignore
+   */
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['permanent', 'persistent', 'temporary'])
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (SwipeableDrawer);
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/SwipeableDrawer/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/SwipeableDrawer/index.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SwipeableDrawer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SwipeableDrawer */ "./node_modules/@material-ui/core/esm/SwipeableDrawer/SwipeableDrawer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _SwipeableDrawer__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
 
@@ -29415,48 +30014,6 @@ var HttpLink = (function (_super) {
 
 /***/ }),
 
-/***/ "./node_modules/apollo-link-ws/lib/bundle.esm.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/apollo-link-ws/lib/bundle.esm.js ***!
-  \*******************************************************/
-/*! exports provided: WebSocketLink */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebSocketLink", function() { return WebSocketLink; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
-/* harmony import */ var subscriptions_transport_ws__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! subscriptions-transport-ws */ "./node_modules/subscriptions-transport-ws/dist/client.js");
-/* harmony import */ var subscriptions_transport_ws__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(subscriptions_transport_ws__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-var WebSocketLink = (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(WebSocketLink, _super);
-    function WebSocketLink(paramsOrClient) {
-        var _this = _super.call(this) || this;
-        if (paramsOrClient instanceof subscriptions_transport_ws__WEBPACK_IMPORTED_MODULE_2__["SubscriptionClient"]) {
-            _this.subscriptionClient = paramsOrClient;
-        }
-        else {
-            _this.subscriptionClient = new subscriptions_transport_ws__WEBPACK_IMPORTED_MODULE_2__["SubscriptionClient"](paramsOrClient.uri, paramsOrClient.options, paramsOrClient.webSocketImpl);
-        }
-        return _this;
-    }
-    WebSocketLink.prototype.request = function (operation) {
-        return this.subscriptionClient.request(operation);
-    };
-    return WebSocketLink;
-}(apollo_link__WEBPACK_IMPORTED_MODULE_1__["ApolloLink"]));
-
-
-//# sourceMappingURL=bundle.esm.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/apollo-link/lib/bundle.esm.js":
 /*!****************************************************!*\
   !*** ./node_modules/apollo-link/lib/bundle.esm.js ***!
@@ -30860,102 +31417,6 @@ function stripSymbols(data) {
 //# sourceMappingURL=bundle.esm.js.map
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js")))
-
-/***/ }),
-
-/***/ "./node_modules/backo2/index.js":
-/*!**************************************!*\
-  !*** ./node_modules/backo2/index.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * Expose `Backoff`.
- */
-
-module.exports = Backoff;
-
-/**
- * Initialize backoff timer with `opts`.
- *
- * - `min` initial timeout in milliseconds [100]
- * - `max` max timeout [10000]
- * - `jitter` [0]
- * - `factor` [2]
- *
- * @param {Object} opts
- * @api public
- */
-
-function Backoff(opts) {
-  opts = opts || {};
-  this.ms = opts.min || 100;
-  this.max = opts.max || 10000;
-  this.factor = opts.factor || 2;
-  this.jitter = opts.jitter > 0 && opts.jitter <= 1 ? opts.jitter : 0;
-  this.attempts = 0;
-}
-
-/**
- * Return the backoff duration.
- *
- * @return {Number}
- * @api public
- */
-
-Backoff.prototype.duration = function(){
-  var ms = this.ms * Math.pow(this.factor, this.attempts++);
-  if (this.jitter) {
-    var rand =  Math.random();
-    var deviation = Math.floor(rand * this.jitter * ms);
-    ms = (Math.floor(rand * 10) & 1) == 0  ? ms - deviation : ms + deviation;
-  }
-  return Math.min(ms, this.max) | 0;
-};
-
-/**
- * Reset the number of attempts.
- *
- * @api public
- */
-
-Backoff.prototype.reset = function(){
-  this.attempts = 0;
-};
-
-/**
- * Set the minimum duration
- *
- * @api public
- */
-
-Backoff.prototype.setMin = function(min){
-  this.ms = min;
-};
-
-/**
- * Set the maximum duration
- *
- * @api public
- */
-
-Backoff.prototype.setMax = function(max){
-  this.max = max;
-};
-
-/**
- * Set the jitter
- *
- * @api public
- */
-
-Backoff.prototype.setJitter = function(jitter){
-  this.jitter = jitter;
-};
-
-
 
 /***/ }),
 
@@ -35966,354 +36427,6 @@ function removeClass(element, className) {
 
 /***/ }),
 
-/***/ "./node_modules/eventemitter3/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/eventemitter3/index.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var has = Object.prototype.hasOwnProperty
-  , prefix = '~';
-
-/**
- * Constructor to create a storage for our `EE` objects.
- * An `Events` instance is a plain object whose properties are event names.
- *
- * @constructor
- * @private
- */
-function Events() {}
-
-//
-// We try to not inherit from `Object.prototype`. In some engines creating an
-// instance in this way is faster than calling `Object.create(null)` directly.
-// If `Object.create(null)` is not supported we prefix the event names with a
-// character to make sure that the built-in object properties are not
-// overridden or used as an attack vector.
-//
-if (Object.create) {
-  Events.prototype = Object.create(null);
-
-  //
-  // This hack is needed because the `__proto__` property is still inherited in
-  // some old browsers like Android 4, iPhone 5.1, Opera 11 and Safari 5.
-  //
-  if (!new Events().__proto__) prefix = false;
-}
-
-/**
- * Representation of a single event listener.
- *
- * @param {Function} fn The listener function.
- * @param {*} context The context to invoke the listener with.
- * @param {Boolean} [once=false] Specify if the listener is a one-time listener.
- * @constructor
- * @private
- */
-function EE(fn, context, once) {
-  this.fn = fn;
-  this.context = context;
-  this.once = once || false;
-}
-
-/**
- * Add a listener for a given event.
- *
- * @param {EventEmitter} emitter Reference to the `EventEmitter` instance.
- * @param {(String|Symbol)} event The event name.
- * @param {Function} fn The listener function.
- * @param {*} context The context to invoke the listener with.
- * @param {Boolean} once Specify if the listener is a one-time listener.
- * @returns {EventEmitter}
- * @private
- */
-function addListener(emitter, event, fn, context, once) {
-  if (typeof fn !== 'function') {
-    throw new TypeError('The listener must be a function');
-  }
-
-  var listener = new EE(fn, context || emitter, once)
-    , evt = prefix ? prefix + event : event;
-
-  if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
-  else if (!emitter._events[evt].fn) emitter._events[evt].push(listener);
-  else emitter._events[evt] = [emitter._events[evt], listener];
-
-  return emitter;
-}
-
-/**
- * Clear event by name.
- *
- * @param {EventEmitter} emitter Reference to the `EventEmitter` instance.
- * @param {(String|Symbol)} evt The Event name.
- * @private
- */
-function clearEvent(emitter, evt) {
-  if (--emitter._eventsCount === 0) emitter._events = new Events();
-  else delete emitter._events[evt];
-}
-
-/**
- * Minimal `EventEmitter` interface that is molded against the Node.js
- * `EventEmitter` interface.
- *
- * @constructor
- * @public
- */
-function EventEmitter() {
-  this._events = new Events();
-  this._eventsCount = 0;
-}
-
-/**
- * Return an array listing the events for which the emitter has registered
- * listeners.
- *
- * @returns {Array}
- * @public
- */
-EventEmitter.prototype.eventNames = function eventNames() {
-  var names = []
-    , events
-    , name;
-
-  if (this._eventsCount === 0) return names;
-
-  for (name in (events = this._events)) {
-    if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
-  }
-
-  if (Object.getOwnPropertySymbols) {
-    return names.concat(Object.getOwnPropertySymbols(events));
-  }
-
-  return names;
-};
-
-/**
- * Return the listeners registered for a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @returns {Array} The registered listeners.
- * @public
- */
-EventEmitter.prototype.listeners = function listeners(event) {
-  var evt = prefix ? prefix + event : event
-    , handlers = this._events[evt];
-
-  if (!handlers) return [];
-  if (handlers.fn) return [handlers.fn];
-
-  for (var i = 0, l = handlers.length, ee = new Array(l); i < l; i++) {
-    ee[i] = handlers[i].fn;
-  }
-
-  return ee;
-};
-
-/**
- * Return the number of listeners listening to a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @returns {Number} The number of listeners.
- * @public
- */
-EventEmitter.prototype.listenerCount = function listenerCount(event) {
-  var evt = prefix ? prefix + event : event
-    , listeners = this._events[evt];
-
-  if (!listeners) return 0;
-  if (listeners.fn) return 1;
-  return listeners.length;
-};
-
-/**
- * Calls each of the listeners registered for a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @returns {Boolean} `true` if the event had listeners, else `false`.
- * @public
- */
-EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
-  var evt = prefix ? prefix + event : event;
-
-  if (!this._events[evt]) return false;
-
-  var listeners = this._events[evt]
-    , len = arguments.length
-    , args
-    , i;
-
-  if (listeners.fn) {
-    if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
-
-    switch (len) {
-      case 1: return listeners.fn.call(listeners.context), true;
-      case 2: return listeners.fn.call(listeners.context, a1), true;
-      case 3: return listeners.fn.call(listeners.context, a1, a2), true;
-      case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
-      case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
-      case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
-    }
-
-    for (i = 1, args = new Array(len -1); i < len; i++) {
-      args[i - 1] = arguments[i];
-    }
-
-    listeners.fn.apply(listeners.context, args);
-  } else {
-    var length = listeners.length
-      , j;
-
-    for (i = 0; i < length; i++) {
-      if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
-
-      switch (len) {
-        case 1: listeners[i].fn.call(listeners[i].context); break;
-        case 2: listeners[i].fn.call(listeners[i].context, a1); break;
-        case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
-        case 4: listeners[i].fn.call(listeners[i].context, a1, a2, a3); break;
-        default:
-          if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
-            args[j - 1] = arguments[j];
-          }
-
-          listeners[i].fn.apply(listeners[i].context, args);
-      }
-    }
-  }
-
-  return true;
-};
-
-/**
- * Add a listener for a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @param {Function} fn The listener function.
- * @param {*} [context=this] The context to invoke the listener with.
- * @returns {EventEmitter} `this`.
- * @public
- */
-EventEmitter.prototype.on = function on(event, fn, context) {
-  return addListener(this, event, fn, context, false);
-};
-
-/**
- * Add a one-time listener for a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @param {Function} fn The listener function.
- * @param {*} [context=this] The context to invoke the listener with.
- * @returns {EventEmitter} `this`.
- * @public
- */
-EventEmitter.prototype.once = function once(event, fn, context) {
-  return addListener(this, event, fn, context, true);
-};
-
-/**
- * Remove the listeners of a given event.
- *
- * @param {(String|Symbol)} event The event name.
- * @param {Function} fn Only remove the listeners that match this function.
- * @param {*} context Only remove the listeners that have this context.
- * @param {Boolean} once Only remove one-time listeners.
- * @returns {EventEmitter} `this`.
- * @public
- */
-EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
-  var evt = prefix ? prefix + event : event;
-
-  if (!this._events[evt]) return this;
-  if (!fn) {
-    clearEvent(this, evt);
-    return this;
-  }
-
-  var listeners = this._events[evt];
-
-  if (listeners.fn) {
-    if (
-      listeners.fn === fn &&
-      (!once || listeners.once) &&
-      (!context || listeners.context === context)
-    ) {
-      clearEvent(this, evt);
-    }
-  } else {
-    for (var i = 0, events = [], length = listeners.length; i < length; i++) {
-      if (
-        listeners[i].fn !== fn ||
-        (once && !listeners[i].once) ||
-        (context && listeners[i].context !== context)
-      ) {
-        events.push(listeners[i]);
-      }
-    }
-
-    //
-    // Reset the array, or remove it completely if we have no more listeners.
-    //
-    if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
-    else clearEvent(this, evt);
-  }
-
-  return this;
-};
-
-/**
- * Remove all listeners, or those of the specified event.
- *
- * @param {(String|Symbol)} [event] The event name.
- * @returns {EventEmitter} `this`.
- * @public
- */
-EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
-  var evt;
-
-  if (event) {
-    evt = prefix ? prefix + event : event;
-    if (this._events[evt]) clearEvent(this, evt);
-  } else {
-    this._events = new Events();
-    this._eventsCount = 0;
-  }
-
-  return this;
-};
-
-//
-// Alias methods names because people roll like that.
-//
-EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
-EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-
-//
-// Expose the prefix.
-//
-EventEmitter.prefixed = prefix;
-
-//
-// Allow `EventEmitter` to be imported as module namespace.
-//
-EventEmitter.EventEmitter = EventEmitter;
-
-//
-// Expose the module.
-//
-if (true) {
-  module.exports = EventEmitter;
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/extract-files/lib/ReactNativeFile.mjs":
 /*!************************************************************!*\
   !*** ./node_modules/extract-files/lib/ReactNativeFile.mjs ***!
@@ -40613,52 +40726,6 @@ function getVisitFn(visitor, kind, isLeaving) {
       }
     }
   }
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/graphql/utilities/getOperationAST.mjs":
-/*!************************************************************!*\
-  !*** ./node_modules/graphql/utilities/getOperationAST.mjs ***!
-  \************************************************************/
-/*! exports provided: getOperationAST */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOperationAST", function() { return getOperationAST; });
-/* harmony import */ var _language_kinds__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../language/kinds */ "./node_modules/graphql/language/kinds.mjs");
-
-
-/**
- * Returns an operation AST given a document AST and optionally an operation
- * name. If a name is not provided, an operation is only returned if only one is
- * provided in the document.
- */
-function getOperationAST(documentAST, operationName) {
-  var operation = null;
-
-  for (var _i2 = 0, _documentAST$definiti2 = documentAST.definitions; _i2 < _documentAST$definiti2.length; _i2++) {
-    var definition = _documentAST$definiti2[_i2];
-
-    if (definition.kind === _language_kinds__WEBPACK_IMPORTED_MODULE_0__["Kind"].OPERATION_DEFINITION) {
-      if (!operationName) {
-        // If no operation name was provided, only return an Operation if there
-        // is one defined in the document. Upon encountering the second, return
-        // null.
-        if (operation) {
-          return null;
-        }
-
-        operation = definition;
-      } else if (definition.name && definition.name.value === operationName) {
-        return definition;
-      }
-    }
-  }
-
-  return operation;
 }
 
 
@@ -57150,668 +57217,6 @@ try {
 
 /***/ }),
 
-/***/ "./node_modules/subscriptions-transport-ws/dist/client.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/client.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var _global = typeof global !== 'undefined' ? global : (typeof window !== 'undefined' ? window : {});
-var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
-var Backoff = __webpack_require__(/*! backo2 */ "./node_modules/backo2/index.js");
-var eventemitter3_1 = __webpack_require__(/*! eventemitter3 */ "./node_modules/eventemitter3/index.js");
-var is_string_1 = __webpack_require__(/*! ./utils/is-string */ "./node_modules/subscriptions-transport-ws/dist/utils/is-string.js");
-var is_object_1 = __webpack_require__(/*! ./utils/is-object */ "./node_modules/subscriptions-transport-ws/dist/utils/is-object.js");
-var printer_1 = __webpack_require__(/*! graphql/language/printer */ "./node_modules/graphql/language/printer.mjs");
-var getOperationAST_1 = __webpack_require__(/*! graphql/utilities/getOperationAST */ "./node_modules/graphql/utilities/getOperationAST.mjs");
-var symbol_observable_1 = __webpack_require__(/*! symbol-observable */ "./node_modules/symbol-observable/es/index.js");
-var protocol_1 = __webpack_require__(/*! ./protocol */ "./node_modules/subscriptions-transport-ws/dist/protocol.js");
-var defaults_1 = __webpack_require__(/*! ./defaults */ "./node_modules/subscriptions-transport-ws/dist/defaults.js");
-var message_types_1 = __webpack_require__(/*! ./message-types */ "./node_modules/subscriptions-transport-ws/dist/message-types.js");
-var SubscriptionClient = (function () {
-    function SubscriptionClient(url, options, webSocketImpl, webSocketProtocols) {
-        var _a = (options || {}), _b = _a.connectionCallback, connectionCallback = _b === void 0 ? undefined : _b, _c = _a.connectionParams, connectionParams = _c === void 0 ? {} : _c, _d = _a.timeout, timeout = _d === void 0 ? defaults_1.WS_TIMEOUT : _d, _e = _a.reconnect, reconnect = _e === void 0 ? false : _e, _f = _a.reconnectionAttempts, reconnectionAttempts = _f === void 0 ? Infinity : _f, _g = _a.lazy, lazy = _g === void 0 ? false : _g, _h = _a.inactivityTimeout, inactivityTimeout = _h === void 0 ? 0 : _h;
-        this.wsImpl = webSocketImpl || NativeWebSocket;
-        if (!this.wsImpl) {
-            throw new Error('Unable to find native implementation, or alternative implementation for WebSocket!');
-        }
-        this.wsProtocols = webSocketProtocols || protocol_1.GRAPHQL_WS;
-        this.connectionCallback = connectionCallback;
-        this.url = url;
-        this.operations = {};
-        this.nextOperationId = 0;
-        this.wsTimeout = timeout;
-        this.unsentMessagesQueue = [];
-        this.reconnect = reconnect;
-        this.reconnecting = false;
-        this.reconnectionAttempts = reconnectionAttempts;
-        this.lazy = !!lazy;
-        this.inactivityTimeout = inactivityTimeout;
-        this.closedByUser = false;
-        this.backoff = new Backoff({ jitter: 0.5 });
-        this.eventEmitter = new eventemitter3_1.EventEmitter();
-        this.middlewares = [];
-        this.client = null;
-        this.maxConnectTimeGenerator = this.createMaxConnectTimeGenerator();
-        this.connectionParams = this.getConnectionParams(connectionParams);
-        if (!this.lazy) {
-            this.connect();
-        }
-    }
-    Object.defineProperty(SubscriptionClient.prototype, "status", {
-        get: function () {
-            if (this.client === null) {
-                return this.wsImpl.CLOSED;
-            }
-            return this.client.readyState;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    SubscriptionClient.prototype.close = function (isForced, closedByUser) {
-        if (isForced === void 0) { isForced = true; }
-        if (closedByUser === void 0) { closedByUser = true; }
-        this.clearInactivityTimeout();
-        if (this.client !== null) {
-            this.closedByUser = closedByUser;
-            if (isForced) {
-                this.clearCheckConnectionInterval();
-                this.clearMaxConnectTimeout();
-                this.clearTryReconnectTimeout();
-                this.unsubscribeAll();
-                this.sendMessage(undefined, message_types_1.default.GQL_CONNECTION_TERMINATE, null);
-            }
-            this.client.close();
-            this.client = null;
-            this.eventEmitter.emit('disconnected');
-            if (!isForced) {
-                this.tryReconnect();
-            }
-        }
-    };
-    SubscriptionClient.prototype.request = function (request) {
-        var _a;
-        var getObserver = this.getObserver.bind(this);
-        var executeOperation = this.executeOperation.bind(this);
-        var unsubscribe = this.unsubscribe.bind(this);
-        var opId;
-        this.clearInactivityTimeout();
-        return _a = {},
-            _a[symbol_observable_1.default] = function () {
-                return this;
-            },
-            _a.subscribe = function (observerOrNext, onError, onComplete) {
-                var observer = getObserver(observerOrNext, onError, onComplete);
-                opId = executeOperation(request, function (error, result) {
-                    if (error === null && result === null) {
-                        if (observer.complete) {
-                            observer.complete();
-                        }
-                    }
-                    else if (error) {
-                        if (observer.error) {
-                            observer.error(error[0]);
-                        }
-                    }
-                    else {
-                        if (observer.next) {
-                            observer.next(result);
-                        }
-                    }
-                });
-                return {
-                    unsubscribe: function () {
-                        if (opId) {
-                            unsubscribe(opId);
-                            opId = null;
-                        }
-                    },
-                };
-            },
-            _a;
-    };
-    SubscriptionClient.prototype.on = function (eventName, callback, context) {
-        var handler = this.eventEmitter.on(eventName, callback, context);
-        return function () {
-            handler.off(eventName, callback, context);
-        };
-    };
-    SubscriptionClient.prototype.onConnected = function (callback, context) {
-        return this.on('connected', callback, context);
-    };
-    SubscriptionClient.prototype.onConnecting = function (callback, context) {
-        return this.on('connecting', callback, context);
-    };
-    SubscriptionClient.prototype.onDisconnected = function (callback, context) {
-        return this.on('disconnected', callback, context);
-    };
-    SubscriptionClient.prototype.onReconnected = function (callback, context) {
-        return this.on('reconnected', callback, context);
-    };
-    SubscriptionClient.prototype.onReconnecting = function (callback, context) {
-        return this.on('reconnecting', callback, context);
-    };
-    SubscriptionClient.prototype.onError = function (callback, context) {
-        return this.on('error', callback, context);
-    };
-    SubscriptionClient.prototype.unsubscribeAll = function () {
-        var _this = this;
-        Object.keys(this.operations).forEach(function (subId) {
-            _this.unsubscribe(subId);
-        });
-    };
-    SubscriptionClient.prototype.applyMiddlewares = function (options) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var queue = function (funcs, scope) {
-                var next = function (error) {
-                    if (error) {
-                        reject(error);
-                    }
-                    else {
-                        if (funcs.length > 0) {
-                            var f = funcs.shift();
-                            if (f) {
-                                f.applyMiddleware.apply(scope, [options, next]);
-                            }
-                        }
-                        else {
-                            resolve(options);
-                        }
-                    }
-                };
-                next();
-            };
-            queue(_this.middlewares.slice(), _this);
-        });
-    };
-    SubscriptionClient.prototype.use = function (middlewares) {
-        var _this = this;
-        middlewares.map(function (middleware) {
-            if (typeof middleware.applyMiddleware === 'function') {
-                _this.middlewares.push(middleware);
-            }
-            else {
-                throw new Error('Middleware must implement the applyMiddleware function.');
-            }
-        });
-        return this;
-    };
-    SubscriptionClient.prototype.getConnectionParams = function (connectionParams) {
-        return function () { return new Promise(function (resolve, reject) {
-            if (typeof connectionParams === 'function') {
-                try {
-                    return resolve(connectionParams.call(null));
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            }
-            resolve(connectionParams);
-        }); };
-    };
-    SubscriptionClient.prototype.executeOperation = function (options, handler) {
-        var _this = this;
-        if (this.client === null) {
-            this.connect();
-        }
-        var opId = this.generateOperationId();
-        this.operations[opId] = { options: options, handler: handler };
-        this.applyMiddlewares(options)
-            .then(function (processedOptions) {
-            _this.checkOperationOptions(processedOptions, handler);
-            if (_this.operations[opId]) {
-                _this.operations[opId] = { options: processedOptions, handler: handler };
-                _this.sendMessage(opId, message_types_1.default.GQL_START, processedOptions);
-            }
-        })
-            .catch(function (error) {
-            _this.unsubscribe(opId);
-            handler(_this.formatErrors(error));
-        });
-        return opId;
-    };
-    SubscriptionClient.prototype.getObserver = function (observerOrNext, error, complete) {
-        if (typeof observerOrNext === 'function') {
-            return {
-                next: function (v) { return observerOrNext(v); },
-                error: function (e) { return error && error(e); },
-                complete: function () { return complete && complete(); },
-            };
-        }
-        return observerOrNext;
-    };
-    SubscriptionClient.prototype.createMaxConnectTimeGenerator = function () {
-        var minValue = 1000;
-        var maxValue = this.wsTimeout;
-        return new Backoff({
-            min: minValue,
-            max: maxValue,
-            factor: 1.2,
-        });
-    };
-    SubscriptionClient.prototype.clearCheckConnectionInterval = function () {
-        if (this.checkConnectionIntervalId) {
-            clearInterval(this.checkConnectionIntervalId);
-            this.checkConnectionIntervalId = null;
-        }
-    };
-    SubscriptionClient.prototype.clearMaxConnectTimeout = function () {
-        if (this.maxConnectTimeoutId) {
-            clearTimeout(this.maxConnectTimeoutId);
-            this.maxConnectTimeoutId = null;
-        }
-    };
-    SubscriptionClient.prototype.clearTryReconnectTimeout = function () {
-        if (this.tryReconnectTimeoutId) {
-            clearTimeout(this.tryReconnectTimeoutId);
-            this.tryReconnectTimeoutId = null;
-        }
-    };
-    SubscriptionClient.prototype.clearInactivityTimeout = function () {
-        if (this.inactivityTimeoutId) {
-            clearTimeout(this.inactivityTimeoutId);
-            this.inactivityTimeoutId = null;
-        }
-    };
-    SubscriptionClient.prototype.setInactivityTimeout = function () {
-        var _this = this;
-        if (this.inactivityTimeout > 0 && Object.keys(this.operations).length === 0) {
-            this.inactivityTimeoutId = setTimeout(function () {
-                if (Object.keys(_this.operations).length === 0) {
-                    _this.close();
-                }
-            }, this.inactivityTimeout);
-        }
-    };
-    SubscriptionClient.prototype.checkOperationOptions = function (options, handler) {
-        var query = options.query, variables = options.variables, operationName = options.operationName;
-        if (!query) {
-            throw new Error('Must provide a query.');
-        }
-        if (!handler) {
-            throw new Error('Must provide an handler.');
-        }
-        if ((!is_string_1.default(query) && !getOperationAST_1.getOperationAST(query, operationName)) ||
-            (operationName && !is_string_1.default(operationName)) ||
-            (variables && !is_object_1.default(variables))) {
-            throw new Error('Incorrect option types. query must be a string or a document,' +
-                '`operationName` must be a string, and `variables` must be an object.');
-        }
-    };
-    SubscriptionClient.prototype.buildMessage = function (id, type, payload) {
-        var payloadToReturn = payload && payload.query ? __assign({}, payload, { query: typeof payload.query === 'string' ? payload.query : printer_1.print(payload.query) }) :
-            payload;
-        return {
-            id: id,
-            type: type,
-            payload: payloadToReturn,
-        };
-    };
-    SubscriptionClient.prototype.formatErrors = function (errors) {
-        if (Array.isArray(errors)) {
-            return errors;
-        }
-        if (errors && errors.errors) {
-            return this.formatErrors(errors.errors);
-        }
-        if (errors && errors.message) {
-            return [errors];
-        }
-        return [{
-                name: 'FormatedError',
-                message: 'Unknown error',
-                originalError: errors,
-            }];
-    };
-    SubscriptionClient.prototype.sendMessage = function (id, type, payload) {
-        this.sendMessageRaw(this.buildMessage(id, type, payload));
-    };
-    SubscriptionClient.prototype.sendMessageRaw = function (message) {
-        switch (this.status) {
-            case this.wsImpl.OPEN:
-                var serializedMessage = JSON.stringify(message);
-                try {
-                    JSON.parse(serializedMessage);
-                }
-                catch (e) {
-                    this.eventEmitter.emit('error', new Error("Message must be JSON-serializable. Got: " + message));
-                }
-                this.client.send(serializedMessage);
-                break;
-            case this.wsImpl.CONNECTING:
-                this.unsentMessagesQueue.push(message);
-                break;
-            default:
-                if (!this.reconnecting) {
-                    this.eventEmitter.emit('error', new Error('A message was not sent because socket is not connected, is closing or ' +
-                        'is already closed. Message was: ' + JSON.stringify(message)));
-                }
-        }
-    };
-    SubscriptionClient.prototype.generateOperationId = function () {
-        return String(++this.nextOperationId);
-    };
-    SubscriptionClient.prototype.tryReconnect = function () {
-        var _this = this;
-        if (!this.reconnect || this.backoff.attempts >= this.reconnectionAttempts) {
-            return;
-        }
-        if (!this.reconnecting) {
-            Object.keys(this.operations).forEach(function (key) {
-                _this.unsentMessagesQueue.push(_this.buildMessage(key, message_types_1.default.GQL_START, _this.operations[key].options));
-            });
-            this.reconnecting = true;
-        }
-        this.clearTryReconnectTimeout();
-        var delay = this.backoff.duration();
-        this.tryReconnectTimeoutId = setTimeout(function () {
-            _this.connect();
-        }, delay);
-    };
-    SubscriptionClient.prototype.flushUnsentMessagesQueue = function () {
-        var _this = this;
-        this.unsentMessagesQueue.forEach(function (message) {
-            _this.sendMessageRaw(message);
-        });
-        this.unsentMessagesQueue = [];
-    };
-    SubscriptionClient.prototype.checkConnection = function () {
-        if (this.wasKeepAliveReceived) {
-            this.wasKeepAliveReceived = false;
-            return;
-        }
-        if (!this.reconnecting) {
-            this.close(false, true);
-        }
-    };
-    SubscriptionClient.prototype.checkMaxConnectTimeout = function () {
-        var _this = this;
-        this.clearMaxConnectTimeout();
-        this.maxConnectTimeoutId = setTimeout(function () {
-            if (_this.status !== _this.wsImpl.OPEN) {
-                _this.reconnecting = true;
-                _this.close(false, true);
-            }
-        }, this.maxConnectTimeGenerator.duration());
-    };
-    SubscriptionClient.prototype.connect = function () {
-        var _this = this;
-        this.client = new this.wsImpl(this.url, this.wsProtocols);
-        this.checkMaxConnectTimeout();
-        this.client.onopen = function () { return __awaiter(_this, void 0, void 0, function () {
-            var connectionParams, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(this.status === this.wsImpl.OPEN)) return [3, 4];
-                        this.clearMaxConnectTimeout();
-                        this.closedByUser = false;
-                        this.eventEmitter.emit(this.reconnecting ? 'reconnecting' : 'connecting');
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.connectionParams()];
-                    case 2:
-                        connectionParams = _a.sent();
-                        this.sendMessage(undefined, message_types_1.default.GQL_CONNECTION_INIT, connectionParams);
-                        this.flushUnsentMessagesQueue();
-                        return [3, 4];
-                    case 3:
-                        error_1 = _a.sent();
-                        this.sendMessage(undefined, message_types_1.default.GQL_CONNECTION_ERROR, error_1);
-                        this.flushUnsentMessagesQueue();
-                        return [3, 4];
-                    case 4: return [2];
-                }
-            });
-        }); };
-        this.client.onclose = function () {
-            if (!_this.closedByUser) {
-                _this.close(false, false);
-            }
-        };
-        this.client.onerror = function (err) {
-            _this.eventEmitter.emit('error', err);
-        };
-        this.client.onmessage = function (_a) {
-            var data = _a.data;
-            _this.processReceivedData(data);
-        };
-    };
-    SubscriptionClient.prototype.processReceivedData = function (receivedData) {
-        var parsedMessage;
-        var opId;
-        try {
-            parsedMessage = JSON.parse(receivedData);
-            opId = parsedMessage.id;
-        }
-        catch (e) {
-            throw new Error("Message must be JSON-parseable. Got: " + receivedData);
-        }
-        if ([message_types_1.default.GQL_DATA,
-            message_types_1.default.GQL_COMPLETE,
-            message_types_1.default.GQL_ERROR,
-        ].indexOf(parsedMessage.type) !== -1 && !this.operations[opId]) {
-            this.unsubscribe(opId);
-            return;
-        }
-        switch (parsedMessage.type) {
-            case message_types_1.default.GQL_CONNECTION_ERROR:
-                if (this.connectionCallback) {
-                    this.connectionCallback(parsedMessage.payload);
-                }
-                break;
-            case message_types_1.default.GQL_CONNECTION_ACK:
-                this.eventEmitter.emit(this.reconnecting ? 'reconnected' : 'connected');
-                this.reconnecting = false;
-                this.backoff.reset();
-                this.maxConnectTimeGenerator.reset();
-                if (this.connectionCallback) {
-                    this.connectionCallback();
-                }
-                break;
-            case message_types_1.default.GQL_COMPLETE:
-                this.operations[opId].handler(null, null);
-                delete this.operations[opId];
-                break;
-            case message_types_1.default.GQL_ERROR:
-                this.operations[opId].handler(this.formatErrors(parsedMessage.payload), null);
-                delete this.operations[opId];
-                break;
-            case message_types_1.default.GQL_DATA:
-                var parsedPayload = !parsedMessage.payload.errors ?
-                    parsedMessage.payload : __assign({}, parsedMessage.payload, { errors: this.formatErrors(parsedMessage.payload.errors) });
-                this.operations[opId].handler(null, parsedPayload);
-                break;
-            case message_types_1.default.GQL_CONNECTION_KEEP_ALIVE:
-                var firstKA = typeof this.wasKeepAliveReceived === 'undefined';
-                this.wasKeepAliveReceived = true;
-                if (firstKA) {
-                    this.checkConnection();
-                }
-                if (this.checkConnectionIntervalId) {
-                    clearInterval(this.checkConnectionIntervalId);
-                    this.checkConnection();
-                }
-                this.checkConnectionIntervalId = setInterval(this.checkConnection.bind(this), this.wsTimeout);
-                break;
-            default:
-                throw new Error('Invalid message type!');
-        }
-    };
-    SubscriptionClient.prototype.unsubscribe = function (opId) {
-        if (this.operations[opId]) {
-            delete this.operations[opId];
-            this.setInactivityTimeout();
-            this.sendMessage(opId, message_types_1.default.GQL_STOP, undefined);
-        }
-    };
-    return SubscriptionClient;
-}());
-exports.SubscriptionClient = SubscriptionClient;
-//# sourceMappingURL=client.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/subscriptions-transport-ws/dist/defaults.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/defaults.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var WS_TIMEOUT = 30000;
-exports.WS_TIMEOUT = WS_TIMEOUT;
-//# sourceMappingURL=defaults.js.map
-
-/***/ }),
-
-/***/ "./node_modules/subscriptions-transport-ws/dist/message-types.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/message-types.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var MessageTypes = (function () {
-    function MessageTypes() {
-        throw new Error('Static Class');
-    }
-    MessageTypes.GQL_CONNECTION_INIT = 'connection_init';
-    MessageTypes.GQL_CONNECTION_ACK = 'connection_ack';
-    MessageTypes.GQL_CONNECTION_ERROR = 'connection_error';
-    MessageTypes.GQL_CONNECTION_KEEP_ALIVE = 'ka';
-    MessageTypes.GQL_CONNECTION_TERMINATE = 'connection_terminate';
-    MessageTypes.GQL_START = 'start';
-    MessageTypes.GQL_DATA = 'data';
-    MessageTypes.GQL_ERROR = 'error';
-    MessageTypes.GQL_COMPLETE = 'complete';
-    MessageTypes.GQL_STOP = 'stop';
-    MessageTypes.SUBSCRIPTION_START = 'subscription_start';
-    MessageTypes.SUBSCRIPTION_DATA = 'subscription_data';
-    MessageTypes.SUBSCRIPTION_SUCCESS = 'subscription_success';
-    MessageTypes.SUBSCRIPTION_FAIL = 'subscription_fail';
-    MessageTypes.SUBSCRIPTION_END = 'subscription_end';
-    MessageTypes.INIT = 'init';
-    MessageTypes.INIT_SUCCESS = 'init_success';
-    MessageTypes.INIT_FAIL = 'init_fail';
-    MessageTypes.KEEP_ALIVE = 'keepalive';
-    return MessageTypes;
-}());
-exports.default = MessageTypes;
-//# sourceMappingURL=message-types.js.map
-
-/***/ }),
-
-/***/ "./node_modules/subscriptions-transport-ws/dist/protocol.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/protocol.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var GRAPHQL_WS = 'graphql-ws';
-exports.GRAPHQL_WS = GRAPHQL_WS;
-var GRAPHQL_SUBSCRIPTIONS = 'graphql-subscriptions';
-exports.GRAPHQL_SUBSCRIPTIONS = GRAPHQL_SUBSCRIPTIONS;
-//# sourceMappingURL=protocol.js.map
-
-/***/ }),
-
-/***/ "./node_modules/subscriptions-transport-ws/dist/utils/is-object.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/utils/is-object.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function isObject(value) {
-    return ((value !== null) && (typeof value === 'object'));
-}
-exports.default = isObject;
-//# sourceMappingURL=is-object.js.map
-
-/***/ }),
-
-/***/ "./node_modules/subscriptions-transport-ws/dist/utils/is-string.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/subscriptions-transport-ws/dist/utils/is-string.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function isString(value) {
-    return typeof value === 'string';
-}
-exports.default = isString;
-//# sourceMappingURL=is-string.js.map
-
-/***/ }),
-
 /***/ "./node_modules/symbol-observable/es/index.js":
 /*!****************************************************!*\
   !*** ./node_modules/symbol-observable/es/index.js ***!
@@ -59157,26 +58562,6 @@ module.exports = function(module) {
 		module.webpackPolyfill = 1;
 	}
 	return module;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/ws/browser.js":
-/*!************************************!*\
-  !*** ./node_modules/ws/browser.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function() {
-  throw new Error(
-    'ws does not work in the browser. Browser clients must use the native ' +
-      'WebSocket object'
-  );
 };
 
 
@@ -62258,12 +61643,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-upload-client */ "./node_modules/apollo-upload-client/lib/index.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var apollo_link_ws__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! apollo-link-ws */ "./node_modules/apollo-link-ws/lib/bundle.esm.js");
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! apollo-utilities */ "./node_modules/apollo-utilities/lib/bundle.esm.js");
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ws */ "./node_modules/ws/browser.js");
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(ws__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! apollo-utilities */ "./node_modules/apollo-utilities/lib/bundle.esm.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 
@@ -62277,9 +61659,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ //import { WebSocketLink } from 'apollo-link-ws';
 
-
-
+ //import * as ws from 'ws';
 
 
 
@@ -62316,23 +61698,33 @@ function () {
         var message = _ref3.message,
             locations = _ref3.locations,
             path = _ref3.path;
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_15__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_16__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
         console.log("[GraphQL error]: Message: ".concat(message, ", Location: ").concat(locations, ", Path: ").concat(path));
       });
       if (networkError) console.log("[Network error]: ".concat(networkError));
     });
-    var wsLink = new apollo_link_ws__WEBPACK_IMPORTED_MODULE_12__["WebSocketLink"]({
-      uri: _redux_constants_other__WEBPACK_IMPORTED_MODULE_3__["urlGQLws"],
-      options: {
-        reconnect: true
-      },
-      webSocketImpl:  true ? WebSocket : undefined
-    });
-    var mainLink = Object(apollo_link__WEBPACK_IMPORTED_MODULE_10__["split"])(function (_ref4) {
-      var query = _ref4.query;
-      var definition = Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_13__["getMainDefinition"])(query);
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-    }, wsLink, uploadLink);
+    /*const wsLink = new WebSocketLink({
+        uri: urlGQLws,
+        options: {
+            reconnect: true
+        },
+        webSocketImpl: process.browser?WebSocket:ws
+    });*/
+
+    var mainLink =
+    /*split(
+    ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+    definition.kind === 'OperationDefinition' &&
+    definition.operation === 'subscription'
+    );
+    },
+    wsLink,*/
+    uploadLink;
+    /*,
+    );*/
+
     var link = apollo_link__WEBPACK_IMPORTED_MODULE_10__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_4__["ApolloClient"]({
       link: link,
@@ -62663,7 +62055,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
+/***/ 0:
 /*!***********************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************/
@@ -62686,5 +62078,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js","styles"]]]);
+},[[0,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

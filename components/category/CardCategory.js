@@ -42,11 +42,9 @@ const CardCategory = React.memo((props) => {
                             <div className={classes.line}>
                                 <label htmlFor={element?element._id:'add'}>
                                     <img
-                                        effect='blur'
                                         className={classes.media}
                                         src={preview}
                                         alt={'Изменить'}
-                                        placeholderSrc='/static/add.png'
                                     />
                                 </label>
                                <TextField

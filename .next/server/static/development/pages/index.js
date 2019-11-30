@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1362,8 +1362,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_styleMUI_drawer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/styleMUI/drawer */ "./src/styleMUI/drawer.js");
 /* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/actions/app */ "./redux/actions/app.js");
 /* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Drawer */ "@material-ui/core/Drawer");
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/SwipeableDrawer */ "@material-ui/core/SwipeableDrawer");
+/* harmony import */ var _material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/List */ "@material-ui/core/List");
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Divider */ "@material-ui/core/Divider");
@@ -1444,7 +1444,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
   let variant = isMobileApp ? 'temporary' : 'permanent';
   const open = isMobileApp ? drawer : true;
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_23__["useRouter"])();
-  return __jsx(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6___default.a, {
+  return __jsx(_material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6___default.a, {
     variant: variant,
     className: classes.drawer,
     open: open,
@@ -1452,6 +1452,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     classes: {
       paper: classes.drawerPaper
     },
+    onOpen: () => showDrawer(true),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
@@ -1461,19 +1462,19 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     className: classes.toolbar,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 49
     },
     __self: undefined
   }), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 51
     },
     __self: undefined
   }), __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 52
     },
     __self: undefined
   }, ['экспедитор', 'организация', 'менеджер'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
@@ -1481,7 +1482,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     as: "/items/all",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1494,34 +1495,34 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 56
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ViewList__WEBPACK_IMPORTED_MODULE_12___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 64
     },
     __self: undefined
   }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 68
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1534,40 +1535,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 69
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ViewList__WEBPACK_IMPORTED_MODULE_12___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 75
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 79
     },
     __self: undefined
   }), ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/ads",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 83
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1580,40 +1581,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 84
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 85
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Whatshot__WEBPACK_IMPORTED_MODULE_13___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 85
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0410\u043A\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 86
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 89
     },
     __self: undefined
   })) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/clients',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 96
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1626,40 +1627,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96
+      lineNumber: 97
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 98
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_15___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 98
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u041A\u043B\u0438\u0435\u043D\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 99
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 102
     },
     __self: undefined
   })) : null, ['client', 'admin', 'организация', 'менеджер'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/orders",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 109
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1672,40 +1673,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 110
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 111
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_16___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 111
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0417\u0430\u043A\u0430\u0437\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 111
+      lineNumber: 112
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 115
     },
     __self: undefined
   })) : null, ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/routes",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 122
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1718,33 +1719,33 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 123
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 124
     },
     __self: undefined
   }, __jsx(_material_ui_icons_FormatListNumbered__WEBPACK_IMPORTED_MODULE_19___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 124
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u041C\u0430\u0440\u0448\u0440\u0443\u0442\u043D\u044B\u0435 \u043B\u0438\u0441\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 125
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 128
     },
     __self: undefined
   })) : null, ['экспедитор', 'организация', 'менеджер'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
@@ -1752,7 +1753,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     as: `/organization/${profile.organization}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 134
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1765,34 +1766,34 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134
+      lineNumber: 135
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 136
     },
     __self: undefined
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_17___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 136
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136
+      lineNumber: 137
     },
     __self: undefined
   }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/organizations",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 141
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1805,40 +1806,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 142
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 142
+      lineNumber: 143
     },
     __self: undefined
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_17___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 142
+      lineNumber: 143
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 144
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 148
     },
     __self: undefined
   }), ['admin', 'организация'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/employments',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 152
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1851,40 +1852,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 153
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_15___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 154
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 155
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 158
     },
     __self: undefined
   })) : null, ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: "/blog",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 164
+      lineNumber: 165
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1897,40 +1898,40 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 166
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 167
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ArtTrack__WEBPACK_IMPORTED_MODULE_18___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 167
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u0411\u043B\u043E\u0433",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 168
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 171
     },
     __self: undefined
   })) : null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
     href: '/contact',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 174
+      lineNumber: 175
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -1943,33 +1944,33 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 176
     },
     __self: undefined
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 176
+      lineNumber: 177
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Info__WEBPACK_IMPORTED_MODULE_14___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 176
+      lineNumber: 177
     },
     __self: undefined
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11___default.a, {
     primary: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 177
+      lineNumber: 178
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 180
+      lineNumber: 181
     },
     __self: undefined
   })));
@@ -2215,11 +2216,9 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     },
     __self: undefined
   }, __jsx("img", {
-    effect: "blur",
     className: classes.media,
     src: preview,
     alt: 'Изменить',
-    placeholderSrc: "/static/add.png",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 44
@@ -2235,13 +2234,13 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 50
     },
     __self: undefined
   })))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 62
     },
     __self: undefined
   }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -2260,7 +2259,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 75
+          lineNumber: 73
         },
         __self: undefined
       }));
@@ -2270,7 +2269,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 66
     },
     __self: undefined
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -2283,7 +2282,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 84
+          lineNumber: 82
         },
         __self: undefined
       }));
@@ -2293,7 +2292,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 78
     },
     __self: undefined
   }, element.status === 'active' ? 'Отключить' : 'Включить'), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -2308,7 +2307,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 93
+          lineNumber: 91
         },
         __self: undefined
       }));
@@ -2316,7 +2315,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 87
     },
     __self: undefined
   }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -2324,7 +2323,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     as: `/subcategory/${element._id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 96
     },
     __self: undefined
   }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -2332,7 +2331,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 97
     },
     __self: undefined
   }, "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"))) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -2353,7 +2352,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
           action: action,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 112
+            lineNumber: 110
           },
           __self: undefined
         }));
@@ -2364,7 +2363,7 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 102
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
@@ -2377,57 +2376,57 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 120
     },
     __self: undefined
   })) : name !== 'Не задано' ? __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 131
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
     href: "/subcategory/[id]",
     as: `/subcategory/${element._id}`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 132
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.line,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 133
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 134
     },
     __self: undefined
-  }, __jsx("div", {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 135
-    },
-    __self: undefined
-  }, __jsx("label", {
-    htmlFor: "contained-button-file",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 136
-    },
-    __self: undefined
   }, __jsx("img", {
     className: classes.media,
     src: element.image,
     alt: element.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 135
     },
     __self: undefined
   })), __jsx("h3", {
     className: isMobileApp ? classes.inputM : classes.inputD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 141
     },
     __self: undefined
   }, element.name)))) : name === 'Не задано' && profile.role === 'admin' ? __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 149
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -2435,21 +2434,21 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     as: `/subcategory/${element._id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 150
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.line,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 151
     },
     __self: undefined
   }, __jsx("label", {
     htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 152
     },
     __self: undefined
   }, __jsx("img", {
@@ -2458,14 +2457,14 @@ const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => 
     alt: element.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 153
     },
     __self: undefined
   })), __jsx("h3", {
     className: isMobileApp ? classes.inputM : classes.inputD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161
+      lineNumber: 159
     },
     __self: undefined
   }, element.name)))) : null);
@@ -5567,14 +5566,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_link__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-upload-client */ "apollo-upload-client");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link-ws */ "apollo-link-ws");
-/* harmony import */ var apollo_link_ws__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-utilities */ "apollo-utilities");
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_utilities__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ws */ "ws");
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(ws__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-utilities */ "apollo-utilities");
+/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_utilities__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 /* eslint-disable no-extra-boolean-cast */
@@ -5586,9 +5581,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ //import { WebSocketLink } from 'apollo-link-ws';
 
-
-
+ //import * as ws from 'ws';
 
 
 
@@ -5622,24 +5617,33 @@ class SingletonApolloClient {
         locations,
         path
       }) => {
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_11__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__["showSnackBar"])('Ошибка'));
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       });
       if (networkError) console.log(`[Network error]: ${networkError}`);
     });
-    const wsLink = new apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__["WebSocketLink"]({
-      uri: _redux_constants_other__WEBPACK_IMPORTED_MODULE_1__["urlGQLws"],
-      options: {
-        reconnect: true
-      },
-      webSocketImpl:  false ? undefined : ws__WEBPACK_IMPORTED_MODULE_12__
-    });
-    const mainLink = Object(apollo_link__WEBPACK_IMPORTED_MODULE_8__["split"])(({
-      query
-    }) => {
-      const definition = Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_11__["getMainDefinition"])(query);
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-    }, wsLink, uploadLink);
+    /*const wsLink = new WebSocketLink({
+        uri: urlGQLws,
+        options: {
+            reconnect: true
+        },
+        webSocketImpl: process.browser?WebSocket:ws
+    });*/
+
+    const mainLink =
+    /*split(
+    ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+    definition.kind === 'OperationDefinition' &&
+    definition.operation === 'subscription'
+    );
+    },
+    wsLink,*/
+    uploadLink;
+    /*,
+    );*/
+
     const link = apollo_link__WEBPACK_IMPORTED_MODULE_8__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_2__["ApolloClient"]({
       link: link,
@@ -5952,7 +5956,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -6096,17 +6100,6 @@ module.exports = require("@material-ui/core/Divider");
 
 /***/ }),
 
-/***/ "@material-ui/core/Drawer":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Drawer" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Drawer");
-
-/***/ }),
-
 /***/ "@material-ui/core/FormControl":
 /*!************************************************!*\
   !*** external "@material-ui/core/FormControl" ***!
@@ -6247,6 +6240,17 @@ module.exports = require("@material-ui/core/Paper");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Snackbar");
+
+/***/ }),
+
+/***/ "@material-ui/core/SwipeableDrawer":
+/*!****************************************************!*\
+  !*** external "@material-ui/core/SwipeableDrawer" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/SwipeableDrawer");
 
 /***/ }),
 
@@ -6635,17 +6639,6 @@ module.exports = require("apollo-link-error");
 
 /***/ }),
 
-/***/ "apollo-link-ws":
-/*!*********************************!*\
-  !*** external "apollo-link-ws" ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("apollo-link-ws");
-
-/***/ }),
-
 /***/ "apollo-upload-client":
 /*!***************************************!*\
   !*** external "apollo-upload-client" ***!
@@ -6918,17 +6911,6 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("url");
-
-/***/ }),
-
-/***/ "ws":
-/*!*********************!*\
-  !*** external "ws" ***!
-  \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("ws");
 
 /***/ })
 

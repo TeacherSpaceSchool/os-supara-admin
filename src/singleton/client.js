@@ -8,9 +8,9 @@ import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import { ApolloLink, split  } from 'apollo-link';
 import { createUploadLink } from 'apollo-upload-client'
-import { WebSocketLink } from 'apollo-link-ws';
+//import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import * as ws from 'ws';
+//import * as ws from 'ws';
 import { SingletonStore } from '../singleton/store';
 import {
     showSnackBar
@@ -44,14 +44,14 @@ export class SingletonApolloClient {
                 });
             if (networkError) console.log(`[Network error]: ${networkError}`);
         });
-        const wsLink = new WebSocketLink({
+        /*const wsLink = new WebSocketLink({
             uri: urlGQLws,
             options: {
                 reconnect: true
             },
             webSocketImpl: process.browser?WebSocket:ws
-        });
-        const mainLink = split(
+        });*/
+        const mainLink = /*split(
             ({ query }) => {
                 const definition = getMainDefinition(query);
                 return (
@@ -59,9 +59,9 @@ export class SingletonApolloClient {
                     definition.operation === 'subscription'
                 );
             },
-            wsLink,
-            uploadLink,
-        );
+            wsLink,*/
+            uploadLink/*,
+        );*/
         const link = ApolloLink.from([
             linkError,
             authLink,

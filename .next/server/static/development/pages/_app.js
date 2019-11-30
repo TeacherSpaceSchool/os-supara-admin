@@ -1637,14 +1637,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_link__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-upload-client */ "apollo-upload-client");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link-ws */ "apollo-link-ws");
-/* harmony import */ var apollo_link_ws__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-utilities */ "apollo-utilities");
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_utilities__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ws */ "ws");
-/* harmony import */ var ws__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(ws__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-utilities */ "apollo-utilities");
+/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_utilities__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 /* eslint-disable no-extra-boolean-cast */
@@ -1656,9 +1652,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ //import { WebSocketLink } from 'apollo-link-ws';
 
-
-
+ //import * as ws from 'ws';
 
 
 
@@ -1692,24 +1688,33 @@ class SingletonApolloClient {
         locations,
         path
       }) => {
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_11__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__["showSnackBar"])('Ошибка'));
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       });
       if (networkError) console.log(`[Network error]: ${networkError}`);
     });
-    const wsLink = new apollo_link_ws__WEBPACK_IMPORTED_MODULE_10__["WebSocketLink"]({
-      uri: _redux_constants_other__WEBPACK_IMPORTED_MODULE_1__["urlGQLws"],
-      options: {
-        reconnect: true
-      },
-      webSocketImpl:  false ? undefined : ws__WEBPACK_IMPORTED_MODULE_12__
-    });
-    const mainLink = Object(apollo_link__WEBPACK_IMPORTED_MODULE_8__["split"])(({
-      query
-    }) => {
-      const definition = Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_11__["getMainDefinition"])(query);
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-    }, wsLink, uploadLink);
+    /*const wsLink = new WebSocketLink({
+        uri: urlGQLws,
+        options: {
+            reconnect: true
+        },
+        webSocketImpl: process.browser?WebSocket:ws
+    });*/
+
+    const mainLink =
+    /*split(
+    ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+    definition.kind === 'OperationDefinition' &&
+    definition.operation === 'subscription'
+    );
+    },
+    wsLink,*/
+    uploadLink;
+    /*,
+    );*/
+
     const link = apollo_link__WEBPACK_IMPORTED_MODULE_8__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_2__["ApolloClient"]({
       link: link,
@@ -1928,17 +1933,6 @@ module.exports = require("apollo-link-context");
 /***/ (function(module, exports) {
 
 module.exports = require("apollo-link-error");
-
-/***/ }),
-
-/***/ "apollo-link-ws":
-/*!*********************************!*\
-  !*** external "apollo-link-ws" ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("apollo-link-ws");
 
 /***/ }),
 
@@ -2181,17 +2175,6 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
-
-/***/ }),
-
-/***/ "ws":
-/*!*********************!*\
-  !*** external "ws" ***!
-  \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("ws");
 
 /***/ })
 
