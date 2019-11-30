@@ -1,9 +1,9 @@
 import { SET_MINI_DIALOG, SHOW_MINI_DIALOG } from '../constants/mini_dialog'
 
-export function setMiniDialog(title,child) {
+export function setMiniDialog(title, child, fullScreen) {
     return {
         type: SET_MINI_DIALOG,
-        payload: {title: title, child: child}
+        payload: {title: title, child: child, fullScreen}
     }
 }
 

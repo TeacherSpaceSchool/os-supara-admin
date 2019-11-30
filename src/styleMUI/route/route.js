@@ -57,7 +57,7 @@ export default makeStyles({
     },
     inputD: {
         marginBottom: 10,
-        width: 'calc(100vw - 682px)'
+        width: 'calc(100vw - 700px)'
     },
     inputDF: {
         marginBottom: 10,
@@ -135,6 +135,18 @@ export default makeStyles({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
+    },
+    geo: {
+        width: 200,
+        textAlign: 'center',
+        marginTop: -10,
+        marginBottom: 20,
+        fontSize: '1rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        borderBottom: '1px dashed #ffb300'
     },
 
 })

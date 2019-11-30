@@ -65,4 +65,20 @@ export default theme => ({
         flexDirection: 'row',
         alignItems: 'baseline'
     },
+    fabGeo: {
+        position: 'fixed',
+        bottom: 70,
+        right: 35
+    },
+    geo: {
+        width: 170,
+        textAlign: 'center',
+        marginTop: -5,
+        marginBottom: 10,
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300'
+    },
 });

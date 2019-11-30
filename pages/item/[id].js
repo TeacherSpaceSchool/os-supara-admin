@@ -38,7 +38,6 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Star from '@material-ui/icons/Star';
 import TextField from '@material-ui/core/TextField';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../../components/dialog/Confirmation'
 
 const Item = React.memo((props) => {
@@ -119,9 +118,7 @@ const Item = React.memo((props) => {
                                 data.item!==null||router.query.id==='new'?
                                     <>
                                     <label htmlFor='contained-button-file'>
-                                        <LazyLoadImage
-                                            placeholderSrc='/static/add.png'
-                                            effect='blur'
+                                        <img
                                             className={isMobileApp?classes.mediaM:classes.mediaD}
                                             src={preview}
                                             alt={'Добавить'}
@@ -320,9 +317,7 @@ const Item = React.memo((props) => {
                                     :
                                     <>
                                     <div className={classes.divImage}>
-                                        <LazyLoadImage
-                                            placeholderSrc='/static/add.png'
-                                            effect='blur'
+                                        <img
                                             className={isMobileApp?classes.mediaM:classes.mediaD}
                                             src={data.item.image}
                                             alt={data.item.info}

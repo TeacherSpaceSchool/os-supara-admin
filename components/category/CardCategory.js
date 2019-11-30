@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../dialog/Confirmation'
 
 const CardCategory = React.memo((props) => {
@@ -42,7 +41,7 @@ const CardCategory = React.memo((props) => {
                         <CardContent>
                             <div className={classes.line}>
                                 <label htmlFor={element?element._id:'add'}>
-                                    <LazyLoadImage
+                                    <img
                                         effect='blur'
                                         className={classes.media}
                                         src={preview}
@@ -135,12 +134,10 @@ const CardCategory = React.memo((props) => {
                             <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                 <div className={classes.line}>
                                     <label htmlFor='contained-button-file'>
-                                        <LazyLoadImage
-                                            effect='blur'
+                                        <img
                                             className={classes.media}
                                             src={element.image}
                                             alt={element.name}
-                                            placeholderSrc='/static/add.png'
                                         />
                                     </label>
                                     <h3 className={isMobileApp?classes.inputM:classes.inputD}>
@@ -155,12 +152,10 @@ const CardCategory = React.memo((props) => {
                                 <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                     <div className={classes.line}>
                                         <label htmlFor='contained-button-file'>
-                                            <LazyLoadImage
-                                                effect='blur'
+                                            <img
                                                 className={classes.media}
                                                 src={element.image}
                                                 alt={element.name}
-                                                placeholderSrc='/static/add.png'
                                             />
                                         </label>
                                         <h3 className={isMobileApp?classes.inputM:classes.inputD}>

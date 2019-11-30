@@ -18,7 +18,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../components/dialog/Confirmation'
 import AddSocial from '../components/dialog/AddSocial'
 
@@ -99,9 +98,7 @@ const Contact = React.memo((props) => {
                                 <>
                                     <div className={classes.column}>
                                         <label htmlFor='contained-button-file'>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur'
+                                            <img
                                                 className={classes.media}
                                                 src={preview}
                                                 alt={'Добавить'}
@@ -109,27 +106,19 @@ const Contact = React.memo((props) => {
                                         </label>
                                         Наши страницы
                                         <div className={classes.row}>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur' src='/static/instagram.svg' onClick={()=>{
+                                            <img src='/static/instagram.svg' onClick={()=>{
                                                 setMiniDialog('Instagram', <AddSocial action={addSocial} idx={0}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur' src='/static/facebook.svg' onClick={()=>{
+                                            <img src='/static/facebook.svg' onClick={()=>{
                                                 setMiniDialog('Facebook', <AddSocial action={addSocial} idx={0}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur' src='/static/twitter.svg' onClick={()=>{
+                                            <img src='/static/twitter.svg' onClick={()=>{
                                                 setMiniDialog('Twitter', <AddSocial action={addSocial} idx={0}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur' src='/static/telegram.svg' onClick={()=>{
+                                            <img src='/static/telegram.svg' onClick={()=>{
                                                 setMiniDialog('Telegram', <AddSocial action={addSocial} idx={0}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
@@ -319,9 +308,7 @@ const Contact = React.memo((props) => {
                                 :
                                 <>
                                 <div className={classes.column}>
-                                    <LazyLoadImage
-                                        placeholderSrc='/static/add.png'
-                                        effect='blur'
+                                    <img
                                         className={classes.media}
                                         src={preview}
                                         alt={name}
@@ -334,9 +321,7 @@ const Contact = React.memo((props) => {
                                             {
                                                 social[0].length>0?
                                                     <a href={social[0]}>
-                                                        <LazyLoadImage
-                                                            placeholderSrc='/static/add.png'
-                                                            effect='blur' src='/static/instagram.svg' className={classes.mediaSocial}/>
+                                                        <img src='/static/instagram.svg' className={classes.mediaSocial}/>
                                                     </a>
                                                     :
                                                     null
@@ -344,9 +329,7 @@ const Contact = React.memo((props) => {
                                             {
                                                 social[1].length>0?
                                                     <a href={social[1]}>
-                                                        <LazyLoadImage
-                                                            placeholderSrc='/static/add.png'
-                                                            effect='blur' src='/static/facebook.svg' className={classes.mediaSocial}/>
+                                                        <img src='/static/facebook.svg' className={classes.mediaSocial}/>
                                                     </a>
                                                     :
                                                     null
@@ -354,9 +337,7 @@ const Contact = React.memo((props) => {
                                             {
                                                 social[2].length>0?
                                                     <a href={social[2]}>
-                                                        <LazyLoadImage
-                                                            placeholderSrc='/static/add.png'
-                                                            effect='blur' src='/static/twitter.svg' className={classes.mediaSocial}/>
+                                                        <img src='/static/twitter.svg' className={classes.mediaSocial}/>
                                                     </a>
                                                     :
                                                     null
@@ -364,9 +345,7 @@ const Contact = React.memo((props) => {
                                             {
                                                 social[3].length>0?
                                                     <a href={social[3]}>
-                                                        <LazyLoadImage
-                                                            placeholderSrc='/static/add.png'
-                                                            effect='blur' src='/static/telegram.svg' className={classes.mediaSocial}/>
+                                                        <img src='/static/telegram.svg' className={classes.mediaSocial}/>
                                                     </a>
                                                     :
                                                     null

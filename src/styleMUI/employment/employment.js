@@ -51,7 +51,7 @@ export default makeStyles({
     },
     inputD: {
         marginBottom: 10,
-        width: 'calc(100vw - 682px)'
+        width: 'calc(100vw - 700px)'
     },
     inputDF: {
         marginBottom: 10,

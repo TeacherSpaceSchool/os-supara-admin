@@ -13,7 +13,6 @@ import Link from 'next/link';
 import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../dialog/Confirmation'
 
 const CardItem = React.memo((props) => {
@@ -71,9 +70,7 @@ const CardItem = React.memo((props) => {
                                     }
                                         </div>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                            <LazyLoadImage
-                                                placeholderSrc='/static/add.png'
-                                                effect='blur'
+                                            <img
                                                 className={classes.media}
                                                 src={element.image}
                                                 alt={element.info}

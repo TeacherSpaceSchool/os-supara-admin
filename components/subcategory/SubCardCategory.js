@@ -34,10 +34,11 @@ const CardCategory = React.memo((props) => {
     };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
+    console.log(element)
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             {
-                profile.role === 'admin' && element._id!=='all'?
+                profile.role === 'admin' && (!element||element._id!=='all')?
                     <>
                     <CardActionArea>
                         <CardContent>
@@ -97,10 +98,11 @@ const CardCategory = React.memo((props) => {
                         </Link>
                                 </>:
                                 <Button onClick={async()=> {
-                                    if (name.length > 0) {
+                                    if (name.length > 0&&selectCategory._id) {
                                         setName('')
+                                        setSelectCategory({})
                                         const action = async() => {
-                                            let subCategorys = (await addSubCategory({name: name}, category)).subCategorys
+                                            let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
                                             setList(subCategorys)
                                         }
                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)

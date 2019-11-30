@@ -13,7 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../dialog/Confirmation'
 
 const CardBlog = React.memo((props) => {
@@ -50,9 +49,7 @@ const CardBlog = React.memo((props) => {
                     />
                     <CardActionArea>
                         <label htmlFor={element?element._id:'add'}>
-                            <LazyLoadImage
-                                placeholderSrc='/static/add.png'
-                                effect='blur'
+                            <img
                                 className={isMobileApp?classes.mediaM:classes.mediaD}
                                 src={preview}
                                 alt={'Изменить'}
@@ -141,9 +138,7 @@ const CardBlog = React.memo((props) => {
                     element!==undefined?
                         <>
                         <CardActionArea>
-                            <LazyLoadImage
-                                placeholderSrc='/static/add.png'
-                                effect='blur'
+                            <img
                                 className={isMobileApp?classes.mediaM:classes.mediaD}
                                 src={element.image}
                                 alt={element.title}

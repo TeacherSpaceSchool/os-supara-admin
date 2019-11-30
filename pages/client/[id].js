@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getClient } from '../../src/gql/client'
 import clientStyle from '../../src/styleMUI/client/client'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
@@ -21,9 +21,9 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Router from 'next/router'
 import Confirmation from '../../components/dialog/Confirmation'
+import Geo from '../../components/dialog/Geo'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -53,6 +53,11 @@ const Client = React.memo((props) => {
         address.splice(idx, 1);
         setAddress([...address])
     };
+    let setAddressGeo = (geo, idx)=>{
+        address[idx][1] = geo
+        console.log(address[idx])
+        setAddress([...address])
+    };
 
     let [info, setInfo] = useState(data.client!==null?data.client.info:'');
     let [preview, setPreview] = useState(data.client!==null?data.client.image:'');
@@ -77,14 +82,12 @@ const Client = React.memo((props) => {
                 <title>{data.client!==null?data.client.name:'Ничего не найдено'}</title>
             </Head>
             <Card className={classes.page}>
-                <CardActions className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client!==null?
                             profile.role==='admin'||profile._id===data.client.user._id?
                                 <>
                                 <label htmlFor='contained-button-file'>
-                                    <LazyLoadImage
-                                        placeholderSrc='/static/add.png'
-                                        effect='blur'
+                                    <img
                                         className={classes.media}
                                         src={preview}
                                         alt={'Добавить'}
@@ -163,8 +166,10 @@ const Client = React.memo((props) => {
                                                 }
                                             />
                                         </FormControl>
-                                        <div className={classes.geo}>
-                                            {console.log(element[1])}
+                                        <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
+                                            setMiniDialog('Геолокация', <Geo change={true} geo={element[1]} setAddressGeo={setAddressGeo} idx={idx}/>, true)
+                                            showMiniDialog(true)
+                                        }}>
                                             {
                                                 element[1]?
                                                     'Изменить геолокацию'
@@ -249,9 +254,7 @@ const Client = React.memo((props) => {
                                 </>
                                 :
                                 <>
-                                <LazyLoadImage
-                                    placeholderSrc='/static/add.png'
-                                    effect='blur'
+                                <img
                                     className={classes.media}
                                     src={preview}
                                     alt={name}
@@ -266,9 +269,22 @@ const Client = React.memo((props) => {
                                         </div>
                                         <div className={classes.column}>
                                             {address?address.map((element, idx)=>
+                                                <>
                                                 <div className={classes.value} key={idx}>
-                                                    {element}
+                                                    {element[0]}
                                                 </div>
+                                                <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
+                                                    setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
+                                                    showMiniDialog(true)
+                                                }}>
+                                                    {
+                                                        element[1]?
+                                                            'Посмотреть геолокацию'
+                                                            :
+                                                            'Геолокация не задана'
+                                                    }
+                                                </div>
+                                                </>
                                             ):null}
                                         </div>
                                     </div>
@@ -296,7 +312,7 @@ const Client = React.memo((props) => {
                             :
                             'Ничего не найдено'
                             }
-                        </CardActions>
+                        </CardContent>
                 </Card>
             <input
                 accept='image/*'

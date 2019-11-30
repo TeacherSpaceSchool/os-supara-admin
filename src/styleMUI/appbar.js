@@ -25,4 +25,8 @@ export default makeStyles({
         width: 'calc(100% - 20px)',
         margin: 10,
     },
+    searchField: {
+        width: 'calc(100% - 20px)',
+        margin: 10,
+    },
 })

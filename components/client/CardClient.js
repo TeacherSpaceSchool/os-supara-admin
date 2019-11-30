@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffClient } from '../../src/gql/client'
 import CardActions from '@material-ui/core/CardActions';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../../components/dialog/Confirmation'
 
 const CardOrganization = React.memo((props) => {
@@ -26,9 +25,7 @@ const CardOrganization = React.memo((props) => {
                 <Link href='/client/[id]' as={`/client/${element.user._id}`}>
                     <CardContent className={classes.line}>
                         <label htmlFor='contained-button-file'>
-                            <LazyLoadImage
-                                placeholderSrc='/static/add.png'
-                                effect='blur'
+                            <img
                                 className={classes.media}
                                 src={element.image}
                                 alt={element.name}

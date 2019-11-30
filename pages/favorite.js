@@ -50,7 +50,7 @@ const Items = React.memo((props) => {
 })
 
 Items.getInitialProps = async function(ctx) {
-    if('client'===ctx.store.getState().user.profile.role||!ctx.store.getState().user.authenticated)
+    if('client'!==ctx.store.getState().user.profile.role&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

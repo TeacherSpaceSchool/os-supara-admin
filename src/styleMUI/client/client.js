@@ -47,9 +47,8 @@ export default makeStyles({
         whiteSpace: 'pre-wrap'
     },
     geo: {
-        width: 140,
+        width: 170,
         textAlign: 'center',
-        color: '#ffb300',
         marginTop: -10,
         marginBottom: 20,
         fontSize: '0.875rem',
@@ -64,7 +63,7 @@ export default makeStyles({
     },
     inputD: {
         marginBottom: 10,
-        width: 'calc(100vw - 682px)'
+        width: 'calc(100vw - 700px)'
     },
     inputDF: {
         marginBottom: 10,

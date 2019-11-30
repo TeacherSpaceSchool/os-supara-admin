@@ -19,14 +19,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Router from 'next/router'
+import Confirmation from './Confirmation'
 
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
         const { client, allPrice } = props;
-        const { showMiniDialog } = props.mini_dialogActions;
+        const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
-        const { classes, action, idx } = props;
+        const { classes } = props;
         const width = isMobileApp? (window.innerWidth-126) : 500
         let [address, setAddress] = useState([]);
         let [coment, setComent] = useState('');
@@ -58,7 +59,7 @@ const BuyBasket =  React.memo(
                                         setAddress([...address])
                                     }}
                                     control={<Checkbox value={idx} />}
-                                    label={element}
+                                    label={element[0]}
                                 />
                             ))
                         }
@@ -90,9 +91,12 @@ const BuyBasket =  React.memo(
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
                         if(paymentMethod.length>0&&address.length>0){
-                            await addOrders({info: coment, paymentMethod: paymentMethod, address: address})
-                            Router.push('/orders')
-                            showMiniDialog(false);
+                            const action = async() => {
+                                await addOrders({info: coment, paymentMethod: paymentMethod, address: address})
+                                Router.push('/orders')
+                                showMiniDialog(false);
+                            }
+                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                         } else
                             showSnackBar('Заполните все поля')
                     }} className={classes.button}>

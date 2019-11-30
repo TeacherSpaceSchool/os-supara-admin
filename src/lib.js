@@ -25,6 +25,12 @@ export const pdDDMMYY = (date) =>
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)
     return date
 }
+export const pdDatePicker = (date) =>
+{
+    date = JSON.stringify(date).split('-')
+    date = date[0].replace('"', '')+'-'+date[1]+'-'+date[2].split('T')[0]
+    return date
+}
 export const pdDDMMYYHHMM = (date) =>
 {
     date = JSON.stringify(date).split('-')

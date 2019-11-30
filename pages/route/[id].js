@@ -22,8 +22,9 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router'
-import { pdDDMMYYYY } from '../../src/lib'
+import { pdDatePicker } from '../../src/lib'
 import Confirmation from '../../components/dialog/Confirmation'
+import GeoRoute from '../../components/dialog/GeoRoute'
 
 const Route = React.memo((props) => {
     const { profile } = props.user;
@@ -31,7 +32,7 @@ const Route = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     const { isMobileApp } = props.app;
-    let [dateStart, setDateStart] = useState(data.route!==null?pdDDMMYYYY(new Date(data.route.dateStart)):null);
+    let [dateStart, setDateStart] = useState(data.route!==null?pdDatePicker(new Date(data.route.dateStart)):null);
     let [dateEnd, setDateEnd] = useState(data.route!==null?data.route.dateEnd:null);
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
     let handleEmployment =  (event) => {
@@ -89,6 +90,8 @@ const Route = React.memo((props) => {
         setCancelInvoices([])
         setInvoices((await getRoute({_id: data.route._id})).route.invoices)
     }
+    console.log(dateStart)
+    const breakGeoRoute = (invoices.filter((element)=>!element.address[1])).length>0
     return (
         <App pageName={data.route?router.query.id==='new'?'Добавить':data.route.number:'Ничего не найдено'}>
             <Head>
@@ -158,6 +161,11 @@ const Route = React.memo((props) => {
                             onChange={ event => setDateStart(event.target.value) }
                         />
                        <br/>
+                       <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
+                           setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
+                           showMiniDialog(true)
+                       }} className={classes.geo}>{breakGeoRoute?'Маршрут неполный':'Просмотреть маршрут'}</div>
+                       <br/>
                        <div style={{ justifyContent: 'center' }} className={classes.row}>
                            <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
                                Все
@@ -174,7 +182,7 @@ const Route = React.memo((props) => {
                            {allInvoices?allInvoices.map((element, idx)=> {
                                return (
                                    <div key={idx} className={classes.row}>
-                                       {['обработка', 'принят'].includes(element.orders[0].status)?
+                                       {['обработка', 'принят'].includes(element.orders[0].status)&&!element.confirmationForwarder?
                                            <Checkbox checked={invoices.includes(element)} onChange={() => {
                                                if (!invoices.includes(element)) {
                                                    invoices.push(element)

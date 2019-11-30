@@ -17,7 +17,6 @@ import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
 import { getBasket, setBasket, deleteBasket } from '../src/gql/basket';
 import { getClient } from '../src/gql/client';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
 import Sign from '../components/dialog/Sign'
@@ -91,6 +90,10 @@ const Basket = React.memo((props) => {
         }
         setAllPrice(allPrice)
     };
+
+    //привести к геолокации
+    if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
+
     return (
         <App getList={getList} pageName='Корзина'>
             <Head>
@@ -105,9 +108,7 @@ const Basket = React.memo((props) => {
                                             <CardActions className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                                                 <div className={classes.itemM}>
                                                 <div className={classes.divImage}>
-                                                    <LazyLoadImage
-                                                        placeholderSrc='/static/add.png'
-                                                        effect='blur' className={classes.mediaM} src={row.item.image}/>
+                                                    <img className={classes.mediaM} src={row.item.image}/>
                                                     <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.cancelM}>
                                                         <CancelIcon style={{height: 40, width: 40}} />
                                                     </IconButton>
@@ -170,9 +171,7 @@ const Basket = React.memo((props) => {
                                             <TableRow key={idx}>
                                                 <TableCell component="th" scope="row" >
                                                     <div className={classes.row}>
-                                                        <LazyLoadImage
-                                                            placeholderSrc='/static/add.png'
-                                                            effect='blur' className={classes.mediaD} src={row.item.image}/>
+                                                        <img className={classes.mediaD} src={row.item.image}/>
                                                         <div className={classes.nameD}>
                                                             {row.item.name}
                                                         </div>
@@ -230,7 +229,7 @@ const Basket = React.memo((props) => {
 })
 
 Basket.getInitialProps = async function(ctx) {
-    if('client'===ctx.store.getState().user.profile.role||!ctx.store.getState().user.authenticated)
+    if('client'!==ctx.store.getState().user.profile.role&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

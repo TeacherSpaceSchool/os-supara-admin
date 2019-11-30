@@ -8,10 +8,11 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 
 const MyDialog =  React.memo(
     (props) =>{
-        const { title, child, show } = props.mini_dialog;
+        const { title, child, show, fullScreen  } = props.mini_dialog;
         const { showMiniDialog } = props.mini_dialogActions;
         return (
                 <Dialog
+                    fullScreen={fullScreen}
                     open={show}
                     onClose={()=>{showMiniDialog(false)}}
                     aria-labelledby='alert-dialog-title'

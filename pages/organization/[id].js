@@ -22,7 +22,6 @@ import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import * as snackbarActions from '../../redux/actions/snackbar'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../../components/dialog/Confirmation'
 
 const Organization = React.memo((props) => {
@@ -99,9 +98,7 @@ const Organization = React.memo((props) => {
                             profile.role==='admin'||(profile.role==='организация'&&data.employment.organization._id===data.organization._id)?
                                 <>
                                 <label htmlFor='contained-button-file'>
-                                    <LazyLoadImage
-                                        placeholderSrc='/static/add.png'
-                                        effect='blur'
+                                    <img
                                         className={classes.media}
                                         src={preview}
                                         alt={'Добавить'}
@@ -340,9 +337,7 @@ const Organization = React.memo((props) => {
                                     'Ничего не найдено'
                                     :
                                     <>
-                                    <LazyLoadImage
-                                        placeholderSrc='/static/add.png'
-                                        effect='blur'
+                                    <img
                                         className={classes.media}
                                         src={preview}
                                         alt={name}

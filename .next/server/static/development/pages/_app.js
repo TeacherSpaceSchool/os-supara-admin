@@ -983,13 +983,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfile", function() { return getProfile; });
 /* harmony import */ var _constants_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/user */ "./redux/constants/user.js");
 /* harmony import */ var _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/mini_dialog */ "./redux/constants/mini_dialog.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "js-cookie");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _constants_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants/app */ "./redux/constants/app.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../src/singleton/store */ "./src/singleton/store.js");
+
+
 
 
 
@@ -999,28 +1003,37 @@ __webpack_require__.r(__webpack_exports__);
 function signup(payload) {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.mutate({
         variables: payload,
-        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     mutation ($phone: String!, $password: String!) {
                         signupuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`
       });
-      if (result.data.signupuser.data === 'Проверьте данные') await dispatch({
+      if (result.data.signupuser.role === 'Проверьте данные') await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        await dispatch({
-          type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
-        });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        }); //setTimeout(()=>window.location.reload(), 1)
+        });
+        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        /*
+        await dispatch({type: AUTHENTICATED});
+        await dispatch({
+            type: SET_PROFILE,
+            payload: result.data.signupuser
+        })*/
+
+        window.location.reload();
       }
     } catch (error) {
       dispatch({
@@ -1033,28 +1046,36 @@ function signup(payload) {
 function signin(payload) {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.mutate({
         variables: payload,
-        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     mutation ($phone: String!, $password: String!) {
                         signinuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`
       });
-      if (result.data.signinuser.data === 'Проверьте данные') await dispatch({
+      if (result.data.signinuser.role === 'Проверьте данные') await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        await dispatch({
-          type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
-        });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        }); //setTimeout(()=>window.location.reload(), 100)
+        });
+        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        window.location.reload();
+        /*
+        await dispatch({type: AUTHENTICATED});
+        await dispatch({
+            type: SET_PROFILE,
+            payload: result.data.signinuser
+        })*/
       }
     } catch (error) {
       console.log(error);
@@ -1068,7 +1089,7 @@ function signin(payload) {
 function checkAuthenticated() {
   return async dispatch => {
     try {
-      if (js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get('jwt')) {
+      if (js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('jwt')) {
         dispatch({
           type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
         });
@@ -1092,19 +1113,27 @@ function setAuthenticated(auth) {
 }
 function logout() {
   return async dispatch => {
-    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-    js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
-    dispatch({
+    await dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
+    });
+    await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+    await js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.remove('jwt');
+    await dispatch({
+      type: _constants_app__WEBPACK_IMPORTED_MODULE_2__["SET_COUNT_BASKET"],
+      payload: 0
+    });
+    await dispatch({
+      type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["SET_PROFILE"],
+      payload: {}
     }); //setTimeout(()=>window.location.reload(),100)
   };
 }
 function setProfile() {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.query({
-        query: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        query: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     query {
                         getStatus {
                            role
@@ -1126,9 +1155,9 @@ function setProfile() {
 }
 async function getProfile() {
   try {
-    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
     let result = await client.query({
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                    query {
                        getStatus {
                           role
@@ -1400,7 +1429,8 @@ __webpack_require__.r(__webpack_exports__);
 const initialState = {
   title: '',
   child: null,
-  show: false
+  show: false,
+  fullScreen: false
 };
 function mini_dialog(state = initialState, action) {
   switch (action.type) {
@@ -1412,7 +1442,8 @@ function mini_dialog(state = initialState, action) {
     case _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SET_MINI_DIALOG"]:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         title: action.payload.title,
-        child: action.payload.child
+        child: action.payload.child,
+        fullScreen: action.payload.fullScreen
       });
 
     default:
@@ -1521,7 +1552,7 @@ function user(state = initialState, action) {
 /*!********************!*\
   !*** ./src/lib.js ***!
   \********************/
-/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDDMMYYHHMM */
+/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDatePicker, pdDDMMYYHHMM */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1532,6 +1563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkInt", function() { return checkInt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYYY", function() { return pdDDMMYYYY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYY", function() { return pdDDMMYY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDatePicker", function() { return pdDatePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYHHMM", function() { return pdDDMMYYHHMM; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
@@ -1562,6 +1594,11 @@ const pdDDMMYYYY = date => {
 const pdDDMMYY = date => {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4);
+  return date;
+};
+const pdDatePicker = date => {
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  date = date[0].replace('"', '') + '-' + date[1] + '-' + date[2].split('T')[0];
   return date;
 };
 const pdDDMMYYHHMM = date => {

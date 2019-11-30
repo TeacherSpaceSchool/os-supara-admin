@@ -11,7 +11,6 @@ import { addBasket } from '../src/gql/basket'
 import * as userActions from '../redux/actions/user'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const mainWindow = React.createRef();
 
@@ -21,9 +20,9 @@ const App = React.memo(props => {
     let { sorts, filters, getList, pageName } = props;
     let [ads, setAds] = useState({});
     useEffect( ()=>{
-        if(authenticated&&!profile.role)
+        if(window&&authenticated)
             setProfile()
-    },[authenticated])
+    },[])
     useEffect( ()=>{
         (async ()=>{
             if(authenticated){
@@ -61,8 +60,7 @@ const App = React.memo(props => {
                     {
                         ads&&ads.url?
                             <a href={ads.url}>
-                                <LazyLoadImage
-                                    placeholderSrc='/static/add.png'
+                                <img
                                     src={ads.image}
                                     alt={ads.title}
                                     className='marketImg'

@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, deleteOrganization } from '../../src/gql/organization'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Confirmation from '../../components/dialog/Confirmation'
 
 const CardOrganization = React.memo((props) => {
@@ -24,8 +23,7 @@ const CardOrganization = React.memo((props) => {
             <CardActionArea>
                 <Link href='/organization/[id]' as={`/organization/${element._id}`}>
                     <div className={classes.line}>
-                        <LazyLoadImage
-                            effect='blur'
+                        <img
                             className={classes.mediaO}
                             src={element.image}
                             alt={element.name}

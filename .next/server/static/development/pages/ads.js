@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,12 +124,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
 /* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-lazy-load-image-component */ "react-lazy-load-image-component");
-/* harmony import */ var react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
+/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\ads\\CardAds.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
 
 
 
@@ -200,37 +197,35 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     className: isMobileApp ? classes.cardM : classes.cardD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 41
     },
     __self: undefined
   }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 42
     },
     __self: undefined
   }, __jsx("label", {
     htmlFor: element ? element._id : 'add',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 43
     },
     __self: undefined
-  }, __jsx(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_13__["LazyLoadImage"], {
-    placeholderSrc: "/static/add.png",
-    effect: "blur",
+  }, __jsx("img", {
     className: isMobileApp ? classes.mediaM : classes.mediaD,
     src: preview,
     alt: 'Изменить',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 44
     },
     __self: undefined
   })), __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 50
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -243,19 +238,19 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 51
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 60
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 61
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -268,13 +263,13 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 62
     },
     __self: undefined
   }))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 73
     },
     __self: undefined
   }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -290,11 +285,11 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
         setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["setAds"])(editElement)).adss);
       };
 
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88
+          lineNumber: 85
         },
         __self: undefined
       }));
@@ -304,7 +299,7 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 77
     },
     __self: undefined
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -313,11 +308,11 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
         setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["deleteAds"])([element._id])).adss);
       };
 
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97
+          lineNumber: 94
         },
         __self: undefined
       }));
@@ -327,7 +322,7 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 90
     },
     __self: undefined
   }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -346,11 +341,11 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
           })).adss);
         };
 
-        setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
           action: action,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 113
+            lineNumber: 110
           },
           __self: undefined
         }));
@@ -363,7 +358,7 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 101
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
@@ -376,32 +371,30 @@ const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 121
     },
     __self: undefined
   })) : element !== undefined ? __jsx("div", {
     className: isMobileApp ? classes.cardM : classes.cardD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134
+      lineNumber: 131
     },
     __self: undefined
   }, __jsx("a", {
     href: element.url,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 132
     },
     __self: undefined
-  }, __jsx(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_13__["LazyLoadImage"], {
-    placeholderSrc: "/static/add.png",
-    effect: "blur",
+  }, __jsx("img", {
     className: isMobileApp ? classes.mediaM : classes.mediaD,
     alt: element.title,
     src: element.image,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136
+      lineNumber: 133
     },
     __self: undefined
   }))) : null);
@@ -708,14 +701,8 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       lineNumber: 117
     },
     __self: undefined
-  }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_23___default.a, {
-    className: classes.textField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 118
-    },
-    __self: undefined
   }, __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    className: classes.searchField,
     id: "adornment-password",
     type: 'login',
     value: search,
@@ -724,7 +711,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 125
+        lineNumber: 124
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -735,35 +722,35 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 126
+        lineNumber: 125
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_22___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 127
+        lineNumber: 126
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
+      lineNumber: 118
     },
     __self: undefined
-  }))) : __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
+  })) : __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
     "aria-owns": openMobileMenu ? 'menu-appbar' : undefined,
     "aria-haspopup": "true",
     onClick: handleMobileMenu,
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 133
     },
     __self: undefined
   }, __jsx(_material_ui_icons_SearchRounded__WEBPACK_IMPORTED_MODULE_26___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141
+      lineNumber: 139
     },
     __self: undefined
   })), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -781,7 +768,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseMobileMenu,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143
+      lineNumber: 141
     },
     __self: undefined
   }, __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -791,7 +778,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 155
     },
     __self: undefined
   }, __jsx("div", {
@@ -801,20 +788,20 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 160
+      lineNumber: 158
     },
     __self: undefined
   }, __jsx(_material_ui_icons_SearchRounded__WEBPACK_IMPORTED_MODULE_26___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161
+      lineNumber: 159
     },
     __self: undefined
   }), "\xA0\u041F\u043E\u0438\u0441\u043A")), filters && filters.length > 0 ? [__jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     onClick: handleMenuFilter,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 164
     },
     __self: undefined
   }, __jsx("div", {
@@ -824,13 +811,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 165
     },
     __self: undefined
   }, __jsx(_material_ui_icons_FilterListRounded__WEBPACK_IMPORTED_MODULE_28___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 166
     },
     __self: undefined
   }), "\xA0\u0424\u0438\u043B\u044C\u0442\u0440")), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -849,7 +836,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseFilter,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 171
+      lineNumber: 169
     },
     __self: undefined
   }, filters.map((elem, idx) => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -863,14 +850,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 186
+      lineNumber: 184
     },
     __self: undefined
   }, elem.name)))] : null, sorts && sorts.length > 0 ? [__jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     onClick: handleMenuSort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 193
+      lineNumber: 191
     },
     __self: undefined
   }, __jsx("div", {
@@ -880,13 +867,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 194
+      lineNumber: 192
     },
     __self: undefined
   }, __jsx(_material_ui_icons_SortRounded__WEBPACK_IMPORTED_MODULE_27___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 195
+      lineNumber: 193
     },
     __self: undefined
   }), "\xA0\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430")), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -905,7 +892,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseSort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 198
+      lineNumber: 196
     },
     __self: undefined
   }, sorts.map((elem, idx) => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -916,19 +903,19 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 211
     },
     __self: undefined
   }, sort === `-${elem.field}` ? __jsx(_material_ui_icons_ArrowDownward__WEBPACK_IMPORTED_MODULE_20___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 211
     },
     __self: undefined
   }) : sort === elem.field ? __jsx(_material_ui_icons_ArrowUpward__WEBPACK_IMPORTED_MODULE_19___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 211
     },
     __self: undefined
   }) : __jsx("div", {
@@ -937,14 +924,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 211
     },
     __self: undefined
   }), elem.name)))] : null), __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
     title: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 217
     },
     __self: undefined
   }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -954,7 +941,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClick: handleMenuProfile,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 220
+      lineNumber: 218
     },
     __self: undefined
   }, __jsx(_material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_32___default.a, {
@@ -962,13 +949,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "secondary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 226
+      lineNumber: 224
     },
     __self: undefined
   }, __jsx(_material_ui_icons_PermIdentity__WEBPACK_IMPORTED_MODULE_29___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 227
+      lineNumber: 225
     },
     __self: undefined
   })))), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -986,13 +973,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseProfile,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 231
+      lineNumber: 229
     },
     __self: undefined
   }, !authenticated || profile.role === 'client' ? [__jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 248
+      lineNumber: 246
     },
     __self: undefined
   }, __jsx(_material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_32___default.a, {
@@ -1000,14 +987,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "secondary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 249
+      lineNumber: 247
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
     href: "/basket",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 250
+      lineNumber: 248
     },
     __self: undefined
   }, __jsx("a", {
@@ -1017,26 +1004,26 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 251
+      lineNumber: 249
     },
     __self: undefined
   }, __jsx(_material_ui_icons_LocalGroceryStore__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 252
+      lineNumber: 250
     },
     __self: undefined
   }), "\xA0\u041A\u043E\u0440\u0437\u0438\u043D\u0430\xA0\xA0")))), __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 258
+      lineNumber: 256
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
     href: "/favorite",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 259
+      lineNumber: 257
     },
     __self: undefined
   }, __jsx("a", {
@@ -1046,19 +1033,19 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 260
+      lineNumber: 258
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Star__WEBPACK_IMPORTED_MODULE_9___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 261
+      lineNumber: 259
     },
     __self: undefined
   }), "\xA0\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435")))] : null, authenticated && profile.role !== 'admin' ? __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 271
+      lineNumber: 269
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
@@ -1066,7 +1053,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     as: `/${profile.role === 'client' ? 'client' : 'employment'}/${profile._id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 272
+      lineNumber: 270
     },
     __self: undefined
   }, __jsx("a", {
@@ -1076,13 +1063,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 273
+      lineNumber: 271
     },
     __self: undefined
   }, __jsx(_material_ui_icons_AssignmentInd__WEBPACK_IMPORTED_MODULE_11___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 274
+      lineNumber: 272
     },
     __self: undefined
   }), "\xA0\u041F\u0440\u043E\u0444\u0438\u043B\u044C"))) : null, authenticated ? __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1097,7 +1084,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 288
+          lineNumber: 286
         },
         __self: undefined
       }));
@@ -1105,7 +1092,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 283
+      lineNumber: 281
     },
     __self: undefined
   }, __jsx("div", {
@@ -1115,13 +1102,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 291
+      lineNumber: 289
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 292
+      lineNumber: 290
     },
     __self: undefined
   }), "\xA0\u0412\u044B\u0439\u0442\u0438")) : __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1131,7 +1118,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
         isMobileApp: isMobileApp,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 298
+          lineNumber: 296
         },
         __self: undefined
       }));
@@ -1139,7 +1126,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 296
+      lineNumber: 294
     },
     __self: undefined
   }, __jsx("div", {
@@ -1149,30 +1136,24 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 301
+      lineNumber: 299
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 302
+      lineNumber: 300
     },
     __self: undefined
   }), "\xA0\u0412\u043E\u0439\u0442\u0438")))) : openSearch ? __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.searchD,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 311
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_23___default.a, {
-    className: classes.textField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 312
+      lineNumber: 309
     },
     __self: undefined
   }, __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_24___default.a, {
+    className: classes.searchField,
     id: "adornment-password",
     type: 'login',
     value: search,
@@ -1181,7 +1162,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 319
+        lineNumber: 316
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -1192,26 +1173,26 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 320
+        lineNumber: 317
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_22___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 321
+        lineNumber: 318
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 313
+      lineNumber: 310
     },
     __self: undefined
-  }))) : __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, filters && filters.length > 0 ? __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
+  })) : __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, filters && filters.length > 0 ? __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
     title: "\u0424\u0438\u043B\u044C\u0442\u0440",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 331
+      lineNumber: 327
     },
     __self: undefined
   }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -1221,13 +1202,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 332
+      lineNumber: 328
     },
     __self: undefined
   }, __jsx(_material_ui_icons_FilterListRounded__WEBPACK_IMPORTED_MODULE_28___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 338
+      lineNumber: 334
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -1245,7 +1226,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseFilter,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 341
+      lineNumber: 337
     },
     __self: undefined
   }, filters.map((elem, idx) => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1259,14 +1240,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 355
+      lineNumber: 351
     },
     __self: undefined
   }, elem.name))), "\xA0") : null, sorts && sorts.length > 0 ? __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
     title: "\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 363
+      lineNumber: 359
     },
     __self: undefined
   }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -1276,13 +1257,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 364
+      lineNumber: 360
     },
     __self: undefined
   }, __jsx(_material_ui_icons_SortRounded__WEBPACK_IMPORTED_MODULE_27___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 370
+      lineNumber: 366
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -1300,7 +1281,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseSort,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 373
+      lineNumber: 369
     },
     __self: undefined
   }, sorts.map((elem, idx) => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1311,19 +1292,19 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 387
+      lineNumber: 383
     },
     __self: undefined
   }, sort === `-${elem.field}` ? __jsx(_material_ui_icons_ArrowDownward__WEBPACK_IMPORTED_MODULE_20___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 387
+      lineNumber: 383
     },
     __self: undefined
   }) : sort === elem.field ? __jsx(_material_ui_icons_ArrowUpward__WEBPACK_IMPORTED_MODULE_19___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 387
+      lineNumber: 383
     },
     __self: undefined
   }) : __jsx("div", {
@@ -1332,14 +1313,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 387
+      lineNumber: 383
     },
     __self: undefined
   }), elem.name))), "\xA0") : null, __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
     title: "\u041F\u043E\u0438\u0441\u043A",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 393
+      lineNumber: 389
     },
     __self: undefined
   }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -1351,20 +1332,20 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 394
+      lineNumber: 390
     },
     __self: undefined
   }, __jsx(_material_ui_icons_SearchRounded__WEBPACK_IMPORTED_MODULE_26___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 400
+      lineNumber: 396
     },
     __self: undefined
   }))), __jsx(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6___default.a, {
     title: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 403
+      lineNumber: 399
     },
     __self: undefined
   }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -1374,7 +1355,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClick: handleMenuProfile,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 404
+      lineNumber: 400
     },
     __self: undefined
   }, __jsx(_material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_32___default.a, {
@@ -1382,13 +1363,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "secondary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 410
+      lineNumber: 406
     },
     __self: undefined
   }, __jsx(_material_ui_icons_PermIdentity__WEBPACK_IMPORTED_MODULE_29___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 411
+      lineNumber: 407
     },
     __self: undefined
   })))), __jsx(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_31___default.a, {
@@ -1406,13 +1387,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     onClose: handleCloseProfile,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 415
+      lineNumber: 411
     },
     __self: undefined
   }, !authenticated || profile.role === 'client' ? [__jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 432
+      lineNumber: 428
     },
     __self: undefined
   }, __jsx(_material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_32___default.a, {
@@ -1420,14 +1401,14 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     color: "secondary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 433
+      lineNumber: 429
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
     href: "/basket",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 434
+      lineNumber: 430
     },
     __self: undefined
   }, __jsx("a", {
@@ -1437,26 +1418,26 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 435
+      lineNumber: 431
     },
     __self: undefined
   }, __jsx(_material_ui_icons_LocalGroceryStore__WEBPACK_IMPORTED_MODULE_8___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 436
+      lineNumber: 432
     },
     __self: undefined
   }), "\xA0\u041A\u043E\u0440\u0437\u0438\u043D\u0430\xA0\xA0")))), __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 442
+      lineNumber: 438
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
     href: "/favorite",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 443
+      lineNumber: 439
     },
     __self: undefined
   }, __jsx("a", {
@@ -1466,19 +1447,19 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 444
+      lineNumber: 440
     },
     __self: undefined
   }, __jsx(_material_ui_icons_Star__WEBPACK_IMPORTED_MODULE_9___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 445
+      lineNumber: 441
     },
     __self: undefined
   }), "\xA0\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435")))] : null, authenticated && profile.role !== 'admin' ? __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 455
+      lineNumber: 451
     },
     __self: undefined
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
@@ -1486,7 +1467,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     as: `/${profile.role === 'client' ? 'client' : 'employment'}/${profile._id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 456
+      lineNumber: 452
     },
     __self: undefined
   }, __jsx("a", {
@@ -1496,13 +1477,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 457
+      lineNumber: 453
     },
     __self: undefined
   }, __jsx(_material_ui_icons_AssignmentInd__WEBPACK_IMPORTED_MODULE_11___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 458
+      lineNumber: 454
     },
     __self: undefined
   }), "\xA0\u041F\u0440\u043E\u0444\u0438\u043B\u044C"))) : null, authenticated ? __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1517,7 +1498,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 472
+          lineNumber: 468
         },
         __self: undefined
       }));
@@ -1525,7 +1506,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 467
+      lineNumber: 463
     },
     __self: undefined
   }, __jsx("div", {
@@ -1535,13 +1516,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 475
+      lineNumber: 471
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 476
+      lineNumber: 472
     },
     __self: undefined
   }), "\xA0\u0412\u044B\u0439\u0442\u0438")) : __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_30___default.a, {
@@ -1551,7 +1532,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
         isMobileApp: isMobileApp,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 482
+          lineNumber: 478
         },
         __self: undefined
       }));
@@ -1559,7 +1540,7 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 480
+      lineNumber: 476
     },
     __self: undefined
   }, __jsx("div", {
@@ -1569,13 +1550,13 @@ const MyAppBar = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 485
+      lineNumber: 481
     },
     __self: undefined
   }, __jsx(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 486
+      lineNumber: 482
     },
     __self: undefined
   }), "\xA0\u0412\u043E\u0439\u0442\u0438")))))));
@@ -1635,12 +1616,14 @@ const MyDialog = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
   const {
     title,
     child,
-    show
+    show,
+    fullScreen
   } = props.mini_dialog;
   const {
     showMiniDialog
   } = props.mini_dialogActions;
   return __jsx(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    fullScreen: fullScreen,
     open: show,
     onClose: () => {
       showMiniDialog(false);
@@ -1658,13 +1641,13 @@ const MyDialog = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 20
     },
     __self: undefined
   }, title), __jsx(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 21
     },
     __self: undefined
   }, child));
@@ -3176,12 +3159,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _scss_app_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../scss/app.scss */ "./scss/app.scss");
 /* harmony import */ var _scss_app_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_scss_app_scss__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-lazy-load-image-component */ "react-lazy-load-image-component");
-/* harmony import */ var react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_14__);
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\layouts\\App.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
-
 
 
 
@@ -3215,8 +3195,8 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     1: setAds
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({});
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    if (authenticated && !profile.role) setProfile();
-  }, [authenticated]);
+    if (window && authenticated) setProfile();
+  }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     (async () => {
       if (authenticated) {
@@ -3259,7 +3239,7 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     className: "App",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 56
     },
     __self: undefined
   }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -3268,62 +3248,61 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     filters: filters,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 57
     },
     __self: undefined
   }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 58
     },
     __self: undefined
   }), __jsx("div", {
     className: "App-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 59
     },
     __self: undefined
   }, ads && ads.url ? __jsx("a", {
     href: ads.url,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 62
     },
     __self: undefined
-  }, __jsx(react_lazy_load_image_component__WEBPACK_IMPORTED_MODULE_14__["LazyLoadImage"], {
-    placeholderSrc: "/static/add.png",
+  }, __jsx("img", {
     src: ads.image,
     alt: ads.title,
     className: "marketImg",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 63
     },
     __self: undefined
   })) : null, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 74
     },
     __self: undefined
   }), __jsx(_components_app_SnackBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 75
     },
     __self: undefined
   }), load ? __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 77
     },
     __self: undefined
   }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 78
     },
     __self: undefined
   })) : null);
@@ -4326,12 +4305,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showMiniDialog", function() { return showMiniDialog; });
 /* harmony import */ var _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/mini_dialog */ "./redux/constants/mini_dialog.js");
 
-function setMiniDialog(title, child) {
+function setMiniDialog(title, child, fullScreen) {
   return {
     type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_0__["SET_MINI_DIALOG"],
     payload: {
       title: title,
-      child: child
+      child: child,
+      fullScreen
     }
   };
 }
@@ -4391,13 +4371,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfile", function() { return getProfile; });
 /* harmony import */ var _constants_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/user */ "./redux/constants/user.js");
 /* harmony import */ var _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/mini_dialog */ "./redux/constants/mini_dialog.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "js-cookie");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _constants_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants/app */ "./redux/constants/app.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../src/singleton/store */ "./src/singleton/store.js");
+
+
 
 
 
@@ -4407,28 +4391,37 @@ __webpack_require__.r(__webpack_exports__);
 function signup(payload) {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.mutate({
         variables: payload,
-        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     mutation ($phone: String!, $password: String!) {
                         signupuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`
       });
-      if (result.data.signupuser.data === 'Проверьте данные') await dispatch({
+      if (result.data.signupuser.role === 'Проверьте данные') await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        await dispatch({
-          type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
-        });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        }); //setTimeout(()=>window.location.reload(), 1)
+        });
+        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        /*
+        await dispatch({type: AUTHENTICATED});
+        await dispatch({
+            type: SET_PROFILE,
+            payload: result.data.signupuser
+        })*/
+
+        window.location.reload();
       }
     } catch (error) {
       dispatch({
@@ -4441,28 +4434,36 @@ function signup(payload) {
 function signin(payload) {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.mutate({
         variables: payload,
-        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     mutation ($phone: String!, $password: String!) {
                         signinuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`
       });
-      if (result.data.signinuser.data === 'Проверьте данные') await dispatch({
+      if (result.data.signinuser.role === 'Проверьте данные') await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
       });else {
-        next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-        await dispatch({
-          type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
-        });
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        }); //setTimeout(()=>window.location.reload(), 100)
+        });
+        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        window.location.reload();
+        /*
+        await dispatch({type: AUTHENTICATED});
+        await dispatch({
+            type: SET_PROFILE,
+            payload: result.data.signinuser
+        })*/
       }
     } catch (error) {
       console.log(error);
@@ -4476,7 +4477,7 @@ function signin(payload) {
 function checkAuthenticated() {
   return async dispatch => {
     try {
-      if (js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get('jwt')) {
+      if (js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('jwt')) {
         dispatch({
           type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATED"]
         });
@@ -4500,19 +4501,27 @@ function setAuthenticated(auth) {
 }
 function logout() {
   return async dispatch => {
-    next_router__WEBPACK_IMPORTED_MODULE_5___default.a.push('/');
-    js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove('jwt');
-    dispatch({
+    await dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
+    });
+    await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+    await js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.remove('jwt');
+    await dispatch({
+      type: _constants_app__WEBPACK_IMPORTED_MODULE_2__["SET_COUNT_BASKET"],
+      payload: 0
+    });
+    await dispatch({
+      type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["SET_PROFILE"],
+      payload: {}
     }); //setTimeout(()=>window.location.reload(),100)
   };
 }
 function setProfile() {
   return async dispatch => {
     try {
-      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+      const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
       let result = await client.query({
-        query: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+        query: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                     query {
                         getStatus {
                            role
@@ -4534,9 +4543,9 @@ function setProfile() {
 }
 async function getProfile() {
   try {
-    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
     let result = await client.query({
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"]`
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                    query {
                        getStatus {
                           role
@@ -5200,7 +5209,7 @@ const setItem = async (element, subCategory) => {
 /*!********************!*\
   !*** ./src/lib.js ***!
   \********************/
-/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDDMMYYHHMM */
+/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDatePicker, pdDDMMYYHHMM */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5211,6 +5220,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkInt", function() { return checkInt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYYY", function() { return pdDDMMYYYY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYY", function() { return pdDDMMYY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDatePicker", function() { return pdDatePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYHHMM", function() { return pdDDMMYYHHMM; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
@@ -5241,6 +5251,11 @@ const pdDDMMYYYY = date => {
 const pdDDMMYY = date => {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4);
+  return date;
+};
+const pdDatePicker = date => {
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  date = date[0].replace('"', '') + '-' + date[1] + '-' + date[2].split('T')[0];
   return date;
 };
 const pdDDMMYYHHMM = date => {
@@ -5516,6 +5531,10 @@ __webpack_require__.r(__webpack_exports__);
   textField: {
     width: 'calc(100% - 20px)',
     margin: 10
+  },
+  searchField: {
+    width: 'calc(100% - 20px)',
+    margin: 10
   }
 }));
 
@@ -5596,6 +5615,22 @@ __webpack_require__.r(__webpack_exports__);
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'baseline'
+  },
+  fabGeo: {
+    position: 'fixed',
+    bottom: 70,
+    right: 35
+  },
+  geo: {
+    width: 170,
+    textAlign: 'center',
+    marginTop: -5,
+    marginBottom: 10,
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    whiteSpace: 'pre-wrap',
+    cursor: 'pointer',
+    borderBottom: '1px dashed #ffb300'
   }
 }));
 
@@ -5623,7 +5658,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 10:
 /*!****************************!*\
   !*** multi ./pages/ads.js ***!
   \****************************/
@@ -6556,17 +6591,6 @@ module.exports = require("prop-types-exact");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
-
-/***/ }),
-
-/***/ "react-lazy-load-image-component":
-/*!**************************************************!*\
-  !*** external "react-lazy-load-image-component" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-lazy-load-image-component");
 
 /***/ }),
 

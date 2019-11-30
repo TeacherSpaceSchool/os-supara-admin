@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import Confirmation from './Confirmation'
+import Geo from '../../components/dialog/Geo'
 
 const Order =  React.memo(
     (props) =>{
@@ -39,6 +40,21 @@ const Order =  React.memo(
                                 :
                                 element.orders[0].status
                     }</div>
+                </div>
+                <div className={classes.row}>
+                    <div className={classes.nameField}>Адрес: &nbsp;</div>
+                    <div className={classes.value}>{element.address[0]}</div>
+                </div>
+                <div className={classes.geo} style={{color: element.address[1]?'#ffb300':'red'}} onClick={()=>{
+                    setMiniDialog('Геолокация', <Geo geo={element.address[1]}/>, true)
+                    showMiniDialog(true)
+                }}>
+                    {
+                        element.address[1]?
+                            'Посмотреть геолокацию'
+                            :
+                            'Геолокация не задана'
+                    }
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Время заказа: &nbsp;</div>

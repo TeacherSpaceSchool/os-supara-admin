@@ -115,8 +115,7 @@ const MyAppBar = React.memo((props) => {
                     {isMobileApp?
                         openSearch?
                             <Paper className={classes.searchM}>
-                                <FormControl className={classes.textField}>
-                                    <Input
+                                    <Input className={classes.searchField}
                                         id='adornment-password'
                                         type={'login'}
                                         value={search}
@@ -128,7 +127,6 @@ const MyAppBar = React.memo((props) => {
                                                 </IconButton>
                                             </InputAdornment>
                                         }/>
-                                </FormControl>
                             </Paper>
                             :
                             <>
@@ -309,8 +307,7 @@ const MyAppBar = React.memo((props) => {
                         :
                         openSearch?
                             <Paper className={classes.searchD}>
-                                <FormControl className={classes.textField}>
-                                    <Input
+                                    <Input className={classes.searchField}
                                         id='adornment-password'
                                         type={'login'}
                                         value={search}
@@ -322,7 +319,6 @@ const MyAppBar = React.memo((props) => {
                                                 </IconButton>
                                             </InputAdornment>
                                         }/>
-                                </FormControl>
                             </Paper>
                             :
                             <>

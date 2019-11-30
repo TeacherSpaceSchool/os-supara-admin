@@ -8,10 +8,14 @@ import {
 import {
     SHOW_MINI_DIALOG
 } from '../constants/mini_dialog'
+import {
+    SET_COUNT_BASKET
+} from '../constants/app'
 import Cookies from 'js-cookie';
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../../src/singleton/client';
 import Router from 'next/router'
+import { SingletonStore } from '../../src/singleton/store';
 
 export function signup(payload) {
     return async (dispatch) => {
@@ -22,22 +26,31 @@ export function signup(payload) {
                 mutation : gql`
                     mutation ($phone: String!, $password: String!) {
                         signupuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`})
-            if(result.data.signupuser.data==='Проверьте данные')
+            if(result.data.signupuser.role==='Проверьте данные')
                 await dispatch({
                     type: ERROR_AUTHENTICATED,
                     payload: true
                 })
             else {
-                Router.push('/')
-                await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                //setTimeout(()=>window.location.reload(), 1)
+                await Router.push('/')
+                /*
+                await dispatch({type: AUTHENTICATED});
+                await dispatch({
+                    type: SET_PROFILE,
+                    payload: result.data.signupuser
+                })*/
+                window.location.reload()
             }
         } catch(error) {
             dispatch({
@@ -57,22 +70,31 @@ export function signin(payload) {
                 mutation : gql`
                     mutation ($phone: String!, $password: String!) {
                         signinuser(phone: $phone, password: $password) {
-                            data,
+                           role
+                           status
+                           phone
+                           organization
+                           _id
                         }
                     }`})
-            if(result.data.signinuser.data==='Проверьте данные')
+            if(result.data.signinuser.role==='Проверьте данные')
                 await dispatch({
                     type: ERROR_AUTHENTICATED,
                     payload: true
                 })
             else {
-                Router.push('/')
-                await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                //setTimeout(()=>window.location.reload(), 100)
+                await Router.push('/')
+                window.location.reload()
+                /*
+                await dispatch({type: AUTHENTICATED});
+                await dispatch({
+                    type: SET_PROFILE,
+                    payload: result.data.signinuser
+                })*/
             }
         } catch(error) {
             console.log(error)
@@ -107,10 +129,18 @@ export function setAuthenticated(auth) {
 
 export function logout() {
     return async (dispatch) => {
-        Router.push('/')
-        Cookies.remove('jwt');
-        dispatch({
+        await dispatch({
             type: UNAUTHENTICATED,
+        })
+        await Router.push('/')
+        await Cookies.remove('jwt');
+        await dispatch({
+            type: SET_COUNT_BASKET,
+            payload: 0
+        })
+        await dispatch({
+            type: SET_PROFILE,
+            payload: {}
         })
         //setTimeout(()=>window.location.reload(),100)
 

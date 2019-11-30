@@ -33,16 +33,12 @@ const Subcategory = React.memo((props) => {
                 <title>{router.query.id==='all'?'Все':data.category!==null?data.category.name:'Ничего не найдено'}</title>
             </Head>
             <div className={classes.page}>
-                {profile.role==='admin'&&router.query.id!=='all'&&data.category!==null?<SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>:null}
+                {profile.role==='admin'?<SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>:null}
+                <SubCardCategory element={{_id: 'all', name: 'Все товары'}}/>
                 {data.subCategorys.length>0||router.query.id==='all'?
-                    <>
-                    <SubCardCategory element={{_id: 'all', name: 'Все товары'}}/>
-                    <br/>
-                    <br/>
-                    {list?list.map((element)=>
-                        <SubCardCategory category={router.query.id} categorys={categorys} key={element._id} setList={setList} element={element}/>
-                    ):null}
-                    </>
+                        list?list.map((element)=>
+                            <SubCardCategory category={router.query.id} categorys={categorys} key={element._id} setList={setList} element={element}/>
+                        ):null
                     :null
                 }
             </div>
