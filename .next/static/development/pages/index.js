@@ -3345,7 +3345,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 var mainWindow = react__WEBPACK_IMPORTED_MODULE_3___default.a.createRef();
 var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
-  var setProfile = props.userActions.setProfile;
+  var _props$userActions = props.userActions,
+      setProfile = _props$userActions.setProfile,
+      logout = _props$userActions.logout;
   var _props$user = props.user,
       profile = _props$user.profile,
       authenticated = _props$user.authenticated;
@@ -3359,8 +3361,8 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       setAds = _useState[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
-    if (window && authenticated) setProfile();
-  }, []);
+    if (authenticated) setProfile();else if (!authenticated && profile.role) logout();
+  }, [authenticated]);
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
     /*#__PURE__*/
@@ -3463,7 +3465,7 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: "App",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 58
     },
     __self: this
   }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3472,45 +3474,45 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     filters: filters,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 59
     },
     __self: this
   }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 60
     },
     __self: this
   }), __jsx("div", {
     className: "App-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 61
     },
     __self: this
   }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 76
     },
     __self: this
   }), __jsx(_components_app_SnackBar__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 77
     },
     __self: this
   }), load ? __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 79
     },
     __self: this
   }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_14__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 80
     },
     __self: this
   })) : null);
@@ -60431,7 +60433,7 @@ function signin(payload) {
               case 17:
                 _context2.prev = 17;
                 _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
+                console.error(_context2.t0);
                 _context2.next = 22;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
@@ -62226,7 +62228,6 @@ var pdDatePicker = function pdDatePicker(date) {
 };
 var pdDDMMYYHHMM = function pdDDMMYYHHMM(date) {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
-  console.log(date);
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;
 };
@@ -62662,7 +62663,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***********************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************/
@@ -62685,5 +62686,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

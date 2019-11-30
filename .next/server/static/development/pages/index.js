@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -3255,7 +3255,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 const mainWindow = react__WEBPACK_IMPORTED_MODULE_1___default.a.createRef();
 const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
   const {
-    setProfile
+    setProfile,
+    logout
   } = props.userActions;
   const {
     profile,
@@ -3272,8 +3273,8 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     1: setAds
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({});
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    if (window && authenticated) setProfile();
-  }, []);
+    if (authenticated) setProfile();else if (!authenticated && profile.role) logout();
+  }, [authenticated]);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     (async () => {
       if (authenticated) {
@@ -3316,7 +3317,7 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     className: "App",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 58
     },
     __self: undefined
   }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -3325,45 +3326,45 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     filters: filters,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 59
     },
     __self: undefined
   }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 60
     },
     __self: undefined
   }), __jsx("div", {
     className: "App-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 61
     },
     __self: undefined
   }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 76
     },
     __self: undefined
   }), __jsx(_components_app_SnackBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 77
     },
     __self: undefined
   }), load ? __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 79
     },
     __self: undefined
   }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 80
     },
     __self: undefined
   })) : null);
@@ -4606,7 +4607,7 @@ function signin(payload) {
         })*/
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
@@ -5533,7 +5534,6 @@ const pdDatePicker = date => {
 };
 const pdDDMMYYHHMM = date => {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
-  console.log(date);
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;
 };
@@ -5952,7 +5952,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

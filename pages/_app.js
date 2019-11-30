@@ -25,6 +25,7 @@ export default withRedux(configureStore, { debug: true })(
             if(ctx.req){
                 ctx.store.getState().app.isMobileApp = checkMobile(ctx.req.headers['user-agent'])
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
+                console.log(await getProfile())
                 if(ctx.store.getState().user.authenticated)
                     ctx.store.getState().user.profile = await getProfile()
             }

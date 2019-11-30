@@ -34192,33 +34192,33 @@ function (_App) {
       return __jsx(react__WEBPACK_IMPORTED_MODULE_9___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 48
         },
         __self: this
       }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_11__["ThemeProvider"], {
         theme: _src_theme__WEBPACK_IMPORTED_MODULE_13__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 49
         },
         __self: this
       }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_12__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 51
         },
         __self: this
       }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_16__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 52
         },
         __self: this
       }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 53
         },
         __self: this
       })))));
@@ -34248,55 +34248,63 @@ function (_App) {
                 new _src_singleton_client__WEBPACK_IMPORTED_MODULE_17__["SingletonApolloClient"](ctx.req);
 
                 if (!ctx.req) {
-                  _context.next = 9;
+                  _context.next = 14;
                   break;
                 }
 
                 ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkMobile"])(ctx.req.headers['user-agent']);
                 ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkAuth"])(ctx.req.headers.cookie);
-
-                if (!ctx.store.getState().user.authenticated) {
-                  _context.next = 9;
-                  break;
-                }
-
+                _context.t0 = console;
                 _context.next = 8;
                 return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
 
               case 8:
-                ctx.store.getState().user.profile = _context.sent;
+                _context.t1 = _context.sent;
 
-              case 9:
-                ctx.store.getState().app.search = '';
-                ctx.store.getState().app.sort = '-updatedAt';
-                ctx.store.getState().app.filter = '';
-                _context.t0 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
-                _context.t1 = {};
+                _context.t0.log.call(_context.t0, _context.t1);
 
-                if (!Component.getInitialProps) {
-                  _context.next = 20;
+                if (!ctx.store.getState().user.authenticated) {
+                  _context.next = 14;
                   break;
                 }
 
-                _context.next = 17;
+                _context.next = 13;
+                return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
+
+              case 13:
+                ctx.store.getState().user.profile = _context.sent;
+
+              case 14:
+                ctx.store.getState().app.search = '';
+                ctx.store.getState().app.sort = '-updatedAt';
+                ctx.store.getState().app.filter = '';
+                _context.t2 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
+                _context.t3 = {};
+
+                if (!Component.getInitialProps) {
+                  _context.next = 25;
+                  break;
+                }
+
+                _context.next = 22;
                 return Component.getInitialProps(ctx);
 
-              case 17:
-                _context.t2 = _context.sent;
-                _context.next = 21;
+              case 22:
+                _context.t4 = _context.sent;
+                _context.next = 26;
                 break;
 
-              case 20:
-                _context.t2 = {};
+              case 25:
+                _context.t4 = {};
 
-              case 21:
-                _context.t3 = _context.t2;
-                _context.t4 = (0, _context.t0)(_context.t1, _context.t3);
+              case 26:
+                _context.t5 = _context.t4;
+                _context.t6 = (0, _context.t2)(_context.t3, _context.t5);
                 return _context.abrupt("return", {
-                  pageProps: _context.t4
+                  pageProps: _context.t6
                 });
 
-              case 24:
+              case 29:
               case "end":
                 return _context.stop();
             }
@@ -34577,7 +34585,7 @@ function signin(payload) {
               case 17:
                 _context2.prev = 17;
                 _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
+                console.error(_context2.t0);
                 _context2.next = 22;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["ERROR_AUTHENTICATED"],
@@ -35231,7 +35239,6 @@ var pdDatePicker = function pdDatePicker(date) {
 };
 var pdDDMMYYHHMM = function pdDDMMYYHHMM(date) {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
-  console.log(date);
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;
 };

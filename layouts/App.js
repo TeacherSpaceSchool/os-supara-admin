@@ -15,14 +15,16 @@ import '../scss/app.scss'
 export const mainWindow = React.createRef();
 
 const App = React.memo(props => {
-    const { setProfile } = props.userActions;
+    const { setProfile, logout } = props.userActions;
     const { profile, authenticated } = props.user;
     let { sorts, filters, getList, pageName } = props;
     let [ads, setAds] = useState({});
     useEffect( ()=>{
-        if(window&&authenticated)
+        if(authenticated)
             setProfile()
-    },[])
+        else if(!authenticated&&profile.role)
+            logout()
+    },[authenticated,])
     useEffect( ()=>{
         (async ()=>{
             if(authenticated){

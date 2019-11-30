@@ -879,6 +879,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     if (ctx.req) {
       ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkMobile"])(ctx.req.headers['user-agent']);
       ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkAuth"])(ctx.req.headers.cookie);
+      console.log((await Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["getProfile"])()));
       if (ctx.store.getState().user.authenticated) ctx.store.getState().user.profile = await Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["getProfile"])();
     }
 
@@ -900,33 +901,33 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 48
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 49
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 51
       },
       __self: this
     }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 52
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 53
       },
       __self: this
     })))));
@@ -1078,7 +1079,7 @@ function signin(payload) {
         })*/
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       await dispatch({
         type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["ERROR_AUTHENTICATED"],
         payload: true
@@ -1603,7 +1604,6 @@ const pdDatePicker = date => {
 };
 const pdDDMMYYHHMM = date => {
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
-  console.log(date);
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;
 };
