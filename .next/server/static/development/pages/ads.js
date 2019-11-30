@@ -3264,23 +3264,7 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       lineNumber: 59
     },
     __self: undefined
-  }, ads && ads.url ? __jsx("a", {
-    href: ads.url,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 62
-    },
-    __self: undefined
-  }, __jsx("img", {
-    src: ads.image,
-    alt: ads.title,
-    className: "marketImg",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: undefined
-  })) : null, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 74

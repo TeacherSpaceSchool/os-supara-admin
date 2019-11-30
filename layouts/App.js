@@ -57,7 +57,7 @@ const App = React.memo(props => {
                 <AppBar pageName={pageName} sorts={sorts} filters={filters}/>
                 <Drawer />
                 <div className='App-body'>
-                    {
+                    {/*
                         ads&&ads.url?
                             <a href={ads.url}>
                                 <img
@@ -67,7 +67,7 @@ const App = React.memo(props => {
                                 />
                             </a>
                             :
-                            null
+                            null*/
                     }
                     {props.children}
                 </div>

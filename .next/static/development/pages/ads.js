@@ -3383,23 +3383,7 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       lineNumber: 59
     },
     __self: this
-  }, ads && ads.url ? __jsx("a", {
-    href: ads.url,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 62
-    },
-    __self: this
-  }, __jsx("img", {
-    src: ads.image,
-    alt: ads.title,
-    className: "marketImg",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: this
-  })) : null, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 74
