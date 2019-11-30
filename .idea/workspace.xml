@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/ads.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/ads.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/ads.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/ads.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/clients.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/clients.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/clients.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/clients.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/App.js" afterPath="$PROJECT_DIR$/layouts/App.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,11 +39,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layouts/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="69" column="34" lean-forward="false" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+            <state relative-caret-position="204">
+              <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -139,7 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Router.push</find>
       <find>/setTime</find>
       <find>/setTimeo</find>
       <find>войти</find>
@@ -169,6 +168,7 @@
       <find>dialogContentStyle</find>
       <find>name</find>
       <find>break</find>
+      <find>37.</find>
     </findStrings>
     <replaceStrings>
       <replace>notification</replace>
@@ -233,7 +233,6 @@
         <option value="$PROJECT_DIR$/components/dialog/Sign.js" />
         <option value="$PROJECT_DIR$/components/client/CardClient.js" />
         <option value="$PROJECT_DIR$/src/gql/client.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/scss/app.scss" />
         <option value="$PROJECT_DIR$/src/styleMUI/appbar.js" />
         <option value="$PROJECT_DIR$/components/app/AppBar.js" />
@@ -265,6 +264,7 @@
         <option value="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
         <option value="$PROJECT_DIR$/layouts/App.js" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -542,12 +542,12 @@
       <workItem from="1574931726929" duration="209000" />
       <workItem from="1574933464017" duration="15013000" />
       <workItem from="1575014396876" duration="17555000" />
-      <workItem from="1575096271881" duration="14014000" />
+      <workItem from="1575096271881" duration="14220000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="626024000" />
+    <option name="totallyTimeSpent" value="626230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -570,7 +570,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.29642856" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -685,6 +685,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -888,14 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gql/order.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1058,8 +1051,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layouts/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="69" column="34" lean-forward="false" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+        <state relative-caret-position="204">
+          <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding />
         </state>
       </provider>
