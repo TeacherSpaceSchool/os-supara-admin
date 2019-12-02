@@ -86,8 +86,8 @@ const Client = React.memo((props) => {
                 <meta property='og:description' content={info} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={preview} />
-                <meta property="og:url" content={`https://${process.env.URL}/client/${router.query.id}`} />
-                <link rel='canonical' href={`https://${process.env.URL}/client/${router.query.id}`}/>
+                <meta property="og:url" content={`http://${process.env.URL}/client/${router.query.id}`} />
+                <link rel='canonical' href={`http://${process.env.URL}/client/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
