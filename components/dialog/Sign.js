@@ -86,7 +86,7 @@ const Sign =  React.memo(
                 <TextField
                     style={{width: width}}
                     id='standard-search'
-                    label='Телефон'
+                    label='Телефон. Формат: +996555780861'
                     type='login'
                     className={classes.textField}
                     margin='normal'
@@ -137,7 +137,7 @@ const Sign =  React.memo(
                 <>
                 <TextField
                     id='standard-search'
-                    label='Телефон'
+                    label='Телефон. Формат: +996555780861'
                     type='login'
                     className={classes.textField}
                     margin='normal'

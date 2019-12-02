@@ -235,7 +235,7 @@ const Contact = React.memo((props) => {
                                             </FormControl>
                                         )}
                                         <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
-                                            <InputLabel>Добавить телефон</InputLabel>
+                                            <InputLabel>Добавить телефон. Формат: +996555780861</InputLabel>
                                             <Input
                                                 value={newPhone}
                                                 onChange={(event)=>{setNewPhone(event.target.value)}}

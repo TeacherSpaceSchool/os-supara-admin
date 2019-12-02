@@ -217,9 +217,9 @@ const Organization = React.memo((props) => {
                                         </FormControl>
                                     )}
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
-                                        <InputLabel>Добавить телефон</InputLabel>
+                                        <InputLabel>Добавить телефон. Формат: +996555780861</InputLabel>
                                         <Input
-                                            placeholder='Добавить телефон'
+                                            placeholder='Добавить телефон. Формат: +996555780861'
                                             value={newPhone}
                                             onChange={(event)=>{setNewPhone(event.target.value)}}
                                             inputProps={{

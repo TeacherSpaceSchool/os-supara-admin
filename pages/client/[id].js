@@ -198,7 +198,7 @@ const Client = React.memo((props) => {
                                         }}
                                     />
                                     <TextField
-                                        label='Телефон'
+                                        label='Телефон. Формат: +996555780861'
                                         value={phone}
                                         className={isMobileApp?classes.inputM:classes.inputD}
                                         onChange={(event)=>{setPhone(event.target.value)}}
