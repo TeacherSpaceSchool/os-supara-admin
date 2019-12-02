@@ -4857,7 +4857,7 @@ const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     __self: undefined
   }), __jsx("meta", {
     property: "og:image",
-    content: `http://${"localhost"}/static/512x512.png`,
+    content: `https://${"localhost"}/static/512x512.png`,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 28
@@ -4865,7 +4865,7 @@ const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     __self: undefined
   }), __jsx("meta", {
     property: "og:url",
-    content: `http://${"localhost"}/orders`,
+    content: `https://${"localhost"}/orders`,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 29
@@ -4873,7 +4873,7 @@ const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     __self: undefined
   }), __jsx("link", {
     rel: "canonical",
-    href: `http://${"localhost"}/orders`,
+    href: `https://${"localhost"}/orders`,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30
@@ -5319,7 +5319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
 
-const urlGQL = `http://${"localhost"}:3000/graphql`;
+const urlGQL = `https://${"localhost"}:3000/graphql`;
 const urlGQLws = `ws://${"localhost"}:3000/graphql`;
 const validMail = mail => {
   return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);

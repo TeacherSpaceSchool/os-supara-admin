@@ -99,9 +99,9 @@ const Route = React.memo((props) => {
                 <meta property='og:title' content={data.route?router.query.id==='new'?'Добавить':data.route.number:'Ничего не найдено'} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/route/${router.query.id}`} />
-                <link rel='canonical' href={`http://${process.env.URL}/route/${router.query.id}`}/>
+                <meta property='og:image' content={`https://${process.env.URL}/static/512x512.png`} />
+                <meta property="og:url" content={`https://${process.env.URL}/route/${router.query.id}`} />
+                <link rel='canonical' href={`https://${process.env.URL}/route/${router.query.id}`}/>
             </Head>
             <Card className={isMobileApp?classes.pageM:classes.pageD}>
                 {router.query.id==='new'?null:<div className={classes.status} style={{background: statusColor[data.route.status]}}>{data.route.status}</div>}

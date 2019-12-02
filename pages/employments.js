@@ -29,9 +29,9 @@ const Employment = React.memo((props) => {
                 <meta property='og:title' content='Сотрудники' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/employments`} />
-                <link rel='canonical' href={`http://${process.env.URL}/employments`}/>
+                <meta property='og:image' content={`https://${process.env.URL}/static/512x512.png`} />
+                <meta property="og:url" content={`https://${process.env.URL}/employments`} />
+                <link rel='canonical' href={`https://${process.env.URL}/employments`}/>
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>

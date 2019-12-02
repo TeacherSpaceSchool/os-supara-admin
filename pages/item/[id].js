@@ -115,8 +115,8 @@ const Item = React.memo((props) => {
                 <meta property='og:description' content={data.item!==null?data.item.info:'Ничего не найдено'} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={preview} />
-                <meta property="og:url" content={`http://${process.env.URL}/item/${router.query.id}`} />
-                <link rel='canonical' href={`http://${process.env.URL}/item/${router.query.id}`}/>
+                <meta property="og:url" content={`https://${process.env.URL}/item/${router.query.id}`} />
+                <link rel='canonical' href={`https://${process.env.URL}/item/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>

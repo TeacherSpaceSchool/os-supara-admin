@@ -1,4 +1,4 @@
-export const urlGQL = `http://${process.env.URL}:3000/graphql`
+export const urlGQL = `https://${process.env.URL}:3000/graphql`
 export const urlGQLws = `ws://${process.env.URL}:3000/graphql`
 export const validMail = (mail) =>
 {
