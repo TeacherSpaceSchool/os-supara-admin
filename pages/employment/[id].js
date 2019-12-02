@@ -228,7 +228,7 @@ const Client = React.memo((props) => {
                                                         profile._id===data.employment.user._id?
                                                             <Button onClick={async()=>{
                                                                 const action = async() => {
-                                                                    logout()
+                                                                    logout(true)
                                                                 }
                                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)

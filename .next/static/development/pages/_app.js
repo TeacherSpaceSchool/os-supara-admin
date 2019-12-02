@@ -3185,7 +3185,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6141,7 +6141,7 @@ function previouslyCompared(a, b) {
 /*!*****************************************************!*\
   !*** ./node_modules/apollo-boost/lib/bundle.esm.js ***!
   \*****************************************************/
-/*! exports provided: ApolloClient, ApolloError, FetchType, NetworkStatus, ObservableQuery, isApolloError, HttpLink, gql, default, Observable, getOperationName, ApolloLink, concat, createOperation, empty, execute, from, fromError, fromPromise, makePromise, split, toPromise, HeuristicFragmentMatcher, InMemoryCache, IntrospectionFragmentMatcher, ObjectCache, StoreReader, StoreWriter, WriteError, assertIdValue, defaultDataIdFromObject, defaultNormalizedCacheFactory, enhanceErrorWithDocument */
+/*! exports provided: ApolloClient, ApolloError, FetchType, NetworkStatus, ObservableQuery, isApolloError, Observable, getOperationName, ApolloLink, concat, createOperation, empty, execute, from, fromError, fromPromise, makePromise, split, toPromise, HeuristicFragmentMatcher, InMemoryCache, IntrospectionFragmentMatcher, ObjectCache, StoreReader, StoreWriter, WriteError, assertIdValue, defaultDataIdFromObject, defaultNormalizedCacheFactory, enhanceErrorWithDocument, HttpLink, gql, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32955,7 +32955,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_14__["default"])(_redux_configureStore__WEBPACK_IMPORTED_MODULE_15__["default"], {
-  debug: true
+  debug: false
 })(
 /*#__PURE__*/
 function (_App) {
@@ -33034,63 +33034,56 @@ function (_App) {
                 new _src_singleton_client__WEBPACK_IMPORTED_MODULE_17__["SingletonApolloClient"](ctx.req);
 
                 if (!ctx.req) {
-                  _context.next = 14;
+                  _context.next = 9;
                   break;
                 }
 
                 ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkMobile"])(ctx.req.headers['user-agent']);
                 ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_20__["checkAuth"])(ctx.req.headers.cookie);
-                _context.t0 = console;
+
+                if (!ctx.store.getState().user.authenticated) {
+                  _context.next = 9;
+                  break;
+                }
+
                 _context.next = 8;
                 return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
 
               case 8:
-                _context.t1 = _context.sent;
-
-                _context.t0.log.call(_context.t0, _context.t1);
-
-                if (!ctx.store.getState().user.authenticated) {
-                  _context.next = 14;
-                  break;
-                }
-
-                _context.next = 13;
-                return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
-
-              case 13:
                 ctx.store.getState().user.profile = _context.sent;
 
-              case 14:
+              case 9:
                 ctx.store.getState().app.search = '';
                 ctx.store.getState().app.sort = '-updatedAt';
                 ctx.store.getState().app.filter = '';
-                _context.t2 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
-                _context.t3 = {};
+                ctx.store.getState().app.load = false;
+                _context.t0 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
+                _context.t1 = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 25;
+                  _context.next = 21;
                   break;
                 }
 
-                _context.next = 22;
+                _context.next = 18;
                 return Component.getInitialProps(ctx);
 
-              case 22:
-                _context.t4 = _context.sent;
-                _context.next = 26;
+              case 18:
+                _context.t2 = _context.sent;
+                _context.next = 22;
                 break;
 
-              case 25:
-                _context.t4 = {};
+              case 21:
+                _context.t2 = {};
 
-              case 26:
-                _context.t5 = _context.t4;
-                _context.t6 = (0, _context.t2)(_context.t3, _context.t5);
+              case 22:
+                _context.t3 = _context.t2;
+                _context.t4 = (0, _context.t0)(_context.t1, _context.t3);
                 return _context.abrupt("return", {
-                  pageProps: _context.t6
+                  pageProps: _context.t4
                 });
 
-              case 29:
+              case 25:
               case "end":
                 return _context.stop();
             }
@@ -33439,7 +33432,7 @@ function setAuthenticated(auth) {
     payload: auth
   };
 }
-function logout() {
+function logout(reload) {
   return (
     /*#__PURE__*/
     function () {
@@ -33456,28 +33449,33 @@ function logout() {
                 });
 
               case 2:
-                _context4.next = 4;
+                if (!reload) {
+                  _context4.next = 5;
+                  break;
+                }
+
+                _context4.next = 5;
                 return next_router__WEBPACK_IMPORTED_MODULE_9___default.a.push('/');
 
-              case 4:
-                _context4.next = 6;
+              case 5:
+                _context4.next = 7;
                 return js_cookie__WEBPACK_IMPORTED_MODULE_6___default.a.remove('jwt');
 
-              case 6:
-                _context4.next = 8;
+              case 7:
+                _context4.next = 9;
                 return dispatch({
                   type: _constants_app__WEBPACK_IMPORTED_MODULE_5__["SET_COUNT_BASKET"],
                   payload: 0
                 });
 
-              case 8:
-                _context4.next = 10;
+              case 9:
+                _context4.next = 11;
                 return dispatch({
                   type: _constants_user__WEBPACK_IMPORTED_MODULE_3__["SET_PROFILE"],
                   payload: {}
                 });
 
-              case 10:
+              case 11:
               case "end":
                 return _context4.stop();
             }

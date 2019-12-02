@@ -92,7 +92,7 @@ const Basket = React.memo((props) => {
     };
 
     //привести к геолокации
-    if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
+    if(data.client&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
     return (
         <App getList={getList} pageName='Корзина'>

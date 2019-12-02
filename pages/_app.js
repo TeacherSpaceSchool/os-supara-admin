@@ -11,7 +11,7 @@ import { SingletonStore } from '../src/singleton/store'
 import { getProfile } from '../redux/actions/user'
 import { checkMobile, checkAuth } from '../src/lib'
 
-export default withRedux(configureStore, { debug: true })(
+export default withRedux(configureStore, { debug: false })(
     class MyApp extends App {
         static componentDidMount() {
             // Remove the server-side injected CSS.
@@ -25,13 +25,13 @@ export default withRedux(configureStore, { debug: true })(
             if(ctx.req){
                 ctx.store.getState().app.isMobileApp = checkMobile(ctx.req.headers['user-agent'])
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
-                console.log(await getProfile())
                 if(ctx.store.getState().user.authenticated)
                     ctx.store.getState().user.profile = await getProfile()
             }
             ctx.store.getState().app.search = ''
             ctx.store.getState().app.sort = '-updatedAt'
             ctx.store.getState().app.filter = ''
+            ctx.store.getState().app.load = false
             return {
                 pageProps: {
                     ...(Component.getInitialProps

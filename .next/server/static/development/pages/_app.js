@@ -859,7 +859,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 /* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(_redux_configureStore__WEBPACK_IMPORTED_MODULE_8__["default"], {
-  debug: true
+  debug: false
 })(class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_3___default.a {
   static componentDidMount() {
     // Remove the server-side injected CSS.
@@ -879,13 +879,13 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     if (ctx.req) {
       ctx.store.getState().app.isMobileApp = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkMobile"])(ctx.req.headers['user-agent']);
       ctx.store.getState().user.authenticated = Object(_src_lib__WEBPACK_IMPORTED_MODULE_13__["checkAuth"])(ctx.req.headers.cookie);
-      console.log((await Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["getProfile"])()));
       if (ctx.store.getState().user.authenticated) ctx.store.getState().user.profile = await Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_12__["getProfile"])();
     }
 
     ctx.store.getState().app.search = '';
     ctx.store.getState().app.sort = '-updatedAt';
     ctx.store.getState().app.filter = '';
+    ctx.store.getState().app.load = false;
     return {
       pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
     };
@@ -1112,12 +1112,12 @@ function setAuthenticated(auth) {
     payload: auth
   };
 }
-function logout() {
+function logout(reload) {
   return async dispatch => {
     await dispatch({
       type: _constants_user__WEBPACK_IMPORTED_MODULE_0__["UNAUTHENTICATED"]
     });
-    await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+    if (reload) await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
     await js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.remove('jwt');
     await dispatch({
       type: _constants_app__WEBPACK_IMPORTED_MODULE_2__["SET_COUNT_BASKET"],

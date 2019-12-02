@@ -127,12 +127,13 @@ export function setAuthenticated(auth) {
     }
 }
 
-export function logout() {
+export function logout(reload) {
     return async (dispatch) => {
         await dispatch({
             type: UNAUTHENTICATED,
         })
-        await Router.push('/')
+        if(reload)
+            await Router.push('/')
         await Cookies.remove('jwt');
         await dispatch({
             type: SET_COUNT_BASKET,

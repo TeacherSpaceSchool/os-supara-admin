@@ -249,7 +249,7 @@ const Client = React.memo((props) => {
                                             :
                                             <Button onClick={()=>{
                                                 const action = async() => {
-                                                    logout()
+                                                    logout(true)
                                                 }
                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { getAds } from '../src/gql/ads'
 import AppBar from '../components/app/AppBar'
 import Dialog from '../components/app/Dialog'
@@ -9,22 +9,28 @@ import { bindActionCreators } from 'redux'
 import { addFavoriteItem } from '../src/gql/items'
 import { addBasket } from '../src/gql/basket'
 import * as userActions from '../redux/actions/user'
+import * as appActions from '../redux/actions/app'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
+import Router from 'next/router'
 
 export const mainWindow = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
+    const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
     let { sorts, filters, getList, pageName } = props;
-    let [ads, setAds] = useState({});
+    //let [ads, setAds] = useState({});
     useEffect( ()=>{
         if(authenticated)
             setProfile()
         else if(!authenticated&&profile.role)
-            logout()
+            logout(false)
     },[authenticated,])
+    Router.events.on('routeChangeStart', ()=>{
+        showLoad(true)
+    })
     useEffect( ()=>{
         (async ()=>{
             if(authenticated){
@@ -46,7 +52,7 @@ const App = React.memo(props => {
                         await getList()
                 }
             }
-            setAds((await getAds()).ads)
+            //setAds((await getAds()).ads)
         })()
     },[])
     const { load } = props.app;
@@ -96,6 +102,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
+        appActions: bindActionCreators(appActions, dispatch),
     }
 }
 
