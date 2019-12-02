@@ -8,36 +8,8 @@ export default makeStyles({
         width: 400,
         margin: 10
     },
-    media: {
-        //borderRadius: '30px',
-        objectFit: 'cover',
-        height: '60px',
-        width: '60px',
-        marginRight: 10
-    },
-    avatar: {
-        borderRadius: '50px',
-        objectFit: 'cover',
-        height: '100px',
-        width: '100px',
-        margin: 10
-    },
-    text: {
-        fontWeight: 'bold',
-        fontSize: '16px',
-        fontFamily: 'Roboto'
-    },
-    inputM: {
-        marginBottom: 5,
-        width: 'calc(100vw - 82px)',
-        fontSize: '16px',
-        fontFamily: 'Roboto'
-    },
-    inputD: {
-        marginBottom: 5,
-        width: 400-32,
-        fontSize: '16px',
-        fontFamily: 'Roboto'
+    input: {
+        width: '100%',
     },
     line: {
         margin: 10,

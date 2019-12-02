@@ -105,7 +105,7 @@ const Client = React.memo((props) => {
                                         <TextField
                                             label='Имя'
                                             value={name}
-                                            className={isMobileApp?classes.inputM:classes.inputD}
+                                            className={classes.input}
                                             onChange={(event)=>{setName(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
@@ -116,7 +116,7 @@ const Client = React.memo((props) => {
                                             type={hide ? 'password' : 'text' }
                                             value={newPass}
                                             onChange={handleNewPass}
-                                            className={isMobileApp?classes.inputM:classes.inputD}
+                                            className={classes.input}
                                             endAdornment={
                                                 <InputAdornment position="end">
                                                     <IconButton aria-label="Toggle password visibility" onClick={handleHide}>
@@ -126,7 +126,7 @@ const Client = React.memo((props) => {
                                             }
                                         />
 
-                                    <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                                    <FormControl className={classes.input}>
                                         <InputLabel>Добавить адрес</InputLabel>
                                         <Input
                                             value={newAddress}
@@ -150,12 +150,12 @@ const Client = React.memo((props) => {
                                     </FormControl>
                                     {address?address.map((element, idx)=>
                                         <>
-                                        <FormControl key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
+                                        <FormControl key={idx} className={classes.input}>
                                             <InputLabel>Адрес</InputLabel>
                                             <Input
                                                 placeholder='Адрес'
                                                 value={element[0]}
-                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                className={classes.input}
                                                 onChange={(event)=>{editAddress(event, idx)}}
                                                 inputProps={{
                                                     'aria-label': 'description',
@@ -191,7 +191,7 @@ const Client = React.memo((props) => {
                                     <TextField
                                         label='email'
                                         value={email}
-                                        className={isMobileApp?classes.inputM:classes.inputD}
+                                        className={classes.input}
                                         onChange={(event)=>{setEmail(event.target.value)}}
                                         inputProps={{
                                             'aria-label': 'description',
@@ -200,7 +200,7 @@ const Client = React.memo((props) => {
                                     <TextField
                                         label='Телефон. Формат: +996555780861'
                                         value={phone}
-                                        className={isMobileApp?classes.inputM:classes.inputD}
+                                        className={classes.input}
                                         onChange={(event)=>{setPhone(event.target.value)}}
                                         inputProps={{
                                             'aria-label': 'description',
@@ -210,7 +210,7 @@ const Client = React.memo((props) => {
                                         multiline={true}
                                         label='Информация'
                                         value={info}
-                                        className={isMobileApp?classes.inputM:classes.inputD}
+                                        className={classes.input}
                                         onChange={(event)=>{setInfo(event.target.value)}}
                                         inputProps={{
                                             'aria-label': 'description',

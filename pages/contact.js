@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { getContact, setContact } from '../src/gql/contact'
 import contactStyle from '../src/styleMUI/contact'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
@@ -98,7 +97,6 @@ const Contact = React.memo((props) => {
                 <link rel='canonical' href={`http://${process.env.URL}/contact`}/>
             </Head>
             <Card className={classes.page}>
-                <CardActions>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {
                             profile.role==='admin'?
@@ -135,13 +133,13 @@ const Contact = React.memo((props) => {
                                         <TextField
                                                 label='Имя'
                                                 value={name}
-                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                className={classes.input}
                                                 onChange={(event)=>{setName(event.target.value)}}
                                                 inputProps={{
                                                     'aria-label': 'description',
                                                 }}
                                             />
-                                        <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                                        <FormControl className={classes.input}>
                                             <InputLabel>Добавить адрес</InputLabel>
                                             <Input
                                                 value={newAddress}
@@ -164,7 +162,7 @@ const Contact = React.memo((props) => {
                                             />
                                         </FormControl>
                                         {address.map((element, idx)=>
-                                            <FormControl  key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
+                                            <FormControl  key={idx} className={classes.input}>
                                                 <InputLabel>Адрес</InputLabel>
                                                 <Input
                                                     placeholder='Адрес'
@@ -188,7 +186,7 @@ const Contact = React.memo((props) => {
                                                 />
                                             </FormControl>
                                         )}
-                                        <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                                        <FormControl className={classes.input}>
                                             <InputLabel>Добавить email</InputLabel>
                                             <Input
                                                 value={newEmail}
@@ -211,7 +209,7 @@ const Contact = React.memo((props) => {
                                             />
                                         </FormControl>
                                         {email.map((element, idx)=>
-                                            <FormControl  key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
+                                            <FormControl  key={idx} className={classes.input}>
                                                 <InputLabel>Организация</InputLabel>
                                                 <Input
                                                     value={element}
@@ -234,7 +232,7 @@ const Contact = React.memo((props) => {
                                                 />
                                             </FormControl>
                                         )}
-                                        <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                                        <FormControl className={classes.input}>
                                             <InputLabel>Добавить телефон. Формат: +996555780861</InputLabel>
                                             <Input
                                                 value={newPhone}
@@ -257,7 +255,7 @@ const Contact = React.memo((props) => {
                                             />
                                         </FormControl>
                                         {phone.map((element, idx)=>
-                                            <FormControl key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
+                                            <FormControl key={idx} className={classes.input}>
                                                 <InputLabel>Организация</InputLabel>
                                                 <Input
                                                     value={element}
@@ -284,7 +282,7 @@ const Contact = React.memo((props) => {
                                             multiline={true}
                                             label='Информация'
                                             value={info}
-                                            className={isMobileApp?classes.inputM:classes.inputD}
+                                            className={classes.input}
                                             onChange={(event)=>{setInfo(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
@@ -413,7 +411,6 @@ const Contact = React.memo((props) => {
                                             </>
                         }
                         </CardContent>
-                    </CardActions>
                 </Card>
             <input
                 accept='image/*'

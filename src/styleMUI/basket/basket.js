@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
     page: {
-        margin: '10px'
+        margin: '10px',
+        overflowX: 'auto'
     },
     row:{
         display: 'flex',
@@ -11,7 +12,6 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        width: '95%'
     },
     cancelM: {
         position: 'absolute',
@@ -53,19 +53,19 @@ export default makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
         fontWeight: 'bold',
-        fontSize: '1.25rem',
+        fontSize: '1.125rem',
         fontFamily: 'Roboto'
     },
     value: {
         marginBottom: 5,
-        fontSize: '1.25rem',
+        fontSize: '1rem',
         fontFamily: 'Roboto'
     },
     nameField: {
         width: 100,
         marginBottom: 5,
         fontWeight: 'bold',
-        fontSize: '1.25rem',
+        fontSize: '1rem',
         fontFamily: 'Roboto',
         color: '#A0A0A0'
     },
@@ -128,7 +128,7 @@ export default makeStyles({
         alignItems: 'center',
         justifyContent: 'center',
         fontWeight: 'bold',
-        fontSize: '1.25rem',
+        fontSize: '1.125rem',
         fontFamily: 'Roboto',
         background: '#ffb300',
         marginRight: 15

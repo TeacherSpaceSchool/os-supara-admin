@@ -32978,33 +32978,33 @@ function (_App) {
       return __jsx(react__WEBPACK_IMPORTED_MODULE_9___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 49
         },
         __self: this
       }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_11__["ThemeProvider"], {
         theme: _src_theme__WEBPACK_IMPORTED_MODULE_13__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 50
         },
         __self: this
       }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_12__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 52
         },
         __self: this
       }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_16__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 53
         },
         __self: this
       }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 54
         },
         __self: this
       })))));
@@ -33057,33 +33057,34 @@ function (_App) {
                 ctx.store.getState().app.sort = '-updatedAt';
                 ctx.store.getState().app.filter = '';
                 ctx.store.getState().app.load = false;
+                ctx.store.getState().mini_dialog.show = false;
                 _context.t0 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
                 _context.t1 = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 21;
+                  _context.next = 22;
                   break;
                 }
 
-                _context.next = 18;
+                _context.next = 19;
                 return Component.getInitialProps(ctx);
 
-              case 18:
+              case 19:
                 _context.t2 = _context.sent;
-                _context.next = 22;
+                _context.next = 23;
                 break;
 
-              case 21:
+              case 22:
                 _context.t2 = {};
 
-              case 22:
+              case 23:
                 _context.t3 = _context.t2;
                 _context.t4 = (0, _context.t0)(_context.t1, _context.t3);
                 return _context.abrupt("return", {
                   pageProps: _context.t4
                 });
 
-              case 25:
+              case 26:
               case "end":
                 return _context.stop();
             }

@@ -22,27 +22,27 @@ export default makeStyles({
     name: {
         marginBottom: 10,
         fontWeight: 'bold',
-        fontSize: '20px',
+        fontSize: '1.25rem',
         fontFamily: 'Roboto'
     },
     value: {
         marginBottom: 10,
         fontWeight: 'bold',
-        fontSize: '16px',
+        fontSize: '1rem',
         fontFamily: 'Roboto'
     },
     nameField: {
         width: 80,
         marginBottom: 10,
         fontWeight: 'bold',
-        fontSize: '16px',
+        fontSize: '1rem',
         fontFamily: 'Roboto',
         color: '#A0A0A0'
     },
     info: {
         color: '#455A64',
         marginBottom: 10,
-        fontSize: '16px',
+        fontSize: '1rem',
         fontFamily: 'Roboto',
         whiteSpace: 'pre-wrap'
     },
@@ -57,17 +57,9 @@ export default makeStyles({
         cursor: 'pointer',
         borderBottom: '1px dashed #ffb300'
     },
-    inputM: {
+    input: {
         marginBottom: 10,
-        width: 'calc(100vw - 82px)',
-    },
-    inputD: {
-        marginBottom: 10,
-        width: 'calc(100vw - 700px)'
-    },
-    inputDF: {
-        marginBottom: 10,
-        width: 'calc(100vw - 382px)'
+        width: '100%',
     },
 
 })

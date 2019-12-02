@@ -32,6 +32,7 @@ export default withRedux(configureStore, { debug: false })(
             ctx.store.getState().app.sort = '-updatedAt'
             ctx.store.getState().app.filter = ''
             ctx.store.getState().app.load = false
+            ctx.store.getState().mini_dialog.show = false
             return {
                 pageProps: {
                     ...(Component.getInitialProps

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
     card: {
-        width: 330,
+        width: 400,
         margin: 10,
         position: 'relative'
     },

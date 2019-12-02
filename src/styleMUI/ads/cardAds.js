@@ -10,8 +10,8 @@ export default makeStyles({
     },
     mediaM: {
         objectFit: 'cover',
-        height: 'calc(100vw / 3)',
-        width: 'calc(100vw - 20px)'
+        height: 'calc((100vw - 40px) / 3)',
+        width: 'calc(100vw - 40px)'
     },
     mediaD: {
         objectFit: 'cover',
@@ -19,10 +19,7 @@ export default makeStyles({
         width: 600,
         cursor: 'pointer'
     },
-    inputM: {
-        width: 'calc(100vw - 32px)',
-    },
-    inputD: {
-        width: 600-32,
+    input: {
+        width: '100%',
     },
 })

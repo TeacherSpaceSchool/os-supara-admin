@@ -4,7 +4,7 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import pageListStyle from '../src/styleMUI/basket/basket'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Table from '@material-ui/core/Table';
@@ -112,48 +112,48 @@ const Basket = React.memo((props) => {
                                 {
                                     list.map((row, idx) => (
                                         <Card className={classes.page} key={idx}>
-                                            <CardActions className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                                            <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                                                 <div className={classes.itemM}>
-                                                <div className={classes.divImage}>
-                                                    <img className={classes.mediaM} src={row.item.image}/>
-                                                    <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.cancelM}>
-                                                        <CancelIcon style={{height: 40, width: 40}} />
-                                                    </IconButton>
-                                                </div>
-                                                <br/>
-                                                <div className={classes.nameM}>
-                                                    {row.item.name}
-                                                </div>
-                                                <br/>
-                                                <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
-                                                    <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>–</div>
-                                                    <input type='text' className={classes.counternmbr} value={row.count} onChange={(event)=>{
-                                                        list[idx].count = isNaN(event.target.value)||event.target.value.length===0?0:parseInt(event.target.value)
-                                                        setBasketChange(idx, list[idx].count)
-                                                        setList([...list])
-                                                    }}/>
-                                                    <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
-                                                </div>
-                                                <div>
-                                                    <div className={classes.row}>
-                                                        <div className={classes.nameField}>
-                                                            Цена
+                                                    <div className={classes.divImage}>
+                                                        <img className={classes.mediaM} src={row.item.image}/>
+                                                        <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.cancelM}>
+                                                            <CancelIcon style={{height: 40, width: 40}} />
+                                                        </IconButton>
+                                                    </div>
+                                                    <br/>
+                                                    <div className={classes.nameM}>
+                                                        {row.item.name}
+                                                    </div>
+                                                    <br/>
+                                                    <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
+                                                        <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>–</div>
+                                                        <input type='text' className={classes.counternmbr} value={row.count} onChange={(event)=>{
+                                                            list[idx].count = isNaN(event.target.value)||event.target.value.length===0?0:parseInt(event.target.value)
+                                                            setBasketChange(idx, list[idx].count)
+                                                            setList([...list])
+                                                        }}/>
+                                                        <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
+                                                    </div>
+                                                    <div>
+                                                        <div className={classes.row}>
+                                                            <div className={classes.nameField}>
+                                                                Цена
+                                                            </div>
+                                                            <div className={classes.value}>
+                                                                {`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock} сом`}
+                                                            </div>
                                                         </div>
-                                                        <div className={classes.value}>
-                                                            {`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock} сом`}
+                                                        <div className={classes.row}>
+                                                            <div className={classes.nameField}>
+                                                                Итого
+                                                            </div>
+                                                            <div className={classes.value}>
+                                                                {`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count} сом`}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className={classes.row}>
-                                                        <div className={classes.nameField}>
-                                                            Итого
-                                                        </div>
-                                                        <div className={classes.value}>
-                                                            {`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count} сом`}
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                            </CardActions>
+                                            </CardContent>
                                         </Card>
                                     ))
                                 }
@@ -162,7 +162,7 @@ const Basket = React.memo((props) => {
                             :
                             <>
                             <Card className={classes.page}>
-                                <CardActions className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                                <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                                 <Table aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
@@ -208,7 +208,7 @@ const Basket = React.memo((props) => {
                                         ))}
                                     </TableBody>
                                 </Table>
-                            </CardActions>
+                            </CardContent>
                             </Card>
                             <div style={{height: 70}}/>
                             </>

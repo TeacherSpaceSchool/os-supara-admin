@@ -100,14 +100,7 @@ const MyAppBar = React.memo((props) => {
                             <MenuIcon/>
                         </IconButton>
                         :
-                        <IconButton
-                            aria-owns='menu-appbar'
-                            aria-haspopup='true'
-                            onClick={() => {showDrawer(!drawer)}}
-                            color='inherit'
-                        >
-                            <MenuIcon/>
-                        </IconButton>
+                        null
                     }
                     <Typography variant='h6' className={classes.title}>
                         {pageName}

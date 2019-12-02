@@ -44,7 +44,7 @@ const CardCategory = React.memo((props) => {
                             <TextField
                                 label='Имя'
                                 value={name}
-                                className={isMobileApp?classes.inputM:classes.inputD}
+                                className={classes.input}
                                 onChange={handleName}
                                 inputProps={{
                                     'aria-label': 'description',
@@ -52,7 +52,7 @@ const CardCategory = React.memo((props) => {
                             />
                             <br/>
                             <br/>
-                            <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                            <FormControl className={classes.input}>
                                 <InputLabel>Категория</InputLabel>
                                 <Select
                                     value={selectCategory._id}
@@ -119,7 +119,7 @@ const CardCategory = React.memo((props) => {
                         <CardActionArea>
                             <Link href='/items/[id]' as={`/items/${element._id}`}>
                                 <div className={classes.line}>
-                                    <h3 className={isMobileApp?classes.inputM:classes.inputD}>
+                                    <h3 className={classes.input}>
                                         {element.name}
                                     </h3>
                                 </div>

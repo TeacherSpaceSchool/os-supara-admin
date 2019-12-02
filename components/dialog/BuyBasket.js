@@ -20,6 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Router from 'next/router'
 import Confirmation from './Confirmation'
+import Link from 'next/link';
 
 const BuyBasket =  React.memo(
     (props) =>{
@@ -28,7 +29,7 @@ const BuyBasket =  React.memo(
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
-        const width = isMobileApp? (window.innerWidth-126) : 500
+        const width = isMobileApp? (window.innerWidth-144) : 500
         let [address, setAddress] = useState([]);
         let [coment, setComent] = useState('');
         let handleComent =  (event) => {
@@ -44,7 +45,7 @@ const BuyBasket =  React.memo(
         return (
             <div className={classes.main}>
                 <FormControl component='fieldset' style={{width: width}}>
-                    <FormLabel component='legend'>Адреса доставки:</FormLabel>
+                    <FormLabel component='legend'>Адреса доставки</FormLabel>
                     <FormGroup>
                         {
                             client.address.map((element, idx) => (
@@ -65,6 +66,10 @@ const BuyBasket =  React.memo(
                         }
                     </FormGroup>
                 </FormControl>
+                <br/>
+                <Link href={'client/[id]'} as={`/client/${client.user._id}`} style={{width: width}}>
+                    Добавить адрес
+                </Link>
                 <br/>
                 <Input
                     style={{width: width}}

@@ -9,7 +9,6 @@ export default makeStyles({
         margin: 10
     },
     media: {
-        //borderRadius: '30px',
         objectFit: 'cover',
         height: '60px',
         width: '60px',

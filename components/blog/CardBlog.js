@@ -59,7 +59,7 @@ const CardBlog = React.memo((props) => {
                             <TextField
                                 label='Имя'
                                 value={title}
-                                className={isMobileApp?classes.inputM:classes.inputD}
+                                className={classes.input}
                                 onChange={handleTitle}
                                 inputProps={{
                                     'aria-label': 'description',
@@ -70,7 +70,7 @@ const CardBlog = React.memo((props) => {
                             <TextField
                                 label='Текст'
                                 value={text}
-                                className={isMobileApp?classes.inputM:classes.inputD}
+                                className={classes.input}
                                 onChange={handleText}
                                 inputProps={{
                                     'aria-label': 'description',

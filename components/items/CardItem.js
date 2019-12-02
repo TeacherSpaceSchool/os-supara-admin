@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import cardItemStyle from '../../src/styleMUI/item/cardItem'
 import { connect } from 'react-redux'
@@ -51,16 +50,15 @@ const CardItem = React.memo((props) => {
     },[])
     return (
         <Card className={classes.card}>
-            <CardActionArea>
-                                    <CardContent className={classes.column}>
-                                        <div className={classes.chipList}>
-                                    {
-                                        element.latest?
-                                            <div className={classes.chip} style={{color: 'white',background: 'green'}}>
-                                                Новинка
-                                            </div>
-                                            :null
-                                    }
+            <CardContent className={classes.column}>
+                <div className={classes.chipList}>
+                    {
+                        element.latest?
+                            <div className={classes.chip} style={{color: 'white',background: 'green'}}>
+                                Новинка
+                            </div>
+                            :null
+                    }
                                     {
                                         element.hit?
                                             <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
@@ -201,7 +199,6 @@ const CardItem = React.memo((props) => {
                                             null
                                         }
                                     </CardContent>
-                                </CardActionArea>
         </Card>
     );
 })

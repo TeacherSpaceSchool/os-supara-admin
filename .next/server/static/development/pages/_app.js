@@ -886,6 +886,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     ctx.store.getState().app.sort = '-updatedAt';
     ctx.store.getState().app.filter = '';
     ctx.store.getState().app.load = false;
+    ctx.store.getState().mini_dialog.show = false;
     return {
       pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
     };
@@ -901,33 +902,33 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 49
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 50
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51
+        lineNumber: 52
       },
       __self: this
     }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 53
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 54
       },
       __self: this
     })))));

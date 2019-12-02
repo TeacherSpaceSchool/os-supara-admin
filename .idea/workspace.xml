@@ -2,7 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/basket.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/development/pages/basket.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/development/pages/index.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/build-manifest.json" afterPath="$PROJECT_DIR$/.next/build-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/ads.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/basket.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/basket.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/clients.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/index.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/orders.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/orders.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/organizations.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/organizations.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/routes.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/routes.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/ads.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/ads.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/basket.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/basket.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/clients.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/clients.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/index.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/next/dist/pages/_error.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/next/dist/pages/_error.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/orders.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/orders.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/organizations.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/organizations.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/routes.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/routes.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/ads/CardAds.js" afterPath="$PROJECT_DIR$/components/ads/CardAds.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/app/AppBar.js" afterPath="$PROJECT_DIR$/components/app/AppBar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/blog/CardBlog.js" afterPath="$PROJECT_DIR$/components/blog/CardBlog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/dialog/AddSocial.js" afterPath="$PROJECT_DIR$/components/dialog/AddSocial.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/dialog/BuyBasket.js" afterPath="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/dialog/Order.js" afterPath="$PROJECT_DIR$/components/dialog/Order.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/dialog/Sign.js" afterPath="$PROJECT_DIR$/components/dialog/Sign.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/items/CardItem.js" afterPath="$PROJECT_DIR$/components/items/CardItem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" afterPath="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/_app.js" afterPath="$PROJECT_DIR$/pages/_app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/basket.js" afterPath="$PROJECT_DIR$/pages/basket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/client/[id].js" afterPath="$PROJECT_DIR$/pages/client/[id].js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/contact.js" afterPath="$PROJECT_DIR$/pages/contact.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/employment/[id].js" afterPath="$PROJECT_DIR$/pages/employment/[id].js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/ads/cardAds.js" afterPath="$PROJECT_DIR$/src/styleMUI/ads/cardAds.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/basket/basket.js" afterPath="$PROJECT_DIR$/src/styleMUI/basket/basket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/blog/cardBlog.js" afterPath="$PROJECT_DIR$/src/styleMUI/blog/cardBlog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" afterPath="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/client/cardClient.js" afterPath="$PROJECT_DIR$/src/styleMUI/client/cardClient.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/client/client.js" afterPath="$PROJECT_DIR$/src/styleMUI/client/client.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/contact.js" afterPath="$PROJECT_DIR$/src/styleMUI/contact.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js" afterPath="$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/employment/employment.js" afterPath="$PROJECT_DIR$/src/styleMUI/employment/employment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js" afterPath="$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" afterPath="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js" afterPath="$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,11 +70,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppBar.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/app/AppBar.js">
+      <file leaf-file-name="SubCardCategory.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/subcategory/SubCardCategory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="168" column="45" lean-forward="true" selection-start-line="168" selection-start-column="45" selection-end-line="169" selection-end-column="56" />
+            <state relative-caret-position="161">
+              <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardSubcategory.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CardRoute.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/route/CardRoute.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardRoute.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/route/cardRoute.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-94">
+              <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardAds.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/ads/cardAds.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardCategory.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/category/cardCategory.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="17" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardOrder.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="route.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styleMUI/route/route.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -38,40 +162,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LazyLoadImage</find>
-      <find>inputD:</find>
-      <find>address</find>
+      <find>mediaSocial</find>
+      <find>inputDF</find>
       <find>inputD</find>
-      <find>setProfile</find>
-      <find>window.location.reload()</find>
-      <find>Проверьте данные</find>
-      <find>getProfile</find>
-      <find>redux</find>
-      <find>'client'===ctx.store.getState().user.profile.role</find>
-      <find>=ctx.store.getState().user.profile.role</find>
-      <find>dialogContentStyle</find>
-      <find>name</find>
-      <find>break</find>
-      <find>37.</find>
-      <find>&quot;</find>
-      <find>static/</find>
-      <find>.URL</find>
-      <find>user</find>
-      <find>ws</find>
-      <find>effect</find>
-      <find>'Телефон'</find>
-      <find>Телефон</find>
-      <find>logout(</find>
-      <find>logout</find>
-      <find>Router</find>
-      <find>setAds</find>
-      <find>console.lo</find>
-      <find>withRedux</find>
-      <find>key</find>
+      <find>.input</find>
+      <find>Car</find>
+      <find>nameField</find>
+      <find>buyD</find>
+      <find>-126</find>
+      <find>clie</find>
+      <find>style={{w</find>
+      <find>0.</find>
+      <find>avatar</find>
+      <find>1.25rem</find>
+      <find>CardActions</find>
+      <find>isMobileApp?classes.inputM:classes.inputDF</find>
+      <find>.value</find>
+      <find>s.value</find>
+      <find>16px</find>
+      <find>info</find>
+      <find>px'</find>
+      <find>number</find>
+      <find>text</find>
+      <find>subcategory</find>
+      <find>/subcategory/C</find>
+      <find>isMobileApp?classes.inputM:classes.inputD</find>
+      <find>width:</find>
+      <find>cardD:</find>
+      <find>.text</find>
+      <find>card</find>
+      <find>cardD</find>
     </findStrings>
     <replaceStrings>
-      <replace>notification</replace>
-      <replace>Items</replace>
       <replace>CardItem</replace>
       <replace>, $</replace>
       <replace>,</replace>
@@ -100,11 +222,14 @@
       <replace>Geo</replace>
       <replace>img</replace>
       <replace>'</replace>
+      <replace>1rem</replace>
+      <replace>classes.input</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\projects\azyk\azyk-admin\node_modules\@material-ui\icons</dir>
       <dir>C:\projects\azyk\azyk-admin\src\styleMUI\organization</dir>
       <dir>C:\projects\azyk\azyk-admin\components\dialog</dir>
+      <dir>C:\projects\azyk\azyk-admin\src\styleMUI\subcategory</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -113,31 +238,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/components/client/CardClient.js" />
-        <option value="$PROJECT_DIR$/src/gql/client.js" />
-        <option value="$PROJECT_DIR$/scss/app.scss" />
-        <option value="$PROJECT_DIR$/src/styleMUI/appbar.js" />
-        <option value="$PROJECT_DIR$/components/app/Dialog.js" />
-        <option value="$PROJECT_DIR$/redux/reducers/mini_dialog.js" />
-        <option value="$PROJECT_DIR$/redux/actions/mini_dialog.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/item/item.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/organization/organization.js" />
-        <option value="$PROJECT_DIR$/components/blog/CardBlog.js" />
-        <option value="$PROJECT_DIR$/components/organization/CardOrganization.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/client/client.js" />
-        <option value="$PROJECT_DIR$/src/gql/basket.js" />
-        <option value="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
-        <option value="$PROJECT_DIR$/src/gql/order.js" />
-        <option value="$PROJECT_DIR$/components/dialog/Order.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/dialogContent.js" />
-        <option value="$PROJECT_DIR$/components/order/CardOrder.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" />
-        <option value="$PROJECT_DIR$/components/route/CardRoute.js" />
         <option value="$PROJECT_DIR$/src/styleMUI/route/route.js" />
         <option value="$PROJECT_DIR$/components/dialog/Geo.js" />
         <option value="$PROJECT_DIR$/components/dialog/GeoRoute.js" />
         <option value="$PROJECT_DIR$/src/lib.js" />
-        <option value="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/pages/index.js" />
         <option value="$PROJECT_DIR$/pages/routes.js" />
@@ -145,7 +249,6 @@
         <option value="$PROJECT_DIR$/pages/orders.js" />
         <option value="$PROJECT_DIR$/pages/favorite.js" />
         <option value="$PROJECT_DIR$/pages/employments.js" />
-        <option value="$PROJECT_DIR$/pages/contact.js" />
         <option value="$PROJECT_DIR$/pages/clients.js" />
         <option value="$PROJECT_DIR$/pages/blog.js" />
         <option value="$PROJECT_DIR$/pages/ads.js" />
@@ -153,17 +256,39 @@
         <option value="$PROJECT_DIR$/pages/route/[id].js" />
         <option value="$PROJECT_DIR$/pages/items/[id].js" />
         <option value="$PROJECT_DIR$/pages/item/[id].js" />
-        <option value="$PROJECT_DIR$/pages/employment/[id].js" />
-        <option value="$PROJECT_DIR$/pages/client/[id].js" />
         <option value="$PROJECT_DIR$/components/category/CardCategory.js" />
         <option value="$PROJECT_DIR$/src/singleton/client.js" />
         <option value="$PROJECT_DIR$/pages/organization/[id].js" />
         <option value="$PROJECT_DIR$/components/app/Drawer.js" />
         <option value="$PROJECT_DIR$/redux/actions/user.js" />
         <option value="$PROJECT_DIR$/layouts/App.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/ads/cardAds.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/contact.js" />
+        <option value="$PROJECT_DIR$/pages/contact.js" />
+        <option value="$PROJECT_DIR$/components/ads/CardAds.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/basket/basket.js" />
+        <option value="$PROJECT_DIR$/components/dialog/Order.js" />
+        <option value="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
         <option value="$PROJECT_DIR$/pages/_app.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/blog/cardBlog.js" />
+        <option value="$PROJECT_DIR$/components/blog/CardBlog.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/client/cardClient.js" />
+        <option value="$PROJECT_DIR$/components/client/CardClient.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/client/client.js" />
+        <option value="$PROJECT_DIR$/pages/client/[id].js" />
         <option value="$PROJECT_DIR$/components/app/AppBar.js" />
+        <option value="$PROJECT_DIR$/components/employment/CardEmployment.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js" />
+        <option value="$PROJECT_DIR$/pages/employment/[id].js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/employment/employment.js" />
+        <option value="$PROJECT_DIR$/components/items/CardItem.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/item/cardItem.js" />
+        <option value="$PROJECT_DIR$/components/subcategory/SubCardCategory.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" />
       </list>
     </option>
   </component>
@@ -221,13 +346,67 @@
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="ads" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="category" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="dialog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="employment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="order" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="subcategory" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -307,7 +486,84 @@
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="singleton" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="ads" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="basket" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="category" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="employment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="favorite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="item" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="orders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styleMUI" type="462c0819:PsiDirectoryNode" />
+              <item name="subcategory" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -471,12 +727,12 @@
       <workItem from="1574933464017" duration="15013000" />
       <workItem from="1575014396876" duration="17555000" />
       <workItem from="1575096271881" duration="19673000" />
-      <workItem from="1575123558007" duration="4386000" />
+      <workItem from="1575123558007" duration="11651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="636069000" />
+    <option name="totallyTimeSpent" value="643334000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,16 +745,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.69285715" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.69384056" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.50506973" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.30714285" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.3061594" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -521,7 +778,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
-          <line>116</line>
+          <line>109</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/_app.js</url>
@@ -530,7 +787,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
-          <line>308</line>
+          <line>301</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -540,7 +797,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/app/AppBar.js</url>
-          <line>228</line>
+          <line>221</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
@@ -549,364 +806,12 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/components/blog/CardBlog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/organization/CardOrganization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gql/ads.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="68" column="71" lean-forward="false" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gql/basket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/singleton/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gql/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="120" column="88" lean-forward="false" selection-start-line="120" selection-start-column="88" selection-end-line="120" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-            <element signature="e#207#2387#0" expanded="false" />
-            <element signature="e#2427#4229#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/BuyBasket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="61" column="52" lean-forward="false" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/dialogContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="76" column="23" lean-forward="false" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/client/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="47" column="6" lean-forward="false" selection-start-line="47" selection-start-column="6" selection-end-line="58" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/route/cardRoute.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/route/route.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="147" column="27" lean-forward="false" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/route/CardRoute.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="42" column="30" lean-forward="false" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/Geo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="20" column="75" lean-forward="false" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/order/CardOrder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="34" column="65" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/GeoRoute.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="41" column="87" lean-forward="false" selection-start-line="41" selection-start-column="87" selection-end-line="41" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="31" column="95" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gql/subcategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="77" column="13" lean-forward="false" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/subcategory/SubCardCategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="100" column="75" lean-forward="false" selection-start-line="100" selection-start-column="75" selection-end-line="100" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/notification.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="33" column="77" lean-forward="false" selection-start-line="33" selection-start-column="77" selection-end-line="33" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/organizations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="84" lean-forward="false" selection-start-line="34" selection-start-column="84" selection-end-line="34" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/orders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="29" column="77" lean-forward="false" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/favorite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="47" column="79" lean-forward="false" selection-start-line="47" selection-start-column="79" selection-end-line="47" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/employments.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="82" lean-forward="false" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/contact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="97" column="78" lean-forward="false" selection-start-line="97" selection-start-column="78" selection-end-line="97" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/subcategory/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="38" column="88" lean-forward="false" selection-start-line="38" selection-start-column="88" selection-end-line="38" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" column="98" lean-forward="false" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="98" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/employment/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/item/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3314">
-          <caret line="111" column="119" lean-forward="false" selection-start-line="111" selection-start-column="119" selection-end-line="118" selection-end-column="98" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-            <element signature="e#6129#20586#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/items/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-185">
-          <caret line="33" column="75" lean-forward="false" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="100" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/route/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2857">
-          <caret line="103" column="77" lean-forward="false" selection-start-line="103" selection-start-column="77" selection-end-line="103" selection-end-column="77" />
-          <folding>
-            <element signature="e#2769#3071#0" expanded="false" />
-            <element signature="e#3101#3258#0" expanded="false" />
-            <element signature="e#3281#3483#0" expanded="false" />
-            <element signature="e#3518#3852#0" expanded="false" />
-            <element signature="e#3921#4016#0" expanded="false" />
-            <element signature="e#4049#4275#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/blog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/category/CardCategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#43#106#0" expanded="false" />
-            <element signature="e#605#657#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/ads.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19">
-          <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/clients.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="29" column="78" lean-forward="false" selection-start-line="29" selection-start-column="78" selection-end-line="29" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="207" column="38" lean-forward="false" selection-start-line="207" selection-start-column="38" selection-end-line="207" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/organization/[id].js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="375" column="65" lean-forward="false" selection-start-line="375" selection-start-column="65" selection-end-line="375" selection-end-column="65" />
           <folding>
             <element signature="e#5138#21730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/app/Drawer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -937,14 +842,6 @@
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/basket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="93" column="27" lean-forward="false" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,20 +883,374 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/blog/blogList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/category/categoryList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/drawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/ads/adsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding>
+            <element signature="e#4866#6962#0" expanded="false" />
+            <marker date="1575273923177" expanded="false" signature="20100:22410" ph="&lt;xml/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/ads.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/ads/CardAds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-139">
+          <caret line="40" column="78" lean-forward="false" selection-start-line="40" selection-start-column="78" selection-end-line="47" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+            <element signature="e#3219#6248#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/basket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1156">
+          <caret line="138" column="93" lean-forward="false" selection-start-line="138" selection-start-column="93" selection-end-line="138" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/dialogContent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/app/Drawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-850">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-561">
+          <caret line="38" column="64" lean-forward="false" selection-start-line="38" selection-start-column="64" selection-end-line="38" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/BuyBasket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="69" column="21" lean-forward="false" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redux/reducers/mini_dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="8" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/_app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="13" column="55" lean-forward="false" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
+        <state relative-caret-position="136">
+          <caret line="34" column="49" lean-forward="false" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/basket/basket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="206" column="24" lean-forward="true" selection-start-line="206" selection-start-column="19" selection-end-line="206" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/blog/cardBlog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/blog/CardBlog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-882">
+          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <folding>
+            <element signature="e#2188#2509#0" expanded="false" />
+            <element signature="e#2534#3492#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/client/cardClient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/client/CardClient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="25" column="56" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="23" column="26" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/app/AppBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="102" column="28" lean-forward="false" selection-start-line="102" selection-start-column="28" selection-end-line="102" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/client/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/employment/CardEmployment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-35">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="92" column="28" lean-forward="false" selection-start-line="92" selection-start-column="17" selection-end-line="92" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/employment/employment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/employment/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="75" column="36" lean-forward="false" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+            <element signature="e#4970#17907#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/favorite/favoriteList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/items/CardItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#49#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/item/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+          <folding>
+            <element signature="e#6129#20586#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/item/cardItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/item/item.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1710">
+          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/orders/orderList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/orders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-338">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/order/CardOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="27" column="54" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="54" />
           <folding>
             <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/app/AppBar.js">
+    <entry file="file://$PROJECT_DIR$/components/subcategory/SubCardCategory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="168" column="45" lean-forward="true" selection-start-line="168" selection-start-column="45" selection-end-line="169" selection-end-column="56" />
+        <state relative-caret-position="161">
+          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/subcategory/cardSubcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/route/CardRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/route/route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/ads/cardAds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/category/cardCategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="17" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/orders/cardOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/route/cardRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
           <folding />
         </state>
       </provider>

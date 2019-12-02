@@ -39,19 +39,18 @@ const CardAds = React.memo((props) => {
           <> {
                 profile.role === 'admin' ?
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <label htmlFor={element?element._id:'add'}>
-                                <img
-                                    className={isMobileApp?classes.mediaM:classes.mediaD}
-                                    src={preview}
-                                    alt={'Изменить'}
-                                />
-                            </label>
-                            <CardContent>
+                        <label htmlFor={element?element._id:'add'}>
+                            <img
+                                className={isMobileApp?classes.mediaM:classes.mediaD}
+                                src={preview}
+                                alt={'Изменить'}
+                            />
+                        </label>
+                        <CardContent>
                                 <TextField
                                     label='Имя'
                                     value={title}
-                                    className={isMobileApp?classes.inputM:classes.inputD}
+                                    className={classes.input}
                                     onChange={handleTitle}
                                     inputProps={{
                                         'aria-label': 'description',
@@ -62,14 +61,13 @@ const CardAds = React.memo((props) => {
                                 <TextField
                                     label='URL'
                                     value={url}
-                                    className={isMobileApp?classes.inputM:classes.inputD}
+                                    className={classes.input}
                                     onChange={handleUrl}
                                     inputProps={{
                                         'aria-label': 'description',
                                     }}
                                 />
                             </CardContent>
-                        </CardActionArea>
                         <CardActions>
                             {
                                 element!==undefined?

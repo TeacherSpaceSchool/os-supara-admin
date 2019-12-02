@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {getEmployment, setEmployments, onoffEmployment, addEmployment, deleteEmployment} from '../../src/gql/employment'
 import organizationStyle from '../../src/styleMUI/employment/employment'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
@@ -69,7 +69,7 @@ const Client = React.memo((props) => {
                 <link rel='canonical' href={`http://${process.env.URL}/employment/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
-                <CardActions className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                 {
                             data.employment!==null?
                                 profile.role==='admin'||profile.role==='организация'||profile._id===data.employment.user._id?
@@ -78,7 +78,7 @@ const Client = React.memo((props) => {
                                             <TextField
                                                 label='Имя'
                                                 value={name}
-                                                className={isMobileApp?classes.inputM:classes.inputDF}
+                                                className={classes.input}
                                                 onChange={(event)=>{setName(event.target.value)}}
                                                 inputProps={{
                                                     'aria-label': 'description',
@@ -89,7 +89,7 @@ const Client = React.memo((props) => {
                                                 type={hide ? 'password' : 'text' }
                                                 value={password}
                                                 onChange={handlePassword}
-                                                className={isMobileApp?classes.inputM:classes.inputDF}
+                                                className={classes.input}
                                                 endAdornment={
                                                     <InputAdornment position='end'>
                                                         <IconButton aria-label='Toggle password visibility' onClick={handleHide}>
@@ -101,7 +101,7 @@ const Client = React.memo((props) => {
                                         <TextField
                                             label='email'
                                             value={email}
-                                            className={isMobileApp?classes.inputM:classes.inputDF}
+                                            className={classes.input}
                                             onChange={(event)=>{setEmail(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
@@ -110,14 +110,14 @@ const Client = React.memo((props) => {
                                         <TextField
                                             label='Телефон. Формат: +996555780861'
                                             value={phone}
-                                            className={isMobileApp?classes.inputM:classes.inputDF}
+                                            className={classes.input}
                                             onChange={(event)=>{setPhone(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
                                             }}
                                         />
                                         {router.query.id==='new'&&profile.role==='admin'?
-                                            <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                            <FormControl className={classes.input}>
                                                 <InputLabel>Организация</InputLabel>
                                                 <Select value={organization._id}onChange={handleOrganization}>
                                                     {data.organizations.map((element)=>
@@ -130,7 +130,7 @@ const Client = React.memo((props) => {
                                                 <TextField
                                                     label='Организация'
                                                     value={organization.name}
-                                                    className={isMobileApp?classes.inputM:classes.inputDF}
+                                                    className={classes.input}
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                         readOnly: true,
@@ -138,7 +138,7 @@ const Client = React.memo((props) => {
                                                 />
                                                 :null
                                         }
-                                        <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                        <FormControl className={classes.input}>
                                             <InputLabel>Роль</InputLabel>
                                             <Select
                                                 value={role}
@@ -248,7 +248,7 @@ const Client = React.memo((props) => {
                                 :
                                 'Ничего не найдено'
                         }
-                </CardActions>
+                </CardContent>
                 </Card>
         </App>
     )

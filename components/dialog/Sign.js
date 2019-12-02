@@ -78,7 +78,7 @@ const Sign =  React.memo(
         const { showMiniDialog } = props.mini_dialogActions;
         const { signin, signup } = props.userActions;
         const { classes } = props;
-        const width = isMobileApp? (window.innerWidth-126) : 500
+        const width = isMobileApp? (window.innerWidth-144) : 500
         return (
             <div className={classes.main}>
             {type==='enter'?

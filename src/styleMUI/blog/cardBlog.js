@@ -20,10 +20,7 @@ export default makeStyles({
         cursor: 'pointer'
     },
     inputM: {
-        width: 'calc(100vw - 32px)',
-    },
-    inputD: {
-        width: 600-32,
+        width: '100%'
     },
     shapka: {
         margin: 20,
@@ -32,12 +29,12 @@ export default makeStyles({
         alignItems: 'baseline'
     },
     title: {
-        fontSize: '1.2rem',
+        fontSize: '1rem',
         fontWeight: 'bold',
         width: 'calc(100% - 130px)'
     },
     date: {
-        fontSize: '1rem',
+        fontSize: '0.875rem',
         color: '#9697a1'
     },
 })

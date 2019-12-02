@@ -19,7 +19,7 @@ const Order =  React.memo(
         const { profile } = props.user;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { classes, element, setList, route, getInvoices } = props;
-        const width = isMobileApp? (window.innerWidth-126) : 500;
+        const width = isMobileApp? (window.innerWidth-144) : 500;
         return (
             <div className={classes.column} style={{width: width}}>
                 <div className={classes.row}>
