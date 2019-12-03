@@ -57,6 +57,7 @@ const CardBlog = React.memo((props) => {
                         </label>
                         <CardContent>
                             <TextField
+                                style={{width: '100%'}}
                                 label='Имя'
                                 value={title}
                                 className={classes.input}
@@ -68,6 +69,7 @@ const CardBlog = React.memo((props) => {
                             <br/>
                             <br/>
                             <TextField
+                                style={{width: '100%'}}
                                 label='Текст'
                                 value={text}
                                 className={classes.input}

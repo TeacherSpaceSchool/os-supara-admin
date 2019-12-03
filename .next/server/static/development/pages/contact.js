@@ -780,8 +780,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_styleMUI_drawer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/styleMUI/drawer */ "./src/styleMUI/drawer.js");
 /* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/actions/app */ "./redux/actions/app.js");
 /* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/SwipeableDrawer */ "@material-ui/core/SwipeableDrawer");
-/* harmony import */ var _material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Drawer */ "@material-ui/core/Drawer");
+/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/List */ "@material-ui/core/List");
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Divider */ "@material-ui/core/Divider");
@@ -861,18 +861,14 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
   let variant = isMobileApp ? 'temporary' : 'permanent';
   const open = isMobileApp ? drawer : true;
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_23__["useRouter"])();
-  return __jsx(_material_ui_core_SwipeableDrawer__WEBPACK_IMPORTED_MODULE_6___default.a, {
+  return __jsx(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_6___default.a, {
     variant: variant,
     className: classes.drawer,
     open: open,
     onClose: () => showDrawer(false),
     classes: {
       paper: classes.drawerPaper
-    },
-    onOpen: () => showDrawer(true),
-    swipeAreaWidth: 20,
-    hysteresis: 0.5,
-    disableDiscovery: true
+    }
   }, isMobileApp ? null : __jsx("div", {
     className: classes.toolbar
   }), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8___default.a, null), __jsx(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_7___default.a, null, ['экспедитор', 'организация', 'менеджер'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
@@ -4810,6 +4806,17 @@ module.exports = require("@material-ui/core/Divider");
 
 /***/ }),
 
+/***/ "@material-ui/core/Drawer":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Drawer" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Drawer");
+
+/***/ }),
+
 /***/ "@material-ui/core/FormControl":
 /*!************************************************!*\
   !*** external "@material-ui/core/FormControl" ***!
@@ -4950,17 +4957,6 @@ module.exports = require("@material-ui/core/Paper");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Snackbar");
-
-/***/ }),
-
-/***/ "@material-ui/core/SwipeableDrawer":
-/*!****************************************************!*\
-  !*** external "@material-ui/core/SwipeableDrawer" ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/SwipeableDrawer");
 
 /***/ }),
 
