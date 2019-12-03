@@ -993,8 +993,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../src/singleton/store */ "./src/singleton/store.js");
-
 
 
 

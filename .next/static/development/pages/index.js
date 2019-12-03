@@ -3335,6 +3335,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
+
 var mainWindow = react__WEBPACK_IMPORTED_MODULE_3___default.a.createRef();
 var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   var _props$userActions = props.userActions,
@@ -3347,13 +3348,18 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   var sorts = props.sorts,
       filters = props.filters,
       getList = props.getList,
-      pageName = props.pageName; //let [ads, setAds] = useState({});
+      pageName = props.pageName;
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_17__["useRouter"])(); //let [ads, setAds] = useState({});
 
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     if (authenticated) setProfile();else if (!authenticated && profile.role) logout(false);
   }, [authenticated]);
-  next_router__WEBPACK_IMPORTED_MODULE_17___default.a.events.on('routeChangeStart', function () {
-    showLoad(true);
+  next_router__WEBPACK_IMPORTED_MODULE_17___default.a.events.on('routeChangeStart', function (err, url) {
+    if (!router.pathname.includes(url)) showLoad(true);
+
+    if (err.cancelled) {
+      showLoad(false);
+    }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
@@ -3448,7 +3454,7 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: "App",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 70
     },
     __self: this
   }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3457,45 +3463,45 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     filters: filters,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 71
     },
     __self: this
   }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 72
     },
     __self: this
   }), __jsx("div", {
     className: "App-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 73
     },
     __self: this
   }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 88
     },
     __self: this
   }), __jsx(_components_app_SnackBar__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 89
     },
     __self: this
   }), load ? __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 91
     },
     __self: this
   }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_15__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 92
     },
     __self: this
   })) : null);
@@ -59230,10 +59236,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_styleMUI_category_categoryList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../src/styleMUI/category/categoryList */ "./src/styleMUI/category/categoryList.js");
 /* harmony import */ var _components_category_CardCategory__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/category/CardCategory */ "./components/category/CardCategory.js");
 /* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_12__);
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
 
 
 
@@ -59256,7 +59265,9 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       search = _props$app.search,
       filter = _props$app.filter,
       sort = _props$app.sort;
-  var profile = props.user.profile;
+  var _props$user = props.user,
+      profile = _props$user.profile,
+      authenticated = _props$user.authenticated;
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
@@ -59285,25 +59296,28 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       }, _callee);
     }))();
   }, [filter, sort, search]);
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    if (!(!authenticated || ['admin', 'client'].includes(profile.role) || !profile.role)) next_router__WEBPACK_IMPORTED_MODULE_12___default.a.push('/items/all');
+  }, [profile, authenticated]);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_4__["default"], {
     filters: data.filterCategory,
     sorts: data.sortCategory,
     pageName: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 29
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 30
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 31
     },
     __self: this
   }, "\u0422\u043E\u0432\u0430\u0440\u044B"), __jsx("meta", {
@@ -59311,7 +59325,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 32
     },
     __self: this
   }), __jsx("meta", {
@@ -59319,7 +59333,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A - \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0439 \u0441\u043A\u043B\u0430\u0434 \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u044E\u0449\u0438\u0439 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F \u0441 \u0442\u043E\u0440\u0433\u043E\u0432\u043E\u0439 \u0442\u043E\u0447\u043A\u043E\u0439",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 33
     },
     __self: this
   }), __jsx("meta", {
@@ -59327,7 +59341,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 34
     },
     __self: this
   }), __jsx("meta", {
@@ -59335,7 +59349,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 35
     },
     __self: this
   }), __jsx("meta", {
@@ -59343,7 +59357,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_11__["urlMain"], "/static/512x512.png"),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 36
     },
     __self: this
   }), __jsx("meta", {
@@ -59351,7 +59365,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_11__["urlMain"]),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 37
     },
     __self: this
   }), __jsx("link", {
@@ -59359,21 +59373,21 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     href: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_11__["urlMain"]),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 38
     },
     __self: this
   })), __jsx("div", {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 40
     },
     __self: this
   }, profile.role === 'admin' ? __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx(_components_category_CardCategory__WEBPACK_IMPORTED_MODULE_10__["default"], {
     setList: setList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 43
     },
     __self: this
   })) : null, __jsx(_components_category_CardCategory__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -59385,7 +59399,7 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     setList: "all",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 48
     },
     __self: this
   }), list ? list.map(function (element) {
@@ -59395,41 +59409,57 @@ var Index = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       element: element,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 51
       },
       __self: this
     }) : null;
   }) : null));
 });
+
 Index.getInitialProps =
 /*#__PURE__*/
-Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.next = 2;
-          return Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["getCategorys"])({
-            search: '',
-            sort: '-updatedAt',
-            filter: ''
-          });
+function () {
+  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(ctx) {
+    var role, authenticated;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            role = ctx.store.getState().user.profile.role;
+            authenticated = ctx.store.getState().user.authenticated;
+            if (!(!authenticated || ['admin', 'client'].includes(role) || !role)) if (ctx.res) {
+              ctx.res.writeHead(302, {
+                Location: '/items/all'
+              });
+              ctx.res.end();
+            } else next_router__WEBPACK_IMPORTED_MODULE_12___default.a.push('/items/all');
+            _context2.next = 5;
+            return Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["getCategorys"])({
+              search: '',
+              sort: '-updatedAt',
+              filter: ''
+            });
 
-        case 2:
-          _context2.t0 = _context2.sent;
-          return _context2.abrupt("return", {
-            data: _context2.t0
-          });
+          case 5:
+            _context2.t0 = _context2.sent;
+            return _context2.abrupt("return", {
+              data: _context2.t0
+            });
 
-        case 4:
-        case "end":
-          return _context2.stop();
+          case 7:
+          case "end":
+            return _context2.stop();
+        }
       }
-    }
-  }, _callee2);
-}));
+    }, _callee2);
+  }));
+
+  return function (_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 function mapStateToProps(state) {
   return {
@@ -59601,7 +59631,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/singleton/store */ "./src/singleton/store.js");
 
 
 
@@ -59645,7 +59674,6 @@ function _templateObject() {
 
   return data;
 }
-
 
 
 
@@ -62075,7 +62103,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 0:
+/***/ 4:
 /*!***********************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Cindex.js ***!
   \***********************************************************************************************************************/
@@ -62098,5 +62126,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js","styles"]]]);
+},[[4,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

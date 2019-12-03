@@ -14,8 +14,7 @@ import {
 import Cookies from 'js-cookie';
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../../src/singleton/client';
-import Router from 'next/router'
-import { SingletonStore } from '../../src/singleton/store';
+import Router from 'next/router';
 
 export function signup(payload) {
     return async (dispatch) => {

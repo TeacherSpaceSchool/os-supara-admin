@@ -3306,6 +3306,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
+
 var mainWindow = react__WEBPACK_IMPORTED_MODULE_3___default.a.createRef();
 var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   var _props$userActions = props.userActions,
@@ -3318,13 +3319,18 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   var sorts = props.sorts,
       filters = props.filters,
       getList = props.getList,
-      pageName = props.pageName; //let [ads, setAds] = useState({});
+      pageName = props.pageName;
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_17__["useRouter"])(); //let [ads, setAds] = useState({});
 
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     if (authenticated) setProfile();else if (!authenticated && profile.role) logout(false);
   }, [authenticated]);
-  next_router__WEBPACK_IMPORTED_MODULE_17___default.a.events.on('routeChangeStart', function () {
-    showLoad(true);
+  next_router__WEBPACK_IMPORTED_MODULE_17___default.a.events.on('routeChangeStart', function (err, url) {
+    if (!router.pathname.includes(url)) showLoad(true);
+
+    if (err.cancelled) {
+      showLoad(false);
+    }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
@@ -3419,7 +3425,7 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: "App",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 70
     },
     __self: this
   }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3428,45 +3434,45 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     filters: filters,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 71
     },
     __self: this
   }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 72
     },
     __self: this
   }), __jsx("div", {
     className: "App-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 73
     },
     __self: this
   }, props.children), __jsx(_components_app_Dialog__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 88
     },
     __self: this
   }), __jsx(_components_app_SnackBar__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 89
     },
     __self: this
   }), load ? __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 91
     },
     __self: this
   }, __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_15__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 92
     },
     __self: this
   })) : null);
@@ -59446,17 +59452,11 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
     _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var items;
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log({
-                subCategory: router.query.id,
-                search: search,
-                sort: sort,
-                filter: filter
-              });
+              _context.t0 = setList;
               _context.next = 3;
               return Object(_src_gql_items__WEBPACK_IMPORTED_MODULE_9__["getItems"])({
                 subCategory: router.query.id,
@@ -59466,11 +59466,10 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
               });
 
             case 3:
-              items = _context.sent.items;
-              console.log('items' + items.length);
-              setList(items);
+              _context.t1 = _context.sent.items;
+              (0, _context.t0)(_context.t1);
 
-            case 6:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -59484,19 +59483,19 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     pageName: router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 27
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 28
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 29
     },
     __self: this
   }, router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено'), __jsx("meta", {
@@ -59504,7 +59503,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 30
     },
     __self: this
   }), __jsx("meta", {
@@ -59512,7 +59511,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 31
     },
     __self: this
   }), __jsx("meta", {
@@ -59520,7 +59519,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 32
     },
     __self: this
   }), __jsx("meta", {
@@ -59528,7 +59527,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 33
     },
     __self: this
   }), __jsx("meta", {
@@ -59536,7 +59535,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/static/512x512.png"),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 34
     },
     __self: this
   }), __jsx("meta", {
@@ -59544,7 +59543,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/items/").concat(router.query.id),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 35
     },
     __self: this
   }), __jsx("link", {
@@ -59552,14 +59551,14 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     href: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/items/").concat(router.query.id),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 36
     },
     __self: this
   })), __jsx("div", {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 38
     },
     __self: this
   }, list ? list.map(function (element) {
@@ -59570,7 +59569,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       subCategory: router.query.id === 'all' ? 'all' : data.subCategory._id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 40
       },
       __self: this
     });
@@ -59579,7 +59578,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     as: "/item/new",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 44
     },
     __self: this
   }, __jsx(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -59588,13 +59587,13 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.fab,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 45
     },
     __self: this
   }, __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_11___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 46
     },
     __self: this
   }))) : null);
@@ -59801,7 +59800,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/singleton/client */ "./src/singleton/client.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/singleton/store */ "./src/singleton/store.js");
 
 
 
@@ -59845,7 +59843,6 @@ function _templateObject() {
 
   return data;
 }
-
 
 
 
@@ -62029,7 +62026,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!**************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fitems%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Citems%5C%5Bid%5D.js ***!
   \**************************************************************************************************************************************************/
@@ -62052,5 +62049,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[5,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=[id].js.map

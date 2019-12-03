@@ -11,7 +11,7 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
-    media: {
+    media1: {
         objectFit: 'cover',
         height: 300,
         width: 300,

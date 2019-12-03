@@ -181,6 +181,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/parse-int */ "core-js/library/fn/parse-int");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/promise.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/promise.js ***!
@@ -1113,10 +1124,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/styles */ "@material-ui/styles");
 /* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _src_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/theme */ "./src/theme.js");
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\_document.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
 
 
 
@@ -1128,20 +1141,20 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       lang: "en",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 9
+        lineNumber: 10
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["Head"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 10
+        lineNumber: 11
       },
       __self: this
     }, __jsx("meta", {
       charSet: "utf-8",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 12
       },
       __self: this
     }), __jsx("meta", {
@@ -1149,7 +1162,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 13
       },
       __self: this
     }), __jsx("meta", {
@@ -1157,7 +1170,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: _src_theme__WEBPACK_IMPORTED_MODULE_5__["default"].palette.primary.main,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 18
       },
       __self: this
     }), __jsx("link", {
@@ -1165,7 +1178,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 19
       },
       __self: this
     }), __jsx("meta", {
@@ -1173,7 +1186,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "257953674358265",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 22
       },
       __self: this
     }), __jsx("meta", {
@@ -1181,7 +1194,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "telephone=no",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 22
+        lineNumber: 23
       },
       __self: this
     }), __jsx("meta", {
@@ -1189,34 +1202,34 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "on",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 24
       },
       __self: this
     }), __jsx("link", {
       rel: "shortcut icon",
-      href: "static/favicon.ico",
+      href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_6__["urlMain"]}/static/favicon.ico`,
       type: "image/x-icon",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24
+        lineNumber: 25
       },
       __self: this
     })), __jsx("body", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 27
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["Main"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 27
+        lineNumber: 28
       },
       __self: this
     }), __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["NextScript"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 28
+        lineNumber: 29
       },
       __self: this
     })));
@@ -1254,7 +1267,7 @@ MyDocument.getInitialProps = async ctx => {
     enhanceApp: App => props => sheets.collect(__jsx(App, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 64
+        lineNumber: 65
       },
       __self: undefined
     })))
@@ -1267,7 +1280,7 @@ MyDocument.getInitialProps = async ctx => {
       key: "styles",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 73
+        lineNumber: 74
       },
       __self: undefined
     }, initialProps.styles, sheets.getStyleElement())]
@@ -1275,6 +1288,50 @@ MyDocument.getInitialProps = async ctx => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MyDocument);
+
+/***/ }),
+
+/***/ "./redux/constants/other.js":
+/*!**********************************!*\
+  !*** ./redux/constants/other.js ***!
+  \**********************************/
+/*! exports provided: urlGQL, urlGQLws, urlMain, validMail, validPhone, checkInt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "urlGQL", function() { return urlGQL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "urlGQLws", function() { return urlGQLws; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "urlMain", function() { return urlMain; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validMail", function() { return validMail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validPhone", function() { return validPhone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkInt", function() { return checkInt; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+
+let urlGQL;
+let urlGQLws;
+let urlMain;
+
+if ("localhost".trim() === 'azyk.store') {
+  urlGQL = `https://${"localhost"}:3000/graphql`;
+  urlGQLws = `ws://${"localhost"}:3000/graphql`;
+  urlMain = `https://${"localhost"}`;
+} else {
+  urlGQL = `http://${"localhost"}:3000/graphql`;
+  urlGQLws = `ws://${"localhost"}:3000/graphql`;
+  urlMain = `http://${"localhost"}`;
+}
+
+const validMail = mail => {
+  return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
+};
+const validPhone = phone => {
+  return /^[+]{1}996[0-9]{9}$/.test(phone);
+};
+const checkInt = int => {
+  return isNaN(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(int)) ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(int);
+};
 
 /***/ }),
 
@@ -1447,6 +1504,17 @@ module.exports = require("core-js/library/fn/object/get-own-property-symbols");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/keys");
+
+/***/ }),
+
+/***/ "core-js/library/fn/parse-int":
+/*!***********************************************!*\
+  !*** external "core-js/library/fn/parse-int" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/parse-int");
 
 /***/ }),
 

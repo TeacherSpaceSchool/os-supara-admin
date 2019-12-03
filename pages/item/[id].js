@@ -330,47 +330,52 @@ const Item = React.memo((props) => {
                                             src={data.item.image}
                                             alt={data.item.info}
                                         />
-                                        <Star className={classes.buttonToggle} onClick={async ()=>{
-                                            let index
-                                            if(profile.role==='client') {
-                                                await favoriteItem([data.item._id])
-                                                index = favorite.indexOf(profile._id)
-                                                if (index === -1) {
-                                                    favorite.push(profile._id)
-                                                    setFavorite([...favorite])
-                                                }
-                                            }
-                                            else if(!authenticated) {
-                                                let favorites = JSON.parse(localStorage.favorites);
-                                                index = -1
-                                                for(let i=0; i<favorites.length; i++){
-                                                    if(favorites[i]._id == data.item._id)
-                                                        index = i
-                                                }
-                                                if(index===-1){
-                                                    favorites.push(data.item)
-                                                    setFavorite(true)
-                                                    localStorage.favorites = JSON.stringify(favorites)
-                                                }
-                                            }
-
-                                            if (index !== -1) {
-                                                const action = async() => {
+                                        {
+                                            profile.role==='client'||!authenticated?
+                                                <Star className={classes.buttonToggle} onClick={async ()=>{
+                                                    let index
                                                     if(profile.role==='client') {
-                                                        favorite.splice(index, 1)
-                                                        setFavorite([...favorite])
+                                                        await favoriteItem([data.item._id])
+                                                        index = favorite.indexOf(profile._id)
+                                                        if (index === -1) {
+                                                            favorite.push(profile._id)
+                                                            setFavorite([...favorite])
+                                                        }
                                                     }
                                                     else if(!authenticated) {
                                                         let favorites = JSON.parse(localStorage.favorites);
-                                                        favorites.splice(index, 1)
-                                                        setFavorite(false)
-                                                        localStorage.favorites = JSON.stringify(favorites)
+                                                        index = -1
+                                                        for(let i=0; i<favorites.length; i++){
+                                                            if(favorites[i]._id == data.item._id)
+                                                                index = i
+                                                        }
+                                                        if(index===-1){
+                                                            favorites.push(data.item)
+                                                            setFavorite(true)
+                                                            localStorage.favorites = JSON.stringify(favorites)
+                                                        }
                                                     }
-                                                }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                showMiniDialog(true)
-                                            }
-                                        }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
+
+                                                    if (index !== -1) {
+                                                        const action = async() => {
+                                                            if(profile.role==='client') {
+                                                                favorite.splice(index, 1)
+                                                                setFavorite([...favorite])
+                                                            }
+                                                            else if(!authenticated) {
+                                                                let favorites = JSON.parse(localStorage.favorites);
+                                                                favorites.splice(index, 1)
+                                                                setFavorite(false)
+                                                                localStorage.favorites = JSON.stringify(favorites)
+                                                            }
+                                                        }
+                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        showMiniDialog(true)
+                                                    }
+                                                }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
+                                                :
+                                                null
+                                        }
                                     </div>
                                     <div>
                                         <br/>

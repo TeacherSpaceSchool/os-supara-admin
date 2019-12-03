@@ -13,6 +13,7 @@ import * as appActions from '../redux/actions/app'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
 import Router from 'next/router'
+import { useRouter } from 'next/router';
 
 export const mainWindow = React.createRef();
 
@@ -21,6 +22,7 @@ const App = React.memo(props => {
     const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
     let { sorts, filters, getList, pageName } = props;
+    const router = useRouter();
     //let [ads, setAds] = useState({});
     useEffect( ()=>{
         if(authenticated)
@@ -28,8 +30,12 @@ const App = React.memo(props => {
         else if(!authenticated&&profile.role)
             logout(false)
     },[authenticated,])
-    Router.events.on('routeChangeStart', ()=>{
-        showLoad(true)
+    Router.events.on('routeChangeStart', (err, url)=>{
+        if(!router.pathname.includes(url))
+            showLoad(true)
+        if (err.cancelled) {
+            showLoad(false)
+        }
     })
     useEffect( ()=>{
         (async ()=>{

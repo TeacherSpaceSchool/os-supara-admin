@@ -2,14 +2,209 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/019de00ce03e7cc3c77fd6be230f4d03.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/0711f1f6eecb54b9af6692e8ef424790.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/0adb7b3bc191fe94a18f8503183767c7.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/0dbe38fc207ac1aeac8fd7276a2a42b6.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/10353cedb2d29c92b6082a1bd33d0dbe.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/116027cdb8bf4adbfa6ee47d3ba71355.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/150dc26dd32427ef66431a7517d330b1.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/17402bdd52d68fa615bc486399eb63ad.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/189af91db6851c4bb0ff94e4fe52273a.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/1be97238768cfcca4e69f71b02e7efdb.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/1ec632fcab2b2c5e9c896dbdb745f5df.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/23acb9574e0e05bb61931b8e9277e9f7.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/24bb540724f65da7d0e85ad90ac10dd4.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/2cc490df7f3c715e9f0c1ec8dd58a214.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/2e2901aa6bcb68e444ed8d0f7e1e5c56.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/45600f7a510f3d43d5232e1ad0631ccb.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/48df50f890b0d0eebb48de10773c63ba.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/49a46b4dc2ed87bd51e3dce983a9cf65.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/4c9a5b3815bfa1f5ed98c5df47c887bb.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/4d2d52dc9688bbc485a52ec24e200eaa.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/4ff19cf31e74c0b88e8deb84348809cc.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/56dae3fc6e10ccc59549539ad950e930.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/67062a2bc09b167b53cfb41bc5e1f299.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/6e75019efc5386a0827ad5ad0c50c34d.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/750ca6d566251c1047a910ed1ae1047c.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/761a18ba787e11a3354db28147b22f60.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/7972ae9af948295b78a953e89740c9f9.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/7b208f7a55f6755e906780bddb9934f4.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/7bf16a6a34c5bfbda24c719e82034495.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/7d0fa7d3a36f732d33175add10a0b854.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/7f60b7ebdacf0194939506096fe7ac2d.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/89aab33bad5135c38e462160f2fb21cc.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/8b382bccf369a9726864b68d827fd672.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/984d537fc083763917d7c9d34598be91.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/9d31b1d8d61431a3097d28b62150c636.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/9d42a0246345976b3ce8becaef0ae369.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/a063187c67695a3b3ce20a591ab9a587.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/af7f4787f43a162596517125cc3e44da.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/afbfa058020005248ddb01fd1aab2d28.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/b3c9fe000865b013a734e38ea3e32d0d.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/c283cd0df1200d6ab7d8da49609e4be2.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/da835d852f6002b3fb8f9076a9233091.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/dbf89b0606c339c0b40a1c919a5ddbf1.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/dd03d974d20ac7a0224c3aa58cad0ade.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/e306cb5115a6443b33bc628613a06d47.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/e415840504fc685069d793a7283ecab5.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/e519d0bf0e7386c1acae3d1ca1688b78.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/e56209436fde59cf951c0ec85fdc960d.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/e6a480f6ec8996911d767875657b0817.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/ea41df4a21c5f1950954f20005cf126d.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/f224aadd52baa666a25ac99053f80160.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/f2c18dcdff5492d57e42dfc084472361.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/f6bafa14d2aa7220038063706418f4d7.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/fe9e738280c8a79cdeaede15c1198c6e.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/cache/next-babel-loader/ff24051765c3ca835a24a3961c1715ff.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/basket.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/subcategory/[id].js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/development/pages/basket.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/development/pages/subcategory/[id].js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/055c6fb9107e3d6d3839.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/072aed3b17ec27d7d7ce.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/0733c1f7a7868c591dd9.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/176904e2ca7dec1b232f.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/17a03a76965868e10b32.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/19b34ce177e4699012d3.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/1b8f5d4187be95f60c2a.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/1e8f2f996f1af73a5cd0.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/1f2ba65cb9edf2bd5aa0.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/24efa1d98cbd0deae4d3.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/280da4e576231c96832a.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/28d884f8adfcacd48e8f.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/2e387737fc01aa648520.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/3149647cc814aba2d4ad.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/353f06a172e626d1e232.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/3fd1b178506dd0f72350.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/40bf58c439f0ca07d420.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/4738f9529610e08f6fea.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/4fceca1293849587b362.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/50d6d68c3d86ee880310.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/548053a62f560c79d804.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/54e6a5dd4752b31df228.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/5a27d594c64d117d5935.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/5e4774df8905eb9e1f95.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/611ef4ec58250fd03144.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/660f0b6409f9fb29a47c.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/66f749b14c12adffc5ef.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/71a8d8442b6aceecabcd.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/73e6f1ce6a3e6e501ac5.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/7c45a75773581be10a94.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/7c6b33e4c8ab06519481.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/7f8dac4ddb16289937cf.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/82a51a15e5a7158411d2.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/83f54e08f7aee6f54d08.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/860aeb3cbe434312c85a.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/925377f790ef34dfd312.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/a1e3788589709ab6d049.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/a5e7ea82f78e118d7f26.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/a6470d7a33c985c4457b.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/a91d2fbbb1681c4b39ed.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/ae00cdfe307b610d5bb5.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/af59c6e0d42ddb06ada6.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/b5e1a05fdb87c8c4f1de.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/bfe4ab528b29208b7464.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/c4cdce611c871f6feec7.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/c6906db9b227392b4110.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/c81b951a7597af981a49.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/c9fccb7cb3b5708798cf.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/cd9605b3d97ae3f0fe59.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/d524910c9578feeb7968.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/de6760a097914ac7f665.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/e11d98ab089a25d76d31.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/ea9386dc67ed202a15da.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/eb89399f55f74a3fb605.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/ef837e5af87e03176eb0.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/f64adb06697e7478bc68.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/f7541d546b1012fa4ced.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/fa402d007aada8c44166.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/fe942734344bdbab3441.hot-update.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/_app.js.660f0b6409f9fb29a47c.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/_app.js.660f0b6409f9fb29a47c.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.1e8f2f996f1af73a5cd0.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.1e8f2f996f1af73a5cd0.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.24efa1d98cbd0deae4d3.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.24efa1d98cbd0deae4d3.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.5a27d594c64d117d5935.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.5a27d594c64d117d5935.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.71a8d8442b6aceecabcd.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.71a8d8442b6aceecabcd.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.7c6b33e4c8ab06519481.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.7c6b33e4c8ab06519481.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.7f8dac4ddb16289937cf.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.7f8dac4ddb16289937cf.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.c4cdce611c871f6feec7.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.c4cdce611c871f6feec7.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.c6906db9b227392b4110.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.c6906db9b227392b4110.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.ef837e5af87e03176eb0.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/basket.js.ef837e5af87e03176eb0.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/index.js.c6906db9b227392b4110.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/index.js.c6906db9b227392b4110.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/index.js.e11d98ab089a25d76d31.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/index.js.e11d98ab089a25d76d31.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.1e8f2f996f1af73a5cd0.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.1e8f2f996f1af73a5cd0.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.24efa1d98cbd0deae4d3.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.24efa1d98cbd0deae4d3.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.4738f9529610e08f6fea.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.4738f9529610e08f6fea.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.5a27d594c64d117d5935.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.5a27d594c64d117d5935.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.71a8d8442b6aceecabcd.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.71a8d8442b6aceecabcd.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.7c6b33e4c8ab06519481.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.7c6b33e4c8ab06519481.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.7f8dac4ddb16289937cf.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.7f8dac4ddb16289937cf.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.82a51a15e5a7158411d2.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.82a51a15e5a7158411d2.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.c4cdce611c871f6feec7.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.c4cdce611c871f6feec7.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.d524910c9578feeb7968.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.d524910c9578feeb7968.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.ef837e5af87e03176eb0.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.ef837e5af87e03176eb0.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.fa402d007aada8c44166.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/static/development/pages/items/[id].js.fa402d007aada8c44166.hot-update.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/styles.e11d98ab089a25d76d31.hot-update.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.next/static/webpack/styles.e11d98ab089a25d76d31.hot-update.js.map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/build-manifest.json" afterPath="$PROJECT_DIR$/.next/build-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/stats.json" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/development_instance_0_f52c4af04e105dcf904bf347819f818a/stats.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_document.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/index.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/index.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/items/[id].js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/items/[id].js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/items/[id].js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/items/[id].js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/next/dist/pages/_error.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/index.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/index.js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/items/[id].js" afterPath="$PROJECT_DIR$/.next/static/development/pages/items/[id].js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/items/[id].js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/items/[id].js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/next/dist/pages/_error.js" afterPath="$PROJECT_DIR$/.next/static/development/pages/next/dist/pages/_error.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/App.js" afterPath="$PROJECT_DIR$/layouts/App.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/next.config.js" afterPath="$PROJECT_DIR$/next.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/_document.js" afterPath="$PROJECT_DIR$/pages/_document.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/index.js" afterPath="$PROJECT_DIR$/pages/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/item/[id].js" afterPath="$PROJECT_DIR$/pages/item/[id].js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/items/[id].js" afterPath="$PROJECT_DIR$/pages/items/[id].js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/organization/[id].js" afterPath="$PROJECT_DIR$/pages/organization/[id].js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/routes.js" afterPath="$PROJECT_DIR$/pages/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redux/actions/user.js" afterPath="$PROJECT_DIR$/redux/actions/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styleMUI/organization/organization.js" afterPath="$PROJECT_DIR$/src/styleMUI/organization/organization.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,21 +218,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="[id].js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/items/[id].js">
+      <file leaf-file-name="Drawer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/app/Drawer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="22" column="98" lean-forward="false" selection-start-line="22" selection-start-column="98" selection-end-line="22" selection-end-column="98" />
+            <state relative-caret-position="357">
+              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layouts/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="24" column="82" lean-forward="false" selection-start-line="24" selection-start-column="82" selection-end-line="24" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CardItem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/items/CardItem.js">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1114">
-              <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+            <state relative-caret-position="-119">
+              <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/redux/actions/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="48" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -55,9 +284,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isMobileApp?classes.inputM:classes.inputDF</find>
-      <find>.value</find>
-      <find>s.value</find>
       <find>16px</find>
       <find>info</find>
       <find>px'</find>
@@ -85,6 +311,9 @@
       <find>setBasket</find>
       <find>getCountBasket</find>
       <find>CancelIcon</find>
+      <find>star</find>
+      <find>organizationStyle</find>
+      <find>classes.media</find>
     </findStrings>
     <replaceStrings>
       <replace>SubCategory</replace>
@@ -131,11 +360,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/components/category/CardCategory.js" />
-        <option value="$PROJECT_DIR$/components/app/Drawer.js" />
-        <option value="$PROJECT_DIR$/redux/actions/user.js" />
-        <option value="$PROJECT_DIR$/layouts/App.js" />
-        <option value="$PROJECT_DIR$/src/styleMUI/category/cardCategory.js" />
         <option value="$PROJECT_DIR$/src/styleMUI/ads/cardAds.js" />
         <option value="$PROJECT_DIR$/src/styleMUI/contact.js" />
         <option value="$PROJECT_DIR$/components/ads/CardAds.js" />
@@ -158,11 +382,9 @@
         <option value="$PROJECT_DIR$/src/styleMUI/route/cardRoute.js" />
         <option value="$PROJECT_DIR$/src/styleMUI/item/cardItem.js" />
         <option value="$PROJECT_DIR$/redux/constants/other.js" />
-        <option value="$PROJECT_DIR$/pages/routes.js" />
         <option value="$PROJECT_DIR$/pages/organizations.js" />
         <option value="$PROJECT_DIR$/pages/orders.js" />
         <option value="$PROJECT_DIR$/pages/notification.js" />
-        <option value="$PROJECT_DIR$/pages/index.js" />
         <option value="$PROJECT_DIR$/pages/favorite.js" />
         <option value="$PROJECT_DIR$/pages/employments.js" />
         <option value="$PROJECT_DIR$/pages/contact.js" />
@@ -171,8 +393,6 @@
         <option value="$PROJECT_DIR$/pages/ads.js" />
         <option value="$PROJECT_DIR$/pages/route/[id].js" />
         <option value="$PROJECT_DIR$/pages/subcategory/[id].js" />
-        <option value="$PROJECT_DIR$/pages/organization/[id].js" />
-        <option value="$PROJECT_DIR$/pages/item/[id].js" />
         <option value="$PROJECT_DIR$/pages/employment/[id].js" />
         <option value="$PROJECT_DIR$/pages/client/[id].js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -181,7 +401,16 @@
         <option value="$PROJECT_DIR$/components/items/CardItem.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
         <option value="$PROJECT_DIR$/src/gql/basket.js" />
+        <option value="$PROJECT_DIR$/pages/_document.js" />
         <option value="$PROJECT_DIR$/pages/items/[id].js" />
+        <option value="$PROJECT_DIR$/pages/routes.js" />
+        <option value="$PROJECT_DIR$/next.config.js" />
+        <option value="$PROJECT_DIR$/pages/item/[id].js" />
+        <option value="$PROJECT_DIR$/src/styleMUI/organization/organization.js" />
+        <option value="$PROJECT_DIR$/pages/organization/[id].js" />
+        <option value="$PROJECT_DIR$/layouts/App.js" />
+        <option value="$PROJECT_DIR$/pages/index.js" />
+        <option value="$PROJECT_DIR$/redux/actions/user.js" />
       </list>
     </option>
   </component>
@@ -316,7 +545,25 @@
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="items" type="462c0819:PsiDirectoryNode" />
+              <item name="employment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="item" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="organization" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="route" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -328,40 +575,6 @@
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
               <item name="redux" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="redux" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="gql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="singleton" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -521,12 +734,12 @@
       <workItem from="1575096271881" duration="19673000" />
       <workItem from="1575123558007" duration="12902000" />
       <workItem from="1575295335088" duration="1230000" />
-      <workItem from="1575348173841" duration="8970000" />
+      <workItem from="1575348173841" duration="15219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="654824000" />
+    <option name="totallyTimeSpent" value="661073000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -541,15 +754,15 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.675" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.67391306" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.50506973" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.325" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13371356" sideWeight="0.32608697" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -600,42 +813,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/contact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="23" column="26" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/app/AppBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="102" column="28" lean-forward="false" selection-start-line="102" selection-start-column="28" selection-end-line="102" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/client/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/employment/CardEmployment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styleMUI/employment/cardEmployment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styleMUI/employment/employment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -735,16 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="33" column="50" lean-forward="false" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/organizations.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -767,16 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="33" column="54" lean-forward="false" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
           <folding>
             <element signature="e#0#29#0" expanded="false" />
           </folding>
@@ -831,48 +988,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/route/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/organization/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="99" column="54" lean-forward="false" selection-start-line="99" selection-start-column="54" selection-end-line="99" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/item/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
-          <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/subcategory/[id].js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/employment/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="69" column="54" lean-forward="false" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
           <folding>
             <element signature="e#0#29#0" expanded="false" />
           </folding>
@@ -897,24 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gql/items.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="790">
@@ -933,37 +1034,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redux/actions/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/redux/reducers/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="15" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="15" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/clients.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="43" column="35" lean-forward="false" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#130#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -973,16 +1048,6 @@
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="17" />
           <folding>
             <element signature="e#0#130#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/_app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1015,16 +1080,163 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/items/CardItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1114">
+        <state relative-caret-position="-655">
           <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/_app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gql/items.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/_document.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/items/[id].js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="22" column="98" lean-forward="false" selection-start-line="22" selection-start-column="98" selection-end-line="22" selection-end-column="98" />
+        <state relative-caret-position="340">
+          <caret line="41" column="18" lean-forward="false" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="55" column="89" lean-forward="false" selection-start-line="55" selection-start-column="89" selection-end-line="55" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/employment/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3029">
+          <caret line="69" column="54" lean-forward="false" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/route/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4208">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/next.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="12" column="30" lean-forward="false" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/item/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-594">
+          <caret line="334" column="106" lean-forward="false" selection-start-line="334" selection-start-column="106" selection-end-line="334" selection-end-column="106" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+            <element signature="e#6153#20610#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/organization/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-972">
+          <caret line="348" column="65" lean-forward="false" selection-start-line="348" selection-start-column="65" selection-end-line="348" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styleMUI/organization/organization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="10" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/clients.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/app/Drawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layouts/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="24" column="82" lean-forward="false" selection-start-line="24" selection-start-column="82" selection-end-line="24" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redux/actions/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="48" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
         </state>
       </provider>

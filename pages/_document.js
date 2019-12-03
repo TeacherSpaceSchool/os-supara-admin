@@ -2,6 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 import theme from '../src/theme';
+import { urlMain } from '../redux/constants/other'
 
 class MyDocument extends Document {
     render() {
@@ -21,7 +22,7 @@ class MyDocument extends Document {
               /><meta property="fb:app_id" content="257953674358265" />
                 <meta name="format-detection" content="telephone=no" />
                 <meta httpEquiv="x-dns-prefetch-control" content="on"/>
-                <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
+                <link rel="shortcut icon" href={`${urlMain}/static/favicon.ico`} type="image/x-icon" />
             </Head>
             <body>
             <Main />

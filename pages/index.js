@@ -8,19 +8,23 @@ import { getCategorys } from '../src/gql/category'
 import pageListStyle from '../src/styleMUI/category/categoryList'
 import CardCategory from '../components/category/CardCategory'
 import { urlMain } from '../redux/constants/other'
-
+import Router from 'next/router'
 
 const Index = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.categorys);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
+    const { profile, authenticated } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        if(!(!authenticated||['admin', 'client'].includes(profile.role)||!profile.role))
+            Router.push('/items/all')
+    },[profile, authenticated])
     return (
         <App filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
@@ -53,7 +57,17 @@ const Index = React.memo((props) => {
     )
 })
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function(ctx) {
+    let role = ctx.store.getState().user.profile.role
+    let authenticated = ctx.store.getState().user.authenticated
+    if(!(!authenticated||['admin', 'client'].includes(role)||!role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/items/all'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/items/all')
     return {
         data: await getCategorys({search: '', sort: '-updatedAt', filter: ''})
     };

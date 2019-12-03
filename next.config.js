@@ -7,8 +7,11 @@ sitemap({
     targetDirectory : 'static/'
 });
 module.exports =
-    withOffline(
-        withSass({
+    withSass(
+        withOffline({
+            workboxOpts: {
+                devSwSrc: true
+            },
             env: {
                 URL: process.env.URL
             },

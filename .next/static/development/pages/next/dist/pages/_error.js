@@ -3681,7 +3681,7 @@ module.exports = (__webpack_require__(/*! dll-reference dll_129a35c7ec57967eb265
 
 /***/ }),
 
-/***/ 2:
+/***/ 5:
 /*!*********************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fnext%2Fdist%2Fpages%2F_error&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cnode_modules%5Cnext%5Cdist%5Cpages%5C_error.js ***!
   \*********************************************************************************************************************************************************************************/
@@ -3704,5 +3704,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[5,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=_error.js.map
