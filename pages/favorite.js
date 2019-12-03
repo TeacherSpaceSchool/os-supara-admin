@@ -6,6 +6,7 @@ import pageListStyle from '../src/styleMUI/favorite/favoriteList'
 import CardItem from '../components/items/CardItem'
 import { favorites } from '../src/gql/items';
 import Router from 'next/router'
+import { urlMain } from '../redux/constants/other'
 
 const Items = React.memo((props) => {
     const { authenticated } = props.user;
@@ -43,9 +44,9 @@ const Items = React.memo((props) => {
                 <meta property='og:title' content='Избранное' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/favorite`} />
-                <link rel='canonical' href={`http://${process.env.URL}/favorite`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}/favorite`} />
+                <link rel='canonical' href={`${urlMain}/favorite`}/>
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>

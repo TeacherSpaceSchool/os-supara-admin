@@ -21,7 +21,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Router from 'next/router'
+import { urlMain } from '../../redux/constants/other'
 import Confirmation from '../../components/dialog/Confirmation'
 import Geo from '../../components/dialog/Geo'
 import { useRouter } from 'next/router'
@@ -86,8 +86,8 @@ const Client = React.memo((props) => {
                 <meta property='og:description' content={info} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={preview} />
-                <meta property="og:url" content={`http://${process.env.URL}/client/${router.query.id}`} />
-                <link rel='canonical' href={`http://${process.env.URL}/client/${router.query.id}`}/>
+                <meta property="og:url" content={`${urlMain}/client/${router.query.id}`} />
+                <link rel='canonical' href={`${urlMain}/client/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>

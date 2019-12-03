@@ -5,6 +5,7 @@ import CardRoute from '../components/route/CardRoute'
 import pageListStyle from '../src/styleMUI/route/routeList'
 import {getRoutes} from '../src/gql/route'
 import { connect } from 'react-redux'
+import { urlMain } from '../redux/constants/other'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
@@ -29,9 +30,9 @@ const Routes = React.memo((props) => {
                 <meta property='og:title' content='Маршрутные листы' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/routes`} />
-                <link rel='canonical' href={`http://${process.env.URL}/routes`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}/routes`} />
+                <link rel='canonical' href={`${urlMain}/routes`}/>
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>

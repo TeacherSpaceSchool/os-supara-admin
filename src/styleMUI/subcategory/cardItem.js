@@ -34,7 +34,7 @@ export default makeStyles({
         fontWeight: 'bold',
         fontSize: 20,
         fontFamily: 'Roboto',
-        height: 20,
+        height: 22,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         marginBottom: 10
@@ -58,7 +58,7 @@ export default makeStyles({
         marginLeft: 3,
         color: '#ff0000',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 22,
         fontFamily: 'Roboto',
         height: 20,
         width: 100,

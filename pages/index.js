@@ -7,6 +7,8 @@ import * as userActions from '../redux/actions/user'
 import { getCategorys } from '../src/gql/category'
 import pageListStyle from '../src/styleMUI/category/categoryList'
 import CardCategory from '../components/category/CardCategory'
+import { urlMain } from '../redux/constants/other'
+
 
 const Index = React.memo((props) => {
     const classes = pageListStyle();
@@ -27,9 +29,9 @@ const Index = React.memo((props) => {
                 <meta property='og:title' content='Азык - электронный склад связывающий производителя с торговой точкой' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}`} />
-                <link rel='canonical' href={`http://${process.env.URL}`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}`} />
+                <link rel='canonical' href={`${urlMain}`}/>
             </Head>
             <div className={classes.page}>
                 {profile.role==='admin'?

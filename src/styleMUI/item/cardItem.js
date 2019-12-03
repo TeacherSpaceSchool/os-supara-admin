@@ -3,6 +3,7 @@ export default makeStyles({
     card: {
         width: 280,
         margin: 10,
+        position: 'relative'
     },
     column: {
         display: 'flex',
@@ -24,7 +25,7 @@ export default makeStyles({
     name: {
         fontSize: '0.95rem',
         fontFamily: 'Roboto',
-        maxHeight: 35,
+        height: 35,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         marginBottom: 10,
@@ -35,7 +36,7 @@ export default makeStyles({
         fontWeight: 'bold',
         fontSize: '1.3rem',
         fontFamily: 'Roboto',
-        height: 20,
+        height: 22,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         marginBottom: 10
@@ -61,7 +62,7 @@ export default makeStyles({
         fontWeight: 'bold',
         fontSize: '1.3rem',
         fontFamily: 'Roboto',
-        height: 20,
+        height: 22,
         width: 100,
         overflow: 'hidden',
         textOverflow: 'ellipsis',

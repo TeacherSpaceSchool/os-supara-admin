@@ -7,6 +7,8 @@ import { getCategorys } from '../../src/gql/category'
 import pageListStyle from '../../src/styleMUI/subcategory/subcategoryList'
 import SubCardCategory from '../../components/subcategory/SubCardCategory'
 import { useRouter } from 'next/router'
+import { urlMain } from '../../redux/constants/other'
+
 
 const Subcategory = React.memo((props) => {
     const classes = pageListStyle();
@@ -35,9 +37,9 @@ const Subcategory = React.memo((props) => {
                 <meta property='og:title' content={router.query.id==='all'?'Все':data.category!==null?data.category.name:'Ничего не найдено'} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/subcategory/${router.query.id}`} />
-                <link rel='canonical' href={`http://${process.env.URL}/subcategory/${router.query.id}`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}/subcategory/${router.query.id}`} />
+                <link rel='canonical' href={`${urlMain}/subcategory/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>
                 {profile.role==='admin'?<SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>:null}

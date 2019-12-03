@@ -5,6 +5,8 @@ import pageListStyle from '../src/styleMUI/blog/blogList'
 import {getBlogs} from '../src/gql/blog'
 import CardBlog from '../components/blog/CardBlog'
 import { connect } from 'react-redux'
+import { urlMain } from '../redux/constants/other'
+
 
 
 const Blog = React.memo((props) => {
@@ -26,9 +28,9 @@ const Blog = React.memo((props) => {
                 <meta property='og:title' content='Блог' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/blog`} />
-                <link rel='canonical' href={`http://${process.env.URL}/blog`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}/blog`} />
+                <link rel='canonical' href={`${urlMain}/blog`}/>
             </Head>
             <div className={classes.page}>
                 {profile.role==='admin'?<CardBlog setList={setList}/>:null}

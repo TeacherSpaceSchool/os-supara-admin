@@ -23,6 +23,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../../components/dialog/Confirmation'
+import { urlMain } from '../../redux/constants/other'
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();
@@ -95,8 +96,8 @@ const Organization = React.memo((props) => {
                 <meta property='og:description' content={info} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={preview} />
-                <meta property="og:url" content={`http://${process.env.URL}/organization/${router.query.id}`} />
-                <link rel='canonical' href={`http://${process.env.URL}/organization/${router.query.id}`}/>
+                <meta property="og:url" content={`${urlMain}/organization/${router.query.id}`} />
+                <link rel='canonical' href={`${urlMain}/organization/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                 <CardActions className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>

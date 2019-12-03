@@ -1185,7 +1185,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       },
       __self: this
     }), __jsx("meta", {
-      "http-equiv": "x-dns-prefetch-control",
+      httpEquiv: "x-dns-prefetch-control",
       content: "on",
       __source: {
         fileName: _jsxFileName,

@@ -5,6 +5,8 @@ import CardAds from '../components/ads/CardAds';
 import pageListStyle from '../src/styleMUI/ads/adsList'
 import {getAdss} from '../src/gql/ads'
 import { connect } from 'react-redux'
+import { urlMain } from '../redux/constants/other'
+
 
 
 const Ads = React.memo((props) => {
@@ -26,9 +28,9 @@ const Ads = React.memo((props) => {
                 <meta property='og:title' content='Акции' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={`http://${process.env.URL}/static/512x512.png`} />
-                <meta property="og:url" content={`http://${process.env.URL}/ads`} />
-                <link rel='canonical' href={`http://${process.env.URL}/ads`}/>
+                <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
+                <meta property="og:url" content={`${urlMain}/ads`} />
+                <link rel='canonical' href={`${urlMain}/ads`}/>
             </Head>
             <div className={classes.page}>
                 {profile.role==='admin'?<CardAds setList={setList}/>:null}
