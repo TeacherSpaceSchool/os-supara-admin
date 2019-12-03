@@ -26,7 +26,6 @@ const CardOrder = React.memo((props) => {
                 <CardContent className={classes.column}>
                     <div className={classes.row}>
                         <div className={classes.number}>{element.number}</div>&nbsp;
-                        <div className={classes.date}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>&nbsp;&nbsp;
                         <div className={classes.status} style={{background: statusColor[element.orders[0].status]}}>{
                             element.orders[0].status==='принят'&&(element.confirmationForwarder||element.confirmationClient)?
                                 element.confirmationClient?
@@ -39,6 +38,10 @@ const CardOrder = React.memo((props) => {
                                 :
                                 element.orders[0].status
                         }</div>
+                    </div>
+                    <div className={classes.row}>
+                        <div className={classes.nameField}>Дата:&nbsp;</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Адрес:&nbsp;</div>

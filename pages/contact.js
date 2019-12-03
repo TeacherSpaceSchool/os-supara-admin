@@ -76,6 +76,7 @@ const Contact = React.memo((props) => {
         social[idx] = value
         setSocial([...social])
     };
+    console.log(social)
     let [info, setInfo] = useState(data.contact.info);
     let [preview, setPreview] = useState(data.contact.image===''?'/static/add.png':data.contact.image);
     let [image, setImage] = useState(undefined);
@@ -113,19 +114,19 @@ const Contact = React.memo((props) => {
                                         Наши страницы
                                         <div className={classes.row}>
                                             <img src='/static/instagram.svg' onClick={()=>{
-                                                setMiniDialog('Instagram', <AddSocial action={addSocial} idx={0}/>)
+                                                setMiniDialog('Instagram', <AddSocial social={social[0]} action={addSocial} idx={0}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
                                             <img src='/static/facebook.svg' onClick={()=>{
-                                                setMiniDialog('Facebook', <AddSocial action={addSocial} idx={0}/>)
+                                                setMiniDialog('Facebook', <AddSocial social={social[1]} action={addSocial} idx={1}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
                                             <img src='/static/twitter.svg' onClick={()=>{
-                                                setMiniDialog('Twitter', <AddSocial action={addSocial} idx={0}/>)
+                                                setMiniDialog('Twitter', <AddSocial social={social[2]} action={addSocial} idx={2}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
                                             <img src='/static/telegram.svg' onClick={()=>{
-                                                setMiniDialog('Telegram', <AddSocial action={addSocial} idx={0}/>)
+                                                setMiniDialog('Telegram', <AddSocial social={social[3]} action={addSocial} idx={3}/>)
                                                 showMiniDialog(true)
                                             }} className={classes.mediaSocial}/>
                                         </div>

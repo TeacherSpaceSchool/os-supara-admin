@@ -23,6 +23,7 @@ html{
   position: fixed;
   overflow: auto;
   top: $app-bar-height-m;
+  padding-bottom: 64px;
   height: calc(100vh - #{$app-bar-height-m});
   width: 100%;
   @media screen and (min-width: $break-small) {

@@ -41,7 +41,7 @@ const Geo =  React.memo(
                                         key={idx}
                                         options={{draggable: false, iconColor: !invoice.confirmationForwarder?'red':'#ffb300'}}
                                         properties={{iconCaption: invoice.number}}
-                                        geometry={invoice.address[1].split(', ')} />
+                                        geometry={invoice.address[1]?invoice.address[1].split(', '):'42.8700000, 74.5900000'} />
                                 )}
                             </Map>
                         </div>

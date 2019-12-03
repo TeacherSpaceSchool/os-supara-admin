@@ -10,7 +10,18 @@ module.exports =
     withSass(
         withOffline({
             workboxOpts: {
-
+                runtimeCaching: [
+                    {
+                        urlPattern: /^https?.*/,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'offlineCache',
+                            expiration: {
+                                maxEntries: 200
+                            }
+                        }
+                    }
+                ]
             },
             env: {
                 URL: process.env.URL

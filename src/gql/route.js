@@ -163,6 +163,7 @@ export const deleteRoute = async(ids)=>{
                              data
                         }
                     }`})
+        return await getRoutes(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }

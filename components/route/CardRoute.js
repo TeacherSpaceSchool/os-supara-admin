@@ -18,6 +18,7 @@ const CardOrder = React.memo((props) => {
     const classes = cardRouteStyle();
     const { element, setList } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { profile } = props.user;
     const statusColor = {
         'создан': 'orange',
         'выполняется': 'blue',
@@ -29,17 +30,21 @@ const CardOrder = React.memo((props) => {
                 <CardActionArea>
                     <CardContent className={classes.column}>
                         <div className={classes.row}>
-                            <div className={classes.nameField}>Компания:&nbsp;</div>
-                            <div className={classes.value}>{element.employment.organization.name}</div>
+                            <div className={classes.nameField}>Номер:&nbsp;</div>
+                            <div className={classes.value}>{element.number}</div>
                             <div className={classes.status} style={{background: statusColor[element.status]}}>{element.status}</div>
-                        </div>
-                        <div className={classes.row}>
-                            <div className={classes.nameField}>Экспедитор:&nbsp;</div>
-                            <div className={classes.value}>{element.employment.name}</div>
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Дата:&nbsp;</div>
                             <div className={classes.value}>{pdDDMMYY(new Date(element.dateStart))}</div>
+                        </div>
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Компания:&nbsp;</div>
+                            <div className={classes.value}>{element.employment.organization.name}</div>
+                        </div>
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Экспедитор:&nbsp;</div>
+                            <div className={classes.value}>{element.employment.name}</div>
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Заказы:&nbsp;</div>
@@ -51,15 +56,20 @@ const CardOrder = React.memo((props) => {
                 </CardActionArea>
             </Link>
             <CardActions>
-                <Button onClick={async()=>{
-                    const action = async() => {
-                        setList((await deleteRoute([element._id])).routes)
-                    }
-                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                    showMiniDialog(true)
-                }} size='small' color='primary'>
-                    Удалить
-                </Button>
+                {
+                    ['организация', 'менеджер', 'admin'].includes(profile.role)&&element.status==='создан'?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                setList((await deleteRoute([element._id])).routes)
+                            }
+                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Удалить
+                        </Button>
+                        :
+                        null
+                }
             </CardActions>
         </Card>
     );

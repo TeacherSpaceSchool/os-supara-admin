@@ -20,10 +20,10 @@ import dialogContentStyle from '../../src/styleMUI/dialogContent'
 
 const AddSocial =  React.memo(
     (props) =>{
-        let [url, setUrl] = useState('');
+        const { classes, action, idx, social } = props;
+        let [url, setUrl] = useState(social?social:'');
         const { isMobileApp } = props.app;
         const { showMiniDialog } = props.mini_dialogActions;
-        const { classes, action, idx } = props;
         const width = isMobileApp? (window.innerWidth-144) : 500
         return (
             <div className={classes.main}>
