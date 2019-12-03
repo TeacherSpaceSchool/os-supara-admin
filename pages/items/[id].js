@@ -20,7 +20,9 @@ const Items = React.memo((props) => {
     const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
-            setList((await getItems({subCategory: router.query.id, search: search, sort: sort, filter: filter})).items)
+            let items = (await getItems({subCategory: router.query.id, search: search, sort: sort, filter: filter})).items
+            console.log(items)
+            setList(items)
         })()
     },[filter, sort, search])
     return (

@@ -34115,17 +34115,15 @@ function () {
         })
       };
     });
-    var linkError = Object(apollo_link_error__WEBPACK_IMPORTED_MODULE_9__["onError"])(function (_ref2) {
-      var graphQLErrors = _ref2.graphQLErrors,
-          networkError = _ref2.networkError;
-      if (graphQLErrors) graphQLErrors.map(function (_ref3) {
-        var message = _ref3.message,
-            locations = _ref3.locations,
-            path = _ref3.path;
+    var linkError = Object(apollo_link_error__WEBPACK_IMPORTED_MODULE_9__["onError"])(function (ctx) {
+      if (ctx.graphQLErrors) ctx.graphQLErrors.map(function (_ref2) {
+        var message = _ref2.message,
+            locations = _ref2.locations,
+            path = _ref2.path;
         new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
         console.log("[GraphQL error]: Message: ".concat(message, ", Location: ").concat(locations, ", Path: ").concat(path));
       });
-      if (networkError) console.log("[Network error]: ".concat(networkError));
+      if (ctx.networkError) console.log("[Network error]: ".concat(ctx.networkError));
     });
     /*const wsLink = new WebSocketLink({
         uri: urlGQLws,

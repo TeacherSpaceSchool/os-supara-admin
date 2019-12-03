@@ -39,7 +39,7 @@ const CardItem = React.memo((props) => {
             else {
                 let basket = JSON.parse(localStorage.basket)
                 for(let i=0; i<basket.length; i++){
-                    if(basket[i]._id == element._id)
+                    if(basket[i].item._id == element._id)
                         setBasket(true)
                 }
             }

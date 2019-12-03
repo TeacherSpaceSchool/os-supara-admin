@@ -57,8 +57,7 @@ const Basket = React.memo((props) => {
     let removeBasketChange= async (idx)=>{
         const action = async() => {
             if(authenticated) {
-                deleteBasket([list[idx]._id])
-                setList((await getBasket()).baskets)
+                setList((await deleteBasket([list[idx]._id])).baskets)
             } else {
                 let list = JSON.parse(localStorage.basket)
                 list.splice(idx, 1)

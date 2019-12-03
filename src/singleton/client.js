@@ -34,15 +34,15 @@ export class SingletonApolloClient {
                 }
             }
         });
-        const linkError = onError(({ graphQLErrors, networkError }) => {
-            if (graphQLErrors)
-                graphQLErrors.map(({ message, locations, path }) =>{
+        const linkError = onError((ctx) => {
+            if (ctx.graphQLErrors)
+                ctx.graphQLErrors.map(({ message, locations, path }) =>{
                     new SingletonStore().getStore().dispatch(showSnackBar('Ошибка'))
                     console.log(
                         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
                     )
                 });
-            if (networkError) console.log(`[Network error]: ${networkError}`);
+            if (ctx.networkError) console.log(`[Network error]: ${ctx.networkError}`);
         });
         /*const wsLink = new WebSocketLink({
             uri: urlGQLws,

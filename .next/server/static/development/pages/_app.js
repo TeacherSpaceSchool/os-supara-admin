@@ -1693,11 +1693,8 @@ class SingletonApolloClient {
         })
       };
     });
-    const linkError = Object(apollo_link_error__WEBPACK_IMPORTED_MODULE_7__["onError"])(({
-      graphQLErrors,
-      networkError
-    }) => {
-      if (graphQLErrors) graphQLErrors.map(({
+    const linkError = Object(apollo_link_error__WEBPACK_IMPORTED_MODULE_7__["onError"])(ctx => {
+      if (ctx.graphQLErrors) ctx.graphQLErrors.map(({
         message,
         locations,
         path
@@ -1705,7 +1702,7 @@ class SingletonApolloClient {
         new _singleton_store__WEBPACK_IMPORTED_MODULE_11__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__["showSnackBar"])('Ошибка'));
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       });
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (ctx.networkError) console.log(`[Network error]: ${ctx.networkError}`);
     });
     /*const wsLink = new WebSocketLink({
         uri: urlGQLws,
