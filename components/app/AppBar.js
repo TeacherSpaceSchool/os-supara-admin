@@ -89,19 +89,15 @@ const MyAppBar = React.memo((props) => {
         <div className={classes.root}>
             <AppBar position='fixed' className={classes.appBar}>
                 <Toolbar>
-                    {isMobileApp?
-                        <IconButton
-                            edge='start'
-                            aria-owns='menu-appbar'
-                            aria-haspopup='true'
-                            onClick={() => {showDrawer(!drawer)}}
-                            color='inherit'
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        :
-                        null
-                    }
+                    <IconButton
+                        edge='start'
+                        aria-owns='menu-appbar'
+                        aria-haspopup='true'
+                        onClick={() => {showDrawer(!drawer)}}
+                        color='inherit'
+                    >
+                        <MenuIcon/>
+                    </IconButton>
                     <Typography variant='h6' className={classes.title}>
                         {pageName}
                     </Typography>
