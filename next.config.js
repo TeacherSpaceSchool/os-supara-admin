@@ -10,7 +10,7 @@ module.exports =
     withSass(
         withOffline({
             workboxOpts: {
-                devSwSrc: true
+
             },
             env: {
                 URL: process.env.URL
