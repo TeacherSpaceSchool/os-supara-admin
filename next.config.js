@@ -10,7 +10,7 @@ module.exports =
     withSass(
         withOffline({
             workboxOpts: {
-
+                swDest: 'static/service-worker.js',
             },
             env: {
                 URL: process.env.URL

@@ -41,8 +41,9 @@ const MyDrawer = React.memo((props) => {
             onClose={()=>showDrawer(false)}
             classes={{paper: classes.drawerPaper,}}
             onOpen={()=>showDrawer(true)}
-            swipeAreaWidth={100}
+            swipeAreaWidth={20}
             hysteresis={0.5}
+            disableDiscovery={true}
         >
             {
                 isMobileApp?
