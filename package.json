@@ -8,7 +8,7 @@
     "build": "set URL=localhost&& next build",
     "start": "set URL=localhost&& next start -p 80",
     "build-server": "URL=azyk.store next build",
-    "start-server": "URL=azyk.store next start -p 80",
+    "start-server": "URL=azyk.store next start -p 4000",
     "export": "next export"
   },
   "keywords": [],
