@@ -4,11 +4,11 @@
   "description": "azyk-app",
   "main": "index.js",
   "scripts": {
-    "dev": "set URL=localhost&& next -p 80",
+    "dev": "set URL=localhost&& node server.js",
     "build": "set URL=localhost&& next build",
-    "start": "set URL=localhost&& next start -p 80",
+    "start": "set URL=localhost&& node server.js",
     "build-server": "URL=azyk.store next build",
-    "start-server": "URL=azyk.store next start -p 5000",
+    "start-server": "URL=azyk.store node server.js",
     "export": "next export"
   },
   "keywords": [],
