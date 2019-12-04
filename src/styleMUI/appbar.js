@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
-export default makeStyles(theme => ({
+export default makeStyles({
     appBar: {
-        zIndex: theme.zIndex.drawer + 1,
+        zIndex: 1201,
     },
     root: {
         flexGrow: 1,
@@ -29,4 +29,4 @@ export default makeStyles(theme => ({
         width: 'calc(100% - 20px)',
         margin: 10,
     },
-}))
+})

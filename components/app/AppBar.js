@@ -87,7 +87,7 @@ const MyAppBar = React.memo((props) => {
     },[])
     return (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.appBar}>
+            <AppBar position='fixed' className='appBar'>
                 <Toolbar>
                     <IconButton
                         edge='start'
