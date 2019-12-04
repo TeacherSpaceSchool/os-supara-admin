@@ -36,7 +36,6 @@ const Route = React.memo((props) => {
     const { isMobileApp } = props.app;
     let [dateStart, setDateStart] = useState(data.route?pdDatePicker(new Date(data.route.dateStart)):null);
     let [dateEnd, setDateEnd] = useState(data.route?data.route.dateEnd:null);
-    console.log(data.route)
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
     let handleEmployment =  (event) => {
         setEmployment({_id: event.target.value, name: event.target.name})
@@ -65,7 +64,8 @@ const Route = React.memo((props) => {
     },[profile])
     useEffect(()=>{
         (async()=>{
-            if(data.route&&['организация', 'менеджер'].includes(profile.role)) {
+            if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
+                console.log('ok')
                 setUnselectedInvoices((await getOrders({search: '', sort: '-updatedAt', filter: 'обработка'})).invoices)
             }
         })()

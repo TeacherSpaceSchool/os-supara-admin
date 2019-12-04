@@ -9,20 +9,25 @@ class MyDocument extends Document {
         return (
             <html lang="en">
             <Head>
-              <meta charSet="utf-8" />
-              <meta
-                  name="viewport"
-                  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-              />
-                {/* PWA primary color */}
-              <meta name="theme-color" content={theme.palette.primary.main} />
-              <link
-                  rel="stylesheet"
-                  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-              /><meta property="fb:app_id" content="257953674358265" />
+                  <meta charSet="utf-8" />
+                  <meta
+                      name="viewport"
+                      content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+                  />
+                    {/* PWA primary color */}
+                  <meta name="theme-color" content='"#ffb300' />
+                  <link
+                      rel="stylesheet"
+                      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                  />
+                <meta property="fb:app_id" content="257953674358265" />
                 <meta name="format-detection" content="telephone=no" />
                 <meta httpEquiv="x-dns-prefetch-control" content="on"/>
-                <link rel="shortcut icon" href={`${urlMain}/static/favicon.ico`} type="image/x-icon" />
+                <link rel="shortcut icon" href={`/static/favicon.ico`} type="image/x-icon" />
+                <link rel="manifest" href="/static/manifest.json"/>
+                <link rel="icon" sizes="192x192" href="/static/192x192.png"/>
+                <link rel="apple-touch-icon" href="/static/192x192.png"/>
+                <meta name="msapplication-square310x310logo" content="/static/192x192.png"/>
             </Head>
             <body>
             <Main />

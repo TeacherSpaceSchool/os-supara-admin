@@ -9,20 +9,17 @@ sitemap({
 module.exports =
     withSass(
         withOffline({
-            workboxOpts: {
+            /*workboxOpts: {
                 runtimeCaching: [
                     {
-                        urlPattern: /^https?.*/,
+                        urlPattern: /^https:.*//*,
                         handler: 'NetworkFirst',
                         options: {
-                            cacheName: 'offlineCache',
-                            expiration: {
-                                maxEntries: 200
-                            }
+                            cacheName: 'cache',
                         }
                     }
                 ]
-            },
+            },*/
             env: {
                 URL: process.env.URL
             },
