@@ -31,7 +31,7 @@ const MyDrawer = React.memo((props) => {
     const { profile, authenticated } = props.user;
     const { showDrawer } = props.appActions;
     let variant = isMobileApp?'temporary' : 'permanent';
-    const open = isMobileApp?drawer:true
+    const open = isMobileApp?drawer:true;
     const router = useRouter();
     return (
         <Drawer
