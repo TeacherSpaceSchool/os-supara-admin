@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -3915,16 +3915,16 @@ const App = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
       lineNumber: 70
     },
     __self: undefined
-  }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    pageName: pageName,
-    sorts: sorts,
-    filters: filters,
+  }, __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 71
     },
     __self: undefined
-  }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    pageName: pageName,
+    sorts: sorts,
+    filters: filters,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 72
@@ -6619,7 +6619,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 6:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/orders.js ***!
   \*******************************/

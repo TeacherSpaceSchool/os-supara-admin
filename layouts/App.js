@@ -68,25 +68,25 @@ const App = React.memo(props => {
     console.log(data, loading)*/
     return(
         <div ref={mainWindow} className='App'>
-                <AppBar pageName={pageName} sorts={sorts} filters={filters}/>
-                <Drawer />
-                <div className='App-body'>
-                    {/*
-                        ads&&ads.url?
-                            <a href={ads.url}>
-                                <img
-                                    src={ads.image}
-                                    alt={ads.title}
-                                    className='marketImg'
-                                />
-                            </a>
-                            :
-                            null*/
-                    }
-                    {props.children}
-                </div>
-                <Dialog />
-                <SnackBar/>
+            <Drawer />
+            <AppBar pageName={pageName} sorts={sorts} filters={filters}/>
+            <div className='App-body'>
+                {/*
+                       ads&&ads.url?
+                           <a href={ads.url}>
+                               <img
+                                   src={ads.image}
+                                   alt={ads.title}
+                                   className='marketImg'
+                               />
+                           </a>
+                           :
+                           null*/
+                }
+                {props.children}
+            </div>
+            <Dialog />
+            <SnackBar/>
             {load?
                 <div className='load'>
                     <CircularProgress/>

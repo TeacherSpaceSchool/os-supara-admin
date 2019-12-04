@@ -3985,16 +3985,16 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       lineNumber: 70
     },
     __self: this
-  }, __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    pageName: pageName,
-    sorts: sorts,
-    filters: filters,
+  }, __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 71
     },
     __self: this
-  }), __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), __jsx(_components_app_AppBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    pageName: pageName,
+    sorts: sorts,
+    filters: filters,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 72
@@ -62256,7 +62256,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 0:
 /*!******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Forders&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Corders.js ***!
   \******************************************************************************************************************************/
@@ -62279,5 +62279,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js","styles"]]]);
+},[[0,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=orders.js.map
