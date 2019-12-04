@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set URL=localhost&& next -p 80",
-    "build": "set URL=localhost&& next build -p 80",
+    "build": "set URL=localhost&& next build",
     "start": "set URL=localhost&& next start -p 80",
     "build-server": "URL=azyk.store next build",
     "start-server": "URL=azyk.store node server.js",

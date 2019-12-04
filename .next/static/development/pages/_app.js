@@ -3185,7 +3185,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34019,21 +34019,25 @@ var checkInt = function checkInt(_int) {
   return isNaN(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1___default()(_int)) ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1___default()(_int);
 };
 var pdDDMMYYYY = function pdDDMMYYYY(date) {
+  date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '');
   return date;
 };
 var pdDDMMYY = function pdDDMMYY(date) {
+  date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4);
   return date;
 };
 var pdDatePicker = function pdDatePicker(date) {
+  date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[0].replace('"', '') + '-' + date[1] + '-' + date[2].split('T')[0];
   return date;
 };
 var pdDDMMYYHHMM = function pdDDMMYYHHMM(date) {
+  date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;

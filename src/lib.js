@@ -15,24 +15,28 @@ export const checkInt = (int) => {
 }
 export const pdDDMMYYYY = (date) =>
 {
+    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
     date = JSON.stringify(date).split('-')
     date = date[2].split('T')[0]+'.'+date[1]+'.'+date[0].replace('"', '')
     return date
 }
 export const pdDDMMYY = (date) =>
 {
+    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
     date = JSON.stringify(date).split('-')
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)
     return date
 }
 export const pdDatePicker = (date) =>
 {
+    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
     date = JSON.stringify(date).split('-')
     date = date[0].replace('"', '')+'-'+date[1]+'-'+date[2].split('T')[0]
     return date
 }
 export const pdDDMMYYHHMM = (date) =>
 {
+    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
     date = JSON.stringify(date).split('-')
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
     return date

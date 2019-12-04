@@ -82,12 +82,21 @@ const Route = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.route) {
+                let allInvoices
                 if (selectType == 'Все')
-                    setAllInvoices([...invoices, ...unselectedInvoices])
+                    allInvoices = [...invoices, ...unselectedInvoices]
                 else if (selectType == 'Свободные')
-                    setAllInvoices([...unselectedInvoices])
+                    allInvoices = [...unselectedInvoices]
                 else if (selectType == 'Выбраные')
-                    setAllInvoices([...invoices])
+                    allInvoices = [...invoices]
+                allInvoices.sort((a, b) => {
+                    a.updatedAt = new Date(a.updatedAt)
+                    b.updatedAt = new Date(b.updatedAt)
+                    if (a.updatedAt > b.updatedAt) return -1;
+                    if (a.updatedAt < b.updatedAt) return 1;
+                    return 0;
+                })
+                setAllInvoices([...allInvoices])
             }
         })()
     },[selectType, unselectedInvoices, invoices])
@@ -203,7 +212,7 @@ const Route = React.memo((props) => {
                                 {allInvoices?allInvoices.map((element, idx)=> {
                                     return (
                                         <div key={idx} className={classes.row}>
-                                            {['обработка', 'принят'].includes(element.orders[0].status)&&!element.confirmationForwarder?
+                                            {['обработка', 'принят'].includes(element.orders[0].status)/*&&!element.confirmationForwarder*/?
                                                 <Checkbox checked={invoices.includes(element)} onChange={() => {
                                                     if (!invoices.includes(element)) {
                                                         invoices.push(element)
