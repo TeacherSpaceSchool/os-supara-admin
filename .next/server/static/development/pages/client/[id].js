@@ -1,7 +1,7 @@
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
-/******/ 	var installedModules = require('../../../ssr-module-cache.js');
+/******/ 	var installedModules = require('../../../../ssr-module-cache.js');
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2442,750 +2442,6 @@ Geo.propTypes = {
 
 /***/ }),
 
-/***/ "./components/dialog/Order.js":
-/*!************************************!*\
-  !*** ./components/dialog/Order.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _src_gql_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/gql/order */ "./src/gql/order.js");
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/styleMUI/dialogContent */ "./src/styleMUI/dialogContent.js");
-/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
-/* harmony import */ var _Confirmation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Confirmation */ "./components/dialog/Confirmation.js");
-/* harmony import */ var _components_dialog_Geo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/dialog/Geo */ "./components/dialog/Geo.js");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Cancel */ "@material-ui/icons/Cancel");
-/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__);
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\Order.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const {
-    isMobileApp
-  } = props.app;
-  const {
-    profile
-  } = props.user;
-  const {
-    showMiniDialog,
-    setMiniDialog
-  } = props.mini_dialogActions;
-  const {
-    classes,
-    element,
-    setList,
-    route,
-    getInvoices
-  } = props;
-  let {
-    0: orders,
-    1: setOrders
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.orders);
-  let {
-    0: allPrice,
-    1: setAllPrice
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.allPrice);
-  const width = isMobileApp ? window.innerWidth - 144 : 500;
-  const {
-    showSnackBar
-  } = props.snackbarActions;
-
-  let canculateAllPrice = () => {
-    allPrice = 0;
-
-    for (let i = 0; i < orders.length; i++) {
-      allPrice += orders[i].allPrice;
-    }
-
-    setAllPrice(allPrice);
-  };
-
-  let increment = idx => {
-    orders[idx].count += 1;
-    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock);
-    setOrders([...orders]);
-    canculateAllPrice();
-  };
-
-  let decrement = idx => {
-    if (orders[idx].count > 1) {
-      orders[idx].count -= 1;
-      orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock);
-      setOrders([...orders]);
-      canculateAllPrice();
-    }
-  };
-
-  let remove = idx => {
-    if (orders.length > 1) {
-      orders.splice(idx, 1);
-      setOrders([...orders]);
-      canculateAllPrice();
-    } else showSnackBar('Товары не могут отсутствовать в заказе');
-  };
-
-  return __jsx("div", {
-    className: classes.column,
-    style: {
-      width: width
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60
-    },
-    __self: undefined
-  }, "\u0417\u0430\u043A\u0430\u0437 \u2116:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 61
-    },
-    __self: undefined
-  }, element.number)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: undefined
-  }, "\u0421\u0442\u0430\u0442\u0443\u0441:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 65
-    },
-    __self: undefined
-  }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 78
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 79
-    },
-    __self: undefined
-  }, "\u0410\u0434\u0440\u0435\u0441: \xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 80
-    },
-    __self: undefined
-  }, element.address[0])), __jsx("div", {
-    className: classes.geo,
-    style: {
-      color: element.address[1] ? '#ffb300' : 'red'
-    },
-    onClick: () => {
-      setMiniDialog('Геолокация', __jsx(_components_dialog_Geo__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        geo: element.address[1],
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 83
-        },
-        __self: undefined
-      }), true);
-      showMiniDialog(true);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 82
-    },
-    __self: undefined
-  }, element.address[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 93
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 94
-    },
-    __self: undefined
-  }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430: \xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 95
-    },
-    __self: undefined
-  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 97
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 98
-    },
-    __self: undefined
-  }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 99
-    },
-    __self: undefined
-  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))), __jsx("a", {
-    href: `/client/${element.client.user._id}`,
-    target: "_blank",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 101
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 102
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 103
-    },
-    __self: undefined
-  }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 104
-    },
-    __self: undefined
-  }, element.client.name))), __jsx("a", {
-    href: `/organization/${element.orders[0].item.organization._id}`,
-    target: "_blank",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 107
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 108
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 109
-    },
-    __self: undefined
-  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 110
-    },
-    __self: undefined
-  }, element.orders[0].item.organization.name))), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 113
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 114
-    },
-    __self: undefined
-  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 115
-    },
-    __self: undefined
-  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 117
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 118
-    },
-    __self: undefined
-  }, "\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 119
-    },
-    __self: undefined
-  }, element.paymentMethod)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 121
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 122
-    },
-    __self: undefined
-  }, "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 123
-    },
-    __self: undefined
-  }, element.info)), __jsx("br", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 125
-    },
-    __self: undefined
-  }), __jsx("div", {
-    className: classes.column,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 126
-    },
-    __self: undefined
-  }, __jsx("b", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 127
-    },
-    __self: undefined
-  }, "\u0422\u043E\u0432\u0430\u0440\u044B:"), orders.map((order, idx) => {
-    if (element.orders[0].status === 'обработка' && (profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin')) return __jsx("div", {
-      key: idx,
-      className: classes.column,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 139
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 140
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 141
-      },
-      __self: undefined
-    }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("a", {
-      href: `/item/${order.item._id}`,
-      target: "_blank",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 142
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 143
-      },
-      __self: undefined
-    }, order.item.name)), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default.a, {
-      onClick: () => {
-        remove(idx);
-      },
-      color: "primary",
-      className: classes.button,
-      "aria-label": "\u0443\u0434\u0430\u043B\u0438\u0442\u044C",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 145
-      },
-      __self: undefined
-    }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default.a, {
-      style: {
-        height: 20,
-        width: 20
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 148
-      },
-      __self: undefined
-    }))), __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 151
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 152
-      },
-      __self: undefined
-    }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
-      className: classes.counterbtn,
-      onClick: () => {
-        decrement(idx);
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 153
-      },
-      __self: undefined
-    }, "-"), __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 154
-      },
-      __self: undefined
-    }, order.count, "\xA0\u0448\u0442"), __jsx("div", {
-      className: classes.counterbtn,
-      onClick: () => {
-        increment(idx);
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 155
-      },
-      __self: undefined
-    }, "+")), __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 157
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 158
-      },
-      __self: undefined
-    }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 159
-      },
-      __self: undefined
-    }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 161
-      },
-      __self: undefined
-    }));else return __jsx("div", {
-      key: idx,
-      className: classes.column,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 166
-      },
-      __self: undefined
-    }, __jsx("a", {
-      href: `/item/${order.item._id}`,
-      target: "_blank",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 167
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 168
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 169
-      },
-      __self: undefined
-    }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 170
-      },
-      __self: undefined
-    }, order.item.name))), __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 173
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 174
-      },
-      __self: undefined
-    }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 175
-      },
-      __self: undefined
-    }, order.count, "\xA0\u0448\u0442")), __jsx("div", {
-      className: classes.row,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 177
-      },
-      __self: undefined
-    }, __jsx("div", {
-      className: classes.nameField,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 178
-      },
-      __self: undefined
-    }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
-      className: classes.value,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 179
-      },
-      __self: undefined
-    }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 181
-      },
-      __self: undefined
-    }));
-  })), __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 187
-    },
-    __self: undefined
-  }, element.orders[0].status === 'обработка' && (profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin') ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "primary",
-    onClick: () => {
-      const action = async () => {
-        let sendOrders = orders.map(order => {
-          return {
-            _id: order._id,
-            count: order.count,
-            allPrice: order.allPrice,
-            status: order.status
-          };
-        });
-        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["setOrder"])({
-          orders: sendOrders,
-          invoice: element._id
-        })).invoices;
-        if (setList) setList(invoices);
-        if (getInvoices) getInvoices();
-        showMiniDialog(false);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 200
-        },
-        __self: undefined
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 190
-    },
-    __self: undefined
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, profile.role === 'client' && 'принят' === element.orders[0].status && !element.confirmationClient || ['менеджер', 'организация'].includes(profile.role) && 'принят' === element.orders[0].status && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "primary",
-    onClick: () => {
-      const action = async () => {
-        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["approveOrders"])({
-          route: route,
-          invoices: [element._id]
-        })).invoices;
-        if (setList) setList(invoices);
-        if (getInvoices) getInvoices();
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 223
-        },
-        __self: undefined
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 215
-    },
-    __self: undefined
-  }, "\u0417\u0430\u043A\u0430\u0437 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D") : null, profile.role === 'client' && element.orders[0].status === 'обработка' || ['менеджер', 'организация'].includes(profile.role) && ['обработка', 'принят'].includes(element.orders[0].status) && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "primary",
-    onClick: () => {
-      let _id = element.orders.map(order => order._id);
-
-      const action = async () => {
-        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["cancelOrders"])({
-          _id: _id
-        })).invoices;
-        if (setList) setList(invoices);
-        if (getInvoices) getInvoices();
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 243
-        },
-        __self: undefined
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 234
-    },
-    __self: undefined
-  }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "secondary",
-    onClick: () => {
-      showMiniDialog(false);
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 250
-    },
-    __self: undefined
-  }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
-});
-
-function mapStateToProps(state) {
-  return {
-    mini_dialog: state.mini_dialog,
-    user: state.user,
-    app: state.app
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__, dispatch),
-    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_8__, dispatch),
-    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__, dispatch)
-  };
-}
-
-Order.propTypes = {
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_10__["default"])(Order)));
-
-/***/ }),
-
 /***/ "./components/dialog/Sign.js":
 /*!***********************************!*\
   !*** ./components/dialog/Sign.js ***!
@@ -3774,268 +3030,6 @@ Sign.propTypes = {
 
 /***/ }),
 
-/***/ "./components/order/CardOrder.js":
-/*!***************************************!*\
-  !*** ./components/order/CardOrder.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "@material-ui/core/CardActionArea");
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/styleMUI/orders/cardOrder */ "./src/styleMUI/orders/cardOrder.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
-/* harmony import */ var _dialog_Order__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../dialog/Order */ "./components/dialog/Order.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\order\\CardOrder.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-const CardOrder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  const {
-    element,
-    setList,
-    route,
-    getInvoices
-  } = props;
-  const {
-    setMiniDialog,
-    showMiniDialog
-  } = props.mini_dialogActions;
-  const statusColor = {
-    'обработка': 'orange',
-    'принят': 'blue',
-    'выполнен': 'green',
-    'отмена': 'red'
-  };
-  return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    className: classes.card,
-    onClick: () => {
-      setMiniDialog('Заказ', __jsx(_dialog_Order__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        getInvoices: getInvoices,
-        route: route,
-        element: element,
-        setList: setList,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 24
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: classes.column,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.number,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: undefined
-  }, element.number), "\xA0", __jsx("div", {
-    className: classes.status,
-    style: {
-      background: statusColor[element.orders[0].status]
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29
-    },
-    __self: undefined
-  }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 42
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 43
-    },
-    __self: undefined
-  }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44
-    },
-    __self: undefined
-  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_9__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: undefined
-  }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48
-    },
-    __self: undefined
-  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_9__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 50
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: undefined
-  }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 52
-    },
-    __self: undefined
-  }, element.address[0])), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 54
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55
-    },
-    __self: undefined
-  }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56
-    },
-    __self: undefined
-  }, element.client.name)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: undefined
-  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60
-    },
-    __self: undefined
-  }, element.orders[0].item.organization.name)), __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 62
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: undefined
-  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: undefined
-  }, element.allPrice, "\xA0\u0441\u043E\u043C")))));
-});
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    app: state.app
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_7__, dispatch),
-    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_8__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, mapDispatchToProps)(CardOrder));
-
-/***/ }),
-
 /***/ "./layouts/App.js":
 /*!************************!*\
   !*** ./layouts/App.js ***!
@@ -4228,6 +3222,17 @@ function mapDispatchToProps(dispatch) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(App));
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/array/is-array */ "core-js/library/fn/array/is-array");
 
 /***/ }),
 
@@ -5013,30 +4018,67 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/orders.js":
-/*!*************************!*\
-  !*** ./pages/orders.js ***!
-  \*************************/
+/***/ "./pages/client/[id].js":
+/*!******************************!*\
+  !*** ./pages/client/[id].js ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
-/* harmony import */ var _components_order_CardOrder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/order/CardOrder */ "./components/order/CardOrder.js");
-/* harmony import */ var _src_styleMUI_orders_orderList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/styleMUI/orders/orderList */ "./src/styleMUI/orders/orderList.js");
-/* harmony import */ var _src_gql_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/gql/order */ "./src/gql/order.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\orders.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/is-array */ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../layouts/App */ "./layouts/App.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_gql_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/gql/client */ "./src/gql/client.js");
+/* harmony import */ var _src_styleMUI_client_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/styleMUI/client/client */ "./src/styleMUI/client/client.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/icons/Delete */ "@material-ui/icons/Delete");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "@material-ui/core/InputAdornment");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/icons/Visibility */ "@material-ui/icons/Visibility");
+/* harmony import */ var _material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/icons/VisibilityOff */ "@material-ui/icons/VisibilityOff");
+/* harmony import */ var _material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/core/FormControl */ "@material-ui/core/FormControl");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "@material-ui/core/InputLabel");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var _components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/dialog/Confirmation */ "./components/dialog/Confirmation.js");
+/* harmony import */ var _components_dialog_Geo__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../components/dialog/Geo */ "./components/dialog/Geo.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_28__);
+
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\client\\[id].js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -5046,72 +4088,228 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_orders_orderList__WEBPACK_IMPORTED_MODULE_4__["default"])();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
+  const {
+    profile
+  } = props.user;
+  const classes = Object(_src_styleMUI_client_client__WEBPACK_IMPORTED_MODULE_6__["default"])();
   const {
     data
   } = props;
-  let {
-    0: list,
-    1: setList
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(data.invoices);
   const {
-    search,
-    filter,
-    sort
+    isMobileApp
   } = props.app;
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    (async () => {
-      setList((await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["getOrders"])({
-        search: search,
-        sort: sort,
-        filter: filter
-      })).invoices);
-    })();
-  }, [filter, sort, search]);
-  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    filters: data.filterInvoice,
-    sorts: data.sortInvoice,
-    pageName: "\u0417\u0430\u043A\u0430\u0437\u044B",
+  let {
+    0: status,
+    1: setStatus
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.user.status : '');
+  let {
+    0: name,
+    1: setName
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.name : '');
+  let {
+    0: email,
+    1: setEmail
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.email : '');
+  let {
+    0: phone,
+    1: setPhone
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.user.phone : ''); //привести к геолокации
+
+  if (!_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_0___default()(data.client.address[0])) data.client.address.map(addres => [addres]);
+  let {
+    0: address,
+    1: setAddress
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.address : []);
+  let {
+    0: birthday,
+    1: setBirthday
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_26__["pdDatePicker"])(new Date(data.client.birthday)) : null);
+  let {
+    0: city,
+    1: setCity
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.city : '');
+  let {
+    0: type,
+    1: setType
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.type : '');
+
+  let handleType = event => {
+    setType(event.target.value);
+  };
+
+  const types = ['частное лицо', 'торговая точка'];
+  let {
+    0: newAddress,
+    1: setNewAddress
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('');
+
+  let addAddress = () => {
+    address = [...address, [newAddress]];
+    setAddress(address);
+    setNewAddress('');
+  };
+
+  let editAddress = (event, idx) => {
+    address[idx][0] = event.target.value;
+    setAddress([...address]);
+  };
+
+  let editAddressName = (event, idx) => {
+    address[idx][2] = event.target.value;
+    setAddress([...address]);
+  };
+
+  let deleteAddress = idx => {
+    address.splice(idx, 1);
+    setAddress([...address]);
+  };
+
+  let setAddressGeo = (geo, idx) => {
+    address[idx][1] = geo;
+    setAddress([...address]);
+  };
+
+  let {
+    0: info,
+    1: setInfo
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.info : '');
+  let {
+    0: preview,
+    1: setPreview
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.image : '');
+  let {
+    0: image,
+    1: setImage
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(undefined);
+
+  let handleChangeImage = event => {
+    setImage(event.target.files[0]);
+    setPreview(URL.createObjectURL(event.target.files[0]));
+  };
+
+  let {
+    0: patent,
+    1: setPatent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(undefined);
+
+  let handleChangePatent = event => {
+    setPatent(event.target.files[0]);
+  };
+
+  let patentUrl = data.client ? data.client.patent : '';
+  let patentRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(null);
+  let {
+    0: passport,
+    1: setPassport
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(undefined);
+
+  let handleChangePassport = event => {
+    setPassport(event.target.files[0]);
+  };
+
+  let passportUrl = data.client ? data.client.passport : '';
+  let passportRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(null);
+  let {
+    0: certificate,
+    1: setCertificate
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(undefined);
+
+  let handleChangeCertificate = event => {
+    setCertificate(event.target.files[0]);
+  };
+
+  let certificateUrl = data.client ? data.client.certificate : '';
+  let certificateRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(null);
+  const {
+    setMiniDialog,
+    showMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    logout
+  } = props.userActions;
+  let {
+    0: newPass,
+    1: setNewPass
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('');
+
+  let handleNewPass = event => {
+    setNewPass(event.target.value);
+  };
+
+  let {
+    0: hide,
+    1: setHide
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('password');
+
+  let handleHide = () => {
+    setHide(!hide);
+  };
+
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_25__["useRouter"])();
+  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    filters: data.filterSubCategory,
+    sorts: data.sortSubCategory,
+    pageName: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 113
     },
     __self: undefined
-  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 114
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 115
     },
     __self: undefined
-  }, "\u0417\u0430\u043A\u0430\u0437\u044B"), __jsx("meta", {
+  }, data.client ? data.client.name : 'Ничего не найдено'), __jsx("meta", {
     name: "description",
-    content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
+    content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 116
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:title",
-    content: "\u0417\u0430\u043A\u0430\u0437\u044B",
+    content: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 117
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:description",
-    content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
+    content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 118
     },
     __self: undefined
   }), __jsx("meta", {
@@ -5119,76 +4317,872 @@ const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 119
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:image",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/static/512x512.png`,
+    content: preview,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 120
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:url",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/orders`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_22__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 121
     },
     __self: undefined
   }), __jsx("link", {
     rel: "canonical",
-    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/orders`,
+    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_22__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 122
     },
     __self: undefined
-  })), __jsx("div", {
+  })), __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default.a, {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 124
     },
     __self: undefined
-  }, list ? list.map(element => __jsx(_components_order_CardOrder__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    setList: setList,
-    key: element._id,
-    element: element,
+  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default.a, {
+    className: isMobileApp ? classes.column : classes.row,
+    style: isMobileApp ? {} : {
+      justifyContent: 'start',
+      alignItems: 'flex-start'
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 125
     },
     __self: undefined
-  })) : null));
+  }, data.client ? profile.role === 'admin' || profile._id === data.client.user._id ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("div", {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 129
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: "contained-button-file",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130
+    },
+    __self: undefined
+  }, __jsx("img", {
+    className: classes.media,
+    src: preview,
+    alt: 'Добавить',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131
+    },
+    __self: undefined
+  })), type === 'торговая точка' ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("div", {
+    className: classes.line,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 140
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.doc,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 141
+    },
+    __self: undefined
+  }, "C\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E:\xA0"), certificateUrl && certificateUrl.length > 0 ? __jsx("a", {
+    href: certificateUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 146
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 147
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: certificate || certificateUrl && certificateUrl.length > 0 ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      certificateRef.current.click();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 154
+    },
+    __self: undefined
+  }, certificate || certificateUrl && certificateUrl.length > 0 ? 'Изменить' : 'Добавить')), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 159
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.doc,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 160
+    },
+    __self: undefined
+  }, "\u041F\u0430\u0441\u043F\u043E\u0440\u0442:\xA0"), passportUrl && passportUrl.length > 0 ? __jsx("a", {
+    href: passportUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 165
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 166
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: passport || passportUrl && passportUrl.length > 0 ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      passportRef.current.click();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 173
+    },
+    __self: undefined
+  }, passport || passportUrl && passportUrl.length > 0 ? 'Изменить' : 'Добавить')), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 177
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.doc,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 178
+    },
+    __self: undefined
+  }, "\u041F\u0430\u0442\u0435\u043D\u0442:\xA0"), patentUrl && patentUrl.length > 0 ? __jsx("a", {
+    href: patentUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 183
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 184
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: patent || patentUrl && patentUrl.length > 0 ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      patentRef.current.click();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 191
+    },
+    __self: undefined
+  }, patent || patentUrl && patentUrl.length > 0 ? 'Изменить' : 'Добавить'))) : null), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 200
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    label: "\u0418\u043C\u044F",
+    value: name,
+    className: classes.input,
+    onChange: event => {
+      setName(event.target.value);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 201
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    placeholder: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
+    type: hide ? 'password' : 'text',
+    value: newPass,
+    onChange: handleNewPass,
+    className: classes.input,
+    endAdornment: __jsx(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      position: "end",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 217
+      },
+      __self: undefined
+    }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      "aria-label": "Toggle password visibility",
+      onClick: handleHide,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 218
+      },
+      __self: undefined
+    }, hide ? __jsx(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_18___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 219
+      },
+      __self: undefined
+    }) : __jsx(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_17___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 219
+      },
+      __self: undefined
+    }))),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 210
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20___default.a, {
+    className: classes.input,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 224
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 225
+    },
+    __self: undefined
+  }, "\u0422\u0438\u043F \u043A\u043B\u0438\u0435\u043D\u0442\u0430"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_28___default.a, {
+    value: type,
+    onChange: handleType,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 226
+    },
+    __self: undefined
+  }, types.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27___default.a, {
+    key: element,
+    value: element,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 228
+    },
+    __self: undefined
+  }, element)))), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    className: classes.input,
+    label: "\u0414\u0435\u043D\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435",
+    type: "date",
+    InputLabelProps: {
+      shrink: true
+    },
+    value: birthday,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    onChange: event => setBirthday(event.target.value),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 232
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    className: classes.input,
+    label: "\u0413\u043E\u0440\u043E\u0434",
+    type: "text",
+    InputLabelProps: {
+      shrink: true
+    },
+    value: city,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    onChange: event => setCity(event.target.value),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 245
+    },
+    __self: undefined
+  }), address ? address.map((element, idx) => __jsx("div", {
+    key: idx,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 259
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20___default.a, {
+    className: classes.input,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 260
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 261
+    },
+    __self: undefined
+  }, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    placeholder: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430",
+    value: element[2],
+    className: classes.input,
+    onChange: event => {
+      editAddressName(event, idx);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    endAdornment: __jsx(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      position: "end",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 271
+      },
+      __self: undefined
+    }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      onClick: () => {
+        deleteAddress(idx);
+      },
+      "aria-label": "toggle password visibility",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 272
+      },
+      __self: undefined
+    }, __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_14___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 278
+      },
+      __self: undefined
+    }))),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 262
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_20___default.a, {
+    className: classes.input,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 284
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_21___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 285
+    },
+    __self: undefined
+  }, "\u0410\u0434\u0440\u0435\u0441 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    placeholder: "\u0410\u0434\u0440\u0435\u0441",
+    value: element[0],
+    className: classes.input,
+    onChange: event => {
+      editAddress(event, idx);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 286
+    },
+    __self: undefined
+  })), __jsx("div", {
+    className: classes.geo,
+    style: {
+      color: element[1] ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      setMiniDialog('Геолокация', __jsx(_components_dialog_Geo__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        change: true,
+        geo: element[1],
+        setAddressGeo: setAddressGeo,
+        idx: idx,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 297
+        },
+        __self: undefined
+      }), true);
+      showMiniDialog(true);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 296
+    },
+    __self: undefined
+  }, element[1] ? 'Изменить геолокацию' : 'Задайте геолокацию'))) : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    onClick: async () => {
+      addAddress();
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 309
+    },
+    __self: undefined
+  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0430\u0434\u0440\u0435\u0441"), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 314
+    },
+    __self: undefined
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 315
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    label: "email",
+    value: email,
+    className: classes.input,
+    onChange: event => {
+      setEmail(event.target.value);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 317
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    label: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D. \u0424\u043E\u0440\u043C\u0430\u0442: +996555780861",
+    value: phone,
+    className: classes.input,
+    onChange: event => {
+      setPhone(event.target.value);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 326
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    multiline: true,
+    label: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F",
+    value: info,
+    className: classes.input,
+    onChange: event => {
+      setInfo(event.target.value);
+    },
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 335
+    },
+    __self: undefined
+  }), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 345
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    onClick: async () => {
+      let editElement = {
+        _id: data.client.user._id
+      };
+      if (image !== undefined) editElement.image = image;
+      if (passport !== undefined) editElement.passport = passport;
+      if (patent !== undefined) editElement.patent = patent;
+      if (certificate !== undefined) editElement.certificate = certificate;
+      if (name.length > 0 && name !== data.client.name) editElement.name = name;
+      if (address.length > 0 && address !== data.client.address) editElement.address = address;
+      if (email.length > 0 && email !== data.client.email) editElement.email = email;
+      if (phone.length > 0 && phone !== data.client.phone) editElement.phone = phone;
+      if (info.length > 0 && info !== data.client.info) editElement.info = info;
+      if (city.length > 0 && city !== data.client.city) editElement.city = city;
+      if (type && type.length > 0 && type !== data.client.type) editElement.type = type;
+      if (birthday && birthday !== data.client.birthday) editElement.birthday = birthday;
+      if (newPass.length > 0) editElement.newPass = newPass;
+
+      const action = async () => {
+        await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_5__["setClient"])(editElement);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_23__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 364
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 346
+    },
+    __self: undefined
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    onClick: async () => {
+      const action = async () => {
+        await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_5__["onoffClient"])([data.client._id]);
+        setStatus(status === 'active' ? 'deactive' : 'active');
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_23__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 375
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 370
+    },
+    __self: undefined
+  }, status === 'active' ? 'Отключить' : 'Включить') : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    onClick: () => {
+      const action = async () => {
+        logout(true);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_23__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 385
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 381
+    },
+    __self: undefined
+  }, "\u0412\u044B\u0439\u0442\u0438")))) : __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("div", {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 397
+    },
+    __self: undefined
+  }, __jsx("img", {
+    className: classes.media,
+    src: preview,
+    alt: name,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 398
+    },
+    __self: undefined
+  }), ['admin', 'организация', 'менеджер'].includes(profile.role) && certificateUrl && certificateUrl.length > 0 ? __jsx("a", {
+    href: certificateUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 405
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 406
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && passportUrl && passportUrl.length > 0 ? __jsx("a", {
+    href: passportUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 414
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 415
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0441\u043F\u043E\u0440\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && patentUrl && patentUrl.length > 0 ? __jsx("a", {
+    href: patentUrl,
+    download: true,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 423
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.docUrl,
+    style: {
+      color: 'indigo'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 424
+    },
+    __self: undefined
+  }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0442\u0435\u043D\u0442")) : null), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 431
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.name,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 432
+    },
+    __self: undefined
+  }, name), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 435
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 436
+    },
+    __self: undefined
+  }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 439
+    },
+    __self: undefined
+  }, address ? address.map((element, idx) => __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("div", {
+    className: classes.value,
+    key: idx,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 442
+    },
+    __self: undefined
+  }, element[0]), __jsx("div", {
+    className: classes.geo,
+    style: {
+      color: element[1] ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      setMiniDialog('Геолокация', __jsx(_components_dialog_Geo__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        geo: element[1],
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 446
+        },
+        __self: undefined
+      }), true);
+      showMiniDialog(true);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 445
+    },
+    __self: undefined
+  }, element[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'))) : null)), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 460
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 461
+    },
+    __self: undefined
+  }, "E-mail:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 464
+    },
+    __self: undefined
+  }, email)), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 468
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 469
+    },
+    __self: undefined
+  }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 472
+    },
+    __self: undefined
+  }, phone)), __jsx("div", {
+    className: classes.info,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 476
+    },
+    __self: undefined
+  }, info))) : 'Ничего не найдено')), __jsx("input", {
+    accept: "image/*",
+    style: {
+      display: 'none'
+    },
+    id: "contained-button-file",
+    type: "file",
+    onChange: handleChangeImage,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 486
+    },
+    __self: undefined
+  }), __jsx("input", {
+    ref: passportRef,
+    style: {
+      display: 'none'
+    },
+    id: "input-passport",
+    type: "file",
+    onChange: handleChangePassport,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 493
+    },
+    __self: undefined
+  }), __jsx("input", {
+    ref: certificateRef,
+    style: {
+      display: 'none'
+    },
+    id: "input-certificate",
+    type: "file",
+    onChange: handleChangeCertificate,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 500
+    },
+    __self: undefined
+  }), __jsx("input", {
+    ref: patentRef,
+    style: {
+      display: 'none'
+    },
+    id: "input-patent",
+    type: "file",
+    onChange: handleChangePatent,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 507
+    },
+    __self: undefined
+  }));
 });
 
-Orders.getInitialProps = async function (ctx) {
-  if (!['admin', 'организация', 'менеджер', 'client'].includes(ctx.store.getState().user.profile.role)) if (ctx.res) {
-    ctx.res.writeHead(302, {
-      Location: '/'
-    });
-    ctx.res.end();
-  } else next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push('/');
+Client.getInitialProps = async function (ctx) {
   return {
-    data: await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["getOrders"])({
-      search: '',
-      sort: '-createdAt',
-      filter: ''
+    data: await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_5__["getClient"])({
+      _id: ctx.query.id
     })
   };
 };
 
 function mapStateToProps(state) {
   return {
-    app: state.app,
-    user: state.user
+    user: state.user,
+    app: state.app
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Orders));
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__, dispatch),
+    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_13__, dispatch)
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(Client));
 
 /***/ }),
 
@@ -5919,6 +5913,150 @@ const setBasket = async element => {
 
 /***/ }),
 
+/***/ "./src/gql/client.js":
+/*!***************************!*\
+  !*** ./src/gql/client.js ***!
+  \***************************/
+/*! exports provided: getClients, getClient, onoffClient, setClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClients", function() { return getClients; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClient", function() { return getClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffClient", function() { return onoffClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setClient", function() { return setClient; });
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+const getClients = async ({
+  search: search,
+  sort: sort,
+  filter: filter
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort,
+        filter: filter
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!, $filter: String!) {
+                        clients(search: $search, sort: $sort, filter: $filter) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            info
+                            reiting
+                            birthday
+                            type
+                            city
+                            patent 
+                            passport 
+                            certificate
+                            user 
+                                {_id role status phone}
+                          }
+                          sortClient {
+                           name
+                            field
+                          }
+                          filterClient {
+                           name
+                           value
+                          }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getClient = async ({
+  _id: _id
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        _id: _id
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($_id: ID!) {
+                        client(_id: $_id) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            info
+                            reiting
+                            birthday
+                            city
+                            type
+                            patent 
+                            passport 
+                            certificate
+                            user 
+                                {_id role status phone}
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const onoffClient = async ids => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: {
+        _id: ids
+      },
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: [ID]!) {
+                        onoffClient(_id: $_id) {
+                             data
+                        }
+                    }`
+    });
+    return await getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setClient = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: ID!, $phone: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, city: $city, image: $image,, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                             data
+                        }
+                    }`
+    });
+    let list = await getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+    return list;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/***/ }),
+
 /***/ "./src/gql/items.js":
 /*!**************************!*\
   !*** ./src/gql/items.js ***!
@@ -6180,222 +6318,6 @@ const setItem = async (element, subCategory) => {
                         }
                     }`
     });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-/***/ }),
-
-/***/ "./src/gql/order.js":
-/*!**************************!*\
-  !*** ./src/gql/order.js ***!
-  \**************************/
-/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setOrder */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrders", function() { return getOrders; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrder", function() { return getOrder; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrders", function() { return addOrders; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelOrders", function() { return cancelOrders; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approveOrders", function() { return approveOrders; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrder", function() { return setOrder; });
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-
-
-
-const getOrders = async ({
-  search,
-  sort,
-  filter
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        search: search,
-        sort: sort,
-        filter: filter
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        invoices(search: $search, sort: $sort, filter: $filter) {
-                            _id
-                            createdAt
-                            orders 
-                                { 
-                                    _id
-                                    createdAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            price
-                                            organization
-                                                {_id name}
-                                        }
-                                    count
-                                    allPrice
-                                    status
-                                 }
-                            client 
-                                { 
-                                    _id
-                                    name
-                                    email
-                                    user 
-                                        {_id phone} 
-                                }
-                            allPrice
-                            info
-                            address
-                            paymentMethod
-                            number
-                            confirmationForwarder
-                            confirmationClient
-                            dateDelivery
-                        }
-                        sortInvoice {
-                            name
-                            field
-                        }
-                        filterInvoice {
-                           name
-                           value
-                        }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const getOrder = async ({
-  _id
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        _id: _id
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($_id: ID!) {
-                        invoice(_id: $_id) {
-                            _id
-                            createdAt
-                            orders 
-                                { 
-                                    _id
-                                    createdAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            price
-                                            organization
-                                                {_id name}
-                                        }
-                                    count
-                                    allPrice
-                                    status
-                                 }
-                            client 
-                                { 
-                                    _id
-                                    name
-                                    email
-                                    user 
-                                        {phone} 
-                                }
-                            allPrice
-                            info
-                            address
-                            paymentMethod
-                            number
-                            confirmationForwarder
-                            confirmationClient
-                            dateDelivery
-                        }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addOrders = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($info: String, $paymentMethod: String, $address: [[String]]) {
-                        addOrders(info: $info, paymentMethod: $paymentMethod, address: $address) {
-                             data
-                        }
-                    }`
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
-const cancelOrders = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        cancelOrders(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const approveOrders = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($invoices: [ID]!, $route: ID) {
-                        approveOrders(invoices: $invoices, route: $route) {
-                             data
-                        }
-                    }`
-    });
-    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const setOrder = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($orders: [OrderInput], $invoice: ID) {
-                        setOrder(orders: $orders, invoice: $invoice) {
-                             data
-                        }
-                    }`
-    });
-    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
   } catch (err) {
     console.error(err);
   }
@@ -6676,6 +6598,103 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/styleMUI/client/client.js":
+/*!***************************************!*\
+  !*** ./src/styleMUI/client/client.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  page: {
+    margin: '20px'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  line: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline'
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  media: {
+    objectFit: 'cover',
+    height: 300,
+    width: 300,
+    marginRight: 10,
+    marginBottom: 10,
+    cursor: 'pointer'
+  },
+  name: {
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: '1.25rem',
+    fontFamily: 'Roboto'
+  },
+  value: {
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto'
+  },
+  nameField: {
+    width: 80,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto',
+    color: '#A0A0A0'
+  },
+  info: {
+    color: '#455A64',
+    marginBottom: 10,
+    fontSize: '1rem',
+    fontFamily: 'Roboto',
+    whiteSpace: 'pre-wrap'
+  },
+  geo: {
+    width: 170,
+    textAlign: 'center',
+    marginTop: -10,
+    marginBottom: 20,
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    whiteSpace: 'pre-wrap',
+    cursor: 'pointer',
+    borderBottom: '1px dashed #ffb300'
+  },
+  doc: {
+    marginBottom: 10,
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    color: '#A0A0A0'
+  },
+  docUrl: {
+    marginBottom: 10,
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  },
+  input: {
+    marginBottom: 10,
+    width: '100%'
+  }
+}));
+
+/***/ }),
+
 /***/ "./src/styleMUI/dialogContent.js":
 /*!***************************************!*\
   !*** ./src/styleMUI/dialogContent.js ***!
@@ -6809,111 +6828,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/styleMUI/orders/cardOrder.js":
-/*!******************************************!*\
-  !*** ./src/styleMUI/orders/cardOrder.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  card: {
-    width: 400,
-    margin: 10,
-    position: 'relative'
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  },
-  number: {
-    marginBottom: 10,
-    fontWeight: 'bold',
-    fontSize: '1rem',
-    fontFamily: 'Roboto'
-  },
-  date: {
-    marginBottom: 10,
-    fontSize: '0.875rem',
-    fontFamily: 'Roboto',
-    color: '#A0A0A0'
-  },
-  status: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 4,
-    borderRadius: 10,
-    fontSize: '0.815rem',
-    fontWeight: 'bold',
-    color: 'white',
-    fontFamily: 'Roboto'
-  },
-  nameField: {
-    marginBottom: 10,
-    fontWeight: 'bold',
-    fontSize: '0.875rem',
-    fontFamily: 'Roboto',
-    color: '#A0A0A0'
-  },
-  value: {
-    marginBottom: 10,
-    fontWeight: '500',
-    fontSize: '0.875rem',
-    fontFamily: 'Roboto'
-  }
-}));
-
-/***/ }),
-
-/***/ "./src/styleMUI/orders/orderList.js":
-/*!******************************************!*\
-  !*** ./src/styleMUI/orders/orderList.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  page: {
-    paddingTop: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  fab: {
-    position: 'fixed',
-    bottom: '20px',
-    right: '20px'
-  }
-}));
-
-/***/ }),
-
-/***/ 5:
-/*!*******************************!*\
-  !*** multi ./pages/orders.js ***!
-  \*******************************/
+/***/ 6:
+/*!************************************!*\
+  !*** multi ./pages/client/[id].js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\orders.js */"./pages/orders.js");
+module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\client\[id].js */"./pages/client/[id].js");
 
 
 /***/ }),
@@ -6959,17 +6881,6 @@ module.exports = require("@material-ui/core/Button");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Card");
-
-/***/ }),
-
-/***/ "@material-ui/core/CardActionArea":
-/*!***************************************************!*\
-  !*** external "@material-ui/core/CardActionArea" ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/CardActionArea");
 
 /***/ }),
 
@@ -7193,6 +7104,17 @@ module.exports = require("@material-ui/core/Paper");
 
 /***/ }),
 
+/***/ "@material-ui/core/Select":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Select" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Select");
+
+/***/ }),
+
 /***/ "@material-ui/core/Snackbar":
 /*!*********************************************!*\
   !*** external "@material-ui/core/Snackbar" ***!
@@ -7322,6 +7244,17 @@ module.exports = require("@material-ui/icons/Cancel");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Clear");
+
+/***/ }),
+
+/***/ "@material-ui/icons/Delete":
+/*!********************************************!*\
+  !*** external "@material-ui/icons/Delete" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/icons/Delete");
 
 /***/ }),
 
@@ -7633,6 +7566,17 @@ module.exports = require("classnames");
 
 /***/ }),
 
+/***/ "core-js/library/fn/array/is-array":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/array/is-array" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/array/is-array");
+
+/***/ }),
+
 /***/ "core-js/library/fn/json/stringify":
 /*!****************************************************!*\
   !*** external "core-js/library/fn/json/stringify" ***!
@@ -7887,4 +7831,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=orders.js.map
+//# sourceMappingURL=[id].js.map

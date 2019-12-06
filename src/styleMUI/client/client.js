@@ -7,6 +7,11 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'row',
     },
+    line:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'baseline'
+    },
     column:{
         display: 'flex',
         flexDirection: 'column',
@@ -56,6 +61,20 @@ export default makeStyles({
         whiteSpace: 'pre-wrap',
         cursor: 'pointer',
         borderBottom: '1px dashed #ffb300'
+    },
+    doc: {
+        marginBottom: 10,
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        fontWeight: 'bold',
+        color: '#A0A0A0'
+    },
+    docUrl: {
+        marginBottom: 10,
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        cursor: 'pointer',
+        fontWeight: 'bold'
     },
     input: {
         marginBottom: 10,

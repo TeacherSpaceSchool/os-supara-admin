@@ -22,6 +22,9 @@ export const getClients = async({search: search, sort: sort, filter: filter})=>{
                             birthday
                             type
                             city
+                            patent 
+                            passport 
+                            certificate
                             user 
                                 {_id role status phone}
                           }
@@ -61,6 +64,9 @@ export const getClient = async({_id: _id})=>{
                             birthday
                             city
                             type
+                            patent 
+                            passport 
+                            certificate
                             user 
                                 {_id role status phone}
                         }
@@ -95,8 +101,8 @@ export const setClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $city: String, $type: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, city: $city, image: $image,, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})

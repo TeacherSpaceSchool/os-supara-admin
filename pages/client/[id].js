@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getClient } from '../../src/gql/client'
@@ -12,7 +12,6 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as userActions from '../../redux/actions/user'
 import { onoffClient, setClient } from '../../src/gql/client'
-import Add from '@material-ui/icons/Done';
 import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -61,6 +60,10 @@ const Client = React.memo((props) => {
         address[idx][0] = event.target.value
         setAddress([...address])
     };
+    let editAddressName = (event, idx)=>{
+        address[idx][2] = event.target.value
+        setAddress([...address])
+    };
     let deleteAddress = (idx)=>{
         address.splice(idx, 1);
         setAddress([...address])
@@ -77,6 +80,24 @@ const Client = React.memo((props) => {
         setImage(event.target.files[0])
         setPreview(URL.createObjectURL(event.target.files[0]))
     })
+    let [patent , setPatent] = useState(undefined);
+    let handleChangePatent = ((event) => {
+        setPatent(event.target.files[0])
+    })
+    let patentUrl =data.client?data.client.patent:'';
+    let patentRef = useRef(null);
+    let [passport, setPassport] = useState(undefined);
+    let handleChangePassport = ((event) => {
+        setPassport(event.target.files[0])
+    })
+    let passportUrl = data.client?data.client.passport:'';
+    let passportRef = useRef(null);
+    let [certificate, setCertificate] = useState(undefined);
+    let handleChangeCertificate = ((event) => {
+        setCertificate(event.target.files[0])
+    })
+    let certificateUrl = data.client?data.client.certificate:'';
+    let certificateRef = useRef(null);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { logout } = props.userActions;
     let [newPass, setNewPass] = useState('');
@@ -105,13 +126,77 @@ const Client = React.memo((props) => {
                     {data.client?
                             profile.role==='admin'||profile._id===data.client.user._id?
                                 <>
-                                <label htmlFor='contained-button-file'>
-                                    <img
-                                        className={classes.media}
-                                        src={preview}
-                                        alt={'Добавить'}
-                                    />
-                                </label>
+                                <div className={classes.column}>
+                                    <label htmlFor='contained-button-file'>
+                                        <img
+                                            className={classes.media}
+                                            src={preview}
+                                            alt={'Добавить'}
+                                        />
+                                    </label>
+                                    {
+                                        type==='торговая точка'?
+                                            <>
+                                            <div className={classes.line}>
+                                                <div className={classes.doc}>
+                                                    Cвидетельство:&nbsp;
+                                                </div>
+                                                {
+                                                    certificateUrl&&certificateUrl.length>0?
+                                                        <a href={certificateUrl} download target='_blank'>
+                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                                Скачать
+                                                            </div>
+                                                        </a>
+                                                        :null
+                                                }
+                                                &nbsp;
+                                                <div className={classes.docUrl} style={{color: certificate||(certificateUrl&&certificateUrl.length>0)?'#ffb300':'red'}} onClick={()=>{certificateRef.current.click()}}>
+                                                    {certificate||(certificateUrl&&certificateUrl.length>0)?'Изменить':'Добавить'}
+                                                </div>
+
+                                            </div>
+                                            <div  className={classes.row}>
+                                                <div className={classes.doc}>
+                                                    Паспорт:&nbsp;
+                                                </div>
+                                                {
+                                                    passportUrl&&passportUrl.length>0?
+                                                        <a href={passportUrl} download target='_blank'>
+                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                                Скачать
+                                                            </div>
+                                                        </a>
+                                                        :null
+                                                }
+                                                &nbsp;
+                                                <div className={classes.docUrl} style={{color: passport||(passportUrl&&passportUrl.length>0)?'#ffb300':'red'}} onClick={()=>{passportRef.current.click()}}>
+                                                    {passport||(passportUrl&&passportUrl.length>0)?'Изменить':'Добавить'}
+                                                </div>
+                                            </div>
+                                            <div  className={classes.row}>
+                                                <div className={classes.doc}>
+                                                    Патент:&nbsp;
+                                                </div>
+                                                {
+                                                    patentUrl&&patentUrl.length>0?
+                                                        <a href={patentUrl} download target='_blank'>
+                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                                Скачать
+                                                            </div>
+                                                        </a>
+                                                        :null
+                                                }
+                                                &nbsp;
+                                                <div className={classes.docUrl} style={{color: patent||(patentUrl&&patentUrl.length>0)?'#ffb300':'red'}} onClick={()=>{patentRef.current.click()}}>
+                                                    {patent||(patentUrl&&patentUrl.length>0)?'Изменить':'Добавить'}
+                                                </div>
+                                            </div>
+                                            </>
+                                            :
+                                            null
+                                    }
+                                </div>
                                 <div>
                                         <TextField
                                             label='Имя'
@@ -170,67 +255,64 @@ const Client = React.memo((props) => {
                                         }}
                                         onChange={ event => setCity(event.target.value) }
                                     />
-                                    <FormControl className={classes.input}>
-                                        <InputLabel>Добавить адрес</InputLabel>
-                                        <Input
-                                            value={newAddress}
-                                            onChange={(event)=>{setNewAddress(event.target.value)}}
-                                            inputProps={{
-                                                'aria-label': 'description',
-                                            }}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        onClick={()=>{
-                                                            addAddress()
-                                                        }}
-                                                        aria-label='toggle password visibility'
-                                                    >
-                                                        <Add/>
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                    />
-                                    </FormControl>
                                     {address?address.map((element, idx)=>
-                                        <>
-                                        <FormControl key={idx} className={classes.input}>
-                                            <InputLabel>Адрес</InputLabel>
-                                            <Input
-                                                placeholder='Адрес'
-                                                value={element[0]}
-                                                className={classes.input}
-                                                onChange={(event)=>{editAddress(event, idx)}}
-                                                inputProps={{
-                                                    'aria-label': 'description',
-                                                }}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            onClick={()=>{
-                                                                deleteAddress(idx)
-                                                            }}
-                                                            aria-label='toggle password visibility'
-                                                        >
-                                                            <Remove/>
-                                                        </IconButton>
-                                                    </InputAdornment>
+                                        <div key={idx}>
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Название магазина</InputLabel>
+                                                <Input
+                                                    placeholder='Название магазина'
+                                                    value={element[2]}
+                                                    className={classes.input}
+                                                    onChange={(event)=>{editAddressName(event, idx)}}
+                                                    inputProps={{
+                                                        'aria-label': 'description',
+                                                    }}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={()=>{
+                                                                    deleteAddress(idx)
+                                                                }}
+                                                                aria-label='toggle password visibility'
+                                                            >
+                                                                <Remove/>
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }
+                                                />
+                                            </FormControl>
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Адрес магазина</InputLabel>
+                                                <Input
+                                                    placeholder='Адрес'
+                                                    value={element[0]}
+                                                    className={classes.input}
+                                                    onChange={(event)=>{editAddress(event, idx)}}
+                                                    inputProps={{
+                                                        'aria-label': 'description',
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
+                                                setMiniDialog('Геолокация', <Geo change={true} geo={element[1]} setAddressGeo={setAddressGeo} idx={idx}/>, true)
+                                                showMiniDialog(true)
+                                            }}>
+                                                {
+                                                    element[1]?
+                                                        'Изменить геолокацию'
+                                                        :
+                                                        'Задайте геолокацию'
                                                 }
-                                            />
-                                        </FormControl>
-                                        <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
-                                            setMiniDialog('Геолокация', <Geo change={true} geo={element[1]} setAddressGeo={setAddressGeo} idx={idx}/>, true)
-                                            showMiniDialog(true)
-                                        }}>
-                                            {
-                                                element[1]?
-                                                    'Изменить геолокацию'
-                                                    :
-                                                    'Задайте геолокацию'
-                                            }
+                                            </div>
                                         </div>
-                                        </>
                                     ):null}
+                                    <Button onClick={async()=>{
+                                        addAddress()
+                                    }} size='small' color='primary'>
+                                        Добавить адрес
+                                    </Button>
+                                    <br/>
+                                    <br/>
 
                                     <TextField
                                         label='email'
@@ -264,6 +346,9 @@ const Client = React.memo((props) => {
                                         <Button onClick={async()=>{
                                             let editElement = {_id: data.client.user._id}
                                             if(image!==undefined)editElement.image = image
+                                            if(passport!==undefined)editElement.passport = passport
+                                            if(patent!==undefined)editElement.patent = patent
+                                            if(certificate!==undefined)editElement.certificate = certificate
                                             if(name.length>0&&name!==data.client.name)editElement.name = name
                                             if(address.length>0&&address!==data.client.address)editElement.address = address
                                             if(email.length>0&&email!==data.client.email)editElement.email = email
@@ -308,11 +393,41 @@ const Client = React.memo((props) => {
                                 </>
                                 :
                                 <>
-                                <img
-                                    className={classes.media}
-                                    src={preview}
-                                    alt={name}
-                                />
+
+                                <div className={classes.column}>
+                                    <img
+                                        className={classes.media}
+                                        src={preview}
+                                        alt={name}
+                                    />
+                                    {
+                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&certificateUrl&&certificateUrl.length>0?
+                                            <a href={certificateUrl} download target='_blank'>
+                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                    Скачать сертификат
+                                                </div>
+                                            </a>
+                                            :null
+                                    }
+                                    {
+                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&passportUrl&&passportUrl.length>0?
+                                            <a href={passportUrl} download target='_blank'>
+                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                    Скачать паспорт
+                                                </div>
+                                            </a>
+                                            :null
+                                    }
+                                    {
+                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&patentUrl&&patentUrl.length>0?
+                                            <a href={patentUrl} download target='_blank'>
+                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                    Скачать патент
+                                                </div>
+                                            </a>
+                                            :null
+                                    }
+                                </div>
                                 <div>
                                     <div className={classes.name}>
                                         {name}
@@ -374,6 +489,27 @@ const Client = React.memo((props) => {
                 id='contained-button-file'
                 type='file'
                 onChange={handleChangeImage}
+            />
+            <input
+                ref={passportRef}
+                style={{ display: 'none' }}
+                id='input-passport'
+                type='file'
+                onChange={handleChangePassport}
+            />
+            <input
+                ref={certificateRef}
+                style={{ display: 'none' }}
+                id='input-certificate'
+                type='file'
+                onChange={handleChangeCertificate}
+            />
+            <input
+                ref={patentRef}
+                style={{ display: 'none' }}
+                id='input-patent'
+                type='file'
+                onChange={handleChangePatent}
             />
         </App>
     )
