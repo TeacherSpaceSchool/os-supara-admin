@@ -81,4 +81,19 @@ export default theme => ({
         cursor: 'pointer',
         borderBottom: '1px dashed #ffb300'
     },
+    counterbtn: {
+        marginRight: 10,
+        marginLeft: 10,
+        userSelect: 'none',
+        cursor: 'pointer',
+        width: 16,
+        height: 16,
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        background: '#e6e6e6',
+        color: '#212121',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });

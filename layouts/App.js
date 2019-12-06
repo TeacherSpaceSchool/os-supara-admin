@@ -39,7 +39,7 @@ const App = React.memo(props => {
     })
     useEffect( ()=>{
         (async ()=>{
-            if(authenticated){
+            if(authenticated&&profile.role==='client'){
                 if(localStorage.favorites&&localStorage.favorites!=='[]') {
                     let favorites = JSON.parse(localStorage.favorites)
                     favorites = favorites.map(element => element._id)

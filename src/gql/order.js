@@ -22,6 +22,8 @@ export const getOrders = async({search, sort, filter})=>{
                                             image
                                             _id
                                             name    
+                                            stock 
+                                            price
                                             organization
                                                 {_id name}
                                         }
@@ -82,6 +84,8 @@ export const getOrder = async({_id})=>{
                                             image
                                             _id
                                             name    
+                                            stock 
+                                            price
                                             organization
                                                 {_id name}
                                         }
@@ -155,6 +159,23 @@ export const approveOrders = async(element)=>{
             mutation : gql`
                     mutation ($invoices: [ID]!, $route: ID) {
                         approveOrders(invoices: $invoices, route: $route) {
+                             data
+                        }
+                    }`})
+        return await getOrders(new SingletonStore().getStore().getState().app)
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const setOrder = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: element,
+            mutation : gql`
+                    mutation ($orders: [OrderInput], $invoice: ID) {
+                        setOrder(orders: $orders, invoice: $invoice) {
                              data
                         }
                     }`})

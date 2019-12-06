@@ -39,7 +39,7 @@ const Basket = React.memo((props) => {
         setList([...list])
     }
     let decrement = (idx)=>{
-        if(list[idx].count>0) {
+        if(list[idx].count>1) {
             list[idx].count -= 1
             setBasketChange(idx, list[idx].count)
             setList([...list])

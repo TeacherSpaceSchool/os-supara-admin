@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { cancelOrders, approveOrders } from '../../src/gql/order'
+import { cancelOrders, approveOrders, setOrder } from '../../src/gql/order'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
@@ -12,6 +12,8 @@ import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import Confirmation from './Confirmation'
 import Geo from '../../components/dialog/Geo'
+import IconButton from '@material-ui/core/IconButton';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const Order =  React.memo(
     (props) =>{
@@ -19,7 +21,39 @@ const Order =  React.memo(
         const { profile } = props.user;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { classes, element, setList, route, getInvoices } = props;
+        let [orders, setOrders] = useState(element.orders);
+        let [allPrice, setAllPrice] = useState(element.allPrice);
         const width = isMobileApp? (window.innerWidth-144) : 500;
+        const { showSnackBar } = props.snackbarActions;
+        let canculateAllPrice = ()=>{
+            allPrice=0
+            for(let i=0; i<orders.length; i++){
+                allPrice+=orders[i].allPrice
+            }
+            setAllPrice(allPrice)
+        }
+        let increment = (idx)=>{
+            orders[idx].count+=1
+            orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+            setOrders([...orders])
+            canculateAllPrice()
+        }
+        let decrement = (idx)=>{
+            if(orders[idx].count>1) {
+                orders[idx].count -= 1
+                orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                setOrders([...orders])
+                canculateAllPrice()
+            }
+        }
+        let remove = (idx)=>{
+            if(orders.length>1) {
+                orders.splice(idx, 1)
+                setOrders([...orders])
+                canculateAllPrice()
+            } else
+                showSnackBar('Товары не могут отсутствовать в заказе')
+        }
         return (
             <div className={classes.column} style={{width: width}}>
                 <div className={classes.row}>
@@ -78,7 +112,7 @@ const Order =  React.memo(
                 </a>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Сумма:&nbsp;</div>
-                    <div className={classes.value}>{element.allPrice}&nbsp;сом</div>
+                    <div className={classes.value}>{allPrice}&nbsp;сом</div>
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Способ оплаты:&nbsp;</div>
@@ -91,31 +125,85 @@ const Order =  React.memo(
                 <br/>
                 <div className={classes.column}>
                     <b>Товары:</b>
-                    <br/>
-                    <br/>
                     {
-                        element.orders.map((order, idx) => (
-                            <div key={idx} className={classes.column}>
-                                <a href={`/item/${order.item._id}`} target='_blank'>
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>Товар:&nbsp;</div>
-                                        <div className={classes.value}>{order.item.name}</div>
+                        orders.map((order, idx) => {
+                            if(
+                                element.orders[0].status==='обработка'&&
+                                (
+                                    profile.role==='client'||
+                                    ['менеджер', 'организация'].includes(profile.role)||
+                                    profile.role==='admin'
+                                )
+                            )
+                                return(
+                                    <div key={idx} className={classes.column}>
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Товар:&nbsp;</div>
+                                            <a href={`/item/${order.item._id}`} target='_blank'>
+                                                <div className={classes.value}>{order.item.name}</div>
+                                            </a>
+                                            <IconButton onClick={()=>{
+                                                remove(idx)
+                                            }} color='primary' className={classes.button} aria-label='удалить'>
+                                                <CancelIcon style={{height: 20, width: 20}}/>
+                                            </IconButton>
+                                        </div>
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Количество:&nbsp;</div>
+                                            <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>-</div>
+                                            <div className={classes.value}>{order.count}&nbsp;шт</div>
+                                            <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
+                                        </div>
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
+                                            <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
+                                        </div>
+                                        <br/>
                                     </div>
-                                </a>
-                                <div className={classes.row}>
-                                    <div className={classes.nameField}>Количество:&nbsp;</div>
-                                    <div className={classes.value}>{order.count}&nbsp;шт</div>
-                                </div>
-                                <div className={classes.row}>
-                                    <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
-                                    <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
-                                </div>
-                                <br/>
-                            </div>
-                        ))
+                                )
+                            else
+                                return(
+                                    <div key={idx} className={classes.column}>
+                                        <a href={`/item/${order.item._id}`} target='_blank'>
+                                            <div className={classes.row}>
+                                                <div className={classes.nameField}>Товар:&nbsp;</div>
+                                                <div className={classes.value}>{order.item.name}</div>
+                                            </div>
+                                        </a>
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Количество:&nbsp;</div>
+                                            <div className={classes.value}>{order.count}&nbsp;шт</div>
+                                        </div>
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
+                                            <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                )
+                        })
                     }
                 </div>
                 <div>
+                    {
+                        (element.orders[0].status==='обработка'&&(profile.role==='client'||['менеджер', 'организация'].includes(profile.role)||profile.role==='admin'))?
+                            <Button variant='contained' color='primary' onClick={()=>{
+                                const action = async() => {
+                                    let sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, status: order.status}})
+                                    let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
+                                    if(setList)
+                                        setList(invoices)
+                                    if(getInvoices)
+                                        getInvoices()
+                                    showMiniDialog(false);
+                                }
+                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            }} className={classes.button}>
+                                Сохранить
+                            </Button>
+                            :
+                            null
+                    }
                     {
                         (
                             (profile.role==='client'&&'принят'===element.orders[0].status&&!element.confirmationClient)
