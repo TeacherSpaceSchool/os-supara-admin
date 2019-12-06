@@ -59906,7 +59906,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: ID!, $phone: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {\n                        setClient(_id: $_id, phone: $phone, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {\n                             data\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($_id: ID!, $phone: String, $city: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {\n                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {\n                             data\n                        }\n                    }"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -59926,7 +59926,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($_id: ID!) {\n                        client(_id: $_id) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            birthday\n                            user \n                                {_id role status phone}\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($_id: ID!) {\n                        client(_id: $_id) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            birthday\n                            city\n                            user \n                                {_id role status phone}\n                        }\n                    }"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -59936,7 +59936,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!) {\n                        clients(search: $search, sort: $sort, filter: $filter) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            birthday\n                            user \n                                {_id role status phone}\n                          }\n                          sortClient {\n                           name\n                            field\n                          }\n                          filterClient {\n                           name\n                           value\n                          }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!) {\n                        clients(search: $search, sort: $sort, filter: $filter) {\n                            _id\n                            image\n                            updatedAt\n                            name\n                            email\n                            address\n                            info\n                            reiting\n                            birthday\n                            city\n                            user \n                                {_id role status phone}\n                          }\n                          sortClient {\n                           name\n                            field\n                          }\n                          filterClient {\n                           name\n                           value\n                          }\n                    }"]);
 
   _templateObject = function _templateObject() {
     return data;

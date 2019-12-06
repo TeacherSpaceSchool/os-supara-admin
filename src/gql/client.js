@@ -20,6 +20,7 @@ export const getClients = async({search: search, sort: sort, filter: filter})=>{
                             info
                             reiting
                             birthday
+                            city
                             user 
                                 {_id role status phone}
                           }
@@ -57,6 +58,7 @@ export const getClient = async({_id: _id})=>{
                             info
                             reiting
                             birthday
+                            city
                             user 
                                 {_id role status phone}
                         }
@@ -91,8 +93,8 @@ export const setClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: String, $city: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})

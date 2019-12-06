@@ -26,6 +26,8 @@ import Confirmation from '../../components/dialog/Confirmation'
 import Geo from '../../components/dialog/Geo'
 import { useRouter } from 'next/router'
 import { pdDatePicker } from '../../src/lib'
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -42,7 +44,7 @@ const Client = React.memo((props) => {
 
     let [address, setAddress] = useState(data.client?data.client.address:[]);
     let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
-
+    let [city, setCity] = useState(data.client?data.client.city:'');
 
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
@@ -142,7 +144,19 @@ const Client = React.memo((props) => {
                                         }}
                                         onChange={ event => setBirthday(event.target.value) }
                                     />
-
+                                    <TextField
+                                        className={classes.input}
+                                        label='Город'
+                                        type='text'
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={city}
+                                        inputProps={{
+                                            'aria-label': 'description',
+                                        }}
+                                        onChange={ event => setCity(event.target.value) }
+                                    />
                                     <FormControl className={classes.input}>
                                         <InputLabel>Добавить адрес</InputLabel>
                                         <Input
@@ -242,6 +256,7 @@ const Client = React.memo((props) => {
                                             if(email.length>0&&email!==data.client.email)editElement.email = email
                                             if(phone.length>0&&phone!==data.client.phone)editElement.phone = phone
                                             if(info.length>0&&info!==data.client.info)editElement.info = info
+                                            if(city.length>0&&city!==data.client.city)editElement.city = city
                                             if(birthday&&birthday!==data.client.birthday)editElement.birthday = birthday
                                             if(newPass.length>0)editElement.newPass = newPass
                                             const action = async() => {

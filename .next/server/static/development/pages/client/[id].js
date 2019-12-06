@@ -4074,9 +4074,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_26__);
 /* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__);
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\client\\[id].js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
 
 
 
@@ -4142,6 +4148,10 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     0: birthday,
     1: setBirthday
   } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_27__["pdDatePicker"])(new Date(data.client.birthday)) : null);
+  let {
+    0: city,
+    1: setCity
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.client ? data.client.city : '');
   let {
     0: newAddress,
     1: setNewAddress
@@ -4218,19 +4228,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     pageName: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 87
     },
     __self: undefined
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 88
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 89
     },
     __self: undefined
   }, data.client ? data.client.name : 'Ничего не найдено'), __jsx("meta", {
@@ -4238,7 +4248,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 90
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4246,7 +4256,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 91
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4254,7 +4264,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 92
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4262,7 +4272,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 93
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4270,7 +4280,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: preview,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 94
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4278,7 +4288,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_23__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 95
     },
     __self: undefined
   }), __jsx("link", {
@@ -4286,14 +4296,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_23__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 94
+      lineNumber: 96
     },
     __self: undefined
   })), __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default.a, {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96
+      lineNumber: 98
     },
     __self: undefined
   }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default.a, {
@@ -4304,14 +4314,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 99
     },
     __self: undefined
   }, data.client ? profile.role === 'admin' || profile._id === data.client.user._id ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("label", {
     htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 103
     },
     __self: undefined
   }, __jsx("img", {
@@ -4320,13 +4330,13 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     alt: 'Добавить',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 104
     },
     __self: undefined
   })), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 110
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -4341,7 +4351,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 111
     },
     __self: undefined
   }), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -4354,7 +4364,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 125
+        lineNumber: 127
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -4362,25 +4372,25 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       onClick: handleHide,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 126
+        lineNumber: 128
       },
       __self: undefined
     }, hide ? __jsx(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_19___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 127
+        lineNumber: 129
       },
       __self: undefined
     }) : __jsx(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_18___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 127
+        lineNumber: 129
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 120
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -4397,20 +4407,37 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     onChange: event => setBirthday(event.target.value),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132
+      lineNumber: 134
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
+    className: classes.input,
+    label: "\u0413\u043E\u0440\u043E\u0434",
+    type: "text",
+    InputLabelProps: {
+      shrink: true
+    },
+    value: city,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    onChange: event => setCity(event.target.value),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 147
     },
     __self: undefined
   }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 160
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 161
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0430\u0434\u0440\u0435\u0441"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -4425,7 +4452,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 155
+        lineNumber: 169
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -4435,19 +4462,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       "aria-label": "toggle password visibility",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 156
+        lineNumber: 170
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Done__WEBPACK_IMPORTED_MODULE_14___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 162
+        lineNumber: 176
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 162
     },
     __self: undefined
   })), address ? address.map((element, idx) => __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
@@ -4455,13 +4482,13 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 184
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 171
+      lineNumber: 185
     },
     __self: undefined
   }, "\u0410\u0434\u0440\u0435\u0441"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -4478,7 +4505,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 181
+        lineNumber: 195
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -4488,19 +4515,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       "aria-label": "toggle password visibility",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 182
+        lineNumber: 196
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_15___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 188
+        lineNumber: 202
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 172
+      lineNumber: 186
     },
     __self: undefined
   })), __jsx("div", {
@@ -4516,7 +4543,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
         idx: idx,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 195
+          lineNumber: 209
         },
         __self: undefined
       }), true);
@@ -4524,7 +4551,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 194
+      lineNumber: 208
     },
     __self: undefined
   }, element[1] ? 'Изменить геолокацию' : 'Задайте геолокацию'))) : null, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -4539,7 +4566,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 208
+      lineNumber: 222
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -4554,7 +4581,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 217
+      lineNumber: 231
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -4570,14 +4597,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 226
+      lineNumber: 240
     },
     __self: undefined
   }), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236
+      lineNumber: 250
     },
     __self: undefined
   }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -4591,6 +4618,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
       if (email.length > 0 && email !== data.client.email) editElement.email = email;
       if (phone.length > 0 && phone !== data.client.phone) editElement.phone = phone;
       if (info.length > 0 && info !== data.client.info) editElement.info = info;
+      if (city.length > 0 && city !== data.client.city) editElement.city = city;
       if (birthday && birthday !== data.client.birthday) editElement.birthday = birthday;
       if (newPass.length > 0) editElement.newPass = newPass;
 
@@ -4602,7 +4630,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 250
+          lineNumber: 265
         },
         __self: undefined
       }));
@@ -4612,7 +4640,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 237
+      lineNumber: 251
     },
     __self: undefined
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -4626,7 +4654,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 261
+          lineNumber: 276
         },
         __self: undefined
       }));
@@ -4636,7 +4664,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 256
+      lineNumber: 271
     },
     __self: undefined
   }, status === 'active' ? 'Отключить' : 'Включить') : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -4649,7 +4677,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 271
+          lineNumber: 286
         },
         __self: undefined
       }));
@@ -4659,7 +4687,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 267
+      lineNumber: 282
     },
     __self: undefined
   }, "\u0412\u044B\u0439\u0442\u0438")))) : __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("img", {
@@ -4668,41 +4696,41 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     alt: name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 282
+      lineNumber: 297
     },
     __self: undefined
   }), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 287
+      lineNumber: 302
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 288
+      lineNumber: 303
     },
     __self: undefined
   }, name), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 291
+      lineNumber: 306
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 292
+      lineNumber: 307
     },
     __self: undefined
   }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 295
+      lineNumber: 310
     },
     __self: undefined
   }, address ? address.map((element, idx) => __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx("div", {
@@ -4710,7 +4738,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 298
+      lineNumber: 313
     },
     __self: undefined
   }, element[0]), __jsx("div", {
@@ -4723,7 +4751,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
         geo: element[1],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 302
+          lineNumber: 317
         },
         __self: undefined
       }), true);
@@ -4731,56 +4759,56 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 301
+      lineNumber: 316
     },
     __self: undefined
   }, element[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'))) : null)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 316
+      lineNumber: 331
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 317
+      lineNumber: 332
     },
     __self: undefined
   }, "E-mail:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 320
+      lineNumber: 335
     },
     __self: undefined
   }, email)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 324
+      lineNumber: 339
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 325
+      lineNumber: 340
     },
     __self: undefined
   }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 328
+      lineNumber: 343
     },
     __self: undefined
   }, phone)), __jsx("div", {
     className: classes.info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 332
+      lineNumber: 347
     },
     __self: undefined
   }, info))) : 'Ничего не найдено')), __jsx("input", {
@@ -4793,7 +4821,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 342
+      lineNumber: 357
     },
     __self: undefined
   }));
@@ -5597,6 +5625,7 @@ const getClients = async ({
                             info
                             reiting
                             birthday
+                            city
                             user 
                                 {_id role status phone}
                           }
@@ -5636,6 +5665,7 @@ const getClient = async ({
                             info
                             reiting
                             birthday
+                            city
                             user 
                                 {_id role status phone}
                         }
@@ -5671,8 +5701,8 @@ const setClient = async element => {
     await client.mutate({
       variables: element,
       mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: ID!, $phone: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: String, $city: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`
@@ -6696,6 +6726,17 @@ module.exports = require("@material-ui/core/MenuItem");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Paper");
+
+/***/ }),
+
+/***/ "@material-ui/core/Select":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Select" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Select");
 
 /***/ }),
 
