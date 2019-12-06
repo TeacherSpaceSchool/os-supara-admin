@@ -15,7 +15,7 @@ export const getBlogs = async({search: search, sort: sort, filter: filter})=>{
                             image
                             text
                             title
-                            updatedAt
+                            createdAt
                           }
                           sortBlog {
                            name

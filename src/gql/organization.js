@@ -12,7 +12,7 @@ export const getOrganization = async({_id: _id})=>{
                     query ($_id: ID!) {
                         organization(_id: $_id) {
                             _id
-                            updatedAt
+                            createdAt
                             name
                             image
                             address
@@ -40,7 +40,7 @@ export const getOrganizations = async({search: search, sort: sort, filter: filte
                     query ($search: String!, $sort: String!, $filter: String!) {
                         organizations(search: $search, sort: $sort, filter: $filter) {
                             _id
-                            updatedAt
+                            createdAt
                             name
                             image
                             address

@@ -14,7 +14,7 @@ export const getNotifications = async({search: search})=>{
                             _id
                             text
                             title
-                            updatedAt
+                            createdAt
                           }
                     }`,
             })
@@ -36,7 +36,7 @@ export const getNotification = async({_id: _id})=>{
                             _id
                             text
                             title
-                            updatedAt
+                            createdAt
                           }
                     }`,
             })

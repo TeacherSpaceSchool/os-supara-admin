@@ -16,7 +16,7 @@ export const getSubCategorys = async({category,  search,  sort,  filter})=>{
                                 {_id name}
                             name
                             status
-                            updatedAt
+                            createdAt
                           }
                           sortSubCategory {
                            name
@@ -31,7 +31,7 @@ export const getSubCategorys = async({category,  search,  sort,  filter})=>{
                                 image
                                 name
                                 status
-                                updatedAt
+                                createdAt
                           }
                     }`,
             })

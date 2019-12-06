@@ -12,7 +12,7 @@ export const getEmployments = async({search: search, sort: sort, filter: filter}
                     query ($search: String!, $sort: String!, $filter: String!) {
                         employments(search: $search, sort: $sort, filter: $filter) {
                             _id
-                            updatedAt
+                            createdAt
                             name
                             email
                             user 
@@ -46,7 +46,7 @@ export const getEmployment = async({_id: _id})=> {
                     query ($_id: ID!) {
                         employment(_id: $_id) {
                             _id
-                            updatedAt
+                            createdAt
                             name
                             email
                             user 
@@ -72,7 +72,7 @@ export const getEcspeditors = async({_id: _id})=>{
                     query ($_id: ID) {
                         ecspeditors(_id: $_id) {
                             _id
-                            updatedAt
+                            createdAt
                             name
                             email
                             user 

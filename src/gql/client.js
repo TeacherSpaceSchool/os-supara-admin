@@ -13,13 +13,14 @@ export const getClients = async({search: search, sort: sort, filter: filter})=>{
                         clients(search: $search, sort: $sort, filter: $filter) {
                             _id
                             image
-                            updatedAt
+                            createdAt
                             name
                             email
                             address
                             info
                             reiting
                             birthday
+                            type
                             city
                             user 
                                 {_id role status phone}
@@ -51,7 +52,7 @@ export const getClient = async({_id: _id})=>{
                         client(_id: $_id) {
                             _id
                             image
-                            updatedAt
+                            createdAt
                             name
                             email
                             address
@@ -59,6 +60,7 @@ export const getClient = async({_id: _id})=>{
                             reiting
                             birthday
                             city
+                            type
                             user 
                                 {_id role status phone}
                         }
@@ -93,8 +95,8 @@ export const setClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $city: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: String, $city: String, $type: String, $image: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, city: $city, image: $image, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})

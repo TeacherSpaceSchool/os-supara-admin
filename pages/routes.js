@@ -62,7 +62,7 @@ Routes.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getRoutes({search: '', sort: '-updatedAt', filter: ''})
+        data: await getRoutes({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

@@ -55,7 +55,7 @@ const Items = React.memo((props) => {
 
 Items.getInitialProps = async function(ctx) {
     return {
-        data: await getItems({subCategory: ctx.query.id, search: '', sort: '-updatedAt', filter: ''}),
+        data: await getItems({subCategory: ctx.query.id, search: '', sort: '-createdAt', filter: ''}),
     };
 };
 

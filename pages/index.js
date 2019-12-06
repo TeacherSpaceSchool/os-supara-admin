@@ -69,7 +69,7 @@ Index.getInitialProps = async function(ctx) {
         } else
             Router.push('/items/all')
     return {
-        data: await getCategorys({search: '', sort: '-updatedAt', filter: ''})
+        data: await getCategorys({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

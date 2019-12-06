@@ -66,7 +66,7 @@ const Route = React.memo((props) => {
         (async()=>{
             if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
                 console.log('ok')
-                setUnselectedInvoices((await getOrders({search: '', sort: '-updatedAt', filter: 'обработка'})).invoices)
+                setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка'})).invoices)
             }
         })()
     },[])
@@ -90,10 +90,10 @@ const Route = React.memo((props) => {
                 else if (selectType == 'Выбраные')
                     allInvoices = [...invoices]
                 allInvoices.sort((a, b) => {
-                    a.updatedAt = new Date(a.updatedAt)
-                    b.updatedAt = new Date(b.updatedAt)
-                    if (a.updatedAt > b.updatedAt) return -1;
-                    if (a.updatedAt < b.updatedAt) return 1;
+                    a.createdAt = new Date(a.createdAt)
+                    b.createdAt = new Date(b.createdAt)
+                    if (a.createdAt > b.createdAt) return -1;
+                    if (a.createdAt < b.createdAt) return 1;
                     return 0;
                 })
                 setAllInvoices([...allInvoices])
@@ -107,7 +107,7 @@ const Route = React.memo((props) => {
     }
     let getInvoices = async ()=>{
         if(data.route){
-            setUnselectedInvoices((await getOrders({search: '', sort: '-updatedAt', filter: 'обработка'})).invoices)
+            setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка'})).invoices)
             setCancelInvoices([])
             setInvoices((await getRoute({_id: data.route._id})).route.invoices)
         }

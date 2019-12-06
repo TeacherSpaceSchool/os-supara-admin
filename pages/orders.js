@@ -50,7 +50,7 @@ Orders.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getOrders({search: '', sort: '-updatedAt', filter: ''})
+        data: await getOrders({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

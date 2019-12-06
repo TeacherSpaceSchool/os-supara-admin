@@ -57,7 +57,7 @@ const Subcategory = React.memo((props) => {
 
 Subcategory.getInitialProps = async function(ctx) {
     return {
-        data: await getSubCategorys({category: ctx.query.id, search: '', sort: '-updatedAt', filter: ''}),
+        data: await getSubCategorys({category: ctx.query.id, search: '', sort: '-createdAt', filter: ''}),
     };
 };
 

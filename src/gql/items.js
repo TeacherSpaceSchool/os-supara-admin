@@ -17,7 +17,7 @@ export const getItems = async({subCategory,  search,  sort,  filter})=>{
                                 {_id name}
                             name
                             status
-                            updatedAt                  
+                            createdAt                  
                             stock
                             image
                             info
@@ -64,7 +64,7 @@ export const favorites = async({ search})=>{
                                 {_id name}
                             name
                             status
-                            updatedAt                  
+                            createdAt                  
                             stock
                             image
                             info
@@ -99,7 +99,7 @@ export const getItem = async({_id})=>{
                                 {_id name}
                             name
                             status
-                            updatedAt                  
+                            createdAt                  
                             stock
                             image
                             info

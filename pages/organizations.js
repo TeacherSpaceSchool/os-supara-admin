@@ -56,7 +56,7 @@ const Organization = React.memo((props) => {
 
 Organization.getInitialProps = async function() {
     return {
-        data: await getOrganizations({search: '', sort: '-updatedAt', filter: ''})
+        data: await getOrganizations({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

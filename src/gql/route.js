@@ -12,15 +12,15 @@ export const getRoutes = async({search, sort, filter})=>{
                     query ($search: String!, $sort: String!, $filter: String!) {
                         routes(search: $search, sort: $sort, filter: $filter) {
                             _id
-                            updatedAt
+                            createdAt
                             invoices
                                 {
                                     _id
-                                    updatedAt
+                                    createdAt
                                     orders 
                                         { 
                                             _id
-                                            updatedAt
+                                            createdAt
                                             item
                                                 {
                                                     image
@@ -52,7 +52,7 @@ export const getRoutes = async({search, sort, filter})=>{
                             employment
                                 { 
                                     _id
-                                    updatedAt
+                                    createdAt
                                     name
                                     email
                                     user 
@@ -91,15 +91,15 @@ export const getRoute = async({_id})=>{
                     query ($_id: ID!) {
                         route(_id: $_id) {
                             _id
-                            updatedAt
+                            createdAt
                             invoices
                                 {
                                     _id
-                                    updatedAt
+                                    createdAt
                                     orders 
                                         { 
                                             _id
-                                            updatedAt
+                                            createdAt
                                             item
                                                 {
                                                     image
@@ -131,7 +131,7 @@ export const getRoute = async({_id})=>{
                             employment
                                 { 
                                     _id
-                                    updatedAt
+                                    createdAt
                                     name
                                     email
                                     user 

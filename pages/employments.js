@@ -62,7 +62,7 @@ Employment.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getEmployments({search: '', sort: '-updatedAt', filter: ''})
+        data: await getEmployments({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

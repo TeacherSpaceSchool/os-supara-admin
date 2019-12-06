@@ -52,7 +52,7 @@ Client.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getClients({search: '', sort: '-updatedAt', filter: ''})
+        data: await getClients({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

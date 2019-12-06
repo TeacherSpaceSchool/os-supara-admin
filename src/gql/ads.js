@@ -14,7 +14,7 @@ export const getAds = async()=>{
                             image
                             url
                             title
-                            updatedAt
+                            createdAt
                           }
                     }`,
             })
@@ -37,7 +37,7 @@ export const getAdss = async({search: search, sort: sort, filter: filter})=>{
                             image
                             url
                             title
-                            updatedAt
+                            createdAt
                           }
                           sortAds {
                            name

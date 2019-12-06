@@ -13,6 +13,7 @@ import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
 import Confirmation from '../dialog/Confirmation'
+import { getCountBasket } from '../../src/gql/basket'
 
 const CardItem = React.memo((props) => {
     const classes = cardItemStyle();
@@ -142,6 +143,7 @@ const CardItem = React.memo((props) => {
                                                     }
                                                     showSnackBar('Товар добавлен в корзину')
                                                     setBasket(true)
+                                                    getCountBasket()
                                                 }}/>
                                                 :
                                                 null

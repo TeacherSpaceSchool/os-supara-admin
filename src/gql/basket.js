@@ -14,7 +14,7 @@ export const getBasket = async()=>{
                     query{
                         baskets {
                             _id
-                            updatedAt
+                            createdAt
                             item 
                                 {_id name stock image price}
                             count

@@ -58,7 +58,11 @@ const Order =  React.memo(
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Время заказа: &nbsp;</div>
-                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                </div>
+                <div className={classes.row}>
+                    <div className={classes.nameField}>Время доставки:&nbsp;</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
                 </div>
                 <a href={`/client/${element.client.user._id}`} target='_blank'>
                     <div className={classes.row}>

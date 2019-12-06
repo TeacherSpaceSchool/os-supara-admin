@@ -40,8 +40,12 @@ const CardOrder = React.memo((props) => {
                         }</div>
                     </div>
                     <div className={classes.row}>
-                        <div className={classes.nameField}>Дата:&nbsp;</div>
-                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>
+                        <div className={classes.nameField}>Время заказа:&nbsp;</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                    </div>
+                    <div className={classes.row}>
+                        <div className={classes.nameField}>Время доставки:&nbsp;</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Адрес:&nbsp;</div>

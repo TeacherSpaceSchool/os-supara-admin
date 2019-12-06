@@ -3185,7 +3185,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, useTheme, withStyles, withTheme, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, MuiThemeProvider, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33054,7 +33054,7 @@ function (_App) {
 
               case 9:
                 ctx.store.getState().app.search = '';
-                ctx.store.getState().app.sort = '-updatedAt';
+                ctx.store.getState().app.sort = '-createdAt';
                 ctx.store.getState().app.filter = '';
                 ctx.store.getState().app.load = false;
                 ctx.store.getState().mini_dialog.show = false;
@@ -33755,7 +33755,7 @@ var initialState = {
   drawer: false,
   search: '',
   filter: '',
-  sort: '-updatedAt',
+  sort: '-createdAt',
   isMobileApp: undefined,
   load: false,
   countBasket: 0

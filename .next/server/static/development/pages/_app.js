@@ -883,7 +883,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     }
 
     ctx.store.getState().app.search = '';
-    ctx.store.getState().app.sort = '-updatedAt';
+    ctx.store.getState().app.sort = '-createdAt';
     ctx.store.getState().app.filter = '';
     ctx.store.getState().app.load = false;
     ctx.store.getState().mini_dialog.show = false;
@@ -1347,7 +1347,7 @@ const initialState = {
   drawer: false,
   search: '',
   filter: '',
-  sort: '-updatedAt',
+  sort: '-createdAt',
   isMobileApp: undefined,
   load: false,
   countBasket: 0

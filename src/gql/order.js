@@ -12,11 +12,11 @@ export const getOrders = async({search, sort, filter})=>{
                     query ($search: String!, $sort: String!, $filter: String!) {
                         invoices(search: $search, sort: $sort, filter: $filter) {
                             _id
-                            updatedAt
+                            createdAt
                             orders 
                                 { 
                                     _id
-                                    updatedAt
+                                    createdAt
                                     item
                                         {
                                             image
@@ -44,6 +44,7 @@ export const getOrders = async({search, sort, filter})=>{
                             number
                             confirmationForwarder
                             confirmationClient
+                            dateDelivery
                         }
                         sortInvoice {
                             name
@@ -71,11 +72,11 @@ export const getOrder = async({_id})=>{
                     query ($_id: ID!) {
                         invoice(_id: $_id) {
                             _id
-                            updatedAt
+                            createdAt
                             orders 
                                 { 
                                     _id
-                                    updatedAt
+                                    createdAt
                                     item
                                         {
                                             image
@@ -103,6 +104,7 @@ export const getOrder = async({_id})=>{
                             number
                             confirmationForwarder
                             confirmationClient
+                            dateDelivery
                         }
                     }`,
             })

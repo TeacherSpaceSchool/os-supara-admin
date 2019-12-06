@@ -35,7 +35,7 @@ const Notification = React.memo((props) => {
 
 Notification.getInitialProps = async function() {
     return {
-        data: await getAdss({search: '', sort: '-updatedAt', filter: ''})
+        data: await getAdss({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

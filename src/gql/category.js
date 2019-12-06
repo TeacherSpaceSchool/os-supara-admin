@@ -15,7 +15,7 @@ export const getCategorys = async({search: search, sort: sort, filter: filter})=
                             image
                             name
                             status
-                            updatedAt
+                            createdAt
                           }
                           sortCategory {
                            name

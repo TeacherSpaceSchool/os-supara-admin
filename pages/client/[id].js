@@ -45,6 +45,11 @@ const Client = React.memo((props) => {
     let [address, setAddress] = useState(data.client?data.client.address:[]);
     let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
     let [city, setCity] = useState(data.client?data.client.city:'');
+    let [type, setType] = useState(data.client?data.client.type:'');
+    let handleType =  (event) => {
+        setType(event.target.value)
+    };
+    const types = ['частное лицо', 'торговая точка']
 
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
@@ -131,9 +136,17 @@ const Client = React.memo((props) => {
                                                 </InputAdornment>
                                             }
                                         />
+                                    <FormControl className={classes.input}>
+                                        <InputLabel>Тип клиента</InputLabel>
+                                        <Select value={type} onChange={handleType}>
+                                            {types.map((element)=>
+                                                <MenuItem key={element} value={element}>{element}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
                                     <TextField
                                         className={classes.input}
-                                        label='Дата'
+                                        label='День рождение'
                                         type='date'
                                         InputLabelProps={{
                                             shrink: true,
@@ -257,6 +270,7 @@ const Client = React.memo((props) => {
                                             if(phone.length>0&&phone!==data.client.phone)editElement.phone = phone
                                             if(info.length>0&&info!==data.client.info)editElement.info = info
                                             if(city.length>0&&city!==data.client.city)editElement.city = city
+                                            if(type&&type.length>0&&type!==data.client.type)editElement.type = type
                                             if(birthday&&birthday!==data.client.birthday)editElement.birthday = birthday
                                             if(newPass.length>0)editElement.newPass = newPass
                                             const action = async() => {

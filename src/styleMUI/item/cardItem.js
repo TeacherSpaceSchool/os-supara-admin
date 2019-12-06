@@ -72,6 +72,7 @@ export default makeStyles({
     button: {
         height: 50,
         width: 50,
+        cursor: 'pointer'
     },
     buttonToggle: {
         height: 30,

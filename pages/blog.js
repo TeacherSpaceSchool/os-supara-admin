@@ -44,7 +44,7 @@ const Blog = React.memo((props) => {
 
 Blog.getInitialProps = async function() {
     return {
-        data: await getBlogs({search: '', sort: '-updatedAt', filter: ''})
+        data: await getBlogs({search: '', sort: '-createdAt', filter: ''})
     };
 };
 

@@ -35,7 +35,7 @@ const CardBlog = React.memo((props) => {
     let handleText =  (event) => {
         setText(event.target.value)
     };
-    let date = pdDDMMYYYY(element?new Date(element.updatedAt):new Date())
+    let date = pdDDMMYYYY(element?new Date(element.createdAt):new Date())
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let [all, setAll] = useState(false);

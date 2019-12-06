@@ -4,7 +4,7 @@ const initialState = {
     drawer: false,
     search: '',
     filter: '',
-    sort: '-updatedAt',
+    sort: '-createdAt',
     isMobileApp: undefined,
     load: false,
     countBasket: 0
