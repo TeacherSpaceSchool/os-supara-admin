@@ -25,21 +25,25 @@ import { urlMain } from '../../redux/constants/other'
 import Confirmation from '../../components/dialog/Confirmation'
 import Geo from '../../components/dialog/Geo'
 import { useRouter } from 'next/router'
+import { pdDatePicker } from '../../src/lib'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
     const classes = clientStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
-    let [status, setStatus] = useState(data.client!==null?data.client.user.status:'');
-    let [name, setName] = useState(data.client!==null?data.client.name:'');
-    let [email, setEmail] = useState(data.client!==null?data.client.email:'');
-    let [phone, setPhone] = useState(data.client!==null?data.client.user.phone:'');
+    let [status, setStatus] = useState(data.client?data.client.user.status:'');
+    let [name, setName] = useState(data.client?data.client.name:'');
+    let [email, setEmail] = useState(data.client?data.client.email:'');
+    let [phone, setPhone] = useState(data.client?data.client.user.phone:'');
 
     //привести к геолокации
     if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    let [address, setAddress] = useState(data.client!==null?data.client.address:[]);
+    let [address, setAddress] = useState(data.client?data.client.address:[]);
+    let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
+
+
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
         address = [...address, [newAddress]]
@@ -59,8 +63,8 @@ const Client = React.memo((props) => {
         setAddress([...address])
     };
 
-    let [info, setInfo] = useState(data.client!==null?data.client.info:'');
-    let [preview, setPreview] = useState(data.client!==null?data.client.image:'');
+    let [info, setInfo] = useState(data.client?data.client.info:'');
+    let [preview, setPreview] = useState(data.client?data.client.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
         setImage(event.target.files[0])
@@ -78,11 +82,11 @@ const Client = React.memo((props) => {
     };
     const router = useRouter()
     return (
-        <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client!==null?data.client.name:'Ничего не найдено'}>
+        <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client?data.client.name:'Ничего не найдено'}>
             <Head>
-                <title>{data.client!==null?data.client.name:'Ничего не найдено'}</title>
+                <title>{data.client?data.client.name:'Ничего не найдено'}</title>
                 <meta name='description' content={info}/>
-                <meta property='og:title' content={data.client!==null?data.client.name:'Ничего не найдено'} />
+                <meta property='og:title' content={data.client?data.client.name:'Ничего не найдено'} />
                 <meta property='og:description' content={info} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={preview} />
@@ -91,7 +95,7 @@ const Client = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    {data.client!==null?
+                    {data.client?
                             profile.role==='admin'||profile._id===data.client.user._id?
                                 <>
                                 <label htmlFor='contained-button-file'>
@@ -125,6 +129,19 @@ const Client = React.memo((props) => {
                                                 </InputAdornment>
                                             }
                                         />
+                                    <TextField
+                                        className={classes.input}
+                                        label='Дата'
+                                        type='date'
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={birthday}
+                                        inputProps={{
+                                            'aria-label': 'description',
+                                        }}
+                                        onChange={ event => setBirthday(event.target.value) }
+                                    />
 
                                     <FormControl className={classes.input}>
                                         <InputLabel>Добавить адрес</InputLabel>
@@ -225,8 +242,8 @@ const Client = React.memo((props) => {
                                             if(email.length>0&&email!==data.client.email)editElement.email = email
                                             if(phone.length>0&&phone!==data.client.phone)editElement.phone = phone
                                             if(info.length>0&&info!==data.client.info)editElement.info = info
+                                            if(birthday&&birthday!==data.client.birthday)editElement.birthday = birthday
                                             if(newPass.length>0)editElement.newPass = newPass
-                                            if(phone.length>0)editElement.phone = phone
                                             const action = async() => {
                                                 await setClient(editElement)
                                             }

@@ -1,6 +1,9 @@
 h3 {
   margin: 0; }
 
+.appBar {
+  z-index: 1201 !important; }
+
 .App {
   background: #F5F5F5;
   width: 100vw;
