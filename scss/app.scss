@@ -25,7 +25,7 @@ html{
 
 .App-body {
   position: fixed;
-  overflow: auto;
+  overflow: scroll;
   -webkit-overflow-scrolling: touch;
   top: $app-bar-height-m;
   padding-bottom: 64px;
