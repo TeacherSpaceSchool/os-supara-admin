@@ -35,109 +35,111 @@ const CardCategory = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     return (
-        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+        <div>
             {
                 profile.role === 'admin' && (!element||(element._id!=='all'&&name!=='Не задано')) ?
-                    <>
-                    <CardActionArea>
-                        <CardContent>
-                            <TextField
-                                label='Имя'
-                                value={name}
-                                className={classes.input}
-                                onChange={handleName}
-                                inputProps={{
-                                    'aria-label': 'description',
-                                }}
-                            />
-                            <br/>
-                            <br/>
-                            <FormControl className={classes.input}>
-                                <InputLabel>Категория</InputLabel>
-                                <Select
-                                    value={selectCategory._id}
-                                    onChange={handleSelectCategory}
-                                >
-                                    {categorys?categorys.map((element)=>
-                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                    ):null}
-                                </Select>
-                            </FormControl>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        {
-                            element!==undefined?
-                                <>
-                                <Button onClick={async()=>{
-                                    let editElement = {_id: element._id}
-                                    if(name.length>0&&name!==element.name)editElement.name = name
-                                    if(selectCategory._id!==undefined&&selectCategory._id!==element.category._id)editElement.category = selectCategory._id
-                                    const action = async() => {
-                                        setList((await setSubCategory(editElement, category)).subCategorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }} size='small' color='primary'>
-                                    Сохранить
-                                </Button>
-                                <Button onClick={async()=>{
-                                    const action = async() => {
-                                        setList((await onoffSubCategory([element._id], category)).subCategorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }} size='small' color='primary'>
-                                    {element.status==='active'?'Отключить':'Включить'}
-                                </Button>
-                                <Button size='small' color='primary' onClick={()=>{
-                                    const action = async() => {
-                                        setList((await deleteSubCategory([element._id], category)).subCategorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }}>
-                                    Удалить
-                                </Button>
-                        <Link href='/items/[id]' as={`/items/${element._id}`}>
-                            <Button size='small' color='primary'>
-                                Перейти
-                            </Button>
-                        </Link>
-                                </>:
-                                <Button onClick={async()=> {
-                                    if (name.length > 0&&selectCategory._id) {
-                                        setName('')
-                                        setSelectCategory({})
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <CardContent>
+                                <TextField
+                                    label='Имя'
+                                    value={name}
+                                    className={classes.input}
+                                    onChange={handleName}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                />
+                                <br/>
+                                <br/>
+                                <FormControl className={classes.input}>
+                                    <InputLabel>Категория</InputLabel>
+                                    <Select
+                                        value={selectCategory._id}
+                                        onChange={handleSelectCategory}
+                                    >
+                                        {categorys?categorys.map((element)=>
+                                            <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                        ):null}
+                                    </Select>
+                                </FormControl>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            {
+                                element!==undefined?
+                                    <>
+                                    <Button onClick={async()=>{
+                                        let editElement = {_id: element._id}
+                                        if(name.length>0&&name!==element.name)editElement.name = name
+                                        if(selectCategory._id!==undefined&&selectCategory._id!==element.category._id)editElement.category = selectCategory._id
                                         const action = async() => {
-                                            let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
-                                            console.log(subCategorys)
-                                            setList(subCategorys)
+                                            setList((await setSubCategory(editElement, category)).subCategorys)
                                         }
                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
-                                    } else {
-                                        showSnackBar('Заполните все поля')
-                                    }
-                                }} size='small' color='primary'>
-                                    Добавить
-                                </Button>}
-                    </CardActions>
-                    </>
+                                    }} size='small' color='primary'>
+                                        Сохранить
+                                    </Button>
+                                    <Button onClick={async()=>{
+                                        const action = async() => {
+                                            setList((await onoffSubCategory([element._id], category)).subCategorys)
+                                        }
+                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }} size='small' color='primary'>
+                                        {element.status==='active'?'Отключить':'Включить'}
+                                    </Button>
+                                    <Button size='small' color='primary' onClick={()=>{
+                                        const action = async() => {
+                                            setList((await deleteSubCategory([element._id], category)).subCategorys)
+                                        }
+                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }}>
+                                        Удалить
+                                    </Button>
+                            <Link href='/items/[id]' as={`/items/${element._id}`}>
+                                <Button size='small' color='primary'>
+                                    Перейти
+                                </Button>
+                            </Link>
+                                    </>:
+                                    <Button onClick={async()=> {
+                                        if (name.length > 0&&selectCategory._id) {
+                                            setName('')
+                                            setSelectCategory({})
+                                            const action = async() => {
+                                                let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
+                                                console.log(subCategorys)
+                                                setList(subCategorys)
+                                            }
+                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        } else {
+                                            showSnackBar('Заполните все поля')
+                                        }
+                                    }} size='small' color='primary'>
+                                        Добавить
+                                    </Button>}
+                        </CardActions>
+                    </Card>
                     :
                     element!==undefined?
-                        <CardActionArea>
-                            <Link href='/items/[id]' as={`/items/${element._id}`}>
-                                <div className={classes.line}>
-                                    <h3 className={classes.input}>
-                                        {element.name}
-                                    </h3>
-                                </div>
-                            </Link>
-                        </CardActionArea>
+                        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                            <CardActionArea>
+                                <Link href='/items/[id]' as={`/items/${element._id}`}>
+                                    <div className={classes.line}>
+                                        <h3 className={classes.input}>
+                                            {element.name}
+                                        </h3>
+                                    </div>
+                                </Link>
+                            </CardActionArea>
+                        </Card>
                         :null
             }
-            </Card>
+            </div>
     );
 })
 

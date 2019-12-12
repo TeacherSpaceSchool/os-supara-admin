@@ -34,11 +34,11 @@ const CardCategory = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     return (
-        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+        <div>
             {
                 name!=='Не задано'&&setList!=='all'&&profile.role === 'admin' ?
-                    <>
-                    <CardActionArea>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
                         <CardContent>
                             <div className={classes.line}>
                                 <label htmlFor={element?element._id:'add'}>
@@ -60,76 +60,77 @@ const CardCategory = React.memo((props) => {
                             </div>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions>
-                        {
-                            element!==undefined?
-                            <>
-                            <Button onClick={async()=>{
-                                    let editElement = {_id: element._id}
-                                    if(name.length>0&&name!==element.name)editElement.name = name
-                                    if(image!==undefined)editElement.image = image
-                                    const action = async() => {
-                                        setList((await setCategory(editElement)).categorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }} size='small' color='primary'>
-                                    Сохранить
-                                </Button>
+                        <CardActions>
+                            {
+                                element!==undefined?
+                                <>
                                 <Button onClick={async()=>{
-                                    const action = async() => {
-                                        setList((await onoffCategory([element._id])).categorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }} size='small' color='primary'>
-                                    {element.status==='active'?'Отключить':'Включить'}
+                                        let editElement = {_id: element._id}
+                                        if(name.length>0&&name!==element.name)editElement.name = name
+                                        if(image!==undefined)editElement.image = image
+                                        const action = async() => {
+                                            setList((await setCategory(editElement)).categorys)
+                                        }
+                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }} size='small' color='primary'>
+                                        Сохранить
+                                    </Button>
+                                    <Button onClick={async()=>{
+                                        const action = async() => {
+                                            setList((await onoffCategory([element._id])).categorys)
+                                        }
+                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }} size='small' color='primary'>
+                                        {element.status==='active'?'Отключить':'Включить'}
+                                    </Button>
+                                    <Button size='small' color='primary' onClick={()=>{
+                                        const action = async() => {
+                                            setList((await deleteCategory([element._id])).categorys)
+                                        }
+                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }}>
+                                        Удалить
+                                    </Button>
+                            <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
+                                <Button size='small' color='primary'>
+                                    Перейти
                                 </Button>
-                                <Button size='small' color='primary' onClick={()=>{
-                                    const action = async() => {
-                                        setList((await deleteCategory([element._id])).categorys)
-                                    }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                    showMiniDialog(true)
-                                }}>
-                                    Удалить
-                                </Button>
-                        <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
-                            <Button size='small' color='primary'>
-                                Перейти
-                            </Button>
-                        </Link>
-                    </>:
-                    <Button onClick={async()=> {
-                        if (image !== undefined && name.length > 0) {
-                            setImage(undefined)
-                            setPreview('/static/add.png')
-                            setName('')
-                            const action = async() => {
-                                setList((await addCategory({image: image, name: name})).categorys)
-                            }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            showMiniDialog(true)
-                        } else
-                            showSnackBar('Заполните все поля')
+                            </Link>
+                        </>:
+                        <Button onClick={async()=> {
+                            if (image !== undefined && name.length > 0) {
+                                setImage(undefined)
+                                setPreview('/static/add.png')
+                                setName('')
+                                const action = async() => {
+                                    setList((await addCategory({image: image, name: name})).categorys)
+                                }
+                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                showMiniDialog(true)
+                            } else
+                                showSnackBar('Заполните все поля')
 
-                    }
-                    } size='small' color='primary'>
-                        Добавить
-                    </Button>}
-                    </CardActions>
-                    <input
-                        accept='image/*'
-                        style={{ display: 'none' }}
-                        id={element?element._id:'add'}
-                        type='file'
-                        onChange={handleChangeImage}
-                    />
-                    </>
+                        }
+                        } size='small' color='primary'>
+                            Добавить
+                        </Button>}
+                        </CardActions>
+                        <input
+                            accept='image/*'
+                            style={{ display: 'none' }}
+                            id={element?element._id:'add'}
+                            type='file'
+                            onChange={handleChangeImage}
+                        />
+                    </Card>
 
                     :
                     name!=='Не задано'?
-                        <CardActionArea>
+                        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                            <CardActionArea>
                             <CardContent>
                                 <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                     <div className={classes.line}>
@@ -147,9 +148,11 @@ const CardCategory = React.memo((props) => {
                                 </Link>
                             </CardContent>
                         </CardActionArea>
+                        </Card>
                         :
                         name==='Не задано'&&profile.role === 'admin'?
-                            <CardActionArea>
+                            <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                                <CardActionArea>
                                 <CardContent>
                                     <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                         <div className={classes.line}>
@@ -167,9 +170,10 @@ const CardCategory = React.memo((props) => {
                                     </Link>
                                 </CardContent>
                             </CardActionArea>
+                            </Card>
                             :null
             }
-            </Card>
+            </div>
     );
 })
 

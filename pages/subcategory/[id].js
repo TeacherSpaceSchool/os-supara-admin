@@ -44,7 +44,11 @@ const Subcategory = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/subcategory/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>
-                {profile.role==='admin'?<SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>:null}
+                {profile.role==='admin'?
+                    <>
+                    <SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>
+                    </>
+                    :null}
                 <SubCardCategory element={{_id: 'all', name: 'Все товары'}}/>
                 {data.subCategorys.length>0||router.query.id==='all'?
                     list?list.map((element)=>
