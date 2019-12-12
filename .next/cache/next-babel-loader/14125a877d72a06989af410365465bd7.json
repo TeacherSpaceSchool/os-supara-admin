@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var AUTHENTICATED = 'AUTHENTICATED';\nexport var UNAUTHENTICATED = 'UNAUTHENTICATED';\nexport var ERROR_AUTHENTICATED = 'ERROR_AUTHENTICATED';\nexport var SET_PROFILE = 'SET_PROFILE';\nexport var SET_AUTH = 'SET_AUTH';","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { NEXT, DISABLE } from '../constants/pagination';\nexport function next(data) {\n  return {\n    type: NEXT\n  };\n}\nexport function disable(data) {\n  return {\n    type: DISABLE\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

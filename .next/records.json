@@ -1,0 +1,92 @@
+{
+  "mini-css-extract-plugin node_modules/css-loader/index.js??ref--6-1!node_modules/sass-loader/lib/loader.js??ref--6-2!scss/app.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "modules": {
+    "byIdentifier": {
+      "multi node_modules/next-offline/register-sw-compiled.js .\\node_modules\\next\\dist\\client\\next.js": 0,
+      "css node_modules/css-loader/index.js??ref--6-1!node_modules/sass-loader/lib/loader.js??ref--6-2!scss/app.scss 0": 1
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1
+    }
+  },
+  "chunks": {
+    "byName": {
+      "commons": 0,
+      "static/runtime/webpack.js": 1,
+      "static/runtime/main.js": 2,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\_app.js": 3,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\_error.js": 4,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\ads.js": 5,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\basket.js": 6,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\blog.js": 7,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\bonus.js": 8,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\bonusclient.js": 9,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\brand\\[id].js": 10,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\brands.js": 11,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\client\\[id].js": 12,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\clients.js": 13,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\contact.js": 14,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\employment\\[id].js": 15,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\employments.js": 16,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\favorite.js": 17,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\index.js": 18,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\item\\[id].js": 19,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\items\\[id].js": 20,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\notification.js": 21,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\orders.js": 22,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\organization\\[id].js": 23,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\organizations.js": 24,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\route\\[id].js": 25,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\routes.js": 26,
+      "static\\sq8PZVlnbGJvVUml1bIFv\\pages\\subcategory\\[id].js": 27
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      2,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

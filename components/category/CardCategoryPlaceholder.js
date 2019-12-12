@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import cardCategoryStyle from '../../src/styleMUI/category/cardcategory'
+import cardCategoryStyle from '../../src/styleMUI/category/cardCategory'
 import Skeleton from '@material-ui/lab/Skeleton';
 
 const CardCategoryPlaceholder = React.memo((props) => {
