@@ -40,6 +40,7 @@ const MyDrawer = React.memo((props) => {
     const [uncoverBonus, setUncoverBonus] = useState(null);
     return (
         <Drawer
+            onOpen={()=>showDrawer(true)}
             disableDiscovery={true}
             variant= {variant}
             className={classes.drawer}
