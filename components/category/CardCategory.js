@@ -14,6 +14,7 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../dialog/Confirmation'
 
+
 const CardCategory = React.memo((props) => {
     const classes = cardCategoryStyle();
     const { element, setList } = props;
@@ -129,24 +130,7 @@ const CardCategory = React.memo((props) => {
                     :
                     name!=='Не задано'?
                         <CardActionArea>
-                            <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
-                                <div className={classes.line}>
-                                    <label htmlFor='contained-button-file'>
-                                        <img
-                                            className={classes.media}
-                                            src={element.image}
-                                            alt={element.name}
-                                        />
-                                    </label>
-                                    <h3 className={isMobileApp?classes.inputM:classes.inputD}>
-                                        {element.name}
-                                    </h3>
-                                </div>
-                            </Link>
-                        </CardActionArea>
-                        :
-                        name==='Не задано'&&profile.role === 'admin'?
-                            <CardActionArea>
+                            <CardContent>
                                 <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                     <div className={classes.line}>
                                         <label htmlFor='contained-button-file'>
@@ -161,6 +145,27 @@ const CardCategory = React.memo((props) => {
                                         </h3>
                                     </div>
                                 </Link>
+                            </CardContent>
+                        </CardActionArea>
+                        :
+                        name==='Не задано'&&profile.role === 'admin'?
+                            <CardActionArea>
+                                <CardContent>
+                                    <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
+                                        <div className={classes.line}>
+                                            <label htmlFor='contained-button-file'>
+                                                <img
+                                                    className={classes.media}
+                                                    src={element.image}
+                                                    alt={element.name}
+                                                />
+                                            </label>
+                                            <h3 className={isMobileApp?classes.inputM:classes.inputD}>
+                                                {element.name}
+                                            </h3>
+                                        </div>
+                                    </Link>
+                                </CardContent>
                             </CardActionArea>
                             :null
             }

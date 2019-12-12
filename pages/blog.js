@@ -6,8 +6,8 @@ import {getBlogs} from '../src/gql/blog'
 import CardBlog from '../components/blog/CardBlog'
 import { connect } from 'react-redux'
 import { urlMain } from '../redux/constants/other'
-
-
+import LazyLoad from 'react-lazyload';
+import CardBlogPlaceholder from '../components/blog/CardBlogPlaceholder'
 
 const Blog = React.memo((props) => {
     const classes = pageListStyle();
@@ -20,6 +20,7 @@ const Blog = React.memo((props) => {
             setList((await getBlogs({search: search, sort: sort, filter: filter})).blogs)
         })()
     },[filter, sort, search])
+    let height = profile.role==='admin'?548:391
     return (
         <App filters={data.filterBlog} sorts={data.sortBlog} pageName='Блог'>
             <Head>
@@ -35,7 +36,9 @@ const Blog = React.memo((props) => {
             <div className={classes.page}>
                 {profile.role==='admin'?<CardBlog setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <CardBlog key={element._id} setList={setList} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardBlogPlaceholder height={height}/>}>
+                        <CardBlog key={element._id} setList={setList} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
         </App>

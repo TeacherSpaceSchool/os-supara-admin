@@ -30,7 +30,8 @@ export default makeStyles({
         textOverflow: 'ellipsis',
         marginBottom: 10,
         wordBreak: 'break-all',
-        textAlign: 'center'
+        textAlign: 'center',
+        cursor: 'pointer'
     },
     price: {
         fontWeight: 'bold',
@@ -39,7 +40,8 @@ export default makeStyles({
         height: 22,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        marginBottom: 10
+        marginBottom: 10,
+        cursor: 'pointer'
     },
     crossedPrice: {
         color: '#C0C0C0',

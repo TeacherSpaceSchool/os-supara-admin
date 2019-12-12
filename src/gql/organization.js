@@ -21,6 +21,7 @@ export const getOrganization = async({_id: _id})=>{
                             info
                             reiting
                             status
+                            minimumOrder
                           }
                     }`,
             })
@@ -106,8 +107,8 @@ export const addOrganization = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($image: Upload!, $name: String!, $address: [String]!, $email: [String]!, $phone: [String]!, $info: String!) {
-                        addOrganization(image: $image, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($image: Upload!, $minimumOrder: Int, $name: String!, $address: [String]!, $email: [String]!, $phone: [String]!, $info: String!) {
+                        addOrganization(image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
                              data
                         }
                     }`})
@@ -122,8 +123,8 @@ export const setOrganization = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $image: Upload, $name: String, $address: [String], $email: [String], $phone: [String], $info: String) {
-                        setOrganization(_id: $_id, image: $image, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($_id: ID!, $image: Upload, $minimumOrder: Int, $name: String, $address: [String], $email: [String], $phone: [String], $info: String) {
+                        setOrganization(_id: $_id, image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
                              data
                         }
                     }`})

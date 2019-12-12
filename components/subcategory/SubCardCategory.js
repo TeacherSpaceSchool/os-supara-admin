@@ -102,6 +102,7 @@ const CardCategory = React.memo((props) => {
                                         setSelectCategory({})
                                         const action = async() => {
                                             let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
+                                            console.log(subCategorys)
                                             setList(subCategorys)
                                         }
                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)

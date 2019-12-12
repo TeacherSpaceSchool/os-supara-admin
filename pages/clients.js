@@ -7,6 +7,9 @@ import CardClient from '../components/client/CardClient'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
+import LazyLoad from 'react-lazyload';
+import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
+const height = 140
 
 
 const Client = React.memo((props) => {
@@ -33,7 +36,9 @@ const Client = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardClient key={element._id} setList={setList} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardClientPlaceholder height={height}/>}>
+                        <CardClient key={element._id} setList={setList} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
         </App>

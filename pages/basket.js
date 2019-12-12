@@ -22,6 +22,11 @@ import BuyBasket from '../components/dialog/BuyBasket'
 import Sign from '../components/dialog/Sign'
 import Confirmation from '../components/dialog/Confirmation'
 import { urlMain } from '../redux/constants/other'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { getBonusesClient } from '../src/gql/bonusclient'
 
 
 const Basket = React.memo((props) => {
@@ -31,6 +36,12 @@ const Basket = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     const { data } = props;
     let [list, setList] = useState(data.baskets);
+    let [organization, setOrganization] = useState({});
+    let [bonus, setBonus] = useState({});
+    let handleOrganization =  (event) => {
+        setOrganization(organizations[organizations.findIndex(element => element._id===event.target.value)])
+    };
+    let [organizations, setOrganizations] = useState([]);
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
     let increment = (idx)=>{
@@ -79,15 +90,36 @@ const Basket = React.memo((props) => {
         })()
     },[])
     useEffect(()=>{
-        calculateAllPrice()
+        (async()=>{
+            organizations = []
+            for(let i=0; i<list.length; i++){
+                if(organizations.findIndex(element => element._id===list[i].item.organization._id)===-1){
+                    organizations.push(list[i].item.organization)
+                }
+            }
+            setOrganizations([...organizations])
+            if(organizations.length>0)
+                setOrganization(organizations[0])
+        })()
     },[list])
+    useEffect(()=>{
+        calculateAllPrice()
+        bonus = {}
+        for(let i=0; i<data.bonusesClient.length; i++){
+            if(organization._id===data.bonusesClient[i].bonus.organization._id){
+                bonus = data.bonusesClient[i]
+            }
+        }
+        setBonus(bonus)
+    },[list, organization])
     let getList = async()=>{
         setList((await getBasket()).baskets)
     };
     let calculateAllPrice = async()=>{
         let allPrice = 0
         for(let i=0;i < list.length; i++){
-            allPrice+=((list[i].item.stock===0||list[i].item.stock===undefined?list[i].item.price:list[i].item.stock)*list[i].count)
+            if(list[i].item.organization._id===organization._id)
+                allPrice+=((list[i].item.stock===0||list[i].item.stock===undefined?list[i].item.price:list[i].item.stock)*list[i].count)
         }
         setAllPrice(allPrice)
     };
@@ -110,53 +142,82 @@ const Basket = React.memo((props) => {
                 {
                         isMobileApp?
                             <div className={classes.column} style={{width: 'calc(100% - 16px)', margin: 8}}>
+                                <Card className={classes.page}>
+                                    <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                                        <FormControl className={classes.input}>
+                                            <InputLabel>Организация</InputLabel>
+                                            <Select value={organization._id} onChange={handleOrganization}>
+                                                {organizations.map((element)=>
+                                                    <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
+                                                )}
+                                            </Select>
+                                        </FormControl>
+                                    </CardContent>
+                                </Card>
                                 {
-                                    list.map((row, idx) => (
-                                        <Card className={classes.page} key={idx}>
-                                            <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                                                <div className={classes.itemM}>
-                                                    <div className={classes.divImage}>
-                                                        <img className={classes.mediaM} src={row.item.image}/>
-                                                        <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.cancelM}>
-                                                            <CancelIcon style={{height: 40, width: 40}} />
-                                                        </IconButton>
-                                                    </div>
-                                                    <br/>
-                                                    <div className={classes.nameM}>
-                                                        {row.item.name}
-                                                    </div>
-                                                    <br/>
-                                                    <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
-                                                        <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>–</div>
-                                                        <input type='text' className={classes.counternmbr} value={row.count} onChange={(event)=>{
-                                                            list[idx].count = isNaN(event.target.value)||event.target.value.length===0?0:parseInt(event.target.value)
-                                                            setBasketChange(idx, list[idx].count)
-                                                            setList([...list])
-                                                        }}/>
-                                                        <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
-                                                    </div>
-                                                    <div>
-                                                        <div className={classes.row}>
-                                                            <div className={classes.nameField}>
-                                                                Цена
+                                    list.map((row, idx) => {
+                                        if(row.item.organization._id===organization._id)
+                                            return (
+                                                <Card className={classes.page} key={idx}>
+                                                    <CardContent className={classes.column} style={isMobileApp ? {} : {
+                                                        justifyContent: 'start',
+                                                        alignItems: 'flex-start'
+                                                    }}>
+                                                        <div className={classes.itemM}>
+                                                            <div className={classes.divImage}>
+                                                                <img className={classes.mediaM} src={row.item.image}/>
+                                                                <IconButton onClick={() => {
+                                                                    removeBasketChange(idx)
+                                                                }} color="primary" className={classes.cancelM}>
+                                                                    <CancelIcon style={{height: 40, width: 40}}/>
+                                                                </IconButton>
                                                             </div>
-                                                            <div className={classes.value}>
-                                                                {`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock} сом`}
+                                                            <br/>
+                                                            <div className={classes.nameM}>
+                                                                {row.item.name}
+                                                            </div>
+                                                            <br/>
+                                                            <div className={classes.counter}
+                                                                 style={isMobileApp ? {marginBottom: 20} : {marginRight: 20}}>
+                                                                <div className={classes.counterbtn} onClick={() => {
+                                                                    decrement(idx)
+                                                                }}>–
+                                                                </div>
+                                                                <input type='text' className={classes.counternmbr}
+                                                                       value={row.count} onChange={(event) => {
+                                                                    list[idx].count = isNaN(event.target.value) || event.target.value.length === 0 ? 0 : parseInt(event.target.value)
+                                                                    setBasketChange(idx, list[idx].count)
+                                                                    setList([...list])
+                                                                }}/>
+                                                                <div className={classes.counterbtn} onClick={() => {
+                                                                    increment(idx)
+                                                                }}>+
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div className={classes.row}>
+                                                                    <div className={classes.nameField}>
+                                                                        Цена
+                                                                    </div>
+                                                                    <div className={classes.value}>
+                                                                        {`${row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock} сом`}
+                                                                    </div>
+                                                                </div>
+                                                                <div className={classes.row}>
+                                                                    <div className={classes.nameField}>
+                                                                        Итого
+                                                                    </div>
+                                                                    <div className={classes.value}>
+                                                                        {`${(row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock) * row.count} сом`}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div className={classes.row}>
-                                                            <div className={classes.nameField}>
-                                                                Итого
-                                                            </div>
-                                                            <div className={classes.value}>
-                                                                {`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count} сом`}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    ))
+                                                    </CardContent>
+                                                </Card>
+                                            )
+                                        }
+                                    )
                                 }
                                 <div style={{height: 70}}/>
                             </div>
@@ -167,7 +228,16 @@ const Basket = React.memo((props) => {
                                 <Table aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell/>
+                                        <TableCell>
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Организация</InputLabel>
+                                                <Select value={organization._id} onChange={handleOrganization}>
+                                                    {organizations.map((element)=>
+                                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                                    )}
+                                                </Select>
+                                            </FormControl>
+                                        </TableCell>
                                         <TableCell align="left">Количество</TableCell>
                                         <TableCell align="left">Цена</TableCell>
                                         <TableCell align="left">Итого</TableCell>
@@ -175,8 +245,10 @@ const Basket = React.memo((props) => {
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {list.map((row, idx) => (
-                                            <TableRow key={idx}>
+                                        {list.map((row, idx) => {
+                                            if(row.item.organization._id===organization._id)
+                                            return (
+                                                <TableRow key={idx}>
                                                 <TableCell component="th" scope="row" >
                                                     <div className={classes.row}>
                                                         <img className={classes.mediaD} src={row.item.image}/>
@@ -206,7 +278,8 @@ const Basket = React.memo((props) => {
                                                     </IconButton>
                                                 </TableCell>
                                             </TableRow>
-                                        ))}
+                                            )
+                                        })}
                                     </TableBody>
                                 </Table>
                             </CardContent>
@@ -222,7 +295,7 @@ const Basket = React.memo((props) => {
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
                     if(allPrice>0) {
                         if (authenticated)
-                            setMiniDialog('Купить', <BuyBasket client={data.client} allPrice={allPrice}/>)
+                            setMiniDialog('Купить', <BuyBasket bonus={bonus} client={data.client} allPrice={allPrice} organization={organization}/>)
                         else
                             setMiniDialog('Купить', <Sign/>)
                         showMiniDialog(true)
@@ -248,7 +321,8 @@ Basket.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getBasket(),
-            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}):[])
+            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}):[]),
+            ...await getBonusesClient({search: '', sort: '-createdAt'})
         }
     };
 };

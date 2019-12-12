@@ -7,20 +7,23 @@ import {getOrders} from '../src/gql/order'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
+const height = 225
+import LazyLoad from 'react-lazyload';
+import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
 
 
 const Orders = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.invoices);
-    const { search, filter, sort } = props.app;
+    const { search, filter, sort, date } = props.app;
     useEffect(()=>{
         (async()=>{
-            setList((await getOrders({search: search, sort: sort, filter: filter})).invoices)
+            setList((await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices)
         })()
-    },[filter, sort, search])
+    },[filter, sort, search, date])
     return (
-        <App filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
                 <title>Заказы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -33,7 +36,9 @@ const Orders = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardOrder setList={setList} key={element._id} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardOrderPlaceholder/>}>
+                        <CardOrder setList={setList} key={element._id} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
         </App>
@@ -50,7 +55,7 @@ Orders.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getOrders({search: '', sort: '-createdAt', filter: ''})
+        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''})
     };
 };
 

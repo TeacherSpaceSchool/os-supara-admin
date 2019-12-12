@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import Confirmation from '../dialog/Confirmation'
 import { getCountBasket } from '../../src/gql/basket'
 
+
 const CardItem = React.memo((props) => {
     const classes = cardItemStyle();
     const { element, setList, subCategory, getList, setFavorites } = props;

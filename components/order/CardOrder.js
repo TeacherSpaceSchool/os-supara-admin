@@ -43,10 +43,16 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.nameField}>Время заказа:&nbsp;</div>
                         <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
                     </div>
-                    <div className={classes.row}>
-                        <div className={classes.nameField}>Время доставки:&nbsp;</div>
-                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
-                    </div>
+                    {
+                        element.dateDelivery?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Время доставки:&nbsp;</div>
+                                <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
+                            </div>
+                            :
+                            null
+
+                    }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Адрес:&nbsp;</div>
                         <div className={classes.value}>{element.address[0]}</div>
@@ -59,6 +65,15 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.nameField}>Поставщик:&nbsp;</div>
                         <div className={classes.value}>{element.orders[0].item.organization.name}</div>
                     </div>
+                    {
+                        element.usedBonus&&element.usedBonus>0?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Использованный бонус:&nbsp;</div>
+                                <div className={classes.value}>{element.usedBonus}&nbsp;сом</div>
+                            </div>
+                            :
+                            null
+                    }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Сумма:&nbsp;</div>
                         <div className={classes.value}>{element.allPrice}&nbsp;сом</div>

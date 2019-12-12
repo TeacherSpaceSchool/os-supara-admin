@@ -9,6 +9,8 @@ import pageListStyle from '../src/styleMUI/category/categoryList'
 import CardCategory from '../components/category/CardCategory'
 import { urlMain } from '../redux/constants/other'
 import Router from 'next/router'
+import LazyLoad from 'react-lazyload';
+import CardCategoryPlaceholder from '../components/category/CardCategoryPlaceholder'
 
 const Index = React.memo((props) => {
     const classes = pageListStyle();
@@ -16,6 +18,7 @@ const Index = React.memo((props) => {
     let [list, setList] = useState(data.categorys);
     const { search, filter, sort } = props.app;
     const { profile, authenticated } = props.user;
+    let height = profile.role==='admin'?161:83
     useEffect(()=>{
         (async()=>{
             setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
@@ -28,7 +31,7 @@ const Index = React.memo((props) => {
     return (
         <App filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
-                <title>Товары</title>
+                <title>Азык - электронный склад связывающий производителя с торговой точкой</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:title' content='Азык - электронный склад связывающий производителя с торговой точкой' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -48,7 +51,9 @@ const Index = React.memo((props) => {
                 <CardCategory element={{image: '/static/add.png', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
                 {list?list.map((element)=>
                     element.name!=='Не задано'?
-                        <CardCategory key={element._id} setList={setList} element={element}/>
+                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardCategoryPlaceholder height={height}/>}>
+                            <CardCategory key={element._id} setList={setList} element={element}/>
+                        </LazyLoad>
                         :
                         null
                 ):null}

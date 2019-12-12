@@ -6,8 +6,8 @@ import pageListStyle from '../src/styleMUI/ads/adsList'
 import {getAdss} from '../src/gql/ads'
 import { connect } from 'react-redux'
 import { urlMain } from '../redux/constants/other'
-
-
+import LazyLoad from 'react-lazyload';
+import CardAdsPlaceholder from '../components/ads/CardAdsPlaceholder'
 
 const Ads = React.memo((props) => {
     const classes = pageListStyle();
@@ -15,11 +15,13 @@ const Ads = React.memo((props) => {
     let [list, setList] = useState(data.adss);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
+    const { count } = props.pagination;
     useEffect(()=>{
         (async()=>{
             setList((await getAdss({search: search, sort: sort, filter: filter})).adss)
         })()
-    },[filter, sort, search])
+    },[filter, sort, search, count])
+    let height = profile.role==='admin'?400:200
     return (
         <App filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>
             <Head>
@@ -35,16 +37,19 @@ const Ads = React.memo((props) => {
             <div className={classes.page}>
                 {profile.role==='admin'?<CardAds setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <CardAds setList={setList} key={element._id} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardAdsPlaceholder height={height}/>}>
+                        <CardAds setList={setList} key={element._id} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
         </App>
     )
 })
 
-Ads.getInitialProps = async function() {
+Ads.getInitialProps = async function(ctx) {
+    ctx.store.getState().pagination.work = true
     return {
-        data: await getAdss({search: '', sort: '-createdAt', filter: ''})
+        data: await getAdss({search: '', sort: '-createdAt', filter: ''}),
     };
 };
 
@@ -52,6 +57,7 @@ function mapStateToProps (state) {
     return {
         app: state.app,
         user: state.user,
+        pagination: state.pagination
     }
 }
 

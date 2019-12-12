@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var SET_COUNT = 'SET_COUNT';","map":{"version":3,"sources":["C:\\projects\\azyk\\azyk-admin\\redux\\constants\\pagination.js"],"names":["SET_COUNT"],"mappings":"AAAA,OAAO,IAAMA,SAAS,GAAG,WAAlB","sourcesContent":["export const SET_COUNT = 'SET_COUNT'\r\n"]},"metadata":{},"sourceType":"module"}

@@ -10,20 +10,29 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import Router from 'next/router'
+const height = 210
+import LazyLoad from 'react-lazyload';
+import CardRoutePlaceholder from '../components/route/CardRoutePlaceholder'
 
 const Routes = React.memo((props) => {
     const { profile } = props.user;
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.routes);
-    const { search, filter, sort } = props.app;
+    const { search, filter, sort, date } = props.app;
+    const { count } = props.pagination;
     useEffect(()=>{
         (async()=>{
-            setList((await getRoutes({search: search, sort: sort, filter: filter})).routes)
+            setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
         })()
-    },[filter, sort, search]);
+    },[filter, sort, search, date]);
+    useEffect(()=>{
+        (async()=>{
+            console.log(count)
+        })()
+    },[count])
     return (
-        <App filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
+        <App dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
                 <title>Маршрутные листы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -36,7 +45,9 @@ const Routes = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardRoute setList={setList} key={element._id} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardRoutePlaceholder/>}>
+                        <CardRoute setList={setList} key={element._id} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
             {['admin', 'организация', 'менеджер'].includes(profile.role)?
@@ -53,6 +64,7 @@ const Routes = React.memo((props) => {
 })
 
 Routes.getInitialProps = async function(ctx) {
+    ctx.store.getState().pagination.work = true
     if(!['admin', 'организация', 'менеджер', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
@@ -62,7 +74,7 @@ Routes.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getRoutes({search: '', sort: '-createdAt', filter: ''})
+        data: await getRoutes({search: '', sort: '-createdAt', filter: '', date: ''})
     };
 };
 
@@ -70,6 +82,7 @@ function mapStateToProps (state) {
     return {
         app: state.app,
         user: state.user,
+        pagination: state.pagination
     }
 }
 

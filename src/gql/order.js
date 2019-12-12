@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getOrders = async({search, sort, filter})=>{
+export const getOrders = async({search, sort, filter, date})=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        const client = new SingletonApolloClient().getClient();
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {search: search, sort: sort, filter: filter, date: date},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        invoices(search: $search, sort: $sort, filter: $filter) {
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
+                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {
                             _id
                             createdAt
                             orders 
@@ -36,8 +36,9 @@ export const getOrders = async({search, sort, filter})=>{
                                     _id
                                     name
                                     email
+                                    phone 
                                     user 
-                                        {_id phone} 
+                                        {_id }
                                 }
                             allPrice
                             info
@@ -47,6 +48,7 @@ export const getOrders = async({search, sort, filter})=>{
                             confirmationForwarder
                             confirmationClient
                             dateDelivery
+                            usedBonus
                         }
                         sortInvoice {
                             name
@@ -98,8 +100,9 @@ export const getOrder = async({_id})=>{
                                     _id
                                     name
                                     email
+                                    phone
                                     user 
-                                        {phone} 
+                                        {_id }
                                 }
                             allPrice
                             info
@@ -109,6 +112,7 @@ export const getOrder = async({_id})=>{
                             confirmationForwarder
                             confirmationClient
                             dateDelivery
+                            usedBonus
                         }
                     }`,
             })
@@ -124,8 +128,8 @@ export const addOrders = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($info: String, $paymentMethod: String, $address: [[String]]) {
-                        addOrders(info: $info, paymentMethod: $paymentMethod, address: $address) {
+                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!) {
+                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization) {
                              data
                         }
                     }`})
@@ -140,8 +144,8 @@ export const cancelOrders = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: [ID]!) {
-                        cancelOrders(_id: $_id) {
+                    mutation ($_id: [ID]!, $invoice: ID) {
+                        cancelOrders(_id: $_id, invoice: $invoice) {
                              data
                         }
                     }`})

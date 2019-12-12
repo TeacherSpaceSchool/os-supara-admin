@@ -21,25 +21,26 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Paper from '@material-ui/core/Paper';
 import Cancel from '@material-ui/icons/Cancel';
-import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/SearchRounded';
 import Sort from '@material-ui/icons/SortRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
+import DateRange from '@material-ui/icons/DateRange';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Badge from '@material-ui/core/Badge';
 import Sign from '../dialog/Sign'
 import Confirmation from '../dialog/Confirmation'
+import SetDate from '../dialog/SetDate'
 
 const MyAppBar = React.memo((props) => {
     //props
     const classes = appbarStyle();
-    const { filters, sorts, pageName } = props
-    const { drawer, search, filter, sort, isMobileApp, countBasket } = props.app;
-    const { showDrawer, setSearch, setFilter, setSort } = props.appActions;
+    const { filters, sorts, pageName, dates } = props
+    const { drawer, search, filter, sort, isMobileApp, countBasket, date } = props.app;
+    const { showDrawer, setSearch, setFilter, setSort, setDate } = props.appActions;
     const { authenticated, profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { logout } = props.userActions;
@@ -75,6 +76,14 @@ const MyAppBar = React.memo((props) => {
     }
     let handleCloseFilter = () => {
         setAnchorElFilter(null);
+    }
+    const [anchorElDate, setAnchorElDate] = useState(null);
+    const openDate = Boolean(anchorElDate);
+    let handleMenuDate = (event) => {
+        setAnchorElDate(event.currentTarget);
+    }
+    let handleCloseDate = () => {
+        setAnchorElDate(null);
     }
     const [openSearch, setOpenSearch] = useState(false);
     let handleSearch = (event) => {
@@ -171,6 +180,38 @@ const MyAppBar = React.memo((props) => {
                                             onClose={handleCloseFilter}
                                         >
                                             {filters.map((elem, idx)=><MenuItem key={'filter'+idx} style={{background: filter===elem.value?'rgba(51, 143, 255, 0.29)': '#fff'}}  onClick={()=>{setFilter(elem.value);handleCloseFilter();}}>{elem.name}</MenuItem>)}
+                                        </Menu>
+                                    ]
+                                    :null
+                                }
+                                {dates?
+                                    [
+                                        <MenuItem onClick={handleMenuDate}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <DateRange/>&nbsp;Дата
+                                            </div>
+                                        </MenuItem>,
+                                        <Menu
+                                            key='Date'
+                                            id='menu-appbar'
+                                            anchorEl={anchorElDate}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            open={openDate}
+                                            onClose={handleCloseDate}
+                                        >
+                                            <MenuItem style={{background: date!==''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setMiniDialog('Дата', <SetDate/>);showMiniDialog(true);handleCloseDate();handleCloseMobileMenu();}}>
+                                                По дате
+                                            </MenuItem>
+                                            <MenuItem style={{background: date===''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setDate('');handleCloseDate();}}>
+                                                Все
+                                            </MenuItem>
                                         </Menu>
                                     ]
                                     :null
@@ -311,6 +352,44 @@ const MyAppBar = React.memo((props) => {
                             </Paper>
                             :
                             <>
+                            {dates?
+                                <>
+                                    <Tooltip title='Дата'>
+                                        <IconButton
+                                            aria-owns={openDate ? 'menu-appbar' : undefined}
+                                            aria-haspopup='true'
+                                            onClick={handleMenuDate}
+                                            color='inherit'
+                                        >
+                                            <DateRange/>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        key='Date'
+                                        id='menu-appbar'
+                                        anchorEl={anchorElDate}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={openDate}
+                                        onClose={handleCloseDate}
+                                    >
+                                        <MenuItem style={{background: date!==''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setMiniDialog('Дата', <SetDate/>);showMiniDialog(true);handleCloseDate();}}>
+                                            По дате
+                                        </MenuItem>
+                                        <MenuItem style={{background: date===''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setDate('');handleCloseDate();}}>
+                                            Все
+                                        </MenuItem>
+                                    </Menu>
+                                &nbsp;
+                                </>
+                                :null
+                            }
                             {filters&&filters.length>0?
                                 <>
                                 <Tooltip title='Фильтр'>

@@ -31,8 +31,10 @@ export default withRedux(configureStore, { debug: false })(
             ctx.store.getState().app.search = ''
             ctx.store.getState().app.sort = '-createdAt'
             ctx.store.getState().app.filter = ''
+            ctx.store.getState().app.date = ''
             ctx.store.getState().app.load = false
             ctx.store.getState().mini_dialog.show = false
+            ctx.store.getState().pagination.work = false
             return {
                 pageProps: {
                     ...(Component.getInitialProps

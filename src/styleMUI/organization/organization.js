@@ -32,7 +32,7 @@ export default makeStyles({
         fontFamily: 'Roboto'
     },
     nameField: {
-        width: 80,
+        width: 130,
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '16px',

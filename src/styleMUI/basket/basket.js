@@ -23,6 +23,9 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
+    input: {
+        width: '100%',
+    },
     divImage: {
         position: 'relative',
         width: '100%'

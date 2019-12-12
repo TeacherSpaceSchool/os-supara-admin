@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Remove from '@material-ui/icons/Remove';
 import { useRouter } from 'next/router'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -36,7 +37,20 @@ const Client = React.memo((props) => {
     let [status, setStatus] = useState(data.employment!==null?data.employment.user.status:'');
     let [name, setName] = useState(data.employment!==null?data.employment.name:'');
     let [email, setEmail] = useState(data.employment!==null?data.employment.email:'');
-    let [phone, setPhone] = useState(data.employment!==null?data.employment.user.phone:'');
+    let [phone, setPhone] = useState(data.employment?data.employment.phone:[]);
+    let addPhone = ()=>{
+        phone = [...phone, '']
+        setPhone(phone)
+    };
+    let editPhone = (event, idx)=>{
+        phone[idx] = event.target.value
+        setPhone([...phone])
+    };
+    let deletePhone = (idx)=>{
+        phone.splice(idx, 1);
+        setPhone([...phone])
+    };
+    let [login, setLogin] = useState(data.employment?data.employment.user.login:'');
     let [organization, setOrganization] = useState(data.employment!==null?data.employment.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
@@ -76,6 +90,29 @@ const Client = React.memo((props) => {
                                 profile.role==='admin'||profile.role==='организация'||profile._id===data.employment.user._id?
                                     <>
                                     <div>
+                                        <TextField
+                                            label='Логин'
+                                            value={login}
+                                            className={classes.input}
+                                            onChange={(event)=>{setLogin(event.target.value)}}
+                                            inputProps={{
+                                                'aria-label': 'description',
+                                            }}
+                                        />
+                                        <Input
+                                            placeholder={router.query.id==='new'?'Пароль':'Новый пароль'}
+                                            type={hide ? 'password' : 'text' }
+                                            value={password}
+                                            onChange={handlePassword}
+                                            className={classes.input}
+                                            endAdornment={
+                                                <InputAdornment position='end'>
+                                                    <IconButton aria-label='Toggle password visibility' onClick={handleHide}>
+                                                        {hide ? <VisibilityOff />:<Visibility />  }
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
                                             <TextField
                                                 label='Имя'
                                                 value={name}
@@ -85,34 +122,46 @@ const Client = React.memo((props) => {
                                                     'aria-label': 'description',
                                                 }}
                                             />
-                                            <Input
-                                                placeholder={router.query.id==='new'?'Пароль':'Новый пароль'}
-                                                type={hide ? 'password' : 'text' }
-                                                value={password}
-                                                onChange={handlePassword}
-                                                className={classes.input}
-                                                endAdornment={
-                                                    <InputAdornment position='end'>
-                                                        <IconButton aria-label='Toggle password visibility' onClick={handleHide}>
-                                                            {hide ? <VisibilityOff />:<Visibility />  }
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                            />
+                                        {phone?phone.map((element, idx)=>
+                                            <div key={idx}>
+                                                <FormControl className={classes.input}>
+                                                    <InputLabel>Телефон. Формат: +996555780861</InputLabel>
+                                                    <Input
+                                                        placeholder='Телефон. Формат: +996555780861'
+                                                        value={element}
+                                                        className={classes.input}
+                                                        onChange={(event)=>{editPhone(event, idx)}}
+                                                        inputProps={{
+                                                            'aria-label': 'description',
+                                                        }}
+                                                        endAdornment={
+                                                            <InputAdornment position="end">
+                                                                <IconButton
+                                                                    onClick={()=>{
+                                                                        deletePhone(idx)
+                                                                    }}
+                                                                    aria-label='toggle password visibility'
+                                                                >
+                                                                    <Remove/>
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        }
+                                                    />
+                                                </FormControl>
+                                            </div>
+                                        ): null}
+                                        <Button onClick={async()=>{
+                                            addPhone()
+                                        }} size='small' color='primary'>
+                                            Добавить телефон
+                                        </Button>
+                                        <br/>
+                                        <br/>
                                         <TextField
                                             label='email'
                                             value={email}
                                             className={classes.input}
                                             onChange={(event)=>{setEmail(event.target.value)}}
-                                            inputProps={{
-                                                'aria-label': 'description',
-                                            }}
-                                        />
-                                        <TextField
-                                            label='Телефон. Формат: +996555780861'
-                                            value={phone}
-                                            className={classes.input}
-                                            onChange={(event)=>{setPhone(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
                                             }}
@@ -166,6 +215,7 @@ const Client = React.memo((props) => {
                                                                     name: name,
                                                                     email: email,
                                                                     phone: phone,
+                                                                    login: login,
                                                                     password: password,
                                                                     role: role,
                                                                     organization: organization._id,
@@ -185,7 +235,8 @@ const Client = React.memo((props) => {
                                                     <Button onClick={async()=>{
                                                         let editElement = {_id: data.employment._id}
                                                         if(name.length>0&&name!==data.employment.name)editElement.name = name
-                                                        if(phone.length>0&&phone!==data.employment.phone)editElement.phone = phone
+                                                        editElement.phone = phone
+                                                        if(login.length>0&&login!==data.employment.user.login)editElement.login = login
                                                         if(email.length>0&&email!==data.employment.email)editElement.email = email
                                                         if(password.length>0)editElement.newPass = password
                                                         if(role.length>0&&role!==data.employment.role)editElement.role = role

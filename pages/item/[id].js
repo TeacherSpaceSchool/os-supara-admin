@@ -40,6 +40,9 @@ import Star from '@material-ui/icons/Star';
 import TextField from '@material-ui/core/TextField';
 import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
+import DeliveryDays from '../../components/dialog/DeliveryDays';
+import { getCountBasket } from '../../src/gql/basket'
+
 
 const Item = React.memo((props) => {
     const classes = itemStyle();
@@ -51,6 +54,7 @@ const Item = React.memo((props) => {
     let [name, setName] = useState(data.item!==null?data.item.name:'');
     let [info, setInfo] = useState(data.item!==null?data.item.info:'');
     let [price, setPrice] = useState(data.item!==null?data.item.price:'');
+    let [deliveryDays, setDeliveryDays] = useState(data.item!==null?data.item.deliveryDays:[]);
     let [subCategory, setSubCategory] = useState(data.item!==null?data.item.subCategory:{});
     let [status, setStatus] = useState(data.item!==null?data.item.status:'');
     let handleSubCategory =  (event) => {
@@ -107,8 +111,9 @@ const Item = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let [favorite, setFavorite] = useState(data.item!==null&&data.item.favorite!==undefined?data.item.favorite:[]);
+    console.log(data.item.subCategory)
     return (
-        <App filters={data.filterItem} sorts={data.sortItem} pageName={data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}>
+        <App subcategory={data.item.subCategory?data.item.subCategory:undefined} category={data.item.subCategory?data.item.subCategory.category:undefined} filters={data.filterItem} sorts={data.sortItem} pageName={data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}>
             <Head>
                 <title>{data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}</title>
                 <meta name='description' content={data.item!==null?data.item.info:'Ничего не найдено'} />
@@ -122,7 +127,7 @@ const Item = React.memo((props) => {
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {
-                            profile.role==='admin'||router.query.id==='new'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)?
+                            profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)?
                                 data.item!==null||router.query.id==='new'?
                                     <>
                                     <label htmlFor='contained-button-file'>
@@ -185,6 +190,14 @@ const Item = React.memo((props) => {
                                                 }}
                                             />
                                         }
+                                        <br/>
+                                        <Button size='small' color='primary' onClick={()=>{
+                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            Дни поставки для торговых точек
+                                        </Button>
+                                        <br/>
                                         <br/>
                                         <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
                                             <InputLabel>Подкатегория</InputLabel>
@@ -252,6 +265,7 @@ const Item = React.memo((props) => {
                                                                     hit: hit,
                                                                     latest: latest,
                                                                     organization: organization._id,
+                                                                    deliveryDays: deliveryDays,
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
@@ -276,6 +290,7 @@ const Item = React.memo((props) => {
                                                         if(latest!==data.item.latest)editElement.latest = latest
                                                         if(organization._id!==data.item.organization._id)editElement.organization = organization._id
                                                         if(subCategory._id!==data.item.subCategory._id)editElement.subCategory = subCategory._id
+                                                        if(deliveryDays)editElement.deliveryDays = deliveryDays
                                                         const action = async() => {
                                                             await setItem(editElement, subCategory._id)
                                                             //Router.push(`/items/${subCategory._id}`)
@@ -378,13 +393,25 @@ const Item = React.memo((props) => {
                                         }
                                     </div>
                                     <div>
-                                        <br/>
+                                        {
+                                            isMobileApp?
+                                                <br/>
+                                                :
+                                                null
+                                        }
                                         <h1 className={classes.name}>
                                             {data.item.name}
                                         </h1>
                                         <div className={classes.share}>
                                             {data.item.organization.name}
                                         </div>
+                                        <div className={classes.deliveryDays} onClick={()=>{
+                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            Дни поставки для торговых точек
+                                        </div>
+                                        <br/>
                                         <div className={classes.row}>
                                             {
                                                 data.item.stock===0||data.item.stock===undefined?
@@ -433,12 +460,12 @@ const Item = React.memo((props) => {
                                                                 localStorage.basket = JSON.stringify(basket)
                                                             }
                                                             showSnackBar('Товар добавлен в корзину')
+                                                            getCountBasket()
                                                         }}
                                                     >
                                                         В КОРЗИНУ
                                                     </Button>
                                                 </div>
-                                                <br/>
                                                 <br/>
                                                 <div className={classes.share}>
                                                     Поделиться:
@@ -518,7 +545,8 @@ Item.getInitialProps = async function(ctx) {
                         subCategory: {_id: ''},
                         organization: {_id: ''},
                         hit: false,
-                        latest: false
+                        latest: false,
+                        deliveryDays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
                     }
                 },
             ...await getOrganizations({search: '', sort: 'name', filter: ''}),

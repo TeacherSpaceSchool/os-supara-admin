@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as userActions from '../../redux/actions/user'
-import { validPhone } from '../../redux/constants/other'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
@@ -22,7 +21,6 @@ const Sign =  React.memo(
     (props) =>{
         let [loginEnter, setLoginEnter] = useState('');
         let [passEnter, setPassEnter] = useState('');
-        let [errorPhone, setErrorPhone] = useState(false);
         let [errorPass, setErrorPass] = useState(false);
         let [errorPassRepeat, setErrorPassRepeat] = useState(false);
         let handlePassEnter =  (event) => {
@@ -60,12 +58,6 @@ const Sign =  React.memo(
         };
         let handleLoginReg =  (event) => {
             setLoginReg(event.target.value)
-            if(!validPhone(event.target.value)){
-                setErrorPhone(true)
-            }
-            else {
-                setErrorPhone(false)
-            }
         };
 
         let [type, setType] = useState('enter');
@@ -86,7 +78,7 @@ const Sign =  React.memo(
                 <TextField
                     style={{width: width}}
                     id='standard-search'
-                    label='Телефон. Формат: +996555780861'
+                    label='Логин'
                     type='login'
                     className={classes.textField}
                     margin='normal'
@@ -124,7 +116,7 @@ const Sign =  React.memo(
                 <div>
                     <Button variant="contained" color="primary" onClick={()=>{
                         if(loginEnter.length>0&&passEnter.length>0)
-                            signin({phone: loginEnter, password: passEnter})
+                            signin({login: loginEnter, password: passEnter})
                     }} className={classes.button}>
                         Войти
                     </Button>
@@ -137,7 +129,7 @@ const Sign =  React.memo(
                 <>
                 <TextField
                     id='standard-search'
-                    label='Телефон. Формат: +996555780861'
+                    label='Логин'
                     type='login'
                     className={classes.textField}
                     margin='normal'
@@ -185,11 +177,6 @@ const Sign =  React.memo(
                     :
                     null
                 }
-                {errorPhone?
-                    <div style={{width: width}} className={classes.error_message}>Проверьте телефон. Пример: +996555780861.</div>
-                    :
-                    null
-                }
                 {errorPass?
                     <div style={{width: width}} className={classes.error_message}>Недостаточная длина пароля</div>
                     :
@@ -202,7 +189,7 @@ const Sign =  React.memo(
                 }
                 <br/>
                 <div>
-                    <Button variant="contained" color="primary" onClick={()=>{if(!errorPass&&!errorPassRepeat&&!errorPhone)signup({phone: loginReg, password: passReg})}} className={classes.button}>
+                    <Button variant="contained" color="primary" onClick={()=>{if(!errorPass&&!errorPassRepeat)signup({login: loginReg, password: passReg})}} className={classes.button}>
                         Зарегестрироваться
                     </Button>
                     <Button variant="contained" color="secondary" onClick={()=>{showMiniDialog(false);}} className={classes.button}>

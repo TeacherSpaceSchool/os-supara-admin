@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import drawerStyle from '../../src/styleMUI/drawer'
 import * as appActions from '../../redux/actions/app'
 import * as userActions from '../../redux/actions/user'
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,12 +12,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ReorderIcon from '@material-ui/icons/ViewList';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import CopyrightIcon from '@material-ui/icons/Loyalty';
 import InfoIcon from '@material-ui/icons/Info';
 import GroupIcon from '@material-ui/icons/Group';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
+import MoneyIcon from '@material-ui/icons/Money';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
+import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
@@ -26,15 +30,17 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 
 
 const MyDrawer = React.memo((props) => {
-    const { classes } = props
+    const { classes, category, subcategory } = props
     const { drawer, isMobileApp } = props.app;
     const { profile, authenticated } = props.user;
     const { showDrawer } = props.appActions;
     let variant = isMobileApp?'temporary' : 'permanent';
     const open = isMobileApp?drawer:true;
     const router = useRouter();
+    const [uncoverBonus, setUncoverBonus] = useState(null);
     return (
         <Drawer
+            disableDiscovery={true}
             variant= {variant}
             className={classes.drawer}
             open={open}
@@ -64,6 +70,7 @@ const MyDrawer = React.memo((props) => {
                             </ListItem>
                         </Link>
                         :
+                        <>
                         <Link href='/'>
                             <ListItem style={{background: router.pathname===('/')
                             ||
@@ -74,8 +81,72 @@ const MyDrawer = React.memo((props) => {
                                 <ListItemText primary='Товары' />
                             </ListItem>
                         </Link>
+                        {
+                            category?
+                                <>
+                                <Divider/>
+                                <Link href='/subcategory/[id]' as={`/subcategory/${category._id}`}>
+                                    <ListItem style={{marginLeft: 16, background: '#f5f5f5'}} button>
+                                        <ListItemText primary={category.name}/>
+                                    </ListItem>
+                                </Link>
+                                {
+                                    subcategory?
+                                        <>
+                                        <Divider/>
+                                        <Link href='/items/[id]' as={`/items/${subcategory._id}`}>
+                                            <ListItem style={{marginLeft: 32, background: '#f5f5f5'}} button>
+                                                <ListItemText primary={subcategory.name}/>
+                                            </ListItem>
+                                        </Link>
+                                        </>
+                                        :
+                                        null
+                                }
+                                </>
+                                :
+                                null
+                        }
+                        </>
                 }
                 <Divider/>
+                {
+                    ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)||!authenticated?
+                        <>
+                        <ListItem style={{background: router.pathname.includes('bonus')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
+                            <ListItemIcon><MoneyIcon color='inherit'/></ListItemIcon>
+                            <ListItemText primary='Бонусы' />
+                            <ListItemIcon>{uncoverBonus?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
+                        </ListItem>
+                        <Divider/>
+                        {
+                            uncoverBonus?
+                                <>
+                                <Link href='/bonus'>
+                                    <ListItem style={{marginLeft: 16, background: router.pathname==='/bonus'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
+                                        <ListItemText primary={['организация', 'менеджер'].includes(profile.role)?'Бонусы компании':'Бонусы компаний'}/>
+                                    </ListItem>
+                                </Link>
+                                <Divider/>
+                                {
+                                    ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)?
+                                        <>
+                                        <Link href='/bonusclient'>
+                                            <ListItem style={{marginLeft: 16, background: router.pathname==='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
+                                                <ListItemText primary={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}/>
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :null
+                                }
+                                </>
+                                :
+                                null
+                        }
+                        </>
+                        :null
+                }
                 {
                     ['admin', 'client'].includes(profile.role)||!authenticated?
                         <>
@@ -93,7 +164,7 @@ const MyDrawer = React.memo((props) => {
                     ['admin', 'организация', 'менеджер'].includes(profile.role)?
                         <>
                         <Link href={'/clients'}>
-                            <ListItem style={{background: router.pathname.includes('client')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                            <ListItem style={{background: router.pathname.includes('client')&&router.pathname!=='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Клиенты' />
                             </ListItem>
@@ -145,6 +216,19 @@ const MyDrawer = React.memo((props) => {
                         </Link>
                 }
                 <Divider/>
+                {
+                    ['admin', 'client'].includes(profile.role)||!authenticated?
+                        <>
+                        <Link href='/brands'>
+                            <ListItem style={{background: (router.pathname).includes('brand')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                <ListItemIcon><CopyrightIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Бренды' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
                 {
                     ['admin', 'организация'].includes(profile.role)?
                         <>

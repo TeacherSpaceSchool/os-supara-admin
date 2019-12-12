@@ -28,6 +28,7 @@ import { pdDatePicker } from '../../src/lib'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
+
 const Client = React.memo((props) => {
     const { profile } = props.user;
     const classes = clientStyle();
@@ -36,7 +37,20 @@ const Client = React.memo((props) => {
     let [status, setStatus] = useState(data.client?data.client.user.status:'');
     let [name, setName] = useState(data.client?data.client.name:'');
     let [email, setEmail] = useState(data.client?data.client.email:'');
-    let [phone, setPhone] = useState(data.client?data.client.user.phone:'');
+    let [phone, setPhone] = useState(data.client?data.client.phone:[]);
+    let addPhone = ()=>{
+        phone = [...phone, '']
+        setPhone(phone)
+    };
+    let editPhone = (event, idx)=>{
+        phone[idx] = event.target.value
+        setPhone([...phone])
+    };
+    let deletePhone = (idx)=>{
+        phone.splice(idx, 1);
+        setPhone([...phone])
+    };
+    let [login, setLogin] = useState(data.client?data.client.user.login:'');
 
     //привести к геолокации
     if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
@@ -207,6 +221,15 @@ const Client = React.memo((props) => {
                                                 'aria-label': 'description',
                                             }}
                                         />
+                                    <TextField
+                                        label='Логин'
+                                        value={login}
+                                        className={classes.input}
+                                        onChange={(event)=>{setLogin(event.target.value)}}
+                                        inputProps={{
+                                            'aria-label': 'description',
+                                        }}
+                                    />
                                         <Input
                                             placeholder='Новый пароль'
                                             type={hide ? 'password' : 'text' }
@@ -255,6 +278,43 @@ const Client = React.memo((props) => {
                                         }}
                                         onChange={ event => setCity(event.target.value) }
                                     />
+                                    <br/>
+                                    <br/>
+                                    {phone?phone.map((element, idx)=>
+                                        <div key={idx}>
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Телефон. Формат: +996555780861</InputLabel>
+                                                <Input
+                                                    placeholder='Телефон. Формат: +996555780861'
+                                                    value={element}
+                                                    className={classes.input}
+                                                    onChange={(event)=>{editPhone(event, idx)}}
+                                                    inputProps={{
+                                                        'aria-label': 'description',
+                                                    }}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={()=>{
+                                                                    deletePhone(idx)
+                                                                }}
+                                                                aria-label='toggle password visibility'
+                                                            >
+                                                                <Remove/>
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }
+                                                />
+                                            </FormControl>
+                                        </div>
+                                    ): null}
+                                    <Button onClick={async()=>{
+                                        addPhone()
+                                    }} size='small' color='primary'>
+                                        Добавить телефон
+                                    </Button>
+                                    <br/>
+                                    <br/>
                                     {address?address.map((element, idx)=>
                                         <div key={idx}>
                                             <FormControl className={classes.input}>
@@ -305,7 +365,8 @@ const Client = React.memo((props) => {
                                                 }
                                             </div>
                                         </div>
-                                    ):null}
+                                    ):
+                                        <br/>}
                                     <Button onClick={async()=>{
                                         addAddress()
                                     }} size='small' color='primary'>
@@ -319,15 +380,6 @@ const Client = React.memo((props) => {
                                         value={email}
                                         className={classes.input}
                                         onChange={(event)=>{setEmail(event.target.value)}}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
-                                    <TextField
-                                        label='Телефон. Формат: +996555780861'
-                                        value={phone}
-                                        className={classes.input}
-                                        onChange={(event)=>{setPhone(event.target.value)}}
                                         inputProps={{
                                             'aria-label': 'description',
                                         }}
@@ -350,9 +402,10 @@ const Client = React.memo((props) => {
                                             if(patent!==undefined)editElement.patent = patent
                                             if(certificate!==undefined)editElement.certificate = certificate
                                             if(name.length>0&&name!==data.client.name)editElement.name = name
-                                            if(address.length>0&&address!==data.client.address)editElement.address = address
+                                            editElement.address = address
                                             if(email.length>0&&email!==data.client.email)editElement.email = email
-                                            if(phone.length>0&&phone!==data.client.phone)editElement.phone = phone
+                                            if(login.length>0&&data.client.user.login!==login)editElement.login = login
+                                            editElement.phone = phone
                                             if(info.length>0&&info!==data.client.info)editElement.info = info
                                             if(city.length>0&&city!==data.client.city)editElement.city = city
                                             if(type&&type.length>0&&type!==data.client.type)editElement.type = type
@@ -440,6 +493,9 @@ const Client = React.memo((props) => {
                                             {address?address.map((element, idx)=>
                                                 <>
                                                 <div className={classes.value} key={idx}>
+                                                    {element[1]}
+                                                </div>
+                                                <div className={classes.value} key={idx}>
                                                     {element[0]}
                                                 </div>
                                                 <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
@@ -470,7 +526,15 @@ const Client = React.memo((props) => {
                                             Телефон:&nbsp;
                                         </div>
                                         <div className={classes.value}>
-                                            {phone}
+                                            <div className={classes.column}>
+                                                {phone?phone.map((element, idx)=>
+                                                    <>
+                                                    <div className={classes.value} key={idx}>
+                                                        {element}
+                                                    </div>
+                                                    </>
+                                                ):null}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={classes.info}>

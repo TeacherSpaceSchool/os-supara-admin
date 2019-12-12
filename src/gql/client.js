@@ -25,8 +25,9 @@ export const getClients = async({search: search, sort: sort, filter: filter})=>{
                             patent 
                             passport 
                             certificate
+                            phone
                             user 
-                                {_id role status phone}
+                                {_id role status login}
                           }
                           sortClient {
                            name
@@ -67,8 +68,9 @@ export const getClient = async({_id: _id})=>{
                             patent 
                             passport 
                             certificate
+                            phone
                             user 
-                                {_id role status phone}
+                                {_id role status login}
                         }
                     }`,
             })
@@ -101,8 +103,8 @@ export const setClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, city: $city, image: $image,, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: [String], $login: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, login: $login, city: $city, image: $image,, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})

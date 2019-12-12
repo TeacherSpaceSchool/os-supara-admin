@@ -13,6 +13,7 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../dialog/Confirmation'
 
+
 const CardAds = React.memo((props) => {
     const classes = cardAdsStyle();
     const { element, setList } = props;

@@ -10,6 +10,9 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { urlMain } from '../../redux/constants/other'
+const height = 377;
+import LazyLoad from 'react-lazyload';
+import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 
 const Items = React.memo((props) => {
     const classes = pageListStyle();
@@ -24,7 +27,7 @@ const Items = React.memo((props) => {
         })()
     },[filter, sort, search])
     return (
-        <App filters={data.filterItem} sorts={data.sortItem} pageName={router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}>
+        <App category={data.subCategory?data.subCategory.category:undefined} filters={data.filterItem} sorts={data.sortItem} pageName={router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}>
             <Head>
                 <title>{router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -37,7 +40,9 @@ const Items = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardItem setList={setList} key={element._id} element={element} subCategory={router.query.id==='all'?'all':data.subCategory._id}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardItemPlaceholder/>}>
+                        <CardItem setList={setList} key={element._id} element={element} subCategory={router.query.id==='all'?'all':data.subCategory._id}/>
+                    </LazyLoad>
                 ):null}
             </div>
             {profile.role==='admin'||profile.role==='организация'||profile.role==='менеджер'?

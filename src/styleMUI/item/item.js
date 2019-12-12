@@ -17,19 +17,20 @@ export default makeStyles({
         flexDirection: 'column',
     },
     mediaM: {
-        objectFit: 'cover',
+        objectFit: 'contain',
         height: 'calc(100vw - 72px)',
         width: 'calc(100vw - 72px)',
     },
     mediaD: {
         cursor: 'pointer',
-        objectFit: 'cover',
+        objectFit: 'contain',
         height: 300,
         width: 300,
         marginRight: 10,
         marginBottom: 10,
     },
     name: {
+        marginTop: 0,
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '1.25rem',
@@ -123,5 +124,15 @@ export default makeStyles({
     },
     divImage: {
         position: 'relative'
-    }
+    },
+    deliveryDays: {
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        color: '#C0C0C0',
+        '&:hover': {
+            color: '#ffb300',
+        },
+    },
 })

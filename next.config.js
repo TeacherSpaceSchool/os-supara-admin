@@ -1,4 +1,5 @@
 const withSass = require('@zeit/next-sass')
+const withCSS = require('@zeit/next-css')
 const sitemap = require('nextjs-sitemap-generator');
 const withOffline = require('next-offline')
 sitemap({
@@ -7,8 +8,9 @@ sitemap({
     targetDirectory : 'static/'
 });
 module.exports =
-    withSass(
-        withOffline({
+    withCSS(
+        withSass(
+            withOffline({
             /*workboxOpts: {
                 runtimeCaching: [
                     {
@@ -22,6 +24,9 @@ module.exports =
             },*/
             env: {
                 URL: process.env.URL
+            },
+            onDemandEntries : {
+                maxInactiveAge :  process.env.URL.trim()==='azyk.store'?1000*60*60*24: 1000 ,
             },
             webpack: (config) => {
                 return config
@@ -51,4 +56,5 @@ module.exports =
                 };
             }
         })
+        )
     )

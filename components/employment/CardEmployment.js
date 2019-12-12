@@ -32,14 +32,18 @@ const CardEmployment = React.memo((props) => {
                                     {element.name}
                                 </div>
                             </div>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Телефон:&nbsp;
-                                </div>
-                                <div className={classes.value}>
-                                    {element.user.phone}
-                                </div>
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>
+                                Телефон:&nbsp;
                             </div>
+                            <div>
+                                {element.phone.map((phone, idx)=>
+                                    <div key={idx} className={classes.value}>
+                                        {phone}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Организация:&nbsp;

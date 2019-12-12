@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { getAds } from '../src/gql/ads'
 import AppBar from '../components/app/AppBar'
 import Dialog from '../components/app/Dialog'
 import SnackBar from '../components/app/SnackBar'
@@ -8,22 +7,25 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addFavoriteItem } from '../src/gql/items'
 import { addBasket } from '../src/gql/basket'
+import * as paginationActions from '../redux/actions/pagination'
 import * as userActions from '../redux/actions/user'
 import * as appActions from '../redux/actions/app'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
 import Router from 'next/router'
 import { useRouter } from 'next/router';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 export const mainWindow = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
+    const { next, disable } = props.paginationActions;
     const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
-    let { sorts, filters, getList, pageName } = props;
+    const { work, count } = props.pagination;
+    let { sorts, filters, getList, pageName, dates, subcategory, category } = props;
     const router = useRouter();
-    //let [ads, setAds] = useState({});
     useEffect( ()=>{
         if(authenticated)
             setProfile()
@@ -37,6 +39,9 @@ const App = React.memo(props => {
             showLoad(false)
         }
     })
+    const containerRef = useBottomScrollListener(()=>{
+        if(work) next()
+    });
     useEffect( ()=>{
         (async ()=>{
             if(authenticated&&profile.role==='client'){
@@ -58,31 +63,14 @@ const App = React.memo(props => {
                         await getList()
                 }
             }
-            //setAds((await getAds()).ads)
         })()
     },[])
     const { load } = props.app;
-    /*const { data: { data }, loading } = useSubscription(
-        BASKET_SUBSCRIPTION
-    );
-    console.log(data, loading)*/
     return(
         <div ref={mainWindow} className='App'>
-            <Drawer />
-            <AppBar pageName={pageName} sorts={sorts} filters={filters}/>
-            <div className='App-body'>
-                {/*
-                       ads&&ads.url?
-                           <a href={ads.url}>
-                               <img
-                                   src={ads.image}
-                                   alt={ads.title}
-                                   className='marketImg'
-                               />
-                           </a>
-                           :
-                           null*/
-                }
+            <Drawer subcategory={subcategory} category={category}/>
+            <AppBar dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
+            <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>
             <Dialog />
@@ -102,6 +90,7 @@ function mapStateToProps (state) {
     return {
         user: state.user,
         app: state.app,
+        pagination: state.pagination
     }
 }
 
@@ -109,6 +98,7 @@ function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
         appActions: bindActionCreators(appActions, dispatch),
+        paginationActions: bindActionCreators(paginationActions, dispatch),
     }
 }
 

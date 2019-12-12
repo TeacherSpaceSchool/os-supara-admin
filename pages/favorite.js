@@ -7,6 +7,9 @@ import CardItem from '../components/items/CardItem'
 import { favorites } from '../src/gql/items';
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
+const height = 377;
+import LazyLoad from 'react-lazyload';
+import CardItemPlaceholder from '../components/items/CardItemPlaceholder'
 
 const Items = React.memo((props) => {
     const { authenticated } = props.user;
@@ -50,7 +53,9 @@ const Items = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardItemPlaceholder/>}>
+                        <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
         </App>

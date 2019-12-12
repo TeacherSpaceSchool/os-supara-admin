@@ -11,6 +11,8 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { urlMain } from '../redux/constants/other'
+import LazyLoad from 'react-lazyload';
+import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
 
 
 const Organization = React.memo((props) => {
@@ -19,6 +21,7 @@ const Organization = React.memo((props) => {
     let [list, setList] = useState(data.organizations);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
+    let height = profile.role==='admin'?126:80
     useEffect(()=>{
         (async()=>{
             setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)
@@ -38,7 +41,9 @@ const Organization = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <CardOrganization key={element._id} setList={setList} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                        <CardOrganization key={element._id} setList={setList} element={element}/>
+                    </LazyLoad>
                 ):null}
             </div>
             {profile.role==='admin'?

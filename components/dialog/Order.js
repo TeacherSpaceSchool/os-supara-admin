@@ -30,6 +30,8 @@ const Order =  React.memo(
             for(let i=0; i<orders.length; i++){
                 allPrice+=orders[i].allPrice
             }
+            if(element.usedBonus&&element.usedBonus>0)
+                allPrice -= element.usedBonus
             setAllPrice(allPrice)
         }
         let increment = (idx)=>{
@@ -94,10 +96,15 @@ const Order =  React.memo(
                     <div className={classes.nameField}>Время заказа: &nbsp;</div>
                     <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
                 </div>
-                <div className={classes.row}>
-                    <div className={classes.nameField}>Время доставки:&nbsp;</div>
-                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
-                </div>
+                {
+                    element.dateDelivery?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Время доставки:&nbsp;</div>
+                            <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
+                        </div>
+                        :
+                        null
+                }
                 <a href={`/client/${element.client.user._id}`} target='_blank'>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Получатель:&nbsp;</div>
@@ -110,6 +117,15 @@ const Order =  React.memo(
                         <div className={classes.value}>{element.orders[0].item.organization.name}</div>
                     </div>
                 </a>
+                {
+                    element.usedBonus&&element.usedBonus>0?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Использованный бонус:&nbsp;</div>
+                            <div className={classes.value}>{element.usedBonus}&nbsp;сом</div>
+                        </div>
+                        :
+                        null
+                }
                 <div className={classes.row}>
                     <div className={classes.nameField}>Сумма:&nbsp;</div>
                     <div className={classes.value}>{allPrice}&nbsp;сом</div>
@@ -234,7 +250,7 @@ const Order =  React.memo(
                             <Button variant='contained' color='primary' onClick={()=>{
                                 let _id = element.orders.map(order=>order._id)
                                 const action = async() => {
-                                    let invoices = (await cancelOrders({_id: _id})).invoices
+                                    let invoices = (await cancelOrders({_id: _id, invoice: element._id})).invoices
                                     if(setList)
                                         setList(invoices)
                                     if(getInvoices)

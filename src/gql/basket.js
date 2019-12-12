@@ -16,7 +16,15 @@ export const getBasket = async()=>{
                             _id
                             createdAt
                             item 
-                                {_id name stock image price}
+                                {
+                                    _id 
+                                    name 
+                                    stock 
+                                    image 
+                                    price
+                                    organization
+                                        {_id name minimumOrder}
+                                }
                             count
                         }
                     }`,
@@ -72,8 +80,8 @@ export const addBasket = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($item: ID!, $count: Int!) {
-                        addBasket(item: $item, count: $count) {
+                    mutation ($item: ID!, $count: Int!, $organization: ID!) {
+                        addBasket(item: $item, count: $count, organization: $organization) {
                              data
                         }
                     }`})

@@ -23,11 +23,11 @@ export function signup(payload) {
             let result = await client.mutate({
                 variables: payload,
                 mutation : gql`
-                    mutation ($phone: String!, $password: String!) {
-                        signupuser(phone: $phone, password: $password) {
+                    mutation ($login: String!, $password: String!) {
+                        signupuser(login: $login, password: $password) {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                         }
@@ -42,7 +42,7 @@ export function signup(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                await Router.push('/')
+                //await Router.push('/')
                 /*
                 await dispatch({type: AUTHENTICATED});
                 await dispatch({
@@ -67,11 +67,11 @@ export function signin(payload) {
             let result = await client.mutate({
                 variables: payload,
                 mutation : gql`
-                    mutation ($phone: String!, $password: String!) {
-                        signinuser(phone: $phone, password: $password) {
+                    mutation ($login: String!, $password: String!) {
+                        signinuser(login: $login, password: $password) {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                         }
@@ -86,10 +86,10 @@ export function signin(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                await Router.push('/')
+                //await Router.push('/')
                 window.location.reload()
-                /*
-                await dispatch({type: AUTHENTICATED});
+
+                /*await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SET_PROFILE,
                     payload: result.data.signinuser
@@ -159,7 +159,7 @@ export function setProfile() {
                         getStatus {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                           }
@@ -185,7 +185,7 @@ export async function getProfile() {
                        getStatus {
                           role
                           status
-                          phone
+                          login
                           organization
                           _id
                          }

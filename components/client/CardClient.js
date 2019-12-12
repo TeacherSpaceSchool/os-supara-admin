@@ -12,6 +12,7 @@ import { onoffClient } from '../../src/gql/client'
 import CardActions from '@material-ui/core/CardActions';
 import Confirmation from '../../components/dialog/Confirmation'
 
+
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
     const { element } = props;
@@ -44,8 +45,12 @@ const CardOrganization = React.memo((props) => {
                                 <div className={classes.nameField}>
                                     Телефон:&nbsp;
                                 </div>
-                                <div className={classes.value}>
-                                    {element.user.phone}
+                                <div>
+                                    {element.phone.map((phone, idx)=>
+                                            <div key={idx} className={classes.value}>
+                                                {phone}
+                                            </div>
+                                    )}
                                 </div>
                             </div>
                             <div className={classes.row}>

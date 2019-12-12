@@ -11,6 +11,7 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, deleteOrganization } from '../../src/gql/organization'
 import Confirmation from '../../components/dialog/Confirmation'
 
+
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
     const { element, setList } = props;

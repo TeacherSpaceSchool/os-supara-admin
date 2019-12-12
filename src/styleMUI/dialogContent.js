@@ -96,4 +96,8 @@ export default theme => ({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    chip: {
+        margin: theme.spacing(0.5),
+        cursor: 'pointer',
+    },
 });

@@ -21,6 +21,7 @@ import Confirmation from '../components/dialog/Confirmation'
 import AddSocial from '../components/dialog/AddSocial'
 import { urlMain } from '../redux/constants/other'
 
+
 const Contact = React.memo((props) => {
     const classes = contactStyle();
     const { data } = props;
@@ -76,7 +77,6 @@ const Contact = React.memo((props) => {
         social[idx] = value
         setSocial([...social])
     };
-    console.log(social)
     let [info, setInfo] = useState(data.contact.info);
     let [preview, setPreview] = useState(data.contact.image===''?'/static/add.png':data.contact.image);
     let [image, setImage] = useState(undefined);
@@ -141,28 +141,6 @@ const Contact = React.memo((props) => {
                                                     'aria-label': 'description',
                                                 }}
                                             />
-                                        <FormControl className={classes.input}>
-                                            <InputLabel>Добавить адрес</InputLabel>
-                                            <Input
-                                                value={newAddress}
-                                                onChange={(event)=>{setNewAddress(event.target.value)}}
-                                                inputProps={{
-                                                    'aria-label': 'description',
-                                                }}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            onClick={()=>{
-                                                                addAddress()
-                                                            }}
-                                                            aria-label='toggle password visibility'
-                                                        >
-                                                            <Add/>
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                            />
-                                        </FormControl>
                                         {address.map((element, idx)=>
                                             <FormControl  key={idx} className={classes.input}>
                                                 <InputLabel>Адрес</InputLabel>
@@ -188,28 +166,13 @@ const Contact = React.memo((props) => {
                                                 />
                                             </FormControl>
                                         )}
-                                        <FormControl className={classes.input}>
-                                            <InputLabel>Добавить email</InputLabel>
-                                            <Input
-                                                value={newEmail}
-                                                onChange={(event)=>{setNewEmail(event.target.value)}}
-                                                inputProps={{
-                                                    'aria-label': 'description',
-                                                }}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            onClick={()=>{
-                                                                addEmail()
-                                                            }}
-                                                            aria-label='toggle password visibility'
-                                                        >
-                                                            <Add/>
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                            />
-                                        </FormControl>
+                                        <Button onClick={async()=>{
+                                            addAddress()
+                                        }} size='small' color='primary'>
+                                            Добавить адрес
+                                        </Button>
+                                        <br/>
+                                        <br/>
                                         {email.map((element, idx)=>
                                             <FormControl  key={idx} className={classes.input}>
                                                 <InputLabel>Организация</InputLabel>
@@ -234,28 +197,13 @@ const Contact = React.memo((props) => {
                                                 />
                                             </FormControl>
                                         )}
-                                        <FormControl className={classes.input}>
-                                            <InputLabel>Добавить телефон. Формат: +996555780861</InputLabel>
-                                            <Input
-                                                value={newPhone}
-                                                onChange={(event)=>{setNewPhone(event.target.value)}}
-                                                inputProps={{
-                                                    'aria-label': 'description',
-                                                }}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            onClick={()=>{
-                                                                addPhone()
-                                                            }}
-                                                            aria-label='toggle password visibility'
-                                                        >
-                                                            <Add/>
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                            />
-                                        </FormControl>
+                                        <Button onClick={async()=>{
+                                            addEmail()
+                                        }} size='small' color='primary'>
+                                            Добавить email
+                                        </Button>
+                                        <br/>
+                                        <br/>
                                         {phone.map((element, idx)=>
                                             <FormControl key={idx} className={classes.input}>
                                                 <InputLabel>Организация</InputLabel>
@@ -280,6 +228,13 @@ const Contact = React.memo((props) => {
                                                 />
                                             </FormControl>
                                         )}
+                                        <Button onClick={async()=>{
+                                            addPhone()
+                                        }} size='small' color='primary'>
+                                            Добавить телефон. Формат: +996555780861
+                                        </Button>
+                                        <br/>
+                                        <br/>
                                         <TextField
                                             multiline={true}
                                             label='Информация'

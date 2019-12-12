@@ -1,4 +1,4 @@
-import { SHOW_DRAWER, SET_SEARCH, SET_FILTER, SET_SORT, SET_IS_MOBILE_APP, SHOW_LOAD, SET_COUNT_BASKET } from '../constants/app'
+import { SHOW_DRAWER, SET_SEARCH, SET_FILTER, SET_SORT, SET_IS_MOBILE_APP, SHOW_LOAD, SET_COUNT_BASKET, SET_DATE } from '../constants/app'
 
 export function showDrawer(data) {
     return {
@@ -10,6 +10,13 @@ export function showDrawer(data) {
 export function setFilter(data) {
     return {
         type: SET_FILTER,
+        payload: data
+    }
+}
+
+export function setDate(data) {
+    return {
+        type: SET_DATE,
         payload: data
     }
 }

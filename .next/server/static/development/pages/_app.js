@@ -885,8 +885,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     ctx.store.getState().app.search = '';
     ctx.store.getState().app.sort = '-createdAt';
     ctx.store.getState().app.filter = '';
+    ctx.store.getState().app.date = '';
     ctx.store.getState().app.load = false;
     ctx.store.getState().mini_dialog.show = false;
+    ctx.store.getState().pagination.work = false;
     return {
       pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
     };
@@ -902,33 +904,33 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
     return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 51
       },
       __self: this
     }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
       theme: _src_theme__WEBPACK_IMPORTED_MODULE_6__["default"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 52
       },
       __self: this
     }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_5___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 54
       },
       __self: this
     }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 55
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 56
       },
       __self: this
     })))));
@@ -1007,11 +1009,11 @@ function signup(payload) {
       let result = await client.mutate({
         variables: payload,
         mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
-                    mutation ($phone: String!, $password: String!) {
-                        signupuser(phone: $phone, password: $password) {
+                    mutation ($login: String!, $password: String!) {
+                        signupuser(login: $login, password: $password) {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                         }
@@ -1024,8 +1026,8 @@ function signup(payload) {
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        });
-        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        }); //await Router.push('/')
+
         /*
         await dispatch({type: AUTHENTICATED});
         await dispatch({
@@ -1050,11 +1052,11 @@ function signin(payload) {
       let result = await client.mutate({
         variables: payload,
         mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
-                    mutation ($phone: String!, $password: String!) {
-                        signinuser(phone: $phone, password: $password) {
+                    mutation ($login: String!, $password: String!) {
+                        signinuser(login: $login, password: $password) {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                         }
@@ -1067,11 +1069,10 @@ function signin(payload) {
         await dispatch({
           type: _constants_mini_dialog__WEBPACK_IMPORTED_MODULE_1__["SHOW_MINI_DIALOG"],
           payload: false
-        });
-        await next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+        }); //await Router.push('/')
+
         window.location.reload();
-        /*
-        await dispatch({type: AUTHENTICATED});
+        /*await dispatch({type: AUTHENTICATED});
         await dispatch({
             type: SET_PROFILE,
             payload: result.data.signinuser
@@ -1138,7 +1139,7 @@ function setProfile() {
                         getStatus {
                            role
                            status
-                           phone
+                           login
                            organization
                            _id
                           }
@@ -1162,7 +1163,7 @@ async function getProfile() {
                        getStatus {
                           role
                           status
-                          phone
+                          login
                           organization
                           _id
                          }
@@ -1209,7 +1210,7 @@ function configureStore(initialState) {
 /*!********************************!*\
   !*** ./redux/constants/app.js ***!
   \********************************/
-/*! exports provided: SHOW_DRAWER, SET_SEARCH, SET_SORT, SET_FILTER, SET_COUNT_BASKET, SET_IS_MOBILE_APP, SHOW_LOAD */
+/*! exports provided: SHOW_DRAWER, SET_SEARCH, SET_SORT, SET_FILTER, SET_DATE, SET_COUNT_BASKET, SET_IS_MOBILE_APP, SHOW_LOAD */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1218,6 +1219,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SEARCH", function() { return SET_SEARCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SORT", function() { return SET_SORT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FILTER", function() { return SET_FILTER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DATE", function() { return SET_DATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_COUNT_BASKET", function() { return SET_COUNT_BASKET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_MOBILE_APP", function() { return SET_IS_MOBILE_APP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_LOAD", function() { return SHOW_LOAD; });
@@ -1225,6 +1227,7 @@ const SHOW_DRAWER = 'SHOW_DRAWER';
 const SET_SEARCH = 'SET_SEARCH';
 const SET_SORT = 'SET_SORT';
 const SET_FILTER = 'SET_FILTER';
+const SET_DATE = 'SET_DATE';
 const SET_COUNT_BASKET = 'SET_COUNT_BASKET';
 const SET_IS_MOBILE_APP = 'SET_IS_MOBILE_APP';
 const SHOW_LOAD = 'SHOW_LOAD';
@@ -1291,6 +1294,22 @@ const checkInt = int => {
 
 /***/ }),
 
+/***/ "./redux/constants/pagination.js":
+/*!***************************************!*\
+  !*** ./redux/constants/pagination.js ***!
+  \***************************************/
+/*! exports provided: DISABLE, NEXT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DISABLE", function() { return DISABLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NEXT", function() { return NEXT; });
+const DISABLE = 'DISABLE';
+const NEXT = 'NEXT';
+
+/***/ }),
+
 /***/ "./redux/constants/snackbar.js":
 /*!*************************************!*\
   !*** ./redux/constants/snackbar.js ***!
@@ -1350,7 +1369,8 @@ const initialState = {
   sort: '-createdAt',
   isMobileApp: undefined,
   load: false,
-  countBasket: 0
+  countBasket: 0,
+  date: ''
 };
 function mini_dialog(state = initialState, action) {
   switch (action.type) {
@@ -1389,6 +1409,11 @@ function mini_dialog(state = initialState, action) {
         countBasket: action.payload
       });
 
+    case _constants_app__WEBPACK_IMPORTED_MODULE_1__["SET_DATE"]:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        date: action.payload
+      });
+
     default:
       return state;
   }
@@ -1411,6 +1436,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./redux/reducers/user.js");
 /* harmony import */ var _mini_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mini_dialog */ "./redux/reducers/mini_dialog.js");
 /* harmony import */ var _snackbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./snackbar */ "./redux/reducers/snackbar.js");
+/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pagination */ "./redux/reducers/pagination.js");
+
 
 
 
@@ -1420,7 +1447,8 @@ __webpack_require__.r(__webpack_exports__);
   app: _app__WEBPACK_IMPORTED_MODULE_1__["default"],
   user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
   mini_dialog: _mini_dialog__WEBPACK_IMPORTED_MODULE_3__["default"],
-  snackbar: _snackbar__WEBPACK_IMPORTED_MODULE_4__["default"]
+  snackbar: _snackbar__WEBPACK_IMPORTED_MODULE_4__["default"],
+  pagination: _pagination__WEBPACK_IMPORTED_MODULE_5__["default"]
 }));
 
 /***/ }),
@@ -1457,6 +1485,43 @@ function mini_dialog(state = initialState, action) {
         title: action.payload.title,
         child: action.payload.child,
         fullScreen: action.payload.fullScreen
+      });
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./redux/reducers/pagination.js":
+/*!**************************************!*\
+  !*** ./redux/reducers/pagination.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return mini_dialog; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _constants_pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/pagination */ "./redux/constants/pagination.js");
+
+
+const initialState = {
+  count: 0,
+  work: false
+};
+function mini_dialog(state = initialState, action) {
+  switch (action.type) {
+    case _constants_pagination__WEBPACK_IMPORTED_MODULE_1__["NEXT"]:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        count: state.count += 1
+      });
+
+    case _constants_pagination__WEBPACK_IMPORTED_MODULE_1__["DISABLE"]:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        work: false
       });
 
     default:

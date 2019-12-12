@@ -66,7 +66,7 @@ const Route = React.memo((props) => {
         (async()=>{
             if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
                 console.log('ok')
-                setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка'})).invoices)
+                setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка', date: ''})).invoices)
             }
         })()
     },[])
@@ -107,7 +107,7 @@ const Route = React.memo((props) => {
     }
     let getInvoices = async ()=>{
         if(data.route){
-            setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка'})).invoices)
+            setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка', date: ''})).invoices)
             setCancelInvoices([])
             setInvoices((await getRoute({_id: data.route._id})).route.invoices)
         }

@@ -8,7 +8,8 @@ import pageListStyle from '../../src/styleMUI/subcategory/subcategoryList'
 import SubCardCategory from '../../components/subcategory/SubCardCategory'
 import { useRouter } from 'next/router'
 import { urlMain } from '../../redux/constants/other'
-
+import LazyLoad from 'react-lazyload';
+import SubCardCategoryPlaceholder from '../../components/subcategory/SubCardCategoryPlaceholder'
 
 const Subcategory = React.memo((props) => {
     const classes = pageListStyle();
@@ -18,6 +19,7 @@ const Subcategory = React.memo((props) => {
     let [categorys, setCategorys] = useState([]);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
+    let height = profile.role==='admin'?189:38
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin')
@@ -30,9 +32,9 @@ const Subcategory = React.memo((props) => {
         })()
     },[filter, sort, search])
     return (
-        <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={router.query.id==='all'?'Все':data.category!==null?data.category.name:'Ничего не найдено'}>
+        <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={router.query.id==='all'?'Все':data.category?data.category.name:'Ничего не найдено'}>
             <Head>
-                <title>{router.query.id==='all'?'Все':data.category!==null?data.category.name:'Ничего не найдено'}</title>
+                <title>{router.query.id==='all'?'Все':data.category?data.category.name:'Ничего не найдено'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:title' content={router.query.id==='all'?'Все':data.category!==null?data.category.name:'Ничего не найдено'} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -45,9 +47,11 @@ const Subcategory = React.memo((props) => {
                 {profile.role==='admin'?<SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>:null}
                 <SubCardCategory element={{_id: 'all', name: 'Все товары'}}/>
                 {data.subCategorys.length>0||router.query.id==='all'?
-                        list?list.map((element)=>
-                            <SubCardCategory category={router.query.id} categorys={categorys} key={element._id} setList={setList} element={element}/>
-                        ):null
+                    list?list.map((element)=>
+                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<SubCardCategoryPlaceholder height={height}/>}>
+                            <SubCardCategory category={router.query.id} categorys={categorys} setList={setList} element={element}/>
+                        </LazyLoad>
+                    ):null
                     :null
                 }
             </div>

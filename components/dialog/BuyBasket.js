@@ -25,7 +25,7 @@ import Link from 'next/link';
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice } = props;
+        const { client, allPrice, organization, bonus } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
@@ -36,6 +36,7 @@ const BuyBasket =  React.memo(
             setComent(event.target.value)
         };
         let [paymentMethod, setPaymentMethod] = useState('');
+        let [useBonus, setUseBonus] = useState(false);
         let paymentMethods = [
             'Наличные'
         ]
@@ -91,19 +92,43 @@ const BuyBasket =  React.memo(
                     </Select>
                 </FormControl>
                 <br/>
-                <div style={{width: width}} className={classes.itogo}><b>Итого:</b>{` ${allPrice} сом`}</div>
+                {
+                    organization.minimumOrder>0?
+                        <>
+                        <div style={{width: width}} className={classes.itogo}><b>Минимальный заказ:</b>{` ${organization.minimumOrder} сом`}</div>
+                        </>
+                        :null
+                }
+                {
+                    bonus.addedBonus&&bonus.addedBonus>0?
+                        <FormControlLabel
+                            style={{width: width}}
+                            onChange={(e)=>{
+                                setUseBonus(e.target.checked)
+                            }}
+                            control={<Checkbox/>}
+                            label={`Использовать бонус ${bonus.addedBonus} сом`}
+                        />
+                        :
+                        null
+                }
+                <div style={{width: width}} className={classes.itogo}><b>Итого:</b>{` ${useBonus?(allPrice*address.length)-bonus.addedBonus:allPrice*address.length} сом`}</div>
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
-                        if(paymentMethod.length>0&&address.length>0){
-                            const action = async() => {
-                                await addOrders({info: coment, paymentMethod: paymentMethod, address: address})
-                                Router.push('/orders')
-                                showMiniDialog(false);
-                            }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                        } else
-                            showSnackBar('Заполните все поля')
+                        if(organization.minimumOrder===0||organization.minimumOrder<allPrice) {
+                            if (paymentMethod.length > 0 && address.length > 0) {
+                                const action = async () => {
+                                    await addOrders({info: coment, usedBonus: useBonus, paymentMethod: paymentMethod, address: address, organization: organization._id})
+                                    Router.push('/orders')
+                                    showMiniDialog(false);
+                                }
+                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            } else
+                                showSnackBar('Заполните все поля')
+                        } else {
+                            showSnackBar('Сумма заказа должна быть выше минимальной')
+                        }
                     }} className={classes.button}>
                         Купить
                     </Button>

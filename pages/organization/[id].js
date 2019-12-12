@@ -24,6 +24,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
+import { checkInt } from '../../src/lib'
+
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();
@@ -33,6 +35,7 @@ const Organization = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     let [statusO, setStatusO] = useState(data.organization!==null?data.organization.status:'');
     let [name, setName] = useState(data.organization!==null?data.organization.name:'');
+    let [minimumOrder, setMinimumOrder] = useState(data.organization!==null?data.organization.minimumOrder:0);
     let [address, setAddress] = useState(data.organization!==null?data.organization.address:[]);
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
@@ -123,26 +126,13 @@ const Organization = React.memo((props) => {
                                         }}
                                     />
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
-                                        <InputLabel>Добавить адрес</InputLabel>
+                                        <InputLabel>Минимальный заказ</InputLabel>
                                         <Input
-                                            placeholder='Добавить адрес'
-                                            value={newAddress}
-                                            onChange={(event)=>{setNewAddress(event.target.value)}}
+                                            value={minimumOrder}
+                                            onChange={(event)=>{setMinimumOrder(checkInt(event.target.value))}}
                                             inputProps={{
                                                 'aria-label': 'description',
                                             }}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        onClick={()=>{
-                                                            addAddress()
-                                                        }}
-                                                        aria-label='toggle password visibility'
-                                                    >
-                                                        <Add/>
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
                                         />
                                     </FormControl>
                                     {address.map((element, idx)=>
@@ -170,29 +160,13 @@ const Organization = React.memo((props) => {
                                             />
                                         </FormControl>
                                     )}
-                                    <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
-                                        <InputLabel>Добавить email</InputLabel>
-                                        <Input
-                                            placeholder='Добавить email'
-                                            value={newEmail}
-                                            onChange={(event)=>{setNewEmail(event.target.value)}}
-                                            inputProps={{
-                                                'aria-label': 'description',
-                                            }}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        onClick={()=>{
-                                                            addEmail()
-                                                        }}
-                                                        aria-label='toggle password visibility'
-                                                    >
-                                                        <Add/>
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                        />
-                                    </FormControl>
+                                    <Button onClick={async()=>{
+                                        addAddress()
+                                    }} size='small' color='primary'>
+                                        Добавить адрес
+                                    </Button>
+                                    <br/>
+                                    <br/>
                                     {email.map((element, idx)=>
                                         <FormControl  key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
                                             <InputLabel>Email{idx+1}</InputLabel>
@@ -217,29 +191,13 @@ const Organization = React.memo((props) => {
                                             />
                                         </FormControl>
                                     )}
-                                    <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
-                                        <InputLabel>Добавить телефон. Формат: +996555780861</InputLabel>
-                                        <Input
-                                            placeholder='Добавить телефон. Формат: +996555780861'
-                                            value={newPhone}
-                                            onChange={(event)=>{setNewPhone(event.target.value)}}
-                                            inputProps={{
-                                                'aria-label': 'description',
-                                            }}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        onClick={()=>{
-                                                            addPhone()
-                                                        }}
-                                                        aria-label='toggle password visibility'
-                                                    >
-                                                        <Add/>
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                        />
-                                    </FormControl>
+                                    <Button onClick={async()=>{
+                                        addEmail()
+                                    }} size='small' color='primary'>
+                                        Добавить email
+                                    </Button>
+                                    <br/>
+                                    <br/>
                                     {phone.map((element, idx)=>
                                         <FormControl  key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
                                             <InputLabel>Телефон{idx+1}</InputLabel>
@@ -264,6 +222,13 @@ const Organization = React.memo((props) => {
                                             />
                                         </FormControl>
                                     )}
+                                    <Button onClick={async()=>{
+                                        addPhone()
+                                    }} size='small' color='primary'>
+                                        Добавить телефон. Формат: +996555780861
+                                    </Button>
+                                    <br/>
+                                    <br/>
                                     <TextField
                                         multiline={true}
                                         label='Информация'
@@ -280,7 +245,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({image: image, name: name, address: address, email: email, phone: phone, info: info})
+                                                            await addOrganization({image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: minimumOrder})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
@@ -301,6 +266,7 @@ const Organization = React.memo((props) => {
                                                     if(email.length>0&&email!==data.organization.email)editElement.email = email
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
+                                                    if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = minimumOrder
                                                     const action = async() => {
                                                         await setOrganization(editElement)
                                                     }
@@ -391,6 +357,19 @@ const Organization = React.memo((props) => {
                                                 )}
                                             </div>
                                         </div>
+                                        {
+                                            minimumOrder>0?
+                                                <div className={classes.row}>
+                                                    <div className={classes.nameField}>
+                                                        Минимальный заказ:&nbsp;
+                                                    </div>
+                                                    <div className={classes.value}>
+                                                        {minimumOrder}&nbsp;сом
+                                                    </div>
+                                                </div>
+                                                :
+                                                null
+                                        }
                                         <br/>
                                         <div className={classes.info}>
                                             {info}
@@ -417,7 +396,7 @@ Organization.getInitialProps = async function(ctx) {
     return {
         data: {
             ...ctx.store.getState().user.authenticated&&['организация', 'менеджер'].includes(ctx.store.getState().user.profile.role)?await getEmployment({_id: ctx.store.getState().user.profile._id}):{},
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: ''}}
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0}}
         }
 
     };

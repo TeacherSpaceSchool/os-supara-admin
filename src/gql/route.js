@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getRoutes = async({search, sort, filter})=>{
+export const getRoutes = async({search, sort, filter, date})=>{
     try{
         const client = new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {search: search, sort: sort, filter: filter, date: date},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        routes(search: $search, sort: $sort, filter: $filter) {
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
+                        routes(search: $search, sort: $sort, filter: $filter, date: $date) {
                             _id
                             createdAt
                             invoices
@@ -38,8 +38,9 @@ export const getRoutes = async({search, sort, filter})=>{
                                             _id
                                             name
                                             email
+                                            phone
                                             user 
-                                                {_id phone} 
+                                                {_id } 
                                         }
                                     allPrice
                                     info
@@ -55,8 +56,9 @@ export const getRoutes = async({search, sort, filter})=>{
                                     createdAt
                                     name
                                     email
+                                    phone
                                     user 
-                                        {_id role status phone}
+                                        {_id role status }
                                     organization 
                                         {_id name}
                                 }
@@ -117,8 +119,9 @@ export const getRoute = async({_id})=>{
                                             _id
                                             name
                                             email
+                                            phone
                                             user 
-                                                {_id phone} 
+                                                {_id } 
                                         }
                                     allPrice
                                     info
@@ -134,8 +137,9 @@ export const getRoute = async({_id})=>{
                                     createdAt
                                     name
                                     email
+                                    phone
                                     user 
-                                        {_id role status phone}
+                                        {_id role status }
                                     organization 
                                         {_id name}
                                 }
