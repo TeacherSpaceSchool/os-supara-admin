@@ -1125,6 +1125,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _src_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/theme */ "./src/theme.js");
 /* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-ga */ "react-ga");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_ga__WEBPACK_IMPORTED_MODULE_7__);
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\_document.js";
@@ -1135,26 +1137,28 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
+react_ga__WEBPACK_IMPORTED_MODULE_7___default.a.initialize('UA-154348779-1');
+
 class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
   render() {
     return __jsx("html", {
       lang: "en",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 10
+        lineNumber: 12
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["Head"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 13
       },
       __self: this
     }, __jsx("meta", {
       charSet: "utf-8",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 14
       },
       __self: this
     }), __jsx("meta", {
@@ -1162,7 +1166,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 15
       },
       __self: this
     }), __jsx("meta", {
@@ -1170,7 +1174,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "\"#ffb300",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 20
       },
       __self: this
     }), __jsx("link", {
@@ -1178,7 +1182,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 21
       },
       __self: this
     }), __jsx("meta", {
@@ -1186,7 +1190,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "257953674358265",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 25
       },
       __self: this
     }), __jsx("meta", {
@@ -1194,7 +1198,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "telephone=no",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24
+        lineNumber: 26
       },
       __self: this
     }), __jsx("meta", {
@@ -1202,7 +1206,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "on",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25
+        lineNumber: 27
       },
       __self: this
     }), __jsx("link", {
@@ -1211,7 +1215,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       type: "image/x-icon",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 28
       },
       __self: this
     }), __jsx("link", {
@@ -1219,7 +1223,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       href: "/static/manifest.json",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 27
+        lineNumber: 29
       },
       __self: this
     }), __jsx("link", {
@@ -1228,7 +1232,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       href: "/static/192x192.png",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 28
+        lineNumber: 30
       },
       __self: this
     }), __jsx("link", {
@@ -1236,7 +1240,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       href: "/static/192x192.png",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 29
+        lineNumber: 31
       },
       __self: this
     }), __jsx("meta", {
@@ -1244,25 +1248,25 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_3___default.a {
       content: "/static/192x192.png",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 30
+        lineNumber: 32
       },
       __self: this
     })), __jsx("body", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 32
+        lineNumber: 34
       },
       __self: this
     }, __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["Main"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 33
+        lineNumber: 35
       },
       __self: this
     }), __jsx(next_document__WEBPACK_IMPORTED_MODULE_3__["NextScript"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 34
+        lineNumber: 36
       },
       __self: this
     })));
@@ -1300,7 +1304,7 @@ MyDocument.getInitialProps = async ctx => {
     enhanceApp: App => props => sheets.collect(__jsx(App, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 70
+        lineNumber: 72
       },
       __self: undefined
     })))
@@ -1313,7 +1317,7 @@ MyDocument.getInitialProps = async ctx => {
       key: "styles",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 79
+        lineNumber: 81
       },
       __self: undefined
     }, initialProps.styles, sheets.getStyleElement())]
@@ -1625,6 +1629,17 @@ module.exports = require("prop-types");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "react-ga":
+/*!***************************!*\
+  !*** external "react-ga" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-ga");
 
 /***/ }),
 

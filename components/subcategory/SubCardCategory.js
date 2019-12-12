@@ -6,7 +6,7 @@ import cardCategoryStyle from '../../src/styleMUI/subcategory/cardSubcategory'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
-import { onoffSubCategory, addSubCategory, setSubCategory} from '../../src/gql/subcategory'
+import { onoffSubCategory, addSubCategory, setSubCategory, deleteSubCategory} from '../../src/gql/subcategory'
 import Link from 'next/link';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
@@ -37,7 +37,7 @@ const CardCategory = React.memo((props) => {
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             {
-                profile.role === 'admin' && (!element||element._id!=='all')?
+                profile.role === 'admin' && (!element||(element._id!=='all'&&name!=='Не задано')) ?
                     <>
                     <CardActionArea>
                         <CardContent>
@@ -69,27 +69,36 @@ const CardCategory = React.memo((props) => {
                         {
                             element!==undefined?
                                 <>
-                        <Button onClick={async()=>{
-                            let editElement = {_id: element._id}
-                            if(name.length>0&&name!==element.name)editElement.name = name
-                            if(selectCategory._id!==undefined&&selectCategory._id!==element.category._id)editElement.category = selectCategory._id
-                            const action = async() => {
-                                setList((await setSubCategory(editElement, category)).subCategorys)
-                            }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            showMiniDialog(true)
-                        }} size='small' color='primary'>
-                            Сохранить
-                        </Button>
-                        <Button onClick={async()=>{
-                            const action = async() => {
-                                setList((await onoffSubCategory([element._id], category)).subCategorys)
-                            }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            showMiniDialog(true)
-                        }} size='small' color='primary'>
-                            {element.status==='active'?'Отключить':'Включить'}
-                        </Button>
+                                <Button onClick={async()=>{
+                                    let editElement = {_id: element._id}
+                                    if(name.length>0&&name!==element.name)editElement.name = name
+                                    if(selectCategory._id!==undefined&&selectCategory._id!==element.category._id)editElement.category = selectCategory._id
+                                    const action = async() => {
+                                        setList((await setSubCategory(editElement, category)).subCategorys)
+                                    }
+                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
+                                }} size='small' color='primary'>
+                                    Сохранить
+                                </Button>
+                                <Button onClick={async()=>{
+                                    const action = async() => {
+                                        setList((await onoffSubCategory([element._id], category)).subCategorys)
+                                    }
+                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
+                                }} size='small' color='primary'>
+                                    {element.status==='active'?'Отключить':'Включить'}
+                                </Button>
+                                <Button size='small' color='primary' onClick={()=>{
+                                    const action = async() => {
+                                        setList((await deleteSubCategory([element._id], category)).subCategorys)
+                                    }
+                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
+                                }}>
+                                    Удалить
+                                </Button>
                         <Link href='/items/[id]' as={`/items/${element._id}`}>
                             <Button size='small' color='primary'>
                                 Перейти

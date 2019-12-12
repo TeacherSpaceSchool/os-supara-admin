@@ -3,6 +3,8 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 import theme from '../src/theme';
 import { urlMain } from '../redux/constants/other'
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-154348779-1');
 
 class MyDocument extends Document {
     render() {

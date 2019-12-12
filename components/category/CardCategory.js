@@ -156,7 +156,7 @@ const CardCategory = React.memo((props) => {
                                             <label htmlFor='contained-button-file'>
                                                 <img
                                                     className={classes.media}
-                                                    src={element.image}
+                                                    src={'/static/add.png'}
                                                     alt={element.name}
                                                 />
                                             </label>

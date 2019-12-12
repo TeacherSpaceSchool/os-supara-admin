@@ -39,7 +39,6 @@ export default makeStyles({
         fontFamily: 'Roboto'
     },
     line: {
-        margin: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
