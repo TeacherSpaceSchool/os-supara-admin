@@ -70,7 +70,7 @@ const Client = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const router = useRouter()
     const { logout } = props.userActions;
-    let roles = ['организация', 'менеджер', 'экспедитор']
+    let roles = ['организация', 'менеджер', 'экспедитор', 'агент']
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.employment!==null?router.query.id==='new'?'Добавить':data.employment.name:'Ничего не найдено'}>
             <Head>
@@ -84,13 +84,12 @@ const Client = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/employment/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
-                <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                 {
                             data.employment!==null?
                                 profile.role==='admin'||profile.role==='организация'||profile._id===data.employment.user._id?
                                     <>
-                                    <div>
-                                        <TextField
+                                    <TextField
                                             label='Логин'
                                             value={login}
                                             className={classes.input}
@@ -123,8 +122,7 @@ const Client = React.memo((props) => {
                                                 }}
                                             />
                                         {phone?phone.map((element, idx)=>
-                                            <div key={idx}>
-                                                <FormControl className={classes.input}>
+                                                <FormControl key={idx} className={classes.input}>
                                                     <InputLabel>Телефон. Формат: +996555780861</InputLabel>
                                                     <Input
                                                         placeholder='Телефон. Формат: +996555780861'
@@ -148,14 +146,12 @@ const Client = React.memo((props) => {
                                                         }
                                                     />
                                                 </FormControl>
-                                            </div>
                                         ): null}
                                         <Button onClick={async()=>{
                                             addPhone()
                                         }} size='small' color='primary'>
                                             Добавить телефон
                                         </Button>
-                                        <br/>
                                         <br/>
                                         <TextField
                                             label='email'
@@ -293,7 +289,6 @@ const Client = React.memo((props) => {
                                                     </>
                                             }
                                         </div>
-                                    </div>
                                     </>
                                     :
                                     'Ничего не найдено'
@@ -307,7 +302,7 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
-    if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'менеджер', 'admin', 'экспедитор', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -317,7 +312,7 @@ Client.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}):{employment:{name: '',email: '',user: {phone: '',status: '',role: '',},organization: {_id: ''},}},
+            ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}):{employment:{name: '',email: '',phone: [], user: {login: '',status: '',role: '',},organization: {_id: ''},}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''})
         }
     };

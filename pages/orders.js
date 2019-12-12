@@ -36,7 +36,7 @@ const Orders = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardOrderPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardOrderPlaceholder/>}>
                         <CardOrder setList={setList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}
@@ -46,7 +46,7 @@ const Orders = React.memo((props) => {
 })
 
 Orders.getInitialProps = async function(ctx) {
-    if(!['admin', 'организация', 'менеджер', 'client'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'организация', 'менеджер', 'client', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

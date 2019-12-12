@@ -155,7 +155,7 @@ const Route = React.memo((props) => {
                             }
                             <br/>
                             {
-                                router.query.id==='new'||data.route.status==='создан'?
+                                (router.query.id==='new'||data.route.status==='создан')&&['admin', 'организация', 'менеджер'].includes(profile.role)?
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                         <InputLabel>Экспедитор</InputLabel>
                                         <Select value={employment._id} onChange={handleEmployment}>

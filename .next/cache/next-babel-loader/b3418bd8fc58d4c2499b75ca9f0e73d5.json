@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { combineReducers } from 'redux';\nimport app from './app';\nimport user from './user';\nimport mini_dialog from './mini_dialog';\nimport snackbar from './snackbar';\nimport pagination from './pagination';\nexport default combineReducers({\n  app,\n  user,\n  mini_dialog,\n  snackbar,\n  pagination\n});","map":null,"metadata":{},"sourceType":"module"}

@@ -111,7 +111,6 @@ const Item = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let [favorite, setFavorite] = useState(data.item!==null&&data.item.favorite!==undefined?data.item.favorite:[]);
-    console.log(data.item.subCategory)
     return (
         <App subcategory={data.item.subCategory?data.item.subCategory:undefined} category={data.item.subCategory?data.item.subCategory.category:undefined} filters={data.filterItem} sorts={data.sortItem} pageName={data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}>
             <Head>
@@ -127,7 +126,7 @@ const Item = React.memo((props) => {
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {
-                            profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)?
+                            profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&organization._id===employment.organization._id)?
                                 data.item!==null||router.query.id==='new'?
                                     <>
                                     <label htmlFor='contained-button-file'>
@@ -431,7 +430,7 @@ const Item = React.memo((props) => {
                                         </div>
                                         <br/>
                                         {
-                                            profile.role==='client'||!authenticated?
+                                            ['агент', 'client'].includes(profile.role)||!authenticated?
                                                 <>
                                                 <div className={isMobileApp?classes.column:classes.rowCenter}>
                                                     <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
@@ -446,7 +445,7 @@ const Item = React.memo((props) => {
                                                         color='primary'
                                                         className={classes.button}
                                                         onClick={()=>{
-                                                            if(profile.role==='client')
+                                                            if(['агент', 'client'].includes(profile.role))
                                                                 addBasket({item: data.item._id, count: count>0?count:1})
                                                             else if(!authenticated) {
                                                                 let basket = JSON.parse(localStorage.basket);

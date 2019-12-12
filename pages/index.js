@@ -51,7 +51,7 @@ const Index = React.memo((props) => {
                 <CardCategory element={{image: '/static/add.png', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
                 {list?list.map((element)=>
                     element.name!=='Не задано'?
-                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardCategoryPlaceholder height={height}/>}>
+                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardCategoryPlaceholder height={height}/>}>
                             <CardCategory key={element._id} setList={setList} element={element}/>
                         </LazyLoad>
                         :

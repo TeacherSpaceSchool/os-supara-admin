@@ -56,7 +56,7 @@ const MyDrawer = React.memo((props) => {
             <Divider />
             <List>
                 {
-                    ['экспедитор', 'организация', 'менеджер'].includes(profile.role)?
+                    ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href='/items/[id]' as='/items/all'>
                             <ListItem style={{background:
                                 router.pathname===('/')
@@ -86,7 +86,7 @@ const MyDrawer = React.memo((props) => {
                                 <>
                                 <Divider/>
                                 <Link href='/subcategory/[id]' as={`/subcategory/${category._id}`}>
-                                    <ListItem style={{marginLeft: 16, background: '#f5f5f5'}} button>
+                                    <ListItem style={{marginLeft: 16, background: '#f5f5f5'}} button onClick={()=>{showDrawer(false)}}>
                                         <ListItemText primary={category.name}/>
                                     </ListItem>
                                 </Link>
@@ -95,7 +95,7 @@ const MyDrawer = React.memo((props) => {
                                         <>
                                         <Divider/>
                                         <Link href='/items/[id]' as={`/items/${subcategory._id}`}>
-                                            <ListItem style={{marginLeft: 32, background: '#f5f5f5'}} button>
+                                            <ListItem style={{marginLeft: 32, background: '#f5f5f5'}} button onClick={()=>{showDrawer(false)}}>
                                                 <ListItemText primary={subcategory.name}/>
                                             </ListItem>
                                         </Link>
@@ -111,7 +111,7 @@ const MyDrawer = React.memo((props) => {
                 }
                 <Divider/>
                 {
-                    ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)||!authenticated?
+                    ['admin', 'client', 'организация', 'менеджер', 'агент'].includes(profile.role)||!authenticated?
                         <>
                         <ListItem style={{background: router.pathname.includes('bonus')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
                             <ListItemIcon><MoneyIcon color='inherit'/></ListItemIcon>
@@ -123,8 +123,8 @@ const MyDrawer = React.memo((props) => {
                             uncoverBonus?
                                 <>
                                 <Link href='/bonus'>
-                                    <ListItem style={{marginLeft: 16, background: router.pathname==='/bonus'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
-                                        <ListItemText primary={['организация', 'менеджер'].includes(profile.role)?'Бонусы компании':'Бонусы компаний'}/>
+                                    <ListItem style={{marginLeft: 16, background: router.pathname==='/bonus'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus);showDrawer(false)}}>
+                                        <ListItemText primary={['организация', 'менеджер', 'агент'].includes(profile.role)?'Бонусы компании':'Бонусы компаний'}/>
                                     </ListItem>
                                 </Link>
                                 <Divider/>
@@ -132,8 +132,8 @@ const MyDrawer = React.memo((props) => {
                                     ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)?
                                         <>
                                         <Link href='/bonusclient'>
-                                            <ListItem style={{marginLeft: 16, background: router.pathname==='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus)}}>
-                                                <ListItemText primary={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}/>
+                                            <ListItem style={{marginLeft: 16, background: router.pathname==='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(!uncoverBonus);showDrawer(false)}}>
+                                                <ListItemText primary={['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}/>
                                             </ListItem>
                                         </Link>
                                         <Divider/>
@@ -161,7 +161,7 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
+                    ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href={'/clients'}>
                             <ListItem style={{background: router.pathname.includes('client')&&router.pathname!=='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -174,7 +174,7 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['client', 'admin', 'организация', 'менеджер'].includes(profile.role)?
+                    ['client', 'admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href='/orders'>
                             <ListItem style={{background: router.pathname==='/orders'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -200,7 +200,7 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['экспедитор', 'организация', 'менеджер'].includes(profile.role)?
+                    ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href='/organization/[id]' as={`/organization/${profile.organization}`}>
                             <ListItem style={{background: router.pathname.includes('organization')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>

@@ -37,7 +37,7 @@ const Ads = React.memo((props) => {
             <div className={classes.page}>
                 {profile.role==='admin'?<CardAds setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardAdsPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardAdsPlaceholder height={height}/>}>
                         <CardAds setList={setList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

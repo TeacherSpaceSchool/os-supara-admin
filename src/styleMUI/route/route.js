@@ -113,7 +113,8 @@ export default makeStyles({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingLeft: 16,
-        paddingRight: 16
+        paddingRight: 16,
+        zIndex: 10000
     },
     bottomRouteM: {
         width: '100vw',
@@ -128,7 +129,8 @@ export default makeStyles({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingLeft: 16,
-        paddingRight: 16
+        paddingRight: 16,
+        zIndex: 10000
     },
     listInvoices: {
         display: 'flex',

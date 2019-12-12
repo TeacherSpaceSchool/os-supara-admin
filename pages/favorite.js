@@ -53,7 +53,7 @@ const Items = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardItemPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardItemPlaceholder/>}>
                         <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

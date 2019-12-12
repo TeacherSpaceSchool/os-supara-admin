@@ -310,7 +310,7 @@ const Basket = React.memo((props) => {
 })
 
 Basket.getInitialProps = async function(ctx) {
-    if('client'!==ctx.store.getState().user.profile.role&&ctx.store.getState().user.authenticated)
+    if(!['client', 'агент'].includes(ctx.store.getState().user.profile.role)&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

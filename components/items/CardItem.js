@@ -127,9 +127,9 @@ const CardItem = React.memo((props) => {
                                             }
                                             </>
                                             :
-                                            profile.role==='client'||!authenticated?
+                                            ['агент', 'client'].includes(profile.role)||!authenticated?
                                                 <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={()=>{
-                                                    if(profile.role==='client')
+                                                    if(['агент', 'client'].includes(profile.role))
                                                         addBasket({item: element._id, count: 1})
                                                     else if(!authenticated) {
                                                         let basket = JSON.parse(localStorage.basket);

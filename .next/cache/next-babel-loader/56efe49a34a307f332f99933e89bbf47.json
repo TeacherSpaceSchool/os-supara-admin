@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { CLOSE_SNACKBAR, SHOW_SNACKBAR } from '../constants/snackbar';\nexport function showSnackBar(title) {\n  return {\n    type: SHOW_SNACKBAR,\n    payload: {\n      title: title\n    }\n  };\n}\nexport function closeSnackBar() {\n  return {\n    type: CLOSE_SNACKBAR\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

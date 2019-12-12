@@ -80,8 +80,8 @@ export const addBasket = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($item: ID!, $count: Int!, $organization: ID!) {
-                        addBasket(item: $item, count: $count, organization: $organization) {
+                    mutation ($item: ID!, $count: Int!) {
+                        addBasket(item: $item, count: $count) {
                              data
                         }
                     }`})

@@ -36,7 +36,7 @@ const Client = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardClientPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardClientPlaceholder height={height}/>}>
                         <CardClient key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}
@@ -48,7 +48,7 @@ const Client = React.memo((props) => {
 Client.getInitialProps = async function(ctx) {
     let role = ctx.store.getState().user.profile.role
     let authenticated = ctx.store.getState().user.authenticated
-    if(authenticated&&!['admin', 'организация', 'менеджер'].includes(role))
+    if(authenticated&&!['admin', 'организация', 'менеджер', 'агент'].includes(role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

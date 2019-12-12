@@ -38,7 +38,7 @@ const Bonus = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={100}  placeholder={<CardBonusPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardBonusPlaceholder height={height}/>}>
                         <CardBonus key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

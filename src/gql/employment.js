@@ -154,7 +154,7 @@ export const addEmployment = async(element)=>{
                              data
                         }
                     }`})
-        return await getEmployments(new SingletonStore().getStore().getState().app)
+        //return await getEmployments(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }

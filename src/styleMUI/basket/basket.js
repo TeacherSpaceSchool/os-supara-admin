@@ -123,6 +123,7 @@ export default makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        zIndex: 10000
     },
     buyM:{
         width: 140,
@@ -154,6 +155,7 @@ export default makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        zIndex: 10000
     },
     allPriceD:{
         marginLeft: 20,

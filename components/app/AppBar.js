@@ -271,8 +271,7 @@ const MyAppBar = React.memo((props) => {
                                         onClose={handleCloseProfile}
                                     >
                                         {
-                                            !authenticated||profile.role==='client'?
-                                                [
+                                            !authenticated||['client', 'агент'].includes(profile.role)?
                                                 <MenuItem>
                                                     <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>
@@ -282,7 +281,12 @@ const MyAppBar = React.memo((props) => {
                                                             </a>
                                                         </Link>
                                                     </Badge>
-                                                </MenuItem>,
+                                                </MenuItem>
+                                                :
+                                                null
+                                        }
+                                        {
+                                            !authenticated||profile.role==='client'?
                                                 <MenuItem>
                                                     <Link href='/favorite'>
                                                         <a style={{display: 'flex', color: '#606060'}}>
@@ -290,7 +294,6 @@ const MyAppBar = React.memo((props) => {
                                                         </a>
                                                     </Link>
                                                 </MenuItem>
-                                                ]
                                                 :
                                                 null
                                         }
@@ -493,18 +496,22 @@ const MyAppBar = React.memo((props) => {
                                         onClose={handleCloseProfile}
                                     >
                                         {
-                                            !authenticated||profile.role==='client'?
-                                                [
-                                                    <MenuItem>
-                                                        <Badge badgeContent={countBasket} color='secondary'>
+                                            !authenticated||['client', 'агент'].includes(profile.role)?
+                                                <MenuItem>
+                                                    <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>
                                                             <a style={{display: 'flex', color: '#606060'}}>
-                                                                  <LocalGroceryStore/>
+                                                                <LocalGroceryStore/>
                                                                 &nbsp;Корзина&nbsp;&nbsp;
                                                             </a>
                                                         </Link>
-                                                </Badge>
-                                                    </MenuItem>,
+                                                    </Badge>
+                                                </MenuItem>
+                                                :
+                                                null
+                                        }
+                                        {
+                                            !authenticated||profile.role==='client'?
                                                 <MenuItem>
                                                     <Link href='/favorite'>
                                                         <a style={{display: 'flex', color: '#606060'}}>
@@ -512,7 +519,6 @@ const MyAppBar = React.memo((props) => {
                                                         </a>
                                                     </Link>
                                                 </MenuItem>
-                                                ]
                                                 :
                                                 null
                                         }
