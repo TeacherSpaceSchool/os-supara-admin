@@ -73,8 +73,12 @@ const Item = React.memo((props) => {
     let [image, setImage] = useState(undefined);
     let [employment, setEmployment] = useState({organization: ''});
     let handleChangeImage = ((event) => {
-        setImage(event.target.files[0])
-        setPreview(URL.createObjectURL(event.target.files[0]))
+        if(event.target.files[0].size/1024/1024<20){
+            setImage(event.target.files[0])
+            setPreview(URL.createObjectURL(event.target.files[0]))
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     useEffect(()=>{
         (async()=>{

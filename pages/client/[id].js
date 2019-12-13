@@ -27,13 +27,14 @@ import { useRouter } from 'next/router'
 import { pdDatePicker } from '../../src/lib'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-
+import * as snackbarActions from '../../redux/actions/snackbar'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
     const classes = clientStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
+    const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.client?data.client.user.status:'');
     let [name, setName] = useState(data.client?data.client.name:'');
     let [email, setEmail] = useState(data.client?data.client.email:'');
@@ -91,24 +92,40 @@ const Client = React.memo((props) => {
     let [preview, setPreview] = useState(data.client?data.client.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
-        setImage(event.target.files[0])
-        setPreview(URL.createObjectURL(event.target.files[0]))
+        if(event.target.files[0].size/1024/1024<20){
+            setImage(event.target.files[0])
+            setPreview(URL.createObjectURL(event.target.files[0]))
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     let [patent , setPatent] = useState(undefined);
     let handleChangePatent = ((event) => {
-        setPatent(event.target.files[0])
+        if(event.target.files[0].size/1024/1024<20){
+            setPatent(event.target.files[0])
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     let patentUrl =data.client?data.client.patent:'';
     let patentRef = useRef(null);
     let [passport, setPassport] = useState(undefined);
     let handleChangePassport = ((event) => {
-        setPassport(event.target.files[0])
+        if(event.target.files[0].size/1024/1024<20){
+            setPassport(event.target.files[0])
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     let passportUrl = data.client?data.client.passport:'';
     let passportRef = useRef(null);
     let [certificate, setCertificate] = useState(undefined);
     let handleChangeCertificate = ((event) => {
-        setCertificate(event.target.files[0])
+        if(event.target.files[0].size/1024/1024<20){
+            setCertificate(event.target.files[0])
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     let certificateUrl = data.client?data.client.certificate:'';
     let certificateRef = useRef(null);
@@ -317,32 +334,37 @@ const Client = React.memo((props) => {
                                     <br/>
                                     {address?address.map((element, idx)=>
                                         <div key={idx}>
+                                            {
+                                                type==='торговая точка'?
+                                                    <FormControl className={classes.input}>
+                                                        <InputLabel>Название магазина</InputLabel>
+                                                        <Input
+                                                            placeholder='Название магазина'
+                                                            value={element[2]}
+                                                            className={classes.input}
+                                                            onChange={(event)=>{editAddressName(event, idx)}}
+                                                            inputProps={{
+                                                                'aria-label': 'description',
+                                                            }}
+                                                            endAdornment={
+                                                                <InputAdornment position="end">
+                                                                    <IconButton
+                                                                        onClick={()=>{
+                                                                            deleteAddress(idx)
+                                                                        }}
+                                                                        aria-label='toggle password visibility'
+                                                                    >
+                                                                        <Remove/>
+                                                                    </IconButton>
+                                                                </InputAdornment>
+                                                            }
+                                                        />
+                                                    </FormControl>
+                                                    :
+                                                    null
+                                            }
                                             <FormControl className={classes.input}>
-                                                <InputLabel>Название магазина</InputLabel>
-                                                <Input
-                                                    placeholder='Название магазина'
-                                                    value={element[2]}
-                                                    className={classes.input}
-                                                    onChange={(event)=>{editAddressName(event, idx)}}
-                                                    inputProps={{
-                                                        'aria-label': 'description',
-                                                    }}
-                                                    endAdornment={
-                                                        <InputAdornment position="end">
-                                                            <IconButton
-                                                                onClick={()=>{
-                                                                    deleteAddress(idx)
-                                                                }}
-                                                                aria-label='toggle password visibility'
-                                                            >
-                                                                <Remove/>
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    }
-                                                />
-                                            </FormControl>
-                                            <FormControl className={classes.input}>
-                                                <InputLabel>Адрес магазина</InputLabel>
+                                                <InputLabel>Адрес{type==='торговая точка'?' магазина':''}</InputLabel>
                                                 <Input
                                                     placeholder='Адрес'
                                                     value={element[0]}
@@ -351,6 +373,21 @@ const Client = React.memo((props) => {
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
+                                                    endAdornment={
+                                                        type==='торговая точка'?
+                                                            null
+                                                            :
+                                                            <InputAdornment position="end">
+                                                                <IconButton
+                                                                    onClick={()=>{
+                                                                        deleteAddress(idx)
+                                                                    }}
+                                                                    aria-label='toggle password visibility'
+                                                                >
+                                                                    <Remove/>
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                    }
                                                 />
                                             </FormControl>
                                             <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
@@ -596,6 +633,7 @@ function mapDispatchToProps(dispatch) {
     return {
         mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
         userActions: bindActionCreators(userActions, dispatch),
+        snackbarActions: bindActionCreators(snackbarActions, dispatch),
     }
 }
 

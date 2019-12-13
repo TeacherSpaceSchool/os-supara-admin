@@ -81,8 +81,12 @@ const Contact = React.memo((props) => {
     let [preview, setPreview] = useState(data.contact.image===''?'/static/add.png':data.contact.image);
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
-        setImage(event.target.files[0])
-        setPreview(URL.createObjectURL(event.target.files[0]))
+        if(event.target.files[0].size/1024/1024<20){
+            setImage(event.target.files[0])
+            setPreview(URL.createObjectURL(event.target.files[0]))
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;

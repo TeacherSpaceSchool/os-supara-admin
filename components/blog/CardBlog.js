@@ -25,8 +25,12 @@ const CardBlog = React.memo((props) => {
     let [preview, setPreview] = useState(element?element.image:'/static/add.png');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
-        setImage(event.target.files[0])
-        setPreview(URL.createObjectURL(event.target.files[0]))
+        if(event.target.files[0].size/1024/1024<20){
+            setImage(event.target.files[0])
+            setPreview(URL.createObjectURL(event.target.files[0]))
+        } else {
+            showSnackBar('Файл слишком большой')
+        }
     })
     let [title, setTitle] = useState(element?element.title:'');
     let handleTitle =  (event) => {

@@ -88,10 +88,395 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/ads/CardAds.js":
+/*!***********************************!*\
+  !*** ./components/ads/CardAds.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "@material-ui/core/CardActionArea");
+/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/styleMUI/ads/cardAds */ "./src/styleMUI/ads/cardAds.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CardActions */ "@material-ui/core/CardActions");
+/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _src_gql_ads__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/gql/ads */ "./src/gql/ads.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\ads\\CardAds.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const classes = Object(_src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const {
+    element,
+    setList
+  } = props;
+  const {
+    profile
+  } = props.user;
+  const {
+    isMobileApp
+  } = props.app; //addCard
+
+  let {
+    0: preview,
+    1: setPreview
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.image : '/static/add.png');
+  let {
+    0: image,
+    1: setImage
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
+
+  let handleChangeImage = event => {
+    if (event.target.files[0].size / 1024 / 1024 < 20) {
+      setImage(event.target.files[0]);
+      setPreview(URL.createObjectURL(event.target.files[0]));
+    } else {
+      showSnackBar('Файл слишком большой');
+    }
+  };
+
+  let {
+    0: title,
+    1: setTitle
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.title : '');
+
+  let handleTitle = event => {
+    setTitle(event.target.value);
+  };
+
+  let {
+    0: url,
+    1: setUrl
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.url : '');
+
+  let handleUrl = event => {
+    setUrl(event.target.value);
+  };
+
+  const {
+    setMiniDialog,
+    showMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    showSnackBar
+  } = props.snackbarActions;
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", profile.role === 'admin' ? __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: isMobileApp ? classes.cardM : classes.cardD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, __jsx("label", {
+    htmlFor: element ? element._id : 'add',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, __jsx("img", {
+    className: isMobileApp ? classes.mediaM : classes.mediaD,
+    src: preview,
+    alt: 'Изменить',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 54
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    label: "\u0418\u043C\u044F",
+    value: title,
+    className: classes.input,
+    onChange: handleTitle,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    label: "URL",
+    value: url,
+    className: classes.input,
+    onChange: handleUrl,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: undefined
+  })), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: undefined
+  }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    onClick: async () => {
+      let editElement = {
+        _id: element._id
+      };
+      if (title.length > 0 && title !== element.title) editElement.title = title;
+      if (url.length > 0 && url !== element.url) editElement.url = url;
+      if (image !== undefined) editElement.image = image;
+
+      const action = async () => {
+        setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["setAds"])(editElement)).adss);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 88
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: undefined
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    onClick: async () => {
+      const action = async () => {
+        setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["deleteAds"])([element._id])).adss);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 97
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 93
+    },
+    __self: undefined
+  }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    onClick: async () => {
+      if (image !== undefined && url.length > 0 && title.length > 0) {
+        setImage(undefined);
+        setPreview('/static/add.png');
+        setTitle('');
+        setUrl('');
+
+        const action = async () => {
+          setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["addAds"])({
+            image: image,
+            url: url,
+            title: title
+          })).adss);
+        };
+
+        setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          action: action,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 113
+          },
+          __self: undefined
+        }));
+        showMiniDialog(true);
+      } else {
+        showSnackBar('Заполните все поля');
+      }
+    },
+    size: "small",
+    color: "primary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104
+    },
+    __self: undefined
+  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
+    accept: "image/*",
+    style: {
+      display: 'none'
+    },
+    id: element ? element._id : 'add',
+    type: "file",
+    onChange: handleChangeImage,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 124
+    },
+    __self: undefined
+  })) : element !== undefined ? __jsx("div", {
+    className: isMobileApp ? classes.cardM : classes.cardD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 134
+    },
+    __self: undefined
+  }, __jsx("a", {
+    href: element.url,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: undefined
+  }, __jsx("img", {
+    className: isMobileApp ? classes.mediaM : classes.mediaD,
+    alt: element.title,
+    src: element.image,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 136
+    },
+    __self: undefined
+  }))) : null);
+});
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_10__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_10__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__, dispatch)
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, mapDispatchToProps)(CardAds));
+
+/***/ }),
+
+/***/ "./components/ads/CardAdsPlaceholder.js":
+/*!**********************************************!*\
+  !*** ./components/ads/CardAdsPlaceholder.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/styleMUI/ads/cardAds */ "./src/styleMUI/ads/cardAds.js");
+/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/lab/Skeleton */ "@material-ui/lab/Skeleton");
+/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__);
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\ads\\CardAdsPlaceholder.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const CardAdsPlaceholder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const classes = Object(_src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  const {
+    height
+  } = props;
+  const {
+    isMobileApp
+  } = props.app;
+  return __jsx("div", {
+    className: isMobileApp ? classes.cardM : classes.cardD,
+    style: {
+      height: height
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11
+    },
+    __self: undefined
+  }, __jsx(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    variant: "rect",
+    height: "100%",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }));
+});
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    app: state.app
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(CardAdsPlaceholder));
+
+/***/ }),
 
 /***/ "./components/app/AppBar.js":
 /*!**********************************!*\
@@ -1875,7 +2260,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -1922,7 +2307,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -1969,7 +2354,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2016,7 +2401,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2064,7 +2449,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2105,7 +2490,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2152,7 +2537,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2199,7 +2584,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2246,7 +2631,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2293,7 +2678,7 @@ const MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     button: true,
     onClick: () => {
-      setUncoverBonus(!uncoverBonus);
+      setUncoverBonus(false);
       showDrawer(false);
     },
     __source: {
@@ -2439,500 +2824,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(MyDialog));
-
-/***/ }),
-
-/***/ "./components/category/CardCategory.js":
-/*!*********************************************!*\
-  !*** ./components/category/CardCategory.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "@material-ui/core/CardActionArea");
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_styleMUI_category_cardCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/styleMUI/category/cardCategory */ "./src/styleMUI/category/cardCategory.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CardActions */ "@material-ui/core/CardActions");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _src_gql_category__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/gql/category */ "./src/gql/category.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\category\\CardCategory.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const CardCategory = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_category_cardCategory__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  const {
-    element,
-    setList
-  } = props;
-  const {
-    profile
-  } = props.user;
-  const {
-    isMobileApp
-  } = props.app; //addCard
-
-  let {
-    0: preview,
-    1: setPreview
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.image : '/static/add.png');
-  let {
-    0: image,
-    1: setImage
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
-
-  let handleChangeImage = event => {
-    setImage(event.target.files[0]);
-    setPreview(URL.createObjectURL(event.target.files[0]));
-  };
-
-  let {
-    0: name,
-    1: setName
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.name : '');
-
-  let handleName = event => {
-    setName(event.target.value);
-  };
-
-  const {
-    setMiniDialog,
-    showMiniDialog
-  } = props.mini_dialogActions;
-  const {
-    showSnackBar
-  } = props.snackbarActions;
-  return __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37
-    },
-    __self: undefined
-  }, name !== 'Не задано' && setList !== 'all' && profile.role === 'admin' ? __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 42
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 43
-    },
-    __self: undefined
-  }, __jsx("label", {
-    htmlFor: element ? element._id : 'add',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44
-    },
-    __self: undefined
-  }, __jsx("img", {
-    className: classes.media,
-    src: preview,
-    alt: 'Изменить',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 45
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    label: "\u0418\u043C\u044F",
-    value: name,
-    className: isMobileApp ? classes.inputM : classes.inputD,
-    onChange: handleName,
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: undefined
-  })))), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: undefined
-  }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      let editElement = {
-        _id: element._id
-      };
-      if (name.length > 0 && name !== element.name) editElement.name = name;
-      if (image !== undefined) editElement.image = image;
-
-      const action = async () => {
-        setList((await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["setCategory"])(editElement)).categorys);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 74
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 67
-    },
-    __self: undefined
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      const action = async () => {
-        setList((await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["onoffCategory"])([element._id])).categorys);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 83
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 79
-    },
-    __self: undefined
-  }, element.status === 'active' ? 'Отключить' : 'Включить'), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    size: "small",
-    color: "primary",
-    onClick: () => {
-      const action = async () => {
-        setList((await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["deleteCategory"])([element._id])).categorys);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 92
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 88
-    },
-    __self: undefined
-  }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    href: "/subcategory/[id]",
-    as: `/subcategory/${element._id}`,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 97
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 98
-    },
-    __self: undefined
-  }, "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"))) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      if (image !== undefined && name.length > 0) {
-        setImage(undefined);
-        setPreview('/static/add.png');
-        setName('');
-
-        const action = async () => {
-          setList((await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_8__["addCategory"])({
-            image: image,
-            name: name
-          })).categorys);
-        };
-
-        setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_14__["default"], {
-          action: action,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 111
-          },
-          __self: undefined
-        }));
-        showMiniDialog(true);
-      } else showSnackBar('Заполните все поля');
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 103
-    },
-    __self: undefined
-  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
-    accept: "image/*",
-    style: {
-      display: 'none'
-    },
-    id: element ? element._id : 'add',
-    type: "file",
-    onChange: handleChangeImage,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 121
-    },
-    __self: undefined
-  })) : name !== 'Не задано' ? __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 132
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 133
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 134
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    href: "/subcategory/[id]",
-    as: `/subcategory/${element._id}`,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 135
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 136
-    },
-    __self: undefined
-  }, __jsx("label", {
-    htmlFor: "contained-button-file",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 137
-    },
-    __self: undefined
-  }, __jsx("img", {
-    className: classes.media,
-    src: element.image,
-    alt: element.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 138
-    },
-    __self: undefined
-  })), __jsx("h3", {
-    className: isMobileApp ? classes.inputM : classes.inputD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 144
-    },
-    __self: undefined
-  }, element.name)))))) : name === 'Не задано' && profile.role === 'admin' ? __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 154
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 155
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 156
-    },
-    __self: undefined
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    href: "/subcategory/[id]",
-    as: `/subcategory/${element._id}`,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 157
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.line,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 158
-    },
-    __self: undefined
-  }, __jsx("label", {
-    htmlFor: "contained-button-file",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 159
-    },
-    __self: undefined
-  }, __jsx("img", {
-    className: classes.media,
-    src: '/static/add.png',
-    alt: element.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 160
-    },
-    __self: undefined
-  })), __jsx("h3", {
-    className: isMobileApp ? classes.inputM : classes.inputD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 166
-    },
-    __self: undefined
-  }, element.name)))))) : null);
-});
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    app: state.app
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__, dispatch),
-    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, mapDispatchToProps)(CardCategory));
-
-/***/ }),
-
-/***/ "./components/category/CardCategoryPlaceholder.js":
-/*!********************************************************!*\
-  !*** ./components/category/CardCategoryPlaceholder.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_styleMUI_category_cardCategory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/styleMUI/category/cardCategory */ "./src/styleMUI/category/cardCategory.js");
-/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/lab/Skeleton */ "@material-ui/lab/Skeleton");
-/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\category\\CardCategoryPlaceholder.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-const CardCategoryPlaceholder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_category_cardCategory__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  const {
-    height
-  } = props;
-  const {
-    isMobileApp
-  } = props.app;
-  return __jsx("div", {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    style: {
-      height: height
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: undefined
-  }, __jsx(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    variant: "rect",
-    height: "100%",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: undefined
-  }));
-});
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    app: state.app
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(CardCategoryPlaceholder));
 
 /***/ }),
 
@@ -4766,10 +4657,10 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./pages/ads.js":
+/*!**********************!*\
+  !*** ./pages/ads.js ***!
+  \**********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4780,21 +4671,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _src_gql_category__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/gql/category */ "./src/gql/category.js");
-/* harmony import */ var _src_styleMUI_category_categoryList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../src/styleMUI/category/categoryList */ "./src/styleMUI/category/categoryList.js");
-/* harmony import */ var _components_category_CardCategory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/category/CardCategory */ "./components/category/CardCategory.js");
-/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-lazyload */ "react-lazyload");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _components_category_CardCategoryPlaceholder__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/category/CardCategoryPlaceholder */ "./components/category/CardCategoryPlaceholder.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\index.js";
+/* harmony import */ var _components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/ads/CardAds */ "./components/ads/CardAds.js");
+/* harmony import */ var _src_styleMUI_ads_adsList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/styleMUI/ads/adsList */ "./src/styleMUI/ads/adsList.js");
+/* harmony import */ var _src_gql_ads__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/gql/ads */ "./src/gql/ads.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-lazyload */ "react-lazyload");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_ads_CardAdsPlaceholder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/ads/CardAdsPlaceholder */ "./components/ads/CardAdsPlaceholder.js");
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\ads.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
@@ -4806,75 +4692,71 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-
-
-
-const Index = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_category_categoryList__WEBPACK_IMPORTED_MODULE_7__["default"])();
+const Ads = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
+  const classes = Object(_src_styleMUI_ads_adsList__WEBPACK_IMPORTED_MODULE_4__["default"])();
   const {
     data
   } = props;
   let {
     0: list,
     1: setList
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(data.categorys);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(data.adss);
   const {
     search,
     filter,
     sort
   } = props.app;
   const {
-    profile,
-    authenticated
+    profile
   } = props.user;
-  let height = profile.role === 'admin' ? 161 : 83;
+  const {
+    count
+  } = props.pagination;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
     (async () => {
-      setList((await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_6__["getCategorys"])({
+      setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_5__["getAdss"])({
         search: search,
         sort: sort,
         filter: filter
-      })).categorys);
+      })).adss);
     })();
-  }, [filter, sort, search]);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    if (!(!authenticated || ['admin', 'client'].includes(profile.role) || !profile.role)) next_router__WEBPACK_IMPORTED_MODULE_10___default.a.push('/items/all');
-  }, [profile, authenticated]);
+  }, [filter, sort, search, count]);
+  let height = profile.role === 'admin' ? 400 : 200;
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    filters: data.filterCategory,
-    sorts: data.sortCategory,
-    pageName: "\u0422\u043E\u0432\u0430\u0440\u044B",
+    filters: data.filterAds,
+    sorts: data.sortAds,
+    pageName: "\u0410\u043A\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 26
     },
     __self: undefined
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 27
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 28
     },
     __self: undefined
-  }, "\u0410\u0437\u044B\u043A - \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0439 \u0441\u043A\u043B\u0430\u0434 \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u044E\u0449\u0438\u0439 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F \u0441 \u0442\u043E\u0440\u0433\u043E\u0432\u043E\u0439 \u0442\u043E\u0447\u043A\u043E\u0439"), __jsx("meta", {
+  }, "\u0410\u043A\u0446\u0438\u0438"), __jsx("meta", {
     name: "description",
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 29
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:title",
-    content: "\u0410\u0437\u044B\u043A - \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0439 \u0441\u043A\u043B\u0430\u0434 \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u044E\u0449\u0438\u0439 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F \u0441 \u0442\u043E\u0440\u0433\u043E\u0432\u043E\u0439 \u0442\u043E\u0447\u043A\u043E\u0439",
+    content: "\u0410\u043A\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 30
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4882,7 +4764,7 @@ const Index = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 31
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4890,101 +4772,82 @@ const Index = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 32
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:image",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_9__["urlMain"]}/static/512x512.png`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/static/512x512.png`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 33
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:url",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_9__["urlMain"]}`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/ads`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 34
     },
     __self: undefined
   }), __jsx("link", {
     rel: "canonical",
-    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_9__["urlMain"]}`,
+    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/ads`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 35
     },
     __self: undefined
   })), __jsx("div", {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 37
     },
     __self: undefined
-  }, profile.role === 'admin' ? __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_components_category_CardCategory__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, profile.role === 'admin' ? __jsx(_components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__["default"], {
     setList: setList,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 38
     },
     __self: undefined
-  })) : null, __jsx(_components_category_CardCategory__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    element: {
-      image: '/static/add.png',
-      name: 'Все подкатегории',
-      _id: 'all'
-    },
-    setList: "all",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 51
-    },
-    __self: undefined
-  }), list ? list.map(element => __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_11___default.a, {
+  }) : null, list ? list.map(element => __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_8___default.a, {
     scrollContainer: '.App-body',
     key: element._id,
     height: height,
     offset: [height, 0],
     debounce: 50,
-    placeholder: __jsx(_components_category_CardCategoryPlaceholder__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    placeholder: __jsx(_components_ads_CardAdsPlaceholder__WEBPACK_IMPORTED_MODULE_9__["default"], {
       height: height,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 40
       },
       __self: undefined
     }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 40
     },
     __self: undefined
-  }, __jsx(_components_category_CardCategory__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    key: element._id,
+  }, __jsx(_components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__["default"], {
     setList: setList,
+    key: element._id,
     element: element,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 41
     },
     __self: undefined
   }))) : null));
 });
 
-Index.getInitialProps = async function (ctx) {
-  let role = ctx.store.getState().user.profile.role;
-  let authenticated = ctx.store.getState().user.authenticated;
-  if (!(!authenticated || ['admin', 'client'].includes(role) || !role)) if (ctx.res) {
-    ctx.res.writeHead(302, {
-      Location: '/items/all'
-    });
-    ctx.res.end();
-  } else next_router__WEBPACK_IMPORTED_MODULE_10___default.a.push('/items/all');
+Ads.getInitialProps = async function (ctx) {
+  ctx.store.getState().pagination.work = true;
   return {
-    data: await Object(_src_gql_category__WEBPACK_IMPORTED_MODULE_6__["getCategorys"])({
+    data: await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_5__["getAdss"])({
       search: '',
       sort: '-createdAt',
       filter: ''
@@ -4994,18 +4857,13 @@ Index.getInitialProps = async function (ctx) {
 
 function mapStateToProps(state) {
   return {
+    app: state.app,
     user: state.user,
-    app: state.app
+    pagination: state.pagination
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_5__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Index));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Ads));
 
 /***/ }),
 
@@ -5527,6 +5385,142 @@ const SET_AUTH = 'SET_AUTH';
 
 /***/ }),
 
+/***/ "./src/gql/ads.js":
+/*!************************!*\
+  !*** ./src/gql/ads.js ***!
+  \************************/
+/*! exports provided: getAds, getAdss, deleteAds, addAds, setAds */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAds", function() { return getAds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAdss", function() { return getAdss; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAds", function() { return deleteAds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addAds", function() { return addAds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAds", function() { return setAds; });
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+const getAds = async () => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query {
+                        ads {
+                            _id
+                            image
+                            url
+                            title
+                            createdAt
+                          }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getAdss = async ({
+  search: search,
+  sort: sort,
+  filter: filter
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort,
+        filter: filter
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!, $filter: String!) {
+                        adss(search: $search, sort: $sort, filter: $filter) {
+                            _id
+                            image
+                            url
+                            title
+                            createdAt
+                          }
+                          sortAds {
+                           name
+                            field
+                          }
+                          filterAds {
+                           name
+                           value
+                          }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const deleteAds = async ids => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: {
+        _id: ids
+      },
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: [ID]!) {
+                        deleteAds(_id: $_id) {
+                             data
+                        }
+                    }`
+    });
+    return await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const addAds = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($image: Upload!, $url: String!, $title: String!) {
+                        addAds(image: $image, url: $url, title: $title) {
+                             data
+                        }
+                    }`
+    });
+    let list = await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+    return list;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setAds = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: ID!, $image: Upload, $url: String, $title: String) {
+                        setAds(_id: $_id, image: $image, url: $url, title: $title) {
+                             data
+                        }
+                    }`
+    });
+    let list = await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+    return list;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/***/ }),
+
 /***/ "./src/gql/basket.js":
 /*!***************************!*\
   !*** ./src/gql/basket.js ***!
@@ -5651,139 +5645,6 @@ const setBasket = async element => {
     });
     await getCountBasket();
     return await getBasket(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-/***/ }),
-
-/***/ "./src/gql/category.js":
-/*!*****************************!*\
-  !*** ./src/gql/category.js ***!
-  \*****************************/
-/*! exports provided: getCategorys, deleteCategory, onoffCategory, addCategory, setCategory */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategorys", function() { return getCategorys; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCategory", function() { return deleteCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffCategory", function() { return onoffCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCategory", function() { return addCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCategory", function() { return setCategory; });
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-
-
-
-const getCategorys = async ({
-  search: search,
-  sort: sort,
-  filter: filter
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        search: search,
-        sort: sort,
-        filter: filter
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        categorys(search: $search, sort: $sort, filter: $filter) {
-                            _id
-                            image
-                            name
-                            status
-                            createdAt
-                          }
-                          sortCategory {
-                           name
-                            field
-                          }
-                          filterCategory {
-                           name
-                           value
-                          }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const deleteCategory = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        deleteCategory(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const onoffCategory = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        onoffCategory(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addCategory = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($image: Upload!, $name: String!) {
-                        addCategory(image: $image, name: $name) {
-                             data
-                        }
-                    }`
-    });
-    return await getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const setCategory = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: ID!, $image: Upload, $name: String) {
-                        setCategory(_id: $_id, image: $image, name: $name) {
-                             data
-                        }
-                    }`
-    });
-    return await getCategorys(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
   } catch (err) {
     console.error(err);
   }
@@ -6342,6 +6203,70 @@ class SingletonStore {
 
 /***/ }),
 
+/***/ "./src/styleMUI/ads/adsList.js":
+/*!*************************************!*\
+  !*** ./src/styleMUI/ads/adsList.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  page: {
+    paddingTop: 20,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+}));
+
+/***/ }),
+
+/***/ "./src/styleMUI/ads/cardAds.js":
+/*!*************************************!*\
+  !*** ./src/styleMUI/ads/cardAds.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  cardM: {
+    width: 'calc(100vw - 40px)',
+    marginBottom: 20
+  },
+  cardD: {
+    width: 600,
+    margin: 10
+  },
+  mediaM: {
+    objectFit: 'cover',
+    height: 'calc((100vw - 40px) / 3)',
+    width: 'calc(100vw - 40px)'
+  },
+  mediaD: {
+    objectFit: 'cover',
+    height: 200,
+    width: 600,
+    cursor: 'pointer'
+  },
+  input: {
+    width: '100%'
+  }
+}));
+
+/***/ }),
+
 /***/ "./src/styleMUI/appbar.js":
 /*!********************************!*\
   !*** ./src/styleMUI/appbar.js ***!
@@ -6383,92 +6308,6 @@ __webpack_require__.r(__webpack_exports__);
   searchField: {
     width: 'calc(100% - 20px)',
     margin: 10
-  }
-}));
-
-/***/ }),
-
-/***/ "./src/styleMUI/category/cardCategory.js":
-/*!***********************************************!*\
-  !*** ./src/styleMUI/category/cardCategory.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  cardM: {
-    width: 'calc(100vw - 40px)',
-    marginBottom: 20
-  },
-  cardD: {
-    width: 400,
-    margin: 10
-  },
-  media: {
-    objectFit: 'cover',
-    height: '60px',
-    width: '60px',
-    marginRight: 10
-  },
-  avatar: {
-    borderRadius: '50px',
-    objectFit: 'cover',
-    height: '100px',
-    width: '100px',
-    margin: 10
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  inputM: {
-    marginBottom: 5,
-    width: 'calc(100vw - 82px)',
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  inputD: {
-    marginBottom: 5,
-    width: 400 - 82,
-    fontSize: '16px',
-    fontFamily: 'Roboto'
-  },
-  line: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
-  }
-}));
-
-/***/ }),
-
-/***/ "./src/styleMUI/category/categoryList.js":
-/*!***********************************************!*\
-  !*** ./src/styleMUI/category/categoryList.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  page: {
-    paddingTop: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
   }
 }));
 
@@ -6611,14 +6450,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
+/***/ 4:
+/*!****************************!*\
+  !*** multi ./pages/ads.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\ads.js */"./pages/ads.js");
 
 
 /***/ }),
@@ -7658,4 +7497,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=ads.js.map
