@@ -7,9 +7,9 @@ import {getOrders} from '../src/gql/order'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
-const height = 225
 import LazyLoad from 'react-lazyload';
 import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
+const height = 225
 
 
 const Orders = React.memo((props) => {

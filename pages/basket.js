@@ -98,8 +98,9 @@ const Basket = React.memo((props) => {
                 }
             }
             setOrganizations([...organizations])
+            console.log(organizations)
             if(organizations.length>0)
-                setOrganization(organizations[0])
+                setOrganization({...organizations[0]})
         })()
     },[list])
     useEffect(()=>{
@@ -127,6 +128,7 @@ const Basket = React.memo((props) => {
     //привести к геолокации
     if(data.client&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
+    console.log(organization)
     return (
         <App getList={getList} pageName='Корзина'>
             <Head>
