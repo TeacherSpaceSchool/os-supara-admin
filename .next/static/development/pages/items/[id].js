@@ -1535,9 +1535,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props) {
-  var classes = props.classes,
-      category = props.category,
-      subcategory = props.subcategory;
+  var classes = props.classes;
   var _props$app = props.app,
       drawer = _props$app.drawer,
       isMobileApp = _props$app.isMobileApp;
@@ -1632,11 +1630,11 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
       lineNumber: 70
     },
     __self: this
-  }))) : __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
+  }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 74
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1649,103 +1647,33 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 75
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 80
     },
     __self: this
   }, __jsx(_material_ui_icons_ViewList__WEBPACK_IMPORTED_MODULE_12___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 80
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0422\u043E\u0432\u0430\u0440\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 81
     },
     __self: this
-  }))), category ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
-    },
-    __self: this
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    href: "/subcategory/[id]",
-    as: "/subcategory/".concat(category._id),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 89
-    },
-    __self: this
-  }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    style: {
-      marginLeft: 16,
-      background: '#f5f5f5'
-    },
-    button: true,
-    onClick: function onClick() {
-      showDrawer(false);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 90
-    },
-    __self: this
-  }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    primary: category.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 91
-    },
-    __self: this
-  }))), subcategory ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 97
-    },
-    __self: this
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    href: "/items/[id]",
-    as: "/items/".concat(subcategory._id),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 98
-    },
-    __self: this
-  }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    style: {
-      marginLeft: 32,
-      background: '#f5f5f5'
-    },
-    button: true,
-    onClick: function onClick() {
-      showDrawer(false);
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 99
-    },
-    __self: this
-  }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    primary: subcategory.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 100
-    },
-    __self: this
-  })))) : null) : null), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 113
+      lineNumber: 85
     },
     __self: this
   }), ['admin', 'client', 'организация', 'менеджер', 'агент'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1758,60 +1686,60 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 89
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 90
     },
     __self: this
   }, __jsx(_material_ui_icons_Money__WEBPACK_IMPORTED_MODULE_20___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 90
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0411\u043E\u043D\u0443\u0441\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
+      lineNumber: 91
     },
     __self: this
   }), __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 92
     },
     __self: this
   }, uncoverBonus ? __jsx(_material_ui_icons_UnfoldMore__WEBPACK_IMPORTED_MODULE_22___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 92
     },
     __self: this
   }) : __jsx(_material_ui_icons_UnfoldLess__WEBPACK_IMPORTED_MODULE_23___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 92
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 94
     },
     __self: this
   }), uncoverBonus ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/bonus",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 98
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1825,27 +1753,27 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 99
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: ['организация', 'менеджер', 'агент'].includes(profile.role) ? 'Бонусы компании' : 'Бонусы компаний',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128
+      lineNumber: 100
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131
+      lineNumber: 103
     },
     __self: this
   }), ['admin', 'client', 'организация', 'менеджер'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/bonusclient",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 107
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1859,27 +1787,27 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136
+      lineNumber: 108
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role) ? 'Бонусы клиентов' : 'Мои бонусы',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 109
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 140
+      lineNumber: 112
     },
     __self: this
   })) : null) : null) : null, ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/ads",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 126
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1893,40 +1821,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 127
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 128
     },
     __self: this
   }, __jsx(_material_ui_icons_Whatshot__WEBPACK_IMPORTED_MODULE_13___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 128
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0410\u043A\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 129
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 160
+      lineNumber: 132
     },
     __self: this
   })) : null, ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: '/clients',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 139
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1940,40 +1868,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168
+      lineNumber: 140
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 169
+      lineNumber: 141
     },
     __self: this
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_16___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 169
+      lineNumber: 141
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041A\u043B\u0438\u0435\u043D\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 170
+      lineNumber: 142
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 173
+      lineNumber: 145
     },
     __self: this
   })) : null, ['client', 'admin', 'организация', 'менеджер', 'агент'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/orders",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 180
+      lineNumber: 152
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1987,40 +1915,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 181
+      lineNumber: 153
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 182
+      lineNumber: 154
     },
     __self: this
   }, __jsx(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_17___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 182
+      lineNumber: 154
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0417\u0430\u043A\u0430\u0437\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 183
+      lineNumber: 155
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 186
+      lineNumber: 158
     },
     __self: this
   })) : null, ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/routes",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 193
+      lineNumber: 165
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2034,33 +1962,33 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 194
+      lineNumber: 166
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 195
+      lineNumber: 167
     },
     __self: this
   }, __jsx(_material_ui_icons_FormatListNumbered__WEBPACK_IMPORTED_MODULE_21___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 195
+      lineNumber: 167
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041C\u0430\u0440\u0448\u0440\u0443\u0442\u043D\u044B\u0435 \u043B\u0438\u0441\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 196
+      lineNumber: 168
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 199
+      lineNumber: 171
     },
     __self: this
   })) : null, ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
@@ -2068,7 +1996,7 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     as: "/organization/".concat(profile.organization),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 205
+      lineNumber: 177
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2082,34 +2010,34 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 206
+      lineNumber: 178
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 207
+      lineNumber: 179
     },
     __self: this
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_18___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 207
+      lineNumber: 179
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 208
+      lineNumber: 180
     },
     __self: this
   }))) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/organizations",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 212
+      lineNumber: 184
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2123,40 +2051,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 185
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 214
+      lineNumber: 186
     },
     __self: this
   }, __jsx(_material_ui_icons_LocationCity__WEBPACK_IMPORTED_MODULE_18___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 214
+      lineNumber: 186
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 215
+      lineNumber: 187
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 191
     },
     __self: this
   }), ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/brands",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 223
+      lineNumber: 195
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2170,40 +2098,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 224
+      lineNumber: 196
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 225
+      lineNumber: 197
     },
     __self: this
   }, __jsx(_material_ui_icons_Loyalty__WEBPACK_IMPORTED_MODULE_14___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 225
+      lineNumber: 197
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0411\u0440\u0435\u043D\u0434\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 226
+      lineNumber: 198
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 229
+      lineNumber: 201
     },
     __self: this
   })) : null, ['admin', 'организация'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: '/employments',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236
+      lineNumber: 208
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2217,40 +2145,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 237
+      lineNumber: 209
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 238
+      lineNumber: 210
     },
     __self: this
   }, __jsx(_material_ui_icons_Group__WEBPACK_IMPORTED_MODULE_16___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 238
+      lineNumber: 210
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 239
+      lineNumber: 211
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 242
+      lineNumber: 214
     },
     __self: this
   })) : null, ['admin', 'client'].includes(profile.role) || !authenticated ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: "/blog",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 249
+      lineNumber: 221
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2264,40 +2192,40 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 250
+      lineNumber: 222
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 251
+      lineNumber: 223
     },
     __self: this
   }, __jsx(_material_ui_icons_ArtTrack__WEBPACK_IMPORTED_MODULE_19___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 251
+      lineNumber: 223
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u0411\u043B\u043E\u0433",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 252
+      lineNumber: 224
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 255
+      lineNumber: 227
     },
     __self: this
   })) : null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_26___default.a, {
     href: '/contact',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 259
+      lineNumber: 231
     },
     __self: this
   }, __jsx(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -2311,33 +2239,33 @@ var MyDrawer = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 260
+      lineNumber: 232
     },
     __self: this
   }, __jsx(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 261
+      lineNumber: 233
     },
     __self: this
   }, __jsx(_material_ui_icons_Info__WEBPACK_IMPORTED_MODULE_15___default.a, {
     color: "inherit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 261
+      lineNumber: 233
     },
     __self: this
   })), __jsx(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_11__["default"], {
     primary: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 262
+      lineNumber: 234
     },
     __self: this
   }))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 265
+      lineNumber: 237
     },
     __self: this
   })));
@@ -3953,9 +3881,7 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       filters = props.filters,
       getList = props.getList,
       pageName = props.pageName,
-      dates = props.dates,
-      subcategory = props.subcategory,
-      category = props.category;
+      dates = props.dates;
   var router = Object(next_router__WEBPACK_IMPORTED_MODULE_17__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     if (authenticated) setProfile();else if (!authenticated && profile.role) logout(false);
@@ -4062,8 +3988,6 @@ var App = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     },
     __self: this
   }, __jsx(_components_app_Drawer__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    subcategory: subcategory,
-    category: category,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 71
@@ -6305,6 +6229,347 @@ var Badge = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function Bad
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Badge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Badge */ "./node_modules/@material-ui/core/esm/Badge/Badge.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Badge__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbCollapsed.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbCollapsed.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/esm/styles/colorManipulator.js");
+/* harmony import */ var _internal_svg_icons_MoreHoriz__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../internal/svg-icons/MoreHoriz */ "./node_modules/@material-ui/core/esm/internal/svg-icons/MoreHoriz.js");
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      display: 'flex'
+    },
+    icon: {
+      width: 24,
+      height: 16,
+      backgroundColor: theme.palette.grey[100],
+      color: theme.palette.grey[700],
+      borderRadius: 2,
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5),
+      cursor: 'pointer',
+      '&:hover, &:focus': {
+        backgroundColor: theme.palette.grey[200]
+      },
+      '&:active': {
+        boxShadow: theme.shadows[0],
+        backgroundColor: Object(_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__["emphasize"])(theme.palette.grey[200], 0.12)
+      }
+    }
+  };
+};
+/**
+ * @ignore - internal component.
+ */
+
+
+function BreadcrumbCollapsed(props) {
+  var classes = props.classes,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["classes"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: classes.root
+  }, other), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_MoreHoriz__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.icon
+  }));
+}
+
+ true ? BreadcrumbCollapsed.propTypes = {
+  /**
+   * @ignore
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(styles, {
+  name: 'PrivateBreadcrumbCollapsed'
+})(BreadcrumbCollapsed));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbSeparator.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbSeparator.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+
+
+
+
+
+
+var styles = {
+  root: {
+    display: 'flex',
+    userSelect: 'none',
+    marginLeft: 8,
+    marginRight: 8
+  }
+};
+/**
+ * @ignore - internal component.
+ */
+
+function BreadcrumbSeparator(props) {
+  var classes = props.classes,
+      className = props.className,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["classes", "className"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    "aria-hidden": true,
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, className)
+  }, other));
+}
+
+ true ? BreadcrumbSeparator.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node.isRequired,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_5__["default"])(styles, {
+  name: 'PrivateBreadcrumbSeparator'
+})(BreadcrumbSeparator));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Breadcrumbs/Breadcrumbs.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Breadcrumbs/Breadcrumbs.js ***!
+  \***********************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
+/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_is__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _Typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _BreadcrumbCollapsed__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./BreadcrumbCollapsed */ "./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbCollapsed.js");
+/* harmony import */ var _BreadcrumbSeparator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./BreadcrumbSeparator */ "./node_modules/@material-ui/core/esm/Breadcrumbs/BreadcrumbSeparator.js");
+
+
+
+
+
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {},
+
+  /* Styles applied to the ol element. */
+  ol: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    padding: 0,
+    // Reset
+    margin: 0 // Reset
+
+  },
+
+  /* Styles applied to the li element. */
+  li: {
+    listStyle: 'none'
+  },
+
+  /* Styles applied to the separator element. */
+  separator: {}
+};
+
+function insertSeparators(items, className, separator) {
+  return items.reduce(function (acc, current, index) {
+    if (index < items.length - 1) {
+      acc = acc.concat(current, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_BreadcrumbSeparator__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        key: "separator-".concat(index),
+        className: className
+      }, separator));
+    } else {
+      acc.push(current);
+    }
+
+    return acc;
+  }, []);
+}
+
+var Breadcrumbs = react__WEBPACK_IMPORTED_MODULE_3___default.a.forwardRef(function Breadcrumbs(props, ref) {
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'nav' : _props$component,
+      _props$itemsAfterColl = props.itemsAfterCollapse,
+      itemsAfterCollapse = _props$itemsAfterColl === void 0 ? 1 : _props$itemsAfterColl,
+      _props$itemsBeforeCol = props.itemsBeforeCollapse,
+      itemsBeforeCollapse = _props$itemsBeforeCol === void 0 ? 1 : _props$itemsBeforeCol,
+      _props$maxItems = props.maxItems,
+      maxItems = _props$maxItems === void 0 ? 8 : _props$maxItems,
+      _props$separator = props.separator,
+      separator = _props$separator === void 0 ? '/' : _props$separator,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["children", "classes", "className", "component", "itemsAfterCollapse", "itemsBeforeCollapse", "maxItems", "separator"]);
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_3___default.a.useState(false),
+      expanded = _React$useState[0],
+      setExpanded = _React$useState[1];
+
+  var renderItemsBeforeAndAfter = function renderItemsBeforeAndAfter(allItems) {
+    var handleClickExpand = function handleClickExpand() {
+      setExpanded(true);
+    }; // This defends against someone passing weird input, to ensure that if all
+    // items would be shown anyway, we just show all items without the EllipsisItem
+
+
+    if (itemsBeforeCollapse + itemsAfterCollapse >= allItems.length) {
+      if (true) {
+        console.error(['Material-UI: you have provided an invalid combination of props to the Breadcrumbs.', "itemsAfterCollapse={".concat(itemsAfterCollapse, "} + itemsBeforeCollapse={").concat(itemsBeforeCollapse, "} >= maxItems={").concat(maxItems, "}")].join('\n'));
+      }
+
+      return allItems;
+    }
+
+    return [].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(allItems.slice(0, itemsBeforeCollapse)), [react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_BreadcrumbCollapsed__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      key: "ellipsis",
+      onClick: handleClickExpand
+    })], Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(allItems.slice(allItems.length - itemsAfterCollapse, allItems.length)));
+  };
+
+  var allItems = react__WEBPACK_IMPORTED_MODULE_3___default.a.Children.toArray(children).filter(function (child) {
+    if (true) {
+      if (Object(react_is__WEBPACK_IMPORTED_MODULE_4__["isFragment"])(child)) {
+        console.error(["Material-UI: the Breadcrumbs component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      }
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.isValidElement(child);
+  }).map(function (child, index) {
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("li", {
+      className: classes.li,
+      key: "child-".concat(index)
+    }, child);
+  });
+  return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: ref,
+    component: Component,
+    color: "textSecondary",
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_6__["default"])(classes.root, className)
+  }, other), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("ol", {
+    className: classes.ol
+  }, insertSeparators(expanded || maxItems && allItems.length <= maxItems ? allItems : renderItemsBeforeAndAfter(allItems), classes.separator, separator)));
+});
+ true ? Breadcrumbs.propTypes = {
+  /**
+   * The breadcrumb children.
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   * By default, it maps the variant to a good default headline component.
+   */
+  component: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.elementType,
+
+  /**
+   * If max items is exceeded, the number of items to show after the ellipsis.
+   */
+  itemsAfterCollapse: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+
+  /**
+   * If max items is exceeded, the number of items to show before the ellipsis.
+   */
+  itemsBeforeCollapse: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+
+  /**
+   * Specifies the maximum number of breadcrumbs to display. When there are more
+   * than the maximum number, only the first `itemsBeforeCollapse` and last `itemsAfterCollapse`
+   * will be shown, with an ellipsis in between.
+   */
+  maxItems: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+
+  /**
+   * Custom separator node.
+   */
+  separator: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.node
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_7__["default"])(styles, {
+  name: 'MuiBreadcrumbs'
+})(Breadcrumbs));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Breadcrumbs/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Breadcrumbs/index.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Breadcrumbs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Breadcrumbs */ "./node_modules/@material-ui/core/esm/Breadcrumbs/Breadcrumbs.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Breadcrumbs__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
 
@@ -22258,6 +22523,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
   d: "M7 10l5 5 5-5z"
 }), 'ArrowDropDown'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/MoreHoriz.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/MoreHoriz.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/core/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+}), 'MoreHoriz'));
 
 /***/ }),
 
@@ -62275,12 +62564,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Fab */ "./node_modules/@material-ui/core/esm/Fab/index.js");
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/constants/other */ "./redux/constants/other.js");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-lazyload */ "./node_modules/react-lazyload/lib/index.js");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _components_items_CardItemPlaceholder__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/items/CardItemPlaceholder */ "./components/items/CardItemPlaceholder.js");
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-lazyload */ "./node_modules/react-lazyload/lib/index.js");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_items_CardItemPlaceholder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/items/CardItemPlaceholder */ "./components/items/CardItemPlaceholder.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_Breadcrumbs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/Breadcrumbs */ "./node_modules/@material-ui/core/esm/Breadcrumbs/index.js");
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\items\\[id].js";
@@ -62296,8 +62587,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
-
 var height = 377;
+
+
+
 
 
 var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
@@ -62344,25 +62637,24 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     }))();
   }, [filter, sort, search]);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    category: data.subCategory ? data.subCategory.category : undefined,
     filters: data.filterItem,
     sorts: data.sortItem,
     pageName: router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 32
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 33
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 34
     },
     __self: this
   }, router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено'), __jsx("meta", {
@@ -62370,7 +62662,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 35
     },
     __self: this
   }), __jsx("meta", {
@@ -62378,7 +62670,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: router.query.id === 'all' ? 'Все' : data.subCategory !== null ? data.subCategory.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 36
     },
     __self: this
   }), __jsx("meta", {
@@ -62386,7 +62678,7 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 37
     },
     __self: this
   }), __jsx("meta", {
@@ -62394,57 +62686,104 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 38
     },
     __self: this
   }), __jsx("meta", {
     property: "og:image",
-    content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/static/512x512.png"),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37
-    },
-    __self: this
-  }), __jsx("meta", {
-    property: "og:url",
-    content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/items/").concat(router.query.id),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38
-    },
-    __self: this
-  }), __jsx("link", {
-    rel: "canonical",
-    href: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_13__["urlMain"], "/items/").concat(router.query.id),
+    content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_12__["urlMain"], "/static/512x512.png"),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 39
     },
     __self: this
-  })), __jsx("div", {
-    className: classes.page,
+  }), __jsx("meta", {
+    property: "og:url",
+    content: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_12__["urlMain"], "/items/").concat(router.query.id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: this
+  }), __jsx("link", {
+    rel: "canonical",
+    href: "".concat(_redux_constants_other__WEBPACK_IMPORTED_MODULE_12__["urlMain"], "/items/").concat(router.query.id),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 41
     },
     __self: this
+  })), __jsx(_material_ui_core_Breadcrumbs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    style: {
+      margin: 20
+    },
+    "aria-label": "breadcrumb",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    href: "/",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }, "\u0422\u043E\u0432\u0430\u0440\u044B"), data.subCategory ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    href: "/subcategory/[id]",
+    as: "/subcategory/".concat(data.subCategory.category._id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: this
+  }, data.subCategory.category.name) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    href: "/subcategory/[id]",
+    as: "/subcategory/all",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: this
+  }, "\u0412\u0441\u0435 \u043F\u043E\u0434\u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u0438"), data.subCategory ? __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    color: "textPrimary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: this
+  }, data.subCategory.name) : __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    color: "textPrimary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: this
+  }, "\u0412\u0441\u0435 \u0442\u043E\u0432\u0430\u0440\u044B")), __jsx("div", {
+    className: classes.page,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: this
   }, list ? list.map(function (element) {
-    return __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_14___default.a, {
+    return __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_13___default.a, {
       scrollContainer: '.App-body',
       key: element._id,
       height: height,
       offset: [height, 0],
       debounce: 50,
-      placeholder: __jsx(_components_items_CardItemPlaceholder__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      placeholder: __jsx(_components_items_CardItemPlaceholder__WEBPACK_IMPORTED_MODULE_14__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 71
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 71
       },
       __self: this
     }, __jsx(_components_items_CardItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -62454,16 +62793,16 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       subCategory: router.query.id === 'all' ? 'all' : data.subCategory._id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 72
       },
       __self: this
     }));
-  }) : null), profile.role === 'admin' || profile.role === 'организация' || profile.role === 'менеджер' ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
+  }) : null), profile.role === 'admin' || profile.role === 'организация' || profile.role === 'менеджер' ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_15___default.a, {
     href: "/item/[id]",
     as: "/item/new",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 77
     },
     __self: this
   }, __jsx(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -62472,13 +62811,13 @@ var Items = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.fab,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 78
     },
     __self: this
   }, __jsx(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_11___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 79
     },
     __self: this
   }))) : null);
@@ -64741,7 +65080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
+/***/ 0:
 /*!**************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fitems%2F%5Bid%5D&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Citems%5C%5Bid%5D.js ***!
   \**************************************************************************************************************************************************/
@@ -64764,5 +65103,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js","styles"]]]);
+},[[0,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=[id].js.map

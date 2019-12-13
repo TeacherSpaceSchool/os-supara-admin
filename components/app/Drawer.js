@@ -30,7 +30,7 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 
 
 const MyDrawer = React.memo((props) => {
-    const { classes, category, subcategory } = props
+    const { classes } = props
     const { drawer, isMobileApp } = props.app;
     const { profile, authenticated } = props.user;
     const { showDrawer } = props.appActions;
@@ -71,7 +71,6 @@ const MyDrawer = React.memo((props) => {
                             </ListItem>
                         </Link>
                         :
-                        <>
                         <Link href='/'>
                             <ListItem style={{background: router.pathname===('/')
                             ||
@@ -82,33 +81,6 @@ const MyDrawer = React.memo((props) => {
                                 <ListItemText primary='Товары' />
                             </ListItem>
                         </Link>
-                        {
-                            category?
-                                <>
-                                <Divider/>
-                                <Link href='/subcategory/[id]' as={`/subcategory/${category._id}`}>
-                                    <ListItem style={{marginLeft: 16, background: '#f5f5f5'}} button onClick={()=>{showDrawer(false)}}>
-                                        <ListItemText primary={category.name}/>
-                                    </ListItem>
-                                </Link>
-                                {
-                                    subcategory?
-                                        <>
-                                        <Divider/>
-                                        <Link href='/items/[id]' as={`/items/${subcategory._id}`}>
-                                            <ListItem style={{marginLeft: 32, background: '#f5f5f5'}} button onClick={()=>{showDrawer(false)}}>
-                                                <ListItemText primary={subcategory.name}/>
-                                            </ListItem>
-                                        </Link>
-                                        </>
-                                        :
-                                        null
-                                }
-                                </>
-                                :
-                                null
-                        }
-                        </>
                 }
                 <Divider/>
                 {

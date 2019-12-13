@@ -42,6 +42,9 @@ import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
 import DeliveryDays from '../../components/dialog/DeliveryDays';
 import { getCountBasket } from '../../src/gql/basket'
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from 'next/link';
 
 
 const Item = React.memo((props) => {
@@ -112,7 +115,7 @@ const Item = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     let [favorite, setFavorite] = useState(data.item!==null&&data.item.favorite!==undefined?data.item.favorite:[]);
     return (
-        <App subcategory={data.item.subCategory?data.item.subCategory:undefined} category={data.item.subCategory?data.item.subCategory.category:undefined} filters={data.filterItem} sorts={data.sortItem} pageName={data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}>
+        <App filters={data.filterItem} sorts={data.sortItem} pageName={data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}>
             <Head>
                 <title>{data.item!==null?router.query.id==='new'?'Добавить':data.item.name:'Ничего не найдено'}</title>
                 <meta name='description' content={data.item!==null?data.item.info:'Ничего не найдено'} />
@@ -123,6 +126,29 @@ const Item = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/item/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/item/${router.query.id}`}/>
             </Head>
+            {
+                data.item.subCategory?
+                    <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
+                        <Link href='/'>
+                            Товары
+                        </Link>
+                        <Link href='/subcategory/[id]' as={`/subcategory/${data.item.subCategory.category._id}`}>
+                            {data.item.subCategory.category.name}
+                        </Link>
+                        <Link href='/items/[id]' as={`/subcategory/${data.item.subCategory._id}`}>
+                            {data.item.subCategory.name}
+                        </Link>
+                        {
+                            data.item?
+                                <Typography color='textPrimary'>
+                                    {data.item.name}
+                                </Typography>
+                                :
+                                null
+                        }
+                    </Breadcrumbs>
+                    :null
+            }
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {

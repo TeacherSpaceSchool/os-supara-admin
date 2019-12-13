@@ -10,6 +10,9 @@ import { useRouter } from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import SubCardCategoryPlaceholder from '../../components/subcategory/SubCardCategoryPlaceholder'
+import Link from 'next/link';
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 const Subcategory = React.memo((props) => {
     const classes = pageListStyle();
@@ -43,6 +46,15 @@ const Subcategory = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/subcategory/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/subcategory/${router.query.id}`}/>
             </Head>
+            <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
+                <Link href='/'>
+                    Товары
+                </Link>
+                <Typography color='textPrimary'>
+                    {router.query.id==='all'?'Все':data.category?data.category.name:'Ничего не найдено'}
+                </Typography>
+            </Breadcrumbs>
+
             <div className={classes.page}>
                 {profile.role==='admin'?
                     <>
