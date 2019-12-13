@@ -93,391 +93,6 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/ads/CardAds.js":
-/*!***********************************!*\
-  !*** ./components/ads/CardAds.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "@material-ui/core/CardActionArea");
-/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/styleMUI/ads/cardAds */ "./src/styleMUI/ads/cardAds.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/CardActions */ "@material-ui/core/CardActions");
-/* harmony import */ var _material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _src_gql_ads__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../src/gql/ads */ "./src/gql/ads.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var _dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../dialog/Confirmation */ "./components/dialog/Confirmation.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\ads\\CardAds.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const CardAds = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  const {
-    element,
-    setList
-  } = props;
-  const {
-    profile
-  } = props.user;
-  const {
-    isMobileApp
-  } = props.app; //addCard
-
-  let {
-    0: preview,
-    1: setPreview
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.image : '/static/add.png');
-  let {
-    0: image,
-    1: setImage
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
-
-  let handleChangeImage = event => {
-    if (event.target.files[0].size / 1024 / 1024 < 20) {
-      setImage(event.target.files[0]);
-      setPreview(URL.createObjectURL(event.target.files[0]));
-    } else {
-      showSnackBar('Файл слишком большой');
-    }
-  };
-
-  let {
-    0: title,
-    1: setTitle
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.title : '');
-
-  let handleTitle = event => {
-    setTitle(event.target.value);
-  };
-
-  let {
-    0: url,
-    1: setUrl
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element ? element.url : '');
-
-  let handleUrl = event => {
-    setUrl(event.target.value);
-  };
-
-  const {
-    setMiniDialog,
-    showMiniDialog
-  } = props.mini_dialogActions;
-  const {
-    showSnackBar
-  } = props.snackbarActions;
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", profile.role === 'admin' ? __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46
-    },
-    __self: undefined
-  }, __jsx("label", {
-    htmlFor: element ? element._id : 'add',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: undefined
-  }, __jsx("img", {
-    className: isMobileApp ? classes.mediaM : classes.mediaD,
-    src: preview,
-    alt: 'Изменить',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 54
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    label: "\u0418\u043C\u044F",
-    value: title,
-    className: classes.input,
-    onChange: handleTitle,
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55
-    },
-    __self: undefined
-  }), __jsx("br", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: undefined
-  }), __jsx("br", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 65
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    label: "URL",
-    value: url,
-    className: classes.input,
-    onChange: handleUrl,
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 66
-    },
-    __self: undefined
-  })), __jsx(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_7___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 76
-    },
-    __self: undefined
-  }, element !== undefined ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      let editElement = {
-        _id: element._id
-      };
-      if (title.length > 0 && title !== element.title) editElement.title = title;
-      if (url.length > 0 && url !== element.url) editElement.url = url;
-      if (image !== undefined) editElement.image = image;
-
-      const action = async () => {
-        setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["setAds"])(editElement)).adss);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 88
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 80
-    },
-    __self: undefined
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      const action = async () => {
-        setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["deleteAds"])([element._id])).adss);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 97
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 93
-    },
-    __self: undefined
-  }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")) : __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    onClick: async () => {
-      if (image !== undefined && url.length > 0 && title.length > 0) {
-        setImage(undefined);
-        setPreview('/static/add.png');
-        setTitle('');
-        setUrl('');
-
-        const action = async () => {
-          setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_8__["addAds"])({
-            image: image,
-            url: url,
-            title: title
-          })).adss);
-        };
-
-        setMiniDialog('Вы уверенны?', __jsx(_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
-          action: action,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 113
-          },
-          __self: undefined
-        }));
-        showMiniDialog(true);
-      } else {
-        showSnackBar('Заполните все поля');
-      }
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 104
-    },
-    __self: undefined
-  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), __jsx("input", {
-    accept: "image/*",
-    style: {
-      display: 'none'
-    },
-    id: element ? element._id : 'add',
-    type: "file",
-    onChange: handleChangeImage,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 124
-    },
-    __self: undefined
-  })) : element !== undefined ? __jsx("div", {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 134
-    },
-    __self: undefined
-  }, __jsx("a", {
-    href: element.url,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 135
-    },
-    __self: undefined
-  }, __jsx("img", {
-    className: isMobileApp ? classes.mediaM : classes.mediaD,
-    alt: element.title,
-    src: element.image,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 136
-    },
-    __self: undefined
-  }))) : null);
-});
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    app: state.app
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_10__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_11__, dispatch),
-    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_10__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, mapDispatchToProps)(CardAds));
-
-/***/ }),
-
-/***/ "./components/ads/CardAdsPlaceholder.js":
-/*!**********************************************!*\
-  !*** ./components/ads/CardAdsPlaceholder.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/styleMUI/ads/cardAds */ "./src/styleMUI/ads/cardAds.js");
-/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/lab/Skeleton */ "@material-ui/lab/Skeleton");
-/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\ads\\CardAdsPlaceholder.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-
-const CardAdsPlaceholder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_ads_cardAds__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  const {
-    height
-  } = props;
-  const {
-    isMobileApp
-  } = props.app;
-  return __jsx("div", {
-    className: isMobileApp ? classes.cardM : classes.cardD,
-    style: {
-      height: height
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: undefined
-  }, __jsx(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    variant: "rect",
-    height: "100%",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: undefined
-  }));
-});
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    app: state.app
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(CardAdsPlaceholder));
-
-/***/ }),
-
 /***/ "./components/app/AppBar.js":
 /*!**********************************!*\
   !*** ./components/app/AppBar.js ***!
@@ -2827,6 +2442,402 @@ function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./components/dialog/BuyBasket.js":
+/*!****************************************!*\
+  !*** ./components/dialog/BuyBasket.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_gql_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/gql/order */ "./src/gql/order.js");
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
+/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/FormLabel */ "@material-ui/core/FormLabel");
+/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/FormControl */ "@material-ui/core/FormControl");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "@material-ui/core/FormGroup");
+/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "@material-ui/core/FormControlLabel");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../src/styleMUI/dialogContent */ "./src/styleMUI/dialogContent.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "@material-ui/core/Checkbox");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "@material-ui/core/InputLabel");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _Confirmation__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./Confirmation */ "./components/dialog/Confirmation.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_22__);
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\BuyBasket.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const BuyBasket = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const {
+    isMobileApp
+  } = props.app;
+  const {
+    client,
+    allPrice,
+    organization,
+    bonus
+  } = props;
+  const {
+    showMiniDialog,
+    setMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    showSnackBar
+  } = props.snackbarActions;
+  const {
+    classes
+  } = props;
+  const width = isMobileApp ? window.innerWidth - 144 : 500;
+  let {
+    0: address,
+    1: setAddress
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  let {
+    0: coment,
+    1: setComent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+
+  let handleComent = event => {
+    setComent(event.target.value);
+  };
+
+  let {
+    0: paymentMethod,
+    1: setPaymentMethod
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+  let {
+    0: useBonus,
+    1: setUseBonus
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  let paymentMethods = ['Наличные'];
+
+  let handlePaymentMethod = event => {
+    setPaymentMethod(event.target.value);
+  };
+
+  return __jsx("div", {
+    className: classes.main,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    component: "fieldset",
+    style: {
+      width: width
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    component: "legend",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, "\u0410\u0434\u0440\u0435\u0441\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), __jsx(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_11___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }, client.address.map((element, idx) => __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12___default.a, {
+    key: idx,
+    onChange: e => {
+      if (e.target.checked) address.push(element);else {
+        address.splice(address.indexOf(element), 1);
+      }
+      setAddress([...address]);
+    },
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      value: idx,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      },
+      __self: undefined
+    }),
+    label: element[0],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: undefined
+  })))), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_22___default.a, {
+    href: 'client/[id]',
+    as: `/client/${client.user._id}`,
+    style: {
+      width: width
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0430\u0434\u0440\u0435\u0441"), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_14___default.a, {
+    style: {
+      width: width
+    },
+    placeholder: "\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439",
+    value: coment,
+    className: isMobileApp ? classes.inputM : classes.inputD,
+    onChange: handleComent,
+    inputProps: {
+      'aria-label': 'description'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: undefined
+  }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    style: {
+      width: width
+    },
+    className: isMobileApp ? classes.inputM : classes.inputD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 86
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  }, "\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_19___default.a, {
+    value: paymentMethod,
+    onChange: handlePaymentMethod,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 88
+    },
+    __self: undefined
+  }, paymentMethods.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_18___default.a, {
+    key: element,
+    value: element,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 90
+    },
+    __self: undefined
+  }, element)))), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94
+    },
+    __self: undefined
+  }), organization.minimumOrder > 0 ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+    style: {
+      width: width
+    },
+    className: classes.itogo,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98
+    },
+    __self: undefined
+  }, __jsx("b", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98
+    },
+    __self: undefined
+  }, "\u041C\u0438\u043D\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439 \u0437\u0430\u043A\u0430\u0437:"), ` ${organization.minimumOrder} сом`)) : null, bonus.addedBonus && bonus.addedBonus > 0 ? __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12___default.a, {
+    style: {
+      width: width
+    },
+    onChange: e => {
+      setUseBonus(e.target.checked);
+    },
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 109
+      },
+      __self: undefined
+    }),
+    label: `Использовать бонус ${bonus.addedBonus} сом`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104
+    },
+    __self: undefined
+  }) : null, __jsx("div", {
+    style: {
+      width: width
+    },
+    className: classes.itogo,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: undefined
+  }, __jsx("b", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: undefined
+  }, "\u0418\u0442\u043E\u0433\u043E:"), ` ${useBonus ? allPrice * address.length - bonus.addedBonus : allPrice * address.length} сом`), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
+    },
+    __self: undefined
+  }), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 117
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: async () => {
+      if (organization.minimumOrder === 0 || organization.minimumOrder < allPrice) {
+        if (paymentMethod.length > 0 && address.length > 0) {
+          const action = async () => {
+            await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["addOrders"])({
+              info: coment,
+              usedBonus: useBonus,
+              paymentMethod: paymentMethod,
+              address: address,
+              organization: organization._id
+            });
+            next_router__WEBPACK_IMPORTED_MODULE_20___default.a.push('/orders');
+            showMiniDialog(false);
+          };
+
+          setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_21__["default"], {
+            action: action,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 126
+            },
+            __self: undefined
+          }));
+        } else showSnackBar('Заполните все поля');
+      } else {
+        showSnackBar('Сумма заказа должна быть выше минимальной');
+      }
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 118
+    },
+    __self: undefined
+  }, "\u041A\u0443\u043F\u0438\u0442\u044C"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13___default.a, {
+    variant: "contained",
+    color: "secondary",
+    onClick: () => {
+      showMiniDialog(false);
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: undefined
+  }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
+});
+
+function mapStateToProps(state) {
+  return {
+    mini_dialog: state.mini_dialog,
+    user: state.user,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__, dispatch),
+    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_8__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__, dispatch)
+  };
+}
+
+BuyBasket.propTypes = {
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_15__["default"])(BuyBasket)));
+
+/***/ }),
+
 /***/ "./components/dialog/Confirmation.js":
 /*!*******************************************!*\
   !*** ./components/dialog/Confirmation.js ***!
@@ -3875,6 +3886,17 @@ function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/array/is-array */ "core-js/library/fn/array/is-array");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js ***!
@@ -4657,31 +4679,77 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/ads.js":
-/*!**********************!*\
-  !*** ./pages/ads.js ***!
-  \**********************/
+/***/ "./pages/basket.js":
+/*!*************************!*\
+  !*** ./pages/basket.js ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
-/* harmony import */ var _components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/ads/CardAds */ "./components/ads/CardAds.js");
-/* harmony import */ var _src_styleMUI_ads_adsList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/styleMUI/ads/adsList */ "./src/styleMUI/ads/adsList.js");
-/* harmony import */ var _src_gql_ads__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/gql/ads */ "./src/gql/ads.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-lazyload */ "react-lazyload");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _components_ads_CardAdsPlaceholder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/ads/CardAdsPlaceholder */ "./components/ads/CardAdsPlaceholder.js");
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\ads.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/is-array */ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _src_styleMUI_basket_basket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../src/styleMUI/basket/basket */ "./src/styleMUI/basket/basket.js");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Cancel */ "@material-ui/icons/Cancel");
+/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Table */ "@material-ui/core/Table");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/TableBody */ "@material-ui/core/TableBody");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/TableCell */ "@material-ui/core/TableCell");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/TableHead */ "@material-ui/core/TableHead");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/TableRow */ "@material-ui/core/TableRow");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _src_gql_basket__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../src/gql/basket */ "./src/gql/basket.js");
+/* harmony import */ var _src_gql_client__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../src/gql/client */ "./src/gql/client.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_23__);
+/* harmony import */ var _components_dialog_BuyBasket__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../components/dialog/BuyBasket */ "./components/dialog/BuyBasket.js");
+/* harmony import */ var _components_dialog_Sign__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../components/dialog/Sign */ "./components/dialog/Sign.js");
+/* harmony import */ var _components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../components/dialog/Confirmation */ "./components/dialog/Confirmation.js");
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "@material-ui/core/InputLabel");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_29__);
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @material-ui/core/FormControl */ "@material-ui/core/FormControl");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_30__);
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_31__);
+/* harmony import */ var _src_gql_bonusclient__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../src/gql/bonusclient */ "./src/gql/bonusclient.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_33___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_33__);
+
+
+
+
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\basket.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 
 
@@ -4692,71 +4760,209 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-const Ads = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
-  const classes = Object(_src_styleMUI_ads_adsList__WEBPACK_IMPORTED_MODULE_4__["default"])();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Basket = react__WEBPACK_IMPORTED_MODULE_5___default.a.memo(props => {
+  const {
+    authenticated
+  } = props.user;
+  const classes = Object(_src_styleMUI_basket_basket__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  const {
+    setMiniDialog,
+    showMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    showSnackBar
+  } = props.snackbarActions;
   const {
     data
   } = props;
   let {
     0: list,
     1: setList
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(data.adss);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(data.baskets);
+  let {
+    0: organization,
+    1: setOrganization
+  } = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])({
+    _id: '',
+    name: ''
+  });
+  let {
+    0: bonus,
+    1: setBonus
+  } = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])({});
+
+  let handleOrganization = event => {
+    setOrganization(organizations[organizations.findIndex(element => element._id === event.target.value)]);
+  };
+
+  let {
+    0: organizations,
+    1: setOrganizations
+  } = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])([]);
+  let {
+    0: allPrice,
+    1: setAllPrice
+  } = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(0);
   const {
-    search,
-    filter,
-    sort
+    isMobileApp
   } = props.app;
-  const {
-    profile
-  } = props.user;
-  const {
-    count
-  } = props.pagination;
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+
+  let increment = idx => {
+    list[idx].count += 1;
+    setBasketChange(idx, list[idx].count);
+    setList([...list]);
+  };
+
+  let decrement = idx => {
+    if (list[idx].count > 1) {
+      list[idx].count -= 1;
+      setBasketChange(idx, list[idx].count);
+      setList([...list]);
+    }
+  };
+
+  let setBasketChange = (idx, count) => {
+    if (authenticated) Object(_src_gql_basket__WEBPACK_IMPORTED_MODULE_21__["setBasket"])({
+      _id: list[idx]._id,
+      count: count
+    });else {
+      let list = JSON.parse(localStorage.basket);
+      list[idx].count = count;
+      localStorage.basket = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(list);
+    }
+  };
+
+  let removeBasketChange = async idx => {
+    const action = async () => {
+      if (authenticated) {
+        setList((await Object(_src_gql_basket__WEBPACK_IMPORTED_MODULE_21__["deleteBasket"])([list[idx]._id])).baskets);
+      } else {
+        let list = JSON.parse(localStorage.basket);
+        list.splice(idx, 1);
+        localStorage.basket = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(list);
+        setList(list);
+      }
+    };
+
+    setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_26__["default"], {
+      action: action,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 80
+      },
+      __self: undefined
+    }));
+    showMiniDialog(true);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(() => {
     (async () => {
-      setList((await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_5__["getAdss"])({
-        search: search,
-        sort: sort,
-        filter: filter
-      })).adss);
+      if (!authenticated) {
+        if (localStorage.basket == undefined) {
+          localStorage.basket = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()([]);
+        }
+
+        setList(JSON.parse(localStorage.basket));
+      }
     })();
-  }, [filter, sort, search, count]);
-  let height = profile.role === 'admin' ? 400 : 200;
-  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    filters: data.filterAds,
-    sorts: data.sortAds,
-    pageName: "\u0410\u043A\u0446\u0438\u0438",
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(() => {
+    (async () => {
+      organizations = [];
+
+      for (let i = 0; i < list.length; i++) {
+        if (organizations.findIndex(element => element._id === list[i].item.organization._id) === -1) {
+          organizations.push(list[i].item.organization);
+        }
+      }
+
+      setOrganizations([...organizations]);
+      if (organizations.length > 0) setOrganization(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, organizations[0]));
+    })();
+  }, [list]);
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(() => {
+    calculateAllPrice();
+    bonus = {};
+
+    for (let i = 0; i < data.bonusesClient.length; i++) {
+      if (organization._id === data.bonusesClient[i].bonus.organization._id) {
+        bonus = data.bonusesClient[i];
+      }
+    }
+
+    setBonus(bonus);
+  }, [list, organization]);
+
+  let getList = async () => {
+    setList((await Object(_src_gql_basket__WEBPACK_IMPORTED_MODULE_21__["getBasket"])()).baskets);
+  };
+
+  let calculateAllPrice = async () => {
+    let allPrice = 0;
+
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].item.organization._id === organization._id) allPrice += (list[i].item.stock === 0 || list[i].item.stock === undefined ? list[i].item.price : list[i].item.stock) * list[i].count;
+    }
+
+    setAllPrice(allPrice);
+  }; //привести к геолокации
+
+
+  if (data.client && !_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1___default()(data.client.address[0])) data.client.address.map(addres => [addres]);
+  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    getList: getList,
+    pageName: "\u041A\u043E\u0440\u0437\u0438\u043D\u0430",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 132
     },
     __self: undefined
-  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_4___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 133
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 134
     },
     __self: undefined
-  }, "\u0410\u043A\u0446\u0438\u0438"), __jsx("meta", {
+  }, "\u041A\u043E\u0440\u0437\u0438\u043D\u0430"), __jsx("meta", {
     name: "description",
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 135
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:title",
-    content: "\u0410\u043A\u0446\u0438\u0438",
+    content: "\u041A\u043E\u0440\u0437\u0438\u043D\u0430",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 136
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4764,7 +4970,7 @@ const Ads = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 137
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4772,98 +4978,607 @@ const Ads = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 138
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:image",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/static/512x512.png`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_27__["urlMain"]}/static/512x512.png`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 139
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:url",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/ads`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_27__["urlMain"]}/basket`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 140
     },
     __self: undefined
   }), __jsx("link", {
     rel: "canonical",
-    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_7__["urlMain"]}/ads`,
+    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_27__["urlMain"]}/basket`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 141
     },
     __self: undefined
-  })), __jsx("div", {
+  })), isMobileApp ? __jsx("div", {
+    className: classes.column,
+    style: {
+      width: 'calc(100% - 16px)',
+      margin: 8
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 145
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9___default.a, {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 146
     },
     __self: undefined
-  }, profile.role === 'admin' ? __jsx(_components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    setList: setList,
+  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    className: classes.column,
+    style: isMobileApp ? {} : {
+      justifyContent: 'start',
+      alignItems: 'flex-start'
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 147
     },
     __self: undefined
-  }) : null, list ? list.map(element => __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_8___default.a, {
-    scrollContainer: '.App-body',
+  }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_33___default.a, {
+    select: true,
+    label: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
+    value: organization._id,
+    onChange: handleOrganization,
+    helperText: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
+    className: classes.input,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 148
+    },
+    __self: undefined
+  }, organizations.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_29___default.a, {
     key: element._id,
-    height: height,
-    offset: [height, 0],
-    debounce: 50,
-    placeholder: __jsx(_components_ads_CardAdsPlaceholder__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      height: height,
+    value: element._id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 157
+    },
+    __self: undefined
+  }, element.name))))), list.map((row, idx) => {
+    if (row.item.organization._id === organization._id) return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      className: classes.page,
+      key: idx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 40
+        lineNumber: 166
       },
       __self: undefined
-    }),
+    }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10___default.a, {
+      className: classes.column,
+      style: isMobileApp ? {} : {
+        justifyContent: 'start',
+        alignItems: 'flex-start'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 167
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.itemM,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 171
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.divImage,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 172
+      },
+      __self: undefined
+    }, __jsx("img", {
+      className: classes.mediaM,
+      src: row.item.image,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 173
+      },
+      __self: undefined
+    }), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_11___default.a, {
+      onClick: () => {
+        removeBasketChange(idx);
+      },
+      color: "primary",
+      className: classes.cancelM,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 174
+      },
+      __self: undefined
+    }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_12___default.a, {
+      style: {
+        height: 40,
+        width: 40
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 177
+      },
+      __self: undefined
+    }))), __jsx("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 180
+      },
+      __self: undefined
+    }), __jsx("div", {
+      className: classes.nameM,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 181
+      },
+      __self: undefined
+    }, row.item.name), __jsx("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 184
+      },
+      __self: undefined
+    }), __jsx("div", {
+      className: classes.counter,
+      style: isMobileApp ? {
+        marginBottom: 20
+      } : {
+        marginRight: 20
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 185
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.counterbtn,
+      onClick: () => {
+        decrement(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 187
+      },
+      __self: undefined
+    }, "\u2013"), __jsx("input", {
+      type: "text",
+      className: classes.counternmbr,
+      value: row.count,
+      onChange: event => {
+        list[idx].count = isNaN(event.target.value) || event.target.value.length === 0 ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(event.target.value);
+        setBasketChange(idx, list[idx].count);
+        setList([...list]);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 191
+      },
+      __self: undefined
+    }), __jsx("div", {
+      className: classes.counterbtn,
+      onClick: () => {
+        increment(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 197
+      },
+      __self: undefined
+    }, "+")), __jsx("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 202
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 203
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 204
+      },
+      __self: undefined
+    }, "\u0426\u0435\u043D\u0430"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 207
+      },
+      __self: undefined
+    }, `${row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock} сом`)), __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 211
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 212
+      },
+      __self: undefined
+    }, "\u0418\u0442\u043E\u0433\u043E"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 215
+      },
+      __self: undefined
+    }, `${(row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock) * row.count} сом`))))));
+  }), __jsx("div", {
+    style: {
+      height: 70
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 227
     },
     __self: undefined
-  }, __jsx(_components_ads_CardAds__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    setList: setList,
+  })) : __jsx(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    className: classes.page,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 231
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_10___default.a, {
+    className: classes.column,
+    style: isMobileApp ? {} : {
+      justifyContent: 'start',
+      alignItems: 'flex-start'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 232
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13___default.a, {
+    "aria-label": "simple table",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 233
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_16___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 234
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 235
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 236
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_30___default.a, {
+    className: classes.input,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 237
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 238
+    },
+    __self: undefined
+  }, "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_31___default.a, {
+    value: organization._id,
+    onChange: handleOrganization,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 239
+    },
+    __self: undefined
+  }, organizations.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_29___default.a, {
     key: element._id,
-    element: element,
+    value: element._id,
+    ola: element.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 241
     },
     __self: undefined
-  }))) : null));
+  }, element.name))))), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    align: "left",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 246
+    },
+    __self: undefined
+  }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    align: "left",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 247
+    },
+    __self: undefined
+  }, "\u0426\u0435\u043D\u0430"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    align: "left",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 248
+    },
+    __self: undefined
+  }, "\u0418\u0442\u043E\u0433\u043E"), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+    align: "center",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 249
+    },
+    __self: undefined
+  }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"))), __jsx(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 252
+    },
+    __self: undefined
+  }, list.map((row, idx) => {
+    if (row.item.organization._id === organization._id) return __jsx(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17___default.a, {
+      key: idx,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 256
+      },
+      __self: undefined
+    }, __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      component: "th",
+      scope: "row",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 257
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 258
+      },
+      __self: undefined
+    }, __jsx("img", {
+      className: classes.mediaD,
+      src: row.item.image,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 259
+      },
+      __self: undefined
+    }), __jsx("div", {
+      className: classes.nameD,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 260
+      },
+      __self: undefined
+    }, row.item.name))), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      align: "left",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 265
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.counterD,
+      style: isMobileApp ? {
+        marginBottom: 20
+      } : {
+        marginRight: 20
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 267
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.counterbtnD,
+      onClick: () => {
+        decrement(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 268
+      },
+      __self: undefined
+    }, "\u2013"), __jsx("input", {
+      type: "text",
+      className: classes.counternmbrD,
+      value: row.count,
+      onChange: event => {
+        list[idx].count = isNaN(event.target.value) || event.target.value.length === 0 ? 0 : _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(event.target.value);
+        setBasketChange(idx, list[idx].count);
+        setList([...list]);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 269
+      },
+      __self: undefined
+    }), __jsx("div", {
+      className: classes.counterbtnD,
+      onClick: () => {
+        increment(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 274
+      },
+      __self: undefined
+    }, "+"))), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      align: "left",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 278
+      },
+      __self: undefined
+    }, `${row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock * row.count} сом`), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      align: "left",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 279
+      },
+      __self: undefined
+    }, `${(row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock * row.count) * row.count} сом`), __jsx(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      align: "center",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 280
+      },
+      __self: undefined
+    }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_11___default.a, {
+      onClick: () => {
+        removeBasketChange(idx);
+      },
+      color: "primary",
+      className: classes.button,
+      "aria-label": "add to shopping cart",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 281
+      },
+      __self: undefined
+    }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_12___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 282
+      },
+      __self: undefined
+    }))));
+  }))))), __jsx("div", {
+    style: {
+      height: 70
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 292
+    },
+    __self: undefined
+  })), __jsx("div", {
+    className: isMobileApp ? classes.bottomBasketM : classes.bottomBasketD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 295
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: isMobileApp ? classes.allPriceM : classes.allPriceD,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 296
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: isMobileApp ? classes.value : classes.priceAllText,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 297
+    },
+    __self: undefined
+  }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C"), __jsx("div", {
+    className: isMobileApp ? classes.nameM : classes.priceAll,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 298
+    },
+    __self: undefined
+  }, `${allPrice} сом`)), __jsx("div", {
+    className: isMobileApp ? classes.buyM : classes.buyD,
+    onClick: () => {
+      if (allPrice > 0) {
+        if (authenticated) setMiniDialog('Купить', __jsx(_components_dialog_BuyBasket__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          bonus: bonus,
+          client: data.client,
+          allPrice: allPrice,
+          organization: organization,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 303
+          },
+          __self: undefined
+        }));else setMiniDialog('Купить', __jsx(_components_dialog_Sign__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 305
+          },
+          __self: undefined
+        }));
+        showMiniDialog(true);
+      } else showSnackBar('Добавьте товар в корзину');
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 300
+    },
+    __self: undefined
+  }, "\u041A\u0423\u041F\u0418\u0422\u042C")));
 });
 
-Ads.getInitialProps = async function (ctx) {
-  ctx.store.getState().pagination.work = true;
+Basket.getInitialProps = async function (ctx) {
+  if (!['client', 'агент'].includes(ctx.store.getState().user.profile.role) && ctx.store.getState().user.authenticated) if (ctx.res) {
+    ctx.res.writeHead(302, {
+      Location: '/'
+    });
+    ctx.res.end();
+  } else next_router__WEBPACK_IMPORTED_MODULE_23___default.a.push('/');
   return {
-    data: await Object(_src_gql_ads__WEBPACK_IMPORTED_MODULE_5__["getAdss"])({
+    data: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, (await Object(_src_gql_basket__WEBPACK_IMPORTED_MODULE_21__["getBasket"])()), ctx.store.getState().user.profile._id ? await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_22__["getClient"])({
+      _id: ctx.store.getState().user.profile._id
+    }) : [], (await Object(_src_gql_bonusclient__WEBPACK_IMPORTED_MODULE_32__["getBonusesClient"])({
       search: '',
-      sort: '-createdAt',
-      filter: ''
-    })
+      sort: '-createdAt'
+    })))
   };
 };
 
 function mapStateToProps(state) {
   return {
     app: state.app,
-    user: state.user,
-    pagination: state.pagination
+    user: state.user
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Ads));
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_18__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_19__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_18__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_20__, dispatch)
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(Basket));
 
 /***/ }),
 
@@ -5385,142 +6100,6 @@ const SET_AUTH = 'SET_AUTH';
 
 /***/ }),
 
-/***/ "./src/gql/ads.js":
-/*!************************!*\
-  !*** ./src/gql/ads.js ***!
-  \************************/
-/*! exports provided: getAds, getAdss, deleteAds, addAds, setAds */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAds", function() { return getAds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAdss", function() { return getAdss; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAds", function() { return deleteAds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addAds", function() { return addAds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAds", function() { return setAds; });
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-
-
-
-const getAds = async () => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query {
-                        ads {
-                            _id
-                            image
-                            url
-                            title
-                            createdAt
-                          }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const getAdss = async ({
-  search: search,
-  sort: sort,
-  filter: filter
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        search: search,
-        sort: sort,
-        filter: filter
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        adss(search: $search, sort: $sort, filter: $filter) {
-                            _id
-                            image
-                            url
-                            title
-                            createdAt
-                          }
-                          sortAds {
-                           name
-                            field
-                          }
-                          filterAds {
-                           name
-                           value
-                          }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const deleteAds = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        deleteAds(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addAds = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($image: Upload!, $url: String!, $title: String!) {
-                        addAds(image: $image, url: $url, title: $title) {
-                             data
-                        }
-                    }`
-    });
-    let list = await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-    return list;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const setAds = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: ID!, $image: Upload, $url: String, $title: String) {
-                        setAds(_id: $_id, image: $image, url: $url, title: $title) {
-                             data
-                        }
-                    }`
-    });
-    let list = await getAdss(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-    return list;
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-/***/ }),
-
 /***/ "./src/gql/basket.js":
 /*!***************************!*\
   !*** ./src/gql/basket.js ***!
@@ -5645,6 +6224,216 @@ const setBasket = async element => {
     });
     await getCountBasket();
     return await getBasket(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/gql/bonusclient.js":
+/*!********************************!*\
+  !*** ./src/gql/bonusclient.js ***!
+  \********************************/
+/*! exports provided: getBonusesClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBonusesClient", function() { return getBonusesClient; });
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+const getBonusesClient = async ({
+  search: search,
+  sort: sort
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!) {
+                        bonusesClient(search: $search, sort: $sort) {
+                            _id
+                            createdAt
+                            current
+                            addedBonus
+                            bonus {
+                                _id
+                                target
+                                bonus
+                                organization
+                                    {_id name image}
+                                }
+                            client {
+                                _id
+                                image
+                                name
+                                user 
+                                    {_id}
+                            }
+                        }
+                        sortBonusClient {
+                            name
+                            field
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/gql/client.js":
+/*!***************************!*\
+  !*** ./src/gql/client.js ***!
+  \***************************/
+/*! exports provided: getClients, getClient, onoffClient, setClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClients", function() { return getClients; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClient", function() { return getClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffClient", function() { return onoffClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setClient", function() { return setClient; });
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+const getClients = async ({
+  search: search,
+  sort: sort,
+  filter: filter
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort,
+        filter: filter
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!, $filter: String!) {
+                        clients(search: $search, sort: $sort, filter: $filter) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            info
+                            reiting
+                            birthday
+                            type
+                            city
+                            patent 
+                            passport 
+                            certificate
+                            phone
+                            user 
+                                {_id role status login}
+                          }
+                          sortClient {
+                           name
+                            field
+                          }
+                          filterClient {
+                           name
+                           value
+                          }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getClient = async ({
+  _id: _id
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        _id: _id
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($_id: ID!) {
+                        client(_id: $_id) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            info
+                            reiting
+                            birthday
+                            city
+                            type
+                            patent 
+                            passport 
+                            certificate
+                            phone
+                            user 
+                                {_id role status login}
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const onoffClient = async ids => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: {
+        _id: ids
+      },
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: [ID]!) {
+                        onoffClient(_id: $_id) {
+                             data
+                        }
+                    }`
+    });
+    return await getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setClient = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: ID!, $phone: [String], $login: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, phone: $phone, login: $login, city: $city, image: $image,, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                             data
+                        }
+                    }`
+    });
+    let list = await getClients(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+    return list;
   } catch (err) {
     console.error(err);
   }
@@ -5976,6 +6765,228 @@ const setItem = async element => {
 
 /***/ }),
 
+/***/ "./src/gql/order.js":
+/*!**************************!*\
+  !*** ./src/gql/order.js ***!
+  \**************************/
+/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setOrder */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrders", function() { return getOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrder", function() { return getOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrders", function() { return addOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelOrders", function() { return cancelOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approveOrders", function() { return approveOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrder", function() { return setOrder; });
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+
+
+
+const getOrders = async ({
+  search,
+  sort,
+  filter,
+  date
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort,
+        filter: filter,
+        date: date
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
+                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {
+                            _id
+                            createdAt
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            price
+                                            organization
+                                                {_id name}
+                                        }
+                                    count
+                                    allPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone 
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            paymentMethod
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            dateDelivery
+                            usedBonus
+                        }
+                        sortInvoice {
+                            name
+                            field
+                        }
+                        filterInvoice {
+                           name
+                           value
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getOrder = async ({
+  _id
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        _id: _id
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($_id: ID!) {
+                        invoice(_id: $_id) {
+                            _id
+                            createdAt
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            price
+                                            organization
+                                                {_id name}
+                                        }
+                                    count
+                                    allPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            paymentMethod
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            dateDelivery
+                            usedBonus
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const addOrders = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!) {
+                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization) {
+                             data
+                        }
+                    }`
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+const cancelOrders = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($_id: [ID]!, $invoice: ID) {
+                        cancelOrders(_id: $_id, invoice: $invoice) {
+                             data
+                        }
+                    }`
+    });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const approveOrders = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($invoices: [ID]!, $route: ID) {
+                        approveOrders(invoices: $invoices, route: $route) {
+                             data
+                        }
+                    }`
+    });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setOrder = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($orders: [OrderInput], $invoice: ID) {
+                        setOrder(orders: $orders, invoice: $invoice) {
+                             data
+                        }
+                    }`
+    });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/***/ }),
+
 /***/ "./src/lib.js":
 /*!********************!*\
   !*** ./src/lib.js ***!
@@ -6203,70 +7214,6 @@ class SingletonStore {
 
 /***/ }),
 
-/***/ "./src/styleMUI/ads/adsList.js":
-/*!*************************************!*\
-  !*** ./src/styleMUI/ads/adsList.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  page: {
-    paddingTop: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
-}));
-
-/***/ }),
-
-/***/ "./src/styleMUI/ads/cardAds.js":
-/*!*************************************!*\
-  !*** ./src/styleMUI/ads/cardAds.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
-  cardM: {
-    width: 'calc(100vw - 40px)',
-    marginBottom: 20
-  },
-  cardD: {
-    width: 600,
-    margin: 10
-  },
-  mediaM: {
-    objectFit: 'cover',
-    height: 'calc((100vw - 40px) / 3)',
-    width: 'calc(100vw - 40px)'
-  },
-  mediaD: {
-    objectFit: 'cover',
-    height: 200,
-    width: 600,
-    cursor: 'pointer'
-  },
-  input: {
-    width: '100%'
-  }
-}));
-
-/***/ }),
-
 /***/ "./src/styleMUI/appbar.js":
 /*!********************************!*\
   !*** ./src/styleMUI/appbar.js ***!
@@ -6308,6 +7255,233 @@ __webpack_require__.r(__webpack_exports__);
   searchField: {
     width: 'calc(100% - 20px)',
     margin: 10
+  }
+}));
+
+/***/ }),
+
+/***/ "./src/styleMUI/basket/basket.js":
+/*!***************************************!*\
+  !*** ./src/styleMUI/basket/basket.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  page: {
+    margin: '10px',
+    overflowX: 'auto'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  itemM: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start'
+  },
+  cancelM: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    cursor: 'pointer'
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  input: {
+    width: '100%'
+  },
+  divImage: {
+    position: 'relative',
+    width: '100%'
+  },
+  mediaM: {
+    objectFit: 'contain',
+    width: '100%',
+    height: 150
+  },
+  mediaD: {
+    objectFit: 'contain',
+    width: 70,
+    height: 70
+  },
+  nameD: {
+    height: 80,
+    width: 200,
+    overflow: 'hidden',
+    wordWrap: 'break-word',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    fontWeight: 500,
+    fontFamily: 'Roboto'
+  },
+  nameM: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: '1.125rem',
+    fontFamily: 'Roboto'
+  },
+  value: {
+    marginBottom: 5,
+    fontSize: '1rem',
+    fontFamily: 'Roboto'
+  },
+  nameField: {
+    width: 100,
+    marginBottom: 5,
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto',
+    color: '#A0A0A0'
+  },
+  counter: {
+    width: 145,
+    borderRadius: 5,
+    overflow: 'hidden',
+    border: '1px solid #e6e6e6',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  counterbtn: {
+    userSelect: 'none',
+    cursor: 'pointer',
+    width: 34,
+    height: 34,
+    fontSize: 20,
+    fontWeight: 700,
+    background: '#e6e6e6',
+    color: '#212121',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  counternmbr: {
+    width: 77,
+    height: 34,
+    outline: 'none',
+    border: 'none',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  hrA: {
+    width: '100%',
+    background: 'black',
+    height: 1,
+    marginBottom: 5,
+    marginTop: 5
+  },
+  bottomBasketM: {
+    width: '100vw',
+    borderTop: '1px #aeaeae solid',
+    background: '#fff',
+    height: 70,
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    zIndex: 10000
+  },
+  buyM: {
+    width: 140,
+    height: 44,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '1.125rem',
+    fontFamily: 'Roboto',
+    background: '#ffb300',
+    marginRight: 15
+  },
+  allPriceM: {
+    marginLeft: 10,
+    width: 'calc(100vw - 100px)'
+  },
+  bottomBasketD: {
+    width: 'calc(100vw - 300px)',
+    background: '#fff',
+    borderTop: '1px #aeaeae solid',
+    height: 70,
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    zIndex: 10000
+  },
+  allPriceD: {
+    marginLeft: 20,
+    width: 'calc(100vw - 500px)'
+  },
+  buyD: {
+    width: 140,
+    height: 44,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto',
+    background: '#ffb300',
+    marginRight: 15
+  },
+  priceAll: {
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto'
+  },
+  priceAllText: {
+    fontSize: '1rem',
+    fontFamily: 'Roboto'
+  },
+  counterD: {
+    width: 113,
+    borderRadius: 5,
+    overflow: 'hidden',
+    border: '1px solid #e6e6e6',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  counterbtnD: {
+    fontSize: '1rem',
+    userSelect: 'none',
+    cursor: 'pointer',
+    width: 28,
+    height: 28,
+    fontWeight: 700,
+    background: '#e6e6e6',
+    color: '#212121',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  counternmbrD: {
+    fontSize: '0.875rem',
+    width: 57,
+    height: 28,
+    outline: 'none',
+    border: 'none',
+    textAlign: 'center'
   }
 }));
 
@@ -6451,13 +7625,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 4:
-/*!****************************!*\
-  !*** multi ./pages/ads.js ***!
-  \****************************/
+/*!*******************************!*\
+  !*** multi ./pages/basket.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\ads.js */"./pages/ads.js");
+module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\basket.js */"./pages/basket.js");
 
 
 /***/ }),
@@ -6506,28 +7680,6 @@ module.exports = require("@material-ui/core/Card");
 
 /***/ }),
 
-/***/ "@material-ui/core/CardActionArea":
-/*!***************************************************!*\
-  !*** external "@material-ui/core/CardActionArea" ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/CardActionArea");
-
-/***/ }),
-
-/***/ "@material-ui/core/CardActions":
-/*!************************************************!*\
-  !*** external "@material-ui/core/CardActions" ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/CardActions");
-
-/***/ }),
-
 /***/ "@material-ui/core/CardContent":
 /*!************************************************!*\
   !*** external "@material-ui/core/CardContent" ***!
@@ -6536,6 +7688,17 @@ module.exports = require("@material-ui/core/CardActions");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardContent");
+
+/***/ }),
+
+/***/ "@material-ui/core/Checkbox":
+/*!*********************************************!*\
+  !*** external "@material-ui/core/Checkbox" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Checkbox");
 
 /***/ }),
 
@@ -6602,6 +7765,39 @@ module.exports = require("@material-ui/core/Divider");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/FormControl");
+
+/***/ }),
+
+/***/ "@material-ui/core/FormControlLabel":
+/*!*****************************************************!*\
+  !*** external "@material-ui/core/FormControlLabel" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/FormControlLabel");
+
+/***/ }),
+
+/***/ "@material-ui/core/FormGroup":
+/*!**********************************************!*\
+  !*** external "@material-ui/core/FormGroup" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/FormGroup");
+
+/***/ }),
+
+/***/ "@material-ui/core/FormLabel":
+/*!**********************************************!*\
+  !*** external "@material-ui/core/FormLabel" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/FormLabel");
 
 /***/ }),
 
@@ -6726,6 +7922,17 @@ module.exports = require("@material-ui/core/Paper");
 
 /***/ }),
 
+/***/ "@material-ui/core/Select":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Select" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Select");
+
+/***/ }),
+
 /***/ "@material-ui/core/Snackbar":
 /*!*********************************************!*\
   !*** external "@material-ui/core/Snackbar" ***!
@@ -6745,6 +7952,61 @@ module.exports = require("@material-ui/core/Snackbar");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/SwipeableDrawer");
+
+/***/ }),
+
+/***/ "@material-ui/core/Table":
+/*!******************************************!*\
+  !*** external "@material-ui/core/Table" ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Table");
+
+/***/ }),
+
+/***/ "@material-ui/core/TableBody":
+/*!**********************************************!*\
+  !*** external "@material-ui/core/TableBody" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/TableBody");
+
+/***/ }),
+
+/***/ "@material-ui/core/TableCell":
+/*!**********************************************!*\
+  !*** external "@material-ui/core/TableCell" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/TableCell");
+
+/***/ }),
+
+/***/ "@material-ui/core/TableHead":
+/*!**********************************************!*\
+  !*** external "@material-ui/core/TableHead" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/TableHead");
+
+/***/ }),
+
+/***/ "@material-ui/core/TableRow":
+/*!*********************************************!*\
+  !*** external "@material-ui/core/TableRow" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/TableRow");
 
 /***/ }),
 
@@ -7122,17 +8384,6 @@ module.exports = require("@material-ui/icons/Whatshot");
 
 /***/ }),
 
-/***/ "@material-ui/lab/Skeleton":
-/*!********************************************!*\
-  !*** external "@material-ui/lab/Skeleton" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/lab/Skeleton");
-
-/***/ }),
-
 /***/ "apollo-boost":
 /*!*******************************!*\
   !*** external "apollo-boost" ***!
@@ -7229,6 +8480,17 @@ module.exports = require("apollo-utilities");
 /***/ (function(module, exports) {
 
 module.exports = require("classnames");
+
+/***/ }),
+
+/***/ "core-js/library/fn/array/is-array":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/array/is-array" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/array/is-array");
 
 /***/ }),
 
@@ -7452,17 +8714,6 @@ module.exports = require("react-bottom-scroll-listener");
 
 /***/ }),
 
-/***/ "react-lazyload":
-/*!*********************************!*\
-  !*** external "react-lazyload" ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-lazyload");
-
-/***/ }),
-
 /***/ "react-redux":
 /*!******************************!*\
   !*** external "react-redux" ***!
@@ -7497,4 +8748,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=ads.js.map
+//# sourceMappingURL=basket.js.map

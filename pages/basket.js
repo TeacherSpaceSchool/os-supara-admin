@@ -27,6 +27,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
+import TextField from '@material-ui/core/TextField';
 
 
 const Basket = React.memo((props) => {
@@ -36,7 +37,7 @@ const Basket = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     const { data } = props;
     let [list, setList] = useState(data.baskets);
-    let [organization, setOrganization] = useState({});
+    let [organization, setOrganization] = useState({_id: '', name: ''});
     let [bonus, setBonus] = useState({});
     let handleOrganization =  (event) => {
         setOrganization(organizations[organizations.findIndex(element => element._id===event.target.value)])
@@ -98,7 +99,6 @@ const Basket = React.memo((props) => {
                 }
             }
             setOrganizations([...organizations])
-            console.log(organizations)
             if(organizations.length>0)
                 setOrganization({...organizations[0]})
         })()
@@ -128,7 +128,6 @@ const Basket = React.memo((props) => {
     //привести к геолокации
     if(data.client&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    console.log(organization)
     return (
         <App getList={getList} pageName='Корзина'>
             <Head>
@@ -145,15 +144,19 @@ const Basket = React.memo((props) => {
                         isMobileApp?
                             <div className={classes.column} style={{width: 'calc(100% - 16px)', margin: 8}}>
                                 <Card className={classes.page}>
-                                    <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                                        <FormControl className={classes.input}>
-                                            <InputLabel>Организация</InputLabel>
-                                            <Select value={organization._id} onChange={handleOrganization}>
-                                                {organizations.map((element)=>
+                                      <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                                        <TextField
+                                            select
+                                            label='Организация'
+                                            value={organization._id}
+                                            onChange={handleOrganization}
+                                            helperText='Организация'
+                                            className={classes.input}
+                                        >
+                                            {organizations.map((element)=>
                                                     <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
-                                                )}
-                                            </Select>
-                                        </FormControl>
+                                            )}
+                                        </TextField>
                                     </CardContent>
                                 </Card>
                                 {

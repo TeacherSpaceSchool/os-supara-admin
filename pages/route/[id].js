@@ -65,7 +65,6 @@ const Route = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
-                console.log('ok')
                 setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка', date: ''})).invoices)
             }
         })()

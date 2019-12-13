@@ -529,9 +529,12 @@ const Client = React.memo((props) => {
                                         <div className={classes.column}>
                                             {address?address.map((element, idx)=>
                                                 <>
-                                                <div className={classes.value} key={idx}>
-                                                    {element[1]}
-                                                </div>
+                                                {type==='торговая точка'?
+                                                    <div className={classes.value} key={idx}>
+                                                        {element[2]}
+                                                    </div>
+                                                    :null
+                                                }
                                                 <div className={classes.value} key={idx}>
                                                     {element[0]}
                                                 </div>
