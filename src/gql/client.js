@@ -26,6 +26,8 @@ export const getClients = async({search: search, sort: sort, filter: filter})=>{
                             passport 
                             certificate
                             phone
+                            organization 
+                                {_id name}
                             user 
                                 {_id role status login}
                           }
@@ -69,6 +71,8 @@ export const getClient = async({_id: _id})=>{
                             passport 
                             certificate
                             phone
+                            organization 
+                                {_id name}
                             user 
                                 {_id role status login}
                         }
@@ -108,8 +112,25 @@ export const setClient = async(element)=>{
                              data
                         }
                     }`})
-        let list = await getClients(new SingletonStore().getStore().getState().app)
-        return list
+        /*let list = await getClients(new SingletonStore().getStore().getState().app)
+        return list*/
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const addClient = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: element,
+            mutation : gql`
+                    mutation ($image: Upload, $name: String!, $birthday: Date, $email: String, $city: String!, $address: [[String]]!, $phone: [String]!, $info: String, $type: String, $patent: Upload, $passport: Upload, $certificate: Upload) {
+                        addClient(image: $image, name: $name, birthday: $birthday, email: $email, city: $city, address: $address, phone: $phone, info: $info, type: $type, patent: $patent, passport: $passport, certificate: $certificate) {
+                             data
+                        }
+                    }`})
+        //return await getEmployments(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }

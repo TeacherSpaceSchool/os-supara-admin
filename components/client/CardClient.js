@@ -19,20 +19,33 @@ const CardOrganization = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
-    let [status, setStatus] = useState(element.user.status);
+    let [status, setStatus] = useState(element.user?element.user.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             <CardActionArea>
-                <Link href='/client/[id]' as={`/client/${element.user._id}`}>
+                <Link href='/client/[id]' as={`/client/${element._id}`}>
                     <CardContent className={classes.line}>
                         <label htmlFor='contained-button-file'>
                             <img
                                 className={classes.media}
-                                src={element.image}
+                                src={element.image?element.image:'/static/add.png'}
                                 alt={element.name}
                             />
                         </label>
                         <div>
+                            {
+                                element.organization?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>
+                                            Организация:&nbsp;
+                                        </div>
+                                        <div className={classes.value}>
+                                            {element.organization.name}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Имя:&nbsp;
@@ -71,7 +84,7 @@ const CardOrganization = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    profile.role === 'admin' ?
+                    element.user&&profile.role === 'admin' ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await onoffClient([element._id])

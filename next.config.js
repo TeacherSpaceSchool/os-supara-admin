@@ -26,7 +26,7 @@ module.exports =
                 URL: process.env.URL
             },
             onDemandEntries : {
-                maxInactiveAge :  process.env.URL.trim()==='azyk.store'?1000*60*60*24: 1000 ,
+                maxInactiveAge :  (process.env.URL).includes('azyk.store')?1000*60*60*24*10: 1000 ,
             },
             webpack: (config) => {
                 return config

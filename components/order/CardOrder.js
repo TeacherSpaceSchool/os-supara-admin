@@ -39,6 +39,15 @@ const CardOrder = React.memo((props) => {
                                 element.orders[0].status
                         }</div>
                     </div>
+                    {
+                        element.agent&&element.agent.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Агент: &nbsp;</div>
+                                <div className={classes.value}>{element.agent.name}</div>
+                            </div>
+                            :
+                            null
+                    }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Время заказа:&nbsp;</div>
                         <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>

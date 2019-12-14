@@ -12,6 +12,8 @@ export const getOrders = async({search, sort, filter, date})=>{
                     query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
                         invoices(search: $search, sort: $sort, filter: $filter, date: $date) {
                             _id
+                            agent 
+                                {_id name}
                             createdAt
                             orders 
                                 { 
@@ -60,6 +62,7 @@ export const getOrders = async({search, sort, filter, date})=>{
                         }
                     }`,
             })
+        console.log(res.data)
         return res.data
     } catch(err){
         console.error(err)
@@ -77,6 +80,8 @@ export const getOrder = async({_id})=>{
                         invoice(_id: $_id) {
                             _id
                             createdAt
+                            agent: 
+                                {_id name}
                             orders 
                                 { 
                                     _id
@@ -128,8 +133,8 @@ export const addOrders = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!) {
-                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization) {
+                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!, $client: ID!) {
+                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization, client: $client) {
                              data
                         }
                     }`})

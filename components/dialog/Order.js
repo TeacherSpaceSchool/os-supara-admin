@@ -77,13 +77,26 @@ const Order =  React.memo(
                                 element.orders[0].status
                     }</div>
                 </div>
+                {
+                    element.agent&&element.agent.name?
+                        <a href={`/employment/${element.agent._id}`} target='_blank'>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Агент: &nbsp;</div>
+                                <div className={classes.value}>{element.agent.name}</div>
+                            </div>
+                        </a>
+                        :
+                        null
+                }
                 <div className={classes.row}>
                     <div className={classes.nameField}>Адрес: &nbsp;</div>
                     <div className={classes.value}>{element.address[0]}</div>
                 </div>
                 <div className={classes.geo} style={{color: element.address[1]?'#ffb300':'red'}} onClick={()=>{
-                    setMiniDialog('Геолокация', <Geo geo={element.address[1]}/>, true)
-                    showMiniDialog(true)
+                    if(element.address[1]) {
+                        setMiniDialog('Геолокация', <Geo geo={element.address[1]}/>, true)
+                        showMiniDialog(true)
+                    }
                 }}>
                     {
                         element.address[1]?
@@ -105,7 +118,7 @@ const Order =  React.memo(
                         :
                         null
                 }
-                <a href={`/client/${element.client.user._id}`} target='_blank'>
+                <a href={`/client/${element.client._id}`} target='_blank'>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Получатель:&nbsp;</div>
                         <div className={classes.value}>{element.client.name}</div>

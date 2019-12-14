@@ -28,21 +28,26 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
-
+import {getClients} from '../src/gql/client'
 
 const Basket = React.memo((props) => {
-    const { authenticated } = props.user;
+    const { authenticated, profile } = props.user;
     const classes = pageListStyle();
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     const { data } = props;
     let [list, setList] = useState(data.baskets);
-    let [organization, setOrganization] = useState({_id: '', name: ''});
     let [bonus, setBonus] = useState({});
+    let [organization, setOrganization] = useState({_id: '', name: ''});
     let handleOrganization =  (event) => {
         setOrganization(organizations[organizations.findIndex(element => element._id===event.target.value)])
     };
     let [organizations, setOrganizations] = useState([]);
+    let [client, setClient] = useState({_id: '', name: ''});
+    let handleClient =  (event) => {
+        setClient(clients[clients.findIndex(element => element._id===event.target.value)])
+    };
+    let [clients, setClients] = useState([]);
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
     let increment = (idx)=>{
@@ -87,6 +92,9 @@ const Basket = React.memo((props) => {
                     localStorage.basket = JSON.stringify([])
                 }
                 setList(JSON.parse(localStorage.basket))
+            }
+            else if(profile.role==='агент') {
+                setClients((await getClients({search: '', sort: '-name', filter: ''})).clients)
             }
         })()
     },[])
@@ -145,18 +153,34 @@ const Basket = React.memo((props) => {
                             <div className={classes.column} style={{width: 'calc(100% - 16px)', margin: 8}}>
                                 <Card className={classes.page}>
                                       <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                                        <TextField
-                                            select
-                                            label='Организация'
-                                            value={organization._id}
-                                            onChange={handleOrganization}
-                                            helperText='Организация'
-                                            className={classes.input}
-                                        >
-                                            {organizations.map((element)=>
-                                                    <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
-                                            )}
-                                        </TextField>
+                                          {
+                                              profile.role==='агент'?
+                                                  <TextField
+                                                      select
+                                                      label='Клиент'
+                                                      value={client._id}
+                                                      onChange={handleClient}
+                                                      helperText='Клиент'
+                                                      className={classes.input}
+                                                  >
+                                                      {clients.map((element)=>
+                                                          <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
+                                                      )}
+                                                  </TextField>
+                                                  :
+                                                  <TextField
+                                                      select
+                                                      label='Организация'
+                                                      value={organization._id}
+                                                      onChange={handleOrganization}
+                                                      helperText='Организация'
+                                                      className={classes.input}
+                                                  >
+                                                      {organizations.map((element)=>
+                                                          <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
+                                                      )}
+                                                  </TextField>
+                                          }
                                     </CardContent>
                                 </Card>
                                 {
@@ -234,14 +258,26 @@ const Basket = React.memo((props) => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>
-                                            <FormControl className={classes.input}>
-                                                <InputLabel>Организация</InputLabel>
-                                                <Select value={organization._id} onChange={handleOrganization}>
-                                                    {organizations.map((element)=>
-                                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                                    )}
-                                                </Select>
-                                            </FormControl>
+                                            {
+                                                profile.role==='агент'?
+                                                    <FormControl className={classes.input}>
+                                                        <InputLabel>Клиент</InputLabel>
+                                                        <Select value={client._id} onChange={handleClient}>
+                                                            {clients.map((element)=>
+                                                                <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                                            )}
+                                                        </Select>
+                                                    </FormControl>
+                                                    :
+                                                    <FormControl className={classes.input}>
+                                                        <InputLabel>Организация</InputLabel>
+                                                        <Select value={organization._id} onChange={handleOrganization}>
+                                                            {organizations.map((element)=>
+                                                                <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                                            )}
+                                                        </Select>
+                                                    </FormControl>
+                                            }
                                         </TableCell>
                                         <TableCell align="left">Количество</TableCell>
                                         <TableCell align="left">Цена</TableCell>
@@ -298,13 +334,22 @@ const Basket = React.memo((props) => {
                     <div className={isMobileApp?classes.nameM:classes.priceAll}>{`${allPrice} сом`}</div>
                 </div>
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
-                    if(allPrice>0) {
+                    if(allPrice>0)
                         if (authenticated)
-                            setMiniDialog('Купить', <BuyBasket bonus={bonus} client={data.client} allPrice={allPrice} organization={organization}/>)
-                        else
+                            if (
+                                (profile.role==='агент'&&client._id&&client.address.length>0&&client.address[0].length>0&&client.name.length>0&&client.phone.length>0)||
+                                (profile.role!=='агент'&&data.client.address.length>0&&data.client.address[0].length>0&&data.client.name.length>0&&data.client.phone.length>0)
+                            ) {
+                                setMiniDialog('Купить', <BuyBasket bonus={bonus} client={profile.role==='агент'?client:data.client} allPrice={allPrice} organization={organization}/>)
+                                showMiniDialog(true)
+                            }
+                            else
+                                showSnackBar('Пожалуйста заполните профиль')
+                        else {
                             setMiniDialog('Купить', <Sign/>)
-                        showMiniDialog(true)
-                    } else
+                            showMiniDialog(true)
+                        }
+                    else
                         showSnackBar('Добавьте товар в корзину')
                 }}>
                     КУПИТЬ

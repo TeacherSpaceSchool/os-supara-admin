@@ -131,7 +131,7 @@ const Item = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/item/${router.query.id}`}/>
             </Head>
             {
-                data.item.subCategory?
+                (!authenticated||['client', 'admin'].includes(profile.role))&&data.item.subCategory?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
                             Товары
@@ -139,7 +139,7 @@ const Item = React.memo((props) => {
                         <Link href='/subcategory/[id]' as={`/subcategory/${data.item.subCategory.category._id}`}>
                             {data.item.subCategory.category.name}
                         </Link>
-                        <Link href='/items/[id]' as={`/subcategory/${data.item.subCategory._id}`}>
+                        <Link href='/items/[id]' as={`/items/${data.item.subCategory._id}`}>
                             {data.item.subCategory.name}
                         </Link>
                         {

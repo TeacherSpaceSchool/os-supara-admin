@@ -9,6 +9,9 @@ import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Link from 'next/link';
 const height = 140
 
 
@@ -17,6 +20,7 @@ const Client = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.clients);
     const { search, filter, sort } = props.app;
+    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getClients({search: search, sort: sort, filter: filter})).clients)
@@ -41,6 +45,15 @@ const Client = React.memo((props) => {
                     </LazyLoad>
                 ):null}
             </div>
+            {['агент', 'менеджер', 'организация'].includes(profile.role)?
+                <Link href='/client/[id]' as={`/client/new`}>
+                    <Fab color='primary' aria-label='add' className={classes.fab}>
+                        <AddIcon />
+                    </Fab>
+                </Link>
+                :
+                null
+            }
         </App>
     )
 })

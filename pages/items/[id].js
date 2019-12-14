@@ -22,7 +22,7 @@ const Items = React.memo((props) => {
     const router = useRouter()
     let [list, setList] = useState(data.items);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
+    const { profile, authenticated } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getItems({subCategory: router.query.id, search: search, sort: sort, filter: filter})).items)
@@ -40,31 +40,34 @@ const Items = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/items/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/items/${router.query.id}`}/>
             </Head>
-                <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
-                    <Link href='/'>
-                        Товары
-                    </Link>
-                    {
-                        data.subCategory?
-                            <Link href='/subcategory/[id]' as={`/subcategory/${data.subCategory.category._id}`}>
-                                {data.subCategory.category.name}
-                            </Link>
-                            :
-                            <Link href='/subcategory/[id]' as={`/subcategory/all`}>
-                                Все подкатегории
-                            </Link>
-                    }
-                    {
-                        data.subCategory?
-                            <Typography color='textPrimary'>
-                                {data.subCategory.name}
-                            </Typography>
-                            :
-                            <Typography color='textPrimary'>
-                                Все товары
-                            </Typography>
-                    }
+            {
+                !authenticated||['client', 'admin'].includes(profile.role)?
+                    <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
+                        <Link href='/'>
+                            Товары
+                        </Link>
+                        {
+                            data.subCategory?
+                                <Link href='/subcategory/[id]' as={`/subcategory/${data.subCategory.category._id}`}>
+                                    {data.subCategory.category.name}
+                                </Link>
+                                :
+                                <Link href='/subcategory/[id]' as={`/subcategory/all`}>
+                                    Все подкатегории
+                                </Link>
+                        }
+                        {
+                            data.subCategory?
+                                <Typography color='textPrimary'>
+                                    {data.subCategory.name}
+                                </Typography>
+                                :
+                                <Typography color='textPrimary'>
+                                    Все товары
+                                </Typography>
+                        }
                     </Breadcrumbs>
+                    :null}
             <div className={classes.page}>
 
                 {list?list.map((element)=>

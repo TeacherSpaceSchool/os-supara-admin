@@ -13,8 +13,10 @@ export default makeStyles({
     },
     media1: {
         objectFit: 'cover',
-        height: 300,
-        width: 300,
+        maxHeight: 300,
+        maxWidth: 300,
+        height: 'calc(100vw - 72px)',
+        width: 'calc(100vw - 72px)',
         marginRight: 10,
         marginBottom: 10,
         cursor: 'pointer'
@@ -32,7 +34,8 @@ export default makeStyles({
         fontFamily: 'Roboto'
     },
     nameField: {
-        width: 130,
+        minWidth: 80,
+        maxWidth: 130,
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '16px',

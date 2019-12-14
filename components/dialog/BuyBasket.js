@@ -68,7 +68,7 @@ const BuyBasket =  React.memo(
                     </FormGroup>
                 </FormControl>
                 <br/>
-                <Link href={'client/[id]'} as={`/client/${client.user._id}`} style={{width: width}}>
+                <Link href={'client/[id]'} as={`/client/${client._id}`} style={{width: width}}>
                     Добавить адрес
                 </Link>
                 <br/>
@@ -119,7 +119,7 @@ const BuyBasket =  React.memo(
                         if(organization.minimumOrder===0||organization.minimumOrder<allPrice) {
                             if (paymentMethod.length > 0 && address.length > 0) {
                                 const action = async () => {
-                                    await addOrders({info: coment, usedBonus: useBonus, paymentMethod: paymentMethod, address: address, organization: organization._id})
+                                    await addOrders({info: coment, usedBonus: useBonus, paymentMethod: paymentMethod, address: address, organization: organization._id, client: client._id})
                                     Router.push('/orders')
                                     showMiniDialog(false);
                                 }

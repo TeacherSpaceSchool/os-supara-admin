@@ -49,7 +49,7 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.row}>
                             <div className={classes.nameField}>Заказы:&nbsp;</div>
                             <div className={classes.column}>
-                                {element.invoices.map((invoice, idx)=> <div key={idx} className={classes.value}>{invoice.number}</div>)}
+                                {element.invoices.map((invoice, idx)=> idx<4?<div key={idx} className={classes.value}>{invoice.number}</div>:idx===4?'...':null)}
                             </div>
                         </div>
                     </CardContent>

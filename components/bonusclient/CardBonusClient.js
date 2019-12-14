@@ -45,7 +45,7 @@ const CardBonus = React.memo((props) => {
                                     <div className={classes.nameField}>
                                         Клиент:&nbsp;
                                     </div>
-                                    <Link href='/client/[id]' as={`/client/${element.client.user._id}`}>
+                                    <Link href='/client/[id]' as={`/client/${element.client._id}`}>
                                         <div className={classes.value}>
                                             {element.client.name}
                                         </div>

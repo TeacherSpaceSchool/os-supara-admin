@@ -2,7 +2,6 @@ import Head from 'next/head';
 import React, { useState, useRef } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
-import { getClient } from '../../src/gql/client'
 import clientStyle from '../../src/styleMUI/client/client'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as userActions from '../../redux/actions/user'
-import { onoffClient, setClient } from '../../src/gql/client'
+import { getClient, onoffClient, setClient, addClient } from '../../src/gql/client'
 import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -28,6 +27,7 @@ import { pdDatePicker } from '../../src/lib'
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import * as snackbarActions from '../../redux/actions/snackbar'
+import Router from 'next/router'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -35,7 +35,7 @@ const Client = React.memo((props) => {
     const { data } = props;
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
-    let [status, setStatus] = useState(data.client?data.client.user.status:'');
+    let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
     let [name, setName] = useState(data.client?data.client.name:'');
     let [email, setEmail] = useState(data.client?data.client.email:'');
     let [phone, setPhone] = useState(data.client?data.client.phone:[]);
@@ -51,7 +51,7 @@ const Client = React.memo((props) => {
         phone.splice(idx, 1);
         setPhone([...phone])
     };
-    let [login, setLogin] = useState(data.client?data.client.user.login:'');
+    let [login, setLogin] = useState(data.client&&data.client.user?data.client.user.login:'');
 
     //привести к геолокации
     if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
@@ -143,25 +143,25 @@ const Client = React.memo((props) => {
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client?data.client.name:'Ничего не найдено'}>
             <Head>
-                <title>{data.client?data.client.name:'Ничего не найдено'}</title>
+                <title>{router.query.id==='new'?'Добавить':data.client?data.client.name:'Ничего не найдено'}</title>
                 <meta name='description' content={info}/>
                 <meta property='og:title' content={data.client?data.client.name:'Ничего не найдено'} />
                 <meta property='og:description' content={info} />
                 <meta property='og:type' content='website' />
-                <meta property='og:image' content={preview} />
+                <meta property='og:image' content={preview?preview:'/static/add.png'} />
                 <meta property="og:url" content={`${urlMain}/client/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/client/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client?
-                            profile.role==='admin'||profile._id===data.client.user._id?
+                        ((router.query.id==='new'||data.client.organization._id===profile.organization)&&['организация', 'менеджер', 'агент'].includes(profile.role))||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
                                 <>
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
                                         <img
                                             className={classes.media}
-                                            src={preview}
+                                            src={preview?preview:'/static/add.png'}
                                             alt={'Добавить'}
                                         />
                                     </label>
@@ -238,29 +238,36 @@ const Client = React.memo((props) => {
                                                 'aria-label': 'description',
                                             }}
                                         />
-                                    <TextField
-                                        label='Логин'
-                                        value={login}
-                                        className={classes.input}
-                                        onChange={(event)=>{setLogin(event.target.value)}}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
-                                        <Input
-                                            placeholder='Новый пароль'
-                                            type={hide ? 'password' : 'text' }
-                                            value={newPass}
-                                            onChange={handleNewPass}
-                                            className={classes.input}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton aria-label="Toggle password visibility" onClick={handleHide}>
-                                                        {hide ? <VisibilityOff />:<Visibility />  }
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                        />
+                                    {
+                                        router.query.id==='new'||data.client.organization?
+                                            null
+                                            :
+                                            <>
+                                            <TextField
+                                                label='Логин'
+                                                value={login}
+                                                className={classes.input}
+                                                onChange={(event)=>{setLogin(event.target.value)}}
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                            <Input
+                                                placeholder='Новый пароль'
+                                                type={hide ? 'password' : 'text' }
+                                                value={newPass}
+                                                onChange={handleNewPass}
+                                                className={classes.input}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton aria-label="Toggle password visibility" onClick={handleHide}>
+                                                            {hide ? <VisibilityOff />:<Visibility />  }
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                            />
+                                            </>
+                                    }
                                     <FormControl className={classes.input}>
                                         <InputLabel>Тип клиента</InputLabel>
                                         <Select value={type} onChange={handleType}>
@@ -432,51 +439,93 @@ const Client = React.memo((props) => {
                                         }}
                                     />
                                     <div className={classes.row}>
-                                        <Button onClick={async()=>{
-                                            let editElement = {_id: data.client.user._id}
-                                            if(image!==undefined)editElement.image = image
-                                            if(passport!==undefined)editElement.passport = passport
-                                            if(patent!==undefined)editElement.patent = patent
-                                            if(certificate!==undefined)editElement.certificate = certificate
-                                            if(name.length>0&&name!==data.client.name)editElement.name = name
-                                            editElement.address = address
-                                            if(email.length>0&&email!==data.client.email)editElement.email = email
-                                            if(login.length>0&&data.client.user.login!==login)editElement.login = login
-                                            editElement.phone = phone
-                                            if(info.length>0&&info!==data.client.info)editElement.info = info
-                                            if(city.length>0&&city!==data.client.city)editElement.city = city
-                                            if(type&&type.length>0&&type!==data.client.type)editElement.type = type
-                                            if(birthday&&birthday!==data.client.birthday)editElement.birthday = birthday
-                                            if(newPass.length>0)editElement.newPass = newPass
-                                            const action = async() => {
-                                                await setClient(editElement)
-                                            }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                            showMiniDialog(true)
-                                        }} size='small' color='primary'>
-                                            Сохранить
-                                        </Button>
-                                        {profile.role==='admin'?
-                                            <Button onClick={async()=>{
-                                                const action = async() => {
-                                                    await onoffClient([data.client._id])
-                                                    setStatus(status==='active'?'deactive':'active')
+                                        {
+                                            ((data.client.organization&&profile.organization===data.client.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
+                                            ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
+                                                <>
+                                                <Button onClick={async()=>{
+                                                    let editElement = {_id: data.client._id}
+                                                    if(image) editElement.image = image
+                                                    if(passport)editElement.passport = passport
+                                                    if(patent)editElement.patent = patent
+                                                    if(certificate)editElement.certificate = certificate
+                                                    if(name&&name.length>0&&name!==data.client.name)editElement.name = name
+                                                    editElement.address = address
+                                                    if(email&&email.length>0&&email!==data.client.email)editElement.email = email
+                                                    if(login&&login.length>0&&data.client.user.login!==login)editElement.login = login
+                                                    editElement.phone = phone
+                                                    if(info&&info.length>0&&info!==data.client.info)editElement.info = info
+                                                    if(city&&city.length>0&&city!==data.client.city)editElement.city = city
+                                                    if(type&&type.length>0&&type!==data.client.type)editElement.type = type
+                                                    if(birthday&&birthday!==data.client.birthday)editElement.birthday = new Date(birthday)
+                                                    if(newPass&&newPass.length>0)editElement.newPass = newPass
+                                                    const action = async() => {
+                                                        await setClient(editElement)
+                                                    }
+                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                    showMiniDialog(true)
+                                                }} size='small' color='primary'>
+                                                    Сохранить
+                                                </Button>
+                                                {profile.role==='admin'?
+                                                    <Button onClick={async()=>{
+                                                        const action = async() => {
+                                                            await onoffClient([data.client._id])
+                                                            setStatus(status==='active'?'deactive':'active')
+                                                        }
+                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        showMiniDialog(true)
+                                                    }} size='small' color='primary'>
+                                                        {status==='active'?'Отключить':'Включить'}
+                                                    </Button>
+                                                    :
+                                                    data.client.user&&profile._id===data.client.user._id?
+                                                        <Button onClick={()=>{
+                                                            const action = async() => {
+                                                                logout(true)
+                                                            }
+                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            showMiniDialog(true)
+                                                        }} size='small' color='primary'>
+                                                            Выйти
+                                                        </Button>
+                                                        :
+                                                        null
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                showMiniDialog(true)
-                                            }} size='small' color='primary'>
-                                                {status==='active'?'Отключить':'Включить'}
-                                            </Button>
-                                            :
-                                            <Button onClick={()=>{
-                                                const action = async() => {
-                                                    logout(true)
-                                                }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                showMiniDialog(true)
-                                            }} size='small' color='primary'>
-                                                Выйти
-                                            </Button>
+                                                </>
+                                                :
+                                                router.query.id==='new'&&['организация', 'менеджер', 'агент'].includes(profile.role)?
+                                                    <Button onClick={async()=>{
+                                                        if(name.length>0&&address.length>0&&city.length>0&&phone.length>0){
+                                                            let editElement = {}
+                                                            if(image!==undefined)editElement.image = image
+                                                            if(passport!==undefined)editElement.passport = passport
+                                                            if(patent!==undefined)editElement.patent = patent
+                                                            if(certificate!==undefined)editElement.certificate = certificate
+                                                            if(name.length>0)editElement.name = name
+                                                            editElement.address = address
+                                                            if(email.length>0)editElement.email = email
+                                                            editElement.phone = phone
+                                                            if(info.length>0)editElement.info = info
+                                                            if(city.length>0)editElement.city = city
+                                                            if(type&&type.length>0)editElement.type = type
+                                                            editElement.birthday = new Date(birthday)
+                                                            const action = async() => {
+                                                                await addClient(editElement)
+                                                                Router.push('/clients')
+                                                            }
+                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            showMiniDialog(true)
+                                                        }
+                                                        else {
+                                                            showSnackBar('Заполните поля: имя, адрес, город и телефон')
+                                                        }
+                                                    }} size='small' color='primary'>
+                                                        Добавить
+                                                    </Button>
+                                                    :
+                                                    null
+
                                         }
                                     </div>
                                 </div>
@@ -539,8 +588,10 @@ const Client = React.memo((props) => {
                                                     {element[0]}
                                                 </div>
                                                 <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
-                                                    setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
-                                                    showMiniDialog(true)
+                                                    if(element[1]) {
+                                                        setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
+                                                        showMiniDialog(true)
+                                                    }
                                                 }}>
                                                     {
                                                         element[1]?
@@ -621,7 +672,28 @@ const Client = React.memo((props) => {
 
 Client.getInitialProps = async function(ctx) {
     return {
-        data: await getClient({_id: ctx.query.id})
+        data: {...(ctx.query.id==='new'?
+            {
+                client:
+                    {
+                        name: '',
+                        email: '',
+                        phone: [],
+                        address: [],
+                        info: '',
+                        image: '/static/add.png',
+                        reiting: 0,
+                        city: '',
+                        type: '',
+                        birthday: null,
+                        user: null,
+                        patent: null,
+                        passport: null,
+                        certificate: null,
+                    }
+            }
+        :
+            await getClient({_id: ctx.query.id}))}
     };
 };
 

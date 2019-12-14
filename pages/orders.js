@@ -15,6 +15,7 @@ const height = 225
 const Orders = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+
     let [list, setList] = useState(data.invoices);
     const { search, filter, sort, date } = props.app;
     useEffect(()=>{
