@@ -26,6 +26,7 @@ const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
         const { client, allPrice, organization, bonus } = props;
+        console.log(client)
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;

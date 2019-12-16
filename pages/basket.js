@@ -36,6 +36,7 @@ const Basket = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     const { data } = props;
+    console.log(data)
     let [list, setList] = useState(data.baskets);
     let [bonus, setBonus] = useState({});
     let [organization, setOrganization] = useState({_id: '', name: ''});
@@ -371,7 +372,7 @@ Basket.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getBasket(),
-            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}):[]),
+            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}):{}),
             ...await getBonusesClient({search: '', sort: '-createdAt'})
         }
     };

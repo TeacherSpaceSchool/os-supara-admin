@@ -2851,11 +2851,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
 /* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/icons/Cancel */ "./node_modules/@material-ui/icons/Cancel.js");
 /* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
 
 
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\Order.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
 
 
 
@@ -2891,6 +2895,26 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.allPrice),
       allPrice = _useState2[0],
       setAllPrice = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.taken),
+      taken = _useState3[0],
+      setTaken = _useState3[1];
+
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.confirmationForwarder),
+      confirmationForwarder = _useState4[0],
+      setConfirmationForwarder = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.confirmationClient),
+      confirmationClient = _useState5[0],
+      setConfirmationClient = _useState5[1];
+
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.cancelForwarder != undefined && element.cancelForwarder),
+      cancelForwarder = _useState6[0],
+      setCancelForwarder = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(element.cancelClient != undefined && element.cancelClient),
+      cancelClient = _useState7[0],
+      setCancelClient = _useState7[1];
 
   var width = isMobileApp ? window.innerWidth - 144 : 500;
   var showSnackBar = props.snackbarActions.showSnackBar;
@@ -2937,49 +2961,49 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 67
     },
     __self: this
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 68
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 69
     },
     __self: this
   }, "\u0417\u0430\u043A\u0430\u0437 \u2116:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 70
     },
     __self: this
   }, element.number)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 72
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 73
     },
     __self: this
   }, "\u0421\u0442\u0430\u0442\u0443\u0441:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 74
     },
     __self: this
   }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), element.agent && element.agent.name ? __jsx("a", {
@@ -2987,49 +3011,49 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 89
     },
     __self: this
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 90
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 91
     },
     __self: this
   }, "\u0410\u0433\u0435\u043D\u0442: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 92
     },
     __self: this
   }, element.agent.name))) : null, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 98
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 99
     },
     __self: this
   }, "\u0410\u0434\u0440\u0435\u0441: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 100
     },
     __self: this
   }, element.address[0])), __jsx("div", {
@@ -3043,7 +3067,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
           geo: element.address[1],
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 104
           },
           __self: this
         }), true);
@@ -3052,49 +3076,49 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 102
     },
     __self: this
   }, element.address[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 115
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 116
     },
     __self: this
   }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 117
     },
     __self: this
   }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), element.dateDelivery ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 121
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 122
     },
     __self: this
   }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116
+      lineNumber: 123
     },
     __self: this
   }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))) : null, __jsx("a", {
@@ -3102,28 +3126,28 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 128
     },
     __self: this
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 129
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 130
     },
     __self: this
   }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 131
     },
     __self: this
   }, element.client.name))), __jsx("a", {
@@ -3131,31 +3155,10 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 134
     },
     __self: this
   }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 128
-    },
-    __self: this
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 129
-    },
-    __self: this
-  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 130
-    },
-    __self: this
-  }, element.orders[0].item.organization.name))), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
@@ -3169,14 +3172,14 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       lineNumber: 136
     },
     __self: this
-  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
+  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 137
     },
     __self: this
-  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
+  }, element.orders[0].item.organization.name))), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
@@ -3190,72 +3193,93 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       lineNumber: 143
     },
     __self: this
-  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 144
     },
     __self: this
-  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
+  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 149
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 150
+    },
+    __self: this
+  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 151
+    },
+    __self: this
+  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 153
+    },
+    __self: this
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 154
     },
     __self: this
   }, "\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 155
     },
     __self: this
   }, element.paymentMethod)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 157
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 158
     },
     __self: this
   }, "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 159
     },
     __self: this
   }, element.info)), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 161
     },
     __self: this
   }), __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 162
     },
     __self: this
   }, __jsx("b", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 163
     },
     __self: this
   }, "\u0422\u043E\u0432\u0430\u0440\u044B:"), orders.map(function (order, idx) {
@@ -3264,21 +3288,21 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       className: classes.column,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 168
+        lineNumber: 175
       },
       __self: this
     }, __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 176
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 170
+        lineNumber: 177
       },
       __self: this
     }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("a", {
@@ -3286,14 +3310,14 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       target: "_blank",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 171
+        lineNumber: 178
       },
       __self: this
     }, __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 172
+        lineNumber: 179
       },
       __self: this
     }, order.item.name)), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -3305,7 +3329,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       "aria-label": "\u0443\u0434\u0430\u043B\u0438\u0442\u044C",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 174
+        lineNumber: 181
       },
       __self: this
     }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_18___default.a, {
@@ -3315,21 +3339,21 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 177
+        lineNumber: 184
       },
       __self: this
     }))), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 180
+        lineNumber: 187
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 181
+        lineNumber: 188
       },
       __self: this
     }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
@@ -3339,14 +3363,14 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 182
+        lineNumber: 189
       },
       __self: this
     }, "-"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 183
+        lineNumber: 190
       },
       __self: this
     }, order.count, "\xA0\u0448\u0442"), __jsx("div", {
@@ -3356,34 +3380,34 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 184
+        lineNumber: 191
       },
       __self: this
     }, "+")), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 186
+        lineNumber: 193
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 187
+        lineNumber: 194
       },
       __self: this
     }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 188
+        lineNumber: 195
       },
       __self: this
     }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 190
+        lineNumber: 197
       },
       __self: this
     }));else return __jsx("div", {
@@ -3391,7 +3415,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       className: classes.column,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 195
+        lineNumber: 202
       },
       __self: this
     }, __jsx("a", {
@@ -3399,86 +3423,192 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       target: "_blank",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 196
+        lineNumber: 203
       },
       __self: this
     }, __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 197
+        lineNumber: 204
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 198
+        lineNumber: 205
       },
       __self: this
     }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 199
+        lineNumber: 206
       },
       __self: this
     }, order.item.name))), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 202
+        lineNumber: 209
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 203
+        lineNumber: 210
       },
       __self: this
     }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 204
+        lineNumber: 211
       },
       __self: this
     }, order.count, "\xA0\u0448\u0442")), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 206
+        lineNumber: 213
       },
       __self: this
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 207
+        lineNumber: 214
       },
       __self: this
     }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 208
+        lineNumber: 215
       },
       __self: this
     }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 210
+        lineNumber: 217
       },
       __self: this
     }));
   })), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 216
+      lineNumber: 223
     },
     __self: this
-  }, element.orders[0].status === 'обработка' && (profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin') ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    disabled: !['менеджер', 'организация', 'admin'].includes(profile.role) || !['обработка', 'принят'].includes(element.orders[0].status),
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      checked: taken,
+      onChange: function onChange() {
+        setTaken(!taken);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 227
+      },
+      __self: this
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u0440\u0438\u043D\u044F\u0442",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 224
+    },
+    __self: this
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 238
+    },
+    __self: this
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    disabled: !['менеджер', 'организация', 'admin', 'экспедитор'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      checked: confirmationForwarder,
+      onChange: function onChange() {
+        setConfirmationForwarder(!confirmationForwarder);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 242
+      },
+      __self: this
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 239
+    },
+    __self: this
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 253
+    },
+    __self: this
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    disabled: !['client', 'admin'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      checked: confirmationClient,
+      onChange: function onChange() {
+        setConfirmationClient(!confirmationClient);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 257
+      },
+      __self: this
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u043E\u043B\u0443\u0447\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 254
+    },
+    __self: this
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 268
+    },
+    __self: this
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    disabled: !['client', 'организация', 'менеджер', 'admin'].includes(profile.role) || 'обработка' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      checked: element.cancelClient != undefined || element.cancelForwarder != undefined ? element.cancelClient != undefined ? cancelClient : cancelForwarder : 'client' === profile.role ? cancelClient : cancelForwarder,
+      onChange: function onChange() {
+        if ('client' === profile.role) setCancelClient(!cancelClient);else if ('admin' === profile.role) {
+          if (element.cancelClient != undefined) setCancelClient(!cancelClient);else setCancelForwarder(!cancelForwarder);
+        } else setCancelForwarder(!cancelForwarder);
+      },
+      color: "secondary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 272
+      },
+      __self: this
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043E\u0442\u043C\u0435\u043D\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 269
+    },
+    __self: this
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 346
+    },
+    __self: this
+  }, profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "contained",
     color: "primary",
     onClick: function onClick() {
@@ -3488,12 +3618,25 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
         var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
         /*#__PURE__*/
         _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-          var sendOrders, invoices;
+          var invoice, sendOrders, invoices;
           return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  sendOrders = orders.map(function (order) {
+                  invoice = {
+                    invoice: element._id
+                  };
+                  if (element.taken !== taken) invoice.taken = taken;
+                  if (element.confirmationClient !== confirmationClient) invoice.confirmationClient = confirmationClient;
+                  if (element.confirmationForwarder !== confirmationForwarder) invoice.confirmationForwarder = confirmationForwarder;
+                  if (element.cancelClient !== cancelClient) invoice.cancelClient = cancelClient;
+                  if (element.cancelForwarder !== cancelForwarder) invoice.cancelForwarder = cancelForwarder;
+                  console.log();
+                  _context.next = 9;
+                  return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["setInvoice"])(invoice);
+
+                case 9:
+                  if (element.orders[0].status !== 'обработка') sendOrders = [];else sendOrders = orders.map(function (order) {
                     return {
                       _id: order._id,
                       count: order.count,
@@ -3501,19 +3644,19 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
                       status: order.status
                     };
                   });
-                  _context.next = 3;
+                  _context.next = 12;
                   return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["setOrder"])({
                     orders: sendOrders,
                     invoice: element._id
                   });
 
-                case 3:
+                case 12:
                   invoices = _context.sent.invoices;
                   if (setList) setList(invoices);
                   if (getInvoices) getInvoices();
                   showMiniDialog(false);
 
-                case 7:
+                case 16:
                 case "end":
                   return _context.stop();
               }
@@ -3530,7 +3673,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229
+          lineNumber: 372
         },
         __self: this
       }));
@@ -3538,122 +3681,10 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 349
     },
     __self: this
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, profile.role === 'client' && 'принят' === element.orders[0].status && !element.confirmationClient || ['менеджер', 'организация'].includes(profile.role) && 'принят' === element.orders[0].status && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    variant: "contained",
-    color: "primary",
-    onClick: function onClick() {
-      var action =
-      /*#__PURE__*/
-      function () {
-        var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-        /*#__PURE__*/
-        _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-          var invoices;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["approveOrders"])({
-                    route: route,
-                    invoices: [element._id]
-                  });
-
-                case 2:
-                  invoices = _context2.sent.invoices;
-                  if (setList) setList(invoices);
-                  if (getInvoices) getInvoices();
-
-                case 5:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-
-        return function action() {
-          return _ref2.apply(this, arguments);
-        };
-      }();
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 252
-        },
-        __self: this
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 244
-    },
-    __self: this
-  }, "\u0417\u0430\u043A\u0430\u0437 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D") : null, profile.role === 'client' && element.orders[0].status === 'обработка' || ['менеджер', 'организация'].includes(profile.role) && ['обработка', 'принят'].includes(element.orders[0].status) && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    variant: "contained",
-    color: "primary",
-    onClick: function onClick() {
-      var _id = element.orders.map(function (order) {
-        return order._id;
-      });
-
-      var action =
-      /*#__PURE__*/
-      function () {
-        var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
-        /*#__PURE__*/
-        _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          var invoices;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  _context3.next = 2;
-                  return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["cancelOrders"])({
-                    _id: _id,
-                    invoice: element._id
-                  });
-
-                case 2:
-                  invoices = _context3.sent.invoices;
-                  if (setList) setList(invoices);
-                  if (getInvoices) getInvoices();
-
-                case 5:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3);
-        }));
-
-        return function action() {
-          return _ref3.apply(this, arguments);
-        };
-      }();
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 272
-        },
-        __self: this
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 263
-    },
-    __self: this
-  }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "contained",
     color: "secondary",
     onClick: function onClick() {
@@ -3662,7 +3693,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 279
+      lineNumber: 379
     },
     __self: this
   }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
@@ -8877,6 +8908,242 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/Checkbox/Checkbox.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Checkbox/Checkbox.js ***!
+  \*****************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
+/* harmony import */ var _internal_SwitchBase__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../internal/SwitchBase */ "./node_modules/@material-ui/core/esm/internal/SwitchBase.js");
+/* harmony import */ var _internal_svg_icons_CheckBoxOutlineBlank__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../internal/svg-icons/CheckBoxOutlineBlank */ "./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBoxOutlineBlank.js");
+/* harmony import */ var _internal_svg_icons_CheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../internal/svg-icons/CheckBox */ "./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBox.js");
+/* harmony import */ var _styles_colorManipulator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/esm/styles/colorManipulator.js");
+/* harmony import */ var _internal_svg_icons_IndeterminateCheckBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../internal/svg-icons/IndeterminateCheckBox */ "./node_modules/@material-ui/core/esm/internal/svg-icons/IndeterminateCheckBox.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      color: theme.palette.text.secondary
+    },
+
+    /* Pseudo-class applied to the root element if `checked={true}`. */
+    checked: {},
+
+    /* Pseudo-class applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Pseudo-class applied to the root element if `indeterminate={true}`. */
+    indeterminate: {},
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      '&$checked': {
+        color: theme.palette.primary.main,
+        '&:hover': {
+          backgroundColor: Object(_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_9__["fade"])(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+          // Reset on touch devices, it doesn't add specificity
+          '@media (hover: none)': {
+            backgroundColor: 'transparent'
+          }
+        }
+      },
+      '&$disabled': {
+        color: theme.palette.action.disabled
+      }
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      '&$checked': {
+        color: theme.palette.secondary.main,
+        '&:hover': {
+          backgroundColor: Object(_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_9__["fade"])(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+          // Reset on touch devices, it doesn't add specificity
+          '@media (hover: none)': {
+            backgroundColor: 'transparent'
+          }
+        }
+      },
+      '&$disabled': {
+        color: theme.palette.action.disabled
+      }
+    }
+  };
+};
+var defaultCheckedIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+var defaultIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_CheckBoxOutlineBlank__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+var defaultIndeterminateIcon = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_IndeterminateCheckBox__WEBPACK_IMPORTED_MODULE_10__["default"], null);
+var Checkbox = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function Checkbox(props, ref) {
+  var _props$checkedIcon = props.checkedIcon,
+      checkedIcon = _props$checkedIcon === void 0 ? defaultCheckedIcon : _props$checkedIcon,
+      classes = props.classes,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'secondary' : _props$color,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      _props$icon = props.icon,
+      icon = _props$icon === void 0 ? defaultIcon : _props$icon,
+      _props$indeterminate = props.indeterminate,
+      indeterminate = _props$indeterminate === void 0 ? false : _props$indeterminate,
+      _props$indeterminateI = props.indeterminateIcon,
+      indeterminateIcon = _props$indeterminateI === void 0 ? defaultIndeterminateIcon : _props$indeterminateI,
+      inputProps = props.inputProps,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["checkedIcon", "classes", "color", "disabled", "icon", "indeterminate", "indeterminateIcon", "inputProps"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_SwitchBase__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    type: "checkbox",
+    checkedIcon: indeterminate ? indeterminateIcon : checkedIcon,
+    classes: {
+      root: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, classes["color".concat(Object(_utils_capitalize__WEBPACK_IMPORTED_MODULE_11__["default"])(color))], indeterminate && classes.indeterminate),
+      checked: classes.checked,
+      disabled: classes.disabled
+    },
+    color: color,
+    inputProps: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      'data-indeterminate': indeterminate
+    }, inputProps),
+    icon: indeterminate ? indeterminateIcon : icon,
+    ref: ref,
+    disabled: disabled
+  }, other));
+});
+ true ? Checkbox.propTypes = {
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['primary', 'secondary', 'default']),
+
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * The id of the `input` element.
+   */
+  id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * If `true`, the component appears indeterminate.
+   * This does not set the native input element to indeterminate due
+   * to inconsistent behavior across browsers.
+   * However, we set a `data-indeterminate` attribute on the input.
+   */
+  indeterminate: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The icon to display when the component is indeterminate.
+   */
+  indeterminateIcon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */
+  inputProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef: _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["refType"],
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * If `true`, the `input` element will be required.
+   */
+  required: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The input component prop `type`.
+   */
+  type: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * The value of the component. The DOM API casts this to a string.
+   */
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_12__["default"])(styles, {
+  name: 'MuiCheckbox'
+})(Checkbox));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Checkbox/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Checkbox/index.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/Checkbox.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Checkbox__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js":
 /*!*********************************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js ***!
@@ -11652,6 +11919,216 @@ __webpack_require__.r(__webpack_exports__);
 function useFormControl() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_FormControlContext__WEBPACK_IMPORTED_MODULE_1__["default"]);
 }
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js ***!
+  \*********************************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
+/* harmony import */ var _FormControl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _Typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      cursor: 'pointer',
+      // For correct alignment with the text.
+      verticalAlign: 'middle',
+      WebkitTapHighlightColor: 'transparent',
+      marginLeft: -11,
+      marginRight: 16,
+      // used for row presentation of radio/checkbox
+      '&$disabled': {
+        cursor: 'default'
+      }
+    },
+
+    /* Styles applied to the root element if `labelPlacement="start"`. */
+    labelPlacementStart: {
+      flexDirection: 'row-reverse',
+      marginLeft: 16,
+      // used for row presentation of radio/checkbox
+      marginRight: -11
+    },
+
+    /* Styles applied to the root element if `labelPlacement="top"`. */
+    labelPlacementTop: {
+      flexDirection: 'column-reverse',
+      marginLeft: 16
+    },
+
+    /* Styles applied to the root element if `labelPlacement="bottom"`. */
+    labelPlacementBottom: {
+      flexDirection: 'column',
+      marginLeft: 16
+    },
+
+    /* Pseudo-class applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the label's Typography component. */
+    label: {
+      '&$disabled': {
+        color: theme.palette.text.disabled
+      }
+    }
+  };
+};
+/**
+ * Drop in replacement of the `Radio`, `Switch` and `Checkbox` component.
+ * Use this component if you want to display an extra label.
+ */
+
+var FormControlLabel = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function FormControlLabel(props, ref) {
+  var checked = props.checked,
+      classes = props.classes,
+      className = props.className,
+      control = props.control,
+      disabledProp = props.disabled,
+      inputRef = props.inputRef,
+      label = props.label,
+      _props$labelPlacement = props.labelPlacement,
+      labelPlacement = _props$labelPlacement === void 0 ? 'end' : _props$labelPlacement,
+      name = props.name,
+      onChange = props.onChange,
+      value = props.value,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["checked", "classes", "className", "control", "disabled", "inputRef", "label", "labelPlacement", "name", "onChange", "value"]);
+
+  var muiFormControl = Object(_FormControl__WEBPACK_IMPORTED_MODULE_6__["useFormControl"])();
+  var disabled = disabledProp;
+
+  if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
+    disabled = control.props.disabled;
+  }
+
+  if (typeof disabled === 'undefined' && muiFormControl) {
+    disabled = muiFormControl.disabled;
+  }
+
+  var controlProps = {
+    disabled: disabled
+  };
+  ['checked', 'name', 'onChange', 'value', 'inputRef'].forEach(function (key) {
+    if (typeof control.props[key] === 'undefined' && typeof props[key] !== 'undefined') {
+      controlProps[key] = props[key];
+    }
+  });
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, className, labelPlacement !== 'end' && classes["labelPlacement".concat(Object(_utils_capitalize__WEBPACK_IMPORTED_MODULE_9__["default"])(labelPlacement))], disabled && classes.disabled),
+    ref: ref
+  }, other), react__WEBPACK_IMPORTED_MODULE_2___default.a.cloneElement(control, controlProps), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    component: "span",
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.label, disabled && classes.disabled)
+  }, label));
+});
+ true ? FormControlLabel.propTypes = {
+  /**
+   * If `true`, the component appears selected.
+   */
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * A control element. For instance, it can be be a `Radio`, a `Switch` or a `Checkbox`.
+   */
+  control: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.element,
+
+  /**
+   * If `true`, the control will be disabled.
+   */
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef: _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["refType"],
+
+  /**
+   * The text to be used in an enclosing label element.
+   */
+  label: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * The position of the label.
+   */
+  labelPlacement: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['end', 'start', 'top', 'bottom']),
+
+  /*
+   * @ignore
+   */
+  name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * The value of the component.
+   */
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_7__["default"])(styles, {
+  name: 'MuiFormControlLabel'
+})(FormControlLabel));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/FormControlLabel/index.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormControlLabel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _FormControlLabel__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
 
 /***/ }),
 
@@ -23210,6 +23687,273 @@ var red = {
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/internal/SwitchBase.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/SwitchBase.js ***!
+  \*******************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
+/* harmony import */ var _FormControl_useFormControl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../FormControl/useFormControl */ "./node_modules/@material-ui/core/esm/FormControl/useFormControl.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _IconButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+
+
+
+
+
+
+
+
+
+var styles = {
+  root: {
+    padding: 9
+  },
+  checked: {},
+  disabled: {},
+  input: {
+    cursor: 'inherit',
+    position: 'absolute',
+    opacity: 0,
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
+    margin: 0,
+    padding: 0,
+    zIndex: 1
+  }
+};
+/**
+ * @ignore - internal component.
+ */
+
+var SwitchBase = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function SwitchBase(props, ref) {
+  var autoFocus = props.autoFocus,
+      checkedProp = props.checked,
+      checkedIcon = props.checkedIcon,
+      classes = props.classes,
+      className = props.className,
+      defaultChecked = props.defaultChecked,
+      disabledProp = props.disabled,
+      icon = props.icon,
+      id = props.id,
+      inputProps = props.inputProps,
+      inputRef = props.inputRef,
+      name = props.name,
+      onBlur = props.onBlur,
+      onChange = props.onChange,
+      onFocus = props.onFocus,
+      readOnly = props.readOnly,
+      required = props.required,
+      tabIndex = props.tabIndex,
+      type = props.type,
+      value = props.value,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["autoFocus", "checked", "checkedIcon", "classes", "className", "defaultChecked", "disabled", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"]);
+
+  var _React$useRef = react__WEBPACK_IMPORTED_MODULE_2___default.a.useRef(checkedProp != null),
+      isControlled = _React$useRef.current;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2___default.a.useState(Boolean(defaultChecked)),
+      checkedState = _React$useState[0],
+      setCheckedState = _React$useState[1];
+
+  var checked = isControlled ? checkedProp : checkedState;
+  var muiFormControl = Object(_FormControl_useFormControl__WEBPACK_IMPORTED_MODULE_6__["default"])();
+
+  var handleFocus = function handleFocus(event) {
+    if (onFocus) {
+      onFocus(event);
+    }
+
+    if (muiFormControl && muiFormControl.onFocus) {
+      muiFormControl.onFocus(event);
+    }
+  };
+
+  var handleBlur = function handleBlur(event) {
+    if (onBlur) {
+      onBlur(event);
+    }
+
+    if (muiFormControl && muiFormControl.onBlur) {
+      muiFormControl.onBlur(event);
+    }
+  };
+
+  var handleInputChange = function handleInputChange(event) {
+    var newChecked = event.target.checked;
+
+    if (!isControlled) {
+      setCheckedState(newChecked);
+    }
+
+    if (onChange) {
+      onChange(event, newChecked);
+    }
+  };
+
+  var disabled = disabledProp;
+
+  if (muiFormControl) {
+    if (typeof disabled === 'undefined') {
+      disabled = muiFormControl.disabled;
+    }
+  }
+
+  var hasLabelFor = type === 'checkbox' || type === 'radio';
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_IconButton__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    component: "span",
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, className, checked && classes.checked, disabled && classes.disabled),
+    disabled: disabled,
+    tabIndex: null,
+    role: undefined,
+    onFocus: handleFocus,
+    onBlur: handleBlur,
+    ref: ref
+  }, other), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    autoFocus: autoFocus,
+    checked: checkedProp,
+    defaultChecked: defaultChecked,
+    className: classes.input,
+    disabled: disabled,
+    id: hasLabelFor && id,
+    name: name,
+    onChange: handleInputChange,
+    readOnly: readOnly,
+    ref: inputRef,
+    required: required,
+    tabIndex: tabIndex,
+    type: type,
+    value: value
+  }, inputProps)), checked ? checkedIcon : icon);
+}); // NB: If changed, please update Checkbox, Switch and Radio
+// so that the API documentation is updated.
+
+ true ? SwitchBase.propTypes = {
+  /**
+   * If `true`, the `input` element will be focused during the first mount.
+   */
+  autoFocus: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * @ignore
+   */
+  defaultChecked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node.isRequired,
+
+  /**
+   * The id of the `input` element.
+   */
+  id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */
+  inputProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef: _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["refType"],
+
+  /*
+   * @ignore
+   */
+  name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * @ignore
+   */
+  onBlur: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * @ignore
+   */
+  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * It prevents the user from changing the value of the field
+   * (not from interacting with the field).
+   */
+  readOnly: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the `input` element will be required.
+   */
+  required: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * @ignore
+   */
+  tabIndex: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string]),
+
+  /**
+   * The input component prop `type`.
+   */
+  type: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string.isRequired,
+
+  /**
+   * The value of the component.
+   */
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_7__["default"])(styles, {
+  name: 'PrivateSwitchBase'
+})(SwitchBase));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/ArrowDropDown.js":
 /*!********************************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/ArrowDropDown.js ***!
@@ -23231,6 +23975,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
   d: "M7 10l5 5 5-5z"
 }), 'ArrowDropDown'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBox.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBox.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/core/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+}), 'CheckBox'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBoxOutlineBlank.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/CheckBoxOutlineBlank.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/core/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+}), 'CheckBoxOutlineBlank'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/IndeterminateCheckBox.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/IndeterminateCheckBox.js ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/core/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2z"
+}), 'IndeterminateCheckBox'));
 
 /***/ }),
 
@@ -65126,7 +65942,7 @@ function () {
 /*!**************************!*\
   !*** ./src/gql/order.js ***!
   \**************************/
-/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setOrder */
+/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setInvoice, setOrder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65136,6 +65952,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrders", function() { return addOrders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelOrders", function() { return cancelOrders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approveOrders", function() { return approveOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInvoice", function() { return setInvoice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrder", function() { return setOrder; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -65148,8 +65965,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function _templateObject6() {
+function _templateObject7() {
   var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($orders: [OrderInput], $invoice: ID) {\n                        setOrder(orders: $orders, invoice: $invoice) {\n                             data\n                        }\n                    }"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean) {\n                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder) {\n                             data\n                        }\n                    }"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -65189,7 +66016,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($_id: ID!) {\n                        invoice(_id: $_id) {\n                            _id\n                            createdAt\n                            agent: \n                                {_id name}\n                            orders \n                                { \n                                    _id\n                                    createdAt\n                                    item\n                                        {\n                                            image\n                                            _id\n                                            name    \n                                            stock \n                                            price\n                                            organization\n                                                {_id name}\n                                        }\n                                    count\n                                    allPrice\n                                    status\n                                 }\n                            client \n                                { \n                                    _id\n                                    name\n                                    email\n                                    phone\n                                    user \n                                        {_id }\n                                }\n                            allPrice\n                            info\n                            address\n                            paymentMethod\n                            number\n                            confirmationForwarder\n                            confirmationClient\n                            dateDelivery\n                            usedBonus\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($_id: ID!) {\n                        invoice(_id: $_id) {\n                            _id\n                            createdAt\n                            agent: \n                                {_id name}\n                            orders \n                                { \n                                    _id\n                                    createdAt\n                                    item\n                                        {\n                                            image\n                                            _id\n                                            name    \n                                            stock \n                                            price\n                                            organization\n                                                {_id name}\n                                        }\n                                    count\n                                    allPrice\n                                    status\n                                 }\n                            client \n                                { \n                                    _id\n                                    name\n                                    email\n                                    phone\n                                    user \n                                        {_id }\n                                }\n                            allPrice\n                            info\n                            address\n                            paymentMethod\n                            number\n                            confirmationForwarder\n                            cancelClient\n                            cancelForwarder\n                            confirmationClient\n                            taken\n                            dateDelivery\n                            usedBonus\n                        }\n                    }"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -65199,7 +66026,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {\n                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {\n                            _id\n                            agent \n                                {_id name}\n                            createdAt\n                            orders \n                                { \n                                    _id\n                                    createdAt\n                                    item\n                                        {\n                                            image\n                                            _id\n                                            name    \n                                            stock \n                                            price\n                                            organization\n                                                {_id name}\n                                        }\n                                    count\n                                    allPrice\n                                    status\n                                 }\n                            client \n                                { \n                                    _id\n                                    name\n                                    email\n                                    phone \n                                    user \n                                        {_id }\n                                }\n                            allPrice\n                            info\n                            address\n                            paymentMethod\n                            number\n                            confirmationForwarder\n                            confirmationClient\n                            dateDelivery\n                            usedBonus\n                        }\n                        sortInvoice {\n                            name\n                            field\n                        }\n                        filterInvoice {\n                           name\n                           value\n                        }\n                    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {\n                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {\n                            _id\n                            agent \n                                {_id name}\n                            createdAt\n                            orders \n                                { \n                                    _id\n                                    createdAt\n                                    item\n                                        {\n                                            image\n                                            _id\n                                            name    \n                                            stock \n                                            price\n                                            organization\n                                                {_id name}\n                                        }\n                                    count\n                                    allPrice\n                                    status\n                                 }\n                            client \n                                { \n                                    _id\n                                    name\n                                    email\n                                    phone \n                                    user \n                                        {_id }\n                                }\n                            allPrice\n                            info\n                            address\n                            paymentMethod\n                            number\n                            confirmationForwarder\n                            confirmationClient\n                            cancelClient\n                            cancelForwarder\n                            taken\n                            dateDelivery\n                            usedBonus\n                        }\n                        sortInvoice {\n                            name\n                            field\n                        }\n                        filterInvoice {\n                           name\n                           value\n                        }\n                    }"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -65238,20 +66065,19 @@ function () {
 
           case 5:
             res = _context.sent;
-            console.log(res.data);
             return _context.abrupt("return", res.data);
 
-          case 10:
-            _context.prev = 10;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](1);
             console.error(_context.t0);
 
-          case 13:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[1, 9]]);
   }));
 
   return function getOrders(_x) {
@@ -65428,7 +66254,7 @@ function () {
     return _ref7.apply(this, arguments);
   };
 }();
-var setOrder =
+var setInvoice =
 /*#__PURE__*/
 function () {
   var _ref8 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
@@ -65448,27 +66274,67 @@ function () {
             });
 
           case 4:
-            _context6.next = 6;
-            return getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+            _context6.next = 9;
+            break;
 
           case 6:
-            return _context6.abrupt("return", _context6.sent);
-
-          case 9:
-            _context6.prev = 9;
+            _context6.prev = 6;
             _context6.t0 = _context6["catch"](0);
             console.error(_context6.t0);
 
-          case 12:
+          case 9:
           case "end":
             return _context6.stop();
         }
       }
-    }, _callee6, null, [[0, 9]]);
+    }, _callee6, null, [[0, 6]]);
   }));
 
-  return function setOrder(_x6) {
+  return function setInvoice(_x6) {
     return _ref8.apply(this, arguments);
+  };
+}();
+var setOrder =
+/*#__PURE__*/
+function () {
+  var _ref9 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(element) {
+    var client;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.prev = 0;
+            client = new _singleton_client__WEBPACK_IMPORTED_MODULE_4__["SingletonApolloClient"]().getClient();
+            _context7.next = 4;
+            return client.mutate({
+              variables: element,
+              mutation: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"])(_templateObject7())
+            });
+
+          case 4:
+            _context7.next = 6;
+            return getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_5__["SingletonStore"]().getStore().getState().app);
+
+          case 6:
+            return _context7.abrupt("return", _context7.sent);
+
+          case 9:
+            _context7.prev = 9;
+            _context7.t0 = _context7["catch"](0);
+            console.error(_context7.t0);
+
+          case 12:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, null, [[0, 9]]);
+  }));
+
+  return function setOrder(_x7) {
+    return _ref9.apply(this, arguments);
   };
 }();
 
@@ -66001,7 +66867,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Forders&absolutePagePath=C%3A%5Cprojects%5Cazyk%5Cazyk-admin%5Cpages%5Corders.js ***!
   \******************************************************************************************************************************/
@@ -66024,5 +66890,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=orders.js.map

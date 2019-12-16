@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { cancelOrders, approveOrders, setOrder } from '../../src/gql/order'
+import { cancelOrders, approveOrders, setOrder, setInvoice } from '../../src/gql/order'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
@@ -14,6 +14,8 @@ import Confirmation from './Confirmation'
 import Geo from '../../components/dialog/Geo'
 import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const Order =  React.memo(
     (props) =>{
@@ -23,6 +25,11 @@ const Order =  React.memo(
         const { classes, element, setList, route, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
+        let [taken, setTaken] = useState(element.taken);
+        let [confirmationForwarder, setConfirmationForwarder] = useState(element.confirmationForwarder);
+        let [confirmationClient, setConfirmationClient] = useState(element.confirmationClient);
+        let [cancelForwarder, setCancelForwarder] = useState(element.cancelForwarder!=undefined&&element.cancelForwarder);
+        let [cancelClient, setCancelClient] = useState(element.cancelClient!=undefined&&element.cancelClient);
         const width = isMobileApp? (window.innerWidth-144) : 500;
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
@@ -214,25 +221,84 @@ const Order =  React.memo(
                     }
                 </div>
                 <div>
-                    {
-                        (element.orders[0].status==='обработка'&&(profile.role==='client'||['менеджер', 'организация'].includes(profile.role)||profile.role==='admin'))?
-                            <Button variant='contained' color='primary' onClick={()=>{
-                                const action = async() => {
-                                    let sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, status: order.status}})
-                                    let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
-                                    if(setList)
-                                        setList(invoices)
-                                    if(getInvoices)
-                                        getInvoices()
-                                    showMiniDialog(false);
+                    <FormControlLabel
+                        disabled={(!['менеджер', 'организация', 'admin'].includes(profile.role)||!['обработка','принят'].includes(element.orders[0].status))}
+                        control={
+                            <Checkbox
+                                checked={taken}
+                                onChange={()=>{
+                                    setTaken(!taken);
+                                }}
+                                color='primary'
+                            />
+                        }
+                        label='Заказ принят'
+                    />
+                </div>
+                <div>
+                    <FormControlLabel
+                        disabled={(!['менеджер', 'организация', 'admin', 'экспедитор'].includes(profile.role)||'принят'!==element.orders[0].status)}
+                        control={
+                            <Checkbox
+                                checked={confirmationForwarder}
+                                onChange={()=>{
+                                    setConfirmationForwarder(!confirmationForwarder);
+                                }}
+                                color='primary'
+                            />
+                        }
+                        label='Заказ доставлен'
+                    />
+                </div>
+                <div>
+                    <FormControlLabel
+                        disabled={(!['client', 'admin'].includes(profile.role)||'принят'!==element.orders[0].status)}
+                        control={
+                            <Checkbox
+                                checked={confirmationClient}
+                                onChange={()=>{
+                                    setConfirmationClient(!confirmationClient);
+                                }}
+                                color='primary'
+                            />
+                        }
+                        label='Заказ получен'
+                    />
+                </div>
+                <div>
+                    <FormControlLabel
+                        disabled={!['client', 'организация', 'менеджер', 'admin'].includes(profile.role)||'обработка'!==element.orders[0].status}
+                        control={
+                            <Checkbox
+                                checked={
+                                    element.cancelClient!=undefined||element.cancelForwarder!=undefined?
+                                        element.cancelClient!=undefined?
+                                            cancelClient
+                                            :
+                                            cancelForwarder
+                                        :
+                                        'client'===profile.role?
+                                            cancelClient
+                                            :
+                                            cancelForwarder
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            }} className={classes.button}>
-                                Сохранить
-                            </Button>
-                            :
-                            null
-                    }
+                                onChange={()=>{
+                                    if('client'===profile.role) setCancelClient(!cancelClient);
+                                    else if('admin'===profile.role){
+                                        if(element.cancelClient!=undefined)
+                                            setCancelClient(!cancelClient)
+                                        else
+                                            setCancelForwarder(!cancelForwarder)
+                                    }
+                                    else setCancelForwarder(!cancelForwarder);
+                                }}
+                                color='secondary'
+                            />
+                        }
+                        label='Заказ отменен'
+                    />
+                </div>
+                {/*
                     {
                         (
                             (profile.role==='client'&&'принят'===element.orders[0].status&&!element.confirmationClient)
@@ -276,10 +342,44 @@ const Order =  React.memo(
                             :
                             null
                     }
+                    */}
+                    <div>
+                {
+                    ((profile.role==='client'||['менеджер', 'организация'].includes(profile.role)||profile.role==='admin'))?
+                        <Button variant='contained' color='primary' onClick={()=>{
+                            const action = async() => {
+
+                                let invoice = {invoice: element._id}
+                                if(element.taken!==taken)invoice.taken=taken
+                                if(element.confirmationClient!==confirmationClient)invoice.confirmationClient=confirmationClient
+                                if(element.confirmationForwarder!==confirmationForwarder)invoice.confirmationForwarder=confirmationForwarder
+                                if(element.cancelClient!==cancelClient)invoice.cancelClient=cancelClient
+                                if(element.cancelForwarder!==cancelForwarder)invoice.cancelForwarder=cancelForwarder
+                                console.log()
+                                await setInvoice(invoice)
+
+                                let sendOrders;
+                                if(element.orders[0].status!=='обработка') sendOrders = []
+                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, status: order.status}})
+
+                                let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
+                                if(setList)
+                                    setList(invoices)
+                                if(getInvoices)
+                                    getInvoices()
+                                showMiniDialog(false);
+                            }
+                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                        }} className={classes.button}>
+                            Сохранить
+                        </Button>
+                        :
+                        null
+                }
                     <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
                         Закрыть
                     </Button>
-                </div>
+                    </div>
             </div>
         );
     }

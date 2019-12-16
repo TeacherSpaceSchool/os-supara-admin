@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2846,8 +2846,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Cancel */ "@material-ui/icons/Cancel");
 /* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "@material-ui/core/Checkbox");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "@material-ui/core/FormControlLabel");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__);
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\Order.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
 
 
 
@@ -2890,6 +2896,26 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     0: allPrice,
     1: setAllPrice
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.allPrice);
+  let {
+    0: taken,
+    1: setTaken
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.taken);
+  let {
+    0: confirmationForwarder,
+    1: setConfirmationForwarder
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.confirmationForwarder);
+  let {
+    0: confirmationClient,
+    1: setConfirmationClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.confirmationClient);
+  let {
+    0: cancelForwarder,
+    1: setCancelForwarder
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.cancelForwarder != undefined && element.cancelForwarder);
+  let {
+    0: cancelClient,
+    1: setCancelClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.cancelClient != undefined && element.cancelClient);
   const width = isMobileApp ? window.innerWidth - 144 : 500;
   const {
     showSnackBar
@@ -2937,49 +2963,49 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 67
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 68
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 69
     },
     __self: undefined
   }, "\u0417\u0430\u043A\u0430\u0437 \u2116:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 70
     },
     __self: undefined
   }, element.number)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 72
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 73
     },
     __self: undefined
   }, "\u0421\u0442\u0430\u0442\u0443\u0441:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 74
     },
     __self: undefined
   }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), element.agent && element.agent.name ? __jsx("a", {
@@ -2987,49 +3013,49 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 89
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 90
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 91
     },
     __self: undefined
   }, "\u0410\u0433\u0435\u043D\u0442: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 92
     },
     __self: undefined
   }, element.agent.name))) : null, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 98
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 99
     },
     __self: undefined
   }, "\u0410\u0434\u0440\u0435\u0441: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 100
     },
     __self: undefined
   }, element.address[0])), __jsx("div", {
@@ -3043,7 +3069,7 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
           geo: element.address[1],
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 104
           },
           __self: undefined
         }), true);
@@ -3052,49 +3078,49 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 102
     },
     __self: undefined
   }, element.address[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 108
+      lineNumber: 115
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 116
     },
     __self: undefined
   }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430: \xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110
+      lineNumber: 117
     },
     __self: undefined
   }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), element.dateDelivery ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 121
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 122
     },
     __self: undefined
   }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116
+      lineNumber: 123
     },
     __self: undefined
   }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))) : null, __jsx("a", {
@@ -3102,28 +3128,28 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 128
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 129
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 130
     },
     __self: undefined
   }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 131
     },
     __self: undefined
   }, element.client.name))), __jsx("a", {
@@ -3131,31 +3157,10 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 134
     },
     __self: undefined
   }, __jsx("div", {
-    className: classes.row,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 128
-    },
-    __self: undefined
-  }, __jsx("div", {
-    className: classes.nameField,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 129
-    },
-    __self: undefined
-  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
-    className: classes.value,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 130
-    },
-    __self: undefined
-  }, element.orders[0].item.organization.name))), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
@@ -3169,14 +3174,14 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       lineNumber: 136
     },
     __self: undefined
-  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
+  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 137
     },
     __self: undefined
-  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
+  }, element.orders[0].item.organization.name))), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
@@ -3190,72 +3195,93 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       lineNumber: 143
     },
     __self: undefined
-  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 144
     },
     __self: undefined
-  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
+  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 149
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 150
+    },
+    __self: undefined
+  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 151
+    },
+    __self: undefined
+  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 153
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 154
     },
     __self: undefined
   }, "\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 155
     },
     __self: undefined
   }, element.paymentMethod)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 157
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 158
     },
     __self: undefined
   }, "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 159
     },
     __self: undefined
   }, element.info)), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 161
     },
     __self: undefined
   }), __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 162
     },
     __self: undefined
   }, __jsx("b", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 163
     },
     __self: undefined
   }, "\u0422\u043E\u0432\u0430\u0440\u044B:"), orders.map((order, idx) => {
@@ -3264,21 +3290,21 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       className: classes.column,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 168
+        lineNumber: 175
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 176
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 170
+        lineNumber: 177
       },
       __self: undefined
     }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("a", {
@@ -3286,14 +3312,14 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       target: "_blank",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 171
+        lineNumber: 178
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 172
+        lineNumber: 179
       },
       __self: undefined
     }, order.item.name)), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default.a, {
@@ -3305,7 +3331,7 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       "aria-label": "\u0443\u0434\u0430\u043B\u0438\u0442\u044C",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 174
+        lineNumber: 181
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default.a, {
@@ -3315,21 +3341,21 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 177
+        lineNumber: 184
       },
       __self: undefined
     }))), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 180
+        lineNumber: 187
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 181
+        lineNumber: 188
       },
       __self: undefined
     }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
@@ -3339,14 +3365,14 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 182
+        lineNumber: 189
       },
       __self: undefined
     }, "-"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 183
+        lineNumber: 190
       },
       __self: undefined
     }, order.count, "\xA0\u0448\u0442"), __jsx("div", {
@@ -3356,34 +3382,34 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 184
+        lineNumber: 191
       },
       __self: undefined
     }, "+")), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 186
+        lineNumber: 193
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 187
+        lineNumber: 194
       },
       __self: undefined
     }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 188
+        lineNumber: 195
       },
       __self: undefined
     }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 190
+        lineNumber: 197
       },
       __self: undefined
     }));else return __jsx("div", {
@@ -3391,7 +3417,7 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       className: classes.column,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 195
+        lineNumber: 202
       },
       __self: undefined
     }, __jsx("a", {
@@ -3399,91 +3425,208 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
       target: "_blank",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 196
+        lineNumber: 203
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 197
+        lineNumber: 204
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 198
+        lineNumber: 205
       },
       __self: undefined
     }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 199
+        lineNumber: 206
       },
       __self: undefined
     }, order.item.name))), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 202
+        lineNumber: 209
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 203
+        lineNumber: 210
       },
       __self: undefined
     }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 204
+        lineNumber: 211
       },
       __self: undefined
     }, order.count, "\xA0\u0448\u0442")), __jsx("div", {
       className: classes.row,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 206
+        lineNumber: 213
       },
       __self: undefined
     }, __jsx("div", {
       className: classes.nameField,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 207
+        lineNumber: 214
       },
       __self: undefined
     }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
       className: classes.value,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 208
+        lineNumber: 215
       },
       __self: undefined
     }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 210
+        lineNumber: 217
       },
       __self: undefined
     }));
   })), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 216
+      lineNumber: 223
     },
     __self: undefined
-  }, element.orders[0].status === 'обработка' && (profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin') ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['менеджер', 'организация', 'admin'].includes(profile.role) || !['обработка', 'принят'].includes(element.orders[0].status),
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: taken,
+      onChange: () => {
+        setTaken(!taken);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 227
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u0440\u0438\u043D\u044F\u0442",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 224
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 238
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['менеджер', 'организация', 'admin', 'экспедитор'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: confirmationForwarder,
+      onChange: () => {
+        setConfirmationForwarder(!confirmationForwarder);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 242
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 239
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 253
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['client', 'admin'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: confirmationClient,
+      onChange: () => {
+        setConfirmationClient(!confirmationClient);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 257
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u043E\u043B\u0443\u0447\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 254
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 268
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['client', 'организация', 'менеджер', 'admin'].includes(profile.role) || 'обработка' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: element.cancelClient != undefined || element.cancelForwarder != undefined ? element.cancelClient != undefined ? cancelClient : cancelForwarder : 'client' === profile.role ? cancelClient : cancelForwarder,
+      onChange: () => {
+        if ('client' === profile.role) setCancelClient(!cancelClient);else if ('admin' === profile.role) {
+          if (element.cancelClient != undefined) setCancelClient(!cancelClient);else setCancelForwarder(!cancelForwarder);
+        } else setCancelForwarder(!cancelForwarder);
+      },
+      color: "secondary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 272
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043E\u0442\u043C\u0435\u043D\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 269
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 346
+    },
+    __self: undefined
+  }, profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
     variant: "contained",
     color: "primary",
     onClick: () => {
       const action = async () => {
-        let sendOrders = orders.map(order => {
+        let invoice = {
+          invoice: element._id
+        };
+        if (element.taken !== taken) invoice.taken = taken;
+        if (element.confirmationClient !== confirmationClient) invoice.confirmationClient = confirmationClient;
+        if (element.confirmationForwarder !== confirmationForwarder) invoice.confirmationForwarder = confirmationForwarder;
+        if (element.cancelClient !== cancelClient) invoice.cancelClient = cancelClient;
+        if (element.cancelForwarder !== cancelForwarder) invoice.cancelForwarder = cancelForwarder;
+        console.log();
+        await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["setInvoice"])(invoice);
+        let sendOrders;
+        if (element.orders[0].status !== 'обработка') sendOrders = [];else sendOrders = orders.map(order => {
           return {
             _id: order._id,
             count: order.count,
@@ -3504,7 +3647,7 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229
+          lineNumber: 372
         },
         __self: undefined
       }));
@@ -3512,68 +3655,10 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 349
     },
     __self: undefined
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, profile.role === 'client' && 'принят' === element.orders[0].status && !element.confirmationClient || ['менеджер', 'организация'].includes(profile.role) && 'принят' === element.orders[0].status && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "primary",
-    onClick: () => {
-      const action = async () => {
-        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["approveOrders"])({
-          route: route,
-          invoices: [element._id]
-        })).invoices;
-        if (setList) setList(invoices);
-        if (getInvoices) getInvoices();
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 252
-        },
-        __self: undefined
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 244
-    },
-    __self: undefined
-  }, "\u0417\u0430\u043A\u0430\u0437 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D") : null, profile.role === 'client' && element.orders[0].status === 'обработка' || ['менеджер', 'организация'].includes(profile.role) && ['обработка', 'принят'].includes(element.orders[0].status) && !element.confirmationForwarder || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    variant: "contained",
-    color: "primary",
-    onClick: () => {
-      let _id = element.orders.map(order => order._id);
-
-      const action = async () => {
-        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["cancelOrders"])({
-          _id: _id,
-          invoice: element._id
-        })).invoices;
-        if (setList) setList(invoices);
-        if (getInvoices) getInvoices();
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 272
-        },
-        __self: undefined
-      }));
-    },
-    className: classes.button,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 263
-    },
-    __self: undefined
-  }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
     variant: "contained",
     color: "secondary",
     onClick: () => {
@@ -3582,7 +3667,7 @@ const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 279
+      lineNumber: 379
     },
     __self: undefined
   }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
@@ -6845,7 +6930,7 @@ const setItem = async element => {
 /*!**************************!*\
   !*** ./src/gql/order.js ***!
   \**************************/
-/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setOrder */
+/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setInvoice, setOrder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6855,6 +6940,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrders", function() { return addOrders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelOrders", function() { return cancelOrders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approveOrders", function() { return approveOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInvoice", function() { return setInvoice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrder", function() { return setOrder; });
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
@@ -6919,6 +7005,9 @@ const getOrders = async ({
                             number
                             confirmationForwarder
                             confirmationClient
+                            cancelClient
+                            cancelForwarder
+                            taken
                             dateDelivery
                             usedBonus
                         }
@@ -6932,7 +7021,6 @@ const getOrders = async ({
                         }
                     }`
     });
-    console.log(res.data);
     return res.data;
   } catch (err) {
     console.error(err);
@@ -6987,7 +7075,10 @@ const getOrder = async ({
                             paymentMethod
                             number
                             confirmationForwarder
+                            cancelClient
+                            cancelForwarder
                             confirmationClient
+                            taken
                             dateDelivery
                             usedBonus
                         }
@@ -7044,6 +7135,22 @@ const approveOrders = async element => {
                     }`
     });
     return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setInvoice = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean) {
+                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder) {
+                             data
+                        }
+                    }`
+    }); //return await getOrders(new SingletonStore().getStore().getState().app)
   } catch (err) {
     console.error(err);
   }
@@ -7575,7 +7682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!*******************************!*\
   !*** multi ./pages/orders.js ***!
   \*******************************/
@@ -7653,6 +7760,17 @@ module.exports = require("@material-ui/core/CardContent");
 
 /***/ }),
 
+/***/ "@material-ui/core/Checkbox":
+/*!*********************************************!*\
+  !*** external "@material-ui/core/Checkbox" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Checkbox");
+
+/***/ }),
+
 /***/ "@material-ui/core/CircularProgress":
 /*!*****************************************************!*\
   !*** external "@material-ui/core/CircularProgress" ***!
@@ -7727,6 +7845,17 @@ module.exports = require("@material-ui/core/Fab");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/FormControl");
+
+/***/ }),
+
+/***/ "@material-ui/core/FormControlLabel":
+/*!*****************************************************!*\
+  !*** external "@material-ui/core/FormControlLabel" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/FormControlLabel");
 
 /***/ }),
 

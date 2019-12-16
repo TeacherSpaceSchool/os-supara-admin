@@ -18,24 +18,25 @@ const Brand = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     const router = useRouter()
-    let [list, setList] = useState(data.brands);
+    let [list, setList] = useState(data?data.brands:[]);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
-            setList((await getBrands({organization: router.query.id, search: search, sort: sort})).brands)
+            if(data)
+                setList((await getBrands({organization: router.query.id, search: search, sort: sort})).brands)
         })()
     },[filter, sort, search])
     return (
-        <App sorts={data.sortItem} pageName={data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
+        <App sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
             <Head>
-                <title>{data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}</title>
-                <meta name='description' content={data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
-                <meta property='og:title' content={data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'} />
-                <meta property='og:description' content={data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
+                <title>{data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}</title>
+                <meta name='description' content={data&&data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
+                <meta property='og:title' content={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'} />
+                <meta property='og:description' content={data&&data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={data.brands[0]?data.brands[0].organization.image:`${urlMain}/brand/${router.query.id}`} />
+                <meta property="og:url" content={data&&data.brands[0]?data.brands[0].organization.image:`${urlMain}/brand/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/brand/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>

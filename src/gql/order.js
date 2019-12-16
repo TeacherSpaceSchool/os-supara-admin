@@ -49,6 +49,9 @@ export const getOrders = async({search, sort, filter, date})=>{
                             number
                             confirmationForwarder
                             confirmationClient
+                            cancelClient
+                            cancelForwarder
+                            taken
                             dateDelivery
                             usedBonus
                         }
@@ -62,7 +65,6 @@ export const getOrders = async({search, sort, filter, date})=>{
                         }
                     }`,
             })
-        console.log(res.data)
         return res.data
     } catch(err){
         console.error(err)
@@ -115,7 +117,10 @@ export const getOrder = async({_id})=>{
                             paymentMethod
                             number
                             confirmationForwarder
+                            cancelClient
+                            cancelForwarder
                             confirmationClient
+                            taken
                             dateDelivery
                             usedBonus
                         }
@@ -172,6 +177,23 @@ export const approveOrders = async(element)=>{
                         }
                     }`})
         return await getOrders(new SingletonStore().getStore().getState().app)
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const setInvoice = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: element,
+            mutation : gql`
+                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean) {
+                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder) {
+                             data
+                        }
+                    }`})
+        //return await getOrders(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }

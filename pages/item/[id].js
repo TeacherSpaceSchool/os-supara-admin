@@ -131,7 +131,7 @@ const Item = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/item/${router.query.id}`}/>
             </Head>
             {
-                (!authenticated||['client', 'admin'].includes(profile.role))&&data.item.subCategory?
+                (router.query.id!=='new'&&(!authenticated||['client', 'admin'].includes(profile.role))&&data.item.subCategory)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
                             Товары
