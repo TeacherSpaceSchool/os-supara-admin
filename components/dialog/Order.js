@@ -9,7 +9,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
 import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
-import { pdDDMMYYHHMM } from '../../src/lib'
+import { pdDDMMYYHHMM, pdDDMMYYHHMMCancel } from '../../src/lib'
 import Confirmation from './Confirmation'
 import Geo from '../../components/dialog/Geo'
 import IconButton from '@material-ui/core/IconButton';
@@ -267,7 +267,9 @@ const Order =  React.memo(
                 </div>
                 <div>
                     <FormControlLabel
-                        disabled={!['client', 'организация', 'менеджер', 'admin'].includes(profile.role)||'обработка'!==element.orders[0].status}
+                        disabled={(
+                            !['client', 'организация', 'менеджер', 'admin'].includes(profile.role)||!['отмена','обработка'].includes(element.orders[0].status)
+                        )}
                         control={
                             <Checkbox
                                 checked={
@@ -295,7 +297,12 @@ const Order =  React.memo(
                                 color='secondary'
                             />
                         }
-                        label='Заказ отменен'
+                        label={
+                            !element.cancelClient&&!element.cancelForwarder?
+                                'Заказ отменен'
+                                :
+                                `Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
+                        }
                     />
                 </div>
                 {/*
@@ -355,7 +362,6 @@ const Order =  React.memo(
                                 if(element.confirmationForwarder!==confirmationForwarder)invoice.confirmationForwarder=confirmationForwarder
                                 if(element.cancelClient!==cancelClient)invoice.cancelClient=cancelClient
                                 if(element.cancelForwarder!==cancelForwarder)invoice.cancelForwarder=cancelForwarder
-                                console.log()
                                 await setInvoice(invoice)
 
                                 let sendOrders;

@@ -41,3 +41,11 @@ export const pdDDMMYYHHMM = (date) =>
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
     return date
 }
+export const pdDDMMYYHHMMCancel = (date) =>
+{
+    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
+    date.setMinutes(date.getMinutes() + 10);
+    date = JSON.stringify(date).split('-')
+    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
+    return date
+}

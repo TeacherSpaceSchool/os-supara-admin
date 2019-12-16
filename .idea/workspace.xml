@@ -115,22 +115,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Order.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Order.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="360" column="40" lean-forward="false" selection-start-line="360" selection-start-column="40" selection-end-line="360" selection-end-column="40" />
+            <state relative-caret-position="124">
+              <caret line="303" column="76" lean-forward="false" selection-start-line="303" selection-start-column="56" selection-end-line="303" selection-end-column="76" />
               <folding>
-                <element signature="e#16162#18729#0" expanded="false" />
+                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#16613#19180#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="[id].js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lib.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="[id].js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="-4432">
               <caret line="157" column="131" lean-forward="false" selection-start-line="157" selection-start-column="131" selection-end-line="157" selection-end-column="131" />
               <folding />
             </state>
@@ -149,7 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>media</find>
       <find>&lt;Breadcrumbs</find>
       <find>мене</find>
       <find>fab:</find>
@@ -177,8 +187,9 @@
       <find>.brands</find>
       <find>profile._id</find>
       <find>getClient</find>
-      <find>!==undefined</find>
       <find>.orga</find>
+      <find>!==undefined</find>
+      <find>pdDDMMYYHHM</find>
     </findStrings>
     <replaceStrings>
       <replace>https://$</replace>
@@ -228,7 +239,6 @@
       <list>
         <option value="$PROJECT_DIR$/pages/bonusclient.js" />
         <option value="$PROJECT_DIR$/components/ads/CardAdsPlaceholder.js" />
-        <option value="$PROJECT_DIR$/src/lib.js" />
         <option value="$PROJECT_DIR$/pages/bonus.js" />
         <option value="$PROJECT_DIR$/pages/_app.js" />
         <option value="$PROJECT_DIR$/redux/reducers/index.js" />
@@ -275,8 +285,9 @@
         <option value="$PROJECT_DIR$/pages/brand/[id].js" />
         <option value="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
-        <option value="$PROJECT_DIR$/components/dialog/Order.js" />
         <option value="$PROJECT_DIR$/pages/client/[id].js" />
+        <option value="$PROJECT_DIR$/src/lib.js" />
+        <option value="$PROJECT_DIR$/components/dialog/Order.js" />
       </list>
     </option>
   </component>
@@ -579,12 +590,12 @@
       <workItem from="1575621432316" duration="31498000" />
       <workItem from="1575869046603" duration="78977000" />
       <workItem from="1576228047173" duration="26560000" />
-      <workItem from="1576476847568" duration="11723000" />
+      <workItem from="1576476847568" duration="13205000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="832853000" />
+    <option name="totallyTimeSpent" value="834335000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -664,14 +675,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/gql/subcategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="50" column="41" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styleMUI/category/cardCategory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1084,21 +1087,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
+    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="360" column="40" lean-forward="false" selection-start-line="360" selection-start-column="40" selection-end-line="360" selection-end-column="40" />
-          <folding>
-            <element signature="e#16162#18729#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="-4432">
+          <caret line="157" column="131" lean-forward="false" selection-start-line="157" selection-start-column="131" selection-end-line="157" selection-end-column="131" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
+    <entry file="file://$PROJECT_DIR$/src/lib.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="157" column="131" lean-forward="false" selection-start-line="157" selection-start-column="131" selection-end-line="157" selection-end-column="131" />
+        <state relative-caret-position="297">
+          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/Order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="303" column="76" lean-forward="false" selection-start-line="303" selection-start-column="56" selection-end-line="303" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#16613#19180#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

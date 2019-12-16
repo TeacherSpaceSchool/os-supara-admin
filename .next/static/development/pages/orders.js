@@ -3581,7 +3581,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     },
     __self: this
   }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    disabled: !['client', 'организация', 'менеджер', 'admin'].includes(profile.role) || 'обработка' !== element.orders[0].status,
+    disabled: !['client', 'организация', 'менеджер', 'admin'].includes(profile.role) || !['отмена', 'обработка'].includes(element.orders[0].status),
     control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
       checked: element.cancelClient != undefined || element.cancelForwarder != undefined ? element.cancelClient != undefined ? cancelClient : cancelForwarder : 'client' === profile.role ? cancelClient : cancelForwarder,
       onChange: function onChange() {
@@ -3592,11 +3592,11 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       color: "secondary",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 272
+        lineNumber: 274
       },
       __self: this
     }),
-    label: "\u0417\u0430\u043A\u0430\u0437 \u043E\u0442\u043C\u0435\u043D\u0435\u043D",
+    label: !element.cancelClient && !element.cancelForwarder ? 'Заказ отменен' : "\u0412\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437 \u0434\u043E ".concat(element.cancelClient ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["pdDDMMYYHHMMCancel"])(new Date(element.cancelClient)) : Object(_src_lib__WEBPACK_IMPORTED_MODULE_14__["pdDDMMYYHHMMCancel"])(new Date(element.cancelForwarder))),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 269
@@ -3605,7 +3605,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
   })), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 346
+      lineNumber: 353
     },
     __self: this
   }, profile.role === 'client' || ['менеджер', 'организация'].includes(profile.role) || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -3631,11 +3631,10 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
                   if (element.confirmationForwarder !== confirmationForwarder) invoice.confirmationForwarder = confirmationForwarder;
                   if (element.cancelClient !== cancelClient) invoice.cancelClient = cancelClient;
                   if (element.cancelForwarder !== cancelForwarder) invoice.cancelForwarder = cancelForwarder;
-                  console.log();
-                  _context.next = 9;
+                  _context.next = 8;
                   return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["setInvoice"])(invoice);
 
-                case 9:
+                case 8:
                   if (element.orders[0].status !== 'обработка') sendOrders = [];else sendOrders = orders.map(function (order) {
                     return {
                       _id: order._id,
@@ -3644,19 +3643,19 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
                       status: order.status
                     };
                   });
-                  _context.next = 12;
+                  _context.next = 11;
                   return Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_8__["setOrder"])({
                     orders: sendOrders,
                     invoice: element._id
                   });
 
-                case 12:
+                case 11:
                   invoices = _context.sent.invoices;
                   if (setList) setList(invoices);
                   if (getInvoices) getInvoices();
                   showMiniDialog(false);
 
-                case 16:
+                case 15:
                 case "end":
                   return _context.stop();
               }
@@ -3673,7 +3672,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 372
+          lineNumber: 378
         },
         __self: this
       }));
@@ -3681,7 +3680,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 349
+      lineNumber: 356
     },
     __self: this
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -3693,7 +3692,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
     className: classes.button,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 379
+      lineNumber: 385
     },
     __self: this
   }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
@@ -66344,7 +66343,7 @@ function () {
 /*!********************!*\
   !*** ./src/lib.js ***!
   \********************/
-/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDatePicker, pdDDMMYYHHMM */
+/*! exports provided: checkMobile, checkAuth, getJWT, checkInt, pdDDMMYYYY, pdDDMMYY, pdDatePicker, pdDDMMYYHHMM, pdDDMMYYHHMMCancel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66357,6 +66356,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYY", function() { return pdDDMMYY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDatePicker", function() { return pdDatePicker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYHHMM", function() { return pdDDMMYYHHMM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pdDDMMYYHHMMCancel", function() { return pdDDMMYYHHMMCancel; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
@@ -66398,6 +66398,13 @@ var pdDatePicker = function pdDatePicker(date) {
 };
 var pdDDMMYYHHMM = function pdDDMMYYHHMM(date) {
   date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+  date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
+  date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
+  return date;
+};
+var pdDDMMYYHHMMCancel = function pdDDMMYYHHMMCancel(date) {
+  date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+  date.setMinutes(date.getMinutes() + 10);
   date = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(date).split('-');
   date = date[2].split('T')[0] + '.' + date[1] + '.' + date[0].replace('"', '').substring(2, 4) + ' ' + date[2].split('T')[1].split(':')[0] + ':' + date[2].split('T')[1].split(':')[1];
   return date;
