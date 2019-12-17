@@ -24,7 +24,7 @@ const AddSocial =  React.memo(
         let [url, setUrl] = useState(social?social:'');
         const { isMobileApp } = props.app;
         const { showMiniDialog } = props.mini_dialogActions;
-        const width = isMobileApp? (window.innerWidth-144) : 500
+        const width = isMobileApp? (window.innerWidth-112) : 500
         return (
             <div className={classes.main}>
             <TextField

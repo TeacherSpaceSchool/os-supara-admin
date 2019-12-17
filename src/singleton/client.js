@@ -9,7 +9,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink, split  } from 'apollo-link';
 import { createUploadLink } from 'apollo-upload-client'
 //import { WebSocketLink } from 'apollo-link-ws';
-import { getMainDefinition } from 'apollo-utilities';
+//import { getMainDefinition } from 'apollo-utilities';
 //import * as ws from 'ws';
 import { SingletonStore } from '../singleton/store';
 import {

@@ -35,9 +35,11 @@ const CardBonus = React.memo((props) => {
                         />
                     </Link>
                     <div>
-                        <h3 className={isMobileApp?classes.inputM:classes.inputD}>
-                            {element.organization.name}
-                        </h3>
+                        <Link href='/organization/[id]' as={`/organization/${element.organization._id}`}>
+                            <h3 className={isMobileApp?classes.inputM:classes.inputD}>
+                                {element.organization.name}
+                            </h3>
+                        </Link>
                         <br/>
                         {
                             ['организация', 'менеджер', 'admin'].includes(profile.role)?

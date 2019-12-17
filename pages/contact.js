@@ -179,7 +179,7 @@ const Contact = React.memo((props) => {
                                         <br/>
                                         {email.map((element, idx)=>
                                             <FormControl  key={idx} className={classes.input}>
-                                                <InputLabel>Организация</InputLabel>
+                                                <InputLabel>Email</InputLabel>
                                                 <Input
                                                     value={element}
                                                     onChange={(event)=>{editEmail(event, idx)}}
@@ -210,7 +210,7 @@ const Contact = React.memo((props) => {
                                         <br/>
                                         {phone.map((element, idx)=>
                                             <FormControl key={idx} className={classes.input}>
-                                                <InputLabel>Организация</InputLabel>
+                                                <InputLabel>Телефон</InputLabel>
                                                 <Input
                                                     value={element}
                                                     onChange={(event)=>{editPhone(event, idx)}}
@@ -323,7 +323,7 @@ const Contact = React.memo((props) => {
                                             null
                                     }
                                 </div>
-                                            <div>
+                                            <div style={{minWidth: '100%'}}>
                                                 <div className={classes.name}>
                                                     {name}
                                                 </div>

@@ -320,7 +320,7 @@ const Organization = React.memo((props) => {
                                         src={preview}
                                         alt={name}
                                     />
-                                    <div>
+                                    <div style={{minWidth: '100%'}}>
                                         <div className={classes.name}>
                                             {name}
                                         </div>

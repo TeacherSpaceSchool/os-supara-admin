@@ -24,9 +24,10 @@ const DeliveryDays =  React.memo(
                 setDeliveryDaysEdit([...deliveryDaysEdit])
             }
         }
+        const width = isMobileApp? (window.innerWidth-112) : 500
         return (
             <div className={classes.main}>
-                <div className={classes.mainLine}>
+                <div>
                     <Chip
                         label='Пн'
                         className={classes.chip}

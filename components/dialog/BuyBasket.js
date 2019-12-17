@@ -30,7 +30,7 @@ const BuyBasket =  React.memo(
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
-        const width = isMobileApp? (window.innerWidth-144) : 500
+        const width = isMobileApp? (window.innerWidth-112) : 500
         let [address, setAddress] = useState([]);
         let [coment, setComent] = useState('');
         let handleComent =  (event) => {

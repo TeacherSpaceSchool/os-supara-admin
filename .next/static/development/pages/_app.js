@@ -3176,7 +3176,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider */
+/*! exports provided: createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34038,9 +34038,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-upload-client */ "./node_modules/apollo-upload-client/lib/index.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! apollo-utilities */ "./node_modules/apollo-utilities/lib/bundle.esm.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 
@@ -34055,8 +34054,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import { WebSocketLink } from 'apollo-link-ws';
-
- //import * as ws from 'ws';
+//import { getMainDefinition } from 'apollo-utilities';
+//import * as ws from 'ws';
 
 
 
@@ -34091,7 +34090,7 @@ function () {
         var message = _ref2.message,
             locations = _ref2.locations,
             path = _ref2.path;
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_12__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__["showSnackBar"])('Ошибка'));
         console.log("[GraphQL error]: Message: ".concat(message, ", Location: ").concat(locations, ", Path: ").concat(path));
       });
       if (ctx.networkError) console.log("[Network error]: ".concat(ctx.networkError));

@@ -2916,7 +2916,7 @@ var Order = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(function (props) {
       cancelClient = _useState7[0],
       setCancelClient = _useState7[1];
 
-  var width = isMobileApp ? window.innerWidth - 144 : 500;
+  var width = isMobileApp ? window.innerWidth - 112 : 500;
   var showSnackBar = props.snackbarActions.showSnackBar;
 
   var canculateAllPrice = function canculateAllPrice() {
@@ -3771,7 +3771,7 @@ var SetDate = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(function (props)
   var isMobileApp = props.app.isMobileApp;
   var showMiniDialog = props.mini_dialogActions.showMiniDialog;
   var setDate = props.appActions.setDate;
-  var width = isMobileApp ? window.innerWidth - 144 : 500;
+  var width = isMobileApp ? window.innerWidth - 112 : 500;
   return __jsx("div", {
     className: classes.main,
     __source: {
@@ -4018,7 +4018,7 @@ var Sign = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props) {
       signin = _props$userActions.signin,
       signup = _props$userActions.signup;
   var classes = props.classes;
-  var width = isMobileApp ? window.innerWidth - 144 : 500;
+  var width = isMobileApp ? window.innerWidth - 112 : 500;
   return __jsx("div", {
     className: classes.main,
     __source: {
@@ -66436,9 +66436,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! apollo-upload-client */ "./node_modules/apollo-upload-client/lib/index.js");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! apollo-utilities */ "./node_modules/apollo-utilities/lib/bundle.esm.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 
@@ -66453,8 +66452,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import { WebSocketLink } from 'apollo-link-ws';
-
- //import * as ws from 'ws';
+//import { getMainDefinition } from 'apollo-utilities';
+//import * as ws from 'ws';
 
 
 
@@ -66489,7 +66488,7 @@ function () {
         var message = _ref2.message,
             locations = _ref2.locations,
             path = _ref2.path;
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_13__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_14__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_12__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_13__["showSnackBar"])('Ошибка'));
         console.log("[GraphQL error]: Message: ".concat(message, ", Location: ").concat(locations, ", Path: ").concat(path));
       });
       if (ctx.networkError) console.log("[Network error]: ".concat(ctx.networkError));

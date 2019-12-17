@@ -108,7 +108,6 @@ const CardCategory = React.memo((props) => {
                                     <Button onClick={async()=> {
                                         if (name.length > 0&&selectCategory._id) {
                                             setName('')
-                                            setSelectCategory({})
                                             const action = async() => {
                                                 let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
                                                 setList(subCategorys)

@@ -30,7 +30,7 @@ const Order =  React.memo(
         let [confirmationClient, setConfirmationClient] = useState(element.confirmationClient);
         let [cancelForwarder, setCancelForwarder] = useState(element.cancelForwarder!=undefined&&element.cancelForwarder);
         let [cancelClient, setCancelClient] = useState(element.cancelClient!=undefined&&element.cancelClient);
-        const width = isMobileApp? (window.innerWidth-144) : 500;
+        const width = isMobileApp? (window.innerWidth-112) : 500;
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
             allPrice=0

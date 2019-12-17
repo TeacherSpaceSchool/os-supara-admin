@@ -20,7 +20,7 @@ const Blog = React.memo((props) => {
             setList((await getBlogs({search: search, sort: sort, filter: filter})).blogs)
         })()
     },[filter, sort, search])
-    let height = profile.role==='admin'?548:391
+    let height = profile.role==='admin'?548:200
     return (
         <App filters={data.filterBlog} sorts={data.sortBlog} pageName='Блог'>
             <Head>

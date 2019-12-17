@@ -431,9 +431,11 @@ const Item = React.memo((props) => {
                                         <h1 className={classes.name}>
                                             {data.item.name}
                                         </h1>
-                                        <div className={classes.share}>
-                                            {data.item.organization.name}
-                                        </div>
+                                        <Link href='/organization/[id]' as={`/organization/${data.item.organization._id}`}>
+                                            <div className={classes.share}>
+                                                {data.item.organization.name}
+                                            </div>
+                                        </Link>
                                         <div className={classes.deliveryDays} onClick={()=>{
                                             setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)}/>)
                                             showMiniDialog(true)
@@ -475,21 +477,26 @@ const Item = React.memo((props) => {
                                                         color='primary'
                                                         className={classes.button}
                                                         onClick={()=>{
-                                                            if(['агент', 'client'].includes(profile.role))
-                                                                addBasket({item: data.item._id, count: count>0?count:1})
-                                                            else if(!authenticated) {
-                                                                let basket = JSON.parse(localStorage.basket);
-                                                                let index = -1
-                                                                for(let i=0; i<basket.length; i++){
-                                                                    if(basket[i].item._id == data.item._id)
-                                                                        index = i
+                                                            if(count>0) {
+                                                                if (['агент', 'client'].includes(profile.role))
+                                                                    addBasket({
+                                                                        item: data.item._id,
+                                                                        count: count > 0 ? count : 1
+                                                                    })
+                                                                else if (!authenticated) {
+                                                                    let basket = JSON.parse(localStorage.basket);
+                                                                    let index = -1
+                                                                    for (let i = 0; i < basket.length; i++) {
+                                                                        if (basket[i].item._id == data.item._id)
+                                                                            index = i
+                                                                    }
+                                                                    if (index === -1)
+                                                                        basket.push({item: data.item, count: count})
+                                                                    localStorage.basket = JSON.stringify(basket)
                                                                 }
-                                                                if(index===-1)
-                                                                    basket.push({item: data.item, count: count})
-                                                                localStorage.basket = JSON.stringify(basket)
+                                                                showSnackBar('Товар добавлен в корзину')
+                                                                getCountBasket()
                                                             }
-                                                            showSnackBar('Товар добавлен в корзину')
-                                                            getCountBasket()
                                                         }}
                                                     >
                                                         В КОРЗИНУ

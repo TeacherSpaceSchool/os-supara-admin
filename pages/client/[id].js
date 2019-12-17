@@ -567,7 +567,7 @@ const Client = React.memo((props) => {
                                             :null
                                     }
                                 </div>
-                                <div>
+                                <div style={{minWidth: '100%'}}>
                                     <div className={classes.name}>
                                         {name}
                                     </div>

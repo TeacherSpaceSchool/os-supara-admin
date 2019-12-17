@@ -1726,10 +1726,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_link__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-upload-client */ "apollo-upload-client");
 /* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-utilities */ "apollo-utilities");
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_utilities__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
 
 
 /* eslint-disable no-extra-boolean-cast */
@@ -1742,8 +1740,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import { WebSocketLink } from 'apollo-link-ws';
-
- //import * as ws from 'ws';
+//import { getMainDefinition } from 'apollo-utilities';
+//import * as ws from 'ws';
 
 
 
@@ -1774,7 +1772,7 @@ class SingletonApolloClient {
         locations,
         path
       }) => {
-        new _singleton_store__WEBPACK_IMPORTED_MODULE_11__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_12__["showSnackBar"])('Ошибка'));
+        new _singleton_store__WEBPACK_IMPORTED_MODULE_10__["SingletonStore"]().getStore().dispatch(Object(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_11__["showSnackBar"])('Ошибка'));
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       });
       if (ctx.networkError) console.log(`[Network error]: ${ctx.networkError}`);
@@ -2030,17 +2028,6 @@ module.exports = require("apollo-link-error");
 /***/ (function(module, exports) {
 
 module.exports = require("apollo-upload-client");
-
-/***/ }),
-
-/***/ "apollo-utilities":
-/*!***********************************!*\
-  !*** external "apollo-utilities" ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("apollo-utilities");
 
 /***/ }),
 

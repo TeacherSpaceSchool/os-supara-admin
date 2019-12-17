@@ -31,7 +31,7 @@ export default makeStyles({
     title: {
         fontSize: '1rem',
         fontWeight: 'bold',
-        width: 'calc(100% - 130px)'
+        width: 'calc(100% - 80px)'
     },
     date: {
         fontSize: '0.875rem',
