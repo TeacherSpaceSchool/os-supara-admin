@@ -252,7 +252,10 @@ const Order =  React.memo(
                 </div>
                 <div>
                     <FormControlLabel
-                        disabled={(!['client', 'admin'].includes(profile.role)||'принят'!==element.orders[0].status)}
+                        disabled={
+                            (!['client', 'admin'].includes(profile.role)||'принят'!==element.orders[0].status)||
+                            ('экспедитор'===profile.role&&!element.client.user)
+                        }
                         control={
                             <Checkbox
                                 checked={confirmationClient}
@@ -352,7 +355,7 @@ const Order =  React.memo(
                     */}
                     <div>
                 {
-                    ((profile.role==='client'||['менеджер', 'организация', 'агент'].includes(profile.role)||profile.role==='admin'))?
+                    ((profile.role==='client'||['менеджер', 'организация', 'агент', 'экспедитор'].includes(profile.role)||profile.role==='admin'))?
                         <Button variant='contained' color='primary' onClick={()=>{
                             const action = async() => {
 
