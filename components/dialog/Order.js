@@ -304,7 +304,7 @@ const Order =  React.memo(
                             !element.cancelClient&&!element.cancelForwarder?
                                 'Заказ отменен'
                                 :
-                                `Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
+                                `Заказ отменен. Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
                         }
                     />
                 </div>
