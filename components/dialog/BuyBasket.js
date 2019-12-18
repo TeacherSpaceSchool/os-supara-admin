@@ -26,7 +26,6 @@ const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
         const { client, allPrice, organization, bonus } = props;
-        console.log(client)
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
@@ -118,7 +117,13 @@ const BuyBasket =  React.memo(
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
                         if(organization.minimumOrder===0||organization.minimumOrder<allPrice) {
-                            if (paymentMethod.length > 0 && address.length > 0) {
+                            let proofeAddress = address.length > 0
+                            if(proofeAddress){
+                                for (let i = 0; i<address.length; i++){
+                                    proofeAddress = address[i][0].length > 0
+                                }
+                            }
+                            if (paymentMethod.length > 0 && proofeAddress) {
                                 const action = async () => {
                                     await addOrders({info: coment, usedBonus: useBonus, paymentMethod: paymentMethod, address: address, organization: organization._id, client: client._id})
                                     Router.push('/orders')

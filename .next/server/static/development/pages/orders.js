@@ -1,7 +1,7 @@
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
-/******/ 	var installedModules = require('../../../../ssr-module-cache.js');
+/******/ 	var installedModules = require('../../../ssr-module-cache.js');
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2571,6 +2571,1130 @@ Confirmation.propTypes = {
 
 /***/ }),
 
+/***/ "./components/dialog/Geo.js":
+/*!**********************************!*\
+  !*** ./components/dialog/Geo.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/styleMUI/dialogContent */ "./src/styleMUI/dialogContent.js");
+/* harmony import */ var react_yandex_maps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-yandex-maps */ "react-yandex-maps");
+/* harmony import */ var react_yandex_maps__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_yandex_maps__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Fab */ "@material-ui/core/Fab");
+/* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_icons_GpsFixed__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/GpsFixed */ "@material-ui/icons/GpsFixed");
+/* harmony import */ var _material_ui_icons_GpsFixed__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_GpsFixed__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "@material-ui/core/CircularProgress");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _Confirmation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Confirmation */ "./components/dialog/Confirmation.js");
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\Geo.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Geo = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const {
+    showSnackBar
+  } = props.snackbarActions;
+  const {
+    showMiniDialog,
+    setMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    classes,
+    geo,
+    name,
+    idx,
+    setAddressGeo,
+    change
+  } = props;
+  let {
+    0: newGeo,
+    1: setNewGeo
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(geo ? geo : '42.8700000, 74.5900000');
+
+  let getGeo = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        setNewGeo(position.coords.latitude + ', ' + position.coords.longitude);
+      });
+    } else {
+      showSnackBar('Геолокация не поддерживается');
+    }
+  };
+
+  let dragend = e => {
+    let geo = e.get('target').geometry.getCoordinates();
+    setNewGeo(geo[0] + ', ' + geo[1]);
+  };
+
+  let {
+    0: load,
+    1: setLoad
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  return __jsx(react_yandex_maps__WEBPACK_IMPORTED_MODULE_7__["YMaps"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx("div", {
+    style: {
+      height: window.innerHeight - 128,
+      width: window.innerWidth - 48,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, load ? __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_12___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }) : null, __jsx("div", {
+    style: {
+      display: load ? 'none' : 'block'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: undefined
+  }, __jsx(react_yandex_maps__WEBPACK_IMPORTED_MODULE_7__["Map"], {
+    onLoad: () => {
+      setLoad(false);
+    },
+    height: window.innerHeight - 128,
+    width: window.innerWidth - 48,
+    defaultState: {
+      center: newGeo.split(', '),
+      zoom: 15
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: undefined
+  }, __jsx(react_yandex_maps__WEBPACK_IMPORTED_MODULE_7__["Placemark"], {
+    onDragEnd: dragend,
+    options: {
+      draggable: true,
+      iconColor: '#ffb300'
+    },
+    properties: {
+      iconCaption: name
+    },
+    geometry: newGeo.split(', '),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: undefined
+  })))), __jsx("center", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: undefined
+  }, change ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: async () => {
+      const action = async () => {
+        await setAddressGeo(newGeo, idx);
+        showMiniDialog(false);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 61
+        },
+        __self: undefined
+      }));
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: undefined
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11___default.a, {
+    variant: "contained",
+    color: "secondary",
+    onClick: () => {
+      showMiniDialog(false);
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"))), change ? __jsx(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_8___default.a, {
+    color: "primary",
+    "aria-label": "\u041D\u0430\u0439\u0442\u0438 \u0433\u0435\u043E\u043B\u043E\u043A\u0430\u0446\u0438\u044E",
+    className: classes.fabGeo,
+    onClick: getGeo,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, __jsx(_material_ui_icons_GpsFixed__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  })) : null);
+});
+
+function mapStateToProps(state) {
+  return {
+    mini_dialog: state.mini_dialog,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_10__, dispatch),
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_5__, dispatch)
+  };
+}
+
+Geo.propTypes = {
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_6__["default"])(Geo)));
+
+/***/ }),
+
+/***/ "./components/dialog/Order.js":
+/*!************************************!*\
+  !*** ./components/dialog/Order.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_gql_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/gql/order */ "./src/gql/order.js");
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../src/styleMUI/dialogContent */ "./src/styleMUI/dialogContent.js");
+/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
+/* harmony import */ var _Confirmation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Confirmation */ "./components/dialog/Confirmation.js");
+/* harmony import */ var _components_dialog_Geo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/dialog/Geo */ "./components/dialog/Geo.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Cancel */ "@material-ui/icons/Cancel");
+/* harmony import */ var _material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "@material-ui/core/Checkbox");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "@material-ui/core/FormControlLabel");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__);
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\dialog\\Order.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Order = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const {
+    isMobileApp
+  } = props.app;
+  const {
+    profile
+  } = props.user;
+  const {
+    showMiniDialog,
+    setMiniDialog
+  } = props.mini_dialogActions;
+  const {
+    classes,
+    element,
+    setList,
+    route,
+    getInvoices
+  } = props;
+  let {
+    0: orders,
+    1: setOrders
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.orders);
+  let {
+    0: allPrice,
+    1: setAllPrice
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.allPrice);
+  let {
+    0: taken,
+    1: setTaken
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.taken);
+  let {
+    0: confirmationForwarder,
+    1: setConfirmationForwarder
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.confirmationForwarder);
+  let {
+    0: confirmationClient,
+    1: setConfirmationClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.confirmationClient);
+  let {
+    0: cancelForwarder,
+    1: setCancelForwarder
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.cancelForwarder != undefined && element.cancelForwarder);
+  let {
+    0: cancelClient,
+    1: setCancelClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(element.cancelClient != undefined && element.cancelClient);
+  const width = isMobileApp ? window.innerWidth - 112 : 500;
+  const {
+    showSnackBar
+  } = props.snackbarActions;
+
+  let canculateAllPrice = () => {
+    allPrice = 0;
+
+    for (let i = 0; i < orders.length; i++) {
+      allPrice += orders[i].allPrice;
+    }
+
+    if (element.usedBonus && element.usedBonus > 0) allPrice -= element.usedBonus;
+    setAllPrice(allPrice);
+  };
+
+  let increment = idx => {
+    orders[idx].count += 1;
+    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock);
+    setOrders([...orders]);
+    canculateAllPrice();
+  };
+
+  let decrement = idx => {
+    if (orders[idx].count > 1) {
+      orders[idx].count -= 1;
+      orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock);
+      setOrders([...orders]);
+      canculateAllPrice();
+    }
+  };
+
+  let remove = idx => {
+    if (orders.length > 1) {
+      orders.splice(idx, 1);
+      setOrders([...orders]);
+      canculateAllPrice();
+    } else showSnackBar('Товары не могут отсутствовать в заказе');
+  };
+
+  return __jsx("div", {
+    className: classes.column,
+    style: {
+      width: width
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: undefined
+  }, "\u0417\u0430\u043A\u0430\u0437 \u2116:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }, element.number)), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: undefined
+  }, "\u0421\u0442\u0430\u0442\u0443\u0441:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), element.agent && element.agent.name ? __jsx("a", {
+    href: `/employment/${element.agent._id}`,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 89
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 90
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 91
+    },
+    __self: undefined
+  }, "\u0410\u0433\u0435\u043D\u0442: \xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 92
+    },
+    __self: undefined
+  }, element.agent.name))) : null, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 99
+    },
+    __self: undefined
+  }, "\u0410\u0434\u0440\u0435\u0441: \xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100
+    },
+    __self: undefined
+  }, element.address[0])), __jsx("div", {
+    className: classes.geo,
+    style: {
+      color: element.address[1] ? '#ffb300' : 'red'
+    },
+    onClick: () => {
+      if (element.address[1]) {
+        setMiniDialog('Геолокация', __jsx(_components_dialog_Geo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          geo: element.address[1],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 104
+          },
+          __self: undefined
+        }), true);
+        showMiniDialog(true);
+      }
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 102
+    },
+    __self: undefined
+  }, element.address[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
+    },
+    __self: undefined
+  }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430: \xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 117
+    },
+    __self: undefined
+  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), element.dateDelivery ? __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 121
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 122
+    },
+    __self: undefined
+  }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123
+    },
+    __self: undefined
+  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))) : null, __jsx("a", {
+    href: `/client/${element.client._id}`,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 128
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 129
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130
+    },
+    __self: undefined
+  }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131
+    },
+    __self: undefined
+  }, element.client.name))), __jsx("a", {
+    href: `/organization/${element.orders[0].item.organization._id}`,
+    target: "_blank",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 134
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 136
+    },
+    __self: undefined
+  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 137
+    },
+    __self: undefined
+  }, element.orders[0].item.organization.name))), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 142
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 143
+    },
+    __self: undefined
+  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 144
+    },
+    __self: undefined
+  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 149
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 150
+    },
+    __self: undefined
+  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 151
+    },
+    __self: undefined
+  }, allPrice, "\xA0\u0441\u043E\u043C")), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 153
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 154
+    },
+    __self: undefined
+  }, "\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 155
+    },
+    __self: undefined
+  }, element.paymentMethod)), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 157
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 158
+    },
+    __self: undefined
+  }, "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 159
+    },
+    __self: undefined
+  }, element.info)), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 161
+    },
+    __self: undefined
+  }), __jsx("div", {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 162
+    },
+    __self: undefined
+  }, __jsx("b", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 163
+    },
+    __self: undefined
+  }, "\u0422\u043E\u0432\u0430\u0440\u044B:"), orders.map((order, idx) => {
+    if (element.orders[0].status === 'обработка' && (profile.role === 'client' || ['менеджер', 'организация', 'агент'].includes(profile.role) || profile.role === 'admin')) return __jsx("div", {
+      key: idx,
+      className: classes.column,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 175
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 176
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 177
+      },
+      __self: undefined
+    }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("a", {
+      href: `/item/${order.item._id}`,
+      target: "_blank",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 178
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 179
+      },
+      __self: undefined
+    }, order.item.name)), __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_14___default.a, {
+      onClick: () => {
+        remove(idx);
+      },
+      color: "primary",
+      className: classes.button,
+      "aria-label": "\u0443\u0434\u0430\u043B\u0438\u0442\u044C",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 181
+      },
+      __self: undefined
+    }, __jsx(_material_ui_icons_Cancel__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      style: {
+        height: 20,
+        width: 20
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 184
+      },
+      __self: undefined
+    }))), __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 187
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 188
+      },
+      __self: undefined
+    }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
+      className: classes.counterbtn,
+      onClick: () => {
+        decrement(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 189
+      },
+      __self: undefined
+    }, "-"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 190
+      },
+      __self: undefined
+    }, order.count, "\xA0\u0448\u0442"), __jsx("div", {
+      className: classes.counterbtn,
+      onClick: () => {
+        increment(idx);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 191
+      },
+      __self: undefined
+    }, "+")), __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 193
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 194
+      },
+      __self: undefined
+    }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 195
+      },
+      __self: undefined
+    }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 197
+      },
+      __self: undefined
+    }));else return __jsx("div", {
+      key: idx,
+      className: classes.column,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 202
+      },
+      __self: undefined
+    }, __jsx("a", {
+      href: `/item/${order.item._id}`,
+      target: "_blank",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 203
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 204
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 205
+      },
+      __self: undefined
+    }, "\u0422\u043E\u0432\u0430\u0440:\xA0"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 206
+      },
+      __self: undefined
+    }, order.item.name))), __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 209
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 210
+      },
+      __self: undefined
+    }, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E:\xA0"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 211
+      },
+      __self: undefined
+    }, order.count, "\xA0\u0448\u0442")), __jsx("div", {
+      className: classes.row,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 213
+      },
+      __self: undefined
+    }, __jsx("div", {
+      className: classes.nameField,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 214
+      },
+      __self: undefined
+    }, "\u041E\u0431\u0449\u0430\u044F \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\xA0"), __jsx("div", {
+      className: classes.value,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 215
+      },
+      __self: undefined
+    }, order.allPrice, "\xA0\u0441\u043E\u043C")), __jsx("br", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 217
+      },
+      __self: undefined
+    }));
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 223
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['менеджер', 'организация', 'admin'].includes(profile.role) || !['обработка', 'принят'].includes(element.orders[0].status),
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: taken,
+      onChange: () => {
+        setTaken(!taken);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 227
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u0440\u0438\u043D\u044F\u0442",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 224
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 238
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['менеджер', 'организация', 'admin', 'экспедитор'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: confirmationForwarder,
+      onChange: () => {
+        setConfirmationForwarder(!confirmationForwarder);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 242
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 239
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 253
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['client', 'admin'].includes(profile.role) || 'принят' !== element.orders[0].status,
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: confirmationClient,
+      onChange: () => {
+        setConfirmationClient(!confirmationClient);
+      },
+      color: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 257
+      },
+      __self: undefined
+    }),
+    label: "\u0417\u0430\u043A\u0430\u0437 \u043F\u043E\u043B\u0443\u0447\u0435\u043D",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 254
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 268
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17___default.a, {
+    disabled: !['client', 'организация', 'менеджер', 'admin', 'агент'].includes(profile.role) || !['отмена', 'обработка'].includes(element.orders[0].status),
+    control: __jsx(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_16___default.a, {
+      checked: element.cancelClient != undefined || element.cancelForwarder != undefined ? element.cancelClient != undefined ? cancelClient : cancelForwarder : 'client' === profile.role ? cancelClient : cancelForwarder,
+      onChange: () => {
+        if ('client' === profile.role) setCancelClient(!cancelClient);else if ('admin' === profile.role) {
+          if (element.cancelClient != undefined) setCancelClient(!cancelClient);else setCancelForwarder(!cancelForwarder);
+        } else setCancelForwarder(!cancelForwarder);
+      },
+      color: "secondary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 274
+      },
+      __self: undefined
+    }),
+    label: !element.cancelClient && !element.cancelForwarder ? 'Заказ отменен' : `Востановить заказ до ${element.cancelClient ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMMCancel"])(new Date(element.cancelClient)) : Object(_src_lib__WEBPACK_IMPORTED_MODULE_11__["pdDDMMYYHHMMCancel"])(new Date(element.cancelForwarder))}`,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 269
+    },
+    __self: undefined
+  })), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 353
+    },
+    __self: undefined
+  }, profile.role === 'client' || ['менеджер', 'организация', 'агент'].includes(profile.role) || profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    variant: "contained",
+    color: "primary",
+    onClick: () => {
+      const action = async () => {
+        let invoice = {
+          invoice: element._id
+        };
+        if (element.taken !== taken) invoice.taken = taken;
+        if (element.confirmationClient !== confirmationClient) invoice.confirmationClient = confirmationClient;
+        if (element.confirmationForwarder !== confirmationForwarder) invoice.confirmationForwarder = confirmationForwarder;
+        if (element.cancelClient !== cancelClient) invoice.cancelClient = cancelClient;
+        if (element.cancelForwarder !== cancelForwarder) invoice.cancelForwarder = cancelForwarder;
+        await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["setInvoice"])(invoice);
+        let sendOrders;
+        if (element.orders[0].status !== 'обработка') sendOrders = [];else sendOrders = orders.map(order => {
+          return {
+            _id: order._id,
+            count: order.count,
+            allPrice: order.allPrice,
+            status: order.status
+          };
+        });
+        let invoices = (await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["setOrder"])({
+          orders: sendOrders,
+          invoice: element._id
+        })).invoices;
+        if (setList) setList(invoices);
+        if (getInvoices) getInvoices();
+        showMiniDialog(false);
+      };
+
+      setMiniDialog('Вы уверенны?', __jsx(_Confirmation__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        action: action,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 378
+        },
+        __self: undefined
+      }));
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 356
+    },
+    __self: undefined
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C") : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    variant: "contained",
+    color: "secondary",
+    onClick: () => {
+      showMiniDialog(false);
+    },
+    className: classes.button,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 385
+    },
+    __self: undefined
+  }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C")));
+});
+
+function mapStateToProps(state) {
+  return {
+    mini_dialog: state.mini_dialog,
+    user: state.user,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_6__, dispatch),
+    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_8__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_7__, dispatch)
+  };
+}
+
+Order.propTypes = {
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_10__["default"])(Order)));
+
+/***/ }),
+
 /***/ "./components/dialog/SetDate.js":
 /*!**************************************!*\
   !*** ./components/dialog/SetDate.js ***!
@@ -3280,6 +4404,355 @@ Sign.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_src_styleMUI_dialogContent__WEBPACK_IMPORTED_MODULE_17__["default"])(Sign)));
+
+/***/ }),
+
+/***/ "./components/order/CardOrder.js":
+/*!***************************************!*\
+  !*** ./components/order/CardOrder.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
+/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/CardActionArea */ "@material-ui/core/CardActionArea");
+/* harmony import */ var _material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/styleMUI/orders/cardOrder */ "./src/styleMUI/orders/cardOrder.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
+/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
+/* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../src/lib */ "./src/lib.js");
+/* harmony import */ var _dialog_Order__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../dialog/Order */ "./components/dialog/Order.js");
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\order\\CardOrder.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+const CardOrder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(props => {
+  const classes = Object(_src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const {
+    element,
+    setList,
+    route,
+    getInvoices
+  } = props;
+  const {
+    setMiniDialog,
+    showMiniDialog
+  } = props.mini_dialogActions;
+  const statusColor = {
+    'обработка': 'orange',
+    'принят': 'blue',
+    'выполнен': 'green',
+    'отмена': 'red'
+  };
+  return __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: classes.card,
+    onClick: () => {
+      setMiniDialog('Заказ', __jsx(_dialog_Order__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        getInvoices: getInvoices,
+        route: route,
+        element: element,
+        setList: setList,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24
+        },
+        __self: undefined
+      }));
+      showMiniDialog(true);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    className: classes.column,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.number,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: undefined
+  }, element.number), "\xA0", __jsx("div", {
+    className: classes.status,
+    style: {
+      background: statusColor[element.orders[0].status]
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: undefined
+  }, element.orders[0].status === 'принят' && (element.confirmationForwarder || element.confirmationClient) ? element.confirmationClient ? 'подтвержден клиентом' : element.confirmationForwarder ? 'доставлен поставщиком' : element.orders[0].status : element.orders[0].status)), element.agent && element.agent.name ? __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: undefined
+  }, "\u0410\u0433\u0435\u043D\u0442: \xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, element.agent.name)) : null, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0430\u0437\u0430:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: undefined
+  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_9__["pdDDMMYYHHMM"])(new Date(element.createdAt)))), element.dateDelivery ? __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: undefined
+  }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, Object(_src_lib__WEBPACK_IMPORTED_MODULE_9__["pdDDMMYYHHMM"])(new Date(element.dateDelivery)))) : null, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: undefined
+  }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, element.address[0])), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }, "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }, element.client.name)), __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, "\u041F\u043E\u0441\u0442\u0430\u0432\u0449\u0438\u043A:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }, element.orders[0].item.organization.name)), element.usedBonus && element.usedBonus > 0 ? __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 79
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: undefined
+  }, "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u043D\u0443\u0441:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: undefined
+  }, element.usedBonus, "\xA0\u0441\u043E\u043C")) : null, __jsx("div", {
+    className: classes.row,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 86
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: classes.nameField,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  }, "\u0421\u0443\u043C\u043C\u0430:\xA0"), __jsx("div", {
+    className: classes.value,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 88
+    },
+    __self: undefined
+  }, element.allPrice, "\xA0\u0441\u043E\u043C")))));
+});
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    app: state.app
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_7__, dispatch),
+    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_8__, dispatch)
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, mapDispatchToProps)(CardOrder));
+
+/***/ }),
+
+/***/ "./components/order/CardOrderPlaceholder.js":
+/*!**************************************************!*\
+  !*** ./components/order/CardOrderPlaceholder.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/styleMUI/orders/cardOrder */ "./src/styleMUI/orders/cardOrder.js");
+/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/lab/Skeleton */ "@material-ui/lab/Skeleton");
+/* harmony import */ var _material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\components\\order\\CardOrderPlaceholder.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+const CardOrderPlaceholder = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(() => {
+  const classes = Object(_src_styleMUI_orders_cardOrder__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  return __jsx("div", {
+    className: classes.card,
+    style: {
+      height: 225
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8
+    },
+    __self: undefined
+  }, __jsx(_material_ui_lab_Skeleton__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    variant: "rect",
+    height: "100%",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: undefined
+  }));
+});
+/* harmony default export */ __webpack_exports__["default"] = (CardOrderPlaceholder);
 
 /***/ }),
 
@@ -4272,66 +5745,33 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/employment/[id].js":
-/*!**********************************!*\
-  !*** ./pages/employment/[id].js ***!
-  \**********************************/
+/***/ "./pages/orders.js":
+/*!*************************!*\
+  !*** ./pages/orders.js ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../layouts/App */ "./layouts/App.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _src_gql_employment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/gql/employment */ "./src/gql/employment.js");
-/* harmony import */ var _src_styleMUI_employment_employment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../src/styleMUI/employment/employment */ "./src/styleMUI/employment/employment.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Card */ "@material-ui/core/Card");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/CardContent */ "@material-ui/core/CardContent");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Input */ "@material-ui/core/Input");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../redux/actions/mini_dialog */ "./redux/actions/mini_dialog.js");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "@material-ui/core/InputAdornment");
-/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Visibility */ "@material-ui/icons/Visibility");
-/* harmony import */ var _material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/icons/VisibilityOff */ "@material-ui/icons/VisibilityOff");
-/* harmony import */ var _material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/icons/Remove */ "@material-ui/icons/Remove");
-/* harmony import */ var _material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "@material-ui/core/InputLabel");
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @material-ui/core/FormControl */ "@material-ui/core/FormControl");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var _src_gql_organization__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../src/gql/organization */ "./src/gql/organization.js");
-/* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../redux/actions/user */ "./redux/actions/user.js");
-/* harmony import */ var _redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../redux/actions/snackbar */ "./redux/actions/snackbar.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var _components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../components/dialog/Confirmation */ "./components/dialog/Confirmation.js");
-/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../redux/constants/other */ "./redux/constants/other.js");
-
-var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\employment\\[id].js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/App */ "./layouts/App.js");
+/* harmony import */ var _components_order_CardOrder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/order/CardOrder */ "./components/order/CardOrder.js");
+/* harmony import */ var _src_styleMUI_orders_orderList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/styleMUI/orders/orderList */ "./src/styleMUI/orders/orderList.js");
+/* harmony import */ var _src_gql_order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/gql/order */ "./src/gql/order.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-lazyload */ "react-lazyload");
+/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_order_CardOrderPlaceholder__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/order/CardOrderPlaceholder */ "./components/order/CardOrderPlaceholder.js");
+var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\orders.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
@@ -4344,156 +5784,69 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
-  const {
-    profile
-  } = props.user;
-  const classes = Object(_src_styleMUI_employment_employment__WEBPACK_IMPORTED_MODULE_6__["default"])();
+const height = 225;
+const Orders = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(props => {
+  const classes = Object(_src_styleMUI_orders_orderList__WEBPACK_IMPORTED_MODULE_4__["default"])();
   const {
     data
   } = props;
+  let {
+    0: list,
+    1: setList
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(data.invoices);
   const {
-    isMobileApp
+    search,
+    filter,
+    sort,
+    date
   } = props.app;
-  const {
-    showSnackBar
-  } = props.snackbarActions;
-  let {
-    0: status,
-    1: setStatus
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment !== null ? data.employment.user.status : '');
-  let {
-    0: name,
-    1: setName
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment !== null ? data.employment.name : '');
-  let {
-    0: email,
-    1: setEmail
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment !== null ? data.employment.email : '');
-  let {
-    0: phone,
-    1: setPhone
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment ? data.employment.phone : []);
-
-  let addPhone = () => {
-    phone = [...phone, ''];
-    setPhone(phone);
-  };
-
-  let editPhone = (event, idx) => {
-    phone[idx] = event.target.value;
-    setPhone([...phone]);
-  };
-
-  let deletePhone = idx => {
-    phone.splice(idx, 1);
-    setPhone([...phone]);
-  };
-
-  let {
-    0: login,
-    1: setLogin
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment ? data.employment.user.login : '');
-  let {
-    0: organization,
-    1: setOrganization
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment !== null ? data.employment.organization : {});
-
-  let handleOrganization = event => {
-    setOrganization({
-      _id: event.target.value,
-      name: event.target.name
-    });
-  };
-
-  let {
-    0: role,
-    1: setRole
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(data.employment !== null ? data.employment.user.role : '');
-
-  let handleRole = event => {
-    setRole(event.target.value);
-  };
-
-  let {
-    0: password,
-    1: setPassword
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('');
-
-  let handlePassword = event => {
-    setPassword(event.target.value);
-  };
-
-  let {
-    0: hide,
-    1: setHide
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('password');
-
-  let handleHide = () => {
-    setHide(!hide);
-  };
-
-  const {
-    setMiniDialog,
-    showMiniDialog
-  } = props.mini_dialogActions;
-  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_18__["useRouter"])();
-  const {
-    logout
-  } = props.userActions;
-  let roles = ['организация', 'менеджер', 'экспедитор', 'агент'];
-  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    filters: data.filterSubCategory,
-    sorts: data.sortSubCategory,
-    pageName: data.employment !== null ? router.query.id === 'new' ? 'Добавить' : data.employment.name : 'Ничего не найдено',
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+    (async () => {
+      setList((await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["getOrders"])({
+        search: search,
+        sort: sort,
+        filter: filter,
+        date: date
+      })).invoices);
+      Object(react_lazyload__WEBPACK_IMPORTED_MODULE_9__["forceCheck"])();
+    })();
+  }, [filter, sort, search, date]);
+  return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    dates: true,
+    filters: data.filterInvoice,
+    sorts: data.sortInvoice,
+    pageName: "\u0417\u0430\u043A\u0430\u0437\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 29
     },
     __self: undefined
-  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_0___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 30
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 31
     },
     __self: undefined
-  }, data.employment !== null ? router.query.id === 'new' ? 'Добавить' : data.employment.name : 'Ничего не найдено'), __jsx("meta", {
+  }, "\u0417\u0430\u043A\u0430\u0437\u044B"), __jsx("meta", {
     name: "description",
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 32
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:title",
-    content: data.employment !== null ? router.query.id === 'new' ? 'Добавить' : data.employment.name : 'Ничего не найдено',
+    content: "\u0417\u0430\u043A\u0430\u0437\u044B",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 33
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4501,7 +5854,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: "\u0410\u0437\u044B\u043A \u2013 \u044D\u0442\u043E \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u0437\u0430\u043A\u0430\u0437\u0430 \u0442\u043E\u0432\u0430\u0440\u043E\u0432 \u043E\u043F\u0442\u043E\u043C, \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043D\u0430\u044F \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u043C\u0430\u043B\u043E\u0433\u043E \u0438 \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.  \u041E\u043D\u0430 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u0435\u0442 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439 \u0438 \u0442\u043E\u0440\u0433\u043E\u0432\u044B\u0435 \u0442\u043E\u0447\u043A\u0438 \u043D\u0430\u043F\u0440\u044F\u043C\u0443\u044E, \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u044F \u0440\u0430\u0441\u0445\u043E\u0434\u044B \u0438 \u043F\u043E\u0432\u044B\u0448\u0430\u044F \u043F\u0440\u043E\u0434\u0430\u0436\u0438. \u0410\u0437\u044B\u043A \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043C\u043E\u0449\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438 \u0434\u043B\u044F \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0441\u0432\u043E\u0435\u0433\u043E \u0431\u0438\u0437\u043D\u0435\u0441\u0430.",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 34
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4509,482 +5862,96 @@ const Client = react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 35
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:image",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_28__["urlMain"]}/static/512x512.png`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/static/512x512.png`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 36
     },
     __self: undefined
   }), __jsx("meta", {
     property: "og:url",
-    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_28__["urlMain"]}/employment/${router.query.id}`,
+    content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/orders`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 37
     },
     __self: undefined
   }), __jsx("link", {
     rel: "canonical",
-    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_28__["urlMain"]}/employment/${router.query.id}`,
+    href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_8__["urlMain"]}/orders`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 38
     },
     __self: undefined
-  })), __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default.a, {
+  })), __jsx("div", {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 40
     },
     __self: undefined
-  }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default.a, {
-    className: classes.column,
-    style: isMobileApp ? {} : {
-      justifyContent: 'start',
-      alignItems: 'flex-start'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 87
-    },
-    __self: undefined
-  }, data.employment !== null ? profile.role === 'admin' || profile.role === 'организация' || profile._id === data.employment.user._id ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    label: "\u041B\u043E\u0433\u0438\u043D",
-    value: login,
-    className: classes.input,
-    onChange: event => {
-      setLogin(event.target.value);
-    },
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 92
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    placeholder: router.query.id === 'new' ? 'Пароль' : 'Новый пароль',
-    type: hide ? 'password' : 'text',
-    value: password,
-    onChange: handlePassword,
-    className: classes.input,
-    endAdornment: __jsx(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_14___default.a, {
-      position: "end",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 108
-      },
-      __self: undefined
-    }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_13___default.a, {
-      "aria-label": "Toggle password visibility",
-      onClick: handleHide,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 109
-      },
-      __self: undefined
-    }, hide ? __jsx(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_16___default.a, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 110
-      },
-      __self: undefined
-    }) : __jsx(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_15___default.a, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 110
-      },
-      __self: undefined
-    }))),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 101
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    label: "\u0418\u043C\u044F",
-    value: name,
-    className: classes.input,
-    onChange: event => {
-      setName(event.target.value);
-    },
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 115
-    },
-    __self: undefined
-  }), phone ? phone.map((element, idx) => __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
-    key: idx,
-    className: classes.input,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 125
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 126
-    },
-    __self: undefined
-  }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D. \u0424\u043E\u0440\u043C\u0430\u0442: +996555780861"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    placeholder: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D. \u0424\u043E\u0440\u043C\u0430\u0442: +996555780861",
-    value: element,
-    className: classes.input,
-    onChange: event => {
-      editPhone(event, idx);
-    },
-    inputProps: {
-      'aria-label': 'description'
-    },
-    endAdornment: __jsx(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_14___default.a, {
-      position: "end",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 136
-      },
-      __self: undefined
-    }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_13___default.a, {
-      onClick: () => {
-        deletePhone(idx);
-      },
-      "aria-label": "toggle password visibility",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 137
-      },
-      __self: undefined
-    }, __jsx(_material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_17___default.a, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 143
-      },
-      __self: undefined
-    }))),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 127
-    },
-    __self: undefined
-  }))) : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      addPhone();
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 150
-    },
-    __self: undefined
-  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u043B\u0435\u0444\u043E\u043D"), __jsx("br", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 155
-    },
-    __self: undefined
-  }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    label: "email",
-    value: email,
-    className: classes.input,
-    onChange: event => {
-      setEmail(event.target.value);
-    },
-    inputProps: {
-      'aria-label': 'description'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 156
-    },
-    __self: undefined
-  }), router.query.id === 'new' && profile.role === 'admin' ? __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
-    className: classes.input,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 166
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 167
-    },
-    __self: undefined
-  }, "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_22___default.a, {
-    value: organization._id,
-    onChange: handleOrganization,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 168
-    },
-    __self: undefined
-  }, data.organizations.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_20___default.a, {
+  }, list ? list.map(element => __jsx(react_lazyload__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    scrollContainer: '.App-body',
     key: element._id,
-    value: element._id,
-    ola: element.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 170
-    },
-    __self: undefined
-  }, element.name)))) : router.query.id !== 'new' ? __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_26___default.a, {
-    label: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F",
-    value: organization.name,
-    className: classes.input,
-    inputProps: {
-      'aria-label': 'description',
-      readOnly: true
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 176
-    },
-    __self: undefined
-  }) : null, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
-    className: classes.input,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 187
-    },
-    __self: undefined
-  }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_19___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 188
-    },
-    __self: undefined
-  }, "\u0420\u043E\u043B\u044C"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_22___default.a, {
-    value: role,
-    onChange: handleRole,
-    inputProps: {
-      'aria-label': 'description',
-      readOnly: profile._id === data.employment.user._id || !['admin', 'организация'].includes(profile.role)
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 189
-    },
-    __self: undefined
-  }, roles.map(element => {
-    //if(element!=='организация'||profile.role=='admin')
-    return __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_20___default.a, {
-      key: element,
-      value: element,
+    height: height,
+    offset: [height, 0],
+    debounce: 0,
+    once: true,
+    placeholder: __jsx(_components_order_CardOrderPlaceholder__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 199
+        lineNumber: 42
       },
       __self: undefined
-    }, element);
-  }))), __jsx("div", {
-    className: classes.row,
+    }),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 204
+      lineNumber: 42
     },
     __self: undefined
-  }, router.query.id === 'new' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      if (name.length > 0 && email.length > 0 && password.length > 0 && phone.length > 0 && role.length > 0 && organization._id !== undefined) {
-        const action = async () => {
-          await Object(_src_gql_employment__WEBPACK_IMPORTED_MODULE_5__["addEmployment"])({
-            name: name,
-            email: email,
-            phone: phone,
-            login: login,
-            password: password,
-            role: role,
-            organization: organization._id
-          });
-          next_router__WEBPACK_IMPORTED_MODULE_18___default.a.push('/employments');
-        };
-
-        setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-          action: action,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 221
-          },
-          __self: undefined
-        }));
-        showMiniDialog(true);
-      } else {
-        showSnackBar('Заполните все поля');
-      }
-    },
-    size: "small",
-    color: "primary",
+  }, __jsx(_components_order_CardOrder__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    setList: setList,
+    key: element._id,
+    element: element,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 207
+      lineNumber: 43
     },
     __self: undefined
-  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C") : __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      let editElement = {
-        _id: data.employment._id
-      };
-      if (name.length > 0 && name !== data.employment.name) editElement.name = name;
-      editElement.phone = phone;
-      if (login.length > 0 && login !== data.employment.user.login) editElement.login = login;
-      if (email.length > 0 && email !== data.employment.email) editElement.email = email;
-      if (password.length > 0) editElement.newPass = password;
-      if (role.length > 0 && role !== data.employment.role) editElement.role = role;
-
-      const action = async () => {
-        await Object(_src_gql_employment__WEBPACK_IMPORTED_MODULE_5__["setEmployments"])(editElement);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 242
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 231
-    },
-    __self: undefined
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), profile._id !== data.employment.user._id && ['admin', 'организация'].includes(profile.role) ? __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      const action = async () => {
-        await Object(_src_gql_employment__WEBPACK_IMPORTED_MODULE_5__["onoffEmployment"])([data.employment._id]);
-        setStatus(status === 'active' ? 'deactive' : 'active');
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 256
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 251
-    },
-    __self: undefined
-  }, status === 'active' ? 'Отключить' : 'Включить'), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      const action = async () => {
-        await Object(_src_gql_employment__WEBPACK_IMPORTED_MODULE_5__["deleteEmployment"])([data.employment._id]);
-        next_router__WEBPACK_IMPORTED_MODULE_18___default.a.push('/employments');
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 266
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 261
-    },
-    __self: undefined
-  }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")) : null, profile._id === data.employment.user._id ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
-    onClick: async () => {
-      const action = async () => {
-        logout(true);
-      };
-
-      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 281
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
-    },
-    size: "small",
-    color: "primary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 277
-    },
-    __self: undefined
-  }, "\u0412\u044B\u0439\u0442\u0438") : null))) : 'Ничего не найдено' : 'Ничего не найдено')));
+  }))) : null));
 });
 
-Client.getInitialProps = async function (ctx) {
-  if (!['организация', 'менеджер', 'admin', 'экспедитор', 'агент'].includes(ctx.store.getState().user.profile.role)) if (ctx.res) {
+Orders.getInitialProps = async function (ctx) {
+  if (!['admin', 'организация', 'менеджер', 'client', 'агент'].includes(ctx.store.getState().user.profile.role)) if (ctx.res) {
     ctx.res.writeHead(302, {
       Location: '/'
     });
     ctx.res.end();
-  } else next_router__WEBPACK_IMPORTED_MODULE_18___default.a.push('/');
+  } else next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push('/');
   return {
-    data: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, ctx.query.id !== 'new' ? await Object(_src_gql_employment__WEBPACK_IMPORTED_MODULE_5__["getEmployment"])({
-      _id: ctx.query.id
-    }) : {
-      employment: {
-        name: '',
-        email: '',
-        phone: [],
-        user: {
-          login: '',
-          status: '',
-          role: ''
-        },
-        organization: {
-          _id: ''
-        }
-      }
-    }, (await Object(_src_gql_organization__WEBPACK_IMPORTED_MODULE_23__["getOrganizations"])({
+    data: await Object(_src_gql_order__WEBPACK_IMPORTED_MODULE_5__["getOrders"])({
       search: '',
-      sort: 'name',
-      filter: ''
-    })))
+      sort: '-createdAt',
+      filter: '',
+      date: ''
+    })
   };
 };
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
-    app: state.app
+    app: state.app,
+    user: state.user
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    mini_dialogActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_mini_dialog__WEBPACK_IMPORTED_MODULE_12__, dispatch),
-    snackbarActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_snackbar__WEBPACK_IMPORTED_MODULE_25__, dispatch),
-    userActions: Object(redux__WEBPACK_IMPORTED_MODULE_11__["bindActionCreators"])(_redux_actions_user__WEBPACK_IMPORTED_MODULE_24__, dispatch)
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(Client));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Orders));
 
 /***/ }),
 
@@ -5637,203 +6604,6 @@ const setBasket = async element => {
 
 /***/ }),
 
-/***/ "./src/gql/employment.js":
-/*!*******************************!*\
-  !*** ./src/gql/employment.js ***!
-  \*******************************/
-/*! exports provided: getEmployments, getEmployment, getEcspeditors, onoffEmployment, deleteEmployment, setEmployments, addEmployment */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmployments", function() { return getEmployments; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmployment", function() { return getEmployment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEcspeditors", function() { return getEcspeditors; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffEmployment", function() { return onoffEmployment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEmployment", function() { return deleteEmployment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEmployments", function() { return setEmployments; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEmployment", function() { return addEmployment; });
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
-/* harmony import */ var _singleton_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../singleton/store */ "./src/singleton/store.js");
-
-
-
-const getEmployments = async ({
-  search: search,
-  sort: sort,
-  filter: filter
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        search: search,
-        sort: sort,
-        filter: filter
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        employments(search: $search, sort: $sort, filter: $filter) {
-                            _id
-                            createdAt
-                            name
-                            email
-                            phone
-                            user 
-                                {_id role status login}
-                            organization 
-                                {_id name}
-                          }
-                          sortEmployment {
-                           name
-                            field
-                          }
-                          filterEmployment {
-                           name
-                           value
-                          }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const getEmployment = async ({
-  _id: _id
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        _id: _id
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($_id: ID!) {
-                        employment(_id: $_id) {
-                            _id
-                            createdAt
-                            name
-                            email
-                            phone
-                            user 
-                                {_id role status login}
-                            organization 
-                                {_id name}
-                        }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const getEcspeditors = async ({
-  _id: _id
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        _id: _id
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($_id: ID) {
-                        ecspeditors(_id: $_id) {
-                            _id
-                            createdAt
-                            name
-                            email
-                            phone
-                            user 
-                                {_id role status login}
-                            organization 
-                                {_id name}
-                        }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const onoffEmployment = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        onoffEmployment(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getEmployments(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const deleteEmployment = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        deleteEmployment(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    return await getEmployments(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const setEmployments = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: ID!, $name: String, $email: String, $newPass: String, $role: String, $phone: [String], $login: String) {
-                        setEmployment(_id: $_id, name: $name, email: $email, newPass: $newPass, role: $role, phone: $phone, login: $login) {
-                             data
-                        }
-                    }`
-    });
-    let list = await getEmployments(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-    return list;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addEmployment = async element => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: element,
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($name: String!, $email: String!, $phone: [String]!, $login: String!, $password: String!, $role: String!, $organization: ID!) {
-                        addEmployment(name: $name, email: $email, phone: $phone, login: $login, password: $password, role: $role, organization: $organization) {
-                             data
-                        }
-                    }`
-    }); //return await getEmployments(new SingletonStore().getStore().getState().app)
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-/***/ }),
-
 /***/ "./src/gql/items.js":
 /*!**************************!*\
   !*** ./src/gql/items.js ***!
@@ -6158,21 +6928,22 @@ const setItem = async element => {
 
 /***/ }),
 
-/***/ "./src/gql/organization.js":
-/*!*********************************!*\
-  !*** ./src/gql/organization.js ***!
-  \*********************************/
-/*! exports provided: getOrganization, getOrganizations, deleteOrganization, onoffOrganization, addOrganization, setOrganization */
+/***/ "./src/gql/order.js":
+/*!**************************!*\
+  !*** ./src/gql/order.js ***!
+  \**************************/
+/*! exports provided: getOrders, getOrder, addOrders, cancelOrders, approveOrders, setInvoice, setOrder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrganization", function() { return getOrganization; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrganizations", function() { return getOrganizations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteOrganization", function() { return deleteOrganization; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onoffOrganization", function() { return onoffOrganization; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrganization", function() { return addOrganization; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrganization", function() { return setOrganization; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrders", function() { return getOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrder", function() { return getOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrders", function() { return addOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelOrders", function() { return cancelOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approveOrders", function() { return approveOrders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInvoice", function() { return setInvoice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrder", function() { return setOrder; });
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _singleton_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../singleton/client */ "./src/singleton/client.js");
@@ -6180,8 +6951,85 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const getOrganization = async ({
-  _id: _id
+const getOrders = async ({
+  search,
+  sort,
+  filter,
+  date
+}) => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    let res = await client.query({
+      variables: {
+        search: search,
+        sort: sort,
+        filter: filter,
+        date: date
+      },
+      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
+                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {
+                            _id
+                            agent 
+                                {_id name}
+                            createdAt
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            price
+                                            organization
+                                                {_id name}
+                                        }
+                                    count
+                                    allPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone 
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            paymentMethod
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            cancelClient
+                            cancelForwarder
+                            taken
+                            dateDelivery
+                            usedBonus
+                        }
+                        sortInvoice {
+                            name
+                            field
+                        }
+                        filterInvoice {
+                           name
+                           value
+                        }
+                    }`
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getOrder = async ({
+  _id
 }) => {
   try {
     const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
@@ -6191,19 +7039,51 @@ const getOrganization = async ({
       },
       query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
                     query ($_id: ID!) {
-                        organization(_id: $_id) {
+                        invoice(_id: $_id) {
                             _id
                             createdAt
-                            name
-                            image
-                            address
-                            email
-                            phone
+                            agent: 
+                                {_id name}
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            price
+                                            organization
+                                                {_id name}
+                                        }
+                                    count
+                                    allPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
                             info
-                            reiting
-                            status
-                            minimumOrder
-                          }
+                            address
+                            paymentMethod
+                            number
+                            confirmationForwarder
+                            cancelClient
+                            cancelForwarder
+                            confirmationClient
+                            taken
+                            dateDelivery
+                            usedBonus
+                        }
                     }`
     });
     return res.data;
@@ -6211,94 +7091,14 @@ const getOrganization = async ({
     console.error(err);
   }
 };
-const getOrganizations = async ({
-  search: search,
-  sort: sort,
-  filter: filter
-}) => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    let res = await client.query({
-      variables: {
-        search: search,
-        sort: sort,
-        filter: filter
-      },
-      query: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        organizations(search: $search, sort: $sort, filter: $filter) {
-                            _id
-                            createdAt
-                            name
-                            image
-                            address
-                            email
-                            phone
-                            info
-                            reiting
-                            status
-                          }
-                          sortOrganization {
-                           name
-                            field
-                          }
-                          filterOrganization {
-                           name
-                           value
-                          }
-                    }`
-    });
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const deleteOrganization = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        deleteOrganization(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-    let list = await getOrganizations(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
-    return list;
-  } catch (err) {
-    console.error(err);
-  }
-};
-const onoffOrganization = async ids => {
-  try {
-    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
-    await client.mutate({
-      variables: {
-        _id: ids
-      },
-      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: [ID]!) {
-                        onoffOrganization(_id: $_id) {
-                             data
-                        }
-                    }`
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
-const addOrganization = async element => {
+const addOrders = async element => {
   try {
     const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
     await client.mutate({
       variables: element,
       mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($image: Upload!, $minimumOrder: Int, $name: String!, $address: [String]!, $email: [String]!, $phone: [String]!, $info: String!) {
-                        addOrganization(image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!, $client: ID!) {
+                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization, client: $client) {
                              data
                         }
                     }`
@@ -6307,18 +7107,69 @@ const addOrganization = async element => {
     console.error(err);
   }
 };
-const setOrganization = async element => {
+const cancelOrders = async element => {
   try {
     const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
     await client.mutate({
       variables: element,
       mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
-                    mutation ($_id: ID!, $image: Upload, $minimumOrder: Int, $name: String, $address: [String], $email: [String], $phone: [String], $info: String) {
-                        setOrganization(_id: $_id, image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($_id: [ID]!, $invoice: ID) {
+                        cancelOrders(_id: $_id, invoice: $invoice) {
                              data
                         }
                     }`
     });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const approveOrders = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($invoices: [ID]!, $route: ID) {
+                        approveOrders(invoices: $invoices, route: $route) {
+                             data
+                        }
+                    }`
+    });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setInvoice = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean) {
+                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder) {
+                             data
+                        }
+                    }`
+    }); //return await getOrders(new SingletonStore().getStore().getState().app)
+  } catch (err) {
+    console.error(err);
+  }
+};
+const setOrder = async element => {
+  try {
+    const client = new _singleton_client__WEBPACK_IMPORTED_MODULE_1__["SingletonApolloClient"]().getClient();
+    await client.mutate({
+      variables: element,
+      mutation: apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
+                    mutation ($orders: [OrderInput], $invoice: ID) {
+                        setOrder(orders: $orders, invoice: $invoice) {
+                             data
+                        }
+                    }`
+    });
+    return await getOrders(new _singleton_store__WEBPACK_IMPORTED_MODULE_2__["SingletonStore"]().getStore().getState().app);
   } catch (err) {
     console.error(err);
   }
@@ -6742,10 +7593,77 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/styleMUI/employment/employment.js":
-/*!***********************************************!*\
-  !*** ./src/styleMUI/employment/employment.js ***!
-  \***********************************************/
+/***/ "./src/styleMUI/orders/cardOrder.js":
+/*!******************************************!*\
+  !*** ./src/styleMUI/orders/cardOrder.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
+  card: {
+    width: 400,
+    margin: 10,
+    position: 'relative'
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline'
+  },
+  number: {
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    fontFamily: 'Roboto'
+  },
+  date: {
+    marginBottom: 10,
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    color: '#A0A0A0'
+  },
+  status: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 4,
+    borderRadius: 10,
+    fontSize: '0.815rem',
+    fontWeight: 'bold',
+    color: 'white',
+    fontFamily: 'Roboto'
+  },
+  nameField: {
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto',
+    color: '#A0A0A0'
+  },
+  value: {
+    marginBottom: 10,
+    fontWeight: '500',
+    fontSize: '0.875rem',
+    fontFamily: 'Roboto'
+  }
+}));
+
+/***/ }),
+
+/***/ "./src/styleMUI/orders/orderList.js":
+/*!******************************************!*\
+  !*** ./src/styleMUI/orders/orderList.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6756,32 +7674,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
   page: {
-    margin: '20px'
-  },
-  row: {
+    paddingTop: 20,
     display: 'flex',
-    flexDirection: 'row'
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
-  column: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  input: {
-    marginBottom: 10,
-    width: '100%'
+  fab: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px'
   }
 }));
 
 /***/ }),
 
-/***/ 5:
-/*!****************************************!*\
-  !*** multi ./pages/employment/[id].js ***!
-  \****************************************/
+/***/ 3:
+/*!*******************************!*\
+  !*** multi ./pages/orders.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\employment\[id].js */"./pages/employment/[id].js");
+module.exports = __webpack_require__(/*! C:\projects\azyk\azyk-admin\pages\orders.js */"./pages/orders.js");
 
 
 /***/ }),
@@ -6830,6 +7746,17 @@ module.exports = require("@material-ui/core/Card");
 
 /***/ }),
 
+/***/ "@material-ui/core/CardActionArea":
+/*!***************************************************!*\
+  !*** external "@material-ui/core/CardActionArea" ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CardActionArea");
+
+/***/ }),
+
 /***/ "@material-ui/core/CardContent":
 /*!************************************************!*\
   !*** external "@material-ui/core/CardContent" ***!
@@ -6838,6 +7765,17 @@ module.exports = require("@material-ui/core/Card");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardContent");
+
+/***/ }),
+
+/***/ "@material-ui/core/Checkbox":
+/*!*********************************************!*\
+  !*** external "@material-ui/core/Checkbox" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Checkbox");
 
 /***/ }),
 
@@ -6896,6 +7834,17 @@ module.exports = require("@material-ui/core/Divider");
 
 /***/ }),
 
+/***/ "@material-ui/core/Fab":
+/*!****************************************!*\
+  !*** external "@material-ui/core/Fab" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Fab");
+
+/***/ }),
+
 /***/ "@material-ui/core/FormControl":
 /*!************************************************!*\
   !*** external "@material-ui/core/FormControl" ***!
@@ -6904,6 +7853,17 @@ module.exports = require("@material-ui/core/Divider");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/FormControl");
+
+/***/ }),
+
+/***/ "@material-ui/core/FormControlLabel":
+/*!*****************************************************!*\
+  !*** external "@material-ui/core/FormControlLabel" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/FormControlLabel");
 
 /***/ }),
 
@@ -7025,17 +7985,6 @@ module.exports = require("@material-ui/core/MenuItem");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Paper");
-
-/***/ }),
-
-/***/ "@material-ui/core/Select":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Select" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Select");
 
 /***/ }),
 
@@ -7237,6 +8186,17 @@ module.exports = require("@material-ui/icons/FormatListNumbered");
 
 /***/ }),
 
+/***/ "@material-ui/icons/GpsFixed":
+/*!**********************************************!*\
+  !*** external "@material-ui/icons/GpsFixed" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/icons/GpsFixed");
+
+/***/ }),
+
 /***/ "@material-ui/icons/Group":
 /*!*******************************************!*\
   !*** external "@material-ui/icons/Group" ***!
@@ -7336,17 +8296,6 @@ module.exports = require("@material-ui/icons/Receipt");
 
 /***/ }),
 
-/***/ "@material-ui/icons/Remove":
-/*!********************************************!*\
-  !*** external "@material-ui/icons/Remove" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Remove");
-
-/***/ }),
-
 /***/ "@material-ui/icons/SearchRounded":
 /*!***************************************************!*\
   !*** external "@material-ui/icons/SearchRounded" ***!
@@ -7443,6 +8392,17 @@ module.exports = require("@material-ui/icons/VisibilityOff");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Whatshot");
+
+/***/ }),
+
+/***/ "@material-ui/lab/Skeleton":
+/*!********************************************!*\
+  !*** external "@material-ui/lab/Skeleton" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/lab/Skeleton");
 
 /***/ }),
 
@@ -7754,6 +8714,17 @@ module.exports = require("react-bottom-scroll-listener");
 
 /***/ }),
 
+/***/ "react-lazyload":
+/*!*********************************!*\
+  !*** external "react-lazyload" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-lazyload");
+
+/***/ }),
+
 /***/ "react-redux":
 /*!******************************!*\
   !*** external "react-redux" ***!
@@ -7762,6 +8733,17 @@ module.exports = require("react-bottom-scroll-listener");
 /***/ (function(module, exports) {
 
 module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "react-yandex-maps":
+/*!************************************!*\
+  !*** external "react-yandex-maps" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-yandex-maps");
 
 /***/ }),
 
@@ -7788,4 +8770,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=[id].js.map
+//# sourceMappingURL=orders.js.map

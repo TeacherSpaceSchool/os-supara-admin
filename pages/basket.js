@@ -36,7 +36,6 @@ const Basket = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     const { data } = props;
-    console.log(data)
     let [list, setList] = useState(data.baskets);
     let [bonus, setBonus] = useState({});
     let [organization, setOrganization] = useState({_id: '', name: ''});
@@ -345,7 +344,7 @@ const Basket = React.memo((props) => {
                                 showMiniDialog(true)
                             }
                             else
-                                showSnackBar('Пожалуйста заполните профиль')
+                                showSnackBar('Пожалуйста заполните все поля')
                         else {
                             setMiniDialog('Купить', <Sign/>)
                             showMiniDialog(true)
