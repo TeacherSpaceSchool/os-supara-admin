@@ -205,7 +205,7 @@ const Client = React.memo((props) => {
                                             {
                                                 router.query.id==='new'?
                                                     <Button onClick={async()=>{
-                                                        if (name.length>0&&email.length>0&&password.length>0&&phone.length>0&&role.length>0&&organization._id!==undefined) {
+                                                        if (name.length>0&&password.length>0&&role.length>0&&organization._id!==undefined) {
                                                             const action = async() => {
                                                                 await addEmployment({
                                                                     name: name,

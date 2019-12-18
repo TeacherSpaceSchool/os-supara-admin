@@ -567,7 +567,7 @@ const Client = React.memo((props) => {
                                             :null
                                     }
                                 </div>
-                                <div style={{minWidth: '100%'}}>
+                                <div style={{width: isMobileApp?'100%':'calc(100% - 300px)'}}>
                                     <div className={classes.name}>
                                         {name}
                                     </div>

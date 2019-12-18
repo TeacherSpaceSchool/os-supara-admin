@@ -36,7 +36,7 @@ const CardBonus = React.memo((props) => {
                     </Link>
                     <div>
                         <Link href='/organization/[id]' as={`/organization/${element.organization._id}`}>
-                            <h3 className={isMobileApp?classes.inputM:classes.inputD}>
+                            <h3 className={classes.input}>
                                 {element.organization.name}
                             </h3>
                         </Link>

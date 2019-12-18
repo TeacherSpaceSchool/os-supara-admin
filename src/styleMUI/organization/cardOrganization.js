@@ -27,15 +27,9 @@ export default makeStyles({
         fontSize: '1rem',
         fontFamily: 'Roboto'
     },
-    inputM: {
+    input: {
         marginBottom: 5,
-        width: 'calc(100vw - 82px)',
-        fontSize: '1rem',
-        fontFamily: 'Roboto'
-    },
-    inputD: {
-        marginBottom: 5,
-        width: 400-82,
+        width: 'calc(100% - 70px)',
         fontSize: '1rem',
         fontFamily: 'Roboto'
     },

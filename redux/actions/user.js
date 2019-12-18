@@ -191,6 +191,7 @@ export async function getProfile() {
                          }
                    }`
             })
+        console.log(result.data.getStatus)
         return result.data.getStatus
     } catch(error) {
         console.error(error)

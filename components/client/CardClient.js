@@ -32,7 +32,7 @@ const CardOrganization = React.memo((props) => {
                                 alt={element.name}
                             />
                         </label>
-                        <div>
+                        <div style={{width: 'calc(100% - 70px)'}}>
                             {
                                 element.organization?
                                     <div className={classes.row}>

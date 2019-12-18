@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getOrganization } from '../../src/gql/organization'
 import organizationStyle from '../../src/styleMUI/organization/organization'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useRouter } from 'next/router'
@@ -17,7 +17,6 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, addOrganization, setOrganization, deleteOrganization } from '../../src/gql/organization'
 import { getEmployment } from '../../src/gql/employment'
-import Add from '@material-ui/icons/Done';
 import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -107,7 +106,7 @@ const Organization = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/organization/${router.query.id}`}/>
             </Head>
             <Card className={classes.page}>
-                <CardActions className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {
                         data.organization!==null?
                             profile.role==='admin'||(profile.role==='организация'&&data.employment.organization._id===data.organization._id)?
@@ -321,7 +320,7 @@ const Organization = React.memo((props) => {
                                         src={preview}
                                         alt={name}
                                     />
-                                    <div style={{minWidth: '100%'}}>
+                                    <div style={{width: isMobileApp?'100%':'calc(100% - 300px)'}}>
                                         <div className={classes.name}>
                                             {name}
                                         </div>
@@ -384,7 +383,7 @@ const Organization = React.memo((props) => {
                             :
                             'Ничего не найдено'
                     }
-                </CardActions>
+                </CardContent>
             </Card>
             <input
                 accept='image/*'

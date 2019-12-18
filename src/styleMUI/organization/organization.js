@@ -13,10 +13,8 @@ export default makeStyles({
     },
     media1: {
         objectFit: 'cover',
-        maxHeight: 300,
-        maxWidth: 300,
-        height: 'calc(100vw - 72px)',
-        width: 'calc(100vw - 72px)',
+        height: 300,
+        width: 300,
         marginRight: 10,
         marginBottom: 10,
         cursor: 'pointer'

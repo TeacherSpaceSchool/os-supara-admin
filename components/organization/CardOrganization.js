@@ -29,7 +29,7 @@ const CardOrganization = React.memo((props) => {
                             src={element.image}
                             alt={element.name}
                         />
-                        <h3 className={isMobileApp?classes.inputM:classes.inputD}>
+                        <h3 className={classes.input}>
                             {element.name}
                         </h3>
                     </div>
