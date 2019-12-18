@@ -22,6 +22,9 @@ module.exports =
                     }
                 ]
             },*/
+                onDemandEntries : {
+                    maxInactiveAge :  (process.env.URL).includes('azyk.store')?1000*60*60*24*10: 1000 ,
+                },
             env: {
                 URL: process.env.URL
             },

@@ -50,7 +50,7 @@ const Index = React.memo((props) => {
                     :
                     null
                 }
-                <CardCategory element={{image: '/static/add.png', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
+                <CardCategory element={{image: '/static/allitem.svg', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardCategoryPlaceholder height={height}/>}>
                         <CardCategory key={element._id} setList={setList} element={element}/>

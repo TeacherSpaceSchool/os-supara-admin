@@ -1,0 +1,1 @@
+{"version":3,"file":"static/webpack/static\\development\\pages\\landing.js.59c6877b2c2460ff3528.hot-update.js","sources":["webpack:///./pages/landing.js"],"sourcesContent":["\r\nconst Landing = (req, res) => {\r\n    res.status(200).end('end')\r\n}\r\n\r\n\r\nexport default (Landing);"],"mappings":";;;;;;;;;;AACA;AAAA;AACA;AACA;AACA;AAEA;;;;A","sourceRoot":""}
