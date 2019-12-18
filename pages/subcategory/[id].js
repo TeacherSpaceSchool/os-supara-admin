@@ -9,6 +9,7 @@ import SubCardCategory from '../../components/subcategory/SubCardCategory'
 import { useRouter } from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import SubCardCategoryPlaceholder from '../../components/subcategory/SubCardCategoryPlaceholder'
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
@@ -32,6 +33,7 @@ const Subcategory = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getSubCategorys({category: router.query.id, search: search, sort: sort, filter: filter})).subCategorys)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -69,7 +71,7 @@ const Subcategory = React.memo((props) => {
                 <SubCardCategory element={{_id: 'all', name: 'Все товары'}}/>
                 {data.subCategorys.length>0||router.query.id==='all'?
                     list?list.map((element)=>
-                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<SubCardCategoryPlaceholder height={height}/>}>
+                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<SubCardCategoryPlaceholder height={height}/>}>
                             <SubCardCategory category={router.query.id} categorys={categorys} setList={setList} element={element}/>
                         </LazyLoad>
                     ):null

@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
 const height = 225
 
@@ -21,6 +22,7 @@ const Orders = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices)
+            forceCheck()
         })()
     },[filter, sort, search, date])
     return (
@@ -37,7 +39,7 @@ const Orders = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardOrderPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
                         <CardOrder setList={setList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

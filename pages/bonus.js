@@ -9,6 +9,7 @@ import pageListStyle from '../src/styleMUI/bonus/bonusList'
 import CardBonus from '../components/bonus/CardBonus'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardBonusPlaceholder from '../components/bonus/CardBonusPlaceholder'
 
 const Bonus = React.memo((props) => {
@@ -21,6 +22,7 @@ const Bonus = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getBonuses({search: search, sort: sort})).bonuses)
+            forceCheck()
         })()
     },[sort, search])
 
@@ -38,7 +40,7 @@ const Bonus = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardBonusPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBonusPlaceholder height={height}/>}>
                         <CardBonus key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

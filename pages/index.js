@@ -10,6 +10,7 @@ import CardCategory from '../components/category/CardCategory'
 import { urlMain } from '../redux/constants/other'
 import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardCategoryPlaceholder from '../components/category/CardCategoryPlaceholder'
 
 const Index = React.memo((props) => {
@@ -22,6 +23,7 @@ const Index = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
+            forceCheck()
         })()
     },[filter, sort, search])
     useEffect(()=>{
@@ -50,7 +52,7 @@ const Index = React.memo((props) => {
                 }
                 <CardCategory element={{image: '/static/add.png', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardCategoryPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardCategoryPlaceholder height={height}/>}>
                         <CardCategory key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

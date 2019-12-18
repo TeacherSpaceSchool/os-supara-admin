@@ -7,6 +7,7 @@ import {getAdss} from '../src/gql/ads'
 import { connect } from 'react-redux'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardAdsPlaceholder from '../components/ads/CardAdsPlaceholder'
 
 const Ads = React.memo((props) => {
@@ -19,6 +20,7 @@ const Ads = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getAdss({search: search, sort: sort, filter: filter})).adss)
+            forceCheck()
         })()
     },[filter, sort, search, count])
     let height = profile.role==='admin'?400:200
@@ -37,7 +39,7 @@ const Ads = React.memo((props) => {
             <div className={classes.page}>
                 {profile.role==='admin'?<CardAds setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardAdsPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>
                         <CardAds setList={setList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

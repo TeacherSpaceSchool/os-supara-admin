@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { urlMain } from '../../redux/constants/other'
 const height = 377;
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +27,7 @@ const Items = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getItems({subCategory: router.query.id, search: search, sort: sort, filter: filter})).items)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -71,7 +73,7 @@ const Items = React.memo((props) => {
             <div className={classes.page}>
 
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardItemPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
                         <CardItem setList={setList} key={element._id} element={element} subCategory={router.query.id==='all'?'all':data.subCategory._id}/>
                     </LazyLoad>
                 ):null}

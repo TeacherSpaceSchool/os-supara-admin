@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardEmploymentPlaceholder from '../components/employment/CardEmploymentPlaceholder'
 const height = 186
 
@@ -23,6 +24,7 @@ const Employment = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getEmployments({search: search, sort: sort, filter: filter})).employments)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -39,7 +41,7 @@ const Employment = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardEmploymentPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardEmploymentPlaceholder height={height}/>}>
                         <CardEmployment key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

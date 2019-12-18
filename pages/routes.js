@@ -12,6 +12,7 @@ import Link from 'next/link';
 import Router from 'next/router'
 const height = 210
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardRoutePlaceholder from '../components/route/CardRoutePlaceholder'
 
 const Routes = React.memo((props) => {
@@ -20,17 +21,12 @@ const Routes = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.routes);
     const { search, filter, sort, date } = props.app;
-    const { count } = props.pagination;
     useEffect(()=>{
         (async()=>{
             setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
+            forceCheck()
         })()
     },[filter, sort, search, date]);
-    useEffect(()=>{
-        (async()=>{
-            console.log(count)
-        })()
-    },[count])
     return (
         <App dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
@@ -45,7 +41,7 @@ const Routes = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardRoutePlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardRoutePlaceholder/>}>
                         <CardRoute setList={setList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

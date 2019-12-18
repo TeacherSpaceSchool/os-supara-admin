@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { urlMain } from '../../redux/constants/other'
 const height = 377;
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 
 const Brand = React.memo((props) => {
@@ -25,6 +26,7 @@ const Brand = React.memo((props) => {
         (async()=>{
             if(data)
                 setList((await getBrands({organization: router.query.id, search: search, sort: sort})).brands)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -41,7 +43,7 @@ const Brand = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardItemPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
                         <CardItem setList={setList} key={element._id} element={element} subCategory={element.subCategory._id}/>
                     </LazyLoad>
                 ):null}

@@ -221,7 +221,7 @@ const Item = React.memo((props) => {
                                         }
                                         <br/>
                                         <Button size='small' color='primary' onClick={()=>{
-                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)}/>)
+                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={true}/>)
                                             showMiniDialog(true)
                                         }}>
                                             Дни поставки для торговых точек
@@ -437,7 +437,7 @@ const Item = React.memo((props) => {
                                             </div>
                                         </Link>
                                         <div className={classes.deliveryDays} onClick={()=>{
-                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&data.item.organization._id===employment.organization._id)}/>)
+                                            setMiniDialog('Дни поставки', <DeliveryDays deliveryDays={deliveryDays} setDeliveryDays={setDeliveryDays} edit={false}/>)
                                             showMiniDialog(true)
                                         }}>
                                             Дни поставки для торговых точек

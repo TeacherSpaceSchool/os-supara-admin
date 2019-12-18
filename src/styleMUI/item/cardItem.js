@@ -25,7 +25,7 @@ export default makeStyles({
     name: {
         fontSize: '0.95rem',
         fontFamily: 'Roboto',
-        height: 35,
+        height: 40,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         marginBottom: 10,

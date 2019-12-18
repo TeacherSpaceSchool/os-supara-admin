@@ -7,6 +7,7 @@ import CardBlog from '../components/blog/CardBlog'
 import { connect } from 'react-redux'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardBlogPlaceholder from '../components/blog/CardBlogPlaceholder'
 
 const Blog = React.memo((props) => {
@@ -18,6 +19,7 @@ const Blog = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getBlogs({search: search, sort: sort, filter: filter})).blogs)
+            forceCheck()
         })()
     },[filter, sort, search])
     let height = profile.role==='admin'?548:200
@@ -36,7 +38,7 @@ const Blog = React.memo((props) => {
             <div className={classes.page}>
                 {profile.role==='admin'?<CardBlog setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardBlogPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBlogPlaceholder height={height}/>}>
                         <CardBlog key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

@@ -9,6 +9,7 @@ import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
 import CardBrand from '../components/brand/CardBrand'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardBrandPlaceholder from '../components/brand/CardBrandPlaceholder'
 
 
@@ -21,6 +22,7 @@ const Organization = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -37,7 +39,7 @@ const Organization = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardBrandPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBrandPlaceholder height={height}/>}>
                         <CardBrand key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

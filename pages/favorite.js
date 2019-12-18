@@ -9,6 +9,7 @@ import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 const height = 377;
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../components/items/CardItemPlaceholder'
 
 const Items = React.memo((props) => {
@@ -24,6 +25,7 @@ const Items = React.memo((props) => {
                 setList(favorites.filter(favorite => favorite.name.includes(search)))
             }
             else setList((await favorites({search: search})).favorites)
+            forceCheck()
         })()
     },[search])
     useEffect(()=>{
@@ -53,7 +55,7 @@ const Items = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardItemPlaceholder/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
                         <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
                     </LazyLoad>
                 ):null}

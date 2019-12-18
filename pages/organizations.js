@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
 
 
@@ -25,6 +26,7 @@ const Organization = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -41,7 +43,7 @@ const Organization = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
                         <CardOrganization key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}

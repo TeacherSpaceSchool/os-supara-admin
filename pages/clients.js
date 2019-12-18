@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -24,6 +25,7 @@ const Client = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getClients({search: search, sort: sort, filter: filter})).clients)
+            forceCheck()
         })()
     },[filter, sort, search])
     return (
@@ -40,7 +42,7 @@ const Client = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={50}  placeholder={<CardClientPlaceholder height={height}/>}>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardClientPlaceholder height={height}/>}>
                         <CardClient key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}
