@@ -15,7 +15,7 @@ module.exports =
                     runtimeCaching: [
                         {
                             urlPattern: /^https?.*/,
-                            handler: 'NetworkFirst',
+                            handler: 'NetworkOnly',
                             options: {
                                 cacheName: 'cache',
                             }
@@ -55,6 +55,6 @@ module.exports =
                         'routes': { page: '/routes' },
                     };
                 }
-            })
+        })
         )
     )
