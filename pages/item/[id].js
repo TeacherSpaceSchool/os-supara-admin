@@ -310,7 +310,7 @@ const Item = React.memo((props) => {
                                                     <>
                                                     <Button onClick={async()=>{
                                                         let editElement = {_id: data.item._id}
-                                                        if(stock>0&&stock!==data.item.stock)editElement.stock = stock
+                                                        if(stock!==data.item.stock)editElement.stock = stock
                                                         if(name.length>0&&name!==data.item.name)editElement.name = name
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
