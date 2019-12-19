@@ -253,8 +253,8 @@ const Order =  React.memo(
                 <div>
                     <FormControlLabel
                         disabled={
-                            (!['client', 'admin'].includes(profile.role)||'принят'!==element.orders[0].status)||
-                            (['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&!element.client.user)
+                            (!['client', 'admin'].includes(profile.role)&&!(['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&!element.client.user))||
+                                'принят'!==element.orders[0].status
                         }
                         control={
                             <Checkbox
