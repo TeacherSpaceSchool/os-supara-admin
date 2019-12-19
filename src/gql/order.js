@@ -71,6 +71,66 @@ export const getOrders = async({search, sort, filter, date})=>{
     }
 }
 
+export const getOrdersForRouting = async()=>{
+    try{
+        const client = new SingletonApolloClient().getClient();
+        let res = await client
+            .query({
+                query: gql`
+                    query{
+                        invoicesForRouting{
+                            _id
+                            agent 
+                                {_id name}
+                            createdAt
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            price
+                                            organization
+                                                {_id name}
+                                        }
+                                    count
+                                    allPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone 
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            paymentMethod
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            cancelClient
+                            cancelForwarder
+                            taken
+                            dateDelivery
+                            usedBonus
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getOrder = async({_id})=>{
     try{
         const client = new SingletonApolloClient().getClient()

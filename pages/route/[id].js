@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getOrganizations } from '../../src/gql/organization'
-import { getOrders } from '../../src/gql/order'
+import { getOrdersForRouting } from '../../src/gql/order'
 import { getRoute, setRoute, deleteRoute, addRoute } from '../../src/gql/route'
 import { getEcspeditors } from '../../src/gql/employment'
 import routeStyle from '../../src/styleMUI/route/route'
@@ -35,8 +35,8 @@ const Route = React.memo((props) => {
     const router = useRouter()
     const { isMobileApp } = props.app;
     let [dateStart, setDateStart] = useState(data.route?pdDatePicker(new Date(data.route.dateStart)):null);
-    let [dateEnd, setDateEnd] = useState(data.route?data.route.dateEnd:null);
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
+    let [status, setStatus] = useState(data.route.status);
     let handleEmployment =  (event) => {
         setEmployment({_id: event.target.value, name: event.target.name})
     };
@@ -65,7 +65,7 @@ const Route = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
-                setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка', date: ''})).invoices)
+                setUnselectedInvoices((await getOrdersForRouting()).invoicesForRouting)
             }
         })()
     },[])
@@ -106,9 +106,13 @@ const Route = React.memo((props) => {
     }
     let getInvoices = async ()=>{
         if(data.route){
-            setUnselectedInvoices((await getOrders({search: '', sort: '-createdAt', filter: 'обработка', date: ''})).invoices)
+            setUnselectedInvoices((await getOrdersForRouting()).invoicesForRouting)
             setCancelInvoices([])
-            setInvoices((await getRoute({_id: data.route._id})).route.invoices)
+            if(data.route._id) {
+                let route = (await getRoute({_id: data.route._id})).route
+                setInvoices(route.invoices)
+                setStatus(route.status)
+            }
         }
     }
     const breakGeoRoute = (invoices.filter((element)=>!element.address[1])).length>0
@@ -127,12 +131,12 @@ const Route = React.memo((props) => {
             <Card className={isMobileApp?classes.pageM:classes.pageD}>
                 {data.route?
                     <>
-                    {router.query.id==='new'?null:<div className={classes.status} style={{background: statusColor[data.route.status]}}>{data.route.status}</div>}
+                    {router.query.id==='new'?null:<div className={classes.status} style={{background: statusColor[status]}}>{status}</div>}
                     <CardContent className={classes.column}>
                         {data.route?
                             <>
                             {router.query.id==='new'?null:<div className={classes.number}>{data.route.number}</div>}
-                            {(router.query.id==='new'||data.route.status==='создан')&&profile.role==='admin'?
+                            {(router.query.id==='new'||status==='создан')&&profile.role==='admin'?
                                 <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                     <InputLabel>Организация</InputLabel>
                                     <Select value={organization._id}onChange={handleOrganization}>
@@ -154,7 +158,7 @@ const Route = React.memo((props) => {
                             }
                             <br/>
                             {
-                                (router.query.id==='new'||data.route.status==='создан')&&['admin', 'организация', 'менеджер'].includes(profile.role)?
+                                (router.query.id==='new'||status==='создан')&&['admin', 'организация', 'менеджер'].includes(profile.role)?
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                         <InputLabel>Экспедитор</InputLabel>
                                         <Select value={employment._id} onChange={handleEmployment}>
@@ -185,7 +189,7 @@ const Route = React.memo((props) => {
                                 value={dateStart}
                                 inputProps={{
                                     'aria-label': 'description',
-                                    readOnly: !(router.query.id==='new'||data.route.status==='создан'),
+                                    readOnly: !(router.query.id==='new'||status==='создан'),
                                 }}
                                 onChange={ event => setDateStart(event.target.value) }
                             />
@@ -211,7 +215,7 @@ const Route = React.memo((props) => {
                                 {allInvoices?allInvoices.map((element, idx)=> {
                                     return (
                                         <div key={idx} className={classes.row}>
-                                            {['обработка', 'принят'].includes(element.orders[0].status)/*&&!element.confirmationForwarder*/?
+                                            {['обработка', 'принят'].includes(element.orders[0].status)&&profile.role!=='экспедитор'?
                                                 <Checkbox checked={invoices.includes(element)} onChange={() => {
                                                     if (!invoices.includes(element)) {
                                                         invoices.push(element)
@@ -258,9 +262,10 @@ const Route = React.memo((props) => {
                                         <>
                                         <Button onClick={async()=>{
                                             const action = async() => {
+
                                                 let editElement = {_id: data.route._id}
-                                                if(employment._id!==data.route.employment._id&&data.route.status==='создан')editElement.employment = employment._id;
-                                                if(dateStart&&data.route.status==='создан')editElement.dateStart = new Date(dateStart);
+                                                if(employment._id!==data.route.employment._id&&status==='создан')editElement.employment = employment._id;
+                                                if(dateStart&&status==='создан')editElement.dateStart = new Date(dateStart);
                                                 editElement.invoices = invoices.map(element=>element._id);
                                                 if(cancelInvoices.length>0)editElement.cancelInvoices = cancelInvoices.map(element=>element._id);
                                                 await setRoute(editElement)
@@ -271,7 +276,7 @@ const Route = React.memo((props) => {
                                         }} size='small' color='primary'>
                                             Сохранить
                                         </Button>
-                                        {['организация', 'менеджер', 'admin'].includes(profile.role)&&data.route.status==='создан'?
+                                        {['организация', 'менеджер', 'admin'].includes(profile.role)&&status==='создан'?
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {

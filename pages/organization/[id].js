@@ -262,7 +262,6 @@ const Organization = React.memo((props) => {
                                                 :
                                                 <>
                                                 <Button onClick={async()=>{
-                                                    console.log(minimumOrder)
                                                     let editElement = {_id: data.organization._id}
                                                     if(image!==undefined)editElement.image = image
                                                     if(name.length>0&&name!==data.organization.name)editElement.name = name

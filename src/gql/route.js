@@ -16,6 +16,8 @@ export const getRoutes = async({search, sort, filter, date})=>{
                             invoices
                                 {
                                     _id
+                                    agent 
+                                        {_id name}
                                     createdAt
                                     orders 
                                         { 
@@ -26,6 +28,8 @@ export const getRoutes = async({search, sort, filter, date})=>{
                                                     image
                                                     _id
                                                     name    
+                                                    stock 
+                                                    price
                                                     organization
                                                         {_id name}
                                                 }
@@ -38,9 +42,9 @@ export const getRoutes = async({search, sort, filter, date})=>{
                                             _id
                                             name
                                             email
-                                            phone
+                                            phone 
                                             user 
-                                                {_id } 
+                                                {_id }
                                         }
                                     allPrice
                                     info
@@ -49,6 +53,11 @@ export const getRoutes = async({search, sort, filter, date})=>{
                                     number
                                     confirmationForwarder
                                     confirmationClient
+                                    cancelClient
+                                    cancelForwarder
+                                    taken
+                                    dateDelivery
+                                    usedBonus
                                 }
                             employment
                                 { 
@@ -97,6 +106,8 @@ export const getRoute = async({_id})=>{
                             invoices
                                 {
                                     _id
+                                    agent 
+                                        {_id name}
                                     createdAt
                                     orders 
                                         { 
@@ -107,6 +118,8 @@ export const getRoute = async({_id})=>{
                                                     image
                                                     _id
                                                     name    
+                                                    stock 
+                                                    price
                                                     organization
                                                         {_id name}
                                                 }
@@ -119,9 +132,9 @@ export const getRoute = async({_id})=>{
                                             _id
                                             name
                                             email
-                                            phone
+                                            phone 
                                             user 
-                                                {_id } 
+                                                {_id }
                                         }
                                     allPrice
                                     info
@@ -130,6 +143,11 @@ export const getRoute = async({_id})=>{
                                     number
                                     confirmationForwarder
                                     confirmationClient
+                                    cancelClient
+                                    cancelForwarder
+                                    taken
+                                    dateDelivery
+                                    usedBonus
                                 }
                             employment
                                 { 

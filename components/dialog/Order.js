@@ -254,7 +254,7 @@ const Order =  React.memo(
                     <FormControlLabel
                         disabled={
                             (!['client', 'admin'].includes(profile.role)||'принят'!==element.orders[0].status)||
-                            ('экспедитор'===profile.role&&!element.client.user)
+                            (['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&!element.client.user)
                         }
                         control={
                             <Checkbox
@@ -366,6 +366,7 @@ const Order =  React.memo(
                                 if(element.cancelClient!==cancelClient)invoice.cancelClient=cancelClient
                                 if(element.cancelForwarder!==cancelForwarder)invoice.cancelForwarder=cancelForwarder
                                 await setInvoice(invoice)
+
 
                                 let sendOrders;
                                 if(element.orders[0].status!=='обработка') sendOrders = []
