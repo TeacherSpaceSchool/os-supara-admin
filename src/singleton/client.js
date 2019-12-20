@@ -68,7 +68,6 @@ export class SingletonApolloClient {
             mainLink
         ]);
         this.client = new ApolloClient({
-            ssrMode: true,
             link: link,
             cache: new InMemoryCache(),
             defaultOptions: {

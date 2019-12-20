@@ -5,8 +5,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/_app.js" afterPath="$PROJECT_DIR$/pages/_app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/client/[id].js" afterPath="$PROJECT_DIR$/pages/client/[id].js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/redux/actions/user.js" afterPath="$PROJECT_DIR$/redux/actions/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/getClientGQL.js" afterPath="$PROJECT_DIR$/src/getClientGQL.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/singleton/client.js" afterPath="$PROJECT_DIR$/src/singleton/client.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,9 +33,11 @@
       <file leaf-file-name="_app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/_app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="85">
+              <caret line="29" column="94" lean-forward="false" selection-start-line="29" selection-start-column="94" selection-end-line="29" selection-end-column="94" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,7 +45,7 @@
       <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
+            <state relative-caret-position="195">
               <caret line="185" column="30" lean-forward="false" selection-start-line="185" selection-start-column="30" selection-end-line="185" selection-end-column="30" />
               <folding>
                 <element signature="e#0#130#0" expanded="true" />
@@ -58,14 +60,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getClientGQL.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="getClientGQL.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/getClientGQL.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <state relative-caret-position="68">
+              <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#43#93#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="[id].js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="472" column="72" lean-forward="false" selection-start-line="472" selection-start-column="72" selection-end-line="472" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="69" column="40" lean-forward="false" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
+              <folding>
+                <element signature="e#43#106#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -217,11 +240,11 @@
         <option value="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
         <option value="$PROJECT_DIR$/components/dialog/Geo.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
-        <option value="$PROJECT_DIR$/pages/client/[id].js" />
-        <option value="$PROJECT_DIR$/src/singleton/client.js" />
         <option value="$PROJECT_DIR$/redux/actions/user.js" />
         <option value="$PROJECT_DIR$/pages/_app.js" />
         <option value="$PROJECT_DIR$/src/getClientGQL.js" />
+        <option value="$PROJECT_DIR$/pages/client/[id].js" />
+        <option value="$PROJECT_DIR$/src/singleton/client.js" />
       </list>
     </option>
   </component>
@@ -271,6 +294,28 @@
             <path>
               <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azyk-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azyk-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="singleton" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -379,8 +424,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="npm.build" />
-        <item index="1" class="java.lang.String" itemvalue="npm.dev" />
+        <item index="0" class="java.lang.String" itemvalue="npm.dev" />
+        <item index="1" class="java.lang.String" itemvalue="npm.build" />
         <item index="2" class="java.lang.String" itemvalue="npm.start" />
         <item index="3" class="java.lang.String" itemvalue="npm.devStart" />
         <item index="4" class="java.lang.String" itemvalue="npm.NODE_ENV=production dev" />
@@ -443,12 +488,12 @@
       <workItem from="1576557533475" duration="4628000" />
       <workItem from="1576647131536" duration="7013000" />
       <workItem from="1576665265921" duration="8973000" />
-      <workItem from="1576747684808" duration="31273000" />
+      <workItem from="1576747684808" duration="31790000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="887480000" />
+    <option name="totallyTimeSpent" value="887997000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,15 +508,15 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1400507" sideWeight="0.66785717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1400507" sideWeight="0.66847825" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.50506973" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1400507" sideWeight="0.33214286" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25706595" sideWeight="0.49619773" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1400507" sideWeight="0.33152175" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24629879" sideWeight="0.4949303" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -913,28 +958,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5865">
-          <caret line="393" column="78" lean-forward="false" selection-start-line="393" selection-start-column="64" selection-end-line="393" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -947,9 +974,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/_app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="29" column="94" lean-forward="false" selection-start-line="29" selection-start-column="94" selection-end-line="29" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/redux/actions/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
+        <state relative-caret-position="195">
           <caret line="185" column="30" lean-forward="false" selection-start-line="185" selection-start-column="30" selection-end-line="185" selection-end-column="30" />
           <folding>
             <element signature="e#0#130#0" expanded="true" />
@@ -963,21 +1000,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/_app.js">
+    <entry file="file://$PROJECT_DIR$/src/getClientGQL.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        <state relative-caret-position="68">
+          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="472" column="72" lean-forward="false" selection-start-line="472" selection-start-column="72" selection-end-line="472" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/getClientGQL.js">
+    <entry file="file://$PROJECT_DIR$/src/singleton/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        <state relative-caret-position="153">
+          <caret line="69" column="40" lean-forward="false" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#93#0" expanded="true" />
+            <element signature="e#43#106#0" expanded="true" />
           </folding>
         </state>
       </provider>

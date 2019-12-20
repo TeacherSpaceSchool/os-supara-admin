@@ -1,6 +1,7 @@
 /* eslint-disable no-extra-boolean-cast */
 import { urlGQL } from '../redux/constants/other';
 import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'node-fetch';
 import { getJWT } from './lib'
 import { setContext } from 'apollo-link-context';
@@ -28,6 +29,20 @@ export const getClientGqlSsr = (req) => {
     return new ApolloClient({
             ssrMode: true,
             link: link,
+            cache: new InMemoryCache(),
+            defaultOptions: {
+                watchQuery: {
+                    fetchPolicy: 'cache-and-network',
+                    errorPolicy: 'ignore',
+                },
+                query: {
+                    fetchPolicy: 'network-only',
+                    errorPolicy: 'all',
+                },
+                mutate: {
+                    errorPolicy: 'all',
+                },
+            },
 
         })
     }
