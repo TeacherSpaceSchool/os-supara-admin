@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import clientStyle from '../../src/styleMUI/client/client'
@@ -36,9 +36,9 @@ const Client = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
-    let [name, setName] = useState(data.client&&data.client.name?data.client.name:'');
-    let [email, setEmail] = useState(data.client&&data.client.email?data.client.email:'');
-    let [phone, setPhone] = useState(data.client&&data.client.phone?data.client.phone:[]);
+    let [name, setName] = useState(data.client?data.client.name:'');
+    let [email, setEmail] = useState(data.client?data.client.email:'');
+    let [phone, setPhone] = useState(data.client?data.client.phone:[]);
     let addPhone = ()=>{
         phone = [...phone, '']
         setPhone(phone)
@@ -54,14 +54,19 @@ const Client = React.memo((props) => {
     let [login, setLogin] = useState(data.client&&data.client.user?data.client.user.login:'');
 
     //привести к геолокации
-    if(data.client.address.length>0&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
+    if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    let [address, setAddress] = useState(data.client&&data.client.address?data.client.address:[]);
-    let [birthday, setBirthday] = useState(data.client&&data.client.birthday?pdDatePicker(new Date(data.client.birthday)):new Date());
-    let [city, setCity] = useState(data.client&&data.client.city?data.client.city:'');
-    let [type, setType] = useState(data.client&&data.client.type?data.client.type:'торговая точка');
+    let [address, setAddress] = useState(data.client?data.client.address:[]);
+    let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
+    let [city, setCity] = useState(data.client?data.client.city:'');
+    let [type, setType] = useState(
+        (router.query.id==='new'||data.client.organization)?
+            'торговая точка'
+            :
+            data.client?data.client.type:''
+    );
     let handleType =  (event) => {
-        setType(event.target.value)
+        setType((router.query.id==='new'||data.client.organization)?'торговая точка':event.target.value)
     };
     const types = ['частное лицо', 'торговая точка']
 
@@ -88,7 +93,7 @@ const Client = React.memo((props) => {
         setAddress([...address])
     };
 
-    let [info, setInfo] = useState(data.client&&data.client.info?data.client.info:'');
+    let [info, setInfo] = useState(data.client?data.client.info:'');
     let [preview, setPreview] = useState(data.client?data.client.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
@@ -140,11 +145,6 @@ const Client = React.memo((props) => {
         setHide(!hide)
     };
     const router = useRouter()
-    useEffect(()=>{
-        if(name.length===0||city.length===0||phone.length===0||address.length===0||address[0].length===0) {
-            showSnackBar('Обязательно заполните адрес, имя и номер телефона')
-        }
-    },[])
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client?data.client.name:'Ничего не найдено'}>
             <Head>
@@ -161,190 +161,190 @@ const Client = React.memo((props) => {
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client?
                         ((router.query.id==='new'||(data.client.organization&&data.client.organization._id===profile.organization))&&['организация', 'менеджер', 'агент'].includes(profile.role))||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
-                                <>
-                                <div className={classes.column}>
-                                    <label htmlFor='contained-button-file'>
-                                        <img
-                                            className={classes.media}
-                                            src={preview?preview:'/static/add.png'}
-                                            alt={'Добавить'}
-                                        />
-                                    </label>
-                                    {
-                                        type==='торговая точка'?
-                                            <>
-                                            <div className={classes.line}>
-                                                <div className={classes.doc}>
-                                                    Cвидетельство:&nbsp;
-                                                </div>
-                                                {
-                                                    certificateUrl&&certificateUrl.length>0?
-                                                        <a href={certificateUrl} download target='_blank'>
-                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                                Скачать
-                                                            </div>
-                                                        </a>
-                                                        :null
-                                                }
-                                                &nbsp;
-                                                <div className={classes.docUrl} style={{color: certificate||(certificateUrl&&certificateUrl.length>0)?'#ffb300':'red'}} onClick={()=>{certificateRef.current.click()}}>
-                                                    {certificate||(certificateUrl&&certificateUrl.length>0)?'Изменить':'Добавить'}
-                                                </div>
+                            <>
+                            <div className={classes.column}>
+                                <label htmlFor='contained-button-file'>
+                                    <img
+                                        className={classes.media}
+                                        src={preview?preview:'/static/add.png'}
+                                        alt={'Добавить'}
+                                    />
+                                </label>
+                                {
+                                    type==='торговая точка'?
+                                        <>
+                                        <div className={classes.line}>
+                                            <div className={classes.doc}>
+                                                Cвидетельство:&nbsp;
+                                            </div>
+                                            {
+                                                certificateUrl&&certificateUrl.length>0?
+                                                    <a href={certificateUrl} download target='_blank'>
+                                                        <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                            Скачать
+                                                        </div>
+                                                    </a>
+                                                    :null
+                                            }
+                                            &nbsp;
+                                            <div className={classes.docUrl} style={{color: certificate||(certificateUrl&&certificateUrl.length>0)?'#ffb300':'red'}} onClick={()=>{certificateRef.current.click()}}>
+                                                {certificate||(certificateUrl&&certificateUrl.length>0)?'Изменить':'Добавить'}
+                                            </div>
 
+                                        </div>
+                                        <div  className={classes.row}>
+                                            <div className={classes.doc}>
+                                                Паспорт:&nbsp;
                                             </div>
-                                            <div  className={classes.row}>
-                                                <div className={classes.doc}>
-                                                    Паспорт:&nbsp;
-                                                </div>
-                                                {
-                                                    passportUrl&&passportUrl.length>0?
-                                                        <a href={passportUrl} download target='_blank'>
-                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                                Скачать
-                                                            </div>
-                                                        </a>
-                                                        :null
-                                                }
-                                                &nbsp;
-                                                <div className={classes.docUrl} style={{color: passport||(passportUrl&&passportUrl.length>0)?'#ffb300':'red'}} onClick={()=>{passportRef.current.click()}}>
-                                                    {passport||(passportUrl&&passportUrl.length>0)?'Изменить':'Добавить'}
-                                                </div>
+                                            {
+                                                passportUrl&&passportUrl.length>0?
+                                                    <a href={passportUrl} download target='_blank'>
+                                                        <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                            Скачать
+                                                        </div>
+                                                    </a>
+                                                    :null
+                                            }
+                                            &nbsp;
+                                            <div className={classes.docUrl} style={{color: passport||(passportUrl&&passportUrl.length>0)?'#ffb300':'red'}} onClick={()=>{passportRef.current.click()}}>
+                                                {passport||(passportUrl&&passportUrl.length>0)?'Изменить':'Добавить'}
                                             </div>
-                                            <div  className={classes.row}>
-                                                <div className={classes.doc}>
-                                                    Патент:&nbsp;
-                                                </div>
-                                                {
-                                                    patentUrl&&patentUrl.length>0?
-                                                        <a href={patentUrl} download target='_blank'>
-                                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                                Скачать
-                                                            </div>
-                                                        </a>
-                                                        :null
-                                                }
-                                                &nbsp;
-                                                <div className={classes.docUrl} style={{color: patent||(patentUrl&&patentUrl.length>0)?'#ffb300':'red'}} onClick={()=>{patentRef.current.click()}}>
-                                                    {patent||(patentUrl&&patentUrl.length>0)?'Изменить':'Добавить'}
-                                                </div>
+                                        </div>
+                                        <div  className={classes.row}>
+                                            <div className={classes.doc}>
+                                                Патент:&nbsp;
                                             </div>
-                                            </>
-                                            :
-                                            null
-                                    }
-                                </div>
-                                <div>
+                                            {
+                                                patentUrl&&patentUrl.length>0?
+                                                    <a href={patentUrl} download target='_blank'>
+                                                        <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                            Скачать
+                                                        </div>
+                                                    </a>
+                                                    :null
+                                            }
+                                            &nbsp;
+                                            <div className={classes.docUrl} style={{color: patent||(patentUrl&&patentUrl.length>0)?'#ffb300':'red'}} onClick={()=>{patentRef.current.click()}}>
+                                                {patent||(patentUrl&&patentUrl.length>0)?'Изменить':'Добавить'}
+                                            </div>
+                                        </div>
+                                        </>
+                                        :
+                                        null
+                                }
+                            </div>
+                            <div>
+                                <TextField
+                                    label='Имя'
+                                    value={name}
+                                    className={classes.input}
+                                    onChange={(event)=>{setName(event.target.value)}}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                />
+                                {
+                                    router.query.id==='new'||data.client.organization?
+                                        null
+                                        :
+                                        <>
                                         <TextField
-                                            label='Имя'
-                                            value={name}
+                                            label='Логин'
+                                            value={login}
                                             className={classes.input}
-                                            onChange={(event)=>{setName(event.target.value)}}
+                                            onChange={(event)=>{setLogin(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
                                             }}
                                         />
-                                    {
-                                        router.query.id==='new'||data.client.organization?
-                                            null
-                                            :
-                                            <>
-                                            <TextField
-                                                label='Логин'
-                                                value={login}
+                                        <Input
+                                            placeholder='Новый пароль'
+                                            type={hide ? 'password' : 'text' }
+                                            value={newPass}
+                                            onChange={handleNewPass}
+                                            className={classes.input}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton aria-label="Toggle password visibility" onClick={handleHide}>
+                                                        {hide ? <VisibilityOff />:<Visibility />  }
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                        </>
+                                }
+                                <FormControl className={classes.input}>
+                                    <InputLabel>Тип клиента</InputLabel>
+                                    <Select value={type} onChange={handleType}>
+                                        {types.map((element)=>
+                                            <MenuItem key={element} value={element}>{element}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                <TextField
+                                    className={classes.input}
+                                    label='День рождение'
+                                    type='date'
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={birthday}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                    onChange={ event => setBirthday(event.target.value) }
+                                />
+                                <TextField
+                                    className={classes.input}
+                                    label='Город'
+                                    type='text'
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={city}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                    onChange={ event => setCity(event.target.value) }
+                                />
+                                <br/>
+                                <br/>
+                                {phone?phone.map((element, idx)=>
+                                    <div key={idx}>
+                                        <FormControl className={classes.input}>
+                                            <InputLabel>Телефон. Формат: +996555780861</InputLabel>
+                                            <Input
+                                                placeholder='Телефон. Формат: +996555780861'
+                                                value={element}
                                                 className={classes.input}
-                                                onChange={(event)=>{setLogin(event.target.value)}}
+                                                onChange={(event)=>{editPhone(event, idx)}}
                                                 inputProps={{
                                                     'aria-label': 'description',
                                                 }}
-                                            />
-                                            <Input
-                                                placeholder='Новый пароль'
-                                                type={hide ? 'password' : 'text' }
-                                                value={newPass}
-                                                onChange={handleNewPass}
-                                                className={classes.input}
                                                 endAdornment={
                                                     <InputAdornment position="end">
-                                                        <IconButton aria-label="Toggle password visibility" onClick={handleHide}>
-                                                            {hide ? <VisibilityOff />:<Visibility />  }
+                                                        <IconButton
+                                                            onClick={()=>{
+                                                                deletePhone(idx)
+                                                            }}
+                                                            aria-label='toggle password visibility'
+                                                        >
+                                                            <Remove/>
                                                         </IconButton>
                                                     </InputAdornment>
                                                 }
                                             />
-                                            </>
-                                    }
-                                    <FormControl className={classes.input}>
-                                        <InputLabel>Тип клиента</InputLabel>
-                                        <Select value={type} onChange={handleType}>
-                                            {types.map((element)=>
-                                                <MenuItem key={element} value={element}>{element}</MenuItem>
-                                            )}
-                                        </Select>
-                                    </FormControl>
-                                    <TextField
-                                        className={classes.input}
-                                        label='День рождение'
-                                        type='date'
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={birthday}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                        onChange={ event => setBirthday(event.target.value) }
-                                    />
-                                    <TextField
-                                        className={classes.input}
-                                        label='Город'
-                                        type='text'
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={city}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                        onChange={ event => setCity(event.target.value) }
-                                    />
-                                    <br/>
-                                    <br/>
-                                    {phone?phone.map((element, idx)=>
-                                        <div key={idx}>
-                                            <FormControl className={classes.input}>
-                                                <InputLabel>Телефон. Формат: +996555780861</InputLabel>
-                                                <Input
-                                                    placeholder='Телефон. Формат: +996555780861'
-                                                    value={element}
-                                                    className={classes.input}
-                                                    onChange={(event)=>{editPhone(event, idx)}}
-                                                    inputProps={{
-                                                        'aria-label': 'description',
-                                                    }}
-                                                    endAdornment={
-                                                        <InputAdornment position="end">
-                                                            <IconButton
-                                                                onClick={()=>{
-                                                                    deletePhone(idx)
-                                                                }}
-                                                                aria-label='toggle password visibility'
-                                                            >
-                                                                <Remove/>
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    }
-                                                />
-                                            </FormControl>
-                                        </div>
-                                    ): null}
-                                    <Button onClick={async()=>{
-                                        addPhone()
-                                    }} size='small' color='primary'>
-                                        Добавить телефон
-                                    </Button>
-                                    <br/>
-                                    <br/>
-                                    {address?address.map((element, idx)=>
+                                        </FormControl>
+                                    </div>
+                                ): null}
+                                <Button onClick={async()=>{
+                                    addPhone()
+                                }} size='small' color='primary'>
+                                    Добавить телефон
+                                </Button>
+                                <br/>
+                                <br/>
+                                {address?address.map((element, idx)=>
                                         <div key={idx}>
                                             {
                                                 type==='торговая точка'?
@@ -415,58 +415,109 @@ const Client = React.memo((props) => {
                                             </div>
                                         </div>
                                     ):
-                                        <br/>}
-                                    <Button onClick={async()=>{
-                                        addAddress()
-                                    }} size='small' color='primary'>
-                                        Добавить адрес
-                                    </Button>
-                                    <br/>
-                                    <br/>
+                                    <br/>}
+                                <Button onClick={async()=>{
+                                    addAddress()
+                                }} size='small' color='primary'>
+                                    Добавить адрес
+                                </Button>
+                                <br/>
+                                <br/>
 
-                                    <TextField
-                                        label='email'
-                                        value={email}
-                                        className={classes.input}
-                                        onChange={(event)=>{setEmail(event.target.value)}}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
-                                    <TextField
-                                        multiline={true}
-                                        label='Информация'
-                                        value={info}
-                                        className={classes.input}
-                                        onChange={(event)=>{setInfo(event.target.value)}}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
-                                    <div className={classes.row}>
-                                        {
-                                            ((data.client.organization&&profile.organization===data.client.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
-                                            ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
-                                                <>
+                                <TextField
+                                    label='email'
+                                    value={email}
+                                    className={classes.input}
+                                    onChange={(event)=>{setEmail(event.target.value)}}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                />
+                                <TextField
+                                    multiline={true}
+                                    label='Информация'
+                                    value={info}
+                                    className={classes.input}
+                                    onChange={(event)=>{setInfo(event.target.value)}}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                    }}
+                                />
+                                <div className={classes.row}>
+                                    {
+                                        ((data.client.organization&&profile.organization===data.client.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
+                                        ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
+                                            <>
+                                            <Button onClick={async()=>{
+                                                let editElement = {_id: data.client._id}
+                                                if(image) editElement.image = image
+                                                if(passport)editElement.passport = passport
+                                                if(patent)editElement.patent = patent
+                                                if(certificate)editElement.certificate = certificate
+                                                if(name&&name.length>0&&name!==data.client.name)editElement.name = name
+                                                editElement.address = address
+                                                if(email&&email.length>0&&email!==data.client.email)editElement.email = email
+                                                if(login&&login.length>0&&data.client.user.login!==login)editElement.login = login
+                                                editElement.phone = phone
+                                                if(info&&info.length>0&&info!==data.client.info)editElement.info = info
+                                                if(city&&city.length>0&&city!==data.client.city)editElement.city = city
+                                                if(type&&type.length>0&&type!==data.client.type)editElement.type = type
+                                                if(birthday&&birthday!==data.client.birthday)editElement.birthday = new Date(birthday)
+                                                if(newPass&&newPass.length>0)editElement.newPass = newPass
+                                                const action = async() => {
+                                                    await setClient(editElement)
+                                                }
+                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                showMiniDialog(true)
+                                            }} size='small' color='primary'>
+                                                Сохранить
+                                            </Button>
+                                            {profile.role==='admin'?
                                                 <Button onClick={async()=>{
-                                                    if(name.length>0&&address.length>0&&address[0].length>0&&city&&city.length>0&&phone.length>0) {
-                                                        let editElement = {_id: data.client._id}
-                                                        if (image) editElement.image = image
-                                                        if (passport) editElement.passport = passport
-                                                        if (patent) editElement.patent = patent
-                                                        if (certificate) editElement.certificate = certificate
-                                                        if (name && name.length > 0 && name !== data.client.name) editElement.name = name
+                                                    const action = async() => {
+                                                        await onoffClient([data.client._id])
+                                                        setStatus(status==='active'?'deactive':'active')
+                                                    }
+                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                    showMiniDialog(true)
+                                                }} size='small' color='primary'>
+                                                    {status==='active'?'Отключить':'Включить'}
+                                                </Button>
+                                                :
+                                                data.client.user&&profile._id===data.client.user._id?
+                                                    <Button onClick={()=>{
+                                                        const action = async() => {
+                                                            logout(true)
+                                                        }
+                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        showMiniDialog(true)
+                                                    }} size='small' color='primary'>
+                                                        Выйти
+                                                    </Button>
+                                                    :
+                                                    null
+                                            }
+                                            </>
+                                            :
+                                            router.query.id==='new'&&['организация', 'менеджер', 'агент'].includes(profile.role)?
+                                                <Button onClick={async()=>{
+                                                    if(name.length>0&&address.length>0&&city.length>0&&phone.length>0){
+                                                        let editElement = {}
+                                                        if(image!==undefined)editElement.image = image
+                                                        if(passport!==undefined)editElement.passport = passport
+                                                        if(patent!==undefined)editElement.patent = patent
+                                                        if(certificate!==undefined)editElement.certificate = certificate
+                                                        if(name.length>0)editElement.name = name
                                                         editElement.address = address
-                                                        if (email && email.length > 0 && email !== data.client.email) editElement.email = email
-                                                        if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login
+                                                        if(email.length>0)editElement.email = email
                                                         editElement.phone = phone
-                                                        if (info && info.length > 0 && info !== data.client.info) editElement.info = info
-                                                        if (city && city.length > 0 && city !== data.client.city) editElement.city = city
-                                                        if (type && type.length > 0 && type !== data.client.type) editElement.type = type
-                                                        if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday)
-                                                        if (newPass && newPass.length > 0) editElement.newPass = newPass
-                                                        const action = async () => {
-                                                            await setClient(editElement)
+                                                        if(info.length>0)editElement.info = info
+                                                        if(city.length>0)editElement.city = city
+                                                        if(type&&type.length>0)editElement.type = type
+                                                        editElement.birthday = new Date(birthday)
+                                                        const action = async() => {
+                                                            await addClient(editElement)
+                                                            Router.push('/clients')
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
@@ -475,179 +526,123 @@ const Client = React.memo((props) => {
                                                         showSnackBar('Заполните поля: имя, адрес, город и телефон')
                                                     }
                                                 }} size='small' color='primary'>
-                                                    Сохранить
+                                                    Добавить
                                                 </Button>
-                                                {profile.role==='admin'?
-                                                    <Button onClick={async()=>{
-                                                        const action = async() => {
-                                                            await onoffClient([data.client._id])
-                                                            setStatus(status==='active'?'deactive':'active')
-                                                        }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                        showMiniDialog(true)
-                                                    }} size='small' color='primary'>
-                                                        {status==='active'?'Отключить':'Включить'}
-                                                    </Button>
-                                                    :
-                                                    data.client.user&&profile._id===data.client.user._id?
-                                                        <Button onClick={()=>{
-                                                            const action = async() => {
-                                                                logout(true)
-                                                            }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                            showMiniDialog(true)
-                                                        }} size='small' color='primary'>
-                                                            Выйти
-                                                        </Button>
-                                                        :
-                                                        null
-                                                }
-                                                </>
                                                 :
-                                                router.query.id==='new'&&['организация', 'менеджер', 'агент'].includes(profile.role)?
-                                                    <Button onClick={async()=>{
-                                                        if(name.length>0&&address.length>0&&city.length>0&&phone.length>0){
-                                                            let editElement = {}
-                                                            if(image!==undefined)editElement.image = image
-                                                            if(passport!==undefined)editElement.passport = passport
-                                                            if(patent!==undefined)editElement.patent = patent
-                                                            if(certificate!==undefined)editElement.certificate = certificate
-                                                            if(name.length>0)editElement.name = name
-                                                            editElement.address = address
-                                                            if(email.length>0)editElement.email = email
-                                                            editElement.phone = phone
-                                                            if(info.length>0)editElement.info = info
-                                                            if(city.length>0)editElement.city = city
-                                                            if(type&&type.length>0)editElement.type = type
-                                                            editElement.birthday = new Date(birthday)
-                                                            const action = async() => {
-                                                                await addClient(editElement)
-                                                                Router.push('/clients')
-                                                            }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                            showMiniDialog(true)
-                                                        }
-                                                        else {
-                                                            showSnackBar('Заполните поля: имя, адрес, город и телефон')
-                                                        }
-                                                    }} size='small' color='primary'>
-                                                        Добавить
-                                                    </Button>
-                                                    :
-                                                    null
+                                                null
 
-                                        }
-                                    </div>
-                                </div>
-                                </>
-                                :
-                                <>
-
-                                <div className={classes.column}>
-                                    <img
-                                        className={classes.media}
-                                        src={preview}
-                                        alt={name}
-                                    />
-                                    {
-                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&certificateUrl&&certificateUrl.length>0?
-                                            <a href={certificateUrl} download target='_blank'>
-                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                    Скачать сертификат
-                                                </div>
-                                            </a>
-                                            :null
-                                    }
-                                    {
-                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&passportUrl&&passportUrl.length>0?
-                                            <a href={passportUrl} download target='_blank'>
-                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                    Скачать паспорт
-                                                </div>
-                                            </a>
-                                            :null
-                                    }
-                                    {
-                                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&patentUrl&&patentUrl.length>0?
-                                            <a href={patentUrl} download target='_blank'>
-                                                <div className={classes.docUrl} style={{color: 'indigo'}}>
-                                                    Скачать патент
-                                                </div>
-                                            </a>
-                                            :null
                                     }
                                 </div>
-                                <div style={{width: isMobileApp?'100%':'calc(100% - 300px)'}}>
-                                    <div className={classes.name}>
-                                        {name}
+                            </div>
+                            </>
+                            :
+                            <>
+
+                            <div className={classes.column}>
+                                <img
+                                    className={classes.media}
+                                    src={preview}
+                                    alt={name}
+                                />
+                                {
+                                    ['admin', 'организация', 'менеджер'].includes(profile.role)&&certificateUrl&&certificateUrl.length>0?
+                                        <a href={certificateUrl} download target='_blank'>
+                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                Скачать сертификат
+                                            </div>
+                                        </a>
+                                        :null
+                                }
+                                {
+                                    ['admin', 'организация', 'менеджер'].includes(profile.role)&&passportUrl&&passportUrl.length>0?
+                                        <a href={passportUrl} download target='_blank'>
+                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                Скачать паспорт
+                                            </div>
+                                        </a>
+                                        :null
+                                }
+                                {
+                                    ['admin', 'организация', 'менеджер'].includes(profile.role)&&patentUrl&&patentUrl.length>0?
+                                        <a href={patentUrl} download target='_blank'>
+                                            <div className={classes.docUrl} style={{color: 'indigo'}}>
+                                                Скачать патент
+                                            </div>
+                                        </a>
+                                        :null
+                                }
+                            </div>
+                            <div style={{width: isMobileApp?'100%':'calc(100% - 300px)'}}>
+                                <div className={classes.name}>
+                                    {name}
+                                </div>
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        Адрес:&nbsp;
                                     </div>
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>
-                                            Адрес:&nbsp;
-                                        </div>
-                                        <div className={classes.column}>
-                                            {address?address.map((element, idx)=>
-                                                <>
-                                                {type==='торговая точка'?
-                                                    <div className={classes.value} key={idx}>
-                                                        {element[2]}
-                                                    </div>
-                                                    :null
-                                                }
+                                    <div className={classes.column}>
+                                        {address?address.map((element, idx)=>
+                                            <>
+                                            {type==='торговая точка'?
                                                 <div className={classes.value} key={idx}>
-                                                    {element[0]}
+                                                    {element[2]}
                                                 </div>
-                                                <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
-                                                    if(element[1]) {
-                                                        setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
-                                                        showMiniDialog(true)
-                                                    }
-                                                }}>
-                                                    {
-                                                        element[1]?
-                                                            'Посмотреть геолокацию'
-                                                            :
-                                                            'Геолокация не задана'
-                                                    }
+                                                :null
+                                            }
+                                            <div className={classes.value} key={idx}>
+                                                {element[0]}
+                                            </div>
+                                            <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
+                                                if(element[1]) {
+                                                    setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
+                                                    showMiniDialog(true)
+                                                }
+                                            }}>
+                                                {
+                                                    element[1]?
+                                                        'Посмотреть геолокацию'
+                                                        :
+                                                        'Геолокация не задана'
+                                                }
+                                            </div>
+                                            </>
+                                        ):null}
+                                    </div>
+                                </div>
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        E-mail:&nbsp;
+                                    </div>
+                                    <div className={classes.value}>
+                                        {email}
+                                    </div>
+                                </div>
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        Телефон:&nbsp;
+                                    </div>
+                                    <div className={classes.value}>
+                                        <div className={classes.column}>
+                                            {phone?phone.map((element, idx)=>
+                                                <>
+                                                <div className={classes.value} key={idx}>
+                                                    {element}
                                                 </div>
                                                 </>
                                             ):null}
                                         </div>
                                     </div>
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>
-                                            E-mail:&nbsp;
-                                        </div>
-                                        <div className={classes.value}>
-                                            {email}
-                                        </div>
-                                    </div>
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>
-                                            Телефон:&nbsp;
-                                        </div>
-                                        <div className={classes.value}>
-                                            <div className={classes.column}>
-                                                {phone?phone.map((element, idx)=>
-                                                    <>
-                                                    <div className={classes.value} key={idx}>
-                                                        {element}
-                                                    </div>
-                                                    </>
-                                                ):null}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className={classes.info}>
-                                        {info}
-                                    </div>
                                 </div>
-                                </>
-                            :
-                            'Ничего не найдено'
-                            }
-                        </CardContent>
-                </Card>
+                                <div className={classes.info}>
+                                    {info}
+                                </div>
+                            </div>
+                            </>
+                        :
+                        'Ничего не найдено'
+                    }
+                </CardContent>
+            </Card>
             <input
                 accept='image/*'
                 style={{ display: 'none' }}
@@ -702,7 +697,7 @@ Client.getInitialProps = async function(ctx) {
                         certificate: null,
                     }
             }
-        :
+            :
             await getClient({_id: ctx.query.id}))}
     };
 };

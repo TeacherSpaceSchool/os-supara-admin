@@ -61273,15 +61273,15 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       status = _useState[0],
       setStatus = _useState[1];
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.name ? data.client.name : ''),
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.name : ''),
       name = _useState2[0],
       setName = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.email ? data.client.email : ''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.email : ''),
       email = _useState3[0],
       setEmail = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.phone ? data.client.phone : []),
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.phone : []),
       phone = _useState4[0],
       setPhone = _useState4[1];
 
@@ -61305,28 +61305,28 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       setLogin = _useState5[1]; //привести к геолокации
 
 
-  if (data.client.address.length > 0 && !_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_3___default()(data.client.address[0])) data.client.address.map(function (addres) {
+  if (!_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_3___default()(data.client.address[0])) data.client.address.map(function (addres) {
     return [addres];
   });
 
-  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.address ? data.client.address : []),
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.address : []),
       address = _useState6[0],
       setAddress = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.birthday ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_30__["pdDatePicker"])(new Date(data.client.birthday)) : new Date()),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? Object(_src_lib__WEBPACK_IMPORTED_MODULE_30__["pdDatePicker"])(new Date(data.client.birthday)) : null),
       birthday = _useState7[0],
       setBirthday = _useState7[1];
 
-  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.city ? data.client.city : ''),
+  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.city : ''),
       city = _useState8[0],
       setCity = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.type ? data.client.type : 'торговая точка'),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(router.query.id === 'new' || data.client.organization ? 'торговая точка' : data.client ? data.client.type : ''),
       type = _useState9[0],
       setType = _useState9[1];
 
   var handleType = function handleType(event) {
-    setType(event.target.value);
+    setType(router.query.id === 'new' || data.client.organization ? 'торговая точка' : event.target.value);
   };
 
   var types = ['частное лицо', 'торговая точка'];
@@ -61361,7 +61361,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     setAddress(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_4__["default"])(address));
   };
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client && data.client.info ? data.client.info : ''),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(data.client ? data.client.info : ''),
       info = _useState11[0],
       setInfo = _useState11[1];
 
@@ -61448,11 +61448,6 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
   };
 
   var router = Object(next_router__WEBPACK_IMPORTED_MODULE_29__["useRouter"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
-    if (name.length === 0 || city.length === 0 || phone.length === 0 || address.length === 0 || address[0].length === 0) {
-      showSnackBar('Обязательно заполните адрес, имя и номер телефона');
-    }
-  }, []);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_7__["default"], {
     filters: data.filterSubCategory,
     sorts: data.sortSubCategory,
@@ -62194,65 +62189,61 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              if (name.length > 0 && address.length > 0 && address[0].length > 0 && city && city.length > 0 && phone.length > 0) {
-                editElement = {
-                  _id: data.client._id
-                };
-                if (image) editElement.image = image;
-                if (passport) editElement.passport = passport;
-                if (patent) editElement.patent = patent;
-                if (certificate) editElement.certificate = certificate;
-                if (name && name.length > 0 && name !== data.client.name) editElement.name = name;
-                editElement.address = address;
-                if (email && email.length > 0 && email !== data.client.email) editElement.email = email;
-                if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login;
-                editElement.phone = phone;
-                if (info && info.length > 0 && info !== data.client.info) editElement.info = info;
-                if (city && city.length > 0 && city !== data.client.city) editElement.city = city;
-                if (type && type.length > 0 && type !== data.client.type) editElement.type = type;
-                if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday);
-                if (newPass && newPass.length > 0) editElement.newPass = newPass;
+              editElement = {
+                _id: data.client._id
+              };
+              if (image) editElement.image = image;
+              if (passport) editElement.passport = passport;
+              if (patent) editElement.patent = patent;
+              if (certificate) editElement.certificate = certificate;
+              if (name && name.length > 0 && name !== data.client.name) editElement.name = name;
+              editElement.address = address;
+              if (email && email.length > 0 && email !== data.client.email) editElement.email = email;
+              if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login;
+              editElement.phone = phone;
+              if (info && info.length > 0 && info !== data.client.info) editElement.info = info;
+              if (city && city.length > 0 && city !== data.client.city) editElement.city = city;
+              if (type && type.length > 0 && type !== data.client.type) editElement.type = type;
+              if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday);
+              if (newPass && newPass.length > 0) editElement.newPass = newPass;
 
-                action =
+              action =
+              /*#__PURE__*/
+              function () {
+                var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
                 /*#__PURE__*/
-                function () {
-                  var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-                  /*#__PURE__*/
-                  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee3() {
-                    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee3$(_context3) {
-                      while (1) {
-                        switch (_context3.prev = _context3.next) {
-                          case 0:
-                            _context3.next = 2;
-                            return Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_17__["setClient"])(editElement);
+                _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee3() {
+                  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          _context3.next = 2;
+                          return Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_17__["setClient"])(editElement);
 
-                          case 2:
-                          case "end":
-                            return _context3.stop();
-                        }
+                        case 2:
+                        case "end":
+                          return _context3.stop();
                       }
-                    }, _callee3);
-                  }));
-
-                  return function action() {
-                    return _ref4.apply(this, arguments);
-                  };
-                }();
-
-                setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
-                  action: action,
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 471
-                  },
-                  __self: this
+                    }
+                  }, _callee3);
                 }));
-                showMiniDialog(true);
-              } else {
-                showSnackBar('Заполните поля: имя, адрес, город и телефон');
-              }
 
-            case 1:
+                return function action() {
+                  return _ref4.apply(this, arguments);
+                };
+              }();
+
+              setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_27__["default"], {
+                action: action,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 470
+                },
+                __self: this
+              }));
+              showMiniDialog(true);
+
+            case 18:
             case "end":
               return _context4.stop();
           }
@@ -62310,7 +62301,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
                 action: action,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 486
+                  lineNumber: 481
                 },
                 __self: this
               }));
@@ -62327,7 +62318,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 481
+      lineNumber: 476
     },
     __self: this
   }, status === 'active' ? 'Отключить' : 'Включить') : data.client.user && profile._id === data.client.user._id ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -62361,7 +62352,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 497
+          lineNumber: 492
         },
         __self: this
       }));
@@ -62371,7 +62362,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 493
+      lineNumber: 488
     },
     __self: this
   }, "\u0412\u044B\u0439\u0442\u0438") : null) : router.query.id === 'new' && ['организация', 'менеджер', 'агент'].includes(profile.role) ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -62433,7 +62424,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
                   action: action,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 527
+                    lineNumber: 522
                   },
                   __self: this
                 }));
@@ -62453,14 +62444,14 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 508
+      lineNumber: 503
     },
     __self: this
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C") : null))) : __jsx(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 546
+      lineNumber: 541
     },
     __self: this
   }, __jsx("img", {
@@ -62469,7 +62460,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     alt: name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 547
+      lineNumber: 542
     },
     __self: this
   }), ['admin', 'организация', 'менеджер'].includes(profile.role) && certificateUrl && certificateUrl.length > 0 ? __jsx("a", {
@@ -62478,7 +62469,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 554
+      lineNumber: 549
     },
     __self: this
   }, __jsx("div", {
@@ -62488,7 +62479,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 555
+      lineNumber: 550
     },
     __self: this
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && passportUrl && passportUrl.length > 0 ? __jsx("a", {
@@ -62497,7 +62488,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 563
+      lineNumber: 558
     },
     __self: this
   }, __jsx("div", {
@@ -62507,7 +62498,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 564
+      lineNumber: 559
     },
     __self: this
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0441\u043F\u043E\u0440\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && patentUrl && patentUrl.length > 0 ? __jsx("a", {
@@ -62516,7 +62507,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 572
+      lineNumber: 567
     },
     __self: this
   }, __jsx("div", {
@@ -62526,7 +62517,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 573
+      lineNumber: 568
     },
     __self: this
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0442\u0435\u043D\u0442")) : null), __jsx("div", {
@@ -62535,35 +62526,35 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 580
+      lineNumber: 575
     },
     __self: this
   }, __jsx("div", {
     className: classes.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 581
+      lineNumber: 576
     },
     __self: this
   }, name), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 584
+      lineNumber: 579
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 585
+      lineNumber: 580
     },
     __self: this
   }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 588
+      lineNumber: 583
     },
     __self: this
   }, address ? address.map(function (element, idx) {
@@ -62572,7 +62563,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       key: idx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 592
+        lineNumber: 587
       },
       __self: this
     }, element[2]) : null, __jsx("div", {
@@ -62580,7 +62571,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       key: idx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 597
+        lineNumber: 592
       },
       __self: this
     }, element[0]), __jsx("div", {
@@ -62594,7 +62585,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
             geo: element[1],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 602
+              lineNumber: 597
             },
             __self: this
           }), true);
@@ -62603,7 +62594,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 600
+        lineNumber: 595
       },
       __self: this
     }, element[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'));
@@ -62611,49 +62602,49 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 617
+      lineNumber: 612
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 618
+      lineNumber: 613
     },
     __self: this
   }, "E-mail:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 621
+      lineNumber: 616
     },
     __self: this
   }, email)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 625
+      lineNumber: 620
     },
     __self: this
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 626
+      lineNumber: 621
     },
     __self: this
   }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 629
+      lineNumber: 624
     },
     __self: this
   }, __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 630
+      lineNumber: 625
     },
     __self: this
   }, phone ? phone.map(function (element, idx) {
@@ -62662,7 +62653,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
       key: idx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 633
+        lineNumber: 628
       },
       __self: this
     }, element));
@@ -62670,7 +62661,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     className: classes.info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 641
+      lineNumber: 636
     },
     __self: this
   }, info))) : 'Ничего не найдено')), __jsx("input", {
@@ -62683,7 +62674,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 651
+      lineNumber: 646
     },
     __self: this
   }), __jsx("input", {
@@ -62696,7 +62687,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     onChange: handleChangePassport,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 658
+      lineNumber: 653
     },
     __self: this
   }), __jsx("input", {
@@ -62709,7 +62700,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     onChange: handleChangeCertificate,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 665
+      lineNumber: 660
     },
     __self: this
   }), __jsx("input", {
@@ -62722,7 +62713,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     onChange: handleChangePatent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 672
+      lineNumber: 667
     },
     __self: this
   }));
