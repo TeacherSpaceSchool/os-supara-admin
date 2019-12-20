@@ -61266,6 +61266,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
   var profile = props.user.profile;
   var classes = Object(_src_styleMUI_client_client__WEBPACK_IMPORTED_MODULE_9__["default"])();
   var data = props.data;
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_29__["useRouter"])();
   var isMobileApp = props.app.isMobileApp;
   var showSnackBar = props.snackbarActions.showSnackBar;
 
@@ -61447,7 +61448,6 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
     setHide(!hide);
   };
 
-  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_29__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
     if (name.length === 0 || city.length === 0 || phone.length === 0 || address.length === 0 || address[0].length === 0) {
       showSnackBar('Обязательно заполните адрес, имя и номер телефона');

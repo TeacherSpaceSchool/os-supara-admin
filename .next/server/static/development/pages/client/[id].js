@@ -4627,6 +4627,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
   const {
     data
   } = props;
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_26__["useRouter"])();
   const {
     isMobileApp
   } = props.app;
@@ -4816,7 +4817,6 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     setHide(!hide);
   };
 
-  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_26__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {
     if (name.length === 0 || city.length === 0 || phone.length === 0 || address.length === 0 || address[0].length === 0) {
       showSnackBar('Обязательно заполните адрес, имя и номер телефона');
