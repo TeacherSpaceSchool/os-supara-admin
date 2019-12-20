@@ -36,9 +36,9 @@ const Client = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
-    let [name, setName] = useState(data.client?data.client.name:'');
-    let [email, setEmail] = useState(data.client?data.client.email:'');
-    let [phone, setPhone] = useState(data.client?data.client.phone:[]);
+    let [name, setName] = useState(data.client&&data.client.name?data.client.name:'');
+    let [email, setEmail] = useState(data.client&&data.client.email?data.client.email:'');
+    let [phone, setPhone] = useState(data.client&&data.client.phone?data.client.phone:[]);
     let addPhone = ()=>{
         phone = [...phone, '']
         setPhone(phone)
@@ -54,12 +54,12 @@ const Client = React.memo((props) => {
     let [login, setLogin] = useState(data.client&&data.client.user?data.client.user.login:'');
 
     //привести к геолокации
-    if(!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
+    if(data.client.address.length>0&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    let [address, setAddress] = useState(data.client?data.client.address:[]);
-    let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
-    let [city, setCity] = useState(data.client?data.client.city:'');
-    let [type, setType] = useState(data.client?data.client.type:'торговая точка');
+    let [address, setAddress] = useState(data.client&&data.client.address?data.client.address:[]);
+    let [birthday, setBirthday] = useState(data.client&&data.client.birthday?pdDatePicker(new Date(data.client.birthday)):new Date());
+    let [city, setCity] = useState(data.client&&data.client.city?data.client.city:'');
+    let [type, setType] = useState(data.client&&data.client.type?data.client.type:'торговая точка');
     let handleType =  (event) => {
         setType(event.target.value)
     };
@@ -88,7 +88,7 @@ const Client = React.memo((props) => {
         setAddress([...address])
     };
 
-    let [info, setInfo] = useState(data.client?data.client.info:'');
+    let [info, setInfo] = useState(data.client&&data.client.info?data.client.info:'');
     let [preview, setPreview] = useState(data.client?data.client.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
@@ -449,7 +449,6 @@ const Client = React.memo((props) => {
                                             ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
-                                                    console.log(name, address, city, phone)
                                                     if(name.length>0&&address.length>0&&address[0].length>0&&city&&city.length>0&&phone.length>0) {
                                                         let editElement = {_id: data.client._id}
                                                         if (image) editElement.image = image
