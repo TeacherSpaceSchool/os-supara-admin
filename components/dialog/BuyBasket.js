@@ -123,15 +123,27 @@ const BuyBasket =  React.memo(
                                     proofeAddress = address[i][0].length > 0
                                 }
                             }
-                            if (paymentMethod.length > 0 && proofeAddress) {
-                                const action = async () => {
-                                    await addOrders({info: coment, usedBonus: useBonus, paymentMethod: paymentMethod, address: address, organization: organization._id, client: client._id})
-                                    Router.push('/orders')
-                                    showMiniDialog(false);
-                                }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            } else
-                                showSnackBar('Заполните все поля')
+                            if(proofeAddress) {
+                                if (paymentMethod.length > 0) {
+                                    const action = async () => {
+                                        await addOrders({
+                                            info: coment,
+                                            usedBonus: useBonus,
+                                            paymentMethod: paymentMethod,
+                                            address: address,
+                                            organization: organization._id,
+                                            client: client._id
+                                        })
+                                        Router.push('/orders')
+                                        showMiniDialog(false);
+                                    }
+                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                } else
+                                    showSnackBar('Заполните все поля')
+                            }
+                            else {
+                                showSnackBar('Укажите адрес точнее')
+                            }
                         } else {
                             showSnackBar('Сумма заказа должна быть выше минимальной')
                         }

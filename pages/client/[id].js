@@ -444,26 +444,31 @@ const Client = React.memo((props) => {
                                             ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
-                                                    let editElement = {_id: data.client._id}
-                                                    if(image) editElement.image = image
-                                                    if(passport)editElement.passport = passport
-                                                    if(patent)editElement.patent = patent
-                                                    if(certificate)editElement.certificate = certificate
-                                                    if(name&&name.length>0&&name!==data.client.name)editElement.name = name
-                                                    editElement.address = address
-                                                    if(email&&email.length>0&&email!==data.client.email)editElement.email = email
-                                                    if(login&&login.length>0&&data.client.user.login!==login)editElement.login = login
-                                                    editElement.phone = phone
-                                                    if(info&&info.length>0&&info!==data.client.info)editElement.info = info
-                                                    if(city&&city.length>0&&city!==data.client.city)editElement.city = city
-                                                    if(type&&type.length>0&&type!==data.client.type)editElement.type = type
-                                                    if(birthday&&birthday!==data.client.birthday)editElement.birthday = new Date(birthday)
-                                                    if(newPass&&newPass.length>0)editElement.newPass = newPass
-                                                    const action = async() => {
-                                                        await setClient(editElement)
+                                                    if(name.length>0&&address.length>0&&address[0].length>0&&city.length>0&&phone.length>0) {
+                                                        let editElement = {_id: data.client._id}
+                                                        if (image) editElement.image = image
+                                                        if (passport) editElement.passport = passport
+                                                        if (patent) editElement.patent = patent
+                                                        if (certificate) editElement.certificate = certificate
+                                                        if (name && name.length > 0 && name !== data.client.name) editElement.name = name
+                                                        editElement.address = address
+                                                        if (email && email.length > 0 && email !== data.client.email) editElement.email = email
+                                                        if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login
+                                                        editElement.phone = phone
+                                                        if (info && info.length > 0 && info !== data.client.info) editElement.info = info
+                                                        if (city && city.length > 0 && city !== data.client.city) editElement.city = city
+                                                        if (type && type.length > 0 && type !== data.client.type) editElement.type = type
+                                                        if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday)
+                                                        if (newPass && newPass.length > 0) editElement.newPass = newPass
+                                                        const action = async () => {
+                                                            await setClient(editElement)
+                                                        }
+                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        showMiniDialog(true)
                                                     }
-                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                    showMiniDialog(true)
+                                                    else {
+                                                        showSnackBar('Заполните поля: имя, адрес, город и телефон')
+                                                    }
                                                 }} size='small' color='primary'>
                                                     Сохранить
                                                 </Button>

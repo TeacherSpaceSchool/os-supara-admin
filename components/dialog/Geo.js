@@ -19,6 +19,7 @@ const Geo =  React.memo(
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { classes, geo, name, idx, setAddressGeo, change } = props;
         let [newGeo, setNewGeo] = useState(geo?geo:'42.8700000, 74.5900000');
+        let [center, setCenter] = useState(newGeo);
         let getGeo = () => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position)=>{
@@ -31,6 +32,7 @@ const Geo =  React.memo(
         let dragend = (e) => {
             let geo = e.get('target').geometry.getCoordinates()
             setNewGeo(geo[0]+', '+geo[1])
+            setCenter(geo[0]+', '+geo[1])
         }
         let [load, setLoad] = useState(true);
         return (
@@ -41,7 +43,7 @@ const Geo =  React.memo(
                             load?<CircularProgress/>:null
                         }
                         <div style={{display: load?'none':'block'}}>
-                            <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: newGeo.split(', '), zoom: 15 }} >
+                            <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: center, zoom: 15 }} >
                                 <Placemark
                                     onDragEnd={dragend}
                                     options={{draggable: true, iconColor: '#ffb300'}}

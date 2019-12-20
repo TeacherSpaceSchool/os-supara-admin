@@ -335,16 +335,30 @@ const Basket = React.memo((props) => {
                 </div>
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
                     if(allPrice>0)
-                        if (authenticated)
+                        if (authenticated) {
+                            let address = profile.role === 'агент' ? client.address : data.client.address
+                            let proofeAddress = address.length > 0
+                            if (proofeAddress) {
+                                for (let i = 0; i < address.length; i++) {
+                                    proofeAddress = address[i][0].length > 0
+                                }
+                            }
                             if (
-                                (profile.role==='агент'&&client._id&&client.address.length>0&&client.address[0].length>0&&client.name.length>0&&client.phone.length>0)||
-                                (profile.role!=='агент'&&data.client.address.length>0&&data.client.address[0].length>0&&data.client.name.length>0&&data.client.phone.length>0)
+                                (profile.role === 'агент' && client._id && proofeAddress && client.name.length > 0 && client.phone.length > 0) ||
+                                (profile.role !== 'агент' && proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0)
                             ) {
-                                setMiniDialog('Купить', <BuyBasket bonus={bonus} client={profile.role==='агент'?client:data.client} allPrice={allPrice} organization={organization}/>)
+                                setMiniDialog('Купить', <BuyBasket bonus={bonus}
+                                                                   client={profile.role === 'агент' ? client : data.client}
+                                                                   allPrice={allPrice} organization={organization}/>)
                                 showMiniDialog(true)
                             }
-                            else
-                                showSnackBar('Пожалуйста заполните все поля')
+                            else {
+                                if (client && client._id)
+                                    Router.push(`/client/${client._id}`)
+                                showSnackBar('Пожалуйста зайдите в свой профиль и заполните адрес, имя и номер телефона')
+
+                            }
+                        }
                         else {
                             setMiniDialog('Купить', <Sign/>)
                             showMiniDialog(true)

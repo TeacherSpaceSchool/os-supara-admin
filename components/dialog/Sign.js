@@ -109,7 +109,7 @@ const Sign =  React.memo(
                     null
                 }
                 <div>
-                    <div style={{width: width}} className={classes.message} onClick={()=>{setType('reg')}}>Зарегестрироваться</div>
+                    <div style={{width: width}} className={classes.message} onClick={()=>{setType('reg')}}>Зарегистрироваться</div>
                     <div style={{width: width}}>Если забыли пароль то свяжитесь с нашими специалистами.</div>
                 </div>
                 <br/>
@@ -190,7 +190,7 @@ const Sign =  React.memo(
                 <br/>
                 <div>
                     <Button variant="contained" color="primary" onClick={()=>{if(!errorPass&&!errorPassRepeat)signup({login: loginReg, password: passReg})}} className={classes.button}>
-                        Зарегестрироваться
+                        Зарегистрироваться
                     </Button>
                     <Button variant="contained" color="secondary" onClick={()=>{showMiniDialog(false);}} className={classes.button}>
                         Закрыть
