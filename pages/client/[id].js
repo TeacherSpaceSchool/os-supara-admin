@@ -470,14 +470,16 @@ const Client = React.memo((props) => {
                                                         if (type && type.length > 0 && type !== data.client.type) editElement.type = type
                                                         if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday)
                                                         if (newPass && newPass.length > 0) editElement.newPass = newPass
+                                                        console.log(editElement)
                                                         const action = async () => {
+
                                                             await setClient(editElement)
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }
                                                     else {
-                                                        showSnackBar('Заполните поля: имя, адрес и телефон')
+                                                        showSnackBar('Заполните поля: имя, город, адрес и телефон')
                                                     }
                                                 }} size='small' color='primary'>
                                                     Сохранить
