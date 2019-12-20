@@ -61450,7 +61450,7 @@ var Client = react__WEBPACK_IMPORTED_MODULE_6___default.a.memo(function (props) 
 
   Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
     if (name.length === 0 || !city || city.length === 0 || phone.length === 0 || address.length === 0 || address[0].length === 0) {
-      showSnackBar('Обязательно заполните адрес, имя и номер телефона');
+      showSnackBar('Обязательно заполните имя, город, номер телефона и адрес');
     }
   }, []);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_7__["default"], {
