@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/dialog/Geo.js" afterPath="$PROJECT_DIR$/components/dialog/Geo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/client/[id].js" afterPath="$PROJECT_DIR$/pages/client/[id].js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -36,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="[id].js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="[id].js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="146" column="9" lean-forward="true" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
+            <state relative-caret-position="221">
+              <caret line="61" column="79" lean-forward="false" selection-start-line="61" selection-start-column="79" selection-end-line="61" selection-end-column="79" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -80,14 +81,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Geo.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Geo.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/dialog/Geo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-340">
+              <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -264,9 +263,9 @@
         <option value="$PROJECT_DIR$/pages/item/[id].js" />
         <option value="$PROJECT_DIR$/next.config.js" />
         <option value="$PROJECT_DIR$/components/dialog/BuyBasket.js" />
-        <option value="$PROJECT_DIR$/components/dialog/Geo.js" />
         <option value="$PROJECT_DIR$/pages/basket.js" />
         <option value="$PROJECT_DIR$/pages/client/[id].js" />
+        <option value="$PROJECT_DIR$/components/dialog/Geo.js" />
       </list>
     </option>
   </component>
@@ -551,12 +550,12 @@
       <workItem from="1576557533475" duration="4628000" />
       <workItem from="1576647131536" duration="7013000" />
       <workItem from="1576665265921" duration="8973000" />
-      <workItem from="1576747684808" duration="16349000" />
+      <workItem from="1576747684808" duration="17498000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="872556000" />
+    <option name="totallyTimeSpent" value="873705000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1013,26 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/GeoRoute.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dialog/Geo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/app/Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-281">
@@ -1072,11 +1051,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="146" column="9" lean-forward="true" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
+        <state relative-caret-position="221">
+          <caret line="61" column="79" lean-forward="false" selection-start-line="61" selection-start-column="79" selection-end-line="61" selection-end-column="79" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/GeoRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dialog/Geo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>

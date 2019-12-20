@@ -59,7 +59,7 @@ const Client = React.memo((props) => {
     let [address, setAddress] = useState(data.client?data.client.address:[]);
     let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
     let [city, setCity] = useState(data.client?data.client.city:'');
-    let [type, setType] = useState(data.client?data.client.type:'');
+    let [type, setType] = useState(data.client?data.client.type:'торговая точка');
     let handleType =  (event) => {
         setType(event.target.value)
     };
@@ -142,7 +142,7 @@ const Client = React.memo((props) => {
     const router = useRouter()
     useEffect(()=>{
         if(name.length===0||city.length===0||phone.length===0||address.length===0||address[0].length===0) {
-            showSnackBar('Пожалуйста зайдите в свой профиль и заполните адрес, имя и номер телефона')
+            showSnackBar('Обязательно заполните адрес, имя и номер телефона')
         }
     },[])
     return (
