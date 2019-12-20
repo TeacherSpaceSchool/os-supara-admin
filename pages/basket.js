@@ -353,8 +353,8 @@ const Basket = React.memo((props) => {
                                 showMiniDialog(true)
                             }
                             else {
-                                if (client && client._id)
-                                    Router.push(`/client/${client._id}`)
+                                if ((profile.role === 'агент' ? client : data.client) && (profile.role === 'агент' ? client : data.client)._id)
+                                    Router.push(`/client/${(profile.role === 'агент' ? client : data.client)._id}`)
                                 showSnackBar('Пожалуйста зайдите в свой профиль и заполните адрес, имя и номер телефона')
 
                             }
