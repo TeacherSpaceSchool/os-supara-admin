@@ -146,7 +146,7 @@ const Client = React.memo((props) => {
         setHide(!hide)
     };
     useEffect(()=>{
-        if(name.length===0||city.length===0||phone.length===0||address.length===0||address[0].length===0) {
+        if(name.length===0||!city||city.length===0||phone.length===0||address.length===0||address[0].length===0) {
             showSnackBar('Обязательно заполните адрес, имя и номер телефона')
         }
     },[])
