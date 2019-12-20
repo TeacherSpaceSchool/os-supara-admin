@@ -355,8 +355,6 @@ const Basket = React.memo((props) => {
                             else {
                                 if ((profile.role === 'агент' ? client : data.client) && (profile.role === 'агент' ? client : data.client)._id)
                                     Router.push(`/client/${(profile.role === 'агент' ? client : data.client)._id}`)
-                                showSnackBar('Пожалуйста зайдите в свой профиль и заполните адрес, имя и номер телефона')
-
                             }
                         }
                         else {

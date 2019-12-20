@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import clientStyle from '../../src/styleMUI/client/client'
@@ -140,6 +140,13 @@ const Client = React.memo((props) => {
         setHide(!hide)
     };
     const router = useRouter()
+    useEffect(()=>{
+        (async()=>{
+            if(name.length>0||(address.length>0&&address[0].length>0)||city.length>0||phone.length>0) {
+                showSnackBar('Пожалуйста зайдите в свой профиль и заполните адрес, имя и номер телефона')
+            }
+        })()
+    },[])
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.client?data.client.name:'Ничего не найдено'}>
             <Head>
