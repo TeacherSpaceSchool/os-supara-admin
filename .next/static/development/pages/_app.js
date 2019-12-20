@@ -32829,6 +32829,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_singleton_store__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../src/singleton/store */ "./src/singleton/store.js");
 /* harmony import */ var _redux_actions_user__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../redux/actions/user */ "./redux/actions/user.js");
 /* harmony import */ var _src_lib__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../src/lib */ "./src/lib.js");
+/* harmony import */ var _src_getClientGQL__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../src/getClientGQL */ "./src/getClientGQL.js");
 
 
 
@@ -32840,6 +32841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _jsxFileName = "C:\\projects\\azyk\\azyk-admin\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
+
 
 
 
@@ -32876,33 +32878,33 @@ function (_App) {
       return __jsx(react__WEBPACK_IMPORTED_MODULE_9___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 54
         },
         __self: this
       }, __jsx(_material_ui_styles__WEBPACK_IMPORTED_MODULE_11__["ThemeProvider"], {
         theme: _src_theme__WEBPACK_IMPORTED_MODULE_13__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 55
         },
         __self: this
       }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_12__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 57
         },
         __self: this
       }), __jsx(react_redux__WEBPACK_IMPORTED_MODULE_16__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 58
         },
         __self: this
       }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 59
         },
         __self: this
       })))));
@@ -32932,7 +32934,7 @@ function (_App) {
                 new _src_singleton_client__WEBPACK_IMPORTED_MODULE_17__["SingletonApolloClient"](ctx.req);
 
                 if (!ctx.req) {
-                  _context.next = 10;
+                  _context.next = 14;
                   break;
                 }
 
@@ -32941,17 +32943,23 @@ function (_App) {
                 console.log(ctx.req.headers.cookie);
 
                 if (!ctx.store.getState().user.authenticated) {
-                  _context.next = 10;
+                  _context.next = 14;
                   break;
                 }
 
-                _context.next = 9;
-                return Object(_redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"])();
-
-              case 9:
-                ctx.store.getState().user.profile = _context.sent;
+                _context.t0 = _redux_actions_user__WEBPACK_IMPORTED_MODULE_19__["getProfile"];
+                _context.next = 10;
+                return Object(_src_getClientGQL__WEBPACK_IMPORTED_MODULE_21__["getClientGQL"])();
 
               case 10:
+                _context.t1 = _context.sent;
+                _context.next = 13;
+                return (0, _context.t0)(_context.t1);
+
+              case 13:
+                ctx.store.getState().user.profile = _context.sent;
+
+              case 14:
                 ctx.store.getState().app.search = '';
                 ctx.store.getState().app.sort = '-createdAt';
                 ctx.store.getState().app.filter = '';
@@ -32959,33 +32967,33 @@ function (_App) {
                 ctx.store.getState().app.load = false;
                 ctx.store.getState().mini_dialog.show = false;
                 ctx.store.getState().pagination.work = false;
-                _context.t0 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
-                _context.t1 = {};
+                _context.t2 = _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"];
+                _context.t3 = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 25;
+                  _context.next = 29;
                   break;
                 }
 
-                _context.next = 22;
+                _context.next = 26;
                 return Component.getInitialProps(ctx);
 
-              case 22:
-                _context.t2 = _context.sent;
-                _context.next = 26;
+              case 26:
+                _context.t4 = _context.sent;
+                _context.next = 30;
                 break;
 
-              case 25:
-                _context.t2 = {};
+              case 29:
+                _context.t4 = {};
 
-              case 26:
-                _context.t3 = _context.t2;
-                _context.t4 = (0, _context.t0)(_context.t1, _context.t3);
+              case 30:
+                _context.t5 = _context.t4;
+                _context.t6 = (0, _context.t2)(_context.t3, _context.t5);
                 return _context.abrupt("return", {
-                  pageProps: _context.t4
+                  pageProps: _context.t6
                 });
 
-              case 29:
+              case 33:
               case "end":
                 return _context.stop();
             }
@@ -33433,21 +33441,21 @@ function setProfile() {
     }()
   );
 }
-function getProfile() {
+function getProfile(_x6) {
   return _getProfile.apply(this, arguments);
 }
 
 function _getProfile() {
   _getProfile = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-    var client, result;
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(client) {
+    var result;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.prev = 0;
-            client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__["SingletonApolloClient"]().getClient();
+            client = client ? client : new _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__["SingletonApolloClient"]().getClient();
             _context6.next = 4;
             return client.query({
               query: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_7__["gql"])(_templateObject4())
@@ -33943,6 +33951,76 @@ function user() {
 
 /***/ }),
 
+/***/ "./src/getClientGQL.js":
+/*!*****************************!*\
+  !*** ./src/getClientGQL.js ***!
+  \*****************************/
+/*! exports provided: getClientGQL */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getClientGQL", function() { return getClientGQL; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _redux_constants_other__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../redux/constants/other */ "./redux/constants/other.js");
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! apollo-client */ "./node_modules/apollo-client/bundle.esm.js");
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! apollo-cache-inmemory */ "./node_modules/apollo-cache-inmemory/lib/bundle.esm.js");
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! node-fetch */ "./node_modules/node-fetch/browser.js");
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib */ "./src/lib.js");
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! apollo-link-context */ "./node_modules/apollo-link-context/lib/bundle.esm.js");
+/* harmony import */ var apollo_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! apollo-link */ "./node_modules/apollo-link/lib/bundle.esm.js");
+/* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! apollo-upload-client */ "./node_modules/apollo-upload-client/lib/index.js");
+/* harmony import */ var apollo_upload_client__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_upload_client__WEBPACK_IMPORTED_MODULE_8__);
+
+
+/* eslint-disable no-extra-boolean-cast */
+
+
+
+
+
+
+
+
+var getClientGQL = function getClientGQL(req) {
+  var uploadLink = Object(apollo_upload_client__WEBPACK_IMPORTED_MODULE_8__["createUploadLink"])({
+    uri: _redux_constants_other__WEBPACK_IMPORTED_MODULE_1__["urlGQL"],
+    fetch: node_fetch__WEBPACK_IMPORTED_MODULE_4___default.a,
+    credentials: 'include'
+  });
+  var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])(function (_, _ref) {
+    var headers = _ref.headers;
+    return {
+      headers: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headers, {
+        authorization: Object(_lib__WEBPACK_IMPORTED_MODULE_5__["getJWT"])(req ? req.headers.cookie : document.cookie) ? "Bearer ".concat(Object(_lib__WEBPACK_IMPORTED_MODULE_5__["getJWT"])(req ? req.headers.cookie : document.cookie)) : ''
+      })
+    };
+  });
+  var link = apollo_link__WEBPACK_IMPORTED_MODULE_7__["ApolloLink"].from([authLink, uploadLink]);
+  var client = new apollo_client__WEBPACK_IMPORTED_MODULE_2__["ApolloClient"]({
+    ssrMode: true,
+    link: link,
+    cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"](),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'ignore'
+      },
+      query: {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all'
+      },
+      mutate: {
+        errorPolicy: 'all'
+      }
+    }
+  });
+  return client;
+};
+
+/***/ }),
+
 /***/ "./src/lib.js":
 /*!********************!*\
   !*** ./src/lib.js ***!
@@ -34121,6 +34199,7 @@ function () {
 
     var link = apollo_link__WEBPACK_IMPORTED_MODULE_10__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_4__["ApolloClient"]({
+      ssrMode: true,
       link: link,
       cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_5__["InMemoryCache"](),
       defaultOptions: {

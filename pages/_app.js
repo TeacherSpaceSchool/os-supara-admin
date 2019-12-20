@@ -10,6 +10,7 @@ import { SingletonApolloClient } from '../src/singleton/client'
 import { SingletonStore } from '../src/singleton/store'
 import { getProfile } from '../redux/actions/user'
 import { checkMobile, checkAuth } from '../src/lib'
+import { getClientGQL } from '../src/getClientGQL'
 
 export default withRedux(configureStore, { debug: false })(
     class MyApp extends App {
@@ -26,8 +27,9 @@ export default withRedux(configureStore, { debug: false })(
                 ctx.store.getState().app.isMobileApp = checkMobile(ctx.req.headers['user-agent'])
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
                 console.log(ctx.req.headers.cookie)
-                if(ctx.store.getState().user.authenticated)
-                    ctx.store.getState().user.profile = await getProfile()
+                if(ctx.store.getState().user.authenticated) {
+                    ctx.store.getState().user.profile = await getProfile(await getClientGQL())
+                }
             }
             ctx.store.getState().app.search = ''
             ctx.store.getState().app.sort = '-createdAt'

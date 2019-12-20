@@ -175,9 +175,9 @@ export function setProfile() {
     };
 }
 
-export async function getProfile() {
+export async function getProfile(client) {
     try {
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let result = await client
             .query({
                 query: gql`

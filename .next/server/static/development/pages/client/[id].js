@@ -6301,9 +6301,9 @@ function setProfile() {
     }
   };
 }
-async function getProfile() {
+async function getProfile(client) {
   try {
-    const client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
+    client = client ? client : new _src_singleton_client__WEBPACK_IMPORTED_MODULE_5__["SingletonApolloClient"]().getClient();
     let result = await client.query({
       query: apollo_boost__WEBPACK_IMPORTED_MODULE_4__["gql"]`
                    query {
@@ -7275,6 +7275,7 @@ class SingletonApolloClient {
 
     const link = apollo_link__WEBPACK_IMPORTED_MODULE_8__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_2__["ApolloClient"]({
+      ssrMode: true,
       link: link,
       cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"](),
       defaultOptions: {

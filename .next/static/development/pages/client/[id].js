@@ -63371,21 +63371,21 @@ function setProfile() {
     }()
   );
 }
-function getProfile() {
+function getProfile(_x6) {
   return _getProfile.apply(this, arguments);
 }
 
 function _getProfile() {
   _getProfile = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-    var client, result;
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(client) {
+    var result;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.prev = 0;
-            client = new _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__["SingletonApolloClient"]().getClient();
+            client = client ? client : new _src_singleton_client__WEBPACK_IMPORTED_MODULE_8__["SingletonApolloClient"]().getClient();
             _context6.next = 4;
             return client.query({
               query: Object(apollo_boost__WEBPACK_IMPORTED_MODULE_7__["gql"])(_templateObject4())
@@ -64923,6 +64923,7 @@ function () {
 
     var link = apollo_link__WEBPACK_IMPORTED_MODULE_10__["ApolloLink"].from([linkError, authLink, mainLink]);
     this.client = new apollo_client__WEBPACK_IMPORTED_MODULE_4__["ApolloClient"]({
+      ssrMode: true,
       link: link,
       cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_5__["InMemoryCache"](),
       defaultOptions: {
