@@ -33,6 +33,7 @@ const Client = React.memo((props) => {
     const { profile } = props.user;
     const classes = clientStyle();
     const { data } = props;
+    const router = useRouter()
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
