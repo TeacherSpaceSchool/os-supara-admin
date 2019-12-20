@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2ef476c-6668-44de-a240-737cecb1fe70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/client/[id].js" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/client/[id].js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/server/static/development/pages/client/[id].js.map" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/client/[id].js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/client/[id].js" afterPath="$PROJECT_DIR$/.next/static/development/pages/client/[id].js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/development/pages/client/[id].js.map" afterPath="$PROJECT_DIR$/.next/static/development/pages/client/[id].js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/client/[id].js" afterPath="$PROJECT_DIR$/pages/client/[id].js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -45,8 +38,8 @@
       <file leaf-file-name="[id].js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="182" column="114" lean-forward="true" selection-start-line="182" selection-start-column="114" selection-end-line="182" selection-end-column="114" />
+            <state relative-caret-position="153">
+              <caret line="255" column="45" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="729" selection-end-column="68" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -557,12 +550,12 @@
       <workItem from="1576557533475" duration="4628000" />
       <workItem from="1576647131536" duration="7013000" />
       <workItem from="1576665265921" duration="8973000" />
-      <workItem from="1576747684808" duration="20618000" />
+      <workItem from="1576747684808" duration="20998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="876825000" />
+    <option name="totallyTimeSpent" value="877205000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1078,8 +1071,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/client/[id].js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="182" column="114" lean-forward="true" selection-start-line="182" selection-start-column="114" selection-end-line="182" selection-end-column="114" />
+        <state relative-caret-position="153">
+          <caret line="255" column="45" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="729" selection-end-column="68" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

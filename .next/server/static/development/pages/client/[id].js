@@ -4670,7 +4670,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     1: setLogin
   } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(data.client && data.client.user ? data.client.user.login : ''); //привести к геолокации
 
-  if (!_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1___default()(data.client.address[0])) data.client.address.map(addres => [addres]);
+  if (data.client.address.length > 0 && !_babel_runtime_corejs2_core_js_array_is_array__WEBPACK_IMPORTED_MODULE_1___default()(data.client.address[0])) data.client.address.map(addres => [addres]);
   let {
     0: address,
     1: setAddress
@@ -4817,25 +4817,30 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
   };
 
   const router = Object(next_router__WEBPACK_IMPORTED_MODULE_26__["useRouter"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(() => {
+    if (name.length === 0 || city.length === 0 || phone.length === 0 || address.length === 0 || address[0].length === 0) {
+      showSnackBar('Обязательно заполните адрес, имя и номер телефона');
+    }
+  }, []);
   return __jsx(_layouts_App__WEBPACK_IMPORTED_MODULE_4__["default"], {
     filters: data.filterSubCategory,
     sorts: data.sortSubCategory,
     pageName: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 149
+      lineNumber: 154
     },
     __self: undefined
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 155
     },
     __self: undefined
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 156
     },
     __self: undefined
   }, router.query.id === 'new' ? 'Добавить' : data.client ? data.client.name : 'Ничего не найдено'), __jsx("meta", {
@@ -4843,7 +4848,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 157
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4851,7 +4856,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: data.client ? data.client.name : 'Ничего не найдено',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153
+      lineNumber: 158
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4859,7 +4864,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 159
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4867,7 +4872,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: "website",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 160
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4875,7 +4880,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: preview ? preview : '/static/add.png',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 161
     },
     __self: undefined
   }), __jsx("meta", {
@@ -4883,7 +4888,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     content: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_23__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 162
     },
     __self: undefined
   }), __jsx("link", {
@@ -4891,14 +4896,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     href: `${_redux_constants_other__WEBPACK_IMPORTED_MODULE_23__["urlMain"]}/client/${router.query.id}`,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 158
+      lineNumber: 163
     },
     __self: undefined
   })), __jsx(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7___default.a, {
     className: classes.page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 160
+      lineNumber: 165
     },
     __self: undefined
   }, __jsx(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8___default.a, {
@@ -4909,21 +4914,21 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161
+      lineNumber: 166
     },
     __self: undefined
   }, data.client ? (router.query.id === 'new' || data.client.organization && data.client.organization._id === profile.organization) && ['организация', 'менеджер', 'агент'].includes(profile.role) || profile.role === 'admin' || data.client.user && profile._id === data.client.user._id ? __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 170
     },
     __self: undefined
   }, __jsx("label", {
     htmlFor: "contained-button-file",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 171
     },
     __self: undefined
   }, __jsx("img", {
@@ -4932,21 +4937,21 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     alt: 'Добавить',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 172
     },
     __self: undefined
   })), type === 'торговая точка' ? __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("div", {
     className: classes.line,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 176
+      lineNumber: 181
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.doc,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 177
+      lineNumber: 182
     },
     __self: undefined
   }, "C\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E:\xA0"), certificateUrl && certificateUrl.length > 0 ? __jsx("a", {
@@ -4955,7 +4960,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 182
+      lineNumber: 187
     },
     __self: undefined
   }, __jsx("div", {
@@ -4965,7 +4970,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 183
+      lineNumber: 188
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
@@ -4978,21 +4983,21 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 190
+      lineNumber: 195
     },
     __self: undefined
   }, certificate || certificateUrl && certificateUrl.length > 0 ? 'Изменить' : 'Добавить')), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 195
+      lineNumber: 200
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.doc,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 196
+      lineNumber: 201
     },
     __self: undefined
   }, "\u041F\u0430\u0441\u043F\u043E\u0440\u0442:\xA0"), passportUrl && passportUrl.length > 0 ? __jsx("a", {
@@ -5001,7 +5006,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 201
+      lineNumber: 206
     },
     __self: undefined
   }, __jsx("div", {
@@ -5011,7 +5016,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 202
+      lineNumber: 207
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
@@ -5024,21 +5029,21 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 209
+      lineNumber: 214
     },
     __self: undefined
   }, passport || passportUrl && passportUrl.length > 0 ? 'Изменить' : 'Добавить')), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 218
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.doc,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 214
+      lineNumber: 219
     },
     __self: undefined
   }, "\u041F\u0430\u0442\u0435\u043D\u0442:\xA0"), patentUrl && patentUrl.length > 0 ? __jsx("a", {
@@ -5047,7 +5052,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 224
     },
     __self: undefined
   }, __jsx("div", {
@@ -5057,7 +5062,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 220
+      lineNumber: 225
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C")) : null, "\xA0", __jsx("div", {
@@ -5070,13 +5075,13 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 227
+      lineNumber: 232
     },
     __self: undefined
   }, patent || patentUrl && patentUrl.length > 0 ? 'Изменить' : 'Добавить'))) : null), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236
+      lineNumber: 241
     },
     __self: undefined
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5091,7 +5096,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 237
+      lineNumber: 242
     },
     __self: undefined
   }), router.query.id === 'new' || data.client.organization ? null : __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5106,7 +5111,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 251
+      lineNumber: 256
     },
     __self: undefined
   }), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -5119,7 +5124,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 267
+        lineNumber: 272
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -5127,38 +5132,38 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       onClick: handleHide,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 268
+        lineNumber: 273
       },
       __self: undefined
     }, hide ? __jsx(_material_ui_icons_VisibilityOff__WEBPACK_IMPORTED_MODULE_19___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 269
+        lineNumber: 274
       },
       __self: undefined
     }) : __jsx(_material_ui_icons_Visibility__WEBPACK_IMPORTED_MODULE_18___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 269
+        lineNumber: 274
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 260
+      lineNumber: 265
     },
     __self: undefined
   })), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 276
+      lineNumber: 281
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 277
+      lineNumber: 282
     },
     __self: undefined
   }, "\u0422\u0438\u043F \u043A\u043B\u0438\u0435\u043D\u0442\u0430"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29___default.a, {
@@ -5166,7 +5171,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: handleType,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 278
+      lineNumber: 283
     },
     __self: undefined
   }, types.map(element => __jsx(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28___default.a, {
@@ -5174,7 +5179,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     value: element,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 280
+      lineNumber: 285
     },
     __self: undefined
   }, element)))), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5191,7 +5196,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: event => setBirthday(event.target.value),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 284
+      lineNumber: 289
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5208,39 +5213,39 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: event => setCity(event.target.value),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 297
+      lineNumber: 302
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 310
+      lineNumber: 315
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 311
+      lineNumber: 316
     },
     __self: undefined
   }), phone ? phone.map((element, idx) => __jsx("div", {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 313
+      lineNumber: 318
     },
     __self: undefined
   }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 314
+      lineNumber: 319
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 315
+      lineNumber: 320
     },
     __self: undefined
   }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D. \u0424\u043E\u0440\u043C\u0430\u0442: +996555780861"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -5257,7 +5262,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 325
+        lineNumber: 330
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -5267,19 +5272,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       "aria-label": "toggle password visibility",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 326
+        lineNumber: 331
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_15___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 332
+        lineNumber: 337
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 316
+      lineNumber: 321
     },
     __self: undefined
   })))) : null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -5290,39 +5295,39 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 340
+      lineNumber: 345
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u043B\u0435\u0444\u043E\u043D"), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 345
+      lineNumber: 350
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 346
+      lineNumber: 351
     },
     __self: undefined
   }), address ? address.map((element, idx) => __jsx("div", {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 348
+      lineNumber: 353
     },
     __self: undefined
   }, type === 'торговая точка' ? __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 351
+      lineNumber: 356
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 352
+      lineNumber: 357
     },
     __self: undefined
   }, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0430"), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -5339,7 +5344,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 362
+        lineNumber: 367
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -5349,32 +5354,32 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       "aria-label": "toggle password visibility",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 363
+        lineNumber: 368
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_15___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 369
+        lineNumber: 374
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 353
+      lineNumber: 358
     },
     __self: undefined
   })) : null, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_21___default.a, {
     className: classes.input,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 378
+      lineNumber: 383
     },
     __self: undefined
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_22___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 379
+      lineNumber: 384
     },
     __self: undefined
   }, "\u0410\u0434\u0440\u0435\u0441", type === 'торговая точка' ? ' магазина' : ''), __jsx(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_9___default.a, {
@@ -5391,7 +5396,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       position: "end",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 392
+        lineNumber: 397
       },
       __self: undefined
     }, __jsx(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -5401,19 +5406,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
       "aria-label": "toggle password visibility",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 393
+        lineNumber: 398
       },
       __self: undefined
     }, __jsx(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_15___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 399
+        lineNumber: 404
       },
       __self: undefined
     }))),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 380
+      lineNumber: 385
     },
     __self: undefined
   })), __jsx("div", {
@@ -5429,7 +5434,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
         idx: idx,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 406
+          lineNumber: 411
         },
         __self: undefined
       }), true);
@@ -5437,13 +5442,13 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 405
+      lineNumber: 410
     },
     __self: undefined
   }, element[1] ? 'Изменить геолокацию' : 'Задайте геолокацию'))) : __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 418
+      lineNumber: 423
     },
     __self: undefined
   }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -5454,19 +5459,19 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 419
+      lineNumber: 424
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0430\u0434\u0440\u0435\u0441"), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 424
+      lineNumber: 429
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 425
+      lineNumber: 430
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5481,7 +5486,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 427
+      lineNumber: 432
     },
     __self: undefined
   }), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_20___default.a, {
@@ -5497,55 +5502,59 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 436
+      lineNumber: 441
     },
     __self: undefined
   }), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 446
+      lineNumber: 451
     },
     __self: undefined
   }, data.client.organization && profile.organization === data.client.organization._id && ['организация', 'менеджер', 'агент'].includes(profile.role) || profile.role === 'admin' || data.client.user && profile._id === data.client.user._id ? __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
     onClick: async () => {
-      let editElement = {
-        _id: data.client._id
-      };
-      if (image) editElement.image = image;
-      if (passport) editElement.passport = passport;
-      if (patent) editElement.patent = patent;
-      if (certificate) editElement.certificate = certificate;
-      if (name && name.length > 0 && name !== data.client.name) editElement.name = name;
-      editElement.address = address;
-      if (email && email.length > 0 && email !== data.client.email) editElement.email = email;
-      if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login;
-      editElement.phone = phone;
-      if (info && info.length > 0 && info !== data.client.info) editElement.info = info;
-      if (city && city.length > 0 && city !== data.client.city) editElement.city = city;
-      if (type && type.length > 0 && type !== data.client.type) editElement.type = type;
-      if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday);
-      if (newPass && newPass.length > 0) editElement.newPass = newPass;
+      if (name.length > 0 && address.length > 0 && address[0].length > 0 && phone.length > 0) {
+        let editElement = {
+          _id: data.client._id
+        };
+        if (image) editElement.image = image;
+        if (passport) editElement.passport = passport;
+        if (patent) editElement.patent = patent;
+        if (certificate) editElement.certificate = certificate;
+        if (name && name.length > 0 && name !== data.client.name) editElement.name = name;
+        editElement.address = address;
+        if (email && email.length > 0 && email !== data.client.email) editElement.email = email;
+        if (login && login.length > 0 && data.client.user.login !== login) editElement.login = login;
+        editElement.phone = phone;
+        if (info && info.length > 0 && info !== data.client.info) editElement.info = info;
+        if (city && city.length > 0 && city !== data.client.city) editElement.city = city;
+        if (type && type.length > 0 && type !== data.client.type) editElement.type = type;
+        if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday);
+        if (newPass && newPass.length > 0) editElement.newPass = newPass;
 
-      const action = async () => {
-        await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_14__["setClient"])(editElement);
-      };
+        const action = async () => {
+          await Object(_src_gql_client__WEBPACK_IMPORTED_MODULE_14__["setClient"])(editElement);
+        };
 
-      setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_24__["default"], {
-        action: action,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 470
-        },
-        __self: undefined
-      }));
-      showMiniDialog(true);
+        setMiniDialog('Вы уверенны?', __jsx(_components_dialog_Confirmation__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          action: action,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 476
+          },
+          __self: undefined
+        }));
+        showMiniDialog(true);
+      } else {
+        showSnackBar('Заполните поля: имя, адрес и телефон');
+      }
     },
     size: "small",
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 451
+      lineNumber: 456
     },
     __self: undefined
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), profile.role === 'admin' ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -5559,7 +5568,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 481
+          lineNumber: 491
         },
         __self: undefined
       }));
@@ -5569,7 +5578,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 476
+      lineNumber: 486
     },
     __self: undefined
   }, status === 'active' ? 'Отключить' : 'Включить') : data.client.user && profile._id === data.client.user._id ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -5582,7 +5591,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
         action: action,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 492
+          lineNumber: 502
         },
         __self: undefined
       }));
@@ -5592,7 +5601,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 488
+      lineNumber: 498
     },
     __self: undefined
   }, "\u0412\u044B\u0439\u0442\u0438") : null) : router.query.id === 'new' && ['организация', 'менеджер', 'агент'].includes(profile.role) ? __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -5621,7 +5630,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
           action: action,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 522
+            lineNumber: 532
           },
           __self: undefined
         }));
@@ -5634,14 +5643,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 503
+      lineNumber: 513
     },
     __self: undefined
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C") : null))) : __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 541
+      lineNumber: 551
     },
     __self: undefined
   }, __jsx("img", {
@@ -5650,7 +5659,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     alt: name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 542
+      lineNumber: 552
     },
     __self: undefined
   }), ['admin', 'организация', 'менеджер'].includes(profile.role) && certificateUrl && certificateUrl.length > 0 ? __jsx("a", {
@@ -5659,7 +5668,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 549
+      lineNumber: 559
     },
     __self: undefined
   }, __jsx("div", {
@@ -5669,7 +5678,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 550
+      lineNumber: 560
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && passportUrl && passportUrl.length > 0 ? __jsx("a", {
@@ -5678,7 +5687,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 558
+      lineNumber: 568
     },
     __self: undefined
   }, __jsx("div", {
@@ -5688,7 +5697,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 559
+      lineNumber: 569
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0441\u043F\u043E\u0440\u0442")) : null, ['admin', 'организация', 'менеджер'].includes(profile.role) && patentUrl && patentUrl.length > 0 ? __jsx("a", {
@@ -5697,7 +5706,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 567
+      lineNumber: 577
     },
     __self: undefined
   }, __jsx("div", {
@@ -5707,7 +5716,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 568
+      lineNumber: 578
     },
     __self: undefined
   }, "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0442\u0435\u043D\u0442")) : null), __jsx("div", {
@@ -5716,35 +5725,35 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 575
+      lineNumber: 585
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 576
+      lineNumber: 586
     },
     __self: undefined
   }, name), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 579
+      lineNumber: 589
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 580
+      lineNumber: 590
     },
     __self: undefined
   }, "\u0410\u0434\u0440\u0435\u0441:\xA0"), __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 583
+      lineNumber: 593
     },
     __self: undefined
   }, address ? address.map((element, idx) => __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, type === 'торговая точка' ? __jsx("div", {
@@ -5752,7 +5761,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 587
+      lineNumber: 597
     },
     __self: undefined
   }, element[2]) : null, __jsx("div", {
@@ -5760,7 +5769,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 592
+      lineNumber: 602
     },
     __self: undefined
   }, element[0]), __jsx("div", {
@@ -5774,7 +5783,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
           geo: element[1],
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 597
+            lineNumber: 607
           },
           __self: undefined
         }), true);
@@ -5783,56 +5792,56 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 595
+      lineNumber: 605
     },
     __self: undefined
   }, element[1] ? 'Посмотреть геолокацию' : 'Геолокация не задана'))) : null)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 612
+      lineNumber: 622
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 613
+      lineNumber: 623
     },
     __self: undefined
   }, "E-mail:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 616
+      lineNumber: 626
     },
     __self: undefined
   }, email)), __jsx("div", {
     className: classes.row,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 620
+      lineNumber: 630
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.nameField,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 621
+      lineNumber: 631
     },
     __self: undefined
   }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D:\xA0"), __jsx("div", {
     className: classes.value,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 624
+      lineNumber: 634
     },
     __self: undefined
   }, __jsx("div", {
     className: classes.column,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 625
+      lineNumber: 635
     },
     __self: undefined
   }, phone ? phone.map((element, idx) => __jsx(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, __jsx("div", {
@@ -5840,14 +5849,14 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     key: idx,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 628
+      lineNumber: 638
     },
     __self: undefined
   }, element))) : null))), __jsx("div", {
     className: classes.info,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 636
+      lineNumber: 646
     },
     __self: undefined
   }, info))) : 'Ничего не найдено')), __jsx("input", {
@@ -5860,7 +5869,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: handleChangeImage,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 646
+      lineNumber: 656
     },
     __self: undefined
   }), __jsx("input", {
@@ -5873,7 +5882,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: handleChangePassport,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 653
+      lineNumber: 663
     },
     __self: undefined
   }), __jsx("input", {
@@ -5886,7 +5895,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: handleChangeCertificate,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 660
+      lineNumber: 670
     },
     __self: undefined
   }), __jsx("input", {
@@ -5899,7 +5908,7 @@ const Client = react__WEBPACK_IMPORTED_MODULE_3___default.a.memo(props => {
     onChange: handleChangePatent,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 667
+      lineNumber: 677
     },
     __self: undefined
   }));
