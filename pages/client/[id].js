@@ -449,7 +449,8 @@ const Client = React.memo((props) => {
                                             ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
-                                                    if(name.length>0&&address.length>0&&address[0].length>0&&city.length>0&&phone.length>0) {
+                                                    console.log(name, address, city, phone)
+                                                    if(name.length>0&&address.length>0&&address[0].length>0&&city&&city.length>0&&phone.length>0) {
                                                         let editElement = {_id: data.client._id}
                                                         if (image) editElement.image = image
                                                         if (passport) editElement.passport = passport
