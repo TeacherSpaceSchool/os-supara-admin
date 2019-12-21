@@ -27,7 +27,7 @@ const BonusClient = React.memo((props) => {
         })()
     },[sort, search])
     return (
-        <App sorts={data.sortBonusClient} pageName={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}>
+        <App searchShow={true} sorts={data.sortBonusClient} pageName={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}>
             <Head>
                 <title>{['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

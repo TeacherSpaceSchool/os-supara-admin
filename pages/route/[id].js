@@ -35,7 +35,7 @@ const Route = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     const { isMobileApp } = props.app;
-    let [dateStart, setDateStart] = useState(data.route?pdDatePicker(new Date(data.route.dateStart)):null);
+    let [dateStart, setDateStart] = useState(pdDatePicker(data.route?new Date(data.route.dateStart):new Date()));
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
     let [status, setStatus] = useState(data.route.status);
     let handleEmployment =  (event) => {
@@ -75,7 +75,8 @@ const Route = React.memo((props) => {
             if(data.route) {
                 if (router.query.id === 'new')
                     setEmployment({})
-                setEmployments((await getEcspeditors({_id: organization._id})).ecspeditors)
+                if(organization._id)
+                    setEmployments((await getEcspeditors({_id: organization._id})).ecspeditors)
             }
         })()
     },[organization])
@@ -212,10 +213,10 @@ const Route = React.memo((props) => {
                                 </div>
                             </div>
                             <br/>
-                            <div className={classes.listInvoices} style={{zoom: isMobileApp?0.83:1}}>
+                            <div className={classes.listInvoices}>
                                 {allInvoices?allInvoices.map((element, idx)=> {
                                     return (
-                                        <div key={idx} className={classes.row}>
+                                        <div key={idx} style={isMobileApp?{alignItems: 'baseline'}:{}} className={isMobileApp?classes.column:classes.row}>
                                             {['обработка', 'принят'].includes(element.orders[0].status)&&profile.role!=='экспедитор'?
                                                 <Checkbox checked={invoices.includes(element)} onChange={() => {
                                                     if (!invoices.includes(element)) {
@@ -322,7 +323,7 @@ Route.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{route: {invoices: [], employment: {}, status: '', dateStart: null, dateEnd: null, number: ''}},
+            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {route: {invoices: [], employment: {}, status: '', dateStart: new Date(), dateEnd: null, number: ''}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

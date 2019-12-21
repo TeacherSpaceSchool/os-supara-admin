@@ -57,6 +57,10 @@ export function signup(payload) {
                 window.location.reload()
             }
         } catch(error) {
+            await dispatch({
+                type: SHOW_LOAD,
+                payload: false
+            })
             dispatch({
                 type: ERROR_AUTHENTICATED,
                 payload: true
@@ -105,7 +109,10 @@ export function signin(payload) {
                 })*/
             }
         } catch(error) {
-            console.error(error)
+            await dispatch({
+                type: SHOW_LOAD,
+                payload: false
+            })
             await dispatch({
                 type: ERROR_AUTHENTICATED,
                 payload: true

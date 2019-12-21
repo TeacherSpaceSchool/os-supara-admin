@@ -34,7 +34,8 @@ export default makeStyles({
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '16px',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
     nameField: {
         width: 80,
@@ -53,7 +54,7 @@ export default makeStyles({
     },
     inputM: {
         marginBottom: 10,
-        width: 'calc(100vw - 82px)',
+        width: '100%',
     },
     inputD: {
         marginBottom: 10,
@@ -136,7 +137,8 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100%'
     },
     geo: {
         width: 200,

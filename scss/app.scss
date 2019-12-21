@@ -28,13 +28,14 @@ html{
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   top: $app-bar-height-m;
-  padding-bottom: 64px;
+  padding-bottom: 0px;
   height: calc(100vh - #{$app-bar-height-m});
   width: 100%;
   @media screen and (min-width: $break-small) {
     top: $app-bar-height-d;
     height: calc(100vh - #{$app-bar-height-d});
     left: 300px;
+    padding-bottom: 64px;
     width: calc(100% - #{$app-drawer-width});
   }
 }

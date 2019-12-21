@@ -58,7 +58,8 @@ export default theme => ({
         marginBottom: 10,
         fontWeight: '500',
         fontSize: '0.875rem',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
     row: {
         display: 'flex',

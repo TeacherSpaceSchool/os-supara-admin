@@ -62,7 +62,8 @@ export default makeStyles({
     value: {
         marginBottom: 5,
         fontSize: '1rem',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
     nameField: {
         width: 100,

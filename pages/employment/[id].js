@@ -99,6 +99,7 @@ const Client = React.memo((props) => {
                                                 'aria-label': 'description',
                                             }}
                                         />
+
                                         <Input
                                             placeholder={router.query.id==='new'?'Пароль':'Новый пароль'}
                                             type={hide ? 'password' : 'text' }

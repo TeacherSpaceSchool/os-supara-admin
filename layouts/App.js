@@ -24,7 +24,7 @@ const App = React.memo(props => {
     const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
     const { work, count } = props.pagination;
-    let { sorts, filters, getList, pageName, dates } = props;
+    let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     useEffect( ()=>{
         if(authenticated)
@@ -69,7 +69,7 @@ const App = React.memo(props => {
     return(
         <div ref={mainWindow} className='App'>
             <Drawer/>
-            <AppBar dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
+            <AppBar searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
             <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>

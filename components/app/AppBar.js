@@ -38,7 +38,7 @@ import SetDate from '../dialog/SetDate'
 const MyAppBar = React.memo((props) => {
     //props
     const classes = appbarStyle();
-    const { filters, sorts, pageName, dates } = props
+    const { filters, sorts, pageName, dates, searchShow } = props
     const { drawer, search, filter, sort, isMobileApp, countBasket, date } = props.app;
     const { showDrawer, setSearch, setFilter, setSort, setDate } = props.appActions;
     const { authenticated, profile } = props.user;
@@ -98,6 +98,7 @@ const MyAppBar = React.memo((props) => {
         if(document.getElementById('search'))
             document.getElementById('search').focus();
     },[openSearch])
+    console.log(searchShow)
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className='appBar'>
@@ -132,14 +133,19 @@ const MyAppBar = React.memo((props) => {
                             </Paper>
                             :
                             <>
-                            <IconButton
-                                aria-owns={openMobileMenu ? 'menu-appbar' : undefined}
-                                aria-haspopup='true'
-                                onClick={handleMobileMenu}
-                                color='inherit'
-                            >
-                                <Search />
-                            </IconButton>
+                            {
+                                searchShow||filters||sorts?
+                                    <IconButton
+                                        aria-owns={openMobileMenu ? 'menu-appbar' : undefined}
+                                        aria-haspopup='true'
+                                        onClick={handleMobileMenu}
+                                        color='inherit'
+                                    >
+                                        <Search />
+                                    </IconButton>
+                                    :
+                                    null
+                            }
                             <Menu
                                 id='menu-appbar'
                                 anchorEl={anchorElMobileMenu}
@@ -154,13 +160,18 @@ const MyAppBar = React.memo((props) => {
                                 open={openMobileMenu}
                                 onClose={handleCloseMobileMenu}
                             >
-                                <MenuItem onClick={()=>{
-                                    setOpenSearch(true);handleCloseMobileMenu()
-                                }}>
-                                    <div style={{display: 'flex', color: '#606060'}}>
-                                        <Search/>&nbsp;Поиск
-                                    </div>
-                                </MenuItem>
+                                {
+                                    searchShow?
+                                        <MenuItem onClick={()=>{
+                                            setOpenSearch(true);handleCloseMobileMenu()
+                                        }}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <Search/>&nbsp;Поиск
+                                            </div>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
                                 {filters&&filters.length>0?
                                     [
                                         <MenuItem onClick={handleMenuFilter}>
@@ -184,6 +195,33 @@ const MyAppBar = React.memo((props) => {
                                             onClose={handleCloseFilter}
                                         >
                                             {filters.map((elem, idx)=><MenuItem key={'filter'+idx} style={{background: filter===elem.value?'rgba(51, 143, 255, 0.29)': '#fff'}}  onClick={()=>{setFilter(elem.value);handleCloseFilter();}}>{elem.name}</MenuItem>)}
+                                        </Menu>
+                                    ]
+                                    :null
+                                }
+                                {sorts&&sorts.length>0?
+                                    [
+                                        <MenuItem onClick={handleMenuSort}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <Sort/>&nbsp;Сортировка
+                                            </div>
+                                        </MenuItem>,
+                                        <Menu
+                                            key='sort'
+                                            id='menu-appbar'
+                                            anchorEl={anchorElSort}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'left',
+                                            }}
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'left',
+                                            }}
+                                            open={openSort}
+                                            onClose={handleCloseSort}
+                                        >
+                                            {sorts.map((elem, idx)=><MenuItem key={'sort'+idx} onClick={()=>{sort===`-${elem.field}`?setSort(elem.field):setSort(`-${elem.field}`);/*handleCloseSort();handleCloseMobileMenu()*/}}>{sort===`-${elem.field}`?<ArrowDownward />:sort===elem.field?<ArrowUpward />:<div style={{width: '24px'}}/>}{elem.name}</MenuItem>)}
                                         </Menu>
                                     ]
                                     :null
@@ -216,33 +254,6 @@ const MyAppBar = React.memo((props) => {
                                             <MenuItem style={{background: date===''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setDate('');handleCloseDate();}}>
                                                 Все
                                             </MenuItem>
-                                        </Menu>
-                                    ]
-                                    :null
-                                }
-                                {sorts&&sorts.length>0?
-                                    [
-                                        <MenuItem onClick={handleMenuSort}>
-                                            <div style={{display: 'flex', color: '#606060'}}>
-                                                <Sort/>&nbsp;Сортировка
-                                            </div>
-                                        </MenuItem>,
-                                        <Menu
-                                            key='sort'
-                                            id='menu-appbar'
-                                            anchorEl={anchorElSort}
-                                            anchorOrigin={{
-                                                vertical: 'top',
-                                                horizontal: 'left',
-                                            }}
-                                            transformOrigin={{
-                                                vertical: 'top',
-                                                horizontal: 'left',
-                                            }}
-                                            open={openSort}
-                                            onClose={handleCloseSort}
-                                        >
-                                            {sorts.map((elem, idx)=><MenuItem key={'sort'+idx} onClick={()=>{sort===`-${elem.field}`?setSort(elem.field):setSort(`-${elem.field}`);/*handleCloseSort();handleCloseMobileMenu()*/}}>{sort===`-${elem.field}`?<ArrowDownward />:sort===elem.field?<ArrowUpward />:<div style={{width: '24px'}}/>}{elem.name}</MenuItem>)}
                                         </Menu>
                                     ]
                                     :null
@@ -463,17 +474,22 @@ const MyAppBar = React.memo((props) => {
                                 </>
                                 :null
                             }
-                            <Tooltip title='Поиск'>
-                                <IconButton
-                                    aria-owns={openSearch ? 'menu-appbar' : undefined}
-                                    aria-haspopup='true'
-                                    onClick={()=>{
-                                        setOpenSearch(true)}}
-                                    color='inherit'
-                                >
-                                    <Search />
-                                </IconButton>
-                            </Tooltip>
+                            {
+                                searchShow?
+                                    <Tooltip title='Поиск'>
+                                        <IconButton
+                                            aria-owns={openSearch ? 'menu-appbar' : undefined}
+                                            aria-haspopup='true'
+                                            onClick={()=>{
+                                                setOpenSearch(true)}}
+                                            color='inherit'
+                                        >
+                                            <Search />
+                                        </IconButton>
+                                    </Tooltip>
+                                    :
+                                    null
+                            }
                                        <Tooltip title='Профиль'>
                                             <IconButton
                                                 aria-owns='menu-appbar'

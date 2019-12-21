@@ -29,7 +29,7 @@ const Routes = React.memo((props) => {
         })()
     },[filter, sort, search, date]);
     return (
-        <App dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
+        <App searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
                 <title>Маршрутные листы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

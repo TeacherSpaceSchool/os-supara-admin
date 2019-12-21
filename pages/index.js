@@ -32,7 +32,7 @@ const Index = React.memo((props) => {
             Router.push('/items/all')
     },[profile, authenticated])
     return (
-        <App filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
+        <App searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
                 <title>Азык - электронный склад связывающий производителя с торговой точкой</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

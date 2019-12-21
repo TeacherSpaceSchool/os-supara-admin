@@ -27,7 +27,7 @@ const Orders = React.memo((props) => {
         })()
     },[filter, sort, search, date])
     return (
-        <App dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
                 <title>Заказы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
     card: {
-        width: 400,
+        maxWidth: 400,
+        width: 'calc(100vw - 20px)',
         margin: 10,
         position: 'relative'
     },
@@ -49,6 +50,7 @@ export default makeStyles({
         marginBottom: 10,
         fontWeight: '500',
         fontSize: '0.875rem',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
 })

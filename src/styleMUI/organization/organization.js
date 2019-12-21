@@ -29,7 +29,8 @@ export default makeStyles({
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '16px',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
     nameField: {
         minWidth: 80,

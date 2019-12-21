@@ -26,7 +26,7 @@ const Organization = React.memo((props) => {
         })()
     },[filter, sort, search])
     return (
-        <App filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Бренды'>
+        <App searchShow={true} filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Бренды'>
             <Head>
                 <title>Бренды</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
