@@ -47,14 +47,14 @@ export function signup(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                await Router.push(`/client/${result.data.signupuser._id}`)
                 /*
                 await dispatch({type: AUTHENTICATED});
                 await dispatch({
                     type: SET_PROFILE,
                     payload: result.data.signupuser
                 })*/
-                window.location.reload()
+                //await window.location.reload()
+                await Router.push(`/client/${result.data.signupuser._id}`)
             }
         } catch(error) {
             await dispatch({
