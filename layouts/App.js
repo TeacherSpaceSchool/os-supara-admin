@@ -28,7 +28,7 @@ const App = React.memo(props => {
     const router = useRouter();
     useEffect( ()=>{
         console.log(authenticated, profile.role)
-        if(authenticated)
+        if(authenticated&&!profile.role)
             setProfile()
         else if(!authenticated&&profile.role)
             logout(false)
