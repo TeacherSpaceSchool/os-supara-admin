@@ -26,6 +26,7 @@ import { pdDatePicker } from '../../src/lib'
 import Confirmation from '../../components/dialog/Confirmation'
 import GeoRoute from '../../components/dialog/GeoRoute'
 import { urlMain } from '../../redux/constants/other'
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 
 const Route = React.memo((props) => {
@@ -321,8 +322,8 @@ Route.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}):{route: {invoices: [], employment: {}, status: '', dateStart: null, dateEnd: null, number: ''}},
-            ...await getOrganizations({search: '', sort: 'name', filter: ''}),
+            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{route: {invoices: [], employment: {}, status: '', dateStart: null, dateEnd: null, number: ''}},
+            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
 };

@@ -13,6 +13,7 @@ import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
+import { getClientGqlSsr } from '../src/getClientGQL'
 const height = 140
 
 
@@ -72,7 +73,7 @@ Client.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getClients({search: '', sort: '-createdAt', filter: ''})
+        data: await getClients({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

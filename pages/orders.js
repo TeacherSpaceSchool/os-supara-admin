@@ -10,6 +10,7 @@ import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 const height = 225
 
 
@@ -58,7 +59,7 @@ Orders.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''})
+        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

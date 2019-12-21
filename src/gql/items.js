@@ -2,10 +2,9 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getItems = async({subCategory,  search,  sort,  filter})=>{
+export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
-
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: {subCategory: subCategory, search: search, sort: sort, filter: filter},
@@ -52,9 +51,9 @@ export const getItems = async({subCategory,  search,  sort,  filter})=>{
     }
 }
 
-export const getBrands = async({organization,  search,  sort,  filter})=>{
+export const getBrands = async({organization,  search,  sort,  filter}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: {organization: organization, search: search, sort: sort, filter: filter},
@@ -91,9 +90,9 @@ export const getBrands = async({organization,  search,  sort,  filter})=>{
     }
 }
 
-export const favorites = async({ search})=>{
+export const favorites = async({ search}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: { search: search },
@@ -126,9 +125,9 @@ export const favorites = async({ search})=>{
     }
 }
 
-export const getItem = async({_id})=>{
+export const getItem = async({_id}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: {_id: _id},

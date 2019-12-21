@@ -13,6 +13,7 @@ import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardEmploymentPlaceholder from '../components/employment/CardEmploymentPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 const height = 186
 
 const Employment = React.memo((props) => {
@@ -69,7 +70,7 @@ Employment.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getEmployments({search: '', sort: '-createdAt', filter: ''})
+        data: await getEmployments({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

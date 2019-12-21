@@ -11,6 +11,7 @@ import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardBonusPlaceholder from '../components/bonus/CardBonusPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Bonus = React.memo((props) => {
     const classes = pageListStyle();
@@ -49,9 +50,9 @@ const Bonus = React.memo((props) => {
     )
 })
 
-Bonus.getInitialProps = async function() {
+Bonus.getInitialProps = async function(ctx) {
     return {
-        data: await getBonuses({search: '', sort: '-createdAt'})
+        data: await getBonuses({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

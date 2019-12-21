@@ -11,6 +11,7 @@ const height = 377;
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../components/items/CardItemPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Items = React.memo((props) => {
     const { authenticated } = props.user;
@@ -74,7 +75,7 @@ Items.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await favorites({search: ''}),
+        data: await favorites({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };
 };
 

@@ -14,6 +14,7 @@ const height = 377;
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Brand = React.memo((props) => {
     const classes = pageListStyle();
@@ -63,7 +64,7 @@ const Brand = React.memo((props) => {
 
 Brand.getInitialProps = async function(ctx) {
     return {
-        data: await getBrands({organization: ctx.query.id, search: '', sort: '-createdAt'}),
+        data: await getBrands({organization: ctx.query.id, search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };
 };
 

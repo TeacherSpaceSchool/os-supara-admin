@@ -144,7 +144,9 @@ const CardBlog = React.memo((props) => {
                     :
                     element!==undefined?
                         <>
-                        <CardActionArea>
+                        <CardActionArea onClick={async()=> {
+                            setAll(!all)
+                        }}>
                             <img
                                 className={isMobileApp?classes.mediaM:classes.mediaD}
                                 src={element.image}
@@ -158,9 +160,7 @@ const CardBlog = React.memo((props) => {
                                 <div style={{fontSize: '1rem', margin: 20, whiteSpace: 'pre-wrap'}}>
                                     {element.text}
                                 </div>:null}
-                            <Button onClick={async()=> {
-                                setAll(!all)
-                            }} size='small' color='primary'>
+                            <Button size='small' color='primary'>
                                 {all?'Свернуть':'Посмотреть полностью'}
                             </Button>
                         </CardActionArea>

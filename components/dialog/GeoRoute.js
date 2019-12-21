@@ -40,7 +40,10 @@ const Geo =  React.memo(
                                     <Placemark
                                         key={idx}
                                         options={{draggable: false, iconColor: !invoice.confirmationForwarder?'red':'#ffb300'}}
-                                        properties={{iconCaption: invoice.number}}
+                                        properties={{iconCaption: `
+                                            Номер: ${invoice.number}\n
+                                            Имя: ${invoice.client.name}
+                                        `}}
                                         geometry={invoice.address[1]?invoice.address[1].split(', '):'42.8700000, 74.5900000'} />
                                 )}
                             </Map>

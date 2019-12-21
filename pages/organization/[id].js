@@ -24,7 +24,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
 import { checkInt } from '../../src/lib'
-
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();
@@ -398,8 +398,8 @@ const Organization = React.memo((props) => {
 Organization.getInitialProps = async function(ctx) {
     return {
         data: {
-            ...ctx.store.getState().user.authenticated&&['организация', 'менеджер'].includes(ctx.store.getState().user.profile.role)?await getEmployment({_id: ctx.store.getState().user.profile._id}):{},
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0}}
+            ...ctx.store.getState().user.authenticated&&['организация', 'менеджер'].includes(ctx.store.getState().user.profile.role)?await getEmployment({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{},
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0}}
         }
 
     };

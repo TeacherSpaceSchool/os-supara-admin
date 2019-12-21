@@ -10,6 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import Router from 'next/router'
+import { getClientGqlSsr } from '../src/getClientGQL'
 const height = 210
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
@@ -70,7 +71,7 @@ Routes.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getRoutes({search: '', sort: '-createdAt', filter: '', date: ''})
+        data: await getRoutes({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

@@ -29,6 +29,7 @@ import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
 import {getClients} from '../src/gql/client'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Basket = React.memo((props) => {
     const { authenticated, profile } = props.user;
@@ -382,9 +383,9 @@ Basket.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getBasket(),
-            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}):{}),
-            ...await getBonusesClient({search: '', sort: '-createdAt'})
+            ...await getBasket(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{}),
+            ...await getBonusesClient({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

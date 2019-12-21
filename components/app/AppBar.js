@@ -94,6 +94,10 @@ const MyAppBar = React.memo((props) => {
             getCountBasket()
         })()
     },[])
+    useEffect(()=>{
+        if(document.getElementById('search'))
+            document.getElementById('search').focus();
+    },[openSearch])
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className='appBar'>
@@ -114,17 +118,17 @@ const MyAppBar = React.memo((props) => {
                         openSearch?
                             <Paper className={classes.searchM}>
                                     <Input className={classes.searchField}
-                                        id='adornment-password'
-                                        type={'login'}
-                                        value={search}
-                                        onChange={handleSearch}
-                                        endAdornment={
-                                            <InputAdornment position='end'>
-                                                <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
-                                                    <Cancel />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }/>
+                                           id='search'
+                                            type={'login'}
+                                            value={search}
+                                            onChange={handleSearch}
+                                            endAdornment={
+                                                <InputAdornment position='end'>
+                                                    <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
+                                                        <Cancel />
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }/>
                             </Paper>
                             :
                             <>
@@ -341,7 +345,7 @@ const MyAppBar = React.memo((props) => {
                         openSearch?
                             <Paper className={classes.searchD}>
                                     <Input className={classes.searchField}
-                                        id='adornment-password'
+                                        id='search'
                                         type={'login'}
                                         value={search}
                                         onChange={handleSearch}
@@ -463,7 +467,8 @@ const MyAppBar = React.memo((props) => {
                                 <IconButton
                                     aria-owns={openSearch ? 'menu-appbar' : undefined}
                                     aria-haspopup='true'
-                                    onClick={()=>{setOpenSearch(true)}}
+                                    onClick={()=>{
+                                        setOpenSearch(true)}}
                                     color='inherit'
                                 >
                                     <Search />

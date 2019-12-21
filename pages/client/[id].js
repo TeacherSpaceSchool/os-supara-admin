@@ -28,6 +28,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Router from 'next/router'
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -708,7 +709,7 @@ Client.getInitialProps = async function(ctx) {
                     }
             }
         :
-            await getClient({_id: ctx.query.id}))}
+            await getClient({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined))}
     };
 };
 

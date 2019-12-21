@@ -5,9 +5,9 @@ import {
     setCountBasket
 } from '../../redux/actions/app'
 
-export const getBasket = async()=>{
+export const getBasket = async(client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 query: gql`

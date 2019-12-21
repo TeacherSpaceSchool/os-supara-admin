@@ -27,6 +27,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
 import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -312,8 +313,8 @@ Client.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}):{employment:{name: '',email: '',phone: [], user: {login: '',status: '',role: '',},organization: {_id: ''},}},
-            ...await getOrganizations({search: '', sort: 'name', filter: ''})
+            ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{employment:{name: '',email: '',phone: [], user: {login: '',status: '',role: '',},organization: {_id: ''},}},
+            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

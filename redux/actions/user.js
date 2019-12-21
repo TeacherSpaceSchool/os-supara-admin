@@ -9,7 +9,8 @@ import {
     SHOW_MINI_DIALOG
 } from '../constants/mini_dialog'
 import {
-    SET_COUNT_BASKET
+    SET_COUNT_BASKET,
+    SHOW_LOAD
 } from '../constants/app'
 import Cookies from 'js-cookie';
 import { gql } from 'apollo-boost';
@@ -18,6 +19,10 @@ import Router from 'next/router';
 
 export function signup(payload) {
     return async (dispatch) => {
+        await dispatch({
+            type: SHOW_LOAD,
+            payload: true
+        })
         try {
             const client = new SingletonApolloClient().getClient()
             let result = await client.mutate({
@@ -42,7 +47,7 @@ export function signup(payload) {
                     type: SHOW_MINI_DIALOG,
                     payload: false
                 })
-                //await Router.push('/')
+                await Router.push(`/client/${result.data.signupuser._id}`)
                 /*
                 await dispatch({type: AUTHENTICATED});
                 await dispatch({
@@ -62,6 +67,10 @@ export function signup(payload) {
 
 export function signin(payload) {
     return async (dispatch) => {
+        await dispatch({
+            type: SHOW_LOAD,
+            payload: true
+        })
         try {
             const client = new SingletonApolloClient().getClient();
             let result = await client.mutate({
@@ -129,6 +138,10 @@ export function setAuthenticated(auth) {
 export function logout(reload) {
     return async (dispatch) => {
         await dispatch({
+            type: SHOW_LOAD,
+            payload: true
+        })
+        await dispatch({
             type: UNAUTHENTICATED,
         })
         if(reload)
@@ -142,7 +155,7 @@ export function logout(reload) {
             type: SET_PROFILE,
             payload: {}
         })
-        //setTimeout(()=>window.location.reload(),100)
+        window.location.reload()
 
 
     }

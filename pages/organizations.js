@@ -14,7 +14,7 @@ import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
-
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Organization = React.memo((props) => {
     const classes = pageListStyle();
@@ -61,9 +61,9 @@ const Organization = React.memo((props) => {
     )
 })
 
-Organization.getInitialProps = async function() {
+Organization.getInitialProps = async function(ctx) {
     return {
-        data: await getOrganizations({search: '', sort: '-createdAt', filter: ''})
+        data: await getOrganizations({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

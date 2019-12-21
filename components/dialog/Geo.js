@@ -41,7 +41,9 @@ const Geo =  React.memo(
                             load?<CircularProgress/>:null
                         }
                         <div style={{display: load?'none':'block'}}>
-                            <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: newGeo.split(', '), zoom: 15 }} >
+                            <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48}
+                                 state={{ center: newGeo.split(', '), zoom: 15 }}
+                            >
                                 <Placemark
                                     onDragEnd={dragend}
                                     options={{draggable: true, iconColor: '#ffb300'}}

@@ -2,9 +2,9 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getOrganization = async({_id: _id})=>{
+export const getOrganization = async({_id: _id}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: {_id: _id},
@@ -31,9 +31,9 @@ export const getOrganization = async({_id: _id})=>{
     }
 }
 
-export const getOrganizations = async({search: search, sort: sort, filter: filter})=>{
+export const getOrganizations = async({search: search, sort: sort, filter: filter}, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 variables: {search: search, sort: sort, filter: filter},

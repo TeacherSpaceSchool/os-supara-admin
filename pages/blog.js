@@ -9,6 +9,7 @@ import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardBlogPlaceholder from '../components/blog/CardBlogPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Blog = React.memo((props) => {
     const classes = pageListStyle();
@@ -47,9 +48,9 @@ const Blog = React.memo((props) => {
     )
 })
 
-Blog.getInitialProps = async function() {
+Blog.getInitialProps = async function(ctx) {
     return {
-        data: await getBlogs({search: '', sort: '-createdAt', filter: ''})
+        data: await getBlogs({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

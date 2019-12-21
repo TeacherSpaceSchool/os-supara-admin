@@ -12,6 +12,7 @@ import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardCategoryPlaceholder from '../components/category/CardCategoryPlaceholder'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Index = React.memo((props) => {
     const classes = pageListStyle();
@@ -73,7 +74,7 @@ Index.getInitialProps = async function(ctx) {
         } else
             Router.push('/items/all')
     return {
-        data: await getCategorys({search: '', sort: '-createdAt', filter: ''})
+        data: await getCategorys({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

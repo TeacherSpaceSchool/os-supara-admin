@@ -10,7 +10,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
-import Add from '@material-ui/icons/Add';
+import * as snackbarActions from '../redux/actions/snackbar'
 import Remove from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -20,12 +20,14 @@ import TextField from '@material-ui/core/TextField';
 import Confirmation from '../components/dialog/Confirmation'
 import AddSocial from '../components/dialog/AddSocial'
 import { urlMain } from '../redux/constants/other'
+import { getClientGqlSsr } from '../src/getClientGQL'
 
 
 const Contact = React.memo((props) => {
     const classes = contactStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
+    const { showSnackBar } = props.snackbarActions;
     let [name, setName] = useState(data.contact.name);
     let [address, setAddress] = useState(data.contact.address);
     let [newAddress, setNewAddress] = useState('');
@@ -384,10 +386,10 @@ const Contact = React.memo((props) => {
     )
 })
 
-Contact.getInitialProps = async function() {
+Contact.getInitialProps = async function(ctx) {
     return {
         data: {
-            ...await getContact()
+            ...await getContact(ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
 
     };
@@ -403,6 +405,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
+        snackbarActions: bindActionCreators(snackbarActions, dispatch),
     }
 }
 

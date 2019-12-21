@@ -14,6 +14,7 @@ import SubCardCategoryPlaceholder from '../../components/subcategory/SubCardCate
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Subcategory = React.memo((props) => {
     const classes = pageListStyle();
@@ -84,7 +85,7 @@ const Subcategory = React.memo((props) => {
 
 Subcategory.getInitialProps = async function(ctx) {
     return {
-        data: await getSubCategorys({category: ctx.query.id, search: '', sort: '-createdAt', filter: ''}),
+        data: await getSubCategorys({category: ctx.query.id, search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };
 };
 

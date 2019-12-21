@@ -45,7 +45,7 @@ import { getCountBasket } from '../../src/gql/basket'
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from 'next/link';
-
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Item = React.memo((props) => {
     const classes = itemStyle();
@@ -105,13 +105,13 @@ const Item = React.memo((props) => {
         }
     },[])
     //BUY
-    let [count, setCount] = useState(0);
+    let [count, setCount] = useState(1);
     let increment = ()=>{
         count+=1
         setCount(count)
     }
     let decrement = ()=>{
-        if(count>0)
+        if(count>1)
             count-=1
             setCount(count)
     }
@@ -468,7 +468,7 @@ const Item = React.memo((props) => {
                                                     <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                         <div className={classes.counterbtn} onClick={decrement}>–</div>
                                                         <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                            setCount(isNaN(event.target.value)||event.target.value.length===0?0:parseInt(event.target.value))
+                                                            setCount(isNaN(event.target.value)||event.target.value.length===0?1:parseInt(event.target.value))
                                                         }}/>
                                                         <div className={classes.counterbtn} onClick={increment}>+</div>
                                                     </div>
@@ -571,7 +571,7 @@ const Item = React.memo((props) => {
 Item.getInitialProps = async function(ctx) {
     return {
         data: {
-            ...ctx.query.id!=='new'?await getItem({_id: ctx.query.id}):{
+            ...ctx.query.id!=='new'?await getItem({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{
                     item:{
                         image: '/static/add.png',
                         stock: 0,
@@ -585,8 +585,8 @@ Item.getInitialProps = async function(ctx) {
                         deliveryDays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
                     }
                 },
-            ...await getOrganizations({search: '', sort: 'name', filter: ''}),
-            ...await getSubCategorys({category: 'all', search: '', sort: 'name', filter: ''})
+            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getSubCategorys({category: 'all', search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

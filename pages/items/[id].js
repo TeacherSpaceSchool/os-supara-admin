@@ -16,6 +16,7 @@ import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { getClientGqlSsr } from '../../src/getClientGQL'
 
 const Items = React.memo((props) => {
     const classes = pageListStyle();
@@ -93,7 +94,7 @@ const Items = React.memo((props) => {
 
 Items.getInitialProps = async function(ctx) {
     return {
-        data: await getItems({subCategory: ctx.query.id, search: '', sort: '-createdAt', filter: ''}),
+        data: await getItems({subCategory: ctx.query.id, search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };
 };
 
