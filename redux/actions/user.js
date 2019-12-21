@@ -151,10 +151,6 @@ export function logout(reload) {
         await dispatch({
             type: UNAUTHENTICATED,
         })
-        if(reload) {
-            await Router.push('/')
-            window.location.reload()
-        }
         await Cookies.remove('jwt');
         await dispatch({
             type: SET_COUNT_BASKET,
@@ -164,6 +160,15 @@ export function logout(reload) {
             type: SET_PROFILE,
             payload: {}
         })
+        if(reload) {
+            await Router.push('/')
+            window.location.reload()
+        }
+        else
+            await dispatch({
+                type: SHOW_LOAD,
+                payload: false
+            })
 
 
     }

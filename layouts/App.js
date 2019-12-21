@@ -27,6 +27,7 @@ const App = React.memo(props => {
     let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     useEffect( ()=>{
+        console.log(authenticated, profile.role)
         if(authenticated)
             setProfile()
         else if(!authenticated&&profile.role)
