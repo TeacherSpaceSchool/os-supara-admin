@@ -29,8 +29,8 @@ const App = React.memo(props => {
     useEffect( ()=>{
         if(authenticated)
             setProfile()
-        /*else if(!authenticated&&profile.role)
-            logout(false)*/
+        else if(!authenticated&&profile.role)
+            logout(false)
     },[authenticated,])
     Router.events.on('routeChangeStart', (err, url)=>{
         if(!router.pathname.includes(url))

@@ -98,7 +98,6 @@ const MyAppBar = React.memo((props) => {
         if(document.getElementById('search'))
             document.getElementById('search').focus();
     },[openSearch])
-    console.log(searchShow)
     return (
         <div className={classes.root}>
             <AppBar position='fixed' className='appBar'>

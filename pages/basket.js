@@ -15,7 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
-import { getBasket, setBasket, deleteBasket } from '../src/gql/basket';
+import { getBasket, setBasket, deleteBasket, getCountBasket } from '../src/gql/basket';
 import { getClient } from '../src/gql/client';
 import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
@@ -80,6 +80,7 @@ const Basket = React.memo((props) => {
                 let list = JSON.parse(localStorage.basket)
                 list.splice(idx, 1)
                 localStorage.basket = JSON.stringify(list)
+                await getCountBasket()
                 setList(list)
             }
         }

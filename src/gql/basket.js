@@ -8,8 +8,7 @@ import {
 export const getBasket = async(client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
-        let res = await client
-            .query({
+        let res = await client.query({
                 query: gql`
                     query{
                         baskets {
@@ -68,7 +67,7 @@ export const deleteBasket = async(ids)=>{
                         }
                     }`})
         await getCountBasket()
-        return await getBasket(new SingletonStore().getStore().getState().app)
+        return await getBasket()
     } catch(err){
         console.error(err)
     }
@@ -103,7 +102,7 @@ export const setBasket = async(element)=>{
                         }
                     }`})
         await getCountBasket()
-        return await getBasket(new SingletonStore().getStore().getState().app)
+        return await getBasket()
     } catch(err){
         console.error(err)
     }
