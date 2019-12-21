@@ -470,9 +470,7 @@ const Client = React.memo((props) => {
                                                         if (type && type.length > 0 && type !== data.client.type) editElement.type = type
                                                         if (birthday && birthday !== data.client.birthday) editElement.birthday = new Date(birthday)
                                                         if (newPass && newPass.length > 0) editElement.newPass = newPass
-                                                        console.log(type)
                                                        const action = async () => {
-
                                                             await setClient(editElement)
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
