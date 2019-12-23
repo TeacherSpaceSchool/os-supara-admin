@@ -28,6 +28,8 @@ export default withRedux(configureStore, { debug: false })(
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
                 if(ctx.store.getState().user.authenticated) {
                     ctx.store.getState().user.profile = await getProfile(await getClientGqlSsr(ctx.req))
+                } else {
+                    ctx.store.getState().user.profile = {}
                 }
             }
             ctx.store.getState().app.search = ''
