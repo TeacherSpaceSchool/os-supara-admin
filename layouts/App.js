@@ -77,7 +77,7 @@ const App = React.memo(props => {
             <SnackBar/>
             {load?
                 <div className='load'>
-                    <CircularProgress variant="determinate" value={20} />
+                    <CircularProgress/>
                 </div>
                 :
                 null
