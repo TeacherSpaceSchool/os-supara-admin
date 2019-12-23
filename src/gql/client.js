@@ -101,6 +101,23 @@ export const onoffClient = async(ids)=>{
     }
 }
 
+export const deleteClient = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        deleteClient(_id: $_id) {
+                             data
+                        }
+                    }`})
+        return await getClients(new SingletonStore().getStore().getState().app)
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const setClient = async(element)=>{
     try{
         const client = new SingletonApolloClient().getClient()

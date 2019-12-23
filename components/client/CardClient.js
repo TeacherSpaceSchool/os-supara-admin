@@ -8,14 +8,14 @@ import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import { onoffClient } from '../../src/gql/client'
+import { onoffClient, deleteClient } from '../../src/gql/client'
 import CardActions from '@material-ui/core/CardActions';
 import Confirmation from '../../components/dialog/Confirmation'
 
 
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
-    const { element } = props;
+    const { element, setList } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
@@ -94,6 +94,24 @@ const CardOrganization = React.memo((props) => {
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             {status==='active'?'Отключить':'Включить'}
+                        </Button>
+                        :
+                        null
+                }
+                {
+                    (!element.user)&&(
+                        ((element.organization&&profile.organization===element.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
+                        ||profile.role==='admin'
+                    ) ?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                setList((await deleteClient([element._id])).clients)
+                                setStatus(status==='active'?'deactive':'active')
+                            }
+                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Удалить
                         </Button>
                         :
                         null

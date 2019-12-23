@@ -37,11 +37,16 @@ export function signup(payload) {
                            _id
                         }
                     }`})
-            if(result.data.signupuser.role==='Проверьте данные')
+            if(result.data.signupuser.role==='Проверьте данные') {
                 await dispatch({
                     type: ERROR_AUTHENTICATED,
                     payload: true
                 })
+                await dispatch({
+                    type: SHOW_LOAD,
+                    payload: false
+                })
+            }
             else {
                 await dispatch({
                     type: SHOW_MINI_DIALOG,
@@ -89,11 +94,16 @@ export function signin(payload) {
                            _id
                         }
                     }`})
-            if(result.data.signinuser.role==='Проверьте данные')
+            if(result.data.signinuser.role==='Проверьте данные') {
                 await dispatch({
                     type: ERROR_AUTHENTICATED,
                     payload: true
                 })
+                await dispatch({
+                    type: SHOW_LOAD,
+                    payload: false
+                })
+            }
             else {
                 await dispatch({
                     type: SHOW_MINI_DIALOG,

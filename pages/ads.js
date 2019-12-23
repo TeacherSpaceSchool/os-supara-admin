@@ -26,7 +26,7 @@ const Ads = React.memo((props) => {
     },[filter, sort, search, count])
     let height = profile.role==='admin'?400:200
     return (
-        <App filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>
+        <App searchShow={true} filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>
             <Head>
                 <title>Акции</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

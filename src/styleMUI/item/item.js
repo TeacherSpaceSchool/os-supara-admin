@@ -61,6 +61,16 @@ export default makeStyles({
         overflow: 'hidden',
         marginBottom: 10
     },
+    inBasket: {
+        color: '#ffb300',
+        textDecoration: 'line-through',
+        fontSize: '1.25rem',
+        fontFamily: 'Roboto',
+        marginLeft: 10,
+        marginTop: 12,
+        overflow: 'hidden',
+        marginBottom: 10
+    },
     stockPrice: {
         color: '#ff0000',
         fontWeight: 'bold',

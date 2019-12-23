@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as userActions from '../../redux/actions/user'
-import { getClient, onoffClient, setClient, addClient } from '../../src/gql/client'
+import { getClient, onoffClient, setClient, addClient, deleteClient } from '../../src/gql/client'
 import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -483,6 +483,24 @@ const Client = React.memo((props) => {
                                                 }} size='small' color='primary'>
                                                     Сохранить
                                                 </Button>
+                                                {
+                                                    (!data.client.user)&&(
+                                                        ((data.client.organization&&profile.organization===data.client.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
+                                                        ||profile.role==='admin'
+                                                    )?
+                                                        <Button onClick={async()=>{
+                                                            const action = async() => {
+                                                                await deleteClient([data.client._id])
+                                                                Router.push('/clients')
+                                                            }
+                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            showMiniDialog(true)
+                                                        }} size='small' color='primary'>
+                                                            Удалить
+                                                        </Button>
+                                                        :
+                                                        null
+                                                }
                                                 {profile.role==='admin'?
                                                     <Button onClick={async()=>{
                                                         const action = async() => {

@@ -10,10 +10,9 @@ import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import Star from '@material-ui/icons/Star';
 import Link from 'next/link';
 import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
-import { addBasket } from '../../src/gql/basket'
+import { addBasket, getCountBasket, deleteBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
 import Confirmation from '../dialog/Confirmation'
-import { getCountBasket } from '../../src/gql/basket'
 
 
 const CardItem = React.memo((props) => {
@@ -128,22 +127,42 @@ const CardItem = React.memo((props) => {
                                             </>
                                             :
                                             ['агент', 'client'].includes(profile.role)||!authenticated?
-                                                <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={()=>{
-                                                    if(['агент', 'client'].includes(profile.role))
-                                                        addBasket({item: element._id, count: 1})
-                                                    else if(!authenticated) {
-                                                        let basket = JSON.parse(localStorage.basket);
-                                                        let index = -1
-                                                        for(let i=0; i<basket.length; i++){
-                                                            if(basket[i].item._id == element._id)
-                                                                index = i
+                                                <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={async()=>{
+                                                    console.log(basket)
+                                                    if(!basket) {
+                                                        if (['агент', 'client'].includes(profile.role))
+                                                            addBasket({item: element._id, count: 1})
+                                                        else if (!authenticated) {
+                                                            let basket = JSON.parse(localStorage.basket);
+                                                            let index = -1
+                                                            for (let i = 0; i < basket.length; i++) {
+                                                                if (basket[i].item._id == element._id)
+                                                                    index = i
+                                                            }
+                                                            if (index === -1)
+                                                                basket.push({item: element, count: 1})
+                                                            localStorage.basket = JSON.stringify(basket)
                                                         }
-                                                        if(index===-1)
-                                                            basket.push({item: element, count: 1})
-                                                        localStorage.basket = JSON.stringify(basket)
+                                                        showSnackBar('Товар добавлен в корзину')
+                                                        setBasket(true)
                                                     }
-                                                    showSnackBar('Товар добавлен в корзину')
-                                                    setBasket(true)
+                                                    else {
+                                                        if(authenticated) {
+                                                            await deleteBasket([element._id])
+                                                        } else {
+                                                            let list = JSON.parse(localStorage.basket)
+                                                            let index = -1
+                                                            for (let i = 0; i < list.length; i++) {
+                                                                if (list[i].item._id == element._id)
+                                                                    index = i
+                                                            }
+                                                            if (index !== -1)
+                                                                list.splice(index, 1)
+                                                            localStorage.basket = JSON.stringify(list)
+                                                        }
+                                                        showSnackBar('Товар удален из корзины')
+                                                        setBasket(false)
+                                                    }
                                                     getCountBasket()
                                                 }}/>
                                                 :

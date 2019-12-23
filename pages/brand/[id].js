@@ -31,7 +31,7 @@ const Brand = React.memo((props) => {
         })()
     },[filter, sort, search])
     return (
-        <App sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
+        <App searchShow={true} sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
             <Head>
                 <title>{data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}</title>
                 <meta name='description' content={data&&data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
