@@ -30,6 +30,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                     name    
                                                     stock 
                                                     price
+                                                    packaging
                                                     organization
                                                         {_id name}
                                                 }
@@ -116,6 +117,7 @@ export const getRoute = async({_id}, client)=>{
                                             item
                                                 {
                                                     image
+                                                    packaging
                                                     _id
                                                     name    
                                                     stock 

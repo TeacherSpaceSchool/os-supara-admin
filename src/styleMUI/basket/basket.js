@@ -8,6 +8,28 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'row'
     },
+    addPackaging: {
+        marginTop: 10,
+        textAlign: 'center',
+        fontSize: '0.8125rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300',
+        userSelect: 'none',
+        width: 122
+    },
+    addPackagingM: {
+        marginBottom: 20,
+        textAlign: 'center',
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300',
+        userSelect: 'none',
+        width: 145
+    },
     itemM:{
         display: 'flex',
         flexDirection: 'column',

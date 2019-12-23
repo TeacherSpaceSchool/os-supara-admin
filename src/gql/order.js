@@ -26,6 +26,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             name    
                                             stock 
                                             price
+                                            packaging
                                             organization
                                                 {_id name}
                                         }
@@ -93,6 +94,7 @@ export const getOrdersForRouting = async()=>{
                                             _id
                                             name    
                                             stock 
+                                            packaging
                                             price
                                             organization
                                                 {_id name}
@@ -154,6 +156,7 @@ export const getOrder = async({_id})=>{
                                             _id
                                             name    
                                             stock 
+                                            packaging
                                             price
                                             organization
                                                 {_id name}

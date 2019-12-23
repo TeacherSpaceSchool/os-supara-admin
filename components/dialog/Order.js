@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { cancelOrders, approveOrders, setOrder, setInvoice } from '../../src/gql/order'
+import { setOrder, setInvoice } from '../../src/gql/order'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
@@ -22,7 +22,7 @@ const Order =  React.memo(
         const { isMobileApp } = props.app;
         const { profile } = props.user;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
-        const { classes, element, setList, route, getInvoices } = props;
+        const { classes, element, setList, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
         let [taken, setTaken] = useState(element.taken);
@@ -186,9 +186,21 @@ const Order =  React.memo(
                                         </div>
                                         <div className={classes.row}>
                                             <div className={classes.nameField}>Количество:&nbsp;</div>
-                                            <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>-</div>
-                                            <div className={classes.value}>{order.count}&nbsp;шт</div>
-                                            <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
+                                            <div className={classes.column}>
+                                                <div className={classes.row}>
+                                                    <div className={classes.counterbtn} onClick={()=>{decrement(idx)}}>-</div>
+                                                    <div className={classes.value}>{order.count}&nbsp;шт</div>
+                                                    <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
+                                                </div>
+                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                    orders[idx].count += order.item.packaging
+                                                    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                                                    setOrders([...orders])
+                                                    canculateAllPrice()
+                                                }}>
+                                                    Добавить упаковку
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className={classes.row}>
                                             <div className={classes.nameField}>Общая стоимость:&nbsp;</div>

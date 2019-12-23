@@ -157,6 +157,7 @@ export const getItem = async({_id}, client)=>{
                             favorite
                             basket
                             deliveryDays
+                            packaging
                         }
                     }`,
             })
@@ -237,8 +238,8 @@ export const addItem = async(element, subCategory)=>{
         await client.mutate({
             variables: {...element, subCategory: subCategory},
             mutation : gql`
-                    mutation ($stock: Int!, $deliveryDays: [String], $name: String!, $image: Upload, $info: String!, $price: Int!, $subCategory: ID!, $organization: ID!, $hit: Boolean!, $latest: Boolean!) {
-                        addItem(stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
+                    mutation ($packaging: Int!, $stock: Int!, $deliveryDays: [String], $name: String!, $image: Upload, $info: String!, $price: Int!, $subCategory: ID!, $organization: ID!, $hit: Boolean!, $latest: Boolean!) {
+                        addItem(packaging: $packaging, stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
                              data
                         }
                     }`})
@@ -253,8 +254,8 @@ export const setItem = async(element)=>{
         await client.mutate({
             variables: {...element},
             mutation : gql`
-                    mutation ($_id: ID!, $stock: Int, $deliveryDays: [String], $name: String, $image: Upload, $info: String, $price: Int, $subCategory: ID, $organization: ID, $hit: Boolean, $latest: Boolean) {
-                        setItem(_id: $_id, stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
+                    mutation ($_id: ID!, $packaging: Int, $stock: Int, $deliveryDays: [String], $name: String, $image: Upload, $info: String, $price: Int, $subCategory: ID, $organization: ID, $hit: Boolean, $latest: Boolean) {
+                        setItem(_id: $_id, packaging: $packaging, stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
                              data
                         }
                     }`})

@@ -5,6 +5,18 @@ export default theme => ({
         alignItems: 'center',
         flexDirection: 'column'
     },
+    addPackaging: {
+        marginTop: -10,
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: '0.8125rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300',
+        userSelect: 'none',
+        width: 122
+    },
     mainLine:{
         display: 'flex',
         justifyContent: 'center',
@@ -80,6 +92,7 @@ export default theme => ({
         fontFamily: 'Roboto',
         whiteSpace: 'pre-wrap',
         cursor: 'pointer',
+        userSelect: 'none',
         borderBottom: '1px dashed #ffb300'
     },
     counterbtn: {

@@ -20,6 +20,7 @@ export const getBasket = async(client)=>{
                                     name 
                                     stock 
                                     image 
+                                    packaging
                                     price
                                     organization
                                         {_id name minimumOrder}

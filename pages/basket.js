@@ -209,7 +209,7 @@ const Basket = React.memo((props) => {
                                                             </div>
                                                             <br/>
                                                             <div className={classes.counter}
-                                                                 style={isMobileApp ? {marginBottom: 20} : {marginRight: 20}}>
+                                                                 style={isMobileApp ? {marginBottom: 10} : {marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={() => {
                                                                     decrement(idx)
                                                                 }}>–
@@ -224,6 +224,13 @@ const Basket = React.memo((props) => {
                                                                     increment(idx)
                                                                 }}>+
                                                                 </div>
+                                                            </div>
+                                                            <div className={classes.addPackagingM} style={{color: '#ffb300'}} onClick={()=>{
+                                                                list[idx].count += row.item.packaging
+                                                                setBasketChange(idx, list[idx].count)
+                                                                setList([...list])
+                                                            }}>
+                                                                Добавить упаковку
                                                             </div>
                                                             <div>
                                                                 <div className={classes.row}>
@@ -305,11 +312,18 @@ const Basket = React.memo((props) => {
                                                     <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                         <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
                                                         <input type='text' className={classes.counternmbrD} value={row.count} onChange={(event)=>{
-                                                            list[idx].count = isNaN(event.target.value)||event.target.value.length===0?0:parseInt(event.target.value)
+                                                            list[idx].count = isNaN(event.target.value)||event.target.value.length<1?1:parseInt(event.target.value)
                                                             setBasketChange(idx, list[idx].count)
                                                             setList([...list])
                                                         }}/>
                                                         <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
+                                                    </div>
+                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                        list[idx].count += row.item.packaging
+                                                        setBasketChange(idx, list[idx].count)
+                                                        setList([...list])
+                                                    }}>
+                                                        Добавить упаковку
                                                     </div>
 
                                                 </TableCell>

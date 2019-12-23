@@ -3,6 +3,18 @@ export default makeStyles({
     page: {
         margin: '20px'
     },
+    addPackaging: {
+        marginTop: 10,
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300',
+        userSelect: 'none',
+        width: 145
+    },
     row:{
         display: 'flex',
         flexDirection: 'row'

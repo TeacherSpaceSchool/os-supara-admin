@@ -71,6 +71,7 @@ const Item = React.memo((props) => {
     let [latest, setLatest] = useState(data.item!==null?data.item.latest:false);
     let [preview, setPreview] = useState(data.item!==null?data.item.image:'');
     let [image, setImage] = useState(undefined);
+    let [packaging, setPackaging] = useState(data.item!==null?data.item.packaging:1);
     let [employment, setEmployment] = useState({organization: ''});
     let handleChangeImage = ((event) => {
         if(event.target.files[0].size/1024/1024<20){
@@ -178,6 +179,17 @@ const Item = React.memo((props) => {
                                                 }}
                                             />
                                         </h1>
+                                        <div className={classes.price}>
+                                            <TextField
+                                                label='Упаковка'
+                                                value={packaging}
+                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                onChange={(event)=>{setPackaging(checkInt(event.target.value))}}
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                        </div>
                                             <div className={classes.price}>
                                                 <TextField
                                                     label='Цена'
@@ -285,6 +297,7 @@ const Item = React.memo((props) => {
                                                         if (name.length>0&&price>0&&subCategory._id!=undefined&&organization._id!=undefined) {
                                                             const action = async() => {
                                                                 await addItem({
+                                                                    packaging: packaging,
                                                                     name: name,
                                                                     stock: stock,
                                                                     image: image,
@@ -312,6 +325,7 @@ const Item = React.memo((props) => {
                                                         let editElement = {_id: data.item._id}
                                                         if(stock!==data.item.stock)editElement.stock = stock
                                                         if(name.length>0&&name!==data.item.name)editElement.name = name
+                                                        if(packaging!==data.item.packaging)editElement.packaging = packaging
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
                                                         if(price>0&&price!==data.item.price)editElement.price = price
@@ -465,13 +479,13 @@ const Item = React.memo((props) => {
                                             ['агент', 'client'].includes(profile.role)||!authenticated?
                                                 <>
                                                 <div className={isMobileApp?classes.column:classes.rowCenter}>
-                                                    <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
-                                                        <div className={classes.counterbtn} onClick={decrement}>–</div>
-                                                        <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                            setCount(isNaN(event.target.value)||event.target.value.length===0?1:parseInt(event.target.value))
-                                                        }}/>
-                                                        <div className={classes.counterbtn} onClick={increment}>+</div>
-                                                    </div>
+                                                        <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
+                                                            <div className={classes.counterbtn} onClick={decrement}>–</div>
+                                                            <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
+                                                                setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
+                                                            }}/>
+                                                            <div className={classes.counterbtn} onClick={increment}>+</div>
+                                                        </div>
                                                     <Button
                                                         variant='contained'
                                                         color='primary'
@@ -501,6 +515,11 @@ const Item = React.memo((props) => {
                                                     >
                                                         В КОРЗИНУ
                                                     </Button>
+                                                </div>
+                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                    setCount(count+=parseInt(data.item.packaging))
+                                                }}>
+                                                    Добавить упаковку
                                                 </div>
                                                 <br/>
                                                 <div className={classes.share}>
@@ -575,6 +594,7 @@ Item.getInitialProps = async function(ctx) {
                     item:{
                         image: '/static/add.png',
                         stock: 0,
+                        packaging: 1,
                         name: '',
                         info: '',
                         price: 0,
