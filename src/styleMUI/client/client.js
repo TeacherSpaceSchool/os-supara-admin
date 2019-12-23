@@ -18,8 +18,8 @@ export default makeStyles({
     },
     media: {
         objectFit: 'cover',
-        maxHeight: 300,
-        maxWidth: 300,
+        maxHeight: 400,
+        maxWidth: 400,
         height: 'calc(100vw - 72px)',
         width: 'calc(100vw - 72px)',
         marginRight: 10,

@@ -5,7 +5,7 @@ export default makeStyles({
     },
     addPackaging: {
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 20,
         textAlign: 'center',
         fontSize: '0.875rem',
         fontFamily: 'Roboto',
@@ -136,6 +136,11 @@ export default makeStyles({
         margin: 10,
         width: 100
     },
+    chipList: {
+        position: 'absolute',
+        bottom: 30,
+        left: 10
+    },
     buttonToggle: {
         height: 40,
         width: 40,
@@ -156,5 +161,15 @@ export default makeStyles({
         '&:hover': {
             color: '#ffb300',
         },
+    },
+    chip: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 12,
+        fontFamily: 'Roboto',
+        width: 60,
+        height: 16,
+        marginBottom: 5
     },
 })

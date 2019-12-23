@@ -97,6 +97,6 @@ export default makeStyles({
         fontFamily: 'Roboto',
         width: 60,
         height: 16,
-        marginBottom: 2
+        marginBottom: 5
     },
 })

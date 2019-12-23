@@ -40,7 +40,6 @@ const CardBonus = React.memo((props) => {
                                 {element.organization.name}
                             </h3>
                         </Link>
-                        <br/>
                         {
                             ['организация', 'менеджер', 'admin'].includes(profile.role)?
                                 <>

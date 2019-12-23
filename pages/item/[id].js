@@ -71,7 +71,7 @@ const Item = React.memo((props) => {
     let [latest, setLatest] = useState(data.item!==null?data.item.latest:false);
     let [preview, setPreview] = useState(data.item!==null?data.item.image:'');
     let [image, setImage] = useState(undefined);
-    let [packaging, setPackaging] = useState(data.item!==null?data.item.packaging:1);
+    let [packaging, setPackaging] = useState(data.item&&data.item.packaging?data.item.packaging:1);
     let [employment, setEmployment] = useState({organization: ''});
     let handleChangeImage = ((event) => {
         if(event.target.files[0].size/1024/1024<20){
@@ -390,6 +390,7 @@ const Item = React.memo((props) => {
                                         />
                                         {
                                             profile.role==='client'||!authenticated?
+                                                <>
                                                 <Star className={classes.buttonToggle} onClick={async ()=>{
                                                     let index
                                                     if(profile.role==='client') {
@@ -431,6 +432,23 @@ const Item = React.memo((props) => {
                                                         showMiniDialog(true)
                                                     }
                                                 }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
+                                                <div className={classes.chipList}>
+                                                    {
+                                                        data.item.latest?
+                                                            <div className={classes.chip} style={{color: 'white',background: 'green'}}>
+                                                                Новинка
+                                                            </div>
+                                                            :null
+                                                    }
+                                                    {
+                                                        data.item.hit?
+                                                            <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
+                                                                Хит
+                                                            </div>
+                                                            :null
+                                                    }
+                                                </div>
+                                                </>
                                                 :
                                                 null
                                         }
@@ -478,49 +496,101 @@ const Item = React.memo((props) => {
                                         {
                                             ['агент', 'client'].includes(profile.role)||!authenticated?
                                                 <>
-                                                <div className={isMobileApp?classes.column:classes.rowCenter}>
-                                                        <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
-                                                            <div className={classes.counterbtn} onClick={decrement}>–</div>
-                                                            <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                                setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
-                                                            }}/>
-                                                            <div className={classes.counterbtn} onClick={increment}>+</div>
-                                                        </div>
-                                                    <Button
-                                                        variant='contained'
-                                                        color='primary'
-                                                        className={classes.button}
-                                                        onClick={()=>{
-                                                            if(count>0) {
-                                                                if (['агент', 'client'].includes(profile.role))
-                                                                    addBasket({
-                                                                        item: data.item._id,
-                                                                        count: count > 0 ? count : 1
-                                                                    })
-                                                                else if (!authenticated) {
-                                                                    let basket = JSON.parse(localStorage.basket);
-                                                                    let index = -1
-                                                                    for (let i = 0; i < basket.length; i++) {
-                                                                        if (basket[i].item._id == data.item._id)
-                                                                            index = i
+                                                {
+                                                    isMobileApp?
+                                                        <>
+                                                        <div className={isMobileApp?classes.column:classes.rowCenter}>
+                                                            <div className={classes.counter} style={isMobileApp?{}:{marginRight: 20}}>
+                                                                <div className={classes.counterbtn} onClick={decrement}>–</div>
+                                                                <input type='number' className={classes.counternmbr} value={count} onChange={(event)=>{
+                                                                    setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
+                                                                }}/>
+                                                                <div className={classes.counterbtn} onClick={increment}>+</div>
+                                                            </div>
+                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                setCount(count+=packaging)
+                                                            }}>
+                                                                Добавить упаковку
+                                                            </div>
+                                                            <Button
+                                                                variant='contained'
+                                                                color='primary'
+                                                                className={classes.button}
+                                                                onClick={()=>{
+                                                                    if(count>0) {
+                                                                        if (['агент', 'client'].includes(profile.role))
+                                                                            addBasket({
+                                                                                item: data.item._id,
+                                                                                count: count > 0 ? count : 1
+                                                                            })
+                                                                        else if (!authenticated) {
+                                                                            let basket = JSON.parse(localStorage.basket);
+                                                                            let index = -1
+                                                                            for (let i = 0; i < basket.length; i++) {
+                                                                                if (basket[i].item._id == data.item._id)
+                                                                                    index = i
+                                                                            }
+                                                                            if (index === -1)
+                                                                                basket.push({item: data.item, count: count})
+                                                                            localStorage.basket = JSON.stringify(basket)
+                                                                        }
+                                                                        showSnackBar('Товар добавлен в корзину')
+                                                                        getCountBasket()
                                                                     }
-                                                                    if (index === -1)
-                                                                        basket.push({item: data.item, count: count})
-                                                                    localStorage.basket = JSON.stringify(basket)
-                                                                }
-                                                                showSnackBar('Товар добавлен в корзину')
-                                                                getCountBasket()
-                                                            }
-                                                        }}
-                                                    >
-                                                        В КОРЗИНУ
-                                                    </Button>
-                                                </div>
-                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                    setCount(count+=parseInt(data.item.packaging))
-                                                }}>
-                                                    Добавить упаковку
-                                                </div>
+                                                                }}
+                                                            >
+                                                                В КОРЗИНУ
+                                                            </Button>
+                                                        </div>
+                                                        <br/>
+                                                        </>
+                                                        :
+                                                        <>
+                                                        <div className={isMobileApp?classes.column:classes.rowCenter}>
+                                                            <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
+                                                                <div className={classes.counterbtn} onClick={decrement}>–</div>
+                                                                <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
+                                                                    setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
+                                                                }}/>
+                                                                <div className={classes.counterbtn} onClick={increment}>+</div>
+                                                            </div>
+                                                            <Button
+                                                                variant='contained'
+                                                                color='primary'
+                                                                className={classes.button}
+                                                                onClick={()=>{
+                                                                    if(count>0) {
+                                                                        if (['агент', 'client'].includes(profile.role))
+                                                                            addBasket({
+                                                                                item: data.item._id,
+                                                                                count: count > 0 ? count : 1
+                                                                            })
+                                                                        else if (!authenticated) {
+                                                                            let basket = JSON.parse(localStorage.basket);
+                                                                            let index = -1
+                                                                            for (let i = 0; i < basket.length; i++) {
+                                                                                if (basket[i].item._id == data.item._id)
+                                                                                    index = i
+                                                                            }
+                                                                            if (index === -1)
+                                                                                basket.push({item: data.item, count: count})
+                                                                            localStorage.basket = JSON.stringify(basket)
+                                                                        }
+                                                                        showSnackBar('Товар добавлен в корзину')
+                                                                        getCountBasket()
+                                                                    }
+                                                                }}
+                                                            >
+                                                                В КОРЗИНУ
+                                                            </Button>
+                                                        </div>
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                            setCount(count+=packaging)
+                                                        }}>
+                                                            Добавить упаковку
+                                                        </div>
+                                                        </>
+                                                }
                                                 <br/>
                                                 <div className={classes.share}>
                                                     Поделиться:

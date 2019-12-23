@@ -193,7 +193,7 @@ const Order =  React.memo(
                                                     <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
                                                 </div>
                                                 <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                    orders[idx].count += order.item.packaging
+                                                    orders[idx].count += order.item.packaging?order.item.packaging:1
                                                     orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
                                                     setOrders([...orders])
                                                     canculateAllPrice()

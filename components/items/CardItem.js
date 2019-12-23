@@ -60,14 +60,16 @@ const CardItem = React.memo((props) => {
                             </div>
                             :null
                     }
-                                    {
-                                        element.hit?
-                                            <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
-                                                Хит
-                                            </div>
-                                            :null
-                                    }
-                                        </div>
+                    {
+                        element.hit?
+                            <>
+                            <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
+                                Хит
+                            </div>
+                            </>
+                            :null
+                    }
+                </div>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
                                             <img
                                                 className={classes.media}

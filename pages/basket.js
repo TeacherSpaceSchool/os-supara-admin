@@ -226,7 +226,7 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                             </div>
                                                             <div className={classes.addPackagingM} style={{color: '#ffb300'}} onClick={()=>{
-                                                                list[idx].count += row.item.packaging
+                                                                list[idx].count += row.item.packaging?row.item.packaging:1
                                                                 setBasketChange(idx, list[idx].count)
                                                                 setList([...list])
                                                             }}>
@@ -319,7 +319,7 @@ const Basket = React.memo((props) => {
                                                         <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
                                                     </div>
                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                        list[idx].count += row.item.packaging
+                                                        list[idx].count += row.item.packaging?row.item.packaging:1
                                                         setBasketChange(idx, list[idx].count)
                                                         setList([...list])
                                                     }}>

@@ -8,6 +8,9 @@ export default makeStyles({
     },
     title: {
         flexGrow: 1,
+        height: 32,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
     },
     searchD: {
         position: 'fixed',

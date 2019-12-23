@@ -40,7 +40,6 @@ const CardBonus = React.memo((props) => {
                                 :
                                 null
                         }
-                        <br/>
                              <div className={classes.row}>
                                     <div className={classes.nameField}>
                                         Клиент:&nbsp;
