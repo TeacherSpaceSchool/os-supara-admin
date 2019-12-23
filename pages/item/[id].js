@@ -181,6 +181,7 @@ const Item = React.memo((props) => {
                                         </h1>
                                         <div className={classes.price}>
                                             <TextField
+                                                type={isMobileApp?'number':'text'}
                                                 label='Упаковка'
                                                 value={packaging}
                                                 className={isMobileApp?classes.inputM:classes.inputD}
@@ -192,6 +193,7 @@ const Item = React.memo((props) => {
                                         </div>
                                             <div className={classes.price}>
                                                 <TextField
+                                                    type={isMobileApp?'number':'text'}
                                                     label='Цена'
                                                     value={price}
                                                     className={isMobileApp?classes.inputM:classes.inputD}
@@ -203,6 +205,7 @@ const Item = React.memo((props) => {
                                             </div>
                                             <div className={classes.price}>
                                                 <TextField
+                                                    type={isMobileApp?'number':'text'}
                                                     label='Скидка'
                                                     value={stock}
                                                     className={isMobileApp?classes.inputM:classes.inputD}

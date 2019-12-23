@@ -131,6 +131,7 @@ const Organization = React.memo((props) => {
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
                                         <InputLabel>Минимальный заказ</InputLabel>
                                         <Input
+                                            type={isMobileApp?'number':'text'}
                                             value={minimumOrder}
                                             onChange={(event)=>{setMinimumOrder(checkInt(event.target.value))}}
                                             inputProps={{

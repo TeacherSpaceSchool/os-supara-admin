@@ -214,7 +214,7 @@ const Basket = React.memo((props) => {
                                                                     decrement(idx)
                                                                 }}>–
                                                                 </div>
-                                                                <input type='text' className={classes.counternmbr}
+                                                                <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
                                                                        value={row.count} onChange={(event) => {
                                                                     list[idx].count = isNaN(event.target.value) || event.target.value.length === 0 ? 0 : parseInt(event.target.value)
                                                                     setBasketChange(idx, list[idx].count)
@@ -311,7 +311,7 @@ const Basket = React.memo((props) => {
 
                                                     <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                         <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
-                                                        <input type='text' className={classes.counternmbrD} value={row.count} onChange={(event)=>{
+                                                        <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
                                                             list[idx].count = isNaN(event.target.value)||event.target.value.length<1?1:parseInt(event.target.value)
                                                             setBasketChange(idx, list[idx].count)
                                                             setList([...list])

@@ -44,6 +44,7 @@ const CardBonus = React.memo((props) => {
                             ['организация', 'менеджер', 'admin'].includes(profile.role)?
                                 <>
                                 <TextField
+                                    type={isMobileApp?'number':'text'}
                                     style={{width: '100%'}}
                                     label='Цель'
                                     value={target}
@@ -55,6 +56,7 @@ const CardBonus = React.memo((props) => {
                                 />
                                 <br/>
                                 <TextField
+                                    type={isMobileApp?'number':'text'}
                                     style={{width: '100%'}}
                                     label='Бонус'
                                     value={bonus1}
