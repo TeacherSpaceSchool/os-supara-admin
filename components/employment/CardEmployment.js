@@ -21,9 +21,9 @@ const CardEmployment = React.memo((props) => {
     let [status, setStatus] = useState(element!==undefined?element.user.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
-            <CardActionArea>
-                <Link href='/employment/[id]' as={`/employment/${element.user._id}`}>
-                    <CardContent>
+            <Link href='/employment/[id]' as={`/employment/${element.user._id}`}>
+                <CardActionArea>
+                   <CardContent>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Имя:&nbsp;
@@ -61,8 +61,8 @@ const CardEmployment = React.memo((props) => {
                                 </div>
                             </div>
                     </CardContent>
-                </Link>
             </CardActionArea>
+</Link>
             {
                 (profile.role === 'admin' || profile.role === 'организация') && profile._id!==element.user._id ?
                     <CardActions>

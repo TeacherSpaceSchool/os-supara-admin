@@ -124,17 +124,17 @@ const CardCategory = React.memo((props) => {
                     </Card>
                     :
                     element!==undefined?
+                        <Link href='/items/[id]' as={`/items/${element._id}`}>
                         <Card className={isMobileApp?classes.cardM:classes.cardD}>
                             <CardActionArea>
-                                <Link href='/items/[id]' as={`/items/${element._id}`}>
-                                    <div className={classes.line}>
+                                   <div className={classes.line}>
                                         <h3 className={classes.input}>
                                             {element.name}
                                         </h3>
                                     </div>
-                                </Link>
                             </CardActionArea>
                         </Card>
+                </Link>
                         :null
             }
             </div>

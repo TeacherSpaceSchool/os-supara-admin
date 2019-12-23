@@ -133,10 +133,10 @@ const CardCategory = React.memo((props) => {
 
                     :
                     name!=='Не задано'?
-                        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
+                            <Card className={isMobileApp?classes.cardM:classes.cardD}>
                             <CardActionArea>
                             <CardContent>
-                                <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                     <div className={classes.line}>
                                         <label htmlFor='contained-button-file'>
                                             <img
@@ -149,16 +149,16 @@ const CardCategory = React.memo((props) => {
                                             {element.name}
                                         </h3>
                                     </div>
-                                </Link>
                             </CardContent>
                         </CardActionArea>
                         </Card>
+                </Link>
                         :
                         name==='Не задано'&&profile.role === 'admin'?
-                            <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                            <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
+                                <Card className={isMobileApp?classes.cardM:classes.cardD}>
                                 <CardActionArea>
                                 <CardContent>
-                                    <Link href='/subcategory/[id]' as={`/subcategory/${element._id}`}>
                                         <div className={classes.line}>
                                             <label htmlFor='contained-button-file'>
                                                 <img
@@ -171,10 +171,10 @@ const CardCategory = React.memo((props) => {
                                                 {element.name}
                                             </h3>
                                         </div>
-                                    </Link>
                                 </CardContent>
                             </CardActionArea>
                             </Card>
+                </Link>
                             :null
             }
             </div>

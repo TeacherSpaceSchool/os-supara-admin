@@ -11,22 +11,22 @@ const CardBrand = React.memo((props) => {
     const { element } = props;
     const { isMobileApp } = props.app;
     return (
-        <Card className={isMobileApp?classes.cardM:classes.cardD}>
-            <CardActionArea>
-                <Link href='/brand/[id]' as={`/brand/${element._id}`}>
-                    <div className={classes.line}>
-                        <img
-                            className={classes.mediaO}
-                            src={element.image}
-                            alt={element.name}
-                        />
-                        <h3 className={classes.input}>
-                            {element.name}
-                        </h3>
-                    </div>
-                </Link>
-            </CardActionArea>
-        </Card>
+        <Link href='/brand/[id]' as={`/brand/${element._id}`}>
+            <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                <CardActionArea>
+                       <div className={classes.line}>
+                            <img
+                                className={classes.mediaO}
+                                src={element.image}
+                                alt={element.name}
+                            />
+                            <h3 className={classes.input}>
+                                {element.name}
+                            </h3>
+                        </div>
+                </CardActionArea>
+            </Card>
+        </Link>
     );
 })
 

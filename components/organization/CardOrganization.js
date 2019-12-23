@@ -21,9 +21,9 @@ const CardOrganization = React.memo((props) => {
     let [status, setStatus] = useState(element!==undefined?element.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
-            <CardActionArea>
-                <Link href='/organization/[id]' as={`/organization/${element._id}`}>
-                    <div className={classes.line}>
+            <Link href='/organization/[id]' as={`/organization/${element._id}`}>
+                <CardActionArea>
+                   <div className={classes.line}>
                         <img
                             className={classes.mediaO}
                             src={element.image}
@@ -33,8 +33,8 @@ const CardOrganization = React.memo((props) => {
                             {element.name}
                         </h3>
                     </div>
-                </Link>
             </CardActionArea>
+</Link>
                 {
                     profile.role === 'admin' ?
                         <CardActions>

@@ -22,8 +22,8 @@ const CardOrganization = React.memo((props) => {
     let [status, setStatus] = useState(element.user?element.user.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
+            <Link href='/client/[id]' as={`/client/${element._id}`}>
             <CardActionArea>
-                <Link href='/client/[id]' as={`/client/${element._id}`}>
                     <CardContent className={classes.line}>
                         <label htmlFor='contained-button-file'>
                             <img
@@ -80,8 +80,8 @@ const CardOrganization = React.memo((props) => {
                             </div>
                         </div>
                     </CardContent>
-                </Link>
             </CardActionArea>
+            </Link>
             <CardActions>
                 {
                     element.user&&profile.role === 'admin' ?
