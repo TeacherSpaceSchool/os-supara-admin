@@ -331,7 +331,7 @@ const Client = React.memo((props) => {
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
-                                                    error={!element&&element.length===0}
+                                                    error={!element&&element==='+996'}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
