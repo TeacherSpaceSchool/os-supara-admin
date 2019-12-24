@@ -381,6 +381,8 @@ const Basket = React.memo((props) => {
                             else {
                                 if ((profile.role === 'агент' ? client : data.client) && (profile.role === 'агент' ? client : data.client)._id)
                                     Router.push(`/client/${(profile.role === 'агент' ? client : data.client)._id}`)
+                                else
+                                    showSnackBar('Пожалуйста выберите клиента')
                             }
                         }
                         else {
