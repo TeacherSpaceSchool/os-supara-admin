@@ -113,7 +113,7 @@ const Organization = React.memo((props) => {
                                 <>
                                 <label htmlFor='contained-button-file'>
                                     <img
-                                        className={classes.media1}
+                                        className={isMobileApp?classes.mediaM:classes.mediaD}
                                         src={preview}
                                         alt={'Добавить'}
                                     />
@@ -316,7 +316,7 @@ const Organization = React.memo((props) => {
                                     :
                                     <>
                                     <img
-                                        className={classes.media1}
+                                        className={isMobileApp?classes.mediaM:classes.mediaD}
                                         src={preview}
                                         alt={name}
                                     />

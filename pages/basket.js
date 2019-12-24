@@ -12,6 +12,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {checkInt} from '../src/lib';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
@@ -216,7 +217,7 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                                 <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
                                                                        value={row.count} onChange={(event) => {
-                                                                    list[idx].count = isNaN(event.target.value) || event.target.value.length === 0 ? 0 : parseInt(event.target.value)
+                                                                    list[idx].count = checkInt(event.target.value)
                                                                     setBasketChange(idx, list[idx].count)
                                                                     setList([...list])
                                                                 }}/>
@@ -226,7 +227,12 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                             </div>
                                                             <div className={classes.addPackagingM} style={{color: '#ffb300'}} onClick={()=>{
-                                                                list[idx].count += row.item.packaging?row.item.packaging:1
+                                                                if(row.item.packaging){
+                                                                    list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
+                                                                }
+                                                                else {
+                                                                    list[idx].count += 1
+                                                                }
                                                                 setBasketChange(idx, list[idx].count)
                                                                 setList([...list])
                                                             }}>
@@ -312,20 +318,24 @@ const Basket = React.memo((props) => {
                                                     <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                         <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
                                                         <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
-                                                            list[idx].count = isNaN(event.target.value)||event.target.value.length<1?1:parseInt(event.target.value)
+                                                            list[idx].count = checkInt(event.target.value)
                                                             setBasketChange(idx, list[idx].count)
                                                             setList([...list])
                                                         }}/>
                                                         <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
                                                     </div>
                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                        list[idx].count += row.item.packaging?row.item.packaging:1
+                                                        if(row.item.packaging){
+                                                            list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
+                                                        }
+                                                        else {
+                                                            list[idx].count += 1
+                                                        }
                                                         setBasketChange(idx, list[idx].count)
                                                         setList([...list])
                                                     }}>
                                                         Добавить упаковку
                                                     </div>
-
                                                 </TableCell>
                                                 <TableCell align="left">{`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count} сом`}</TableCell>
                                                 <TableCell align="left">{`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count)*row.count} сом`}</TableCell>

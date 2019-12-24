@@ -15,9 +15,11 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                             agent 
                                 {_id name}
                             createdAt
+                            allTonnage
                             orders 
                                 { 
                                     _id
+                                    allTonnage
                                     createdAt
                                     item
                                         {
@@ -27,6 +29,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             stock 
                                             price
                                             packaging
+                                            weight
                                             organization
                                                 {_id name}
                                         }
@@ -72,21 +75,24 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
     }
 }
 
-export const getOrdersForRouting = async()=>{
+export const getOrdersForRouting = async(organization)=>{
     try{
         const client = new SingletonApolloClient().getClient();
         let res = await client
             .query({
+                variables: {organization: organization},
                 query: gql`
-                    query{
-                        invoicesForRouting{
+                    query($organization: ID){
+                        invoicesForRouting(organization: $organization){
                             _id
                             agent 
                                 {_id name}
                             createdAt
+                            allTonnage
                             orders 
                                 { 
                                     _id
+                                    allTonnage
                                     createdAt
                                     item
                                         {
@@ -95,6 +101,7 @@ export const getOrdersForRouting = async()=>{
                                             name    
                                             stock 
                                             packaging
+                                            weight
                                             price
                                             organization
                                                 {_id name}
@@ -146,10 +153,12 @@ export const getOrder = async({_id})=>{
                             createdAt
                             agent: 
                                 {_id name}
+                            allTonnage
                             orders 
                                 { 
                                     _id
                                     createdAt
+                                    allTonnage
                                     item
                                         {
                                             image
@@ -157,6 +166,7 @@ export const getOrder = async({_id})=>{
                                             name    
                                             stock 
                                             packaging
+                                            weight
                                             price
                                             organization
                                                 {_id name}

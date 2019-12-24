@@ -25,6 +25,7 @@ const Order =  React.memo(
         const { classes, element, setList, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
+        let [allTonnage, setAllTonnage] = useState(element.allTonnage);
         let [taken, setTaken] = useState(element.taken);
         let [confirmationForwarder, setConfirmationForwarder] = useState(element.confirmationForwarder);
         let [confirmationClient, setConfirmationClient] = useState(element.confirmationClient);
@@ -33,17 +34,21 @@ const Order =  React.memo(
         const width = isMobileApp? (window.innerWidth-112) : 500;
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
+            allTonnage=0
             allPrice=0
             for(let i=0; i<orders.length; i++){
                 allPrice+=orders[i].allPrice
+                allTonnage+=orders[i].allTonnage
             }
             if(element.usedBonus&&element.usedBonus>0)
                 allPrice -= element.usedBonus
             setAllPrice(allPrice)
+            setAllTonnage(allTonnage)
         }
         let increment = (idx)=>{
             orders[idx].count+=1
             orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+            orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
             setOrders([...orders])
             canculateAllPrice()
         }
@@ -51,6 +56,7 @@ const Order =  React.memo(
             if(orders[idx].count>1) {
                 orders[idx].count -= 1
                 orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                 setOrders([...orders])
                 canculateAllPrice()
             }
@@ -151,6 +157,10 @@ const Order =  React.memo(
                     <div className={classes.value}>{allPrice}&nbsp;сом</div>
                 </div>
                 <div className={classes.row}>
+                    <div className={classes.nameField}>Тоннаж:&nbsp;</div>
+                    <div className={classes.value}>{allTonnage}&nbsp;кг</div>
+                </div>
+                <div className={classes.row}>
                     <div className={classes.nameField}>Способ оплаты:&nbsp;</div>
                     <div className={classes.value}>{element.paymentMethod}</div>
                 </div>
@@ -193,8 +203,14 @@ const Order =  React.memo(
                                                     <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
                                                 </div>
                                                 <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                    orders[idx].count += order.item.packaging?order.item.packaging:1
+                                                    if(order.item.packaging){
+                                                        orders[idx].count = (parseInt(orders[idx].count/order.item.packaging)+1)*order.item.packaging
+                                                    }
+                                                    else {
+                                                        orders[idx].count += 1
+                                                    }
                                                     orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                                                    orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                                                     setOrders([...orders])
                                                     canculateAllPrice()
                                                 }}>
@@ -382,7 +398,7 @@ const Order =  React.memo(
 
                                 let sendOrders;
                                 if(element.orders[0].status!=='обработка') sendOrders = []
-                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, status: order.status}})
+                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, status: order.status}})
 
                                 let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
                                 if(setList)

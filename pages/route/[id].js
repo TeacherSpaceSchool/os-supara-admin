@@ -48,6 +48,7 @@ const Route = React.memo((props) => {
     let [invoices, setInvoices] = useState(data.route?data.route.invoices:[]);
     let [cancelInvoices, setCancelInvoices] = useState([]);
     let [allInvoices, setAllInvoices] = useState([]);
+    let [allTonnage, setAllTonnage] = useState(data.route&&data.route.allTonnage?data.route.allTonnage:0);
     let [unselectedInvoices, setUnselectedInvoices] = useState([]);
     let [selectType, setSelectType] = useState('Все');
     let [employments, setEmployments] = useState([]);
@@ -77,6 +78,7 @@ const Route = React.memo((props) => {
                     setEmployment({})
                 if(organization._id)
                     setEmployments((await getEcspeditors({_id: organization._id})).ecspeditors)
+                setUnselectedInvoices((await getOrdersForRouting(organization._id  )).invoicesForRouting)
             }
         })()
     },[organization])
@@ -101,6 +103,15 @@ const Route = React.memo((props) => {
             }
         })()
     },[selectType, unselectedInvoices, invoices])
+    useEffect(()=>{
+        (async()=>{
+            allTonnage = 0
+           for(let i=0; i<invoices.length; i++){
+               allTonnage += invoices[i].allTonnage
+           }
+           setAllTonnage(allTonnage)
+        })()
+    },[invoices])
     const statusColor = {
         'создан': 'orange',
         'выполняется': 'blue',
@@ -138,7 +149,7 @@ const Route = React.memo((props) => {
                         {data.route?
                             <>
                             {router.query.id==='new'?null:<div className={classes.number}>{data.route.number}</div>}
-                            {(router.query.id==='new'||status==='создан')&&profile.role==='admin'?
+                            {(router.query.id==='new')&&profile.role==='admin'?
                                 <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                     <InputLabel>Организация</InputLabel>
                                     <Select value={organization._id}onChange={handleOrganization}>
@@ -195,6 +206,15 @@ const Route = React.memo((props) => {
                                 }}
                                 onChange={ event => setDateStart(event.target.value) }
                             />
+                            <br/>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>
+                                    Тоннаж:&nbsp;
+                                </div>
+                                <div className={classes.value}>
+                                    {allTonnage}&nbsp;кг
+                                </div>
+                            </div>
                             <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
@@ -323,7 +343,7 @@ Route.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {route: {invoices: [], employment: {}, status: '', dateStart: new Date(), dateEnd: null, number: ''}},
+            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {route: {allTonnage: 0, invoices: [], employment: {}, status: '', dateStart: new Date(), dateEnd: null, number: ''}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

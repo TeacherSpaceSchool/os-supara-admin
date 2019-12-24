@@ -13,6 +13,9 @@ export const getJWT = (auth)=>{
 export const checkInt = (int) => {
     return isNaN(parseInt(int))?0:parseInt(int)
 }
+export const checkFloat = (float) => {
+    return isNaN(parseFloat(float))?0:parseFloat(float)
+}
 export const pdDDMMYYYY = (date) =>
 {
     date.setHours(date.getHours() - (date.getTimezoneOffset()/60));

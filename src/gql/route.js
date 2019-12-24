@@ -19,9 +19,11 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     agent 
                                         {_id name}
                                     createdAt
+                                    allTonnage
                                     orders 
                                         { 
                                             _id
+                                            allTonnage
                                             createdAt
                                             item
                                                 {
@@ -31,6 +33,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                     stock 
                                                     price
                                                     packaging
+                                                    weight
                                                     organization
                                                         {_id name}
                                                 }
@@ -75,6 +78,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                             status
                             dateStart
                             dateEnd
+                            allTonnage
                             number
                         }
                         sortRoute {
@@ -110,14 +114,17 @@ export const getRoute = async({_id}, client)=>{
                                     agent 
                                         {_id name}
                                     createdAt
+                                    allTonnage
                                     orders 
                                         { 
                                             _id
                                             createdAt
+                                            allTonnage
                                             item
                                                 {
                                                     image
                                                     packaging
+                                                    weight
                                                     _id
                                                     name    
                                                     stock 
@@ -166,6 +173,7 @@ export const getRoute = async({_id}, client)=>{
                             status
                             dateStart
                             dateEnd
+                            allTonnage
                             number
                         }
                     }`,

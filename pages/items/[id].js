@@ -93,8 +93,9 @@ const Items = React.memo((props) => {
 })
 
 Items.getInitialProps = async function(ctx) {
+    ctx.store.getState().app.sort = 'name'
     return {
-        data: await getItems({subCategory: ctx.query.id, search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+        data: await getItems({subCategory: ctx.query.id, search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };
 };
 

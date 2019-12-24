@@ -62,8 +62,9 @@ const Organization = React.memo((props) => {
 })
 
 Organization.getInitialProps = async function(ctx) {
+    ctx.store.getState().app.sort = 'name'
     return {
-        data: await getOrganizations({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

@@ -40,14 +40,16 @@ const Client = React.memo((props) => {
     let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
     let [name, setName] = useState(data.client?data.client.name:'');
     let [email, setEmail] = useState(data.client?data.client.email:'');
-    let [phone, setPhone] = useState(data.client?data.client.phone:[]);
+    let [phone, setPhone] = useState(data.client&&data.client.phone.length>0?data.client.phone:['+996']);
     let addPhone = ()=>{
-        phone = [...phone, '']
+        phone = [...phone, '+996']
         setPhone(phone)
     };
     let editPhone = (event, idx)=>{
-        phone[idx] = event.target.value
-        setPhone([...phone])
+        if(phone[idx]!=='+996') {
+            phone[idx] = event.target.value
+            setPhone([...phone])
+        }
     };
     let deletePhone = (idx)=>{
         phone.splice(idx, 1);
@@ -58,7 +60,7 @@ const Client = React.memo((props) => {
     //привести к геолокации
     if(data.client.address.length>0&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    let [address, setAddress] = useState(data.client?data.client.address:[]);
+    let [address, setAddress] = useState(data.client&&data.client.address.length>0?data.client.address:[['']]);
     let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
     let [city, setCity] = useState(data.client?data.client.city:'');
     let [type, setType] = useState(
@@ -147,7 +149,7 @@ const Client = React.memo((props) => {
         setHide(!hide)
     };
     useEffect(()=>{
-        if(name.length===0||!city||city.length===0||phone.length===0||address.length===0||address[0].length===0) {
+        if(name.length===0||!city||city.length===0||phone.length===0||address.length===0||address[0].length===0||address[0][0].length===0) {
             showSnackBar('Обязательно заполните имя, город, номер телефона и адрес')
         }
     },[])
@@ -171,7 +173,7 @@ const Client = React.memo((props) => {
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
                                         <img
-                                            className={classes.media}
+                                            className={isMobileApp?classes.mediaM:classes.mediaD}
                                             src={preview?preview:'/static/add.png'}
                                             alt={'Добавить'}
                                         />
@@ -242,6 +244,7 @@ const Client = React.memo((props) => {
                                 <div>
                                         <TextField
                                             label='Имя'
+                                            error={name.length===0}
                                             value={name}
                                             className={classes.input}
                                             onChange={(event)=>{setName(event.target.value)}}
@@ -303,6 +306,7 @@ const Client = React.memo((props) => {
                                     <TextField
                                         className={classes.input}
                                         label='Город'
+                                        error={name.length===0}
                                         type='text'
                                         InputLabelProps={{
                                             shrink: true,
@@ -318,7 +322,7 @@ const Client = React.memo((props) => {
                                     {phone?phone.map((element, idx)=>
                                         <div key={idx}>
                                             <FormControl className={classes.input}>
-                                                <InputLabel>Телефон. Формат: +996555780861</InputLabel>
+                                                <InputLabel color={!element&&element.length>0?'primary':'secondary'}>Телефон. Формат: +996555780861</InputLabel>
                                                 <Input
                                                     placeholder='Телефон. Формат: +996555780861'
                                                     value={element}
@@ -327,6 +331,7 @@ const Client = React.memo((props) => {
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
+                                                    error={!element&&element.length===0}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
@@ -382,8 +387,9 @@ const Client = React.memo((props) => {
                                                     null
                                             }
                                             <FormControl className={classes.input}>
-                                                <InputLabel>Адрес{type==='торговая точка'?' магазина':''}</InputLabel>
+                                                <InputLabel color={!element[0]&&element[0].length>0?'primary':'secondary'}>Адрес{type==='торговая точка'?' магазина':''}</InputLabel>
                                                 <Input
+                                                    error={!element[0]&&element[0].length===0}
                                                     placeholder='Адрес'
                                                     value={element[0]}
                                                     className={classes.input}
@@ -455,7 +461,7 @@ const Client = React.memo((props) => {
                                             ||profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
-                                                    if(name.length>0&&address.length>0&&address[0].length>0&&phone.length>0) {
+                                                    if(name.length>0&&address[0].length>0&&address.length>0&&phone[0].length>0&&phone.length>0) {
                                                         let editElement = {_id: data.client._id}
                                                         if (image) editElement.image = image
                                                         if (passport) editElement.passport = passport
@@ -530,7 +536,7 @@ const Client = React.memo((props) => {
                                                 :
                                                 router.query.id==='new'&&['организация', 'менеджер', 'агент'].includes(profile.role)?
                                                     <Button onClick={async()=>{
-                                                        if(name.length>0&&address.length>0&&city.length>0&&phone.length>0){
+                                                        if(name.length>0&&address[0].length>0&&address.length>0&&city.length>0&&phone[0].length>0&&phone.length>0){
                                                             let editElement = {}
                                                             if(image!==undefined)editElement.image = image
                                                             if(passport!==undefined)editElement.passport = passport
@@ -569,7 +575,7 @@ const Client = React.memo((props) => {
 
                                 <div className={classes.column}>
                                     <img
-                                        className={classes.media}
+                                        className={isMobileApp?classes.mediaM:classes.mediaD}
                                         src={preview}
                                         alt={name}
                                     />

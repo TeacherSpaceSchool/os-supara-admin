@@ -22,6 +22,7 @@ export const getBasket = async(client)=>{
                                     image 
                                     packaging
                                     price
+                                    weight
                                     organization
                                         {_id name minimumOrder}
                                 }

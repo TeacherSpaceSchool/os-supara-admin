@@ -64,6 +64,7 @@ const Index = React.memo((props) => {
 
 Index.getInitialProps = async function(ctx) {
     let role = ctx.store.getState().user.profile.role
+    ctx.store.getState().app.sort = 'name'
     let authenticated = ctx.store.getState().user.authenticated
     if(!(!authenticated||['admin', 'client'].includes(role)||!role))
         if(ctx.res) {
@@ -74,7 +75,7 @@ Index.getInitialProps = async function(ctx) {
         } else
             Router.push('/items/all')
     return {
-        data: await getCategorys({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getCategorys({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

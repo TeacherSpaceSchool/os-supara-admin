@@ -7,7 +7,7 @@ import { getEmployment } from '../../src/gql/employment'
 import { getOrganizations } from '../../src/gql/organization'
 import { getItem, addItem, setItem, onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket } from '../../src/gql/basket'
-import { checkInt } from '../../src/lib'
+import { checkInt, checkFloat } from '../../src/lib'
 import itemStyle from '../../src/styleMUI/item/item'
 import { useRouter } from 'next/router'
 import Card from '@material-ui/core/Card';
@@ -63,6 +63,7 @@ const Item = React.memo((props) => {
     let handleSubCategory =  (event) => {
         setSubCategory({_id: event.target.value, name: event.target.name})
     };
+    let [weight, setWeight] = useState(data.item&&data.item.weight?data.item.weight:0);
     let [organization, setOrganization] = useState(data.item!==null?data.item.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
@@ -179,6 +180,22 @@ const Item = React.memo((props) => {
                                                 }}
                                             />
                                         </h1>
+                                        <div className={classes.price}>
+                                            <TextField
+                                                type={isMobileApp?'number':'text'}
+                                                label='Вес в килограммах'
+                                                value={weight}
+                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                onChange={(event)=>{
+                                                    while((event.target.value).includes(','))
+                                                        event.target.value = (event.target.value).replace(',', '.')
+                                                    setWeight(event.target.value)}
+                                                }
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                        </div>
                                         <div className={classes.price}>
                                             <TextField
                                                 type={isMobileApp?'number':'text'}
@@ -311,6 +328,7 @@ const Item = React.memo((props) => {
                                                                     latest: latest,
                                                                     organization: organization._id,
                                                                     deliveryDays: deliveryDays,
+                                                                    weight: checkFloat(weight)
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
@@ -332,6 +350,7 @@ const Item = React.memo((props) => {
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
                                                         if(price>0&&price!==data.item.price)editElement.price = price
+                                                        if(weight!==data.item.weight)editElement.weight = checkFloat(weight)
                                                         if(hit!==data.item.hit)editElement.hit = hit
                                                         if(latest!==data.item.latest)editElement.latest = latest
                                                         if(organization._id!==data.item.organization._id)editElement.organization = organization._id
@@ -506,12 +525,13 @@ const Item = React.memo((props) => {
                                                             <div className={classes.counter} style={isMobileApp?{}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
                                                                 <input type='number' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                                    setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
+                                                                    setCount(checkInt(event.target.value))
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
                                                             </div>
                                                             <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                                setCount(count+=packaging)
+                                                                count = (parseInt(count/packaging)+1)*packaging
+                                                                setCount(count)
                                                             }}>
                                                                 Добавить упаковку
                                                             </div>
@@ -534,7 +554,7 @@ const Item = React.memo((props) => {
                                                                                     index = i
                                                                             }
                                                                             if (index === -1)
-                                                                                basket.push({item: data.item, count: count})
+                                                                                basket.push({item: data.item, count: count > 0 ? count : 1})
                                                                             localStorage.basket = JSON.stringify(basket)
                                                                         }
                                                                         showSnackBar('Товар добавлен в корзину')
@@ -553,7 +573,7 @@ const Item = React.memo((props) => {
                                                             <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
                                                                 <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                                    setCount(isNaN(event.target.value)||event.target.value<1?1:parseInt(event.target.value))
+                                                                    setCount(checkInt(event.target.value))
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
                                                             </div>
@@ -576,7 +596,7 @@ const Item = React.memo((props) => {
                                                                                     index = i
                                                                             }
                                                                             if (index === -1)
-                                                                                basket.push({item: data.item, count: count})
+                                                                                basket.push({item: data.item, count: count > 0 ? count : 1})
                                                                             localStorage.basket = JSON.stringify(basket)
                                                                         }
                                                                         showSnackBar('Товар добавлен в корзину')
@@ -588,13 +608,13 @@ const Item = React.memo((props) => {
                                                             </Button>
                                                         </div>
                                                         <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                            setCount(count+=packaging)
+                                                            count = (parseInt(count/packaging)+1)*packaging
+                                                            setCount(count)
                                                         }}>
                                                             Добавить упаковку
                                                         </div>
                                                         </>
                                                 }
-                                                <br/>
                                                 <div className={classes.share}>
                                                     Поделиться:
                                                 </div>
