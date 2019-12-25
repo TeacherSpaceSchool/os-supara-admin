@@ -5,13 +5,6 @@ import { connect } from 'react-redux'
 import pageListStyle from '../src/styleMUI/catalog/catalog'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
-import CancelIcon from '@material-ui/icons/Cancel';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import {checkInt} from '../src/lib';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
@@ -19,13 +12,7 @@ import * as snackbarActions from '../redux/actions/snackbar'
 import { getItems } from '../src/gql/items';
 import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
-import Sign from '../components/dialog/Sign'
-import Confirmation from '../components/dialog/Confirmation'
 import { urlMain } from '../redux/constants/other'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
 import {getOrganization} from '../src/gql/organization'
@@ -35,6 +22,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { forceCheck } from 'react-lazyload';
 import { addBasket, deleteBasket, deleteBasketAll } from '../src/gql/basket';
 import Divider from '@material-ui/core/Divider';
+import LazyLoad from 'react-lazyload';
+import CardCatalogPlaceholder from '../components/catalog/CardCatalogPlaceholder'
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
@@ -157,7 +146,8 @@ const Catalog = React.memo((props) => {
                             else
                                 price = row.price
                             return (
-                                <div key={row._id}>
+                                <LazyLoad scrollContainer={'.App-body'} key={row._id} offset={[186, 0]} debounce={0} once={true}  placeholder={<CardCatalogPlaceholder/>}>
+                                    <div>
                                     <div className={classes.line}>
                                         <a href={`/item/${row._id}`} target='_blank'>
                                             <img className={classes.media} src={row.image}/>
@@ -194,6 +184,7 @@ const Catalog = React.memo((props) => {
                                     <Divider/>
                                     <br/>
                                 </div>
+                                </LazyLoad>
                                 )
                             }
                         )
