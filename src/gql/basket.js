@@ -75,6 +75,22 @@ export const deleteBasket = async(ids)=>{
     }
 }
 
+export const deleteBasketAll = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation{
+                        deleteBasketAll{
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const addBasket = async(element)=>{
     try{
         const client = new SingletonApolloClient().getClient()

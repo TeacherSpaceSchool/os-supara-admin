@@ -11,6 +11,8 @@ export const getJWT = (auth)=>{
     return res!==null?res[0].trim().replace('jwt=', ''):undefined
 }
 export const checkInt = (int) => {
+    if(int.length>1&&int[0]==='0')
+        int = int.substring(1)
     return isNaN(parseInt(int))?0:parseInt(int)
 }
 export const checkFloat = (float) => {
@@ -51,4 +53,12 @@ export const pdDDMMYYHHMMCancel = (date) =>
     date = JSON.stringify(date).split('-')
     date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
     return date
+}
+export const validMail = (mail) =>
+{
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
+}
+export const validPhone = (phone) =>
+{
+    return /^[+]{1}996[0-9]{9}$/.test(phone);
 }

@@ -7,70 +7,12 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'row'
     },
-    addPackaging: {
-        marginTop: 10,
-        textAlign: 'center',
-        fontSize: '0.8125rem',
-        fontFamily: 'Roboto',
-        whiteSpace: 'pre-wrap',
-        cursor: 'pointer',
-        borderBottom: '1px dashed #ffb300',
-        userSelect: 'none',
-        width: 122
-    },
-    addPackagingM: {
-        marginBottom: 20,
-        textAlign: 'center',
-        fontSize: '0.875rem',
-        fontFamily: 'Roboto',
-        whiteSpace: 'pre-wrap',
-        cursor: 'pointer',
-        borderBottom: '1px dashed #ffb300',
-        userSelect: 'none',
-        width: 145
-    },
-    itemM:{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
-    cancelM: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        cursor: 'pointer'
-    },
     column:{
         display: 'flex',
         flexDirection: 'column',
     },
     input: {
         width: '100%',
-    },
-    divImage: {
-        position: 'relative',
-        width: '100%'
-    },
-    mediaM: {
-        objectFit: 'contain',
-        width: '100%',
-        height: 150,
-    },
-    mediaD: {
-        objectFit: 'contain',
-        width: 70,
-        height: 70
-    },
-    nameD: {
-        height: 80,
-        width: 200,
-        overflow: 'hidden',
-        wordWrap: 'break-word',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        fontWeight: 500,
-        fontFamily: 'Roboto'
     },
     nameM: {
         display: 'flex',
@@ -85,52 +27,6 @@ export default makeStyles({
         fontSize: '1rem',
         fontFamily: 'Roboto',
         wordBreak: 'break-all'
-    },
-    nameField: {
-        width: 100,
-        marginBottom: 5,
-        fontWeight: 'bold',
-        fontSize: '1rem',
-        fontFamily: 'Roboto',
-        color: '#A0A0A0'
-    },
-    counter: {
-        width: 145,
-        borderRadius: 5,
-        overflow: 'hidden',
-        border: '1px solid #e6e6e6',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    counterbtn: {
-        userSelect: 'none',
-        cursor: 'pointer',
-        width: 34,
-        height: 34,
-        fontSize: 20,
-        fontWeight: 700,
-        background: '#e6e6e6',
-        color: '#212121',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    counternmbr: {
-        width: 77,
-        height: 34,
-        outline: 'none',
-        border: 'none',
-        fontSize: 20,
-        textAlign: 'center',
-    },
-    hrA: {
-        width: '100%',
-        background: 'black',
-        height: 1,
-        marginBottom: 5,
-        marginTop: 5
-
     },
     bottomBasketM: {
         width: '100vw',
@@ -207,9 +103,20 @@ export default makeStyles({
         fontFamily: 'Roboto'
 
     },
-
-    counterD: {
-        width: 113,
+    line: {
+        display: 'flex',
+        alignItems: 'start',
+        justifyContent: 'start',
+        flexDirection: 'row',
+    },
+    media: {
+        width: 100,
+        height: 100,
+        objectFit: 'contain',
+        marginRight: 10
+    },
+    counter: {
+        width: 127,
         borderRadius: 5,
         overflow: 'hidden',
         border: '1px solid #e6e6e6',
@@ -217,12 +124,12 @@ export default makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    counterbtnD: {
-        fontSize: '1rem',
+    counterbtn: {
         userSelect: 'none',
         cursor: 'pointer',
-        width: 28,
-        height: 28,
+        width: 25,
+        height: 25,
+        fontSize: '1rem',
         fontWeight: 700,
         background: '#e6e6e6',
         color: '#212121',
@@ -230,14 +137,24 @@ export default makeStyles({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    counternmbrD: {
-        fontSize: '0.875rem',
-        width: 57,
-        height: 28,
+    counternmbr: {
+        width: 77,
+        height: 25,
         outline: 'none',
         border: 'none',
+        fontSize: '1rem',
         textAlign: 'center',
     },
-
+    addPackaging: {
+        marginTop: 10,
+        textAlign: 'center',
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        borderBottom: '1px dashed #ffb300',
+        userSelect: 'none',
+        width: 140
+    },
 
 })

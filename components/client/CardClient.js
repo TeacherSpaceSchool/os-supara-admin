@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffClient, deleteClient } from '../../src/gql/client'
+import { pdDDMMYYHHMM } from '../../src/lib'
 import CardActions from '@material-ui/core/CardActions';
 import Confirmation from '../../components/dialog/Confirmation'
 
@@ -76,6 +77,14 @@ const CardOrganization = React.memo((props) => {
                                             {addres[0]}
                                         </div>
                                     )}
+                                </div>
+                            </div>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>
+                                    Зарегестрирован:&nbsp;
+                                </div>
+                                <div className={classes.value}>
+                                    {pdDDMMYYHHMM(new Date(element.createdAt))}
                                 </div>
                             </div>
                         </div>

@@ -516,7 +516,7 @@ const Item = React.memo((props) => {
                                         </div>
                                         <br/>
                                         {
-                                            ['агент', 'client'].includes(profile.role)||!authenticated?
+                                            ['client'].includes(profile.role)||!authenticated?
                                                 <>
                                                 {
                                                     isMobileApp?
@@ -541,7 +541,7 @@ const Item = React.memo((props) => {
                                                                 className={classes.button}
                                                                 onClick={()=>{
                                                                     if(count>0) {
-                                                                        if (['агент', 'client'].includes(profile.role))
+                                                                        if (['client'].includes(profile.role))
                                                                             addBasket({
                                                                                 item: data.item._id,
                                                                                 count: count > 0 ? count : 1
@@ -583,7 +583,7 @@ const Item = React.memo((props) => {
                                                                 className={classes.button}
                                                                 onClick={()=>{
                                                                     if(count>0) {
-                                                                        if (['агент', 'client'].includes(profile.role))
+                                                                        if (['client'].includes(profile.role))
                                                                             addBasket({
                                                                                 item: data.item._id,
                                                                                 count: count > 0 ? count : 1

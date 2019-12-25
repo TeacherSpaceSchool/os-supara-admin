@@ -69,11 +69,13 @@ Index.getInitialProps = async function(ctx) {
     if(!(!authenticated||['admin', 'client'].includes(role)||!role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
-                Location: '/items/all'
+                Location: role==='агент'?'catalog':'/items/all'
             })
             ctx.res.end()
-        } else
-            Router.push('/items/all')
+        }
+        else {
+            Router.push(role==='агент'?'catalog':'/items/all')
+        }
     return {
         data: await getCategorys({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };

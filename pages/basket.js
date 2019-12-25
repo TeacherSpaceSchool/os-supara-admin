@@ -45,11 +45,6 @@ const Basket = React.memo((props) => {
         setOrganization(organizations[organizations.findIndex(element => element._id===event.target.value)])
     };
     let [organizations, setOrganizations] = useState([]);
-    let [client, setClient] = useState({_id: '', name: ''});
-    let handleClient =  (event) => {
-        setClient(clients[clients.findIndex(element => element._id===event.target.value)])
-    };
-    let [clients, setClients] = useState([]);
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
     let increment = (idx)=>{
@@ -95,9 +90,6 @@ const Basket = React.memo((props) => {
                     localStorage.basket = JSON.stringify([])
                 }
                 setList(JSON.parse(localStorage.basket))
-            }
-            else if(profile.role==='агент') {
-                setClients((await getClients({search: '', sort: '-name', filter: ''})).clients)
             }
         })()
     },[])
@@ -156,22 +148,7 @@ const Basket = React.memo((props) => {
                             <div className={classes.column} style={{width: 'calc(100% - 16px)', margin: 8}}>
                                 <Card className={classes.page}>
                                       <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                                          {
-                                              profile.role==='агент'?
-                                                  <TextField
-                                                      select
-                                                      label='Клиент'
-                                                      value={client._id}
-                                                      onChange={handleClient}
-                                                      helperText='Клиент'
-                                                      className={classes.input}
-                                                  >
-                                                      {clients.map((element)=>
-                                                          <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
-                                                      )}
-                                                  </TextField>
-                                                  :
-                                                  <TextField
+                                         <TextField
                                                       select
                                                       label='Организация'
                                                       value={organization._id}
@@ -183,8 +160,7 @@ const Basket = React.memo((props) => {
                                                           <MenuItem key={element._id} value={element._id}>{element.name}</MenuItem>
                                                       )}
                                                   </TextField>
-                                          }
-                                    </CardContent>
+                                      </CardContent>
                                 </Card>
                                 {
                                     list.map((row, idx) => {
@@ -273,26 +249,14 @@ const Basket = React.memo((props) => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>
-                                            {
-                                                profile.role==='агент'?
-                                                    <FormControl className={classes.input}>
-                                                        <InputLabel>Клиент</InputLabel>
-                                                        <Select value={client._id} onChange={handleClient}>
-                                                            {clients.map((element)=>
-                                                                <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                                            )}
-                                                        </Select>
-                                                    </FormControl>
-                                                    :
-                                                    <FormControl className={classes.input}>
-                                                        <InputLabel>Организация</InputLabel>
-                                                        <Select value={organization._id} onChange={handleOrganization}>
-                                                            {organizations.map((element)=>
-                                                                <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                                            )}
-                                                        </Select>
-                                                    </FormControl>
-                                            }
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Организация</InputLabel>
+                                                <Select value={organization._id} onChange={handleOrganization}>
+                                                    {organizations.map((element)=>
+                                                            <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                                    )}
+                                                </Select>
+                                            </FormControl>
                                         </TableCell>
                                         <TableCell align="left">Количество</TableCell>
                                         <TableCell align="left">Цена</TableCell>
@@ -362,27 +326,23 @@ const Basket = React.memo((props) => {
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
                     if(allPrice>0)
                         if (authenticated) {
-                            let address = profile.role === 'агент' ? client.address : data.client.address
+                            let address = data.client.address
                             let proofeAddress = address.length > 0
                             if (proofeAddress) {
                                 for (let i = 0; i < address.length; i++) {
                                     proofeAddress = address[i][0].length > 0
                                 }
                             }
-                            if (
-                                (profile.role === 'агент' && client._id && proofeAddress && client.name.length > 0 && client.phone.length > 0) ||
-                                (profile.role !== 'агент' && proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0)
+                            if (proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0
                             ) {
                                 setMiniDialog('Купить', <BuyBasket bonus={bonus}
-                                                                   client={profile.role === 'агент' ? client : data.client}
+                                                                   client={data.client}
                                                                    allPrice={allPrice} organization={organization}/>)
                                 showMiniDialog(true)
                             }
                             else {
-                                if ((profile.role === 'агент' ? client : data.client) && (profile.role === 'агент' ? client : data.client)._id)
-                                    Router.push(`/client/${(profile.role === 'агент' ? client : data.client)._id}`)
-                                else
-                                    showSnackBar('Пожалуйста выберите клиента')
+                                if (data.client && data.client._id)
+                                    Router.push(`/client/${data.client._id}`)
                             }
                         }
                         else {
@@ -400,7 +360,7 @@ const Basket = React.memo((props) => {
 })
 
 Basket.getInitialProps = async function(ctx) {
-    if(!['client', 'агент'].includes(ctx.store.getState().user.profile.role)&&ctx.store.getState().user.authenticated)
+    if(!['client'].includes(ctx.store.getState().user.profile.role)&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

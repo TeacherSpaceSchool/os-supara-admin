@@ -100,7 +100,7 @@ const BuyBasket =  React.memo(
                         :null
                 }
                 {
-                    bonus.addedBonus&&bonus.addedBonus>0?
+                    bonus&&bonus.addedBonus?
                         <FormControlLabel
                             style={{width: width}}
                             onChange={(e)=>{

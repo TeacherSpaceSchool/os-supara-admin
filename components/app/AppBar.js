@@ -285,7 +285,7 @@ const MyAppBar = React.memo((props) => {
                                         onClose={handleCloseProfile}
                                     >
                                         {
-                                            !authenticated||['client', 'агент'].includes(profile.role)?
+                                            !authenticated||['client'].includes(profile.role)?
                                                 <MenuItem>
                                                     <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>
@@ -516,7 +516,7 @@ const MyAppBar = React.memo((props) => {
                                         onClose={handleCloseProfile}
                                     >
                                         {
-                                            !authenticated||['client', 'агент'].includes(profile.role)?
+                                            !authenticated||['client'].includes(profile.role)?
                                                 <MenuItem>
                                                     <Badge badgeContent={countBasket} color='secondary'>
                                                         <Link href='/basket'>

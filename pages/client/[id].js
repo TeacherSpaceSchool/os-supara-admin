@@ -29,6 +29,7 @@ import Select from '@material-ui/core/Select';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Router from 'next/router'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import { validPhone } from '../../src/lib'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -46,8 +47,16 @@ const Client = React.memo((props) => {
         setPhone(phone)
     };
     let editPhone = (event, idx)=>{
-            phone[idx] = event.target.value
-            setPhone([...phone])
+        phone[idx] = event.target.value
+        while(phone[idx].includes(' '))
+            phone[idx] = phone[idx].replace(' ', '')
+        while(phone[idx].includes('-'))
+            phone[idx] = phone[idx].replace('-', '')
+        while(phone[idx].includes(')'))
+            phone[idx] = phone[idx].replace(')', '')
+        while(phone[idx].includes('('))
+            phone[idx] = phone[idx].replace('(', '')
+        setPhone([...phone])
     };
     let deletePhone = (idx)=>{
         phone.splice(idx, 1);
@@ -304,7 +313,7 @@ const Client = React.memo((props) => {
                                     <TextField
                                         className={classes.input}
                                         label='Город'
-                                        error={name.length===0}
+                                        error={city.length===0}
                                         type='text'
                                         InputLabelProps={{
                                             shrink: true,
@@ -320,7 +329,7 @@ const Client = React.memo((props) => {
                                     {phone?phone.map((element, idx)=>
                                         <div key={idx}>
                                             <FormControl className={classes.input}>
-                                                <InputLabel color={!element&&element==='+996'&&element.length<13?'primary':'secondary'}>Телефон. Формат: +996555780861</InputLabel>
+                                                <InputLabel color={validPhone(element)?'primary':'secondary'}>Телефон. Формат: +996555780861</InputLabel>
                                                 <Input
                                                     placeholder='Телефон. Формат: +996555780861'
                                                     value={element}
@@ -329,7 +338,7 @@ const Client = React.memo((props) => {
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
-                                                    error={!element&&element==='+996'&&element.length<13}
+                                                    error={!validPhone(element)}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
@@ -385,10 +394,9 @@ const Client = React.memo((props) => {
                                                     null
                                             }
                                             <FormControl className={classes.input}>
-                                                <InputLabel color={!element[0]&&element[0].length>0?'primary':'secondary'}>Адрес{type==='торговая точка'?' магазина':''}</InputLabel>
+                                                <InputLabel color={element[0]||element[0].length>0?'primary':'secondary'}>Адрес{type==='торговая точка'?' магазина':''}</InputLabel>
                                                 <Input
-                                                    error={!element[0]&&element[0].length===0}
-                                                    placeholder='Адрес'
+                                                    error={!element[0]||element[0].length===0}
                                                     value={element[0]}
                                                     className={classes.input}
                                                     onChange={(event)=>{editAddress(event, idx)}}

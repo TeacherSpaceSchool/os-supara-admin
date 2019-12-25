@@ -213,7 +213,6 @@ export function setProfile() {
 
 export async function getProfile(client) {
     try {
-        console.log(client)
         client = client? client : new SingletonApolloClient().getClient()
         let result = await client
             .query({

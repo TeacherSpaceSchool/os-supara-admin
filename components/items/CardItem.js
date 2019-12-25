@@ -130,7 +130,6 @@ const CardItem = React.memo((props) => {
                                             :
                                             ['агент', 'client'].includes(profile.role)||!authenticated?
                                                 <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={async()=>{
-                                                    console.log(basket)
                                                     if(!basket) {
                                                         if (['агент', 'client'].includes(profile.role))
                                                             addBasket({item: element._id, count: 1})

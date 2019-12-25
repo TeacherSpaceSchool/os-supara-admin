@@ -58,16 +58,18 @@ const MyDrawer = React.memo((props) => {
             <List>
                 {
                     ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
-                        <Link href='/items/[id]' as='/items/all'>
+                        <Link href={profile.role==='агент'?'/catalog':'/items/[id]'} as={profile.role==='агент'?'/catalog':'/items/all'}>
                             <ListItem style={{background:
                                 router.pathname===('/')
                                 ||
                                 router.pathname.includes('subcategory')
                                 ||
-                                router.pathname.includes('item')?
+                                router.pathname.includes('item')
+                                ||
+                                router.pathname.includes('catalog')?
                                     '#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Товары' />
+                                <ListItemText primary={profile.role!=='агент'?'Товары':'Каталог'} />
                             </ListItem>
                         </Link>
                         :
@@ -102,7 +104,7 @@ const MyDrawer = React.memo((props) => {
                                 </Link>
                                 <Divider/>
                                 {
-                                    ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)?
+                                    ['admin', 'client', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                                         <>
                                         <Link href='/bonusclient'>
                                             <ListItem style={{marginLeft: 16, background: router.pathname==='/bonusclient'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
