@@ -25,6 +25,7 @@ import Router from 'next/router'
 import { pdDatePicker } from '../../src/lib'
 import Confirmation from '../../components/dialog/Confirmation'
 import GeoRoute from '../../components/dialog/GeoRoute'
+import ShippingList from '../../components/dialog/ShippingList'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 
@@ -220,6 +221,11 @@ const Route = React.memo((props) => {
                                 setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
                                 showMiniDialog(true)
                             }} className={classes.geo}>{breakGeoRoute?'Маршрут неполный':'Просмотреть маршрут'}</div>
+                            <br/>
+                            <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
+                                setMiniDialog('Cписок товаров', <ShippingList invoices={invoices}/>)
+                                showMiniDialog(true)
+                            }} className={classes.geo}>Cписок товаров</div>
                             <br/>
                             <div style={{ justifyContent: 'center' }} className={classes.row}>
                                 <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
