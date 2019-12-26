@@ -75,7 +75,7 @@ const Item = React.memo((props) => {
     let [packaging, setPackaging] = useState(data.item&&data.item.packaging?data.item.packaging:1);
     let [employment, setEmployment] = useState({organization: ''});
     let handleChangeImage = ((event) => {
-        if(event.target.files[0].size/1024/1024<20){
+        if(event.target.files[0].size/1024/1024<50){
             setImage(event.target.files[0])
             setPreview(URL.createObjectURL(event.target.files[0]))
         } else {

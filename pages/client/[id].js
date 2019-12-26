@@ -108,7 +108,7 @@ const Client = React.memo((props) => {
     let [preview, setPreview] = useState(data.client?data.client.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
-        if(event.target.files[0].size/1024/1024<20){
+        if(event.target.files[0].size/1024/1024<50){
             setImage(event.target.files[0])
             setPreview(URL.createObjectURL(event.target.files[0]))
         } else {
@@ -117,7 +117,7 @@ const Client = React.memo((props) => {
     })
     let [patent , setPatent] = useState(undefined);
     let handleChangePatent = ((event) => {
-        if(event.target.files[0].size/1024/1024<20){
+        if(event.target.files[0].size/1024/1024<50){
             setPatent(event.target.files[0])
         } else {
             showSnackBar('Файл слишком большой')
@@ -127,7 +127,7 @@ const Client = React.memo((props) => {
     let patentRef = useRef(null);
     let [passport, setPassport] = useState(undefined);
     let handleChangePassport = ((event) => {
-        if(event.target.files[0].size/1024/1024<20){
+        if(event.target.files[0].size/1024/1024<50){
             setPassport(event.target.files[0])
         } else {
             showSnackBar('Файл слишком большой')
@@ -137,7 +137,7 @@ const Client = React.memo((props) => {
     let passportRef = useRef(null);
     let [certificate, setCertificate] = useState(undefined);
     let handleChangeCertificate = ((event) => {
-        if(event.target.files[0].size/1024/1024<20){
+        if(event.target.files[0].size/1024/1024<50){
             setCertificate(event.target.files[0])
         } else {
             showSnackBar('Файл слишком большой')
