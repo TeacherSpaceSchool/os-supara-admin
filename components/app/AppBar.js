@@ -38,7 +38,7 @@ import SetDate from '../dialog/SetDate'
 const MyAppBar = React.memo((props) => {
     //props
     const classes = appbarStyle();
-    const { filters, sorts, pageName, dates, searchShow } = props
+    const { filters, sorts, pageName, dates, searchShow, statisticShow } = props
     const { drawer, search, filter, sort, isMobileApp, countBasket, date } = props.app;
     const { showDrawer, setSearch, setFilter, setSort, setDate } = props.appActions;
     const { authenticated, profile } = props.user;

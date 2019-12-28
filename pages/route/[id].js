@@ -220,7 +220,7 @@ const Route = React.memo((props) => {
                                 onChange={ event => setDateStart(event.target.value) }
                             />
                             <br/>
-                            <div className={classes.row}>
+                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Тоннаж{auto.tonnage?' (груз/автомобиль)':''}:&nbsp;
                                 </div>
@@ -228,19 +228,14 @@ const Route = React.memo((props) => {
                                     {`${allTonnage} кг${auto.tonnage?`/${auto.tonnage} кг`:''}`}
                                 </div>
                             </div>
-                            {
-                                allSize>0?
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>
-                                            Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
-                                        </div>
-                                        <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
-                                            {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
-                                        </div>
-                                    </div>
-                                    :
-                                    null
-                            }
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>
+                                    Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
+                                </div>
+                                <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
+                                    {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
+                                </div>
+                            </div>
                             <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
