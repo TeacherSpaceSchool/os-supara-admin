@@ -23,9 +23,11 @@ const Bonus = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getBonuses({search: search, sort: sort})).bonuses)
-            forceCheck()
         })()
     },[sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
 
     return (
         <App searchShow={true} sorts={data.sortBonus} pageName={['организация', 'менеджер'].includes(profile.role)?'Бонусы компании':'Бонусы компаний'}>

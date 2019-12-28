@@ -6,6 +6,7 @@ export default theme => ({
     },
     drawerPaper: {
         width: 300,
+        overflow: 'hidden'
     },
     toolbar: theme.mixins.toolbar,
 });

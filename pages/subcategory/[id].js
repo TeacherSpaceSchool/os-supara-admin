@@ -34,9 +34,11 @@ const Subcategory = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getSubCategorys({category: router.query.id, search: search, sort: sort, filter: filter})).subCategorys)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={router.query.id==='all'?'Все':data.category?data.category.name:'Ничего не найдено'}>
             <Head>

@@ -26,7 +26,6 @@ const Items = React.memo((props) => {
                 setList(favorites.filter(favorite => favorite.name.includes(search)))
             }
             else setList((await favorites({search: search})).favorites)
-            forceCheck()
         })()
     },[search])
     useEffect(()=>{
@@ -42,6 +41,9 @@ const Items = React.memo((props) => {
     let getList = async()=>{
         setList((await favorites({search: search})).favorites)
     };
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} getList={getList} pageName='Избранное'>
             <Head>

@@ -21,9 +21,11 @@ const Ads = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getAdss({search: search, sort: sort, filter: filter})).adss)
-            forceCheck()
         })()
     },[filter, sort, search, count])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     let height = profile.role==='admin'?400:200
     return (
         <App searchShow={true} filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>

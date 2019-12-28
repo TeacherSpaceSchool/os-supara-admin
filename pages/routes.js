@@ -25,9 +25,11 @@ const Routes = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
-            forceCheck()
         })()
     },[filter, sort, search, date]);
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>

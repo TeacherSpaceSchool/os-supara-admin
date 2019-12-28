@@ -22,9 +22,11 @@ const Organization = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Бренды'>
             <Head>

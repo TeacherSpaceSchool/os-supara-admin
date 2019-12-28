@@ -34,7 +34,6 @@ const ShippingList =  React.memo(
                 shippingListObject[keys[i]]._id = keys[i]
                 shippingList.push(shippingListObject[keys[i]])
             }
-            console.log(shippingList)
             setShippingList([...shippingList])
         },[])
         const width = isMobileApp? (window.innerWidth-112) : 500
@@ -43,9 +42,9 @@ const ShippingList =  React.memo(
                 {
                     shippingList.map((order, idx) => {
                         return(
-                                <div key={idx} className={classes.column}>
+                                <div style={{width: width}} key={idx} className={classes.column}>
                                     <a href={`/item/${order._id}`} target='_blank'>
-                                        <div className={classes.row}>
+                                        <div style={{width: width}} className={classes.row}>
                                             <div className={classes.nameField}>Товар:&nbsp;</div>
                                             <div className={classes.value}>{order.name}</div>
                                         </div>

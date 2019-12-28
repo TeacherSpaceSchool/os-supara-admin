@@ -20,12 +20,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const Order =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { profile } = props.user;
+        const { profile, authenticated } = props.user;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { classes, element, setList, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
+        let [allSize, setAllSize] = useState(element.allSize);
         let [taken, setTaken] = useState(element.taken);
         let [confirmationForwarder, setConfirmationForwarder] = useState(element.confirmationForwarder);
         let [confirmationClient, setConfirmationClient] = useState(element.confirmationClient);
@@ -35,20 +36,24 @@ const Order =  React.memo(
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
             allTonnage=0
+            allSize=0
             allPrice=0
             for(let i=0; i<orders.length; i++){
                 allPrice+=orders[i].allPrice
                 allTonnage+=orders[i].allTonnage
+                allSize+=orders[i].allSize
             }
             if(element.usedBonus&&element.usedBonus>0)
                 allPrice -= element.usedBonus
             setAllPrice(allPrice)
             setAllTonnage(allTonnage)
+            setAllSize(allSize)
         }
         let increment = (idx)=>{
             orders[idx].count+=1
             orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
             orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+            orders[idx].allSize = orders[idx].count * orders[idx].item.size
             setOrders([...orders])
             canculateAllPrice()
         }
@@ -57,6 +62,7 @@ const Order =  React.memo(
                 orders[idx].count -= 1
                 orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
                 orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+                orders[idx].allSize = orders[idx].count * orders[idx].item.size
                 setOrders([...orders])
                 canculateAllPrice()
             }
@@ -156,10 +162,21 @@ const Order =  React.memo(
                     <div className={classes.nameField}>Сумма:&nbsp;</div>
                     <div className={classes.value}>{allPrice}&nbsp;сом</div>
                 </div>
-                <div className={classes.row}>
-                    <div className={classes.nameField}>Тоннаж:&nbsp;</div>
-                    <div className={classes.value}>{allTonnage}&nbsp;кг</div>
-                </div>
+                {
+                    authenticated&&profile.role!=='client'?
+                        <>
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Тоннаж:&nbsp;</div>
+                            <div className={classes.value}>{allTonnage}&nbsp;кг</div>
+                        </div>
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Кубатура:&nbsp;</div>
+                            <div className={classes.value}>{allSize}&nbsp;см³</div>
+                        </div>
+                        </>
+                        :
+                        null
+                }
                 <div className={classes.row}>
                     <div className={classes.nameField}>Способ оплаты:&nbsp;</div>
                     <div className={classes.value}>{element.paymentMethod}</div>
@@ -398,7 +415,7 @@ const Order =  React.memo(
 
                                 let sendOrders;
                                 if(element.orders[0].status!=='обработка') sendOrders = []
-                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, status: order.status}})
+                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
 
                                 let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
                                 if(setList)

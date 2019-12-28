@@ -11,6 +11,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ReorderIcon from '@material-ui/icons/ViewList';
+import AllInboxIcon from '@material-ui/icons/AllInbox';
+import CommuteIcon from '@material-ui/icons/Commute';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import CopyrightIcon from '@material-ui/icons/Loyalty';
 import InfoIcon from '@material-ui/icons/Info';
@@ -211,6 +213,32 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('employment')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Сотрудники' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    authenticated&&profile.role!=='client'?
+                        <>
+                        <Link href='/equipments'>
+                            <ListItem style={{background: router.pathname==='/equipments'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><AllInboxIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Оборудование' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
+                        <>
+                        <Link href='/autos'>
+                            <ListItem style={{background: router.pathname==='/autos'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><CommuteIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Транспорт' />
                             </ListItem>
                         </Link>
                         <Divider/>

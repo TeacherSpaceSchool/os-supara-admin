@@ -24,9 +24,11 @@ const Index = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     useEffect(()=>{
         if(!(!authenticated||['admin', 'client'].includes(profile.role)||!profile.role))
             Router.push('/items/all')

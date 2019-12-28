@@ -23,9 +23,11 @@ const BonusClient = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getBonusesClient({search: search, sort: sort})).bonusesClient)
-            forceCheck()
         })()
     },[sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} sorts={data.sortBonusClient} pageName={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}>
             <Head>

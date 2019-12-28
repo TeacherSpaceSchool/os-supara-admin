@@ -14,6 +14,7 @@ const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
     const { element, setList, route, getInvoices } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { profile, authenticated} = props.user;
     const statusColor = {
         'обработка': 'orange',
         'принят': 'blue',
@@ -87,10 +88,21 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.nameField}>Сумма:&nbsp;</div>
                         <div className={classes.value}>{element.allPrice}&nbsp;сом</div>
                     </div>
-                    <div className={classes.row}>
-                        <div className={classes.nameField}>Тоннаж:&nbsp;</div>
-                        <div className={classes.value}>{element.allTonnage}&nbsp;кг</div>
-                    </div>
+                    {
+                        authenticated&&profile.role!=='client'?
+                            <>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Тоннаж:&nbsp;</div>
+                                <div className={classes.value}>{element.allTonnage}&nbsp;кг</div>
+                            </div>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Кубатура:&nbsp;</div>
+                                <div className={classes.value}>{element.allSize}&nbsp;см³</div>
+                            </div>
+                            </>
+                        :
+                            null
+                    }
                 </CardContent>
             </CardActionArea>
         </Card>

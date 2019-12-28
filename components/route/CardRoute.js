@@ -43,6 +43,10 @@ const CardOrder = React.memo((props) => {
                             <div className={classes.value}>{element.allTonnage}&nbsp;кг</div>
                         </div>
                         <div className={classes.row}>
+                            <div className={classes.nameField}>Кубатура:&nbsp;</div>
+                            <div className={classes.value}>{element.allSize}&nbsp;см³</div>
+                        </div>
+                        <div className={classes.row}>
                             <div className={classes.nameField}>Компания:&nbsp;</div>
                             <div className={classes.value}>{element.employment.organization.name}</div>
                         </div>

@@ -23,9 +23,11 @@ const Orders = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices)
-            forceCheck()
         })()
     },[filter, sort, search, date])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>

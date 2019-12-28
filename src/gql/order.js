@@ -16,10 +16,12 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                 {_id name}
                             createdAt
                             allTonnage
+                            allSize
                             orders 
                                 { 
                                     _id
                                     allTonnage
+                                    allSize
                                     createdAt
                                     item
                                         {
@@ -30,6 +32,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             price
                                             packaging
                                             weight
+                                            size
                                             organization
                                                 {_id name}
                                         }
@@ -89,10 +92,12 @@ export const getOrdersForRouting = async(organization)=>{
                                 {_id name}
                             createdAt
                             allTonnage
+                            allSize
                             orders 
                                 { 
                                     _id
                                     allTonnage
+                                    allSize
                                     createdAt
                                     item
                                         {
@@ -102,6 +107,7 @@ export const getOrdersForRouting = async(organization)=>{
                                             stock 
                                             packaging
                                             weight
+                                            size
                                             price
                                             organization
                                                 {_id name}
@@ -154,11 +160,13 @@ export const getOrder = async({_id})=>{
                             agent: 
                                 {_id name}
                             allTonnage
+                            allSize
                             orders 
                                 { 
                                     _id
                                     createdAt
                                     allTonnage
+                                    allSize
                                     item
                                         {
                                             image
@@ -167,6 +175,7 @@ export const getOrder = async({_id})=>{
                                             stock 
                                             packaging
                                             weight
+                                            size
                                             price
                                             organization
                                                 {_id name}

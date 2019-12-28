@@ -64,6 +64,7 @@ const Item = React.memo((props) => {
         setSubCategory({_id: event.target.value, name: event.target.name})
     };
     let [weight, setWeight] = useState(data.item&&data.item.weight?data.item.weight:0);
+    let [size, setSize] = useState(data.item&&data.item.size?data.item.size:0);
     let [organization, setOrganization] = useState(data.item!==null?data.item.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
@@ -136,13 +137,19 @@ const Item = React.memo((props) => {
                 (router.query.id!=='new'&&(!authenticated||['client', 'admin'].includes(profile.role))&&data.item.subCategory)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
-                            Товары
+                            <a>
+                                Товары
+                            </a>
                         </Link>
                         <Link href='/subcategory/[id]' as={`/subcategory/${data.item.subCategory.category._id}`}>
-                            {data.item.subCategory.category.name}
+                            <a>
+                                {data.item.subCategory.category.name}
+                            </a>
                         </Link>
                         <Link href='/items/[id]' as={`/items/${data.item.subCategory._id}`}>
-                            {data.item.subCategory.name}
+                            <a>
+                                {data.item.subCategory.name}
+                            </a>
                         </Link>
                         {
                             data.item?
@@ -190,6 +197,22 @@ const Item = React.memo((props) => {
                                                     while((event.target.value).includes(','))
                                                         event.target.value = (event.target.value).replace(',', '.')
                                                     setWeight(event.target.value)}
+                                                }
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                        </div>
+                                        <div className={classes.price}>
+                                            <TextField
+                                                type={isMobileApp?'number':'text'}
+                                                label='Кубатура в см³'
+                                                value={size}
+                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                onChange={(event)=>{
+                                                    while((event.target.value).includes(','))
+                                                        event.target.value = (event.target.value).replace(',', '.')
+                                                    setSize(event.target.value)}
                                                 }
                                                 inputProps={{
                                                     'aria-label': 'description',
@@ -328,7 +351,8 @@ const Item = React.memo((props) => {
                                                                     latest: latest,
                                                                     organization: organization._id,
                                                                     deliveryDays: deliveryDays,
-                                                                    weight: checkFloat(weight)
+                                                                    weight: checkFloat(weight),
+                                                                    size: checkFloat(size)
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
@@ -351,6 +375,7 @@ const Item = React.memo((props) => {
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
                                                         if(price>0&&price!==data.item.price)editElement.price = price
                                                         if(weight!==data.item.weight)editElement.weight = checkFloat(weight)
+                                                        if(size!==data.item.size)editElement.size = checkFloat(size)
                                                         if(hit!==data.item.hit)editElement.hit = hit
                                                         if(latest!==data.item.latest)editElement.latest = latest
                                                         if(organization._id!==data.item.organization._id)editElement.organization = organization._id

@@ -20,9 +20,11 @@ const Blog = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getBlogs({search: search, sort: sort, filter: filter})).blogs)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     let height = profile.role==='admin'?548:200
     return (
         <App searchShow={true} filters={data.filterBlog} sorts={data.sortBlog} pageName='Блог'>

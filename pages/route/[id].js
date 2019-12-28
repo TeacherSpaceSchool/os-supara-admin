@@ -6,6 +6,7 @@ import { getOrganizations } from '../../src/gql/organization'
 import { getOrdersForRouting } from '../../src/gql/order'
 import { getRoute, setRoute, deleteRoute, addRoute } from '../../src/gql/route'
 import { getEcspeditors } from '../../src/gql/employment'
+import { getAuto } from '../../src/gql/auto'
 import routeStyle from '../../src/styleMUI/route/route'
 import { useRouter } from 'next/router'
 import Card from '@material-ui/core/Card';
@@ -22,7 +23,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router'
-import { pdDatePicker } from '../../src/lib'
+import {checkFloat, pdDatePicker} from '../../src/lib'
 import Confirmation from '../../components/dialog/Confirmation'
 import GeoRoute from '../../components/dialog/GeoRoute'
 import ShippingList from '../../components/dialog/ShippingList'
@@ -50,8 +51,16 @@ const Route = React.memo((props) => {
     let [cancelInvoices, setCancelInvoices] = useState([]);
     let [allInvoices, setAllInvoices] = useState([]);
     let [allTonnage, setAllTonnage] = useState(data.route&&data.route.allTonnage?data.route.allTonnage:0);
+    let [allSize, setAllSize] = useState(data.route&&data.route.allSize?data.route.allSize:0);
     let [unselectedInvoices, setUnselectedInvoices] = useState([]);
     let [selectType, setSelectType] = useState('Все');
+    let [auto, setAuto] = useState({});
+    useEffect(()=>{
+        (async()=>{
+            if(employment._id)
+                setAuto((await getAuto({_id: employment._id})).auto)
+        })()
+    },[employment])
     let [employments, setEmployments] = useState([]);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
@@ -107,10 +116,13 @@ const Route = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             allTonnage = 0
+            allSize = 0
            for(let i=0; i<invoices.length; i++){
                allTonnage += invoices[i].allTonnage
+               allSize += invoices[i].allSize
            }
            setAllTonnage(allTonnage)
+            setAllSize(allSize)
         })()
     },[invoices])
     const statusColor = {
@@ -210,18 +222,30 @@ const Route = React.memo((props) => {
                             <br/>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
-                                    Тоннаж:&nbsp;
+                                    Тоннаж{auto.tonnage?' (груз/автомобиль)':''}:&nbsp;
                                 </div>
-                                <div className={classes.value}>
-                                    {allTonnage}&nbsp;кг
+                                <div className={classes.value} style={{color: allTonnage<checkFloat(auto.tonnage)?'green':'red'}}>
+                                    {`${allTonnage} кг${auto.tonnage?`/${auto.tonnage} кг`:''}`}
                                 </div>
                             </div>
+                            {
+                                allSize>0?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>
+                                            Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
+                                        </div>
+                                        <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
+                                            {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
                                 showMiniDialog(true)
                             }} className={classes.geo}>{breakGeoRoute?'Маршрут неполный':'Просмотреть маршрут'}</div>
-                            <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Cписок товаров', <ShippingList invoices={invoices}/>)
                                 showMiniDialog(true)
@@ -349,7 +373,7 @@ Route.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {route: {allTonnage: 0, invoices: [], employment: {}, status: '', dateStart: new Date(), dateEnd: null, number: ''}},
+            ...ctx.query.id!=='new'?await getRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {route: {allTonnage: 0, allSize: 0, invoices: [], employment: {}, status: '', dateStart: new Date(), dateEnd: null, number: ''}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

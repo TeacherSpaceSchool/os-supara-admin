@@ -38,9 +38,11 @@ const Catalog = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getItems({subCategory: 'all', search: search, sort: sort, filter: filter})).items)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     let [bonus, setBonus] = useState({});
     let [client, setClient] = useState();
     let handleClient =  (client) => {

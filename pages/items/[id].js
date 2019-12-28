@@ -28,9 +28,11 @@ const Items = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getItems({subCategory: router.query.id, search: search, sort: sort, filter: filter})).items)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} filters={data.filterItem} sorts={data.sortItem} pageName={router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}>
             <Head>

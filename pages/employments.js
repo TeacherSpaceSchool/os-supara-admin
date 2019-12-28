@@ -25,9 +25,11 @@ const Employment = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setList((await getEmployments({search: search, sort: sort, filter: filter})).employments)
-            forceCheck()
         })()
     },[filter, sort, search])
+    useEffect(()=>{
+        forceCheck()
+    },[list])
     return (
         <App searchShow={true} filters={data.filterEmployment} sorts={data.sortEmployment} pageName='Сотрудники'>
             <Head>

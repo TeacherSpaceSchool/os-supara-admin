@@ -38,7 +38,6 @@ export default makeStyles({
         wordBreak: 'break-all'
     },
     nameField: {
-        width: 80,
         marginBottom: 10,
         fontWeight: 'bold',
         fontSize: '16px',
