@@ -165,14 +165,24 @@ const Order =  React.memo(
                 {
                     authenticated&&profile.role!=='client'?
                         <>
-                        <div className={classes.row}>
-                            <div className={classes.nameField}>Тоннаж:&nbsp;</div>
-                            <div className={classes.value}>{allTonnage}&nbsp;кг</div>
-                        </div>
-                        <div className={classes.row}>
-                            <div className={classes.nameField}>Кубатура:&nbsp;</div>
-                            <div className={classes.value}>{allSize}&nbsp;см³</div>
-                        </div>
+                        {
+                            allTonnage?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Тоннаж:&nbsp;</div>
+                                    <div className={classes.value}>{allTonnage}&nbsp;кг</div>
+                                </div>
+                                :
+                                null
+                        }
+                        {
+                            allSize?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Кубатура:&nbsp;</div>
+                                    <div className={classes.value}>{allSize}&nbsp;см³</div>
+                                </div>
+                                :
+                                null
+                        }
                         </>
                         :
                         null

@@ -74,6 +74,9 @@ const Items = React.memo((props) => {
                     </Breadcrumbs>
                     :null}
             <div className={classes.page}>
+                <div className='count'>
+                    {`Всего товаров: ${list.length}`}
+                </div>
 
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>

@@ -220,22 +220,32 @@ const Route = React.memo((props) => {
                                 onChange={ event => setDateStart(event.target.value) }
                             />
                             <br/>
-                             <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Тоннаж{auto.tonnage?' (груз/автомобиль)':''}:&nbsp;
-                                </div>
-                                <div className={classes.value} style={{color: allTonnage<checkFloat(auto.tonnage)?'green':'red'}}>
-                                    {`${allTonnage} кг${auto.tonnage?`/${auto.tonnage} кг`:''}`}
-                                </div>
-                            </div>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
-                                </div>
-                                <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
-                                    {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
-                                </div>
-                            </div>
+                            {
+                                allTonnage?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>
+                                            Тоннаж{auto.tonnage?' (груз/автомобиль)':''}:&nbsp;
+                                        </div>
+                                        <div className={classes.value} style={{color: allTonnage<checkFloat(auto.tonnage)?'green':'red'}}>
+                                            {`${allTonnage} кг${auto.tonnage?`/${auto.tonnage} кг`:''}`}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
+                            {
+                                allSize?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>
+                                            Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
+                                        </div>
+                                        <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
+                                            {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)

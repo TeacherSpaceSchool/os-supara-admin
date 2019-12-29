@@ -49,7 +49,7 @@ const CardBonus = React.memo((props) => {
                                     label='Цель'
                                     value={target}
                                     className={classes.input}
-                                    onChange={(event)=>{setTarget(checkInt(event.target.value))}}
+                                    onChange={(event)=>{setTarget((event.target.value))}}
                                     inputProps={{
                                         'aria-label': 'description',
                                     }}
@@ -61,7 +61,7 @@ const CardBonus = React.memo((props) => {
                                     label='Бонус'
                                     value={bonus1}
                                     className={classes.input}
-                                    onChange={(event)=>{setBonus1(checkInt(event.target.value))}}
+                                    onChange={(event)=>{setBonus1((event.target.value))}}
                                     inputProps={{
                                         'aria-label': 'description',
                                     }}
@@ -96,7 +96,7 @@ const CardBonus = React.memo((props) => {
                         <CardActions>
                             <Button onClick={async()=>{
                                 const action = async() => {
-                                    const list = (await setBonus({_id: element._id, target: target, bonus: bonus1})).bonuses
+                                    const list = (await setBonus({_id: element._id, target: checkInt(target), bonus: checkInt(bonus1)})).bonuses
                                     setList(list)
                                 }
                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)

@@ -56,6 +56,9 @@ const Items = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/favorite`} />
                 <link rel='canonical' href={`${urlMain}/favorite`}/>
             </Head>
+            <div className='count'>
+                {`Всего избранного: ${list.length}`}
+            </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>

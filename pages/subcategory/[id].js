@@ -66,6 +66,9 @@ const Subcategory = React.memo((props) => {
             }
 
             <div className={classes.page}>
+                <div className='count'>
+                    {`Всего подкатегорий: ${list.length}`}
+                </div>
                 {profile.role==='admin'?
                     <>
                     <SubCardCategory categorys={categorys} category={router.query.id} setList={setList}/>

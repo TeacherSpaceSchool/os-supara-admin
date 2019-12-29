@@ -38,6 +38,9 @@ const Blog = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/blog`} />
                 <link rel='canonical' href={`${urlMain}/blog`}/>
             </Head>
+            <div className='count'>
+                {`Всего публикаций: ${list.length}`}
+            </div>
             <div className={classes.page}>
                 {profile.role==='admin'?<CardBlog setList={setList}/>:null}
                 {list?list.map((element)=>

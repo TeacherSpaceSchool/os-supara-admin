@@ -16,6 +16,23 @@ html{
   z-index: 1201 !important;
 }
 
+.count{
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+  background: #fff;
+  position: fixed;
+  left: 10px;
+  z-index: 1500;
+  @media screen and (min-width: $break-small) {
+    left: 310px;
+  }
+  bottom: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .App{
   background: #F5F5F5;
   width: 100vw;

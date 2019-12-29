@@ -117,18 +117,18 @@ const MyAppBar = React.memo((props) => {
                     {isMobileApp?
                         openSearch?
                             <Paper className={classes.searchM}>
-                                    <Input className={classes.searchField}
-                                           id='search'
-                                            type={'login'}
-                                            value={search}
-                                            onChange={handleSearch}
-                                            endAdornment={
-                                                <InputAdornment position='end'>
-                                                    <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
-                                                        <Cancel />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }/>
+                                <Input className={classes.searchField}
+                                       id='search'
+                                       type={'login'}
+                                       value={search}
+                                       onChange={handleSearch}
+                                       endAdornment={
+                                           <InputAdornment position='end'>
+                                               <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
+                                                   <Cancel />
+                                               </IconButton>
+                                           </InputAdornment>
+                                       }/>
                             </Paper>
                             :
                             <>
@@ -258,151 +258,151 @@ const MyAppBar = React.memo((props) => {
                                     :null
                                 }
                             </Menu>
-                                    <Tooltip title='Профиль'>
-                                        <IconButton
-                                            aria-owns='menu-appbar'
-                                            aria-haspopup='true'
-                                            color='inherit'
-                                            onClick={handleMenuProfile}
-                                        >
+                            <Tooltip title='Профиль'>
+                                <IconButton
+                                    aria-owns='menu-appbar'
+                                    aria-haspopup='true'
+                                    color='inherit'
+                                    onClick={handleMenuProfile}
+                                >
+                                    <Badge badgeContent={countBasket} color='secondary'>
+                                        <PermIdentity/>
+                                    </Badge>
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                id='menu-appbar'
+                                anchorEl={anchorElProfile}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={openProfile}
+                                onClose={handleCloseProfile}
+                            >
+                                {
+                                    !authenticated||['client'].includes(profile.role)?
+                                        <MenuItem>
                                             <Badge badgeContent={countBasket} color='secondary'>
-                                                <PermIdentity/>
+                                                <Link href='/basket'>
+                                                    <a style={{display: 'flex', color: '#606060'}}>
+                                                        <LocalGroceryStore/>
+                                                        &nbsp;Корзина&nbsp;&nbsp;
+                                                    </a>
+                                                </Link>
                                             </Badge>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        id='menu-appbar'
-                                        anchorEl={anchorElProfile}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={openProfile}
-                                        onClose={handleCloseProfile}
-                                    >
-                                        {
-                                            !authenticated||['client'].includes(profile.role)?
-                                                <MenuItem>
-                                                    <Badge badgeContent={countBasket} color='secondary'>
-                                                        <Link href='/basket'>
-                                                            <a style={{display: 'flex', color: '#606060'}}>
-                                                                <LocalGroceryStore/>
-                                                                &nbsp;Корзина&nbsp;&nbsp;
-                                                            </a>
-                                                        </Link>
-                                                    </Badge>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            !authenticated||profile.role==='client'?
-                                                <MenuItem>
-                                                    <Link href='/favorite'>
-                                                        <a style={{display: 'flex', color: '#606060'}}>
-                                                            <Star/>&nbsp;Избранное
-                                                        </a>
-                                                    </Link>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            authenticated&&profile.role!=='admin'?
-                                                <MenuItem>
-                                                    <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
-                                                        <a style={{display: 'flex', color: '#606060'}}>
-                                                            <AssignmentInd/>&nbsp;Профиль
-                                                        </a>
-                                                    </Link>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            authenticated?
-                                                <MenuItem onClick={()=>{
-                                                    handleCloseProfile()
-                                                    const action = async() => {
-                                                        logout(true)
-                                                    }
-                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                    showMiniDialog(true)
-                                                }}>
-                                                    <div style={{display: 'flex', color: '#606060'}}>
-                                                        <ExitToApp/>&nbsp;Выйти
-                                                    </div>
-                                                </MenuItem>
-                                            :
-                                                <MenuItem onClick={()=>{
-                                                    handleCloseProfile()
-                                                    setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
-                                                    showMiniDialog(true)
-                                                }}>
-                                                    <div style={{display: 'flex', color: '#606060'}}>
-                                                        <ExitToApp/>&nbsp;Войти
-                                                    </div>
-                                                </MenuItem>
-                                        }
-                                    </Menu>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    !authenticated||profile.role==='client'?
+                                        <MenuItem>
+                                            <Link href='/favorite'>
+                                                <a style={{display: 'flex', color: '#606060'}}>
+                                                    <Star/>&nbsp;Избранное
+                                                </a>
+                                            </Link>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    authenticated&&profile.role!=='admin'?
+                                        <MenuItem>
+                                            <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
+                                                <a style={{display: 'flex', color: '#606060'}}>
+                                                    <AssignmentInd/>&nbsp;Профиль
+                                                </a>
+                                            </Link>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    authenticated?
+                                        <MenuItem onClick={()=>{
+                                            handleCloseProfile()
+                                            const action = async() => {
+                                                logout(true)
+                                            }
+                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <ExitToApp/>&nbsp;Выйти
+                                            </div>
+                                        </MenuItem>
+                                        :
+                                        <MenuItem onClick={()=>{
+                                            handleCloseProfile()
+                                            setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <ExitToApp/>&nbsp;Войти
+                                            </div>
+                                        </MenuItem>
+                                }
+                            </Menu>
 
                             </>
                         :
                         openSearch?
                             <Paper className={classes.searchD}>
-                                    <Input className={classes.searchField}
-                                        id='search'
-                                        type={'login'}
-                                        value={search}
-                                        onChange={handleSearch}
-                                        endAdornment={
-                                            <InputAdornment position='end'>
-                                                <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
-                                                    <Cancel />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }/>
+                                <Input className={classes.searchField}
+                                       id='search'
+                                       type={'login'}
+                                       value={search}
+                                       onChange={handleSearch}
+                                       endAdornment={
+                                           <InputAdornment position='end'>
+                                               <IconButton aria-label='Search' onClick={()=>{setSearch('');setOpenSearch(false)}}>
+                                                   <Cancel />
+                                               </IconButton>
+                                           </InputAdornment>
+                                       }/>
                             </Paper>
                             :
                             <>
                             {dates?
                                 <>
-                                    <Tooltip title='Дата'>
-                                        <IconButton
-                                            aria-owns={openDate ? 'menu-appbar' : undefined}
-                                            aria-haspopup='true'
-                                            onClick={handleMenuDate}
-                                            color='inherit'
-                                        >
-                                            <DateRange/>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        key='Date'
-                                        id='menu-appbar'
-                                        anchorEl={anchorElDate}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={openDate}
-                                        onClose={handleCloseDate}
+                                <Tooltip title='Дата'>
+                                    <IconButton
+                                        aria-owns={openDate ? 'menu-appbar' : undefined}
+                                        aria-haspopup='true'
+                                        onClick={handleMenuDate}
+                                        color='inherit'
                                     >
-                                        <MenuItem style={{background: date!==''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setMiniDialog('Дата', <SetDate/>);showMiniDialog(true);handleCloseDate();}}>
-                                            По дате
-                                        </MenuItem>
-                                        <MenuItem style={{background: date===''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setDate('');handleCloseDate();}}>
-                                            Все
-                                        </MenuItem>
-                                    </Menu>
+                                        <DateRange/>
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    key='Date'
+                                    id='menu-appbar'
+                                    anchorEl={anchorElDate}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={openDate}
+                                    onClose={handleCloseDate}
+                                >
+                                    <MenuItem style={{background: date!==''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setMiniDialog('Дата', <SetDate/>);showMiniDialog(true);handleCloseDate();}}>
+                                        По дате
+                                    </MenuItem>
+                                    <MenuItem style={{background: date===''?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={()=>{setDate('');handleCloseDate();}}>
+                                        Все
+                                    </MenuItem>
+                                </Menu>
                                 &nbsp;
                                 </>
                                 :null
@@ -489,97 +489,97 @@ const MyAppBar = React.memo((props) => {
                                     :
                                     null
                             }
-                                       <Tooltip title='Профиль'>
-                                            <IconButton
-                                                aria-owns='menu-appbar'
-                                                aria-haspopup='true'
-                                                color='inherit'
-                                                onClick={handleMenuProfile}
-                                            >
-                                                <Badge badgeContent={countBasket} color='secondary'>
-                                                    <PermIdentity/>
-                                                </Badge>
-                                            </IconButton>
-                                        </Tooltip>
-                                    <Menu
-                                        id='menu-appbar'
-                                        anchorEl={anchorElProfile}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={openProfile}
-                                        onClose={handleCloseProfile}
-                                    >
-                                        {
-                                            !authenticated||['client'].includes(profile.role)?
-                                                <MenuItem>
-                                                    <Badge badgeContent={countBasket} color='secondary'>
-                                                        <Link href='/basket'>
-                                                            <a style={{display: 'flex', color: '#606060'}}>
-                                                                <LocalGroceryStore/>
-                                                                &nbsp;Корзина&nbsp;&nbsp;
-                                                            </a>
-                                                        </Link>
-                                                    </Badge>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            !authenticated||profile.role==='client'?
-                                                <MenuItem>
-                                                    <Link href='/favorite'>
-                                                        <a style={{display: 'flex', color: '#606060'}}>
-                                                            <Star/>&nbsp;Избранное
-                                                        </a>
-                                                    </Link>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            authenticated&&profile.role!=='admin'?
-                                                <MenuItem>
-                                                    <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
-                                                        <a style={{display: 'flex', color: '#606060'}}>
-                                                            <AssignmentInd/>&nbsp;Профиль
-                                                        </a>
-                                                    </Link>
-                                                </MenuItem>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            authenticated?
-                                                <MenuItem onClick={()=>{
-                                                    handleCloseProfile()
-                                                    const action = async() => {
-                                                        logout(true)
-                                                    }
-                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                                    showMiniDialog(true)
-                                                }}>
-                                                    <div style={{display: 'flex', color: '#606060'}}>
-                                                        <ExitToApp/>&nbsp;Выйти
-                                                    </div>
-                                                </MenuItem>
-                                                :
-                                                <MenuItem onClick={()=>{
-                                                    handleCloseProfile()
-                                                    setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
-                                                    showMiniDialog(true)
-                                                }}>
-                                                    <div style={{display: 'flex', color: '#606060'}}>
-                                                        <ExitToApp/>&nbsp;Войти
-                                                    </div>
-                                                </MenuItem>
-                                        }
-                                    </Menu>
+                            <Tooltip title='Профиль'>
+                                <IconButton
+                                    aria-owns='menu-appbar'
+                                    aria-haspopup='true'
+                                    color='inherit'
+                                    onClick={handleMenuProfile}
+                                >
+                                    <Badge badgeContent={countBasket} color='secondary'>
+                                        <PermIdentity/>
+                                    </Badge>
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                id='menu-appbar'
+                                anchorEl={anchorElProfile}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={openProfile}
+                                onClose={handleCloseProfile}
+                            >
+                                {
+                                    !authenticated||['client'].includes(profile.role)?
+                                        <MenuItem>
+                                            <Badge badgeContent={countBasket} color='secondary'>
+                                                <Link href='/basket'>
+                                                    <a style={{display: 'flex', color: '#606060'}}>
+                                                        <LocalGroceryStore/>
+                                                        &nbsp;Корзина&nbsp;&nbsp;
+                                                    </a>
+                                                </Link>
+                                            </Badge>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    !authenticated||profile.role==='client'?
+                                        <MenuItem>
+                                            <Link href='/favorite'>
+                                                <a style={{display: 'flex', color: '#606060'}}>
+                                                    <Star/>&nbsp;Избранное
+                                                </a>
+                                            </Link>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    authenticated&&profile.role!=='admin'?
+                                        <MenuItem>
+                                            <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
+                                                <a style={{display: 'flex', color: '#606060'}}>
+                                                    <AssignmentInd/>&nbsp;Профиль
+                                                </a>
+                                            </Link>
+                                        </MenuItem>
+                                        :
+                                        null
+                                }
+                                {
+                                    authenticated?
+                                        <MenuItem onClick={()=>{
+                                            handleCloseProfile()
+                                            const action = async() => {
+                                                logout(true)
+                                            }
+                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <ExitToApp/>&nbsp;Выйти
+                                            </div>
+                                        </MenuItem>
+                                        :
+                                        <MenuItem onClick={()=>{
+                                            handleCloseProfile()
+                                            setMiniDialog('Вход', <Sign isMobileApp={isMobileApp}/>)
+                                            showMiniDialog(true)
+                                        }}>
+                                            <div style={{display: 'flex', color: '#606060'}}>
+                                                <ExitToApp/>&nbsp;Войти
+                                            </div>
+                                        </MenuItem>
+                                }
+                            </Menu>
 
                             </>
                     }

@@ -133,7 +133,7 @@ const Organization = React.memo((props) => {
                                         <Input
                                             type={isMobileApp?'number':'text'}
                                             value={minimumOrder}
-                                            onChange={(event)=>{setMinimumOrder(checkInt(event.target.value))}}
+                                            onChange={(event)=>{setMinimumOrder(event.target.value)}}
                                             inputProps={{
                                                 'aria-label': 'description',
                                             }}
@@ -249,7 +249,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: minimumOrder})
+                                                            await addOrganization({image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
@@ -270,7 +270,7 @@ const Organization = React.memo((props) => {
                                                     if(email.length>0&&email!==data.organization.email)editElement.email = email
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
-                                                    if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = minimumOrder
+                                                    if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = checkInt(minimumOrder)
                                                     const action = async() => {
                                                         await setOrganization(editElement)
                                                     }

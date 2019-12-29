@@ -40,6 +40,9 @@ const Ads = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/ads`}/>
             </Head>
             <div className={classes.page}>
+                <div className='count'>
+                    {`Всего акций: ${list.length}`}
+                </div>
                 {profile.role==='admin'?<CardAds setList={setList}/>:null}
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>

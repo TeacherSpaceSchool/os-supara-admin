@@ -45,6 +45,9 @@ const Equipments = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/equipments`} />
                 <link rel='canonical' href={`${urlMain}/equipments`}/>
             </Head>
+            <div className='count'>
+                {`Всего оборудования: ${list.length}`}
+            </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardEquipmentPlaceholder height={height}/>}>

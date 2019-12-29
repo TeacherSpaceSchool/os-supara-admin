@@ -225,7 +225,7 @@ const Item = React.memo((props) => {
                                                 label='Упаковка'
                                                 value={packaging}
                                                 className={isMobileApp?classes.inputM:classes.inputD}
-                                                onChange={(event)=>{setPackaging(checkInt(event.target.value))}}
+                                                onChange={(event)=>{setPackaging(event.target.value)}}
                                                 inputProps={{
                                                     'aria-label': 'description',
                                                 }}
@@ -237,7 +237,7 @@ const Item = React.memo((props) => {
                                                     label='Цена'
                                                     value={price}
                                                     className={isMobileApp?classes.inputM:classes.inputD}
-                                                    onChange={(event)=>{setPrice(checkInt(event.target.value))}}
+                                                    onChange={(event)=>{setPrice(event.target.value)}}
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
@@ -249,7 +249,7 @@ const Item = React.memo((props) => {
                                                     label='Скидка'
                                                     value={stock}
                                                     className={isMobileApp?classes.inputM:classes.inputD}
-                                                    onChange={(event)=>{setStock(checkInt(event.target.value))}}
+                                                    onChange={(event)=>{setStock(event.target.value)}}
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}
@@ -340,12 +340,12 @@ const Item = React.memo((props) => {
                                                         if (name.length>0&&price>0&&subCategory._id!=undefined&&organization._id!=undefined) {
                                                             const action = async() => {
                                                                 await addItem({
-                                                                    packaging: packaging,
+                                                                    packaging: checkInt(packaging),
                                                                     name: name,
-                                                                    stock: stock,
+                                                                    stock: checkInt(stock),
                                                                     image: image,
                                                                     info: info,
-                                                                    price: price,
+                                                                    price: checkInt(price),
                                                                     subCategory: subCategory._id,
                                                                     hit: hit,
                                                                     latest: latest,
@@ -368,12 +368,12 @@ const Item = React.memo((props) => {
                                                     <>
                                                     <Button onClick={async()=>{
                                                         let editElement = {_id: data.item._id}
-                                                        if(stock!==data.item.stock)editElement.stock = stock
+                                                        if(stock!==data.item.stock)editElement.stock = checkInt(stock)
                                                         if(name.length>0&&name!==data.item.name)editElement.name = name
-                                                        if(packaging!==data.item.packaging)editElement.packaging = packaging
+                                                        if(packaging!==data.item.packaging)editElement.packaging = checkInt(packaging)
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
-                                                        if(price>0&&price!==data.item.price)editElement.price = price
+                                                        if(price>0&&price!==data.item.price)editElement.price = checkInt(price)
                                                         if(weight!==data.item.weight)editElement.weight = checkFloat(weight)
                                                         if(size!==data.item.size)editElement.size = checkFloat(size)
                                                         if(hit!==data.item.hit)editElement.hit = hit
@@ -550,7 +550,7 @@ const Item = React.memo((props) => {
                                                             <div className={classes.counter} style={isMobileApp?{}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
                                                                 <input type='number' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                                    setCount(checkInt(event.target.value))
+                                                                    setCount(event.target.value)
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
                                                             </div>
@@ -569,7 +569,7 @@ const Item = React.memo((props) => {
                                                                         if (['client'].includes(profile.role))
                                                                             addBasket({
                                                                                 item: data.item._id,
-                                                                                count: count > 0 ? count : 1
+                                                                                count: count > 0 ? checkInt(count) : 1
                                                                             })
                                                                         else if (!authenticated) {
                                                                             let basket = JSON.parse(localStorage.basket);
@@ -579,7 +579,7 @@ const Item = React.memo((props) => {
                                                                                     index = i
                                                                             }
                                                                             if (index === -1)
-                                                                                basket.push({item: data.item, count: count > 0 ? count : 1})
+                                                                                basket.push({item: data.item, count: count > 0 ? checkInt(count) : 1})
                                                                             localStorage.basket = JSON.stringify(basket)
                                                                         }
                                                                         showSnackBar('Товар добавлен в корзину')
@@ -598,7 +598,7 @@ const Item = React.memo((props) => {
                                                             <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
                                                                 <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
-                                                                    setCount(checkInt(event.target.value))
+                                                                    setCount(event.target.value)
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
                                                             </div>
@@ -611,7 +611,7 @@ const Item = React.memo((props) => {
                                                                         if (['client'].includes(profile.role))
                                                                             addBasket({
                                                                                 item: data.item._id,
-                                                                                count: count > 0 ? count : 1
+                                                                                count: count > 0 ? checkInt(count) : 1
                                                                             })
                                                                         else if (!authenticated) {
                                                                             let basket = JSON.parse(localStorage.basket);

@@ -91,14 +91,24 @@ const CardOrder = React.memo((props) => {
                     {
                         authenticated&&profile.role!=='client'?
                             <>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>Тоннаж:&nbsp;</div>
-                                <div className={classes.value}>{element.allTonnage}&nbsp;кг</div>
-                            </div>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>Кубатура:&nbsp;</div>
-                                <div className={classes.value}>{element.allSize}&nbsp;см³</div>
-                            </div>
+                            {
+                                element.allTonnage?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>Тоннаж:&nbsp;</div>
+                                        <div className={classes.value}>{element.allTonnage}&nbsp;кг</div>
+                                    </div>
+                                    :
+                                    null
+                            }
+                            {
+                                element.allSize?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>Кубатура:&nbsp;</div>
+                                        <div className={classes.value}>{element.allSize}&nbsp;см³</div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             </>
                         :
                             null

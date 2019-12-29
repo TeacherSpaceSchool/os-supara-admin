@@ -39,6 +39,9 @@ const Organization = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/brands`} />
                 <link rel='canonical' href={`${urlMain}/brands`}/>
             </Head>
+            <div className='count'>
+                {`Всего брендов: ${list.length}`}
+            </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBrandPlaceholder height={height}/>}>

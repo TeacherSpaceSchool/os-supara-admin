@@ -289,14 +289,19 @@ const Client = React.memo((props) => {
                                             />
                                             </>
                                     }
-                                    <FormControl className={classes.input}>
-                                        <InputLabel>Тип клиента</InputLabel>
-                                        <Select value={type} onChange={handleType}>
-                                            {types.map((element)=>
-                                                <MenuItem key={element} value={element}>{element}</MenuItem>
-                                            )}
-                                        </Select>
-                                    </FormControl>
+                                    {
+                                        profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
+                                            <FormControl className={classes.input}>
+                                                <InputLabel>Тип клиента</InputLabel>
+                                                <Select value={type} onChange={handleType}>
+                                                    {types.map((element)=>
+                                                        <MenuItem key={element} value={element}>{element}</MenuItem>
+                                                    )}
+                                                </Select>
+                                            </FormControl>
+                                            :
+                                            null
+                                    }
                                     <TextField
                                         className={classes.input}
                                         label='День рождение'

@@ -19,7 +19,7 @@ const Index = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.categorys);
     const { search, filter, sort } = props.app;
-    const { profile, authenticated } = props.user;
+    const { profile } = props.user;
     let height = profile.role==='admin'?161:83
     useEffect(()=>{
         (async()=>{
@@ -29,10 +29,6 @@ const Index = React.memo((props) => {
     useEffect(()=>{
         forceCheck()
     },[list])
-    useEffect(()=>{
-        if(!(!authenticated||['admin', 'client'].includes(profile.role)||!profile.role))
-            Router.push('/items/all')
-    },[profile, authenticated])
     return (
         <App searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
@@ -46,6 +42,9 @@ const Index = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}`}/>
             </Head>
             <div className={classes.page}>
+                <div className='count'>
+                    {`Всего категорий: ${list.length}`}
+                </div>
                 {profile.role==='admin'?
                     <>
                     <CardCategory setList={setList}/>

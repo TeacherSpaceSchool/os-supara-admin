@@ -55,6 +55,7 @@ const Catalog = React.memo((props) => {
         let id = list[idx]._id
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0}
+        basket[id].count = checkInt(basket[id].count)
         basket[id].count+=1
 
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
@@ -67,6 +68,7 @@ const Catalog = React.memo((props) => {
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0}
         if(basket[id].count>0) {
+            basket[id].count = checkInt(basket[id].count)
             basket[id].count -= 1
             basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
             if(basket[id].count>0)
@@ -80,7 +82,7 @@ const Catalog = React.memo((props) => {
         let id = list[idx]._id
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0}
-        basket[id].count = count
+        basket[id].count = checkInt(count)
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
         if(count>0)
             addBasket({item: list[idx]._id, count: count})
@@ -92,6 +94,7 @@ const Catalog = React.memo((props) => {
         let id = list[idx]._id
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0}
+        basket[id].count = checkInt(basket[id].count)
         if(list[idx].packaging){
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
         }
@@ -167,8 +170,8 @@ const Catalog = React.memo((props) => {
                                                 }}>–
                                                 </div>
                                                 <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
-                                                       value={basket[row._id]?basket[row._id].count:0} onChange={(event) => {
-                                                    setBasketChange(idx, checkInt(event.target.value))
+                                                       value={basket[row._id]?basket[row._id].count:''} onChange={(event) => {
+                                                    setBasketChange(idx, event.target.value)
                                                 }}/>
                                                 <div className={classes.counterbtn} onClick={() => {
                                                     increment(idx)

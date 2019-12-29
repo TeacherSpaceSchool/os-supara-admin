@@ -60,6 +60,9 @@ const Basket = React.memo((props) => {
         }
     }
     let setBasketChange= (idx, count)=>{
+        count = checkInt(count)
+        if(count<1)
+            count = 1
         if(authenticated)
             setBasket({_id: list[idx]._id, count: count})
         else {
@@ -193,7 +196,7 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                                 <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
                                                                        value={row.count} onChange={(event) => {
-                                                                    list[idx].count = checkInt(event.target.value)
+                                                                    list[idx].count = event.target.value
                                                                     setBasketChange(idx, list[idx].count)
                                                                     setList([...list])
                                                                 }}/>
@@ -282,8 +285,8 @@ const Basket = React.memo((props) => {
                                                     <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                         <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
                                                         <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
-                                                            list[idx].count = checkInt(event.target.value)
-                                                            setBasketChange(idx, list[idx].count)
+                                                            list[idx].count = event.target.value
+                                                            setBasketChange(idx, checkInt(list[idx].count))
                                                             setList([...list])
                                                         }}/>
                                                         <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>

@@ -22,12 +22,32 @@ const Orders = React.memo((props) => {
     const { search, filter, sort, date } = props.app;
     useEffect(()=>{
         (async()=>{
-            setList((await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices)
+            let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
+            setList(orders)
+
+            let tonnage = 0;
+            let size = 0;
+            let price = 0;
+            for(let i=0; i<list.length; i++){
+                price+=list[i].allPrice
+                size+=list[i].allSize
+                tonnage+=list[i].allTonnage
+            }
+            setPrice(price)
+            setTonnage(tonnage)
+            setSize(size)
+
         })()
     },[filter, sort, search, date])
     useEffect(()=>{
         forceCheck()
     },[list])
+
+    let [tonnage, setTonnage] = useState(0);
+    let [size, setSize] = useState(0);
+    let [price, setPrice] = useState(0);
+    let [showStat, setShowStat] = useState(false);
+
     return (
         <App searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
@@ -40,6 +60,41 @@ const Orders = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/orders`} />
                 <link rel='canonical' href={`${urlMain}/orders`}/>
             </Head>
+            <div className='count' onClick={()=>setShowStat(!showStat)}>
+                {
+                    `Всего заказов: ${list.length}`
+                }
+                {
+                    showStat?
+                        <>
+                        <br/>
+                        <br/>
+                        {`Всего сумма: ${price} сом`}
+                        {
+                            tonnage?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего тонаж: ${tonnage} кг`}
+                                </>
+                                :
+                                null
+                        }
+                        {
+                            size?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего кубатура: ${size} см³`}
+                                </>
+                                :
+                                null
+                        }
+                        </>
+                        :
+                        null
+                }
+            </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>

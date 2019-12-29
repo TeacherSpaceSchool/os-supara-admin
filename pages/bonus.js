@@ -41,6 +41,9 @@ const Bonus = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/bonus`} />
                 <link rel='canonical' href={`${urlMain}/bonus`}/>
             </Head>
+            <div className='count'>
+                {`Всего бонусов: ${list.length}`}
+            </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBonusPlaceholder height={height}/>}>
