@@ -17,7 +17,7 @@ html{
 }
 
 .count{
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
@@ -45,14 +45,13 @@ html{
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   top: $app-bar-height-m;
-  padding-bottom: 0px;
+  padding-bottom: 64px;
   height: calc(100vh - #{$app-bar-height-m});
   width: 100%;
   @media screen and (min-width: $break-small) {
     top: $app-bar-height-d;
     height: calc(100vh - #{$app-bar-height-d});
     left: 300px;
-    padding-bottom: 64px;
     width: calc(100% - #{$app-drawer-width});
   }
 }
