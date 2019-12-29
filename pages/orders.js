@@ -28,10 +28,10 @@ const Orders = React.memo((props) => {
             let tonnage = 0;
             let size = 0;
             let price = 0;
-            for(let i=0; i<list.length; i++){
-                price+=list[i].allPrice
-                size+=list[i].allSize
-                tonnage+=list[i].allTonnage
+            for(let i=0; i<orders.length; i++){
+                price+=orders[i].allPrice
+                size+=orders[i].allSize
+                tonnage+=orders[i].allTonnage
             }
             setPrice(price)
             setTonnage(tonnage)
