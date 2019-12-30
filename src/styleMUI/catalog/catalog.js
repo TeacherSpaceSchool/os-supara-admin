@@ -11,6 +11,31 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
+    valuecons: {
+        marginTop: 5,
+        marginBottom: -5,
+        fontWeight: '500',
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
+    },
+    counterbtncons: {
+        marginTop: 5,
+        marginBottom: -5,
+        marginRight: 10,
+        marginLeft: 10,
+        userSelect: 'none',
+        cursor: 'pointer',
+        width: 16,
+        height: 16,
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        background: '#e6e6e6',
+        color: '#212121',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     input: {
         width: '100%',
     },
@@ -155,6 +180,19 @@ export default makeStyles({
         borderBottom: '1px dashed #ffb300',
         userSelect: 'none',
         width: 140
+    },
+    showCons: {
+        marginLeft: 15,
+        padding: 3,
+        textAlign: 'center',
+        fontSize: '0.875rem',
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        whiteSpace: 'pre-wrap',
+        cursor: 'pointer',
+        userSelect: 'none',
+        background: '#e6e6e6',
+        borderRadius: 5
     },
 
 })

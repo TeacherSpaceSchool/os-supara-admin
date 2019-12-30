@@ -89,6 +89,15 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.value}>{element.allPrice}&nbsp;сом</div>
                     </div>
                     {
+                        element.consignmentPrice?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Консигнации:&nbsp;</div>
+                                <div className={classes.value}>{element.consignmentPrice}&nbsp;сом</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
                         authenticated&&profile.role!=='client'?
                             <>
                             {

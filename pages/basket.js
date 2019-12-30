@@ -53,18 +53,32 @@ const Basket = React.memo((props) => {
         setList([...list])
     }
     let decrement = (idx)=>{
-        if(list[idx].count>1) {
+        if(list[idx].count>0) {
             list[idx].count -= 1
             setBasketChange(idx, list[idx].count)
             setList([...list])
         }
     }
-    let setBasketChange= (idx, count)=>{
+    let incrementConsignment = (idx)=>{
+        if(list[idx].consignment<list[idx].count) {
+            list[idx].consignment += 1
+            setBasketChange(idx, list[idx].count, list[idx].consignment)
+            setList([...list])
+        }
+    }
+    let decrementConsignment = (idx)=>{
+        if(list[idx].consignment>1) {
+            list[idx].consignment -= 1
+            setBasketChange(idx, list[idx].count, list[idx].consignment)
+            setList([...list])
+        }
+    }
+    let setBasketChange= (idx, count, consignment)=>{
         count = checkInt(count)
         if(count<1)
             count = 1
         if(authenticated)
-            setBasket({_id: list[idx]._id, count: count})
+            setBasket({_id: list[idx]._id, count: count, consignment})
         else {
             let list = JSON.parse(localStorage.basket);
             list[idx].count = count;
@@ -205,7 +219,7 @@ const Basket = React.memo((props) => {
                                                                 }}>+
                                                                 </div>
                                                             </div>
-                                                            <div className={classes.addPackagingM} style={{color: '#ffb300'}} onClick={()=>{
+                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
                                                                 if(row.item.packaging){
                                                                     list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
                                                                 }
@@ -217,6 +231,30 @@ const Basket = React.memo((props) => {
                                                             }}>
                                                                 Добавить упаковку
                                                             </div>
+                                                            {
+                                                                authenticated&&data.client.type==='торговая точка'?
+                                                                    <>
+                                                                    <div className={classes.row}>
+                                                                        <div className={classes.valuecons}>Консигнация</div>
+                                                                        <div className={classes.counterbtncons} onClick={()=>{decrementConsignment(idx)}}>-</div>
+                                                                        <div className={classes.valuecons}>{row.consignment}&nbsp;шт</div>
+                                                                        <div className={classes.counterbtncons} onClick={()=>{incrementConsignment(idx)}}>+</div>
+                                                                    </div>
+                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                        let consignment = (parseInt(list[idx].count / row.item.consignment) + 1) * row.item.consignment
+                                                                        if(consignment<list[idx].count) {
+                                                                            list[idx].consignment = consignment
+                                                                            setBasketChange(idx, list[idx].count, list[idx].consignment)
+                                                                            setList([...list])
+                                                                        }
+                                                                    }}>
+                                                                        Добавить упаковку
+                                                                    </div>
+                                                                    <br/>
+                                                                    </>
+                                                                    :
+                                                                    null
+                                                            }
                                                             <div>
                                                                 <div className={classes.row}>
                                                                     <div className={classes.nameField}>
@@ -303,6 +341,33 @@ const Basket = React.memo((props) => {
                                                     }}>
                                                         Добавить упаковку
                                                     </div>
+                                                    {
+                                                        authenticated&&data.client.type==='торговая точка'?
+                                                        <>
+                                                        <div className={classes.row}>
+                                                            <div className={classes.valuecons}>Консигнация</div>
+                                                            <div className={classes.counterbtncons} onClick={()=>{decrementConsignment(idx)}}>-</div>
+                                                            <div className={classes.valuecons}>{row.consignment}&nbsp;шт</div>
+                                                            <div className={classes.counterbtncons} onClick={()=>{incrementConsignment(idx)}}>+</div>
+                                                        </div>
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                            if(list[idx].consignment<list[idx].count) {
+                                                                if (row.item.packaging) {
+                                                                    list[idx].consignment = (parseInt(list[idx].count / row.item.consignment) + 1) * row.item.consignment
+                                                                }
+                                                                else {
+                                                                    list[idx].consignment += 1
+                                                                }
+                                                                setBasketChange(idx, list[idx].count, list[idx].consignment)
+                                                                setList([...list])
+                                                            }
+                                                        }}>
+                                                            Добавить упаковку
+                                                        </div>
+                                                        </>
+                                                        :
+                                                        null
+                                                    }
                                                 </TableCell>
                                                 <TableCell align="left">{`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count} сом`}</TableCell>
                                                 <TableCell align="left">{`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count)*row.count} сом`}</TableCell>

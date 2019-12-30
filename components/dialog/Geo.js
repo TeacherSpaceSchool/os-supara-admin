@@ -16,7 +16,7 @@ import Confirmation from './Confirmation'
 const Geo =  React.memo(
     (props) =>{
         const { showSnackBar } = props.snackbarActions;
-        const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
+        const { showFullDialog, setMiniDialog, showMiniDialog } = props.mini_dialogActions;
         const { classes, geo, name, idx, setAddressGeo, change } = props;
         let [newGeo, setNewGeo] = useState(geo?geo:'42.8700000, 74.5900000');
         let getGeo = () => {
@@ -58,7 +58,7 @@ const Geo =  React.memo(
                                 <Button variant='contained' color='primary' onClick={async()=>{
                                     const action = async() => {
                                         await setAddressGeo(newGeo, idx)
-                                        showMiniDialog(false);
+                                        showFullDialog(false);
                                     }
                                     setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                 }} className={classes.button}>
@@ -66,7 +66,7 @@ const Geo =  React.memo(
                                 </Button>
                                 :null
                         }
-                        <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
+                        <Button variant='contained' color='secondary' onClick={()=>{showFullDialog(false);}} className={classes.button}>
                             Закрыть
                         </Button>
                     </center>

@@ -9,6 +9,7 @@ export default makeStyles({
     },
     addPackaging: {
         marginTop: 10,
+        marginBottom: 10,
         textAlign: 'center',
         fontSize: '0.8125rem',
         fontFamily: 'Roboto',
@@ -237,6 +238,31 @@ export default makeStyles({
         outline: 'none',
         border: 'none',
         textAlign: 'center',
+    },
+    valuecons: {
+        marginTop: 5,
+        marginBottom: -5,
+        fontWeight: '500',
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
+    },
+    counterbtncons: {
+        marginTop: 5,
+        marginBottom: -5,
+        marginRight: 10,
+        marginLeft: 10,
+        userSelect: 'none',
+        cursor: 'pointer',
+        width: 16,
+        height: 16,
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        background: '#e6e6e6',
+        color: '#212121',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
 

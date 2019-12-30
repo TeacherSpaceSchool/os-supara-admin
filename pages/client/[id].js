@@ -145,7 +145,7 @@ const Client = React.memo((props) => {
     })
     let certificateUrl = data.client?data.client.certificate:'';
     let certificateRef = useRef(null);
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { logout } = props.userActions;
     let [newPass, setNewPass] = useState('');
     let handleNewPass =  (event) => {
@@ -426,8 +426,8 @@ const Client = React.memo((props) => {
                                                 />
                                             </FormControl>
                                             <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
-                                                setMiniDialog('Геолокация', <Geo change={true} geo={element[1]} setAddressGeo={setAddressGeo} idx={idx}/>, true)
-                                                showMiniDialog(true)
+                                                setFullDialog('Геолокация', <Geo change={true} geo={element[1]} setAddressGeo={setAddressGeo} idx={idx}/>)
+                                                showFullDialog(true)
                                             }}>
                                                 {
                                                     element[1]?
@@ -640,8 +640,8 @@ const Client = React.memo((props) => {
                                                 </div>
                                                 <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
                                                     if(element[1]) {
-                                                        setMiniDialog('Геолокация', <Geo geo={element[1]}/>, true)
-                                                        showMiniDialog(true)
+                                                        setFullDialog('Геолокация', <Geo geo={element[1]}/>)
+                                                        showFullDialog(true)
                                                     }
                                                 }}>
                                                     {

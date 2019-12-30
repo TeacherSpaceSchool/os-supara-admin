@@ -24,12 +24,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router'
 import {checkFloat, pdDatePicker} from '../../src/lib'
-import Confirmation from '../../components/dialog/Confirmation'
-import GeoRoute from '../../components/dialog/GeoRoute'
-import ShippingList from '../../components/dialog/ShippingList'
+import dynamic from 'next/dynamic'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 
+const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
+const GeoRoute = dynamic(() => import('../../components/dialog/GeoRoute'))
+const ShippingList = dynamic(() => import('../../components/dialog/ShippingList'))
 
 const Route = React.memo((props) => {
     const { profile } = props.user;
@@ -62,7 +63,7 @@ const Route = React.memo((props) => {
         })()
     },[employment])
     let [employments, setEmployments] = useState([]);
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
         (async()=>{
@@ -226,7 +227,7 @@ const Route = React.memo((props) => {
                                         <div className={classes.nameField}>
                                             Тоннаж{auto.tonnage?' (груз/автомобиль)':''}:&nbsp;
                                         </div>
-                                        <div className={classes.value} style={{color: allTonnage<checkFloat(auto.tonnage)?'green':'red'}}>
+                                        <div className={classes.value} style={{color: !auto.tonnage||allTonnage<checkFloat(auto.tonnage)?'green':'red'}}>
                                             {`${allTonnage} кг${auto.tonnage?`/${auto.tonnage} кг`:''}`}
                                         </div>
                                     </div>
@@ -239,7 +240,7 @@ const Route = React.memo((props) => {
                                         <div className={classes.nameField}>
                                             Кубатура{auto.size?' (груз/автомобиль)':''}:&nbsp;
                                         </div>
-                                        <div className={classes.value} style={{color: allSize<checkFloat(auto.size)?'green':'red'}}>
+                                        <div className={classes.value} style={{color: !auto.size||allSize<checkFloat(auto.size)?'green':'red'}}>
                                             {`${allSize} см³${auto.size?`/${auto.size} см³`:''}`}
                                         </div>
                                     </div>
@@ -248,8 +249,8 @@ const Route = React.memo((props) => {
                             }
                             <br/>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
-                                setMiniDialog('Маршрут', <GeoRoute invoices={invoices}/>, true)
-                                showMiniDialog(true)
+                                setFullDialog('Маршрут', <GeoRoute invoices={invoices} route={data.route._id}  getInvoices={getInvoices}/>)
+                                showFullDialog(true)
                             }} className={classes.geo}>{breakGeoRoute?'Маршрут неполный':'Просмотреть маршрут'}</div>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
                                 setMiniDialog('Cписок товаров', <ShippingList invoices={invoices}/>)

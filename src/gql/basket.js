@@ -28,6 +28,7 @@ export const getBasket = async(client)=>{
                                         {_id name minimumOrder}
                                 }
                             count
+                            consignment
                         }
                     }`,
             })
@@ -98,8 +99,8 @@ export const addBasket = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($item: ID!, $count: Int!) {
-                        addBasket(item: $item, count: $count) {
+                    mutation ($item: ID!, $count: Int!, $consignment: Int) {
+                        addBasket(item: $item, count: $count, consignment: $consignment) {
                              data
                         }
                     }`})
@@ -115,8 +116,8 @@ export const setBasket = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $count: Int!) {
-                        setBasket(_id: $_id, count: $count) {
+                    mutation ($_id: ID!, $count: Int!, $consignment: Int) {
+                        setBasket(_id: $_id, count: $count, consignment: $consignment) {
                              data
                         }
                     }`})

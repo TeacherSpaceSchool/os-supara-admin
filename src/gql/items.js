@@ -28,6 +28,7 @@ export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
                             latest
                             favorite
                             basket
+                            packaging
                         }
                         sortItem {
                             name

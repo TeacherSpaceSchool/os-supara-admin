@@ -54,7 +54,7 @@ const Catalog = React.memo((props) => {
     let increment = (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0}
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(basket[id].count)
         basket[id].count+=1
 
@@ -66,7 +66,7 @@ const Catalog = React.memo((props) => {
     let decrement = (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0}
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].count>0) {
             basket[id].count = checkInt(basket[id].count)
             basket[id].count -= 1
@@ -78,10 +78,38 @@ const Catalog = React.memo((props) => {
             setBasket({...basket})
         }
     }
+    let incrementConsignment = (idx)=>{
+        let id = list[idx]._id
+        if(!basket[id])
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+        console.log(basket[id].consignment, basket[id].count)
+        if(basket[id].consignment<basket[id].count) {
+            basket[id].consignment += 1
+            addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
+            setBasket({...basket})
+        }
+    }
+    let decrementConsignment = (idx)=>{
+        let id = list[idx]._id
+        if(!basket[id])
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+        if(basket[id].consignment>0) {
+            basket[id].consignment -= 1
+            addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
+            setBasket({...basket})
+        }
+    }
+    let showConsignment = (idx)=>{
+        let id = list[idx]._id
+        if(!basket[id])
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+        basket[id].showConsignment = !basket[id].showConsignment
+        setBasket({...basket})
+    }
     let setBasketChange= (idx, count)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0}
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(count)
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
         if(count>0)
@@ -93,17 +121,25 @@ const Catalog = React.memo((props) => {
     let addPackaging= (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0}
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(basket[id].count)
         if(list[idx].packaging){
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
         }
-        else {
-            basket[id].count += 1
-        }
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
         addBasket({item: list[idx]._id, count: basket[id].count})
         setBasket({...basket})
+    }
+    let addPackagingConsignment = (idx)=>{
+        let id = list[idx]._id
+        if(!basket[id])
+            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+        let consignment = (parseInt(basket[id].consignment/list[idx].packaging)+1)*list[idx].packaging
+        if(consignment<=basket[id].count){
+            basket[id].consignment = consignment
+            addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
+            setBasket({...basket})
+        }
     }
     useEffect(()=>{
         let keys = Object.keys(basket)
@@ -164,18 +200,26 @@ const Catalog = React.memo((props) => {
                                             <b className={classes.value}>
                                                 {`${price} сом`}
                                             </b>
-                                            <div className={classes.counter}>
-                                                <div className={classes.counterbtn} onClick={() => {
-                                                    decrement(idx)
-                                                }}>–
+                                            <div className={classes.line}>
+                                                <div className={classes.counter}>
+                                                    <div className={classes.counterbtn} onClick={() => {
+                                                        decrement(idx)
+                                                    }}>–
+                                                    </div>
+                                                    <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
+                                                           value={basket[row._id]?basket[row._id].count:''} onChange={(event) => {
+                                                        setBasketChange(idx, event.target.value)
+                                                    }}/>
+                                                    <div className={classes.counterbtn} onClick={() => {
+                                                        increment(idx)
+                                                    }}>+
+                                                    </div>
                                                 </div>
-                                                <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
-                                                       value={basket[row._id]?basket[row._id].count:''} onChange={(event) => {
-                                                    setBasketChange(idx, event.target.value)
-                                                }}/>
-                                                <div className={classes.counterbtn} onClick={() => {
-                                                    increment(idx)
-                                                }}>+
+                                                &nbsp;&nbsp;&nbsp;
+                                                <div className={classes.showCons} style={{color: basket[row._id]&&basket[row._id].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                    showConsignment(idx)
+                                                }}>
+                                                    КОНС
                                                 </div>
                                             </div>
                                             <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
@@ -183,6 +227,25 @@ const Catalog = React.memo((props) => {
                                             }}>
                                                 Добавить упаковку
                                             </div>
+                                            {
+                                                basket[row._id]&&basket[row._id].showConsignment?
+                                                    <>
+                                                    <br/>
+                                                    <div className={classes.row}>
+                                                        <div className={classes.valuecons}>Консигнация</div>
+                                                        <div className={classes.counterbtncons} onClick={()=>{decrementConsignment(idx)}}>-</div>
+                                                        <div className={classes.valuecons}>{basket[row._id]?basket[row._id].consignment:0}&nbsp;шт</div>
+                                                        <div className={classes.counterbtncons} onClick={()=>{incrementConsignment(idx)}}>+</div>
+                                                    </div>
+                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                        addPackagingConsignment(idx)
+                                                    }}>
+                                                        Добавить упаковку
+                                                    </div>
+                                                    </>
+                                                    :
+                                                    null
+                                            }
                                         </div>
                                     </div>
                                     <br/>

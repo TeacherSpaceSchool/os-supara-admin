@@ -38,6 +38,8 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                         }
                                     count
                                     allPrice
+                                    consignment
+                                    consignmentPrice
                                     status
                                  }
                             client 
@@ -45,11 +47,13 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                     _id
                                     name
                                     email
-                                    phone 
+                                    phone
+                                    type 
                                     user 
                                         {_id }
                                 }
                             allPrice
+                            consignmentPrice
                             info
                             address
                             paymentMethod
@@ -114,6 +118,8 @@ export const getOrdersForRouting = async(organization)=>{
                                         }
                                     count
                                     allPrice
+                                    consignment
+                                    consignmentPrice
                                     status
                                  }
                             client 
@@ -122,10 +128,12 @@ export const getOrdersForRouting = async(organization)=>{
                                     name
                                     email
                                     phone 
+                                    type 
                                     user 
                                         { _id }
                                 }
                             allPrice
+                            consignmentPrice
                             info
                             address
                             paymentMethod
@@ -182,6 +190,8 @@ export const getOrder = async({_id})=>{
                                         }
                                     count
                                     allPrice
+                                    consignment
+                                    consignmentPrice
                                     status
                                  }
                             client 
@@ -190,10 +200,12 @@ export const getOrder = async({_id})=>{
                                     name
                                     email
                                     phone
+                                    type 
                                     user 
                                         {_id }
                                 }
                             allPrice
+                            consignmentPrice
                             info
                             address
                             paymentMethod

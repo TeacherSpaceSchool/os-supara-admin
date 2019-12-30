@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import AppBar from '../components/app/AppBar'
 import Dialog from '../components/app/Dialog'
+import FullDialog from '../components/app/FullDialog'
 import SnackBar from '../components/app/SnackBar'
 import Drawer from '../components/app/Drawer'
 import { connect } from 'react-redux'
@@ -73,6 +74,7 @@ const App = React.memo(props => {
             <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>
+            <FullDialog/>
             <Dialog />
             <SnackBar/>
             {load?

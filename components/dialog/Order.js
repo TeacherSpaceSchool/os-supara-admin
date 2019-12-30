@@ -21,10 +21,11 @@ const Order =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
         const { profile, authenticated } = props.user;
-        const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
+        const { showMiniDialog, setMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
         const { classes, element, setList, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
+        let [consignmentPrice, setСonsignmentPrice] = useState(element.consignmentPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
         let [allSize, setAllSize] = useState(element.allSize);
         let [taken, setTaken] = useState(element.taken);
@@ -38,7 +39,9 @@ const Order =  React.memo(
             allTonnage=0
             allSize=0
             allPrice=0
+            consignmentPrice=0
             for(let i=0; i<orders.length; i++){
+                consignmentPrice+=orders[i].consignmentPrice
                 allPrice+=orders[i].allPrice
                 allTonnage+=orders[i].allTonnage
                 allSize+=orders[i].allSize
@@ -48,6 +51,7 @@ const Order =  React.memo(
             setAllPrice(allPrice)
             setAllTonnage(allTonnage)
             setAllSize(allSize)
+            setСonsignmentPrice(consignmentPrice)
         }
         let increment = (idx)=>{
             orders[idx].count+=1
@@ -63,6 +67,22 @@ const Order =  React.memo(
                 orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
                 orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                 orders[idx].allSize = orders[idx].count * orders[idx].item.size
+                setOrders([...orders])
+                canculateAllPrice()
+            }
+        }
+        let incrementConsignation = (idx)=>{
+            if(orders[idx].consignment<orders[idx].count){
+                orders[idx].consignment+=1
+                orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                setOrders([...orders])
+                canculateAllPrice()
+            }
+        }
+        let decrementConsignation = (idx)=>{
+            if(orders[idx].consignment>0) {
+                orders[idx].consignment -= 1
+                orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
                 setOrders([...orders])
                 canculateAllPrice()
             }
@@ -113,8 +133,8 @@ const Order =  React.memo(
                 </div>
                 <div className={classes.geo} style={{color: element.address[1]?'#ffb300':'red'}} onClick={()=>{
                     if(element.address[1]) {
-                        setMiniDialog('Геолокация', <Geo geo={element.address[1]}/>, true)
-                        showMiniDialog(true)
+                        setFullDialog('Геолокация', <Geo geo={element.address[1]}/>)
+                        showFullDialog(true)
                     }
                 }}>
                     {
@@ -162,6 +182,15 @@ const Order =  React.memo(
                     <div className={classes.nameField}>Сумма:&nbsp;</div>
                     <div className={classes.value}>{allPrice}&nbsp;сом</div>
                 </div>
+                {
+                    consignmentPrice?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Консигнации:&nbsp;</div>
+                            <div className={classes.value}>{consignmentPrice}&nbsp;сом</div>
+                        </div>
+                        :
+                        null
+                }
                 {
                     authenticated&&profile.role!=='client'?
                         <>
@@ -249,7 +278,39 @@ const Order =  React.memo(
                                             <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
                                             <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
                                         </div>
-                                        <br/>
+                                        {console.log(element.client)}
+                                        {
+                                            element.client.type==='торговая точка'?
+                                                <>
+                                                <div className={classes.row}>
+                                                    <div className={classes.nameField}>Консигнации:&nbsp;</div>
+                                                    <div className={classes.column}>
+                                                        <div className={classes.row}>
+                                                            <div className={classes.counterbtn} onClick={()=>{decrementConsignation(idx)}}>-</div>
+                                                            <div className={classes.value}>{order.consignment}&nbsp;шт</div>
+                                                            <div className={classes.counterbtn} onClick={()=>{incrementConsignation(idx)}}>+</div>
+                                                        </div>
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                            let consignment = (parseInt(orders[idx].consignment/order.item.packaging)+1)*order.item.packaging
+                                                            if(consignment<=orders[idx].count){
+                                                                orders[idx].consignment = consignment
+                                                            }
+                                                            orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                                                            setOrders([...orders])
+                                                            canculateAllPrice()
+                                                        }}>
+                                                            Добавить упаковку
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className={classes.row}>
+                                                    <div className={classes.nameField}>Стоимость консигнации:&nbsp;</div>
+                                                    <div className={classes.value}>{order.consignmentPrice}&nbsp;сом</div>
+                                                </div>
+                                                </>
+                                                :
+                                                null
+                                        }
                                     </div>
                                 )
                             else
@@ -269,7 +330,21 @@ const Order =  React.memo(
                                             <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
                                             <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
                                         </div>
-                                        <br/>
+                                        {
+                                            order.consignment?
+                                                <>
+                                                <div className={classes.row}>
+                                                    <div className={classes.nameField}>Консигнации:&nbsp;</div>
+                                                    <div className={classes.value}>{order.consignment}&nbsp;шт</div>
+                                                </div>
+                                                <div className={classes.row}>
+                                                    <div className={classes.nameField}>Стоимость консигнации:&nbsp;</div>
+                                                    <div className={classes.value}>{order.consignmentPrice}&nbsp;сом</div>
+                                                </div>
+                                                </>
+                                                :
+                                                null
+                                        }
                                     </div>
                                 )
                         })
@@ -425,7 +500,7 @@ const Order =  React.memo(
 
                                 let sendOrders;
                                 if(element.orders[0].status!=='обработка') sendOrders = []
-                                else sendOrders = orders.map((order)=>{return {_id: order._id, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
+                                else sendOrders = orders.map((order)=>{return {_id: order._id, consignmentPrice: order.consignmentPrice, consignment: order.consignment, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
 
                                 let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
                                 if(setList)

@@ -42,6 +42,8 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                 }
                                             count
                                             allPrice
+                                            consignment
+                                            consignmentPrice
                                             status
                                          }
                                     client 
@@ -50,10 +52,12 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                             name
                                             email
                                             phone 
+                                            type 
                                             user 
                                                 {_id }
                                         }
                                     allPrice
+                                    consignmentPrice
                                     info
                                     address
                                     paymentMethod
@@ -141,6 +145,8 @@ export const getRoute = async({_id}, client)=>{
                                                 }
                                             count
                                             allPrice
+                                            consignment
+                                            consignmentPrice
                                             status
                                          }
                                     client 
@@ -148,11 +154,13 @@ export const getRoute = async({_id}, client)=>{
                                             _id
                                             name
                                             email
-                                            phone 
+                                            phone  
+                                            type
                                             user 
                                                 {_id }
                                         }
                                     allPrice
+                                    consignmentPrice
                                     info
                                     address
                                     paymentMethod
