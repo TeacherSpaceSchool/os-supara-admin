@@ -241,8 +241,8 @@ const Basket = React.memo((props) => {
                                                                         <div className={classes.counterbtncons} onClick={()=>{incrementConsignment(idx)}}>+</div>
                                                                     </div>
                                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                                        let consignment = (parseInt(list[idx].count / row.item.consignment) + 1) * row.item.consignment
-                                                                        if(consignment<list[idx].count) {
+                                                                        let consignment = (parseInt(list[idx].consignment / row.item.packaging) + 1) * row.item.packaging
+                                                                        if(consignment<=list[idx].count) {
                                                                             list[idx].consignment = consignment
                                                                             setBasketChange(idx, list[idx].count, list[idx].consignment)
                                                                             setList([...list])
@@ -351,13 +351,9 @@ const Basket = React.memo((props) => {
                                                             <div className={classes.counterbtncons} onClick={()=>{incrementConsignment(idx)}}>+</div>
                                                         </div>
                                                         <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                            if(list[idx].consignment<list[idx].count) {
-                                                                if (row.item.packaging) {
-                                                                    list[idx].consignment = (parseInt(list[idx].count / row.item.consignment) + 1) * row.item.consignment
-                                                                }
-                                                                else {
-                                                                    list[idx].consignment += 1
-                                                                }
+                                                            let consignment = (parseInt(list[idx].consignment / row.item.packaging) + 1) * row.item.packaging
+                                                            if(consignment<=list[idx].count) {
+                                                                list[idx].consignment = consignment
                                                                 setBasketChange(idx, list[idx].count, list[idx].consignment)
                                                                 setList([...list])
                                                             }

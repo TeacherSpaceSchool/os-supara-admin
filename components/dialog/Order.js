@@ -497,7 +497,6 @@ const Order =  React.memo(
                                 if(element.cancelForwarder!==cancelForwarder)invoice.cancelForwarder=cancelForwarder
                                 await setInvoice(invoice)
 
-
                                 let sendOrders;
                                 if(element.orders[0].status!=='обработка') sendOrders = []
                                 else sendOrders = orders.map((order)=>{return {_id: order._id, consignmentPrice: order.consignmentPrice, consignment: order.consignment, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
