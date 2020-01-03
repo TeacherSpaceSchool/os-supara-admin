@@ -28,12 +28,19 @@ const Orders = React.memo((props) => {
             let tonnage = 0;
             let size = 0;
             let price = 0;
+            let consignment = 0;
+            let consignmentPayment = 0;
             for(let i=0; i<orders.length; i++){
                 price+=orders[i].allPrice
                 size+=orders[i].allSize
                 tonnage+=orders[i].allTonnage
+                consignment+=orders[i].consignmentPrice
+                if(orders[i].paymentConsignation)
+                    consignmentPayment+=orders[i].consignmentPrice
             }
             setPrice(price)
+            setConsignment(consignment)
+            setConsignmentPayment(consignmentPayment)
             setTonnage(tonnage)
             setSize(size)
 
@@ -46,6 +53,8 @@ const Orders = React.memo((props) => {
     let [tonnage, setTonnage] = useState(0);
     let [size, setSize] = useState(0);
     let [price, setPrice] = useState(0);
+    let [consignment, setConsignment] = useState(0);
+    let [consignmentPayment, setConsignmentPayment] = useState(0);
     let [showStat, setShowStat] = useState(false);
 
     return (
@@ -70,6 +79,19 @@ const Orders = React.memo((props) => {
                         <br/>
                         <br/>
                         {`Всего сумма: ${price} сом`}
+                        {
+                            consignment?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего консигнаций: ${consignment} сом`}
+                                <br/>
+                                <br/>
+                                {`Оплачено консигнаций: ${consignmentPayment} сом`}
+                                </>
+                                :
+                                null
+                        }
                         {
                             tonnage?
                                 <>

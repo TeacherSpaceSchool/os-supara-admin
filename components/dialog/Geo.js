@@ -61,6 +61,7 @@ const Geo =  React.memo(
                                         showFullDialog(false);
                                     }
                                     setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
                                 }} className={classes.button}>
                                     Сохранить
                                 </Button>

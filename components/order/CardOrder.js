@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -21,6 +21,14 @@ const CardOrder = React.memo((props) => {
         'выполнен': 'green',
         'отмена': 'red'
     }
+    let [priceAfterReturn, setPriceAfterReturn] = useState(0);
+    useEffect(()=>{
+        priceAfterReturn = 0
+        for(let i=0; i<element.orders.length; i++){
+            priceAfterReturn += (element.allPrice-element.orders[i].returned*(element.orders[i].item.stock?element.orders[i].item.stock:element.orders[i].item.price))
+        }
+        setPriceAfterReturn(priceAfterReturn)
+    },[element,])
     return (
         <Card className={classes.card} onClick={()=>{setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}}>
             <CardActionArea>
@@ -85,14 +93,16 @@ const CardOrder = React.memo((props) => {
                             null
                     }
                     <div className={classes.row}>
-                        <div className={classes.nameField}>Сумма:&nbsp;</div>
-                        <div className={classes.value}>{element.allPrice}&nbsp;сом</div>
+                        <div className={classes.nameField}>Сумма&nbsp;{priceAfterReturn!==element.allPrice?'(фактически/итого)':''}:</div>
+                        <div className={classes.value}>{priceAfterReturn!==element.allPrice?`${priceAfterReturn} сом/${element.allPrice} сом`:`${element.allPrice} сом`}</div>
                     </div>
                     {
                         element.consignmentPrice?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Консигнации:&nbsp;</div>
-                                <div className={classes.value}>{element.consignmentPrice}&nbsp;сом</div>
+                                <div className={classes.value} style={{color: element.paymentConsignation?'green':'red'}}>
+                                    {element.consignmentPrice}&nbsp;сом,&nbsp;{element.paymentConsignation?'оплачены':'не оплачены'}
+                                </div>
                             </div>
                             :
                             null

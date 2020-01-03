@@ -43,6 +43,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                             count
                                             allPrice
                                             consignment
+                                            returned
                                             consignmentPrice
                                             status
                                          }
@@ -66,6 +67,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     confirmationClient
                                     cancelClient
                                     cancelForwarder
+                                    paymentConsignation
                                     taken
                                     dateDelivery
                                     usedBonus
@@ -146,6 +148,7 @@ export const getRoute = async({_id}, client)=>{
                                             count
                                             allPrice
                                             consignment
+                                            returned
                                             consignmentPrice
                                             status
                                          }
@@ -169,6 +172,7 @@ export const getRoute = async({_id}, client)=>{
                                     confirmationClient
                                     cancelClient
                                     cancelForwarder
+                                    paymentConsignation
                                     taken
                                     dateDelivery
                                     usedBonus

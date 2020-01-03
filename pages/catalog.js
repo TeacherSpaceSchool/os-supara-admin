@@ -82,7 +82,6 @@ const Catalog = React.memo((props) => {
         let id = list[idx]._id
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
-        console.log(basket[id].consignment, basket[id].count)
         if(basket[id].consignment<basket[id].count) {
             basket[id].consignment += 1
             addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})

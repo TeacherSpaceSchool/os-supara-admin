@@ -39,6 +39,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                     count
                                     allPrice
                                     consignment
+                                    returned
                                     consignmentPrice
                                     status
                                  }
@@ -62,6 +63,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                             confirmationClient
                             cancelClient
                             cancelForwarder
+                            paymentConsignation
                             taken
                             dateDelivery
                             usedBonus
@@ -119,6 +121,7 @@ export const getOrdersForRouting = async(organization)=>{
                                     count
                                     allPrice
                                     consignment
+                                    returned
                                     consignmentPrice
                                     status
                                  }
@@ -142,6 +145,7 @@ export const getOrdersForRouting = async(organization)=>{
                             confirmationClient
                             cancelClient
                             cancelForwarder
+                            paymentConsignation
                             taken
                             dateDelivery
                             usedBonus
@@ -191,6 +195,7 @@ export const getOrder = async({_id})=>{
                                     count
                                     allPrice
                                     consignment
+                                    returned
                                     consignmentPrice
                                     status
                                  }
@@ -213,6 +218,7 @@ export const getOrder = async({_id})=>{
                             confirmationForwarder
                             cancelClient
                             cancelForwarder
+                            paymentConsignation
                             confirmationClient
                             taken
                             dateDelivery
@@ -282,8 +288,8 @@ export const setInvoice = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean) {
-                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder) {
+                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean, $paymentConsignation: Boolean) {
+                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder, paymentConsignation: $paymentConsignation) {
                              data
                         }
                     }`})

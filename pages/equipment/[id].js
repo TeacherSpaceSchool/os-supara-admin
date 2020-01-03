@@ -42,7 +42,6 @@ const Equipment = React.memo((props) => {
     };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const router = useRouter()
-    console.log(organizations)
     return (
         <App pageName={data.equipment?router.query.id==='new'?'Добавить':data.equipment.name:'Ничего не найдено'}>
             <Head>

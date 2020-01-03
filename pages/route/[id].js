@@ -31,6 +31,7 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
 const GeoRoute = dynamic(() => import('../../components/dialog/GeoRoute'))
 const ShippingList = dynamic(() => import('../../components/dialog/ShippingList'))
+const ReturnedList = dynamic(() => import('../../components/dialog/ReturnedList'))
 
 const Route = React.memo((props) => {
     const { profile } = props.user;
@@ -38,6 +39,10 @@ const Route = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     const { isMobileApp } = props.app;
+
+    let [allPrice, setAllPrice] = useState(0);
+    let [allPriceAfterReturned, setAllPriceAfterReturned] = useState(0);
+
     let [dateStart, setDateStart] = useState(pdDatePicker(data.route?new Date(data.route.dateStart):new Date()));
     let [employment, setEmployment] = useState(data.route?data.route.employment:{});
     let [status, setStatus] = useState(data.route.status);
@@ -118,12 +123,23 @@ const Route = React.memo((props) => {
         (async()=>{
             allTonnage = 0
             allSize = 0
+            allPrice = 0
+            allPriceAfterReturned = 0
            for(let i=0; i<invoices.length; i++){
                allTonnage += invoices[i].allTonnage
                allSize += invoices[i].allSize
+               allPrice += invoices[i].allPrice
+
+               invoices[i].allPriceAfterReturned = 0
+               for(let i1=0; i1<invoices[i].orders.length; i1++){
+                   invoices[i].allPriceAfterReturned += (invoices[i].allPrice-invoices[i].orders[i1].returned*(invoices[i].orders[i1].item.stock?invoices[i].orders[i1].item.stock:invoices[i].orders[i1].item.price))
+               }
+               allPriceAfterReturned += invoices[i].allPriceAfterReturned
            }
            setAllTonnage(allTonnage)
             setAllSize(allSize)
+            setAllPriceAfterReturned(allPriceAfterReturned)
+            setAllPrice(allPrice)
         })()
     },[invoices])
     const statusColor = {
@@ -154,6 +170,10 @@ const Route = React.memo((props) => {
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
                 <meta property="og:url" content={`${urlMain}/route/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/route/${router.query.id}`}/>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+                <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+                <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+                <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
             </Head>
             <Card className={isMobileApp?classes.pageM:classes.pageD}>
                 {data.route?
@@ -221,6 +241,14 @@ const Route = React.memo((props) => {
                                 onChange={ event => setDateStart(event.target.value) }
                             />
                             <br/>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>
+                                    Сумма&nbsp;{allPriceAfterReturned?'(фактически/итого)':''}:&nbsp;
+                                </div>
+                                <div className={classes.value}>
+                                    {`${allPriceAfterReturned?`${allPriceAfterReturned} сом/`:''}${allPrice} сом`}
+                                </div>
+                            </div>
                             {
                                 allTonnage?
                                     <div className={classes.row}>
@@ -253,9 +281,13 @@ const Route = React.memo((props) => {
                                 showFullDialog(true)
                             }} className={classes.geo}>{breakGeoRoute?'Маршрут неполный':'Просмотреть маршрут'}</div>
                             <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
-                                setMiniDialog('Cписок товаров', <ShippingList invoices={invoices}/>)
+                                setMiniDialog('Cписок загрузки', <ShippingList invoices={invoices}/>)
                                 showMiniDialog(true)
-                            }} className={classes.geo}>Cписок товаров</div>
+                            }} className={classes.geo}>Cписок загрузки</div>
+                            <div style={{color: breakGeoRoute?'red':'#ffb300'}} onClick={()=>{
+                                setMiniDialog('Cписок выгрузки', <ReturnedList invoices={invoices}/>)
+                                showMiniDialog(true)
+                            }} className={classes.geo}>Cписок выгрузки</div>
                             <br/>
                             <div style={{ justifyContent: 'center' }} className={classes.row}>
                                 <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>

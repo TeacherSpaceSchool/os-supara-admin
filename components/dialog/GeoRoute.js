@@ -6,12 +6,10 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { Map, YMaps, Placemark, TrafficControl } from 'react-yandex-maps';
-import Order from './Order';
-import GpsFixed from '@material-ui/icons/GpsFixed';
+import SetRoute from './SetRoute';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Confirmation from './Confirmation'
 
 const Geo =  React.memo(
     (props) =>{
@@ -47,26 +45,16 @@ const Geo =  React.memo(
         });
         let [load, setLoad] = useState(true);
         let [map, setMap] = useState(null);
-        let onApiAvaliable = (ymaps)=>{
-            let route = invoices.map(invoice=>{return { type: 'wayPoint', point: invoice.address[1].split(', ') }})
-            ymaps.route(route, {
-                mapStateAutoApply: true
-            }).then((route) => {
-                console.log(route)
-                route.getPaths().options.set({
-                    // в балуне выводим только информацию о времени движения с учетом пробок
-                    balloonContentBodyLayout: ymaps.templateLayoutFactory.createClass('$[properties.humanJamsTime]'),
-                    // можно выставить настройки графики маршруту
-                    strokeColor: '0000ffff',
-                    opacity: 0.9
-                });
+        useEffect(()=>{
+            (async()=>{
+               if(map){
+                   console.log()
+               }
+            })()
+        },[map])
 
-                // добавляем маршрут на карту
-                map.geoObjects.add(route);
-            });
-        }
         return (
-            <YMaps onApiAvaliable={(ymaps) => {console.log(1);onApiAvaliable(ymaps)}}>
+            <YMaps>
                 <div className={classes.column}>
                     <div style={{height: window.innerHeight-128, width: window.innerWidth-48, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {
@@ -83,13 +71,22 @@ const Geo =  React.memo(
                                     :
                                     null
                                 }
-                                {invoices.map((invoice, idx)=>
-                                    <Placemark
-                                        onClick={()=>{setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={invoice}/>); showMiniDialog(true)}}
-                                        key={idx}
-                                        options={{draggable: false, iconColor: !invoice.confirmationForwarder?'red':'#ffb300'}}
-                                        properties={{iconCaption: invoice.number}}
-                                        geometry={invoice.address[1]?invoice.address[1].split(', '):'42.8700000, 74.5900000'} />
+                                {invoices.map((invoice, idx)=> {
+                                    if(invoice.address[1]) return <Placemark
+                                            onClick={() => {
+                                                setMiniDialog('Заказ', <SetRoute
+                                                    geo={invoice.address[1].split(', ')}
+                                                    getInvoices={getInvoices} route={route} invoice={invoice}/>);
+                                                showMiniDialog(true)
+                                            }}
+                                            key={idx}
+                                            options={{
+                                                draggable: false,
+                                                iconColor: !invoice.confirmationForwarder ? 'red' : '#ffb300'
+                                            }}
+                                            properties={{iconCaption: invoice.client.name}}
+                                            geometry={invoice.address[1].split(', ')}/>
+                                    }
                                 )}
                             </Map>
                         </div>
