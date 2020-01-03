@@ -202,7 +202,7 @@ const Order =  React.memo(
                         null
                 }
                 <div className={classes.row}>
-                    <div className={classes.nameField}>Сумма{priceAfterReturn!==element.allPrice?' (фактически/итого)':''}:&nbsp;</div>
+                    <div className={classes.nameField}>Сумма{priceAfterReturn!==element.allPrice?' (факт./итого)':''}:&nbsp;</div>
                     <div className={classes.value}>{priceAfterReturn!==element.allPrice?`${priceAfterReturn} сом/${element.allPrice} сом`:`${element.allPrice} сом`}</div>
                 </div>
                 {
@@ -349,11 +349,11 @@ const Order =  React.memo(
                                             </div>
                                         </a>
                                         <div className={classes.row}>
-                                            <div className={classes.nameField}>Количество{order.returned?' (возврат/итого)':''}:&nbsp;</div>
+                                            <div className={classes.nameField}>Количество{order.returned?' (факт./итого)':''}:&nbsp;</div>
                                             <div className={classes.value}>{order.returned?`${order.count-order.returned} шт/${order.count} шт`:`${order.count} шт`}</div>
                                         </div>
                                         <div className={classes.row}>
-                                            <div className={classes.nameField}>Сумма{order.returned?' (фактически/итого)':''}:&nbsp;</div>
+                                            <div className={classes.nameField}>Сумма{order.returned?' (факт./итого)':''}:&nbsp;</div>
                                             <div className={classes.value}>
                                                 {
                                                     order.returned?
@@ -427,11 +427,11 @@ const Order =  React.memo(
                                             </div>
                                         </a>
                                         <div className={classes.row}>
-                                            <div className={classes.nameField}>Количество{order.returned?' (возврат/итого)':''}:&nbsp;</div>
+                                            <div className={classes.nameField}>Количество{order.returned?' (факт./итого)':''}:&nbsp;</div>
                                             <div className={classes.value}>{order.returned?`${order.count-order.returned} шт/${order.count} шт`:`${order.count} шт`}</div>
                                         </div>
                                         <div className={classes.row}>
-                                            <div className={classes.nameField}>Сумма{order.returned?' (фактически/итого)':''}:&nbsp;</div>
+                                            <div className={classes.nameField}>Сумма{order.returned?' (факт./итого)':''}:&nbsp;</div>
                                             <div className={classes.value}>
                                                 {
                                                     order.returned?

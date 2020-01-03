@@ -93,7 +93,7 @@ const CardOrder = React.memo((props) => {
                             null
                     }
                     <div className={classes.row}>
-                        <div className={classes.nameField}>Сумма&nbsp;{priceAfterReturn!==element.allPrice?'(фактически/итого)':''}:</div>
+                        <div className={classes.nameField}>Сумма&nbsp;{priceAfterReturn!==element.allPrice?'(факт./итого)':''}:</div>
                         <div className={classes.value}>{priceAfterReturn!==element.allPrice?`${priceAfterReturn} сом/${element.allPrice} сом`:`${element.allPrice} сом`}</div>
                     </div>
                     {
