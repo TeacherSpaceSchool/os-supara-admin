@@ -127,14 +127,15 @@ const Equipment = React.memo((props) => {
                             {
                                 router.query.id==='new'?
                                     <Button onClick={async()=>{
-                                        if (name.length>0&&number.length>0) {
+                                        if (name.length>0&&number.length>0&&organization&&organization._id) {
                                             const action = async() => {
                                                 let equipment = {
                                                     name: name,
                                                     number: number,
-                                                    organization: organization._id,
-                                                    client: client._id
+                                                    organization: organization._id
                                                 }
+                                                if(client&&client._id)
+                                                    equipment.client = client._id
                                                 await addEquipment(equipment)
                                                 Router.push('/equipments')
                                             }

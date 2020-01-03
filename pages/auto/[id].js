@@ -153,15 +153,16 @@ const Auto = React.memo((props) => {
                             {
                                 router.query.id==='new'?
                                     <Button onClick={async()=>{
-                                        if (size.length>0&&tonnage.length>0&&number.length>0) {
+                                        if (size.length>0&&tonnage.length>0&&number.length>0&&organization&&organization._id) {
                                             const action = async() => {
                                                 let auto = {
                                                     size: checkFloat(size),
                                                     tonnage: checkFloat(tonnage),
                                                     number: number,
                                                     organization: organization._id,
-                                                    employment: employment._id
                                                 }
+                                                if(employment&&employment._id)
+                                                    auto.employment = employment._id
                                                 await addAuto(auto)
                                                 Router.push('/autos')
                                             }
