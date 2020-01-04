@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import cardAdsStyle from '../../src/styleMUI/ads/cardAds'
 import { connect } from 'react-redux'

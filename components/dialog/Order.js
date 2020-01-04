@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 import { setOrder, setInvoice } from '../../src/gql/order'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
-import * as userActions from '../../redux/actions/user'
 import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDDMMYYHHMM, pdDDMMYYHHMMCancel } from '../../src/lib'
@@ -25,7 +24,7 @@ const Order =  React.memo(
         const { classes, element, setList, getInvoices } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
-        let [consignmentPrice, setСonsignmentPrice] = useState(element.consignmentPrice);
+        let [consignmentPrice, setConsignmentPrice] = useState(element.consignmentPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
         let [allSize, setAllSize] = useState(element.allSize);
         let [taken, setTaken] = useState(element.taken);
@@ -52,7 +51,7 @@ const Order =  React.memo(
             setAllPrice(allPrice)
             setAllTonnage(allTonnage)
             setAllSize(allSize)
-            setСonsignmentPrice(consignmentPrice)
+            setConsignmentPrice(consignmentPrice)
         }
         let increment = (idx)=>{
             orders[idx].count+=1
@@ -683,7 +682,6 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
-        userActions: bindActionCreators(userActions, dispatch),
         snackbarActions: bindActionCreators(snackbarActions, dispatch),
     }
 }

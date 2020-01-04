@@ -1,7 +1,7 @@
 export let urlGQL
 export let urlGQLws
 export let urlMain
-if(process.env.URL.trim()==='azyk.store') {
+if(process.env.URL==='azyk.store') {
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `ws://${process.env.URL}:3000/graphql`
     urlMain = `https://${process.env.URL}`

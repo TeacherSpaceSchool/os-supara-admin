@@ -29,11 +29,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
-import {getClients} from '../src/gql/client'
 import { getClientGqlSsr } from '../src/getClientGQL'
 
 const Basket = React.memo((props) => {
-    const { authenticated, profile } = props.user;
+    const { authenticated } = props.user;
     const classes = pageListStyle();
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;

@@ -8,23 +8,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addFavoriteItem } from '../src/gql/items'
 import { addBasket } from '../src/gql/basket'
-import * as paginationActions from '../redux/actions/pagination'
 import * as userActions from '../redux/actions/user'
 import * as appActions from '../redux/actions/app'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
 import Router from 'next/router'
 import { useRouter } from 'next/router';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+//import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 export const mainWindow = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
-    const { next, disable } = props.paginationActions;
     const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
-    const { work, count } = props.pagination;
     let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     useEffect( ()=>{
@@ -40,9 +37,9 @@ const App = React.memo(props => {
             showLoad(false)
         }
     })
-    const containerRef = useBottomScrollListener(()=>{
+    /*const containerRef = useBottomScrollListener(()=>{
         if(work) next()
-    });
+    });*/
     useEffect( ()=>{
         (async ()=>{
             if(authenticated&&profile.role==='client'){
@@ -71,7 +68,7 @@ const App = React.memo(props => {
         <div ref={mainWindow} className='App'>
             <Drawer/>
             <AppBar searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
-            <div ref={containerRef} className='App-body'>
+            <div/* ref={containerRef}*/ className='App-body'>
                 {props.children}
             </div>
             <FullDialog/>
@@ -92,7 +89,6 @@ function mapStateToProps (state) {
     return {
         user: state.user,
         app: state.app,
-        pagination: state.pagination
     }
 }
 
@@ -100,7 +96,6 @@ function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
         appActions: bindActionCreators(appActions, dispatch),
-        paginationActions: bindActionCreators(paginationActions, dispatch),
     }
 }
 
