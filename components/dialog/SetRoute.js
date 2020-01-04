@@ -13,6 +13,7 @@ const Geo =  React.memo(
     (props) =>{
         const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
         const { classes, invoice, getInvoices, route, geo } = props;
+        const { isMobileApp } = props.app;
         return (
             <div className={classes.column}>
                 <center>
@@ -22,7 +23,10 @@ const Geo =  React.memo(
                 </center>
                 <center>
                     <a href={
-                        `https://2gis.kg/bishkek/geo/${geo[1]},${geo[0]}/center/${geo[1]},${geo[0]}/zoom/12`
+                        isMobileApp?
+                            `dgis://2gis.ru/routeSearch/rsType/car/to/${geo[1]},${geo[0]}`
+                            :
+                            `https://2gis.kg/bishkek/geo/${geo[1]},${geo[0]}/center/${geo[1]},${geo[0]}/zoom/12`
                     } target='_blank'>
                         <Button variant='contained' color='primary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
                             Построить маршрут
