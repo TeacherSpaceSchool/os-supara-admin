@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
     page: {
-        overflowX: 'auto'
+        overflowX: 'auto',
+        marginBottom: 8,
     },
     row:{
         display: 'flex',

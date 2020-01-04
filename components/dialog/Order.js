@@ -114,7 +114,7 @@ const Order =  React.memo(
         useEffect(()=>{
             priceAfterReturn = 0
             for(let i=0; i<orders.length; i++){
-                priceAfterReturn += (allPrice-orders[i].returned*(orders[i].item.stock?orders[i].item.stock:orders[i].item.price))
+                priceAfterReturn += (orders[i].allPrice-orders[i].returned*(orders[i].item.stock?orders[i].item.stock:orders[i].item.price))
             }
             setPriceAfterReturn(priceAfterReturn)
         },[orders,])

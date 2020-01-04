@@ -17,7 +17,8 @@ const ShippingList =  React.memo(
             let shippingListObject = {}
             shippingList = []
             for(let i=0; i<invoices.length; i++){
-                for(let ii=0; ii<invoices[ii].orders.length; ii++) {
+                console.log()
+                for(let ii=0; ii<invoices[i].orders.length; ii++) {
                     if(!shippingListObject[invoices[i].orders[ii].item._id]){
                         shippingListObject[invoices[i].orders[ii].item._id] = {
                             name: invoices[i].orders[ii].item.name,

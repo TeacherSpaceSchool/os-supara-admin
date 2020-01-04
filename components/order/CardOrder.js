@@ -25,7 +25,7 @@ const CardOrder = React.memo((props) => {
     useEffect(()=>{
         priceAfterReturn = 0
         for(let i=0; i<element.orders.length; i++){
-            priceAfterReturn += (element.allPrice-element.orders[i].returned*(element.orders[i].item.stock?element.orders[i].item.stock:element.orders[i].item.price))
+            priceAfterReturn += (element.orders[i].allPrice-element.orders[i].returned*(element.orders[i].item.stock?element.orders[i].item.stock:element.orders[i].item.price))
         }
         setPriceAfterReturn(priceAfterReturn)
     },[element,])

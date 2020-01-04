@@ -67,7 +67,7 @@ const Basket = React.memo((props) => {
         }
     }
     let decrementConsignment = (idx)=>{
-        if(list[idx].consignment>1) {
+        if(list[idx].consignment>0) {
             list[idx].consignment -= 1
             setBasketChange(idx, list[idx].count, list[idx].consignment)
             setList([...list])
@@ -183,6 +183,7 @@ const Basket = React.memo((props) => {
                                     list.map((row, idx) => {
                                         if(row.item.organization._id===organization._id)
                                             return (
+                                                <>
                                                 <Card className={classes.page} key={idx}>
                                                     <CardContent className={classes.column} style={isMobileApp ? {} : {
                                                         justifyContent: 'start',
@@ -276,6 +277,7 @@ const Basket = React.memo((props) => {
                                                         </div>
                                                     </CardContent>
                                                 </Card>
+                                                </>
                                             )
                                         }
                                     )
