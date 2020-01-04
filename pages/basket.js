@@ -366,8 +366,10 @@ const Basket = React.memo((props) => {
                                                         null
                                                     }
                                                 </TableCell>
-                                                <TableCell align="left">{`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count} сом`}</TableCell>
-                                                <TableCell align="left">{`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock*row.count)*row.count} сом`}</TableCell>
+                                                <TableCell align="left"
+                                                >{`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock} сом`}</TableCell>
+                                                <TableCell align="left">
+                                                    {`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count} сом`}</TableCell>
                                                 <TableCell align="center">
                                                     <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.button} aria-label="add to shopping cart">
                                                         <CancelIcon />

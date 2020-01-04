@@ -112,7 +112,7 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(count)
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
         if(count>0)
-            addBasket({item: list[idx]._id, count: count})
+            addBasket({item: list[idx]._id, count: basket[id].count})
         else
             deleteBasket([list[idx]._id])
         setBasket({...basket})

@@ -105,7 +105,7 @@ export const addAuto = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($tonnage: Float!, $size: Float!, $number: String!, $organization: ID!, $employment: ID) {
+                    mutation ($tonnage: Float!, $size: Float!, $number: String!, $organization: ID, $employment: ID) {
                         addAuto(tonnage: $tonnage, size: $size, number: $number, organization: $organization, employment: $employment) {
                              data
                         }
