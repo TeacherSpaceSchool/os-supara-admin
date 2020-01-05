@@ -31,11 +31,11 @@ const App = React.memo(props => {
             logout(false)
     },[authenticated,])
     Router.events.on('routeChangeStart', (err, url)=>{
-        if(!router.pathname.includes(url))
+        /*if(!router.pathname.includes(url))
             showLoad(true)
         if (err.cancelled) {
             showLoad(false)
-        }
+        }*/
     })
     /*const containerRef = useBottomScrollListener(()=>{
         if(work) next()

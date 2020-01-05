@@ -55,7 +55,9 @@ const Subcategory = React.memo((props) => {
                 !authenticated||['client', 'admin'].includes(profile.role)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
-                            Товары
+                            <a>
+                                Товары
+                            </a>
                         </Link>
                         <Typography color='textPrimary'>
                             {router.query.id==='all'?'Все':data.category?data.category.name:'Ничего не найдено'}

@@ -132,7 +132,7 @@ const Route = React.memo((props) => {
 
                invoices[i].allPriceAfterReturned = 0
                for(let i1=0; i1<invoices[i].orders.length; i1++){
-                   invoices[i].allPriceAfterReturned += (invoices[i].allPrice-invoices[i].orders[i1].returned*(invoices[i].orders[i1].item.stock?invoices[i].orders[i1].item.stock:invoices[i].orders[i1].item.price))
+                   invoices[i].allPriceAfterReturned += (invoices[i].orders[i1].allPrice-invoices[i].orders[i1].returned*(invoices[i].orders[i1].item.stock?invoices[i].orders[i1].item.stock:invoices[i].orders[i1].item.price))
                }
                allPriceAfterReturned += invoices[i].allPriceAfterReturned
            }

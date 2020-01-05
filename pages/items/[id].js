@@ -49,16 +49,22 @@ const Items = React.memo((props) => {
                 !authenticated||['client', 'admin'].includes(profile.role)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
-                            Товары
+                            <a>
+                                Товары
+                            </a>
                         </Link>
                         {
                             data.subCategory?
                                 <Link href='/subcategory/[id]' as={`/subcategory/${data.subCategory.category._id}`}>
-                                    {data.subCategory.category.name}
+                                    <a>
+                                        {data.subCategory.category.name}
+                                    </a>
                                 </Link>
                                 :
                                 <Link href='/subcategory/[id]' as={`/subcategory/all`}>
-                                    Все подкатегории
+                                    <a>
+                                        Все подкатегории
+                                    </a>
                                 </Link>
                         }
                         {
