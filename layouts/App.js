@@ -22,6 +22,7 @@ const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
     const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
+    const { load } = props.app;
     let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     useEffect( ()=>{
@@ -31,11 +32,10 @@ const App = React.memo(props => {
             logout(false)
     },[authenticated,])
     Router.events.on('routeChangeStart', (err, url)=>{
-        /*if(!router.pathname.includes(url))
+        if (!router.pathname.includes(url)&&!load)
             showLoad(true)
-        if (err.cancelled) {
+        if (err.cancelled&&load)
             showLoad(false)
-        }*/
     })
     /*const containerRef = useBottomScrollListener(()=>{
         if(work) next()
@@ -63,7 +63,6 @@ const App = React.memo(props => {
             }
         })()
     },[])
-    const { load } = props.app;
     return(
         <div ref={mainWindow} className='App'>
             <Drawer/>
