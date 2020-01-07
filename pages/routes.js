@@ -22,16 +22,17 @@ const Routes = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.routes);
     const { search, filter, sort, date } = props.app;
+    let getList = async()=>{
+        setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
+    }
     useEffect(()=>{
-        (async()=>{
-            setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
-        })()
+        getList()
     },[filter, sort, search, date]);
     useEffect(()=>{
         forceCheck()
     },[list])
     return (
-        <App searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
+        <App getList={getList} searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
                 <title>Маршрутные листы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />

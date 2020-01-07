@@ -11,6 +11,7 @@ import { SingletonStore } from '../src/singleton/store'
 import { getProfile } from '../redux/actions/user'
 import { checkMobile, checkAuth } from '../src/lib'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import { ApolloProvider } from '@apollo/react-hooks';
 
 export default withRedux(configureStore, { debug: false })(
     class MyApp extends App {
@@ -22,8 +23,8 @@ export default withRedux(configureStore, { debug: false })(
             }
         }
         static async getInitialProps({ Component, ctx }) {
-            new SingletonApolloClient(ctx.req)
             if(ctx.req){
+                //new SingletonApolloClient(ctx.req)
                 ctx.store.getState().app.isMobileApp = checkMobile(ctx.req.headers['user-agent'])
                 ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
                 if(ctx.store.getState().user.authenticated) {
@@ -51,15 +52,20 @@ export default withRedux(configureStore, { debug: false })(
         render() {
             const { Component, pageProps, store } = this.props;
             new SingletonStore(store)
+
+            let client = process.browser?new SingletonApolloClient().getClient():getClientGqlSsr()
+
             return (
                 <React.Fragment>
-                    <ThemeProvider theme={theme}>
-                        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                        <CssBaseline />
-                        <Provider store={store}>
-                                <Component {...pageProps} />
-                        </Provider>
-                    </ThemeProvider>
+                    <ApolloProvider client={client}>
+                        <ThemeProvider theme={theme}>
+                            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                            <CssBaseline />
+                            <Provider store={store}>
+                                    <Component {...pageProps} />
+                            </Provider>
+                        </ThemeProvider>
+                    </ApolloProvider>
                 </React.Fragment>
             );
         }

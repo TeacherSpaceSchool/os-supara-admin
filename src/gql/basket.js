@@ -49,9 +49,15 @@ export const getCountBasket = async()=>{
                         countBasket 
                     }`
             })
-        else if(localStorage.basket) {
-            let basket = JSON.parse(localStorage.basket)
-            res = { data: { countBasket: basket.length}}
+        else{
+            if(localStorage.basket==undefined) {
+                localStorage.basket = JSON.stringify([])
+                res = { data: { countBasket: 0}}
+            }
+            else {
+                let basket = JSON.parse(localStorage.basket)
+                res = {data: {countBasket: basket.length}}
+            }
         }
         new SingletonStore().getStore().dispatch(setCountBasket(res.data.countBasket))
     } catch(err){

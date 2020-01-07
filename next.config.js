@@ -1,15 +1,15 @@
 const withSass = require('@zeit/next-sass')
 const withCSS = require('@zeit/next-css')
-const sitemap = require('nextjs-sitemap-generator');
+//const sitemap = require('nextjs-sitemap-generator');
 const withOffline = require('next-offline')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: false
 })
-sitemap({
+/*sitemap({
     baseUrl: 'https://azyk.store',
     pagesDirectory: __dirname + '/pages',
-    targetDirectory : 'static/'
-});
+    targetDirectory : '/'
+});*/
 module.exports =
     withBundleAnalyzer(
         withCSS(

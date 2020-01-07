@@ -8,19 +8,21 @@ import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import { ApolloLink, split  } from 'apollo-link';
 import { createUploadLink } from 'apollo-upload-client'
-//import { WebSocketLink } from 'apollo-link-ws';
-//import { getMainDefinition } from 'apollo-utilities';
-//import * as ws from 'ws';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import * as ws from 'ws';
 import { SingletonStore } from '../singleton/store';
 import {
     showSnackBar
 } from '../../redux/actions/snackbar'
+
 export class SingletonApolloClient {
     constructor(req) {
         if (!!SingletonApolloClient.instance) {
             return SingletonApolloClient.instance;
         }
         SingletonApolloClient.instance = this;
+        this.jwt = getJWT(req?req.headers.cookie:document.cookie)
         const uploadLink = createUploadLink({
             uri: urlGQL,
             fetch: fetch,
@@ -44,24 +46,32 @@ export class SingletonApolloClient {
                 });
             if (ctx.networkError) console.log(`[Network error]: ${ctx.networkError}`);
         });
-        /*const wsLink = new WebSocketLink({
-            uri: urlGQLws,
-            options: {
-                reconnect: true
-            },
-            webSocketImpl: process.browser?WebSocket:ws
-        });*/
-        const mainLink = /*split(
-            ({ query }) => {
-                const definition = getMainDefinition(query);
-                return (
-                    definition.kind === 'OperationDefinition' &&
-                    definition.operation === 'subscription'
-                );
-            },
-            wsLink,*/
-            uploadLink/*,
-        );*/
+        let mainLink;
+        if(this.jwt) {
+            const wsLink = new WebSocketLink({
+                uri: urlGQLws,
+                options: {
+                    reconnect: true,
+                    connectionParams: {
+                        authorization: this.jwt ? `Bearer ${this.jwt}` : ''
+                    }
+                },
+                webSocketImpl: process.browser ? WebSocket : ws
+            });
+            mainLink = split(
+                ({query}) => {
+                    const definition = getMainDefinition(query);
+                    return (
+                        definition.kind === 'OperationDefinition' &&
+                        definition.operation === 'subscription'
+                    );
+                },
+                wsLink,
+                uploadLink,
+            );
+        }
+        else
+            mainLink = uploadLink
         const link = ApolloLink.from([
             linkError,
             authLink,
@@ -85,8 +95,6 @@ export class SingletonApolloClient {
             },
 
         });
-        this.jwt = getJWT(req?req.headers.cookie:document.cookie)
-
         return this;
     }
 

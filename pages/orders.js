@@ -20,31 +20,31 @@ const Orders = React.memo((props) => {
 
     let [list, setList] = useState(data.invoices);
     const { search, filter, sort, date } = props.app;
+    const getList = async ()=>{
+        let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
+        setList(orders)
+
+        let tonnage = 0;
+        let size = 0;
+        let price = 0;
+        let consignment = 0;
+        let consignmentPayment = 0;
+        for(let i=0; i<orders.length; i++){
+            price+=orders[i].allPrice
+            size+=orders[i].allSize
+            tonnage+=orders[i].allTonnage
+            consignment+=orders[i].consignmentPrice
+            if(orders[i].paymentConsignation)
+                consignmentPayment+=orders[i].consignmentPrice
+        }
+        setPrice(price)
+        setConsignment(consignment)
+        setConsignmentPayment(consignmentPayment)
+        setTonnage(tonnage)
+        setSize(size)
+    }
     useEffect(()=>{
-        (async()=>{
-            let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
-            setList(orders)
-
-            let tonnage = 0;
-            let size = 0;
-            let price = 0;
-            let consignment = 0;
-            let consignmentPayment = 0;
-            for(let i=0; i<orders.length; i++){
-                price+=orders[i].allPrice
-                size+=orders[i].allSize
-                tonnage+=orders[i].allTonnage
-                consignment+=orders[i].consignmentPrice
-                if(orders[i].paymentConsignation)
-                    consignmentPayment+=orders[i].consignmentPrice
-            }
-            setPrice(price)
-            setConsignment(consignment)
-            setConsignmentPayment(consignmentPayment)
-            setTonnage(tonnage)
-            setSize(size)
-
-        })()
+        getList()
     },[filter, sort, search, date])
     useEffect(()=>{
         forceCheck()
@@ -58,7 +58,7 @@ const Orders = React.memo((props) => {
     let [showStat, setShowStat] = useState(false);
 
     return (
-        <App searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App getList={getList} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
                 <title>Заказы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -137,8 +137,9 @@ Orders.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
             Router.push('/')
+    ctx.store.getState().app.sort = '-updatedAt'
     return {
-        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getOrders({search: '', sort: '-updatedAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

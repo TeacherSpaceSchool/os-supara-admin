@@ -315,3 +315,11 @@ export const setOrder = async(element)=>{
         console.error(err)
     }
 }
+
+export const subscriptionOrder = gql`
+  subscription  {
+    reloadOrder {
+      who
+    }
+  }
+`

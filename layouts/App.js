@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '../components/app/AppBar'
 import Dialog from '../components/app/Dialog'
 import FullDialog from '../components/app/FullDialog'
@@ -14,9 +14,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
 import Router from 'next/router'
 import { useRouter } from 'next/router';
+import { subscriptionOrder } from '../src/gql/order';
+import { useSubscription } from '@apollo/react-hooks';
 //import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 export const mainWindow = React.createRef();
+export const alert = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
@@ -25,6 +28,7 @@ const App = React.memo(props => {
     const { load } = props.app;
     let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
+    const [unread, setUnread] = useState({});
     useEffect( ()=>{
         if(authenticated&&!profile.role)
             setProfile()
@@ -40,6 +44,27 @@ const App = React.memo(props => {
     /*const containerRef = useBottomScrollListener(()=>{
         if(work) next()
     });*/
+    //if(authenticated&&profile.role&&'экспедитор'!==profile.role) {
+        const subscriptionOrderRes = useSubscription(subscriptionOrder);
+        if(
+            authenticated&&
+            profile.role&&
+            'экспедитор'!==profile.role&&
+            subscriptionOrderRes.data&&
+            profile._id!==subscriptionOrderRes.data.reloadOrder.who
+        ) {
+            if (router.pathname === '/orders')
+                getList()
+            else {
+                if(!unread.orders) {
+                    unread.orders = true
+                    setUnread({...unread})
+                }
+                /*if (alert.current)
+                    alert.current.play()*/
+            }
+        }
+    //}
     useEffect( ()=>{
         (async ()=>{
             if(authenticated&&profile.role==='client'){
@@ -53,6 +78,7 @@ const App = React.memo(props => {
                 }
                 if(localStorage.basket&&localStorage.basket!=='[]') {
                     let basket = JSON.parse(localStorage.basket)
+                    console.log(basket.length)
                     for(let i=0; i<basket.length; i++){
                         await addBasket({item: basket[i].item._id, count: basket[i].count})
                     }
@@ -65,7 +91,7 @@ const App = React.memo(props => {
     },[])
     return(
         <div ref={mainWindow} className='App'>
-            <Drawer/>
+            <Drawer unread={unread} setUnread={setUnread}/>
             <AppBar searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
             <div/* ref={containerRef}*/ className='App-body'>
                 {props.children}
@@ -80,6 +106,7 @@ const App = React.memo(props => {
                 :
                 null
             }
+            <audio src='/alert.mp3' ref={alert}/>
         </div>
     )
 });

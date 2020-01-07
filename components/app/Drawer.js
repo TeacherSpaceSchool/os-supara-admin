@@ -29,10 +29,11 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
+import Badge from '@material-ui/core/Badge';
 
 
 const MyDrawer = React.memo((props) => {
-    const { classes } = props
+    const { classes, unread, setUnread } = props
     const { drawer, isMobileApp } = props.app;
     const { profile, authenticated } = props.user;
     const { showDrawer } = props.appActions;
@@ -154,9 +155,10 @@ const MyDrawer = React.memo((props) => {
                     ['client', 'admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href='/orders'>
-                            <ListItem style={{background: router.pathname==='/orders'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                            <ListItem style={{background: router.pathname==='/orders'?'#f5f5f5':'#ffffff'}} button onClick={()=>{;setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><ReceiptIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Заказы' />
+                                <Badge color='secondary' variant='dot' invisible={!unread.orders}/>
                             </ListItem>
                         </Link>
                         <Divider/>
