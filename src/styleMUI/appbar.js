@@ -12,7 +12,7 @@ export default makeStyles({
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
-        fontSize: '1.125rem'
+        fontSize: '1.125rem!important'
     },
     searchD: {
         position: 'fixed',
