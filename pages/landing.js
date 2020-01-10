@@ -11,11 +11,11 @@ const Landing = () => {
 Landing.getInitialProps = async function(ctx) {
     if(ctx.res) {
         ctx.res.writeHead(302, {
-            Location: '/static/landing/landing.html'
+            Location: '/landing.html'
         })
         ctx.res.end()
     } else
-        Router.push('/static/landing/landing.html')
+        Router.push('/landing.html')
 };
 
 export default Landing;

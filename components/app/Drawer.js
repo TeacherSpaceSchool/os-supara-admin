@@ -15,6 +15,7 @@ import AllInboxIcon from '@material-ui/icons/AllInbox';
 import CommuteIcon from '@material-ui/icons/Commute';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import CopyrightIcon from '@material-ui/icons/Loyalty';
+import LiveHelp from '@material-ui/icons/LiveHelp';
 import InfoIcon from '@material-ui/icons/Info';
 import GroupIcon from '@material-ui/icons/Group';
 import ReceiptIcon from '@material-ui/icons/Receipt';
@@ -264,6 +265,13 @@ const MyDrawer = React.memo((props) => {
                     <ListItem style={{background: router.pathname==='/contact'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                         <ListItemIcon><InfoIcon color='inherit'/></ListItemIcon>
                         <ListItemText primary='Контакты' />
+                    </ListItem>
+                </Link>
+                <Divider/>
+                <Link href={'/faq'}>
+                    <ListItem style={{background: router.pathname==='/faq'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                        <ListItemIcon><LiveHelp color='inherit'/></ListItemIcon>
+                        <ListItemText primary='Инструкции' />
                     </ListItem>
                 </Link>
                 <Divider/>

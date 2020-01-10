@@ -2,11 +2,11 @@ export default theme => ({
     drawer: {
         width: 300,
         flexShrink: 0,
-        overflow: 'hidden'
+        overflowX: 'hidden'
     },
     drawerPaper: {
         width: 300,
-        overflow: 'hidden'
+        overflowX: 'hidden'
     },
     toolbar: theme.mixins.toolbar,
 });

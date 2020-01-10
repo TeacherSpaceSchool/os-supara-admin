@@ -229,7 +229,7 @@ const Organization = React.memo((props) => {
                                     <Button onClick={async()=>{
                                         addPhone()
                                     }} size='small' color='primary'>
-                                        Добавить телефон. Формат: +996555780861
+                                        Добавить телефон
                                     </Button>
                                     <br/>
                                     <br/>
