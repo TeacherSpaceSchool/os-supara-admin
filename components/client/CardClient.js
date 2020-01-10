@@ -79,6 +79,14 @@ const CardOrganization = React.memo((props) => {
                                     )}
                                 </div>
                             </div>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>
+                                    Регистрация:&nbsp;
+                                </div>
+                                <div className={classes.value}>
+                                    {pdDDMMYYHHMM(new Date(element.createdAt))}
+                                </div>
+                            </div>
                             {
                                 element.lastActive?
                                     <div className={classes.row}>
@@ -92,14 +100,6 @@ const CardOrganization = React.memo((props) => {
                                     :
                                     null
                             }
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Регистрация:&nbsp;
-                                </div>
-                                <div className={classes.value}>
-                                    {pdDDMMYYHHMM(new Date(element.createdAt))}
-                                </div>
-                            </div>
                         </div>
                     </CardContent>
             </CardActionArea>
