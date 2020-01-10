@@ -30,6 +30,7 @@ const Brand = React.memo((props) => {
             forceCheck()
         })()
     },[filter, sort, search])
+    let [showStat, setShowStat] = useState(false);
     return (
         <App searchShow={true} sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
             <Head>
@@ -58,6 +59,54 @@ const Brand = React.memo((props) => {
                 :
                 null
             }
+            <div className='count' onClick={()=>setShowStat(!showStat)}>
+                {
+                    `Всего заказов: ${list.length}`
+                }
+                {
+                    showStat?
+                        <>
+                        <br/>
+                        <br/>
+                        {`Всего сумма: ${price} сом`}
+                        {
+                            consignment?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего консигнаций: ${consignment} сом`}
+                                <br/>
+                                <br/>
+                                {`Оплачено консигнаций: ${consignmentPayment} сом`}
+                                </>
+                                :
+                                null
+                        }
+                        {
+                            tonnage?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего тонаж: ${tonnage} кг`}
+                                </>
+                                :
+                                null
+                        }
+                        {
+                            size?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего кубатура: ${size} см³`}
+                                </>
+                                :
+                                null
+                        }
+                        </>
+                        :
+                        null
+                }
+            </div>
         </App>
     )
 })

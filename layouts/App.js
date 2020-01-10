@@ -60,6 +60,8 @@ const App = React.memo(props => {
                     unread.orders = true
                     setUnread({...unread})
                 }
+                if( navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                    navigator.vibrate(200);
                 /*if (alert.current)
                     alert.current.play()*/
             }

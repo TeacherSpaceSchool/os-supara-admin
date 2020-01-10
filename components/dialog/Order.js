@@ -151,7 +151,7 @@ const Order =  React.memo(
                 }
                 <div className={classes.row}>
                     <div className={classes.nameField}>Адрес: &nbsp;</div>
-                    <div className={classes.value}>{element.address[0]}</div>
+                    <div className={classes.value}>{`${element.address[2]?`${element.address[2]}, `:''}${element.address[0]}`}</div>
                 </div>
                 <div className={classes.geo} style={{color: element.address[1]?'#ffb300':'red'}} onClick={()=>{
                     if(element.address[1]) {
@@ -332,6 +332,7 @@ const Order =  React.memo(
                                                 :
                                                 null
                                         }
+                                        <br/>
                                     </div>
                                 )
                             else if(
@@ -414,6 +415,7 @@ const Order =  React.memo(
                                                 :
                                                 null
                                         }
+                                        <br/>
                                     </div>
                                 )
                             else
@@ -466,6 +468,7 @@ const Order =  React.memo(
                                                 :
                                                 null
                                         }
+                                        <br/>
                                     </div>
                                 )
                         })
@@ -493,7 +496,11 @@ const Order =  React.memo(
                 }
                 <div>
                     <FormControlLabel
-                        disabled={(!['менеджер', 'организация', 'admin'].includes(profile.role)||!['обработка','принят'].includes(element.orders[0].status))}
+                        disabled=
+                            {profile.role==='admin'?
+                                !['обработка','принят'].includes(element.orders[0].status)
+                                :
+                                !(['менеджер', 'организация'].includes(profile.role)&&['обработка','принят'].includes(element.orders[0].status))}
                         control={
                             <Checkbox
                                 checked={taken}
@@ -508,7 +515,11 @@ const Order =  React.memo(
                 </div>
                 <div>
                     <FormControlLabel
-                        disabled={(!['менеджер', 'организация', 'admin', 'экспедитор'].includes(profile.role)||'принят'!==element.orders[0].status)}
+                        disabled={
+                            profile.role==='admin'?
+                                !['выполнен','принят'].includes(element.orders[0].status)
+                                :
+                                !(['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&'принят'===element.orders[0].status)}
                         control={
                             <Checkbox
                                 checked={confirmationForwarder}
@@ -524,8 +535,13 @@ const Order =  React.memo(
                 <div>
                     <FormControlLabel
                         disabled={
-                            (!['client', 'admin'].includes(profile.role)&&!(['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&!element.client.user))||
-                                'принят'!==element.orders[0].status
+                            profile.role==='admin'?
+                                !['выполнен','принят'].includes(element.orders[0].status)
+                                :
+                                profile.role==='client'?
+                                    'принят'!==element.orders[0].status
+                                    :
+                                    !(['менеджер', 'организация', 'экспедитор'].includes(profile.role)&&!element.client.user)
                         }
                         control={
                             <Checkbox
@@ -542,7 +558,10 @@ const Order =  React.memo(
                 <div>
                     <FormControlLabel
                         disabled={(
-                            !['client', 'организация', 'менеджер', 'admin', 'агент'].includes(profile.role)||!['отмена','обработка'].includes(element.orders[0].status)
+                            profile.role==='admin'?
+                                !['отмена','обработка'].includes(element.orders[0].status)
+                                :
+                                !(['client', 'организация', 'менеджер', 'агент'].includes(profile.role)&&['отмена','обработка'].includes(element.orders[0].status))
                         )}
                         control={
                             <Checkbox

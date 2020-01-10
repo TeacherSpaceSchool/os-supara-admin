@@ -248,14 +248,14 @@ export const addOrders = async(element)=>{
     }
 }
 
-export const cancelOrders = async(element)=>{
+export const deleteOrders = async(ids)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
-            variables: element,
+            variables: {_id: ids},
             mutation : gql`
-                    mutation ($_id: [ID]!, $invoice: ID) {
-                        cancelOrders(_id: $_id, invoice: $invoice) {
+                    mutation ($_id: [ID]!) {
+                        deleteOrders(_id: $_id) {
                              data
                         }
                     }`})

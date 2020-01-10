@@ -10,7 +10,7 @@ export default makeStyles({
         flexWrap: 'wrap'
     },
     fab: {
-        position: 'fixed',
+        position: 'fixed!important',
         bottom: '20px',
         right: '20px'
     }

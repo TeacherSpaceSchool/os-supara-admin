@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 import cardOrderStyle from '../../src/styleMUI/orders/cardOrder'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -9,6 +11,8 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import Order from '../dialog/Order'
+import Confirmation from '../../components/dialog/Confirmation'
+import { deleteOrders } from '../../src/gql/order'
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
@@ -30,8 +34,8 @@ const CardOrder = React.memo((props) => {
         setPriceAfterReturn(priceAfterReturn)
     },[element,])
     return (
-        <Card className={classes.card} onClick={()=>{setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}}>
-            <CardActionArea>
+        <Card className={classes.card}>
+            <CardActionArea onClick={()=>{setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}}>
                 <CardContent className={classes.column}>
                     <div className={classes.row}>
                         <div className={classes.number}>{element.number}</div>&nbsp;
@@ -73,7 +77,7 @@ const CardOrder = React.memo((props) => {
                     }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Адрес:&nbsp;</div>
-                        <div className={classes.value}>{element.address[0]}</div>
+                        <div className={classes.value}>{`${element.address[2]?`${element.address[2]}, `:''}${element.address[0]}`}</div>
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Получатель:&nbsp;</div>
@@ -134,6 +138,22 @@ const CardOrder = React.memo((props) => {
                     }
                 </CardContent>
             </CardActionArea>
+            <CardActions>
+                {
+                    profile.role==='admin' ?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                setList((await deleteOrders([element._id])).invoices)
+                            }
+                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Удалить
+                        </Button>
+                        :
+                        null
+                }
+            </CardActions>
         </Card>
     );
 })

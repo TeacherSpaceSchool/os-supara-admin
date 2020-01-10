@@ -243,10 +243,10 @@ const Route = React.memo((props) => {
                             <br/>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
-                                    Сумма&nbsp;{allPriceAfterReturned?'(факт./итого)':''}:&nbsp;
+                                    Сумма&nbsp;{allPriceAfterReturned!==allPrice?'(факт./итого)':''}:&nbsp;
                                 </div>
                                 <div className={classes.value}>
-                                    {`${allPriceAfterReturned?`${allPriceAfterReturned} сом/`:''}${allPrice} сом`}
+                                    {`${allPriceAfterReturned!==allPrice?`${allPriceAfterReturned} сом/`:''}${allPrice} сом`}
                                 </div>
                             </div>
                             {

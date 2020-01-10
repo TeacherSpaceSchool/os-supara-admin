@@ -74,14 +74,27 @@ const CardOrganization = React.memo((props) => {
                                 <div>
                                     {element.address.map((addres, idx)=>
                                         <div key={idx} className={classes.value}>
-                                            {addres[0]}
+                                            {`${addres[2]?`${addres[2]}, `:''}${addres[0]}`}
                                         </div>
                                     )}
                                 </div>
                             </div>
+                            {
+                                element.lastActive?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>
+                                            Активность:&nbsp;
+                                        </div>
+                                        <div className={classes.value}>
+                                            {pdDDMMYYHHMM(new Date(element.lastActive))}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
-                                    Зарегестрирован:&nbsp;
+                                    Регистрация:&nbsp;
                                 </div>
                                 <div className={classes.value}>
                                     {pdDDMMYYHHMM(new Date(element.createdAt))}
@@ -108,14 +121,11 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    (!element.user)&&(
-                        ((element.organization&&profile.organization===element.organization._id)&&['организация', 'менеджер', 'агент'].includes(profile.role))
-                        ||profile.role==='admin'
-                    ) ?
+                    (!element.user&&element.organization&&profile.organization===element.organization._id&&['организация', 'менеджер', 'агент'].includes(profile.role))
+                    ||profile.role==='admin' ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteClient([element._id])).clients)
-                                setStatus(status==='active'?'deactive':'active')
                             }
                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                             showMiniDialog(true)

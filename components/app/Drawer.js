@@ -155,7 +155,7 @@ const MyDrawer = React.memo((props) => {
                     ['client', 'admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href='/orders'>
-                            <ListItem style={{background: router.pathname==='/orders'?'#f5f5f5':'#ffffff'}} button onClick={()=>{;setUncoverBonus(false);showDrawer(false)}}>
+                            <ListItem style={{background: router.pathname==='/orders'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><ReceiptIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Заказы' />
                                 <Badge color='secondary' variant='dot' invisible={!unread.orders}/>
@@ -222,7 +222,7 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    authenticated&&profile.role!=='client'?
+                    ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href='/equipments'>
                             <ListItem style={{background: router.pathname==='/equipments'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
