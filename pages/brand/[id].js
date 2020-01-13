@@ -20,7 +20,7 @@ const Brand = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     const router = useRouter()
-    let [list, setList] = useState(data?data.brands:[]);
+    let [list, setList] = useState(data.brands);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
     useEffect(()=>{

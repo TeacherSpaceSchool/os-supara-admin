@@ -29,11 +29,11 @@ const Auto = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     const organizations = data.organizations;
-    let [number, setNumber] = useState(data.auto!==null?data.auto.number:'');
-    let [size, setSize] = useState(data.auto!==null?data.auto.size:0);
-    let [tonnage, setTonnage] = useState(data.auto!==null?data.auto.tonnage:0);
-    let [organization, setOrganization] = useState(data.auto!==null?data.auto.organization:{});
-    let [employment, setEmployment] = useState(data.auto!==null?data.auto.employment:{});
+    let [number, setNumber] = useState(data.auto&&data.auto.number?data.auto.number:'');
+    let [size, setSize] = useState(data.auto&&data.auto.size?data.auto.size:0);
+    let [tonnage, setTonnage] = useState(data.auto&&data.auto.tonnage?data.auto.tonnage:0);
+    let [organization, setOrganization] = useState(data.auto&&data.auto.organization?data.auto.organization:{});
+    let [employment, setEmployment] = useState(data.auto&&data.auto.employment?data.auto.employment:{});
     let [employments, setEmployments] = useState([]);
     useEffect(()=>{
         (async()=>{

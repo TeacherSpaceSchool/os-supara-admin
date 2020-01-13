@@ -19,8 +19,8 @@ const CardAuto = React.memo((props) => {
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     return (
-        <Link href='/auto/[id]' as={`/auto/${element._id}`}>
-            <Card className={isMobileApp?classes.cardM:classes.cardD}>
+           <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                <Link href='/auto/[id]' as={`/auto/${element._id}`}>
                 <CardActionArea>
                     <CardContent>
                         <div className={classes.row}>
@@ -70,6 +70,7 @@ const CardAuto = React.memo((props) => {
 
                     </CardContent>
                 </CardActionArea>
+                </Link>
                     {
                         ['организация', 'admin'].includes(profile.role) ?
                             <CardActions>
@@ -88,7 +89,6 @@ const CardAuto = React.memo((props) => {
                             null
                     }
             </Card>
-        </Link>
     );
 })
 

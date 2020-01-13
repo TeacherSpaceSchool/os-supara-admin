@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import cardFaqStyle from '../../src/styleMUI/faq/cardFaq'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
@@ -11,6 +12,7 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../dialog/Confirmation'
+import PdfViewer from '../../components/dialog/PdfViewer'
 
 
 const CardFaq = React.memo((props) => {
@@ -33,7 +35,7 @@ const CardFaq = React.memo((props) => {
     let handleTitle =  (event) => {
         setTitle(event.target.value)
     };
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let faqRef = useRef(null);
     return (
@@ -112,15 +114,18 @@ const CardFaq = React.memo((props) => {
                   </Card>
                   :
                   element!==undefined?
-                      <a href={element.url} target='_blank'>
-                          <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                              <CardContent>
-                                  <h3 className={classes.input}>
-                                      {element.title}
-                                  </h3>
-                              </CardContent>
-                          </Card>
-                      </a>
+                      <Card onClick={()=>{
+                          setFullDialog(element.title, <PdfViewer pdf={element.url}/>)
+                          showFullDialog(true)
+                      }} className={isMobileApp?classes.cardM:classes.cardD}>
+                          <CardActionArea>
+                          <CardContent>
+                              <h3 className={classes.input}>
+                                  {element.title}
+                              </h3>
+                          </CardContent>
+                          </CardActionArea>
+                      </Card>
                       :null
             }</>
     );

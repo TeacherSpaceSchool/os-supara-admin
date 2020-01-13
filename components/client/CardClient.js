@@ -61,9 +61,15 @@ const CardOrganization = React.memo((props) => {
                                 </div>
                                 <div>
                                     {element.phone.map((phone, idx)=>
-                                            <div key={idx} className={classes.value}>
+                                        idx<4?
+                                            <div key={`phone${idx}`} className={classes.value}>
                                                 {phone}
                                             </div>
+                                            :
+                                            idx===4?
+                                                '...'
+                                                :
+                                                null
                                     )}
                                 </div>
                             </div>
@@ -73,9 +79,15 @@ const CardOrganization = React.memo((props) => {
                                 </div>
                                 <div>
                                     {element.address.map((addres, idx)=>
-                                        <div key={idx} className={classes.value}>
-                                            {`${addres[2]?`${addres[2]}, `:''}${addres[0]}`}
-                                        </div>
+                                        idx<4?
+                                            <div key={`addres${idx}`} className={classes.value}>
+                                                {`${addres[2]?`${addres[2]}, `:''}${addres[0]}`}
+                                            </div>
+                                            :
+                                            idx===4?
+                                                '...'
+                                                :
+                                                null
                                     )}
                                 </div>
                             </div>

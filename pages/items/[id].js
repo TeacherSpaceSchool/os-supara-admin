@@ -7,6 +7,8 @@ import CardItem from '../../components/items/CardItem'
 import { useRouter } from 'next/router'
 import {getItems} from '../../src/gql/items';
 import Fab from '@material-ui/core/Fab';
+import Badge from '@material-ui/core/Badge';
+import LocalGroceryStore from '@material-ui/icons/LocalGroceryStore';
 import AddIcon from '@material-ui/icons/Add';
 import { urlMain } from '../../redux/constants/other'
 const height = 377;
@@ -23,7 +25,7 @@ const Items = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     let [list, setList] = useState(data.items);
-    const { search, filter, sort } = props.app;
+    const { search, filter, sort, countBasket } = props.app;
     const { profile, authenticated } = props.user;
     useEffect(()=>{
         (async()=>{
@@ -33,6 +35,7 @@ const Items = React.memo((props) => {
     useEffect(()=>{
         forceCheck()
     },[list])
+    console.log(countBasket)
     return (
         <App searchShow={true} filters={data.filterItem} sorts={data.sortItem} pageName={router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}>
             <Head>
@@ -97,7 +100,13 @@ const Items = React.memo((props) => {
                     </Fab>
                 </Link>
                 :
-                null
+                <Link href='/basket'>
+                    <Fab color='primary' aria-label='add' className={classes.fab}>
+                        <Badge badgeContent={countBasket} color='secondary'>
+                            <LocalGroceryStore />
+                        </Badge>
+                    </Fab>
+                </Link>
             }
         </App>
     )

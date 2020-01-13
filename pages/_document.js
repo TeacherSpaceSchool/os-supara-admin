@@ -32,6 +32,9 @@ class MyDocument extends Document {
                 <meta name="msapplication-square310x310logo" content="/static/192x192.png"/>
             </Head>
             <body>
+            <noscript>
+                Пожалуйста включить JS для запуска приложения
+            </noscript>
             <Main />
             <NextScript />
             </body>
