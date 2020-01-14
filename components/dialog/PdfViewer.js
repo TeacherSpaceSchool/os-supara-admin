@@ -20,7 +20,7 @@ const PdfViewer =  React.memo(
         return (
             <div className={classes.column}>
                 <object style={{height: window.innerHeight-140, width: window.innerWidth-48}} data={pdf} type='application/pdf'>
-                    <iframe src={`https://docs.google.com/viewer?url=${pdf}&embedded=true`}/>
+                    <iframe style={{height: window.innerHeight-145, width: window.innerWidth-48}} src={`https://docs.google.com/viewer?url=${pdf}&embedded=true`}/>
                 </object>
                 <center>
                     <Button variant='contained' color='secondary' onClick={()=>{showFullDialog(false);}} className={classes.button}>
