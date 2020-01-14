@@ -275,6 +275,19 @@ const MyDrawer = React.memo((props) => {
                     </ListItem>
                 </Link>
                 <Divider/>
+                {
+                    ['admin'].includes(profile.role)?
+                        <>
+                        <Link href={'/employments'}>
+                            <ListItem style={{background: router.pathname.includes('employment')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Статистика' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
             </List>
         </Drawer>
     )

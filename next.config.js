@@ -24,6 +24,14 @@ module.exports =
                         URL: process.env.URL
                     },
                     webpack: (config) => {
+                        const originalEntry = config.entry;
+                        config.entry = async () => {
+                            const entries = await originalEntry();
+                            if (entries['main.js']) {
+                                entries['main.js'].unshift('./src/polyfills.js');
+                            }
+                            return entries;
+                        };
                         return config
                     },
                     exportPathMap: function() {

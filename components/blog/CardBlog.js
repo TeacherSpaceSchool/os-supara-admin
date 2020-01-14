@@ -74,6 +74,7 @@ const CardBlog = React.memo((props) => {
                             <br/>
                             <br/>
                             <TextField
+                                multiline={true}
                                 style={{width: '100%'}}
                                 label='Текст'
                                 value={text}
