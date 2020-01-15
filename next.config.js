@@ -1,11 +1,13 @@
 const withSass = require('@zeit/next-sass')
 const withCSS = require('@zeit/next-css')
 const withOffline = require('next-offline')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports =
         withCSS(
             withSass(
                 withOffline({
                     workboxOpts: {
+                        importScripts: ['/sw-push-listener.js'],
                         runtimeCaching: [
                             {
                                 urlPattern: /^https?.*/,
@@ -32,6 +34,7 @@ module.exports =
                             }
                             return entries;
                         };
+                        config.plugins.push(new CopyWebpackPlugin(['./public/sw-push-listener.js']));
                         return config
                     },
                     exportPathMap: function() {

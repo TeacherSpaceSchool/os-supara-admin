@@ -139,9 +139,9 @@ Orders.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
             Router.push('/')
-    ctx.store.getState().app.sort = '-updatedAt'
+    ctx.store.getState().app.sort = '-createdAt'
     return {
-        data: await getOrders({search: '', sort: '-updatedAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

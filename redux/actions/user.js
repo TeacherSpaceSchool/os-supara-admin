@@ -15,6 +15,7 @@ import {
 import Cookies from 'js-cookie';
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../../src/singleton/client';
+import { unregister, register } from '../../src/subscribe';
 import Router from 'next/router';
 
 export function signup(payload) {
@@ -61,6 +62,7 @@ export function signup(payload) {
                     payload: result.data.signupuser
                 })*/
                 //await window.location.reload()
+                await register(true)
                 await Router.push(`/client/${result.data.signupuser._id}`)
             }
         } catch(error) {
@@ -114,6 +116,7 @@ export function signin(payload) {
                     payload: false
                 })
                 //await Router.push('/')
+                await register(true)
                 window.location.reload()
 
                 /*await dispatch({type: AUTHENTICATED});
@@ -175,6 +178,7 @@ export function logout(reload) {
             payload: {}
         })
         if(reload) {
+            await unregister()
             await Router.push('/')
             window.location.reload()
         }

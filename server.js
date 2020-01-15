@@ -2,7 +2,7 @@ const { createServer } = require('http')
 const { join } = require('path')
 const { parse } = require('url')
 const next = require('next')
-const app = next({ dev: process.env.URL!=='azyk.store' })
+const app = next({ dev: !!process.env.dev })
 const handle = app.getRequestHandler()
 
 app.prepare()
