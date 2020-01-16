@@ -11,6 +11,8 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffClient, deleteClient } from '../../src/gql/client'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import CardActions from '@material-ui/core/CardActions';
+import NotificationsActive from '@material-ui/icons/NotificationsActive';
+import NotificationsOff from '@material-ui/icons/NotificationsOff';
 import Confirmation from '../../components/dialog/Confirmation'
 
 
@@ -26,6 +28,15 @@ const CardOrganization = React.memo((props) => {
             <Link href='/client/[id]' as={`/client/${element._id}`}>
             <CardActionArea>
                     <CardContent className={classes.line}>
+                        {
+                            profile.role==='admin'?
+                                element.notification?
+                                    <NotificationsActive color='primary' className={classes.notification}/>
+                                    :
+                                    <NotificationsOff color='secondary' className={classes.notification}/>
+                                :
+                                null
+                        }
                         <label htmlFor='contained-button-file'>
                             <img
                                 className={classes.media}

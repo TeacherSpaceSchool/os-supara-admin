@@ -35,7 +35,6 @@ const Items = React.memo((props) => {
     useEffect(()=>{
         forceCheck()
     },[list])
-    console.log(countBasket)
     return (
         <App searchShow={true} filters={data.filterItem} sorts={data.sortItem} pageName={router.query.id==='all'?'Все':data.subCategory!==null?data.subCategory.name:'Ничего не найдено'}>
             <Head>

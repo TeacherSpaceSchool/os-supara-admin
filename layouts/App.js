@@ -80,7 +80,6 @@ const App = React.memo(props => {
                 }
                 if(localStorage.basket&&localStorage.basket!=='[]') {
                     let basket = JSON.parse(localStorage.basket)
-                    console.log(basket.length)
                     for(let i=0; i<basket.length; i++){
                         await addBasket({item: basket[i].item._id, count: basket[i].count})
                     }

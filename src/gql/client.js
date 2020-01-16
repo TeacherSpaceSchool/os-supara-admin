@@ -18,6 +18,7 @@ export const getClients = async({search: search, sort: sort, filter: filter}, cl
                             email
                             address
                             lastActive
+                            notification
                             info
                             reiting
                             birthday

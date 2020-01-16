@@ -44,7 +44,6 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                         })
                             .then(function (subscription) {
                                 localStorage.pushVersion=0
-                                console.log(subscription);
                                 console.log('User is subscribed');
 
                                 saveSubscription(subscription);

@@ -8,7 +8,7 @@ import configureStore from '../redux/configureStore'
 import { Provider } from 'react-redux';
 import { SingletonApolloClient } from '../src/singleton/client'
 import { SingletonStore } from '../src/singleton/store'
-import { register } from '../src/subscribe'
+import { register, checkDisableSubscribe } from '../src/subscribe'
 import { getProfile } from '../redux/actions/user'
 import { checkMobile, checkAuth } from '../src/lib'
 import { getClientGqlSsr } from '../src/getClientGQL'
@@ -53,8 +53,10 @@ export default withRedux(configureStore, { debug: false })(
         render() {
             const { Component, pageProps, store } = this.props;
             new SingletonStore(store)
-            process.browser&&register()
-
+            if(process.browser){
+                checkDisableSubscribe()
+                register()
+            }
             let client = process.browser?new SingletonApolloClient().getClient():getClientGqlSsr()
 
             return (

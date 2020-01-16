@@ -15,6 +15,12 @@ export default makeStyles({
         width: '60px',
         marginRight: 10
     },
+    notification: {
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        fontSize: 15
+    },
     line: {
         display: 'flex',
         alignItems: 'start',
