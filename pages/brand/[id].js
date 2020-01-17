@@ -10,6 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { urlMain } from '../../redux/constants/other'
+import initialApp from '../../src/initialApp'
 const height = 377;
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
@@ -112,6 +113,7 @@ const Brand = React.memo((props) => {
 })
 
 Brand.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getBrands({organization: ctx.query.id, search: '', sort: ctx.store.getState().app.sort}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

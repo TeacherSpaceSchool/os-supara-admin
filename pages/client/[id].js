@@ -30,6 +30,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import Router from 'next/router'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import { validPhone } from '../../src/lib'
+import initialApp from '../../src/initialApp'
 
 const Client = React.memo((props) => {
     const { profile } = props.user;
@@ -722,6 +723,7 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: {...(ctx.query.id==='new'?
             {

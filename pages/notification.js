@@ -5,7 +5,7 @@ import CardAds from '../components/ads/CardAds';
 import pageListStyle from '../src/styleMUI/pageList/pageList'
 import {getAdss} from '../src/gql/ads'
 import { connect } from 'react-redux'
-
+import initialApp from '../src/initialApp'
 
 const Notification = React.memo((props) => {
     const classes = pageListStyle();
@@ -33,7 +33,8 @@ const Notification = React.memo((props) => {
     )
 })
 
-Notification.getInitialProps = async function() {
+Notification.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: await getAdss({search: '', sort: '-createdAt', filter: ''})
     };

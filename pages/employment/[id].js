@@ -1,3 +1,4 @@
+import initialApp from '../../src/initialApp'
 import Head from 'next/head';
 import React, { useState } from 'react';
 import App from '../../layouts/App';
@@ -304,6 +305,7 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!['организация', 'менеджер', 'admin', 'экспедитор', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

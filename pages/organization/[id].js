@@ -25,6 +25,7 @@ import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
 import { checkInt } from '../../src/lib'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import initialApp from '../../src/initialApp'
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();
@@ -397,6 +398,7 @@ const Organization = React.memo((props) => {
 })
 
 Organization.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: {
             ...ctx.store.getState().user.authenticated&&['организация', 'менеджер'].includes(ctx.store.getState().user.profile.role)?await getEmployment({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{},

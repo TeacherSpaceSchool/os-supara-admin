@@ -27,6 +27,7 @@ import {checkFloat, pdDatePicker} from '../../src/lib'
 import dynamic from 'next/dynamic'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import initialApp from '../../src/initialApp'
 
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
 const GeoRoute = dynamic(() => import('../../components/dialog/GeoRoute'))
@@ -401,6 +402,7 @@ const Route = React.memo((props) => {
 })
 
 Route.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

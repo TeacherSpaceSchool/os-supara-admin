@@ -11,6 +11,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 const height = 225
 
 
@@ -131,6 +132,7 @@ const Orders = React.memo((props) => {
 })
 
 Orders.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!['admin', 'организация', 'менеджер', 'client', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

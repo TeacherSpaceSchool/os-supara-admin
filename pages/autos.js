@@ -16,6 +16,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import Router from 'next/router'
+import initialApp from '../src/initialApp'
 
 const Autos = React.memo((props) => {
     const classes = pageListStyle();
@@ -69,6 +70,7 @@ const Autos = React.memo((props) => {
 })
 
 Autos.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!(ctx.store.getState().user.authenticated))
         if(ctx.res) {
             ctx.res.writeHead(302, {

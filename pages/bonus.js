@@ -12,6 +12,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardBonusPlaceholder from '../components/bonus/CardBonusPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Bonus = React.memo((props) => {
     const classes = pageListStyle();
@@ -56,6 +57,7 @@ const Bonus = React.memo((props) => {
 })
 
 Bonus.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: await getBonuses({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };

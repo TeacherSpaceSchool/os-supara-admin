@@ -11,6 +11,7 @@ import Badge from '@material-ui/core/Badge';
 import LocalGroceryStore from '@material-ui/icons/LocalGroceryStore';
 import AddIcon from '@material-ui/icons/Add';
 import { urlMain } from '../../redux/constants/other'
+import initialApp from '../../src/initialApp'
 const height = 377;
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
@@ -112,6 +113,7 @@ const Items = React.memo((props) => {
 })
 
 Items.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getItems({subCategory: ctx.query.id, search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

@@ -7,11 +7,12 @@ import CardItem from '../components/items/CardItem'
 import { favorites } from '../src/gql/items';
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
-const height = 377;
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../components/items/CardItemPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
+const height = 377;
 
 const Items = React.memo((props) => {
     const { authenticated } = props.user;
@@ -71,6 +72,7 @@ const Items = React.memo((props) => {
 })
 
 Items.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if('client'!==ctx.store.getState().user.profile.role&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {

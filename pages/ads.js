@@ -10,6 +10,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardAdsPlaceholder from '../components/ads/CardAdsPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Ads = React.memo((props) => {
     const classes = pageListStyle();
@@ -55,6 +56,7 @@ const Ads = React.memo((props) => {
 })
 
 Ads.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     ctx.store.getState().pagination.work = true
     return {
         data: await getAdss({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

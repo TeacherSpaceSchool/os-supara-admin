@@ -13,6 +13,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardCategoryPlaceholder from '../components/category/CardCategoryPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Index = React.memo((props) => {
     const classes = pageListStyle();
@@ -64,6 +65,7 @@ const Index = React.memo((props) => {
 })
 
 Index.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     let role = ctx.store.getState().user.profile.role
     ctx.store.getState().app.sort = 'name'
     let authenticated = ctx.store.getState().user.authenticated

@@ -10,6 +10,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardBlogPlaceholder from '../components/blog/CardBlogPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Blog = React.memo((props) => {
     const classes = pageListStyle();
@@ -54,6 +55,7 @@ const Blog = React.memo((props) => {
 })
 
 Blog.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: await getBlogs({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };

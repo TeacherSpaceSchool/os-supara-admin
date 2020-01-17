@@ -10,6 +10,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardFaqPlaceholder from '../components/faq/CardFaqPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Faqs = React.memo((props) => {
     const classes = pageListStyle();
@@ -54,6 +55,7 @@ const Faqs = React.memo((props) => {
 })
 
 Faqs.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: await getFaqs({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };

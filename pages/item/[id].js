@@ -1,3 +1,4 @@
+import initialApp from '../../src/initialApp'
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import App from '../../layouts/App';
@@ -706,6 +707,7 @@ const Item = React.memo((props) => {
 })
 
 Item.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: {
             ...ctx.query.id!=='new'?await getItem({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{

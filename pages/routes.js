@@ -15,6 +15,7 @@ const height = 210
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardRoutePlaceholder from '../components/route/CardRoutePlaceholder'
+import initialApp from '../src/initialApp'
 
 const Routes = React.memo((props) => {
     const { profile } = props.user;
@@ -67,6 +68,7 @@ const Routes = React.memo((props) => {
 })
 
 Routes.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     ctx.store.getState().pagination.work = true
     if(!['admin', 'организация', 'менеджер', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {

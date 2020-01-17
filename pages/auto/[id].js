@@ -21,6 +21,7 @@ import Confirmation from '../../components/dialog/Confirmation'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import initialApp from '../../src/initialApp'
 
 const Auto = React.memo((props) => {
     const { profile } = props.user;
@@ -218,6 +219,7 @@ const Auto = React.memo((props) => {
 })
 
 Auto.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!(ctx.store.getState().user.authenticated))
         if(ctx.res) {
             ctx.res.writeHead(302, {

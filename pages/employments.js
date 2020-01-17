@@ -14,6 +14,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardEmploymentPlaceholder from '../components/employment/CardEmploymentPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 const height = 186
 
 const Employment = React.memo((props) => {
@@ -66,6 +67,7 @@ const Employment = React.memo((props) => {
 })
 
 Employment.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

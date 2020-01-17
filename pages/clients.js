@@ -14,6 +14,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 const height = 140
 
 
@@ -67,6 +68,7 @@ const Client = React.memo((props) => {
 })
 
 Client.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     let role = ctx.store.getState().user.profile.role
     let authenticated = ctx.store.getState().user.authenticated
     if(authenticated&&!['admin', 'организация', 'менеджер', 'агент'].includes(role))

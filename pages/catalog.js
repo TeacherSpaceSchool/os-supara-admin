@@ -24,6 +24,7 @@ import { addBasket, deleteBasket, deleteBasketAll } from '../src/gql/basket';
 import Divider from '@material-ui/core/Divider';
 import LazyLoad from 'react-lazyload';
 import CardCatalogPlaceholder from '../components/catalog/CardCatalogPlaceholder'
+import initialApp from '../src/initialApp'
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
@@ -299,6 +300,7 @@ const Catalog = React.memo((props) => {
 })
 
 Catalog.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!ctx.store.getState().user.authenticated||'агент'!==ctx.store.getState().user.profile.role)
         if(ctx.res) {
             ctx.res.writeHead(302, {

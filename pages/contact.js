@@ -21,6 +21,7 @@ import Confirmation from '../components/dialog/Confirmation'
 import AddSocial from '../components/dialog/AddSocial'
 import { urlMain } from '../redux/constants/other'
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 
 const Contact = React.memo((props) => {
@@ -387,6 +388,7 @@ const Contact = React.memo((props) => {
 })
 
 Contact.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     return {
         data: {
             ...await getContact(ctx.req?await getClientGqlSsr(ctx.req):undefined)

@@ -30,6 +30,7 @@ import Select from '@material-ui/core/Select';
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
 import { getClientGqlSsr } from '../src/getClientGQL'
+import initialApp from '../src/initialApp'
 
 const Basket = React.memo((props) => {
     const { authenticated } = props.user;
@@ -427,6 +428,7 @@ const Basket = React.memo((props) => {
 })
 
 Basket.getInitialProps = async function(ctx) {
+    await initialApp(ctx)
     if(!['client'].includes(ctx.store.getState().user.profile.role)&&ctx.store.getState().user.authenticated)
         if(ctx.res) {
             ctx.res.writeHead(302, {
