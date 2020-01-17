@@ -17,7 +17,7 @@ export default async (ctx)=>{
             if (ctx.store.getState().user.profile.client) {
                 setClient({
                     _id: ctx.store.getState().user.profile.client,
-                    device: `${ua.device.vendor ? ua.device.vendor : ''}-${ua.browser.model ? ua.browser.model : ''} | ${ua.os.name ? ua.os.name : ''}-${ua.os.version ? ua.os.version : ''} | ${ua.browser.name ? ua.browser.name : ''}-${ua.browser.version ? ua.browser.name : ''}`
+                    device: `${ua.device.vendor ? `${ua.device.vendor}-` : ''}${ua.device.model ? ua.device.model : ''} | ${ua.os.name ? `${ua.os.name}-` : ''}${ua.os.version ? ua.os.version : ''} | ${ua.browser.name ? `${ua.browser.name}-` : ''}${ua.browser.version ? ua.browser.version : ''}`
                 }, await getClientGqlSsr(ctx.req))
             }
         } else {
