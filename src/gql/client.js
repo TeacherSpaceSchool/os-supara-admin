@@ -18,6 +18,7 @@ export const getClients = async({search: search, sort: sort, filter: filter}, cl
                             email
                             address
                             lastActive
+                            device
                             notification
                             info
                             reiting
@@ -120,14 +121,14 @@ export const deleteClient = async(ids)=>{
     }
 }
 
-export const setClient = async(element)=>{
+export const setClient = async(element, client)=>{
     try{
-        const client = new SingletonApolloClient().getClient()
+        client = client? client : new SingletonApolloClient().getClient()
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: [String], $login: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, phone: $phone, login: $login, city: $city, image: $image, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: [String], $login: String, $device: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, device: $device, phone: $phone, login: $login, city: $city, image: $image, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})

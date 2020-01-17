@@ -123,6 +123,16 @@ const CardOrganization = React.memo((props) => {
                                     :
                                     null
                             }
+                            {
+                                element.device?
+                                    <div className={classes.row}>
+                                        <div className={classes.value}>
+                                            {element.device}
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                         </div>
                     </CardContent>
             </CardActionArea>

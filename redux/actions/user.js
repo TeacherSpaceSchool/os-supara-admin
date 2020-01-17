@@ -209,6 +209,7 @@ export function setProfile() {
                           }
                     }`
                 })
+
             await dispatch({
                 type: SET_PROFILE,
                 payload: result.data.getStatus

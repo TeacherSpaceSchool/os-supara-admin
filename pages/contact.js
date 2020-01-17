@@ -112,7 +112,7 @@ const Contact = React.memo((props) => {
                                     <div className={classes.column}>
                                         <label htmlFor='contained-button-file'>
                                             <img
-                                                className={classes.media}
+                                                className={isMobileApp?classes.mediaM:classes.mediaD}
                                                 src={preview}
                                                 alt={'Добавить'}
                                             />
@@ -277,7 +277,7 @@ const Contact = React.memo((props) => {
                                 <>
                                 <div className={classes.column}>
                                     <img
-                                        className={classes.media}
+                                        className={isMobileApp?classes.mediaM:classes.mediaD}
                                         src={preview}
                                         alt={name}
                                     />

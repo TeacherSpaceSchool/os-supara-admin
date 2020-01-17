@@ -11,14 +11,19 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
-    media: {
+    mediaM: {
         objectFit: 'cover',
-        maxHeight: 300,
-        maxWidth: 300,
         height: 'calc(100vw - 72px)',
         width: 'calc(100vw - 72px)',
+        marginBottom: 10,
+    },
+    mediaD: {
+        objectFit: 'cover',
+        height: 300,
+        width: 300,
         marginRight: 10,
         marginBottom: 10,
+        cursor: 'pointer'
     },
     name: {
         marginBottom: 10,
