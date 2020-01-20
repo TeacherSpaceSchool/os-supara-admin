@@ -16,7 +16,7 @@ import { deleteOrders } from '../../src/gql/order'
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
-    const { element, setList, route, getInvoices } = props;
+    const { element, setList, route, getInvoices, setSelected, selected } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { profile, authenticated} = props.user;
     const statusColor = {
@@ -35,7 +35,17 @@ const CardOrder = React.memo((props) => {
     },[element,])
     return (
         <Card className={classes.card}>
-            <CardActionArea onClick={()=>{setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}}>
+            <CardActionArea onClick={()=>{
+                if(!selected.length){setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}
+                else {
+                    if(selected.includes(element._id)) {
+                        let _selected = selected.filter((i)=>i!==element._id)
+                        setSelected([..._selected])
+                    }
+                    else
+                        setSelected([...selected, element._id])
+                }
+            }}>
                 <CardContent className={classes.column}>
                     <div className={classes.row}>
                         <div className={classes.number}>{element.number}</div>&nbsp;
@@ -140,7 +150,7 @@ const CardOrder = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    profile.role==='admin' ?
+                    profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteOrders([element._id])).invoices)

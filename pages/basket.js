@@ -203,21 +203,30 @@ const Basket = React.memo((props) => {
                                                                 {row.item.name}
                                                             </div>
                                                             <br/>
-                                                            <div className={classes.counter}
-                                                                 style={isMobileApp ? {marginBottom: 10} : {marginRight: 20}}>
-                                                                <div className={classes.counterbtn} onClick={() => {
-                                                                    decrement(idx)
-                                                                }}>–
+                                                            <div className={classes.row}>
+                                                                <div className={classes.counter}
+                                                                     style={isMobileApp ? {marginBottom: 10} : {marginRight: 20}}>
+                                                                    <div className={classes.counterbtn} onClick={() => {
+                                                                        decrement(idx)
+                                                                    }}>–
+                                                                    </div>
+                                                                    <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
+                                                                           value={row.count} onChange={(event) => {
+                                                                        list[idx].count = event.target.value
+                                                                        setBasketChange(idx, list[idx].count)
+                                                                        setList([...list])
+                                                                    }}/>
+                                                                    <div className={classes.counterbtn} onClick={() => {
+                                                                        increment(idx)
+                                                                    }}>+
+                                                                    </div>
                                                                 </div>
-                                                                <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
-                                                                       value={row.count} onChange={(event) => {
-                                                                    list[idx].count = event.target.value
-                                                                    setBasketChange(idx, list[idx].count)
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                                    list[idx].showConsignment = !list[idx].showConsignment
                                                                     setList([...list])
-                                                                }}/>
-                                                                <div className={classes.counterbtn} onClick={() => {
-                                                                    increment(idx)
-                                                                }}>+
+                                                                }}>
+                                                                    КОНС
                                                                 </div>
                                                             </div>
                                                             <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
@@ -233,7 +242,7 @@ const Basket = React.memo((props) => {
                                                                 Добавить упаковку
                                                             </div>
                                                             {
-                                                                authenticated&&data.client.type==='торговая точка'?
+                                                                authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
                                                                     <>
                                                                     <div className={classes.row}>
                                                                         <div className={classes.valuecons}>Консигнация</div>
@@ -321,15 +330,22 @@ const Basket = React.memo((props) => {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell align="left">
-
-                                                    <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
-                                                        <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
-                                                        <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
-                                                            list[idx].count = event.target.value
-                                                            setBasketChange(idx, checkInt(list[idx].count))
+                                                    <div className={classes.row}>
+                                                        <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
+                                                            <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
+                                                            <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
+                                                                list[idx].count = event.target.value
+                                                                setBasketChange(idx, checkInt(list[idx].count))
+                                                                setList([...list])
+                                                            }}/>
+                                                            <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
+                                                        </div>
+                                                        <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                            list[idx].showConsignment = !list[idx].showConsignment
                                                             setList([...list])
-                                                        }}/>
-                                                        <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
+                                                        }}>
+                                                            КОНС
+                                                        </div>
                                                     </div>
                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
                                                         if(row.item.packaging){
@@ -344,7 +360,7 @@ const Basket = React.memo((props) => {
                                                         Добавить упаковку
                                                     </div>
                                                     {
-                                                        authenticated&&data.client.type==='торговая точка'?
+                                                        authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
                                                         <>
                                                         <div className={classes.row}>
                                                             <div className={classes.valuecons}>Консигнация</div>

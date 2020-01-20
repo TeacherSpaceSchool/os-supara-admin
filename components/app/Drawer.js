@@ -44,6 +44,8 @@ const MyDrawer = React.memo((props) => {
     const [uncoverBonus, setUncoverBonus] = useState(null);
     return (
         <Drawer
+            disableSwipeToOpen = {true}
+            disableBackdropTransition = {true}
             onOpen={()=>showDrawer(true)}
             disableDiscovery={true}
             variant= {variant}

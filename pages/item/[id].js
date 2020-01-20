@@ -72,6 +72,7 @@ const Item = React.memo((props) => {
     };
     let [hit, setHit] = useState(data.item!==null?data.item.hit:false);
     let [latest, setLatest] = useState(data.item!==null?data.item.latest:false);
+    let [apiece, setApiece] = useState(data.item!==null?data.item.apiece:false);
     let [preview, setPreview] = useState(data.item!==null?data.item.image:'');
     let [image, setImage] = useState(undefined);
     let [packaging, setPackaging] = useState(data.item&&data.item.packaging?data.item.packaging:1);
@@ -171,7 +172,7 @@ const Item = React.memo((props) => {
                                     <>
                                     <label htmlFor='contained-button-file'>
                                         <img
-                                            className={isMobileApp?classes.mediaM:classes.mediaD}
+                                            className={classes.media}
                                             src={preview}
                                             alt={'Добавить'}
                                         />
@@ -298,6 +299,7 @@ const Item = React.memo((props) => {
                                                 <>
                                                 <div className={classes.row}>
                                                     <FormControlLabel
+                                                        labelPlacement = 'bottom'
                                                         control={
                                                             <Switch
                                                                 checked={hit}
@@ -309,6 +311,7 @@ const Item = React.memo((props) => {
                                                         label='Популярное'
                                                     />
                                                     <FormControlLabel
+                                                        labelPlacement = 'bottom'
                                                         control={
                                                             <Switch
                                                                 checked={latest}
@@ -319,6 +322,18 @@ const Item = React.memo((props) => {
                                                         }
                                                         label='Новинка'
                                                     />
+                                                    {/*<FormControlLabel
+                                                        labelPlacement = 'bottom'
+                                                        control={
+                                                            <Switch
+                                                                checked={apiece}
+                                                                onChange={()=>{setApiece(!apiece)}}
+                                                                color="primary"
+                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                            />
+                                                        }
+                                                        label='Поштучно'
+                                                    />*/}
                                                 </div>
                                                 <br/>
                                                 </>:null
@@ -353,7 +368,8 @@ const Item = React.memo((props) => {
                                                                     organization: organization._id,
                                                                     deliveryDays: deliveryDays,
                                                                     weight: checkFloat(weight),
-                                                                    size: checkFloat(size)
+                                                                    size: checkFloat(size),
+                                                                    apiece: apiece
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
@@ -378,6 +394,7 @@ const Item = React.memo((props) => {
                                                         if(weight!==data.item.weight)editElement.weight = checkFloat(weight)
                                                         if(size!==data.item.size)editElement.size = checkFloat(size)
                                                         if(hit!==data.item.hit)editElement.hit = hit
+                                                        if(apiece!==data.item.apiece)editElement.apiece = apiece
                                                         if(latest!==data.item.latest)editElement.latest = latest
                                                         if(organization._id!==data.item.organization._id)editElement.organization = organization._id
                                                         if(subCategory._id!==data.item.subCategory._id)editElement.subCategory = subCategory._id
@@ -432,7 +449,7 @@ const Item = React.memo((props) => {
                                     <>
                                     <div className={classes.divImage}>
                                         <img
-                                            className={isMobileApp?classes.mediaM:classes.mediaD}
+                                            className={classes.media}
                                             src={data.item.image}
                                             alt={data.item.info}
                                         />

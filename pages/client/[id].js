@@ -181,7 +181,7 @@ const Client = React.memo((props) => {
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
                                         <img
-                                            className={isMobileApp?classes.mediaM:classes.mediaD}
+                                            className={classes.media}
                                             src={preview?preview:'/static/add.png'}
                                             alt={'Добавить'}
                                         />
@@ -587,7 +587,7 @@ const Client = React.memo((props) => {
 
                                 <div className={classes.column}>
                                     <img
-                                        className={isMobileApp?classes.mediaM:classes.mediaD}
+                                        className={classes.media}
                                         src={preview}
                                         alt={name}
                                     />

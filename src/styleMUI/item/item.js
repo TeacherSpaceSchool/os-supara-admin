@@ -28,14 +28,11 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
-    mediaM: {
-        objectFit: 'contain',
-        height: 'calc(100vw - 72px)',
-        width: 'calc(100vw - 72px)',
-    },
-    mediaD: {
+    media: {
         cursor: 'pointer',
         objectFit: 'contain',
+        maxHeight: 'calc(100vw - 72px)',
+        maxWidth: 'calc(100vw - 72px)',
         height: 300,
         width: 300,
         marginRight: 10,

@@ -19,6 +19,7 @@ export const getBasket = async(client)=>{
                                     _id 
                                     name 
                                     stock 
+                                    apiece
                                     image 
                                     packaging
                                     price

@@ -29,6 +29,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             _id
                                             name    
                                             stock 
+                                            apiece
                                             price
                                             packaging
                                             weight
@@ -111,6 +112,7 @@ export const getOrdersForRouting = async(organization)=>{
                                             _id
                                             name    
                                             stock 
+                                            apiece
                                             packaging
                                             weight
                                             size
@@ -185,6 +187,7 @@ export const getOrder = async({_id})=>{
                                             _id
                                             name    
                                             stock 
+                                            apiece
                                             packaging
                                             weight
                                             size

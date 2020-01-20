@@ -16,14 +16,10 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
-    mediaM: {
+    media: {
         objectFit: 'cover',
-        height: 'calc(100vw - 72px)',
-        width: 'calc(100vw - 72px)',
-        marginBottom: 10,
-    },
-    mediaD: {
-        objectFit: 'cover',
+        maxHeight: 'calc(100vw - 72px)',
+        maxWidth: 'calc(100vw - 72px)',
         height: 300,
         width: 300,
         marginRight: 10,
