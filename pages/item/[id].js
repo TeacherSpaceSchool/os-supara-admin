@@ -110,15 +110,20 @@ const Item = React.memo((props) => {
         }
     },[])
     //BUY
-    let [count, setCount] = useState(1);
+    let [count, setCount] = useState(data.item.apiece?1:packaging);
     let increment = ()=>{
-        count+=1
+        if(!data.item.apiece)
+            count+=packaging
+        else
+            count+=1
         setCount(count)
     }
     let decrement = ()=>{
-        if(count>1)
-            count-=1
-            setCount(count)
+        if(!data.item.apiece&&count>packaging)
+            count-=packaging
+        else if(data.item.apiece&&count>1)
+                count-=1
+        setCount(count)
     }
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
@@ -322,7 +327,7 @@ const Item = React.memo((props) => {
                                                         }
                                                         label='Новинка'
                                                     />
-                                                    {/*<FormControlLabel
+                                                    <FormControlLabel
                                                         labelPlacement = 'bottom'
                                                         control={
                                                             <Switch
@@ -333,7 +338,7 @@ const Item = React.memo((props) => {
                                                             />
                                                         }
                                                         label='Поштучно'
-                                                    />*/}
+                                                    />
                                                 </div>
                                                 <br/>
                                                 </>:null
@@ -356,7 +361,7 @@ const Item = React.memo((props) => {
                                                         if (name.length>0&&price>0&&subCategory._id!=undefined&&organization._id!=undefined) {
                                                             const action = async() => {
                                                                 await addItem({
-                                                                    packaging: checkInt(packaging),
+                                                                    packaging: checkInt(packaging)>0?checkInt(packaging):1,
                                                                     name: name,
                                                                     stock: checkInt(stock),
                                                                     image: image,
@@ -387,7 +392,7 @@ const Item = React.memo((props) => {
                                                         let editElement = {_id: data.item._id}
                                                         if(stock!==data.item.stock)editElement.stock = checkInt(stock)
                                                         if(name.length>0&&name!==data.item.name)editElement.name = name
-                                                        if(packaging!==data.item.packaging)editElement.packaging = checkInt(packaging)
+                                                        if(packaging!==data.item.packaging&&checkInt(packaging)>0)editElement.packaging = checkInt(packaging)
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
                                                         if(price>0&&price!==data.item.price)editElement.price = checkInt(price)
@@ -567,17 +572,24 @@ const Item = React.memo((props) => {
                                                         <div className={isMobileApp?classes.column:classes.rowCenter}>
                                                             <div className={classes.counter} style={isMobileApp?{}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
-                                                                <input type='number' className={classes.counternmbr} value={count} onChange={(event)=>{
+                                                                <input type='number' readOnly={!data.item.apiece} className={classes.counternmbr} value={count} onChange={(event)=>{
                                                                     setCount(event.target.value)
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
                                                             </div>
-                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                                count = (parseInt(count/packaging)+1)*packaging
-                                                                setCount(count)
-                                                            }}>
-                                                                Добавить упаковку
-                                                            </div>
+                                                            {
+                                                                data.item.apiece?
+                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                        count = (parseInt(count/packaging)+1)*packaging
+                                                                        setCount(count)
+                                                                    }}>
+                                                                        Добавить упаковку
+                                                                    </div>
+                                                                    :
+                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                                       Упаковок: {count/packaging}
+                                                                    </div>
+                                                            }
                                                             <Button
                                                                 variant='contained'
                                                                 color='primary'
@@ -615,7 +627,7 @@ const Item = React.memo((props) => {
                                                         <div className={isMobileApp?classes.column:classes.rowCenter}>
                                                             <div className={classes.counter} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                                 <div className={classes.counterbtn} onClick={decrement}>–</div>
-                                                                <input type='text' className={classes.counternmbr} value={count} onChange={(event)=>{
+                                                                <input type='text' readOnly={!data.item.apiece} className={classes.counternmbr} value={count} onChange={(event)=>{
                                                                     setCount(event.target.value)
                                                                 }}/>
                                                                 <div className={classes.counterbtn} onClick={increment}>+</div>
@@ -650,12 +662,19 @@ const Item = React.memo((props) => {
                                                                 В КОРЗИНУ
                                                             </Button>
                                                         </div>
-                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                            count = (parseInt(count/packaging)+1)*packaging
-                                                            setCount(count)
-                                                        }}>
-                                                            Добавить упаковку
-                                                        </div>
+                                                        {
+                                                            data.item.apiece?
+                                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                    count = (parseInt(count/packaging)+1)*packaging
+                                                                    setCount(count)
+                                                                }}>
+                                                                    Добавить упаковку
+                                                                </div>
+                                                                :
+                                                                <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                                   Упаковок: {count/packaging}
+                                                                </div>
+                                                        }
                                                         </>
                                                 }
                                                 <div className={classes.share}>

@@ -18,11 +18,11 @@ export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
                             status
                             createdAt                  
                             stock
-                            apiece
                             image
                             info
                             price
                             apiece
+                            packaging
                             reiting
                             organization
                                 {_id name}
@@ -70,6 +70,7 @@ export const getBrands = async({organization,  search,  sort,  filter}, client)=
                             createdAt                  
                             stock
                             apiece
+                            packaging
                             image
                             info
                             price
@@ -110,6 +111,7 @@ export const favorites = async({ search}, client)=>{
                             createdAt                  
                             stock
                             apiece
+                            packaging
                             image
                             info
                             price

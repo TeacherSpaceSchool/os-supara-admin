@@ -54,7 +54,10 @@ const Order =  React.memo(
             setConsignmentPrice(consignmentPrice)
         }
         let increment = (idx)=>{
-            orders[idx].count+=1
+            if(orders[idx].item.apiece)
+                orders[idx].count+=1
+            else
+                orders[idx].count+=orders[idx].item.packaging
             orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
             orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
             orders[idx].allSize = orders[idx].count * orders[idx].item.size
@@ -62,8 +65,16 @@ const Order =  React.memo(
             canculateAllPrice()
         }
         let decrement = (idx)=>{
-            if(orders[idx].count>1) {
+            if(orders[idx].count>1&&orders[idx].item.apiece) {
                 orders[idx].count -= 1
+                orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+                orders[idx].allSize = orders[idx].count * orders[idx].item.size
+                setOrders([...orders])
+                canculateAllPrice()
+            }
+            else if(orders[idx].count>orders[idx].item.packaging&&!orders[idx].item.apiece) {
+                orders[idx].count -= orders[idx].item.packaging
                 orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
                 orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                 orders[idx].allSize = orders[idx].count * orders[idx].item.size
@@ -280,20 +291,22 @@ const Order =  React.memo(
                                                     <div className={classes.value}>{order.count}&nbsp;шт</div>
                                                     <div className={classes.counterbtn} onClick={()=>{increment(idx)}}>+</div>
                                                 </div>
-                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                    if(order.item.packaging){
-                                                        orders[idx].count = (parseInt(orders[idx].count/order.item.packaging)+1)*order.item.packaging
-                                                    }
-                                                    else {
-                                                        orders[idx].count += 1
-                                                    }
-                                                    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
-                                                    orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
-                                                    setOrders([...orders])
-                                                    canculateAllPrice()
-                                                }}>
-                                                    Добавить упаковку
-                                                </div>
+                                                {
+                                                    orders[idx].item.apiece?
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                            orders[idx].count = (parseInt(orders[idx].count/order.item.packaging)+1)*order.item.packaging
+                                                            orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                                                            orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+                                                            setOrders([...orders])
+                                                            canculateAllPrice()
+                                                        }}>
+                                                            Добавить упаковку
+                                                        </div>
+                                                        :
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                            Упаковок: {order.count/order.item.packaging}
+                                                        </div>
+                                                }
                                             </div>
                                         </div>
                                         <div className={classes.row}>
@@ -594,7 +607,7 @@ const Order =  React.memo(
                             !element.cancelClient&&!element.cancelForwarder?
                                 'Заказ отменен'
                                 :
-                                `Заказ отменен. Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
+                                `Заказ отменен ${element.cancelClient?'клиентом':' поставщиком'}. Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
                         }
                     />
                 </div>

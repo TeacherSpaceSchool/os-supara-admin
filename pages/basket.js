@@ -48,15 +48,24 @@ const Basket = React.memo((props) => {
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
     let increment = (idx)=>{
-        list[idx].count+=1
+        if(list[idx].item.apiece)
+            list[idx].count+=1
+        else
+            list[idx].count+=list[idx].item.packaging
         setBasketChange(idx, list[idx].count)
         setList([...list])
     }
     let decrement = (idx)=>{
-        if(list[idx].count>0) {
+        if(list[idx].item.apiece&&list[idx].count>1) {
             list[idx].count -= 1
             setBasketChange(idx, list[idx].count)
             setList([...list])
+        }
+        else if(!list[idx].item.apiece&&list[idx].count>list[idx].item.packaging) {
+            list[idx].count -= list[idx].item.packaging
+            setBasketChange(idx, list[idx].count)
+            setList([...list])
+
         }
     }
     let incrementConsignment = (idx)=>{
@@ -119,7 +128,8 @@ const Basket = React.memo((props) => {
                 }
             }
             setOrganizations([...organizations])
-            if(organizations.length>0)
+            let organizationsIdx = organizations.map(organization=>organization._id)
+            if(organizations.length>0&&!organizationsIdx.includes(organization._id))
                 setOrganization({...organizations[0]})
         })()
     },[list])
@@ -210,7 +220,7 @@ const Basket = React.memo((props) => {
                                                                         decrement(idx)
                                                                     }}>–
                                                                     </div>
-                                                                    <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
+                                                                    <input readOnly={!row.item.apiece} type={isMobileApp?'number':'text'} className={classes.counternmbr}
                                                                            value={row.count} onChange={(event) => {
                                                                         list[idx].count = event.target.value
                                                                         setBasketChange(idx, list[idx].count)
@@ -229,18 +239,20 @@ const Basket = React.memo((props) => {
                                                                     КОНС
                                                                 </div>
                                                             </div>
-                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                                if(row.item.packaging){
-                                                                    list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
-                                                                }
-                                                                else {
-                                                                    list[idx].count += 1
-                                                                }
-                                                                setBasketChange(idx, list[idx].count)
-                                                                setList([...list])
-                                                            }}>
-                                                                Добавить упаковку
-                                                            </div>
+                                                            {
+                                                                row.item.apiece?
+                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                        list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
+                                                                        setBasketChange(idx, list[idx].count)
+                                                                        setList([...list])
+                                                                    }}>
+                                                                        Добавить упаковку
+                                                                    </div>
+                                                                    :
+                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                                        Упаковок: {list[idx].count/list[idx].item.packaging}
+                                                                    </div>
+                                                            }
                                                             {
                                                                 authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
                                                                     <>
@@ -333,32 +345,31 @@ const Basket = React.memo((props) => {
                                                     <div className={classes.row}>
                                                         <div className={classes.counterD} style={isMobileApp?{marginBottom: 20}:{marginRight: 20}}>
                                                             <div className={classes.counterbtnD} onClick={()=>{decrement(idx)}}>–</div>
-                                                            <input type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
+                                                            <input readOnly={!row.item.apiece} type={isMobileApp?'number':'text'} className={classes.counternmbrD} value={row.count} onChange={(event)=>{
                                                                 list[idx].count = event.target.value
                                                                 setBasketChange(idx, checkInt(list[idx].count))
                                                                 setList([...list])
                                                             }}/>
                                                             <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
                                                         </div>
-                                                        <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                        <div className={classes.showConsD} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
                                                             list[idx].showConsignment = !list[idx].showConsignment
                                                             setList([...list])
                                                         }}>
                                                             КОНС
                                                         </div>
                                                     </div>
-                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                        if(row.item.packaging){
+                                                    {row.item.apiece?
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
                                                             list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
-                                                        }
-                                                        else {
-                                                            list[idx].count += 1
-                                                        }
-                                                        setBasketChange(idx, list[idx].count)
-                                                        setList([...list])
-                                                    }}>
-                                                        Добавить упаковку
-                                                    </div>
+                                                            setBasketChange(idx, list[idx].count)
+                                                            setList([...list])
+                                                        }}>
+                                                            Добавить упаковку
+                                                        </div>
+                                                        :
+                                                        null
+                                                    }
                                                     {
                                                         authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
                                                         <>

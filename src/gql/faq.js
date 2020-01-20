@@ -14,6 +14,7 @@ export const getFaqs = async({search: search}, client)=>{
                             _id
                             url
                             title
+                            video
                             createdAt
                         }
                     }`,
@@ -47,8 +48,8 @@ export const addFaq = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($file: Upload!, $title: String!) {
-                        addFaq(file: $file, title: $title) {
+                    mutation ($file: Upload!, $title: String!, $video: String) {
+                        addFaq(file: $file, title: $title, video: $video) {
                              data
                         }
                     }`})
@@ -64,8 +65,8 @@ export const setFaq = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $file: Upload, $title: String) {
-                        setFaq(_id: $_id, file: $file, title: $title) {
+                    mutation ($_id: ID!, $file: Upload, $title: String, $video: String) {
+                        setFaq(_id: $_id, file: $file, title: $title, video: $video) {
                              data
                         }
                     }`})

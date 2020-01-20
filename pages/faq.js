@@ -26,7 +26,7 @@ const Faqs = React.memo((props) => {
     useEffect(()=>{
         forceCheck()
     },[list])
-    let height = profile.role==='admin'?100:50
+    let height = profile.role==='admin'?244:125
     return (
         <App searchShow={true} pageName='Инструкции'>
             <Head>

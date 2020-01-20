@@ -29,17 +29,18 @@ const App = React.memo(props => {
     let { sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     const [unread, setUnread] = useState({});
+    const [reloadPage, setReloadPage] = useState(false);
     useEffect( ()=>{
         if(authenticated&&!profile.role)
             setProfile()
         else if(!authenticated&&profile.role)
             logout(false)
     },[authenticated,])
-    Router.events.on('routeChangeStart', (err, url)=>{
-        if (!router.pathname.includes(url)&&!load)
-            showLoad(true)
-        if (err.cancelled&&load)
-            showLoad(false)
+    Router.events.on('routeChangeStart', (url, err)=>{
+        if (!router.pathname.includes(url)&&!reloadPage)
+            setReloadPage(true)
+        if (err&&err.cancelled&&reloadPage)
+            setReloadPage(false)
     })
     /*const containerRef = useBottomScrollListener(()=>{
         if(work) next()
@@ -100,7 +101,7 @@ const App = React.memo(props => {
             <FullDialog/>
             <Dialog />
             <SnackBar/>
-            {load?
+            {load||reloadPage?
                 <div className='load'>
                     <CircularProgress/>
                 </div>

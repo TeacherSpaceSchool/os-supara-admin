@@ -37,9 +37,9 @@ const Client = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.employment!==null?data.employment.user.status:'');
-    let [name, setName] = useState(data.employment!==null?data.employment.name:'');
-    let [email, setEmail] = useState(data.employment!==null?data.employment.email:'');
-    let [phone, setPhone] = useState(data.employment?data.employment.phone:[]);
+    let [name, setName] = useState(data.employment!==null&&data.employment.name?data.employment.name:'');
+    let [email, setEmail] = useState(data.employment!==null&&data.employment.email?data.employment.email:'');
+    let [phone, setPhone] = useState(data.employment&&data.employment.phone?data.employment.phone:[]);
     let addPhone = ()=>{
         phone = [...phone, '']
         setPhone(phone)
@@ -52,12 +52,12 @@ const Client = React.memo((props) => {
         phone.splice(idx, 1);
         setPhone([...phone])
     };
-    let [login, setLogin] = useState(data.employment?data.employment.user.login:'');
-    let [organization, setOrganization] = useState(data.employment!==null?data.employment.organization:{});
+    let [login, setLogin] = useState(data.employment&&data.employment.login?data.employment.user.login:'');
+    let [organization, setOrganization] = useState(data.employment&&data.employment.organization?data.employment.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
     };
-    let [role, setRole] = useState(data.employment!==null?data.employment.user.role:'');
+    let [role, setRole] = useState(data.employment&&data.employment.user?data.employment.user.role:'');
     let handleRole =  (event) => {
         setRole(event.target.value)
     };

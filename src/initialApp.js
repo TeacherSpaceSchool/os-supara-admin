@@ -9,8 +9,6 @@ export default async (ctx)=>{
         //new SingletonApolloClient(ctx.req)
 
         let ua = uaParserJs(ctx.req.headers['user-agent'])
-        console.log(ua.device)
-
         ctx.store.getState().app.isMobileApp = ['mobile', 'tablet'].includes(ua.device.type)
         ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
         if (ctx.store.getState().user.authenticated) {

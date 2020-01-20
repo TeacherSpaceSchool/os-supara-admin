@@ -18,11 +18,13 @@ const CardBonus = React.memo((props) => {
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             <CardActionArea>
                 <CardContent className={classes.line}>
-                     <img
-                         className={classes.media}
-                         src={ ['организация', 'менеджер', 'агент'].includes(profile.role)?element.client.image:element.bonus.organization.image}
-                         alt={element.bonus.organization.name}
-                     />
+                    <Link href='/organization/[id]' as={`/organization/${element.bonus.organization._id}`}>
+                        <img
+                             className={classes.media}
+                             src={ ['организация', 'менеджер', 'агент'].includes(profile.role)?element.client.image:element.bonus.organization.image}
+                             alt={element.bonus.organization.name}
+                         />
+                    </Link>
                     <div>
                         {
                             !['организация', 'менеджер', 'агент'].includes(profile.role)?

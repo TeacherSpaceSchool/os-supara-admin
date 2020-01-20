@@ -33,8 +33,8 @@ const CardOrganization = React.memo((props) => {
                             {element.name}
                         </h3>
                     </div>
-            </CardActionArea>
-</Link>
+                </CardActionArea>
+            </Link>
                 {
                     profile.role === 'admin' ?
                         <CardActions>

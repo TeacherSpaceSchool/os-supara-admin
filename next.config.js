@@ -14,7 +14,7 @@ module.exports =
                                 handler: 'NetworkOnly',
                             },
                             {
-                                urlPattern: /^https?.*/,
+                                urlPattern: /^https?.*\.!(png|gif|jpg|jpeg|svg)/,
                                 handler: 'NetworkFirst',
                                 options: {
                                     cacheName: 'cache',

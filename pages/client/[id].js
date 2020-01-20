@@ -69,8 +69,8 @@ const Client = React.memo((props) => {
     if(data.client.address.length>0&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
     let [address, setAddress] = useState(data.client&&data.client.address.length>0?data.client.address:[['']]);
-    let [birthday, setBirthday] = useState(data.client?pdDatePicker(new Date(data.client.birthday)):null);
-    let [city, setCity] = useState(data.client?data.client.city:'');
+    let [birthday, setBirthday] = useState(data.client&&data.client.birthday?pdDatePicker(new Date(data.client.birthday)):null);
+    let [city, setCity] = useState(data.client&&data.client.city?data.client.city:'');
     let [type, setType] = useState(
         (router.query.id==='new'||data.client.organization)?
             'торговая точка'

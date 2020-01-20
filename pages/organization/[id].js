@@ -110,7 +110,7 @@ const Organization = React.memo((props) => {
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {
                         data.organization!==null?
-                            profile.role==='admin'||(profile.role==='организация'&&data.employment.organization._id===data.organization._id)?
+                            profile.role==='admin'||(profile.role==='организация'&&profile.organization===data.organization._id)?
                                 <>
                                 <label htmlFor='contained-button-file'>
                                     <img
@@ -401,7 +401,6 @@ Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     return {
         data: {
-            ...ctx.store.getState().user.authenticated&&['организация', 'менеджер'].includes(ctx.store.getState().user.profile.role)?await getEmployment({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{},
             ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0}}
         }
 

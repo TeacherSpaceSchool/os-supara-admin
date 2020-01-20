@@ -132,7 +132,7 @@ const CardItem = React.memo((props) => {
                                                 <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={async()=>{
                                                     if(!basket) {
                                                         if (['агент', 'client'].includes(profile.role))
-                                                            addBasket({item: element._id, count: 1})
+                                                            addBasket({item: element._id, count: element.apiece?1:element.packaging})
                                                         else if (!authenticated) {
                                                             let basket = JSON.parse(localStorage.basket);
                                                             let index = -1
@@ -141,7 +141,7 @@ const CardItem = React.memo((props) => {
                                                                     index = i
                                                             }
                                                             if (index === -1)
-                                                                basket.push({item: element, count: 1})
+                                                                basket.push({item: element, count: element.apiece?1:element.packaging})
                                                             localStorage.basket = JSON.stringify(basket)
                                                         }
                                                         showSnackBar('Товар добавлен в корзину')

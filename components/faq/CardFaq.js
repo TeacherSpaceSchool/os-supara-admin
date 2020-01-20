@@ -13,7 +13,7 @@ import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../dialog/Confirmation'
 import PdfViewer from '../../components/dialog/PdfViewer'
-
+import VideoViewer from '../../components/dialog/VideoViewer'
 
 const CardFaq = React.memo((props) => {
     const classes = cardFaqStyle();
@@ -30,8 +30,12 @@ const CardFaq = React.memo((props) => {
             showSnackBar('Файл слишком большой')
         }
     })
-    let [title, setTitle] = useState(element?element.title:'');
-    let [url, setUrl] = useState(element?element.url:false);
+    let [title, setTitle] = useState(element&&element.title?element.title:'');
+    let [video, setVideo] = useState(element&&element.video?element.video:'');
+    let handleVideo =  (event) => {
+        setVideo(event.target.value)
+    };
+    let [url, setUrl] = useState(element&&element.url?element.url:false);
     let handleTitle =  (event) => {
         setTitle(event.target.value)
     };
@@ -55,6 +59,17 @@ const CardFaq = React.memo((props) => {
                           />
                           <br/>
                           <br/>
+                          <TextField
+                              label='Видео'
+                              value={video}
+                              className={classes.input}
+                              onChange={handleVideo}
+                              inputProps={{
+                                  'aria-label': 'description',
+                              }}
+                          />
+                          <br/>
+                          <br/>
                           <Button size='small' color={url?'primary':'secondary'} onClick={async()=>{faqRef.current.click()}}>
                               Загрузить инструкцию
                           </Button>
@@ -66,6 +81,7 @@ const CardFaq = React.memo((props) => {
                                   <Button onClick={async()=>{
                                       let editElement = {_id: element._id}
                                       if(title.length>0&&title!==element.title)editElement.title = title
+                                      if(video.length>0&&video!==element.video)editElement.video = video
                                       if(file!==undefined)editElement.file = file
                                       const action = async() => {
                                           setList((await setFaq(editElement)).faqs)
@@ -89,7 +105,7 @@ const CardFaq = React.memo((props) => {
                                   <Button onClick={async()=> {
                                       if (file !== undefined && title.length > 0) {
                                           const action = async() => {
-                                              setList((await addFaq({file: file, title: title})).faqs)
+                                              setList((await addFaq({video: video, file: file, title: title})).faqs)
                                           }
                                           setFile(undefined)
                                           setTitle('')
@@ -114,15 +130,33 @@ const CardFaq = React.memo((props) => {
                   </Card>
                   :
                   element!==undefined?
-                      <Card onClick={()=>{
-                          setFullDialog(element.title, <PdfViewer pdf={element.url}/>)
-                          showFullDialog(true)
-                      }} className={isMobileApp?classes.cardM:classes.cardD}>
+                      <Card className={isMobileApp?classes.cardM:classes.cardD}>
                           <CardActionArea>
                           <CardContent>
                               <h3 className={classes.input}>
                                   {element.title}
                               </h3>
+                              {
+                                  video?
+                                      <>
+                                      <br/>
+                                      <Button onClick={async()=> {
+                                          setFullDialog(element.title, <VideoViewer video={element.video}/>)
+                                          showFullDialog(true)
+                                      }} size='small' color='primary'>
+                                          Просмотреть видео
+                                      </Button>
+                                      </>
+                                      :
+                                      null
+                              }
+                              <br/>
+                              <Button onClick={async()=> {
+                                  setFullDialog(element.title, <PdfViewer pdf={element.url}/>)
+                                  showFullDialog(true)
+                              }} size='small' color='primary'>
+                                  Прочитать инструкцию
+                              </Button>
                           </CardContent>
                           </CardActionArea>
                       </Card>

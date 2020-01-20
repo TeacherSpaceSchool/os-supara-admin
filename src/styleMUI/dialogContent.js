@@ -6,7 +6,6 @@ export default theme => ({
         flexDirection: 'column'
     },
     addPackaging: {
-        marginTop: -10,
         marginBottom: 10,
         textAlign: 'center',
         fontSize: '0.8125rem',
@@ -15,7 +14,6 @@ export default theme => ({
         cursor: 'pointer',
         borderBottom: '1px dashed #ffb300',
         userSelect: 'none',
-        width: 122
     },
     mainLine:{
         display: 'flex',

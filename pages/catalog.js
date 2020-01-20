@@ -57,7 +57,7 @@ const Catalog = React.memo((props) => {
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(basket[id].count)
-        basket[id].count+=1
+        basket[id].count+=list[idx].apiece?1:list[idx].packaging
 
         basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
 
@@ -70,7 +70,7 @@ const Catalog = React.memo((props) => {
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].count>0) {
             basket[id].count = checkInt(basket[id].count)
-            basket[id].count -= 1
+            basket[id].count -= list[idx].apiece?1:list[idx].packaging
             basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
             if(basket[id].count>0)
                 addBasket({item: list[idx]._id, count: basket[id].count})
@@ -206,7 +206,7 @@ const Catalog = React.memo((props) => {
                                                         decrement(idx)
                                                     }}>–
                                                     </div>
-                                                    <input type={isMobileApp?'number':'text'} className={classes.counternmbr}
+                                                    <input readOnly={!row.apiece} type={isMobileApp?'number':'text'} className={classes.counternmbr}
                                                            value={basket[row._id]?basket[row._id].count:''} onChange={(event) => {
                                                         setBasketChange(idx, event.target.value)
                                                     }}/>
@@ -222,11 +222,17 @@ const Catalog = React.memo((props) => {
                                                     КОНС
                                                 </div>
                                             </div>
-                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                addPackaging(idx)
-                                            }}>
-                                                Добавить упаковку
-                                            </div>
+                                            {row.apiece?
+                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                    addPackaging(idx)
+                                                }}>
+                                                    Добавить упаковку
+                                                </div>
+                                                :
+                                                <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                    Упаковок: {basket[row._id]?basket[row._id].count/row.packaging:0}
+                                                </div>
+                                            }
                                             {
                                                 basket[row._id]&&basket[row._id].showConsignment?
                                                     <>

@@ -38,7 +38,6 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                     packaging
                                                     weight
                                                     size
-                                                    item
                                                     organization
                                                         {_id name}
                                                 }
