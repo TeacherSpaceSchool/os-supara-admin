@@ -145,7 +145,7 @@ const Orders = React.memo((props) => {
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
                         <ClickNHold
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
-                            time={0.3}
+                            time={1}
                             onClickNHold={()=>{
                                 if(selected.includes(element._id)) {
                                     selected = selected.filter((i)=>i!==element._id)
