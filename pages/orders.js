@@ -32,6 +32,7 @@ const Orders = React.memo((props) => {
     let [list, setList] = useState(data.invoices);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { search, filter, sort, date } = props.app;
+    const { profile } = props.user;
     const getList = async ()=>{
         let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
         setList(orders)
@@ -145,14 +146,15 @@ const Orders = React.memo((props) => {
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
                         <ClickNHold
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
-                            time={2}
+                            time={1}
                             onClickNHold={()=>{
-                                if(selected.includes(element._id)) {
-                                    selected = selected.filter((i)=>i!==element._id)
-                                    setSelected([...selected])
-                                }
-                                else
-                                    setSelected([...selected, element._id])
+                                if(profile.role==='admin')
+                                    if(selected.includes(element._id)) {
+                                        selected = selected.filter((i)=>i!==element._id)
+                                        setSelected([...selected])
+                                    }
+                                    else
+                                        setSelected([...selected, element._id])
 
                             }}
                         >

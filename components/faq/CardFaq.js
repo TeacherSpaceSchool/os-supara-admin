@@ -144,7 +144,7 @@ const CardFaq = React.memo((props) => {
                                           setFullDialog(element.title, <VideoViewer video={element.video}/>)
                                           showFullDialog(true)
                                       }} size='small' color='primary'>
-                                          Просмотреть видео
+                                          Просмотреть видео инструкцию
                                       </Button>
                                       </>
                                       :
