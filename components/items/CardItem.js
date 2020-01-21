@@ -78,9 +78,9 @@ const CardItem = React.memo((props) => {
                                             />
                                         </Link>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                            <div className={classes.name}>
+                                            <a className={classes.name}>
                                                 {element.name}
-                                            </div>
+                                            </a>
                                         </Link>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
                                             <div className={classes.row}>

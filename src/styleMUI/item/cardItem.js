@@ -23,6 +23,7 @@ export default makeStyles({
         cursor: 'pointer'
     },
     name: {
+        color: 'black',
         fontSize: '0.95rem',
         fontFamily: 'Roboto',
         height: 40,
