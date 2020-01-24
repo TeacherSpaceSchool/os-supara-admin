@@ -171,6 +171,7 @@ export default makeStyles({
         textAlign: 'center',
     },
     addPackaging: {
+        fontWeight: 'bold',
         marginTop: 10,
         textAlign: 'center',
         fontSize: '0.875rem',

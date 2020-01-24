@@ -85,7 +85,9 @@ export default makeStyles({
     chipList: {
         position: 'absolute',
         top: 5,
-        left: 5
+        left: 5,
+        display: 'flex',
+        flexDirection: 'column'
     },
     chip: {
         display: 'flex',

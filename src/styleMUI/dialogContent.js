@@ -6,6 +6,7 @@ export default theme => ({
         flexDirection: 'column'
     },
     addPackaging: {
+        fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'center',
         fontSize: '0.8125rem',

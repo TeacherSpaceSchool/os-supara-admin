@@ -26,7 +26,7 @@ const CardOrganization = React.memo((props) => {
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
             <Link href='/client/[id]' as={`/client/${element._id}`}>
-            <CardActionArea>
+               <CardActionArea>
                     <CardContent className={classes.line}>
                         {
                             profile.role==='admin'?
@@ -91,7 +91,7 @@ const CardOrganization = React.memo((props) => {
                                 <div>
                                     {element.address.map((addres, idx)=>
                                         idx<4?
-                                            <div key={`addres${idx}`} className={classes.value}>
+                                            <div style={{color: addres[1]?'rgba(0, 0, 0, 0.87)':'red'}} key={`addres${idx}`} className={classes.value}>
                                                 {`${addres[2]?`${addres[2]}, `:''}${addres[0]}`}
                                             </div>
                                             :

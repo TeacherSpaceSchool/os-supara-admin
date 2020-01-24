@@ -13,7 +13,6 @@ import itemStyle from '../../src/styleMUI/item/item'
 import { useRouter } from 'next/router'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {
     FacebookShareButton,
     VKShareButton,
@@ -32,6 +31,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Router from 'next/router'
 import { bindActionCreators } from 'redux'
@@ -175,13 +175,63 @@ const Item = React.memo((props) => {
                             profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&organization._id===employment.organization._id)?
                                 data.item!==null||router.query.id==='new'?
                                     <>
-                                    <label htmlFor='contained-button-file'>
-                                        <img
-                                            className={classes.media}
-                                            src={preview}
-                                            alt={'Добавить'}
-                                        />
-                                    </label>
+                                    <div className={classes.column}>
+                                        <label htmlFor='contained-button-file'>
+                                            <img
+                                                className={classes.media}
+                                                src={preview}
+                                                alt={'Добавить'}
+                                            />
+                                        </label>
+                                        <br/>
+                                        {
+                                            profile.role==='admin'?
+                                                <>
+                                                <div className={classes.row}>
+                                                    <FormControlLabel
+                                                        labelPlacement = 'bottom'
+                                                        style={{zoom: 0.82}}
+                                                        control={
+                                                            <Switch
+                                                                checked={hit}
+                                                                onChange={()=>{setHit(!hit)}}
+                                                                color="primary"
+                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                            />
+                                                        }
+                                                        label='Популярное'
+                                                    />
+                                                    <FormControlLabel
+                                                        labelPlacement = 'bottom'
+                                                        style={{zoom: 0.82}}
+                                                        control={
+                                                            <Switch
+                                                                checked={latest}
+                                                                onChange={()=>{setLatest(!latest)}}
+                                                                color="primary"
+                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                            />
+                                                        }
+                                                        label='Новинка'
+                                                    />
+                                                    <FormControlLabel
+                                                        labelPlacement = 'bottom'
+                                                        style={{zoom: 0.82}}
+                                                        control={
+                                                            <Switch
+                                                                checked={apiece}
+                                                                onChange={()=>{setApiece(!apiece)}}
+                                                                color="primary"
+                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                            />
+                                                        }
+                                                        label='Поштучно'
+                                                    />
+                                                </div>
+                                                <br/>
+                                                </>:null
+                                        }
+                                    </div>
                                     <div>
                                         <h1 className={classes.name}>
                                             <TextField
@@ -298,51 +348,6 @@ const Item = React.memo((props) => {
                                                 )}
                                             </Select>
                                         </FormControl>
-                                        <br/>
-                                        {
-                                            profile.role==='admin'?
-                                                <>
-                                                <div className={classes.row}>
-                                                    <FormControlLabel
-                                                        labelPlacement = 'bottom'
-                                                        control={
-                                                            <Switch
-                                                                checked={hit}
-                                                                onChange={()=>{setHit(!hit)}}
-                                                                color="primary"
-                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                                                            />
-                                                        }
-                                                        label='Популярное'
-                                                    />
-                                                    <FormControlLabel
-                                                        labelPlacement = 'bottom'
-                                                        control={
-                                                            <Switch
-                                                                checked={latest}
-                                                                onChange={()=>{setLatest(!latest)}}
-                                                                color="primary"
-                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                                                            />
-                                                        }
-                                                        label='Новинка'
-                                                    />
-                                                    <FormControlLabel
-                                                        labelPlacement = 'bottom'
-                                                        control={
-                                                            <Switch
-                                                                checked={apiece}
-                                                                onChange={()=>{setApiece(!apiece)}}
-                                                                color="primary"
-                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                                                            />
-                                                        }
-                                                        label='Поштучно'
-                                                    />
-                                                </div>
-                                                <br/>
-                                                </>:null
-                                        }
                                         <TextField
                                             multiline={true}
                                             label='Информация'
@@ -549,15 +554,15 @@ const Item = React.memo((props) => {
                                             {
                                                 data.item.stock===0||data.item.stock===undefined?
                                                     <div className={classes.price}>
-                                                        {data.item.price}&nbsp;сом
+                                                        {count*data.item.price}&nbsp;сом
                                                     </div>
                                                     :
                                                     <>
                                                     <div className={classes.stockPrice}>
-                                                        {data.item.stock}&nbsp;сом
+                                                        {count*data.item.stock}&nbsp;сом
                                                     </div>
                                                     <div className={classes.crossedPrice}>
-                                                        {data.item.price}&nbsp;сом
+                                                        {count*data.item.price}&nbsp;сом
                                                     </div>
                                                     </>
                                             }
@@ -587,7 +592,7 @@ const Item = React.memo((props) => {
                                                                     </div>
                                                                     :
                                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}}>
-                                                                       Упаковок: {count/packaging}
+                                                                       Упаковок: {(count/packaging)}
                                                                     </div>
                                                             }
                                                             <Button
@@ -672,7 +677,7 @@ const Item = React.memo((props) => {
                                                                 </div>
                                                                 :
                                                                 <div className={classes.addPackaging} style={{color: '#ffb300'}}>
-                                                                   Упаковок: {count/packaging}
+                                                                   Упаковок: {(count/packaging)}
                                                                 </div>
                                                         }
                                                         </>

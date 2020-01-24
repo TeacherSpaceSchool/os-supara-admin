@@ -173,8 +173,7 @@ const Route = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/route/${router.query.id}`}/>
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
                 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-                <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-                <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
             </Head>
             <Card className={isMobileApp?classes.pageM:classes.pageD}>
                 {data.route?

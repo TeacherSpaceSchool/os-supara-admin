@@ -9,6 +9,7 @@ export default makeStyles({
         flexDirection: 'row'
     },
     addPackaging: {
+        fontWeight: 'bold',
         marginTop: 10,
         marginBottom: 10,
         textAlign: 'center',

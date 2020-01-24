@@ -81,7 +81,7 @@ const CardFaq = React.memo((props) => {
                                   <Button onClick={async()=>{
                                       let editElement = {_id: element._id}
                                       if(title.length>0&&title!==element.title)editElement.title = title
-                                      if(video.length>0&&video!==element.video)editElement.video = video
+                                      if(video!==element.video)editElement.video = video
                                       if(file!==undefined)editElement.file = file
                                       const action = async() => {
                                           setList((await setFaq(editElement)).faqs)
@@ -103,12 +103,13 @@ const CardFaq = React.memo((props) => {
                                   </>
                                   :
                                   <Button onClick={async()=> {
-                                      if (file !== undefined && title.length > 0) {
+                                      if (title.length > 0) {
                                           const action = async() => {
                                               setList((await addFaq({video: video, file: file, title: title})).faqs)
                                           }
                                           setFile(undefined)
                                           setTitle('')
+                                          setVideo('')
                                           setUrl(false)
                                           setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                           showMiniDialog(true)

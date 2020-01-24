@@ -4,6 +4,7 @@ export default makeStyles({
         margin: '20px'
     },
     addPackaging: {
+        fontWeight: 'bold',
         marginTop: 10,
         marginBottom: 20,
         textAlign: 'center',

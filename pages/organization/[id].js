@@ -16,7 +16,6 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, addOrganization, setOrganization, deleteOrganization } from '../../src/gql/organization'
-import { getEmployment } from '../../src/gql/employment'
 import Remove from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -26,6 +25,8 @@ import { urlMain } from '../../redux/constants/other'
 import { checkInt } from '../../src/lib'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const Organization = React.memo((props) => {
     const classes = organizationStyle();
@@ -33,10 +34,11 @@ const Organization = React.memo((props) => {
     const { isMobileApp } = props.app;
     const router = useRouter()
     const { showSnackBar } = props.snackbarActions;
-    let [statusO, setStatusO] = useState(data.organization!==null?data.organization.status:'');
-    let [name, setName] = useState(data.organization!==null?data.organization.name:'');
+    let [statusO, setStatusO] = useState(data.organization?data.organization.status:'');
+    let [name, setName] = useState(data.organization?data.organization.name:'');
+    let [accessToClient, setAccessToClient] = useState(data.organization&&data.organization.accessToClient!==null?data.organization.accessToClient:false);
     let [minimumOrder, setMinimumOrder] = useState(data.organization!==null?data.organization.minimumOrder:0);
-    let [address, setAddress] = useState(data.organization!==null?data.organization.address:[]);
+    let [address, setAddress] = useState(data.organization?data.organization.address:[]);
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
         address = [...address, newAddress]
@@ -112,13 +114,26 @@ const Organization = React.memo((props) => {
                         data.organization!==null?
                             profile.role==='admin'||(profile.role==='организация'&&profile.organization===data.organization._id)?
                                 <>
-                                <label htmlFor='contained-button-file'>
-                                    <img
-                                        className={classes.media}
-                                        src={preview}
-                                        alt={'Добавить'}
+                                <div className={classes.column}>
+                                    <label htmlFor='contained-button-file'>
+                                        <img
+                                            className={classes.media}
+                                            src={preview}
+                                            alt={'Добавить'}
+                                        />
+                                    </label>
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={accessToClient}
+                                                onChange={()=>{setAccessToClient(!accessToClient)}}
+                                                color="primary"
+                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                            />
+                                        }
+                                        label='Доступ к клиентам'
                                     />
-                                </label>
+                                </div>
                                 <div>
                                     <TextField
                                         label='Имя'
@@ -271,6 +286,7 @@ const Organization = React.memo((props) => {
                                                     if(email.length>0&&email!==data.organization.email)editElement.email = email
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
+                                                    if(accessToClient!==data.organization.accessToClient)editElement.accessToClient = accessToClient
                                                     if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = checkInt(minimumOrder)
                                                     const action = async() => {
                                                         await setOrganization(editElement)

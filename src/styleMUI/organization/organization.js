@@ -10,6 +10,7 @@ export default makeStyles({
     column:{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'start'
     },
     media: {
         objectFit: 'cover',

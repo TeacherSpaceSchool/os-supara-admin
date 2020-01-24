@@ -13,6 +13,9 @@ import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket, getCountBasket, deleteBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
 import Confirmation from '../dialog/Confirmation'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import { setItem } from '../../src/gql/items'
 
 
 const CardItem = React.memo((props) => {
@@ -24,6 +27,9 @@ const CardItem = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let [basket, setBasket] = useState(false);
+    let [hit, setHit] = useState(element.hit);
+    let [latest, setLatest] = useState(element.latest);
+    let [apiece, setApiece] = useState(element.apiece);
     useEffect(()=>{
         if(!authenticated){
             if(localStorage.favorites==undefined)
@@ -52,30 +58,90 @@ const CardItem = React.memo((props) => {
     return (
         <Card className={classes.card}>
             <CardContent className={classes.column}>
-                <div className={classes.chipList}>
-                    {
-                        element.latest?
-                            <div className={classes.chip} style={{color: 'white',background: 'green'}}>
-                                Новинка
-                            </div>
-                            :null
-                    }
-                    {
-                        element.hit?
-                            <>
-                            <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
-                                Хит
-                            </div>
-                            </>
-                            :null
-                    }
+                <div className={classes.chipList}>{
+                    profile.role==='admin'?
+                        <>
+                            <FormControlLabel
+                                style={{zoom: 0.75, background: 'rgba(229, 229, 229, 0.3)'}}
+                                labelPlacement = 'bottom'
+                                control={
+                                    <Switch
+                                        checked={hit}
+                                        onChange={async ()=>{
+                                            let _hit = !hit
+                                            await setItem({_id: element._id, hit: _hit})
+                                            setHit(_hit)
+                                        }}
+                                        color="primary"
+                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    />
+                                }
+                                label='Популярное'
+                            />
+                            <FormControlLabel
+                                style={{zoom: 0.75, background: 'rgba(229, 229, 229, 0.3)'}}
+                                labelPlacement = 'bottom'
+                                control={
+                                    <Switch
+                                        checked={latest}
+                                        onChange={async()=>{
+                                            let _latest = !latest
+                                            await setItem({_id: element._id, latest: _latest})
+                                            setLatest(_latest)
+                                        }}
+                                        color="primary"
+                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    />
+                                }
+                                label='Новинка'
+                            />
+                            <FormControlLabel
+                                style={{zoom: 0.75, background: 'rgba(229, 229, 229, 0.3)'}}
+                                labelPlacement = 'bottom'
+                                control={
+                                    <Switch
+                                        checked={apiece}
+                                        onChange={async ()=>{
+                                            let _apiece = !apiece
+                                            await setItem({_id: element._id, apiece: _apiece})
+                                            setApiece(_apiece)
+                                        }}
+                                        color="primary"
+                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    />
+                                }
+                                label='Поштучно'
+                            />
+                        </>
+                        :
+                        <>
+                        {
+                            element.latest?
+                                <div className={classes.chip} style={{color: 'white',background: 'green'}}>
+                                    Новинка
+                                </div>
+                                :null
+                        }
+                        {
+                            element.hit?
+                                <>
+                                <div className={classes.chip} style={{color: 'black',background: 'yellow'}}>
+                                    Хит
+                                </div>
+                                </>
+                                :null
+                        }
+                        </>
+                }
                 </div>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                            <img
-                                                className={classes.media}
-                                                src={element.image}
-                                                alt={element.info}
-                                            />
+                                           <a>
+                                               <img
+                                                   className={classes.media}
+                                                   src={element.image}
+                                                   alt={element.info}
+                                               />
+                                           </a>
                                         </Link>
                                         <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
                                             <a className={classes.name}>
@@ -169,7 +235,8 @@ const CardItem = React.memo((props) => {
                                                 :
                                                 null
                                         }
-                                        {profile.role==='client'||!authenticated?
+
+                {profile.role==='client'||!authenticated?
                                             <Star className={classes.buttonToggle} onClick={async ()=>{
                                                 let index
                                                 if(profile.role==='client') {

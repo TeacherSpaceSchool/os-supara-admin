@@ -48,7 +48,7 @@ export const addFaq = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($file: Upload!, $title: String!, $video: String) {
+                    mutation ($file: Upload, $title: String!, $video: String) {
                         addFaq(file: $file, title: $title, video: $video) {
                              data
                         }

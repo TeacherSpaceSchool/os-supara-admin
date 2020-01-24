@@ -250,7 +250,7 @@ const Basket = React.memo((props) => {
                                                                     </div>
                                                                     :
                                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}}>
-                                                                        Упаковок: {list[idx].count/list[idx].item.packaging}
+                                                                        Упаковок: {(list[idx].count/list[idx].item.packaging)}
                                                                     </div>
                                                             }
                                                             {

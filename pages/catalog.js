@@ -230,7 +230,7 @@ const Catalog = React.memo((props) => {
                                                 </div>
                                                 :
                                                 <div className={classes.addPackaging} style={{color: '#ffb300'}}>
-                                                    Упаковок: {basket[row._id]?basket[row._id].count/row.packaging:0}
+                                                    Упаковок: {basket[row._id]?(basket[row._id].count/row.packaging).toFixed(1):0}
                                                 </div>
                                             }
                                             {

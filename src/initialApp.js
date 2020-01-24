@@ -7,7 +7,6 @@ import { getClientGqlSsr } from '../src/getClientGQL'
 export default async (ctx)=>{
     if (ctx.req) {
         //new SingletonApolloClient(ctx.req)
-
         let ua = uaParserJs(ctx.req.headers['user-agent'])
         ctx.store.getState().app.isMobileApp = ['mobile', 'tablet'].includes(ua.device.type)
         ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
@@ -16,7 +15,7 @@ export default async (ctx)=>{
             if (ctx.store.getState().user.profile.client) {
                 setClient({
                     _id: ctx.store.getState().user.profile.client,
-                    device: `${ua.device.vendor ? `${ua.device.vendor}-` : ''}${ua.device.model ? ua.device.model : ''} | ${ua.os.name ? `${ua.os.name}-` : ''}${ua.os.version ? ua.os.version : ''} | ${ua.browser.name ? `${ua.browser.name}-` : ''}${ua.browser.version ? ua.browser.version : ''}`
+                    device: `${ua.device.vendor ? `${ua.device.vendor}-` : ''}${ua.device.model ? ua.device.model : ua.ua.split(' (')[1].split('; ')[2].split(') ')[0]} | ${ua.os.name ? `${ua.os.name}-` : ''}${ua.os.version ? ua.os.version : ''} | ${ua.browser.name ? `${ua.browser.name}-` : ''}${ua.browser.version ? ua.browser.version : ''}`
                 }, await getClientGqlSsr(ctx.req))
             }
         } else {

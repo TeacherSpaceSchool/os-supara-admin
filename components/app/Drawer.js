@@ -22,6 +22,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import MoneyIcon from '@material-ui/icons/Money';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
@@ -34,7 +35,7 @@ import Badge from '@material-ui/core/Badge';
 
 
 const MyDrawer = React.memo((props) => {
-    const { classes, unread, setUnread } = props
+    const { classes, unread } = props
     const { drawer, isMobileApp } = props.app;
     const { profile, authenticated } = props.user;
     const { showDrawer } = props.appActions;
@@ -277,6 +278,19 @@ const MyDrawer = React.memo((props) => {
                     </ListItem>
                 </Link>
                 <Divider/>
+                {
+                    ['admin'].includes(profile.role)?
+                        <>
+                        <Link href={'/statistic'}>
+                            <ListItem style={{background: router.pathname.includes('statistic')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><EqualizerIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Статистика' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
             </List>
         </Drawer>
     )
