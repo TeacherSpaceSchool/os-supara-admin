@@ -36,16 +36,19 @@ const ClientGeoStatistic = React.memo((props) => {
                                      state={{ center: [42.8700000, 74.5900000], zoom: 12 }}
                                 >
                                     {
-                                        data.statisticClientGeo.map(
-                                            (element, idx) => {
-                                                return <Placemark
-                                                    onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
-                                                    key={idx}
-                                                    options={{iconColor: element.data[1]}}
-                                                    properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
-                                                    geometry={element.address[1].split(', ')}/>
-                                            }
-                                        )
+                                        data.statisticClientGeo?
+                                            data.statisticClientGeo.map(
+                                                (element, idx) => {
+                                                    return <Placemark
+                                                        onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
+                                                        key={idx}
+                                                        options={{iconColor: element.data[1]}}
+                                                        properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
+                                                        geometry={element.address[1].split(', ')}/>
+                                                }
+                                            )
+                                            :
+                                            null
                                     }
                                 </Map>
                             </div>
