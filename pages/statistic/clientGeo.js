@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import Router from 'next/router'
@@ -8,13 +8,19 @@ import initialApp from '../../src/initialApp'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import { getStatisticClientGeo } from '../../src/gql/statistic'
 import { Map, YMaps, Placemark } from 'react-yandex-maps';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ClientGeoStatistic = React.memo((props) => {
 
     const { data } = props;
     const { isMobileApp } = props.app;
     let [load, setLoad] = useState(true);
-    console.log(data)
+    useEffect(()=>{
+        if(process.browser){
+            let appBody = document.getElementsByClassName('App-body')
+            appBody[0].style.paddingBottom = '0px'
+        }
+    },[process.browser])
     return (
         <YMaps>
             <App pageName='Карта клиентов'>
@@ -31,25 +37,28 @@ const ClientGeoStatistic = React.memo((props) => {
                 {
                     process.browser?
                         <div style={{height: window.innerHeight-64, width: isMobileApp?window.innerWidth:window.innerWidth-300, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            {
+                                load?<CircularProgress/>:null
+                            }
                             <div style={{display: load?'none':'block'}}>
                                 <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-64} width={isMobileApp?window.innerWidth:window.innerWidth-300}
-                                     state={{ center: [42.8700000, 74.5900000], zoom: 12 }}
-                                >
-                                    {
-                                        data.statisticClientGeo?
-                                            data.statisticClientGeo.map(
-                                                (element, idx) => {
-                                                    return <Placemark
-                                                        onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
-                                                        key={idx}
-                                                        options={{iconColor: element.data[1]}}
-                                                        properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
-                                                        geometry={element.address[1].split(', ')}/>
-                                                }
-                                            )
-                                            :
-                                            null
-                                    }
+                                         state={{ center: [42.8700000, 74.5900000], zoom: 12 }}
+                                    >
+                                        {
+                                            data.statisticClientGeo?
+                                                data.statisticClientGeo.map(
+                                                    (element, idx) => {
+                                                        return <Placemark
+                                                            onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
+                                                            key={idx}
+                                                            options={{iconColor: element.data[1]}}
+                                                            properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
+                                                            geometry={element.address[1].split(', ')}/>
+                                                    }
+                                                )
+                                                :
+                                                null
+                                        }
                                 </Map>
                             </div>
                         </div>

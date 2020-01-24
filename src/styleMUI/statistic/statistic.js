@@ -15,8 +15,7 @@ export default makeStyles({
         flexDirection: 'column',
     },
     input: {
-        width: '100%',
-        maxWidth: 150,
+        width: 'calc(50% - 10px)',
         margin: 5
     },
 

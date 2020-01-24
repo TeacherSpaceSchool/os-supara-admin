@@ -23,14 +23,13 @@ const ClientStatistic = React.memo((props) => {
     const { profile } = props.user;
     let [organization, setOrganization] = useState({_id: 'all'});
     let [dateStart, setDateStart] = useState(null);
-    let [dateEnd, setDateEnd] = useState(null);
     let [statisticClient, setStatisticClient] = useState(data.statisticClient);
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin')
-                setStatisticClient((await getStatisticClient({company: organization?organization._id: 'all', dateEnd: dateEnd, dateStart: dateStart})).statisticClient)
+                setStatisticClient((await getStatisticClient({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null})).statisticClient)
         })()
-    },[organization, dateEnd, dateStart])
+    },[organization, dateStart])
 
 
     return (
@@ -73,19 +72,6 @@ const ClientStatistic = React.memo((props) => {
                                 'aria-label': 'description',
                             }}
                             onChange={ event => setDateStart(event.target.value) }
-                        />
-                        <TextField
-                            className={classes.input}
-                            label='Дата конца'
-                            type='date'
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={dateEnd}
-                            inputProps={{
-                                'aria-label': 'description',
-                            }}
-                            onChange={ event => setDateEnd(event.target.value) }
                         />
                     </div>
                     <Table row={statisticClient.row} columns={statisticClient.columns}/>

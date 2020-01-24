@@ -30,13 +30,20 @@ const MyTable =  React.memo(
         const { columns, row } = props;
         let data = row.map(row=>row.data)
         const options = {
-            sort: false,
+            customSort: (data, colIndex, order) => {
+                data = data.sort(function(a, b) {
+                    return order==='desc'?
+                        parseInt(b.data[colIndex]) - parseInt(a.data[colIndex])
+                        :
+                        parseInt(a.data[colIndex]) - parseInt(b.data[colIndex])
+                });
+                return data
+            },
             selectableRows: 'none',
             print: false,
-            rowsPerPageOptions: [],
+            pagination: false,
             count: data.length,
             downloadOptions: {filename: 'tableDownload.csv', separator: ','},
-            responsive: 'scrollMaxHeight',
             onCellClick: (colData, colMeta) => {
                 if(colMeta.colIndex===0)
                     window.open(`/client/${row[colMeta.rowIndex]._id}`,'_blank');
