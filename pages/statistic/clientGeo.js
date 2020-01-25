@@ -74,7 +74,7 @@ const ClientGeoStatistic = React.memo((props) => {
                                     >
                                         {
                                             statisticClientGeo?
-                                                statisticClientGeo.map(
+                                                (statisticClientGeo.slice(1)).map(
                                                     (element, idx) => {
                                                         return <Placemark
                                                             onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
@@ -126,6 +126,9 @@ const ClientGeoStatistic = React.memo((props) => {
                 :
                 null
         }
+        <div className='count'>
+            {`${statisticClientGeo[0].data[0]}|${statisticClientGeo[0].data[1]}|${statisticClientGeo[0].data[2]}`}
+        </div>
         </>
     )
 })
