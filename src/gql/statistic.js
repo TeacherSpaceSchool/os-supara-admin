@@ -22,17 +22,78 @@ export const getStatisticClient = async({company: company, dateStart: dateStart}
     }
 }
 
-export const getStatisticClientGeo = async(client)=>{
+export const getStatisticItem = async({company: company, dateStart: dateStart}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {company: company, dateStart: dateStart},
+                query: gql`
+                    query ($company: String, $dateStart: Date) {
+                        statisticItem(company: $company, dateStart: $dateStart) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getStatisticClientGeo = async({organization, item}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query($organization: ID, $item: ID) {
+                        statisticClientGeo(organization: $organization, item: $item) {
+                            client
+                            address
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getActiveItem = async({organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query($organization: ID!) {
+                        activeItem(organization: $organization) {
+                            name
+                            _id
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getActiveOrganization = async(client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
                 query: gql`
                     query {
-                        statisticClientGeo {
-                            client
-                            address
-                            data
+                        activeOrganization {
+                            name
+                            _id
                         }
                     }`,
             })

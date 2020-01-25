@@ -74,7 +74,7 @@ const BuyBasket =  React.memo(
                 <br/>
                 <Input
                     style={{width: width}}
-                    placeholder='Коментарий'
+                    placeholder='Комментарий'
                     value={coment}
                     className={isMobileApp?classes.inputM:classes.inputD}
                     onChange={handleComent}

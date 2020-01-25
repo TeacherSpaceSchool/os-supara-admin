@@ -67,13 +67,15 @@ const MyDrawer = React.memo((props) => {
                     ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href={profile.role==='агент'?'/catalog':'/items/[id]'} as={profile.role==='агент'?'/catalog':'/items/all'}>
                             <ListItem style={{background:
-                                router.pathname===('/')
-                                ||
-                                router.pathname.includes('subcategory')
-                                ||
-                                router.pathname.includes('item')
-                                ||
-                                router.pathname.includes('catalog')?
+                                (
+                                    router.pathname===('/')
+                                    ||
+                                    router.pathname.includes('subcategory')
+                                    ||
+                                    router.pathname.includes('item')
+                                    ||
+                                    router.pathname.includes('catalog')
+                                )&&!['/statistic/item']!==router.pathname?
                                     '#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary={profile.role!=='агент'?'Товары':'Каталог'} />

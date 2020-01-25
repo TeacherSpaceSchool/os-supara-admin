@@ -6,14 +6,17 @@ import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticClientGeo } from '../../src/gql/statistic'
+import { getStatisticClientGeo, getActiveItem, getActiveOrganization } from '../../src/gql/statistic'
 import { Map, YMaps, Placemark } from 'react-yandex-maps';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 const ClientGeoStatistic = React.memo((props) => {
 
     const { data } = props;
     const { isMobileApp } = props.app;
+    const { profile } = props.user;
     let [load, setLoad] = useState(true);
     useEffect(()=>{
         if(process.browser){
@@ -21,11 +24,36 @@ const ClientGeoStatistic = React.memo((props) => {
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
+    let [organization, setOrganization] = useState(null);
+    let [items, setItems] = useState([]);
+    let [item, setItem] = useState(null);
+    let [statisticClientGeo, setStatisticClientGeo] = useState(data.statisticClientGeo);
+    useEffect(()=>{
+        (async()=>{
+            if(profile.role==='admin') {
+                if(organization)
+                    setItems((await getActiveItem({organization: organization._id})).activeItem)
+                else
+                    setItems([])
+                setItem(null)
+                //setStatisticClientGeo((await getStatisticClientGeo({organization: organization ? organization._id : null})).statisticClientGeo)
+            }
+        })()
+    },[organization])
+    useEffect(()=>{
+        (async()=>{
+            if(profile.role==='admin') {
+                console.log(item)
+                setStatisticClientGeo((await getStatisticClientGeo({organization: organization ? organization._id : null, item: item ? item._id : null})).statisticClientGeo)
+            }
+        })()
+    },[item, items, organization])
     return (
+        <>
         <YMaps>
-            <App pageName='Карта клиентов'>
+            <App pageName='Карта продаж'>
                 <Head>
-                    <title>Карта клиентов</title>
+                    <title>Карта продаж</title>
                     <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                     <meta property='og:title' content='Карта клиентов' />
                     <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -45,8 +73,8 @@ const ClientGeoStatistic = React.memo((props) => {
                                          state={{ center: [42.8700000, 74.5900000], zoom: 12 }}
                                     >
                                         {
-                                            data.statisticClientGeo?
-                                                data.statisticClientGeo.map(
+                                            statisticClientGeo?
+                                                statisticClientGeo.map(
                                                     (element, idx) => {
                                                         return <Placemark
                                                             onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
@@ -67,6 +95,38 @@ const ClientGeoStatistic = React.memo((props) => {
                 }
             </App>
         </YMaps>
+        <Autocomplete
+            style={{width: 150, position: 'fixed', top: 74, right: 10, padding: 10, borderRadius: 5, boxShadow: '0 0 10px rgba(0,0,0,0.5)', background: '#fff'}}
+            options={data.activeOrganization}
+            getOptionLabel={option => option.name}
+            value={organization}
+            onChange={(event, newValue) => {
+                setOrganization(newValue)
+            }}
+            noOptionsText='Ничего не найдено'
+            renderInput={params => (
+                <TextField {...params} label='Организация' fullWidth />
+            )}
+        />
+        {
+            items&&items.length>0?
+                <Autocomplete
+                    style={{width: 150, position: 'fixed', top: 74, right: 180, padding: 10, borderRadius: 5, boxShadow: '0 0 10px rgba(0,0,0,0.5)', background: '#fff'}}
+                    options={items}
+                    getOptionLabel={option => option.name}
+                    value={item}
+                    onChange={(event, newValue) => {
+                        setItem(newValue)
+                    }}
+                    noOptionsText='Ничего не найдено'
+                    renderInput={params => (
+                        <TextField {...params} label='Товар' fullWidth />
+                    )}
+                />
+                :
+                null
+        }
+        </>
     )
 })
 
@@ -82,7 +142,8 @@ ClientGeoStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getStatisticClientGeo(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getStatisticClientGeo({}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
 };

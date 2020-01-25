@@ -10,38 +10,39 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticClient, getActiveOrganization } from '../../src/gql/statistic'
+import { getStatisticItem, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-const ClientStatistic = React.memo((props) => {
+const ItemStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
+    console.log(data)
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
-    let [statisticClient, setStatisticClient] = useState(data.statisticClient);
+    let [statisticItem, setStatisticItem] = useState(data.statisticItem);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState({_id: 'all'});
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin')
-                setStatisticClient((await getStatisticClient({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null})).statisticClient)
+                setStatisticItem((await getStatisticItem({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null})).statisticItem)
         })()
     },[organization, dateStart])
 
     return (
-        <App pageName='Статистика клиентов'>
+        <App pageName='Статистика товаров'>
             <Head>
-                <title>Статистика клиентов</title>
+                <title>Статистика товаров</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Статистика клиентов' />
+                <meta property='og:title' content='Статистика товаров' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/client`} />
-                <link rel='canonical' href={`${urlMain}/statistic/client`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/items`} />
+                <link rel='canonical' href={`${urlMain}/statistic/items`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
@@ -73,26 +74,26 @@ const ClientStatistic = React.memo((props) => {
                             onChange={ event => setDateStart(event.target.value) }
                         />
                     </div>
-                    <Table row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
+                    <Table row={(statisticItem.row).slice(1)} columns={statisticItem.columns}/>
                 </CardContent>
             </Card>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
-                {`Активных клиентов: ${statisticClient.row[0].data[0]}`}
+                {`Активных товаров: ${statisticItem.row[0].data[0]}`}
                 {
                     showStat?
                         <>
                         <br/>
                         <br/>
-                        {`Всего прибыль: ${statisticClient.row[0].data[1]} сом`}
+                        {`Всего прибыль: ${statisticItem.row[0].data[1]} сом`}
                         <br/>
                         <br/>
-                        {`Конс: ${statisticClient.row[0].data[2]} сом`}
+                        {`Конс: ${statisticItem.row[0].data[2]} сом`}
                         <br/>
                         <br/>
-                        {`Заказов выполнено: ${statisticClient.row[0].data[3]} шт`}
+                        {`Заказов выполнено: ${statisticItem.row[0].data[3]} шт`}
                         <br/>
                         <br/>
-                        {`Заказов отменено: ${statisticClient.row[0].data[4]} шт`}
+                        {`Заказов отменено: ${statisticItem.row[0].data[4]} шт`}
                         </>
                         :
                         null
@@ -102,7 +103,7 @@ const ClientStatistic = React.memo((props) => {
     )
 })
 
-ClientStatistic.getInitialProps = async function(ctx) {
+ItemStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
@@ -114,7 +115,7 @@ ClientStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getStatisticClient({company: 'all'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getStatisticItem({company: 'all'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
@@ -127,4 +128,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(ClientStatistic);
+export default connect(mapStateToProps)(ItemStatistic);

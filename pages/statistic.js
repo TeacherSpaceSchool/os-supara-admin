@@ -31,7 +31,7 @@ const Statistic = React.memo((props) => {
                         <CardActionArea>
                             <div className={classes.line}>
                                 <h3 className={classes.input}>
-                                    Карта клиентов
+                                    Карта продаж
                                 </h3>
                             </div>
                         </CardActionArea>
@@ -48,18 +48,7 @@ const Statistic = React.memo((props) => {
                         </CardActionArea>
                     </Card>
                 </Link>
-                <Link href='/statistic/order'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Заказы
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/items'>
+                <Link href='/statistic/item'>
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
                         <CardActionArea>
                             <div className={classes.line}>

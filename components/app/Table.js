@@ -45,7 +45,7 @@ const MyTable =  React.memo(
             count: data.length,
             downloadOptions: {filename: 'tableDownload.csv', separator: ','},
             onCellClick: (colData, colMeta) => {
-                if(colMeta.colIndex===0)
+                if(colMeta.colIndex===0&&row[colMeta.rowIndex]._id)
                     window.open(`/client/${row[colMeta.rowIndex]._id}`,'_blank');
             },
         };
