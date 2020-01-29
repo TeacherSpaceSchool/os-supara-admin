@@ -2,6 +2,26 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
+export const getAdsOrganizations = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        adsOrganizations {
+                            _id
+                            image
+                            name
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getAds = async()=>{
     try{
         const client = new SingletonApolloClient().getClient()
@@ -24,28 +44,20 @@ export const getAds = async()=>{
     }
 }
 
-export const getAdss = async({search: search, sort: sort, filter: filter}, client)=>{
+export const getAdss = async({search: search, organization: organization}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {search: search, organization: organization},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        adss(search: $search, sort: $sort, filter: $filter) {
+                    query ($search: String!, $organization: ID!) {
+                        adss(search: $search, organization: $organization) {
                             _id
                             image
                             url
                             title
                             createdAt
-                          }
-                          sortAds {
-                           name
-                            field
-                          }
-                          filterAds {
-                           name
-                           value
                           }
                     }`,
             })
@@ -55,7 +67,7 @@ export const getAdss = async({search: search, sort: sort, filter: filter}, clien
     }
 }
 
-export const deleteAds = async(ids)=>{
+export const deleteAds = async(ids, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
@@ -66,31 +78,30 @@ export const deleteAds = async(ids)=>{
                              data
                         }
                     }`})
-        return await getAdss(new SingletonStore().getStore().getState().app)
+        return await getAdss({...new SingletonStore().getStore().getState().app, organization: organization})
     } catch(err){
         console.error(err)
     }
 }
 
-export const addAds = async(element)=>{
+export const addAds = async(element, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($image: Upload!, $url: String!, $title: String!) {
-                        addAds(image: $image, url: $url, title: $title) {
+                    mutation ($image: Upload!, $url: String!, $title: String!, $organization: ID!) {
+                        addAds(image: $image, url: $url, title: $title, organization: $organization) {
                              data
                         }
                     }`})
-        let list = await getAdss(new SingletonStore().getStore().getState().app)
-        return list
+        return await getAdss({...new SingletonStore().getStore().getState().app, organization: organization})
     } catch(err){
         console.error(err)
     }
 }
 
-export const setAds = async(element)=>{
+export const setAds = async(element, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
@@ -101,8 +112,7 @@ export const setAds = async(element)=>{
                              data
                         }
                     }`})
-        let list = await getAdss(new SingletonStore().getStore().getState().app)
-        return list
+        return await getAdss({...new SingletonStore().getStore().getState().app, organization: organization})
     } catch(err){
         console.error(err)
     }

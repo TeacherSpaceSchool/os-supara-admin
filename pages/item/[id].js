@@ -66,6 +66,7 @@ const Item = React.memo((props) => {
     };
     let [weight, setWeight] = useState(data.item&&data.item.weight?data.item.weight:0);
     let [size, setSize] = useState(data.item&&data.item.size?data.item.size:0);
+    let [priotiry, setPriotiry] = useState(data.item&&data.item.priotiry?data.item.priotiry:0);
     let [organization, setOrganization] = useState(data.item!==null?data.item.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
@@ -247,6 +248,20 @@ const Item = React.memo((props) => {
                                         <div className={classes.price}>
                                             <TextField
                                                 type={isMobileApp?'number':'text'}
+                                                label='Приоритет'
+                                                value={priotiry}
+                                                className={isMobileApp?classes.inputM:classes.inputD}
+                                                onChange={(event)=>{
+                                                    setPriotiry(event.target.value)}
+                                                }
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                        </div>
+                                        <div className={classes.price}>
+                                            <TextField
+                                                type={isMobileApp?'number':'text'}
                                                 label='Вес в килограммах'
                                                 value={weight}
                                                 className={isMobileApp?classes.inputM:classes.inputD}
@@ -379,7 +394,8 @@ const Item = React.memo((props) => {
                                                                     deliveryDays: deliveryDays,
                                                                     weight: checkFloat(weight),
                                                                     size: checkFloat(size),
-                                                                    apiece: apiece
+                                                                    apiece: apiece,
+                                                                    priotiry: checkInt(priotiry)
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
@@ -408,6 +424,7 @@ const Item = React.memo((props) => {
                                                         if(latest!==data.item.latest)editElement.latest = latest
                                                         if(organization._id!==data.item.organization._id)editElement.organization = organization._id
                                                         if(subCategory._id!==data.item.subCategory._id)editElement.subCategory = subCategory._id
+                                                        if(priotiry!==data.item.priotiry)editElement.priotiry = checkInt(priotiry)
                                                         if(deliveryDays)editElement.deliveryDays = deliveryDays
                                                         const action = async() => {
                                                             await setItem(editElement, subCategory._id)
@@ -753,6 +770,7 @@ Item.getInitialProps = async function(ctx) {
         data: {
             ...ctx.query.id!=='new'?await getItem({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{
                     item:{
+                        priotiry: 0,
                         image: '/static/add.png',
                         stock: 0,
                         packaging: 1,

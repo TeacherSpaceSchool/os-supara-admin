@@ -1,11 +1,10 @@
-let notificationUrl = '';
+let notificationUrl = 'https://azyk.store';
 //notification registered feature for getting update automatically from server api
 self.addEventListener('push', function (event) {
     let _data = event.data ?
         event.data.json()
         :
         {title: 'AZYK.STORE', message: 'Не забудьте сделать свой заказ', tag: 'AZYK.STORE', url: 'https://azyk.store', icon: 'https://azyk.store/static/192x192.png'};
-    notificationUrl = _data.url;
     event.waitUntil(
         self.registration.showNotification(_data.title, {
             body: _data.message,

@@ -1,15 +1,15 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 
-export const getStatisticClient = async({company: company, dateStart: dateStart}, client)=>{
+export const getStatisticClient = async({company, dateStart, dateType}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {company: company, dateStart: dateStart},
+                variables: {company: company, dateStart: dateStart, dateType: dateType},
                 query: gql`
-                    query ($company: String, $dateStart: Date) {
-                        statisticClient(company: $company, dateStart: $dateStart) {
+                    query ($company: String, $dateStart: Date, $dateType: String) {
+                        statisticClient(company: $company, dateStart: $dateStart, dateType: $dateType) {
                             columns
                             row 
                                 {_id data}
@@ -22,15 +22,15 @@ export const getStatisticClient = async({company: company, dateStart: dateStart}
     }
 }
 
-export const getStatisticItem = async({company: company, dateStart: dateStart}, client)=>{
+export const getStatisticItem = async({company, dateStart, dateType}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {company: company, dateStart: dateStart},
+                variables: {company: company, dateStart: dateStart, dateType: dateType},
                 query: gql`
-                    query ($company: String, $dateStart: Date) {
-                        statisticItem(company: $company, dateStart: $dateStart) {
+                    query ($company: String, $dateStart: Date, $dateType: String) {
+                        statisticItem(company: $company, dateStart: $dateStart, dateType: $dateType) {
                             columns
                             row 
                                 {_id data}

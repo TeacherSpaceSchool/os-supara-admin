@@ -31,6 +31,7 @@ import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import {getAdss} from '../src/gql/ads'
 
 const Basket = React.memo((props) => {
     const { authenticated } = props.user;
@@ -40,6 +41,7 @@ const Basket = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.baskets);
     let [bonus, setBonus] = useState({});
+    let [ads, setAds] = useState([]);
     let [organization, setOrganization] = useState({_id: '', name: ''});
     let handleOrganization =  (event) => {
         setOrganization(organizations[organizations.findIndex(element => element._id===event.target.value)])
@@ -134,14 +136,18 @@ const Basket = React.memo((props) => {
         })()
     },[list])
     useEffect(()=>{
-        calculateAllPrice()
-        bonus = {}
-        for(let i=0; i<data.bonusesClient.length; i++){
-            if(organization._id===data.bonusesClient[i].bonus.organization._id){
-                bonus = data.bonusesClient[i]
+        (async()=>{
+            calculateAllPrice()
+            bonus = {}
+            for(let i=0; i<data.bonusesClient.length; i++){
+                if(organization._id===data.bonusesClient[i].bonus.organization._id){
+                    bonus = data.bonusesClient[i]
+                }
             }
-        }
-        setBonus(bonus)
+            setBonus(bonus)
+            if(organization._id)
+                setAds((await getAdss({search: '', organization: organization._id})).adss)
+        })()
     },[list, organization])
     let getList = async()=>{
         setList((await getBasket()).baskets)
@@ -194,65 +200,70 @@ const Basket = React.memo((props) => {
                                         if(row.item.organization._id===organization._id)
                                             return (
                                                 <>
-                                                <Card className={classes.page} key={idx}>
+                                                <Card className={classes.page} key={idx} style={{position: 'relative'}}>
+                                                    <IconButton onClick={() => {
+                                                        removeBasketChange(idx)
+                                                    }} color="primary" className={classes.cancelM}>
+                                                        <CancelIcon style={{height: 25, width: 25}}/>
+                                                    </IconButton>
                                                     <CardContent className={classes.column} style={isMobileApp ? {} : {
                                                         justifyContent: 'start',
                                                         alignItems: 'flex-start'
                                                     }}>
                                                         <div className={classes.itemM}>
-                                                            <div className={classes.divImage}>
-                                                                <img className={classes.mediaM} src={row.item.image}/>
-                                                                <IconButton onClick={() => {
-                                                                    removeBasketChange(idx)
-                                                                }} color="primary" className={classes.cancelM}>
-                                                                    <CancelIcon style={{height: 40, width: 40}}/>
-                                                                </IconButton>
-                                                            </div>
-                                                            <br/>
-                                                            <div className={classes.nameM}>
-                                                                {row.item.name}
-                                                            </div>
-                                                            <br/>
                                                             <div className={classes.row}>
-                                                                <div className={classes.counter}
-                                                                     style={isMobileApp ? {marginBottom: 10} : {marginRight: 20}}>
-                                                                    <div className={classes.counterbtn} onClick={() => {
-                                                                        decrement(idx)
-                                                                    }}>–
+                                                                <img className={classes.mediaM} src={row.item.image}/>
+                                                                <div className={classes.column}>
+                                                                    <div className={classes.nameM}>
+                                                                        {row.item.name}
                                                                     </div>
-                                                                    <input readOnly={!row.item.apiece} type={isMobileApp?'number':'text'} className={classes.counternmbr}
-                                                                           value={row.count} onChange={(event) => {
-                                                                        list[idx].count = event.target.value
-                                                                        setBasketChange(idx, list[idx].count)
-                                                                        setList([...list])
-                                                                    }}/>
-                                                                    <div className={classes.counterbtn} onClick={() => {
-                                                                        increment(idx)
-                                                                    }}>+
+                                                                    <br/>
+                                                                    <div className={classes.row}>
+                                                                        <div className={classes.counterM}>
+                                                                            <div className={classes.counterbtnM} onClick={() => {
+                                                                                decrement(idx)
+                                                                            }}>–
+                                                                            </div>
+                                                                            <input readOnly={!row.item.apiece} type={isMobileApp?'number':'text'} className={classes.counternmbrM}
+                                                                                   value={row.count} onChange={(event) => {
+                                                                                list[idx].count = event.target.value
+                                                                                setBasketChange(idx, list[idx].count)
+                                                                                setList([...list])
+                                                                            }}/>
+                                                                            <div className={classes.counterbtnM} onClick={() => {
+                                                                                increment(idx)
+                                                                            }}>+
+                                                                            </div>
+                                                                        </div>
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        {
+                                                                            authenticated&&data.client.type==='торговая точка'?
+                                                                            <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                                                list[idx].showConsignment = !list[idx].showConsignment
+                                                                                setList([...list])
+                                                                            }}>
+                                                                                КОНС
+                                                                            </div>
+                                                                                :
+                                                                                null
+                                                                        }
                                                                     </div>
-                                                                </div>
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
-                                                                    list[idx].showConsignment = !list[idx].showConsignment
-                                                                    setList([...list])
-                                                                }}>
-                                                                    КОНС
+                                                                    {
+                                                                        row.item.apiece?
+                                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                                list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
+                                                                                setBasketChange(idx, list[idx].count)
+                                                                                setList([...list])
+                                                                            }}>
+                                                                                Добавить упаковку
+                                                                            </div>
+                                                                            :
+                                                                            <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                                                Упаковок: {(list[idx].count/list[idx].item.packaging)}
+                                                                            </div>
+                                                                    }
                                                                 </div>
                                                             </div>
-                                                            {
-                                                                row.item.apiece?
-                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                                        list[idx].count = (parseInt(list[idx].count/row.item.packaging)+1)*row.item.packaging
-                                                                        setBasketChange(idx, list[idx].count)
-                                                                        setList([...list])
-                                                                    }}>
-                                                                        Добавить упаковку
-                                                                    </div>
-                                                                    :
-                                                                    <div className={classes.addPackaging} style={{color: '#ffb300'}}>
-                                                                        Упаковок: {(list[idx].count/list[idx].item.packaging)}
-                                                                    </div>
-                                                            }
                                                             {
                                                                 authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
                                                                     <>
@@ -280,7 +291,7 @@ const Basket = React.memo((props) => {
                                                             <div>
                                                                 <div className={classes.row}>
                                                                     <div className={classes.nameField}>
-                                                                        Цена
+                                                                        Цена:
                                                                     </div>
                                                                     <div className={classes.value}>
                                                                         {`${row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock} сом`}
@@ -288,7 +299,7 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                                 <div className={classes.row}>
                                                                     <div className={classes.nameField}>
-                                                                        Итого
+                                                                        Итого:
                                                                     </div>
                                                                     <div className={classes.value}>
                                                                         {`${(row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock) * row.count} сом`}
@@ -416,7 +427,7 @@ const Basket = React.memo((props) => {
             <div className={isMobileApp?classes.bottomBasketM:classes.bottomBasketD}>
                 <div className={isMobileApp?classes.allPriceM:classes.allPriceD}>
                     <div className={isMobileApp?classes.value:classes.priceAllText}>Общая стоимость</div>
-                    <div className={isMobileApp?classes.nameM:classes.priceAll}>{`${allPrice} сом`}</div>
+                    <div className={isMobileApp?classes.priceAllM:classes.priceAll}>{`${allPrice} сом`}</div>
                 </div>
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
                     if(allPrice>0)
@@ -430,9 +441,11 @@ const Basket = React.memo((props) => {
                             }
                             if (proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0
                             ) {
-                                setMiniDialog('Купить', <BuyBasket bonus={bonus}
-                                                                   client={data.client}
-                                                                   allPrice={allPrice} organization={organization}/>)
+                                setMiniDialog('Купить', <BuyBasket
+                                    adss={ads}
+                                    bonus={bonus}
+                                    client={data.client}
+                                    allPrice={allPrice} organization={organization}/>)
                                 showMiniDialog(true)
                             }
                             else {

@@ -75,7 +75,7 @@ const MyDrawer = React.memo((props) => {
                                     router.pathname.includes('item')
                                     ||
                                     router.pathname.includes('catalog')
-                                )&&!['/statistic/item']!==router.pathname?
+                                )&&!router.pathname.includes('statistic')?
                                     '#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary={profile.role!=='агент'?'Товары':'Каталог'} />
@@ -132,10 +132,10 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'client'].includes(profile.role)||!authenticated?
+                    ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)||!authenticated?
                         <>
-                        <Link href='/ads'>
-                            <ListItem style={{background: router.pathname==='/ads'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                        <Link href={`/ads${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`} as={`/organization${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`}>
+                            <ListItem style={{background: router.pathname.includes('ads')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><WhatshotIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Акции' />
                             </ListItem>

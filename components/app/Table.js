@@ -43,6 +43,7 @@ const MyTable =  React.memo(
             print: false,
             pagination: false,
             count: data.length,
+            responsive: 'scroll',
             downloadOptions: {filename: 'tableDownload.csv', separator: ','},
             onCellClick: (colData, colMeta) => {
                 if(colMeta.colIndex===0&&row[colMeta.rowIndex]._id)

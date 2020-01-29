@@ -27,6 +27,8 @@ const Order =  React.memo(
         let [consignmentPrice, setConsignmentPrice] = useState(element.consignmentPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
         let [allSize, setAllSize] = useState(element.allSize);
+        let [showCons, setShowCons] = useState({});
+        let [showReturn, setShowReturn] = useState({});
         let [taken, setTaken] = useState(element.taken);
         let [paymentConsignation, setPaymentConsignation] = useState(element.paymentConsignation);
         let [confirmationForwarder, setConfirmationForwarder] = useState(element.confirmationForwarder);
@@ -49,8 +51,8 @@ const Order =  React.memo(
             if(element.usedBonus&&element.usedBonus>0)
                 allPrice -= element.usedBonus
             setAllPrice(allPrice)
-            setAllTonnage(allTonnage)
-            setAllSize(allSize)
+            setAllTonnage(Math.round(allTonnage))
+            setAllSize(Math.round(allSize))
             setConsignmentPrice(consignmentPrice)
         }
         let increment = (idx)=>{
@@ -66,20 +68,28 @@ const Order =  React.memo(
         }
         let decrement = (idx)=>{
             if(orders[idx].count>1&&orders[idx].item.apiece) {
-                orders[idx].count -= 1
-                orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
-                orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
-                orders[idx].allSize = orders[idx].count * orders[idx].item.size
-                setOrders([...orders])
-                canculateAllPrice()
+                let takePrice = 1 * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                if(!orders[idx].item.organization.minimumOrder||((allPrice-takePrice)>=orders[idx].item.organization.minimumOrder)) {
+                    orders[idx].count -= 1
+                    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                    orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+                    orders[idx].allSize = orders[idx].count * orders[idx].item.size
+                    setOrders([...orders])
+                    canculateAllPrice()
+                } else
+                    showSnackBar('Сумма не может быть меньше минимальной')
             }
             else if(orders[idx].count>orders[idx].item.packaging&&!orders[idx].item.apiece) {
-                orders[idx].count -= orders[idx].item.packaging
-                orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
-                orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
-                orders[idx].allSize = orders[idx].count * orders[idx].item.size
-                setOrders([...orders])
-                canculateAllPrice()
+                let takePrice = orders[idx].item.packaging * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                if(orders[idx].item.organization.minimumOrder||((allPrice-takePrice)>=orders[idx].item.organization.minimumOrder)) {
+                    orders[idx].count -= orders[idx].item.packaging
+                    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                    orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
+                    orders[idx].allSize = orders[idx].count * orders[idx].item.size
+                    setOrders([...orders])
+                    canculateAllPrice()
+                } else
+                    showSnackBar('Сумма не может быть меньше минимальной')
             }
         }
         let incrementConsignation = (idx)=>{
@@ -212,8 +222,8 @@ const Order =  React.memo(
                         null
                 }
                 <div className={classes.row}>
-                    <div className={classes.nameField}>Сумма{priceAfterReturn!==element.allPrice?' (факт./итого)':''}:&nbsp;</div>
-                    <div className={classes.value}>{priceAfterReturn!==element.allPrice?`${priceAfterReturn} сом/${element.allPrice} сом`:`${element.allPrice} сом`}</div>
+                    <div className={classes.nameField}>Сумма{priceAfterReturn!==allPrice?' (факт./итого)':''}:&nbsp;</div>
+                    <div className={classes.value}>{priceAfterReturn!==allPrice?`${priceAfterReturn} сом/${allPrice} сом`:`${allPrice} сом`}</div>
                 </div>
                 {
                     consignmentPrice?
@@ -260,6 +270,8 @@ const Order =  React.memo(
                 <br/>
                 <div className={classes.column}>
                     <b>Товары:</b>
+                    <br/>
+                    <br/>
                     {
                         orders.map((order, idx) => {
                             if(
@@ -275,7 +287,7 @@ const Order =  React.memo(
                                         <div className={classes.row}>
                                             <div className={classes.nameField}>Товар:&nbsp;</div>
                                             <a href={`/item/${order.item._id}`} target='_blank'>
-                                                <div className={classes.value}>{order.item.name}</div>
+                                                <b className={classes.value}>{order.item.name}</b>
                                             </a>
                                             <IconButton onClick={()=>{
                                                 remove(idx)
@@ -313,8 +325,16 @@ const Order =  React.memo(
                                             <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
                                             <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
                                         </div>
+                                        <div className={classes.row}>
+                                            <div onClick={()=>{showCons[order._idx]=!showCons[order._idx];setShowCons({...showCons})}} style={showCons[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
+                                        </div>
                                         {
-                                            element.client.type==='торговая точка'?
+                                            showCons[order._idx]||showReturn[order._idx]?
+                                                <br/>
+                                                :null
+                                        }
+                                        {
+                                            element.client.type==='торговая точка'&&showCons[order._idx]?
                                                 <>
                                                 <div className={classes.row}>
                                                     <div className={classes.nameField}>Консигнации:&nbsp;</div>
@@ -376,54 +396,83 @@ const Order =  React.memo(
                                                 }
                                             </div>
                                         </div>
+                                        <div className={classes.row}>
+                                            <div onClick={()=>{showCons[order._idx]=!showCons[order._idx];setShowCons({...showCons})}} style={showCons[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
+                                            <div onClick={()=>{showReturn[order._idx]=!showReturn[order._idx];setShowReturn({...showReturn})}} style={showReturn[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>ВОЗВ</div>
+                                        </div>
+                                        {
+                                            showCons[order._idx]||showReturn[order._idx]?
+                                                <br/>
+                                                :null
+                                        }
                                         {
                                             element.client.type==='торговая точка'?
                                                 <>
-                                                <div className={classes.row}>
-                                                    <div className={classes.nameField}>Консигнации:&nbsp;</div>
-                                                    <div className={classes.column}>
+                                                {
+                                                    showCons[order._idx]?
+                                                        <>
                                                         <div className={classes.row}>
-                                                            <div className={classes.counterbtn} onClick={()=>{decrementConsignation(idx)}}>-</div>
-                                                            <div className={classes.value}>{order.consignment}&nbsp;шт</div>
-                                                            <div className={classes.counterbtn} onClick={()=>{incrementConsignation(idx)}}>+</div>
+                                                            <div className={classes.nameField}>Консигнации:&nbsp;</div>
+                                                            <div className={classes.column}>
+                                                                <div className={classes.row}>
+                                                                    <div className={classes.counterbtn} onClick={()=>{decrementConsignation(idx)}}>-</div>
+                                                                    <div className={classes.value}>{order.consignment}&nbsp;шт</div>
+                                                                    <div className={classes.counterbtn} onClick={()=>{incrementConsignation(idx)}}>+</div>
+                                                                </div>
+                                                                <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
+                                                                    let consignment = (parseInt(orders[idx].consignment/order.item.packaging)+1)*order.item.packaging
+                                                                    if(consignment<=orders[idx].count){
+                                                                        orders[idx].consignment = consignment
+                                                                    }
+                                                                    orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+                                                                    setOrders([...orders])
+                                                                    canculateAllPrice()
+                                                                }}>
+                                                                    Добавить упаковку
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                            let consignment = (parseInt(orders[idx].consignment/order.item.packaging)+1)*order.item.packaging
-                                                            if(consignment<=orders[idx].count){
-                                                                orders[idx].consignment = consignment
-                                                            }
-                                                            orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
-                                                            setOrders([...orders])
-                                                            canculateAllPrice()
-                                                        }}>
-                                                            Добавить упаковку
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className={classes.row}>
-                                                    <div className={classes.nameField}>Стоимость консигнации:&nbsp;</div>
-                                                    <div className={classes.value}>{order.consignmentPrice}&nbsp;сом</div>
-                                                </div>
-                                                <div className={classes.row}>
-                                                    <div className={classes.nameField}>Возврат:&nbsp;</div>
-                                                    <div className={classes.column}>
                                                         <div className={classes.row}>
-                                                            <div className={classes.counterbtn} onClick={()=>{decrementReturned(idx)}}>-</div>
-                                                            <div className={classes.value}>{order.returned}&nbsp;шт</div>
-                                                            <div className={classes.counterbtn} onClick={()=>{incrementReturned(idx)}}>+</div>
+                                                            <div className={classes.nameField}>Стоимость консигнации:&nbsp;</div>
+                                                            <div className={classes.value}>{order.consignmentPrice}&nbsp;сом</div>
                                                         </div>
-                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
-                                                            let returned = (parseInt(orders[idx].returned/order.item.packaging)+1)*order.item.packaging
-                                                            if(returned<=orders[idx].count){
-                                                                orders[idx].returned = returned
-                                                            }
-                                                             setOrders([...orders])
-                                                            canculateAllPrice()
-                                                        }}>
-                                                            Добавить упаковку
+                                                        </>
+                                                        :null
+                                                }
+                                                {
+                                                    showReturn[order._idx] ?
+                                                        <div className={classes.row}>
+                                                            <div className={classes.nameField}>Возврат:&nbsp;</div>
+                                                            <div className={classes.column}>
+                                                                <div className={classes.row}>
+                                                                    <div className={classes.counterbtn} onClick={() => {
+                                                                        decrementReturned(idx)
+                                                                    }}>-
+                                                                    </div>
+                                                                    <div
+                                                                        className={classes.value}>{order.returned}&nbsp;
+                                                                        шт
+                                                                    </div>
+                                                                    <div className={classes.counterbtn} onClick={() => {
+                                                                        incrementReturned(idx)
+                                                                    }}>+
+                                                                    </div>
+                                                                </div>
+                                                                <div className={classes.addPackaging}
+                                                                     style={{color: '#ffb300'}} onClick={() => {
+                                                                    let returned = (parseInt(orders[idx].returned / order.item.packaging) + 1) * order.item.packaging
+                                                                    if (returned <= orders[idx].count) {
+                                                                        orders[idx].returned = returned
+                                                                    }
+                                                                    setOrders([...orders])
+                                                                    canculateAllPrice()
+                                                                }}>
+                                                                    Добавить упаковку
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                        : null
+                                                }
                                                 </>
                                                 :
                                                 null

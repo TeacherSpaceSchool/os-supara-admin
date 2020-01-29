@@ -13,24 +13,25 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 import { getStatisticItem, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const ItemStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
-    console.log(data)
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
+    let [dateType, setDateType] = useState('month');
     let [statisticItem, setStatisticItem] = useState(data.statisticItem);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState({_id: 'all'});
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin')
-                setStatisticItem((await getStatisticItem({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null})).statisticItem)
+                setStatisticItem((await getStatisticItem({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null, dateType: dateType})).statisticItem)
         })()
-    },[organization, dateStart])
+    },[organization, dateStart, dateType])
 
     return (
         <App pageName='Статистика товаров'>
@@ -46,6 +47,20 @@ const ItemStatistic = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                    <div className={classes.row}>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
+                            День
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('week')} size='small' color={dateType==='week'?'primary':''}>
+                            Неделя
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('month')} size='small' color={dateType==='month'?'primary':''}>
+                            Месяц
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('year')} size='small' color={dateType==='year'?'primary':''}>
+                            Год
+                        </Button>
+                    </div>
                     <div className={classes.row}>
                         <Autocomplete
                             className={classes.input}

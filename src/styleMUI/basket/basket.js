@@ -19,7 +19,7 @@ export default makeStyles({
         cursor: 'pointer',
         borderBottom: '1px dashed #ffb300',
         userSelect: 'none',
-        width: 122
+        width: 125
     },
     addPackagingM: {
         marginBottom: 20,
@@ -35,7 +35,7 @@ export default makeStyles({
     itemM:{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     },
     cancelM: {
         position: 'absolute',
@@ -55,9 +55,12 @@ export default makeStyles({
         width: '100%'
     },
     mediaM: {
+        width: 'calc(100vw / 4)',
+        height: 'calc(100vw / 4)',
+        maxWidth: 100,
+        maxHeight: 100,
         objectFit: 'contain',
-        width: '100%',
-        height: 150,
+        marginRight: 10
     },
     mediaD: {
         objectFit: 'contain',
@@ -76,6 +79,15 @@ export default makeStyles({
         fontFamily: 'Roboto'
     },
     nameM: {
+        width: 'calc(100% - 20px)',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: '1rem',
+        fontFamily: 'Roboto'
+    },
+    priceAllM: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -122,6 +134,36 @@ export default makeStyles({
     counternmbr: {
         width: 77,
         height: 34,
+        outline: 'none',
+        border: 'none',
+        fontSize: 20,
+        textAlign: 'center',
+    },
+    counterM: {
+        width: 127,
+        borderRadius: 5,
+        overflow: 'hidden',
+        border: '1px solid #e6e6e6',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    counterbtnM: {
+        userSelect: 'none',
+        cursor: 'pointer',
+        width: 25,
+        height: 25,
+        fontSize: 20,
+        fontWeight: 700,
+        background: '#e6e6e6',
+        color: '#212121',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    counternmbrM: {
+        width: 77,
+        height: 25,
         outline: 'none',
         border: 'none',
         fontSize: 20,
@@ -283,7 +325,7 @@ export default makeStyles({
     },
     showConsM: {
         padding: 3,
-        height: 34,
+        height: 27,
         marginLeft: 10,
         display: 'flex',
         justifyContent: 'center',

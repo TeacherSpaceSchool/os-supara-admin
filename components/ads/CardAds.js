@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import cardAdsStyle from '../../src/styleMUI/ads/cardAds'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,7 @@ import Confirmation from '../dialog/Confirmation'
 
 const CardAds = React.memo((props) => {
     const classes = cardAdsStyle();
-    const { element, setList } = props;
+    const { element, setList, organization } = props;
     const { profile } = props.user;
     const { isMobileApp } = props.app;
     //addCard
@@ -39,6 +40,7 @@ const CardAds = React.memo((props) => {
     };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
+    console.log(organization)
     return (
           <> {
                 profile.role === 'admin' ?
@@ -82,7 +84,7 @@ const CardAds = React.memo((props) => {
                                         if(url.length>0&&url!==element.url)editElement.url = url
                                         if(image!==undefined)editElement.image = image
                                         const action = async() => {
-                                            setList((await setAds(editElement)).adss)
+                                            setList((await setAds(editElement, organization)).adss)
                                         }
                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
@@ -91,7 +93,7 @@ const CardAds = React.memo((props) => {
                                     </Button>
                                     <Button onClick={async()=>{
                                         const action = async() => {
-                                            setList((await deleteAds([element._id])).adss)
+                                            setList((await deleteAds([element._id], organization)).adss)
                                         }
                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
@@ -107,7 +109,7 @@ const CardAds = React.memo((props) => {
                                             setTitle('')
                                             setUrl('')
                                             const action = async() => {
-                                                setList((await addAds({image: image, url: url, title: title})).adss)
+                                                setList((await addAds({organization: organization, image: image, url: url, title: title}, organization)).adss)
                                             }
                                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
@@ -130,15 +132,20 @@ const CardAds = React.memo((props) => {
                     </Card>
                     :
                     element!==undefined?
-                        <div className={isMobileApp?classes.cardM:classes.cardD}>
-                            <a href={element.url}>
-                                <img
-                                    className={isMobileApp?classes.mediaM:classes.mediaD}
-                                    alt={element.title}
-                                    src={element.image}
-                                />
-                            </a>
-                        </div>
+                        <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                            <CardActionArea>
+                                <a href={element.url}>
+                                    <img
+                                        className={isMobileApp?classes.mediaM:classes.mediaD}
+                                        alt={element.title}
+                                        src={element.image}
+                                    />
+                                </a>
+                                <div style={{fontSize: '1rem', margin: 20, whiteSpace: 'pre-wrap'}}>
+                                    {element.title}
+                                </div>
+                            </CardActionArea>
+                        </Card>
                         :null
             }</>
     );

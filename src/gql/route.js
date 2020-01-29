@@ -34,6 +34,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                     name    
                                                     stock 
                                                     apiece
+                                                    priotiry
                                                     price
                                                     packaging
                                                     weight
@@ -143,6 +144,7 @@ export const getRoute = async({_id}, client)=>{
                                                     name    
                                                     stock 
                                                     apiece
+                                                    priotiry
                                                     price
                                                     organization
                                                         {_id name}

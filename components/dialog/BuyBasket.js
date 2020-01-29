@@ -21,11 +21,12 @@ import Select from '@material-ui/core/Select';
 import Router from 'next/router'
 import Confirmation from './Confirmation'
 import Link from 'next/link';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice, organization, bonus } = props;
+        const { client, allPrice, organization, bonus, adss } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
@@ -45,6 +46,19 @@ const BuyBasket =  React.memo(
         };
         return (
             <div className={classes.main}>
+                {
+                    adss.length>0?
+                        <>
+                        <a href={`/ads/${organization._id}`} target='_blank'>
+                            <div className={classes.showAds} style={{width: width}}>
+                                <WhatshotIcon color='inherit'/>&nbsp;Просмотреть акции
+                            </div>
+                        </a>
+                        <br/>
+                        </>
+                        :
+                        null
+                }
                 <FormControl component='fieldset' style={{width: width}}>
                     <FormLabel component='legend'>Адреса доставки</FormLabel>
                     <FormGroup>

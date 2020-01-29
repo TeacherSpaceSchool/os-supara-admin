@@ -16,6 +16,24 @@ export default theme => ({
         borderBottom: '1px dashed #ffb300',
         userSelect: 'none',
     },
+    showAds: {
+        fontWeight: 'bold',
+        marginBottom: 10,
+        padding: 10,
+        background: 'red',
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        textAlign: 'center',
+        fontSize: '1rem',
+        fontFamily: 'Roboto',
+        cursor: 'pointer',
+        border: '1px solid #ffb300',
+        userSelect: 'none',
+        boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)'
+},
     mainLine:{
         display: 'flex',
         justifyContent: 'center',
@@ -108,6 +126,22 @@ export default theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    minibtn: {
+        marginRight: 20,
+        marginBottom: 10,
+        userSelect: 'none',
+        cursor: 'pointer',
+        width: 50,
+        height: 20,
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        background: '#e6e6e6',
+        color: '#212121',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10
     },
     chip: {
         margin: theme.spacing(0.5),

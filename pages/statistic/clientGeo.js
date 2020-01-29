@@ -127,7 +127,7 @@ const ClientGeoStatistic = React.memo((props) => {
                 null
         }
         <div className='count'>
-            {`${statisticClientGeo[0].data[0]}|${statisticClientGeo[0].data[1]}|${statisticClientGeo[0].data[2]}`}
+            {`${parseInt(statisticClientGeo[0].data[0])+parseInt(statisticClientGeo[0].data[1])+parseInt(statisticClientGeo[0].data[2])}(${statisticClientGeo[0].data[0]}|${statisticClientGeo[0].data[1]}|${statisticClientGeo[0].data[2]})`}
         </div>
         </>
     )

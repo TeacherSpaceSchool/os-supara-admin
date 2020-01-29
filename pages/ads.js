@@ -1,35 +1,28 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import App from '../layouts/App';
-import CardAds from '../components/ads/CardAds';
-import pageListStyle from '../src/styleMUI/ads/adsList'
-import {getAdss} from '../src/gql/ads'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as userActions from '../redux/actions/user'
+import { getAdsOrganizations } from '../src/gql/ads'
+import { getOrganizations } from '../src/gql/organization'
+import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
+import CardOrganization from '../components/organization/CardOrganization'
+import Link from 'next/link';
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
-import { forceCheck } from 'react-lazyload';
-import CardAdsPlaceholder from '../components/ads/CardAdsPlaceholder'
+import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
 
 const Ads = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let [list, setList] = useState(data.adss);
-    const { search, filter, sort } = props.app;
+    let [list, setList] = useState(data.organizations);
     const { profile } = props.user;
-    const { count } = props.pagination;
-    useEffect(()=>{
-        (async()=>{
-            setList((await getAdss({search: search, sort: sort, filter: filter})).adss)
-        })()
-    },[filter, sort, search, count])
-    useEffect(()=>{
-        forceCheck()
-    },[list])
-    let height = profile.role==='admin'?400:200
+    let height = profile.role==='admin'?126:80
     return (
-        <App searchShow={true} filters={data.filterAds} sorts={data.sortAds} pageName='Акции'>
+        <App pageName='Акции'>
             <Head>
                 <title>Акции</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -40,14 +33,17 @@ const Ads = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/ads`} />
                 <link rel='canonical' href={`${urlMain}/ads`}/>
             </Head>
+            <div className='count'>
+                {`Всего организаций: ${list.length}`}
+            </div>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего акций: ${list.length}`}
-                </div>
-                {profile.role==='admin'?<CardAds setList={setList}/>:null}
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>
-                        <CardAds setList={setList} key={element._id} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                        <Link href='/ads/[id]' as={`/ads/${element._id}`}>
+                            <a>
+                                <CardOrganization key={element._id} setList={setList} element={element}/>
+                            </a>
+                        </Link>
                     </LazyLoad>
                 ):null}
             </div>
@@ -57,18 +53,28 @@ const Ads = React.memo((props) => {
 
 Ads.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    ctx.store.getState().pagination.work = true
     return {
-        data: await getAdss({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+        data: {
+            organizations:
+                ctx.store.getState().user.profile.role==='admin'?
+                    (await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
+                    :
+                    (await getAdsOrganizations(ctx.req?await getClientGqlSsr(ctx.req):undefined)).adsOrganizations
+        }
     };
 };
 
 function mapStateToProps (state) {
     return {
-        app: state.app,
         user: state.user,
-        pagination: state.pagination
+        app: state.app,
     }
 }
 
-export default connect(mapStateToProps)(Ads);
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActions, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Ads);

@@ -50,7 +50,11 @@ const Organization = React.memo((props) => {
             <div className={classes.page}>
                 {list?list.map((element)=>
                     <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
-                        <CardOrganization key={element._id} setList={setList} element={element}/>
+                        <Link href='/organization/[id]' as={`/organization/${element._id}`}>
+                            <a>
+                                <CardOrganization organization key={element._id} setList={setList} element={element}/>
+                            </a>
+                        </Link>
                     </LazyLoad>
                 ):null}
             </div>

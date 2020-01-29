@@ -4,24 +4,23 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import cardOrganizationStyle from '../../src/styleMUI/organization/cardOrganization.js'
 import { connect } from 'react-redux'
-import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffOrganization, deleteOrganization } from '../../src/gql/organization'
 import Confirmation from '../../components/dialog/Confirmation'
+import organization from '../../src/styleMUI/organization/organization';
 
 
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
-    const { element, setList } = props;
+    const { element, setList, organization } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     let [status, setStatus] = useState(element!==undefined?element.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
-            <Link href='/organization/[id]' as={`/organization/${element._id}`}>
                 <CardActionArea>
                    <div className={classes.line}>
                         <img
@@ -34,9 +33,8 @@ const CardOrganization = React.memo((props) => {
                         </h3>
                     </div>
                 </CardActionArea>
-            </Link>
                 {
-                    profile.role === 'admin' ?
+                    profile.role === 'admin'&&organization ?
                         <CardActions>
                             <Button onClick={async()=>{
                                         const action = async() => {

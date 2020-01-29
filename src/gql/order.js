@@ -30,12 +30,13 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             name    
                                             stock 
                                             apiece
+                                            priotiry
                                             price
                                             packaging
                                             weight
                                             size
                                             organization
-                                                {_id name}
+                                                {_id name minimumOrder}
                                         }
                                     count
                                     allPrice
@@ -113,6 +114,7 @@ export const getOrdersForRouting = async(organization)=>{
                                             name    
                                             stock 
                                             apiece
+                                            priotiry
                                             packaging
                                             weight
                                             size
@@ -188,6 +190,7 @@ export const getOrder = async({_id})=>{
                                             name    
                                             stock 
                                             apiece
+                                            priotiry
                                             packaging
                                             weight
                                             size
