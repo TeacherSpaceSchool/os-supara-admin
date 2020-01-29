@@ -54,7 +54,7 @@ const CardAds = React.memo((props) => {
                         </label>
                         <CardContent>
                                 <TextField
-                                    label='Имя'
+                                    label='Текст'
                                     value={title}
                                     className={classes.input}
                                     onChange={handleTitle}

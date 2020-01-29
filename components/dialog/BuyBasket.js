@@ -49,11 +49,11 @@ const BuyBasket =  React.memo(
                 {
                     adss.length>0?
                         <>
-                        <a href={`/ads/${organization._id}`} target='_blank'>
+                        <Link href={`/ads/${organization._id}`}>
                             <div className={classes.showAds} style={{width: width}}>
                                 <WhatshotIcon color='inherit'/>&nbsp;Просмотреть акции
                             </div>
-                        </a>
+                        </Link>
                         <br/>
                         </>
                         :
