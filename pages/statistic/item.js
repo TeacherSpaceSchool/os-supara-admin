@@ -32,6 +32,12 @@ const ItemStatistic = React.memo((props) => {
                 setStatisticItem((await getStatisticItem({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null, dateType: dateType})).statisticItem)
         })()
     },[organization, dateStart, dateType])
+    useEffect(()=>{
+        if(process.browser){
+            let appBody = document.getElementsByClassName('App-body')
+            appBody[0].style.paddingBottom = '0px'
+        }
+    },[process.browser])
 
     return (
         <App pageName='Статистика товаров'>

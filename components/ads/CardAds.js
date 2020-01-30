@@ -40,7 +40,6 @@ const CardAds = React.memo((props) => {
     };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
-    console.log(organization)
     return (
           <> {
                 profile.role === 'admin' ?

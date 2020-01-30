@@ -44,13 +44,6 @@ const Geo =  React.memo(
         });
         let [load, setLoad] = useState(true);
         let [map, setMap] = useState(null);
-        useEffect(()=>{
-            (async()=>{
-               if(map){
-                   console.log()
-               }
-            })()
-        },[map])
 
         return (
             <YMaps>

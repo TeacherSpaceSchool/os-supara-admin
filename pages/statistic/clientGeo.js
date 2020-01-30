@@ -43,7 +43,6 @@ const ClientGeoStatistic = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
-                console.log(item)
                 setStatisticClientGeo((await getStatisticClientGeo({organization: organization ? organization._id : null, item: item ? item._id : null})).statisticClientGeo)
             }
         })()
