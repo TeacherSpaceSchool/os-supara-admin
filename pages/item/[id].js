@@ -386,7 +386,7 @@ const Item = React.memo((props) => {
                                                                     stock: checkInt(stock),
                                                                     image: image,
                                                                     info: info,
-                                                                    price: checkInt(price),
+                                                                    price: checkFloat(price),
                                                                     subCategory: subCategory._id,
                                                                     hit: hit,
                                                                     latest: latest,
@@ -416,7 +416,7 @@ const Item = React.memo((props) => {
                                                         if(packaging!==data.item.packaging&&checkInt(packaging)>0)editElement.packaging = checkInt(packaging)
                                                         if(image!==undefined)editElement.image = image
                                                         if(info.length>0&&info!==data.item.info)editElement.info = info
-                                                        if(price>0&&price!==data.item.price)editElement.price = checkInt(price)
+                                                        if(price>0&&price!==data.item.price)editElement.price = checkFloat(price)
                                                         if(weight!==data.item.weight)editElement.weight = checkFloat(weight)
                                                         if(size!==data.item.size)editElement.size = checkFloat(size)
                                                         if(hit!==data.item.hit)editElement.hit = hit
@@ -571,15 +571,15 @@ const Item = React.memo((props) => {
                                             {
                                                 data.item.stock===0||data.item.stock===undefined?
                                                     <div className={classes.price}>
-                                                        {count*data.item.price}&nbsp;сом
+                                                        {Math.round(count*data.item.price)}&nbsp;сом
                                                     </div>
                                                     :
                                                     <>
                                                     <div className={classes.stockPrice}>
-                                                        {count*data.item.stock}&nbsp;сом
+                                                        {Math.round(count*data.item.stock)}&nbsp;сом
                                                     </div>
                                                     <div className={classes.crossedPrice}>
-                                                        {count*data.item.price}&nbsp;сом
+                                                        {Math.round(count*data.item.price)}&nbsp;сом
                                                     </div>
                                                     </>
                                             }

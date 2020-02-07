@@ -37,6 +37,7 @@ const Organization = React.memo((props) => {
     let [statusO, setStatusO] = useState(data.organization?data.organization.status:'');
     let [name, setName] = useState(data.organization?data.organization.name:'');
     let [accessToClient, setAccessToClient] = useState(data.organization&&data.organization.accessToClient!==null?data.organization.accessToClient:false);
+    let [consignation, setConsignation] = useState(data.organization&&data.organization.consignation!==null?data.organization.consignation:false);
     let [minimumOrder, setMinimumOrder] = useState(data.organization!==null?data.organization.minimumOrder:0);
     let [address, setAddress] = useState(data.organization?data.organization.address:[]);
     let [newAddress, setNewAddress] = useState('');
@@ -122,17 +123,35 @@ const Organization = React.memo((props) => {
                                             alt={'Добавить'}
                                         />
                                     </label>
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                checked={accessToClient}
-                                                onChange={()=>{setAccessToClient(!accessToClient)}}
-                                                color="primary"
-                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    {
+                                        profile.role==='admin'?
+                                            <>
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch
+                                                        checked={accessToClient}
+                                                        onChange={()=>{setAccessToClient(!accessToClient)}}
+                                                        color="primary"
+                                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                    />
+                                                }
+                                                label='Доступ к клиентам'
                                             />
-                                        }
-                                        label='Доступ к клиентам'
-                                    />
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch
+                                                        checked={consignation}
+                                                        onChange={()=>{setConsignation(!consignation)}}
+                                                        color="primary"
+                                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                    />
+                                                }
+                                                label='Консигнации'
+                                            />
+                                            </>
+                                            :
+                                            null
+                                    }
                                 </div>
                                 <div>
                                     <TextField
@@ -265,7 +284,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
+                                                            await addOrganization({consignation: consignation, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
@@ -287,6 +306,7 @@ const Organization = React.memo((props) => {
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
                                                     if(accessToClient!==data.organization.accessToClient)editElement.accessToClient = accessToClient
+                                                    if(consignation!==data.organization.consignation)editElement.consignation = consignation
                                                     if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = checkInt(minimumOrder)
                                                     const action = async() => {
                                                         await setOrganization(editElement)
@@ -417,7 +437,7 @@ Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     return {
         data: {
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0}}
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0,consignation: false,accessToClient: false}}
         }
 
     };

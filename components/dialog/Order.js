@@ -50,7 +50,7 @@ const Order =  React.memo(
             }
             if(element.usedBonus&&element.usedBonus>0)
                 allPrice -= element.usedBonus
-            setAllPrice(allPrice)
+            setAllPrice(Math.round(allPrice))
             setAllTonnage(Math.round(allTonnage))
             setAllSize(Math.round(allSize))
             setConsignmentPrice(consignmentPrice)
@@ -60,7 +60,7 @@ const Order =  React.memo(
                 orders[idx].count+=1
             else
                 orders[idx].count+=orders[idx].item.packaging
-            orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock)
+            orders[idx].allPrice = Math.round(orders[idx].count * (orders[idx].item.stock===0||orders[idx].item.stock===undefined?orders[idx].item.price:orders[idx].item.stock))
             orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
             orders[idx].allSize = orders[idx].count * orders[idx].item.size
             setOrders([...orders])
@@ -71,7 +71,7 @@ const Order =  React.memo(
                 let takePrice = 1 * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
                 if(!orders[idx].item.organization.minimumOrder||((allPrice-takePrice)>=orders[idx].item.organization.minimumOrder)) {
                     orders[idx].count -= 1
-                    orders[idx].allPrice = orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock)
+                    orders[idx].allPrice = Math.round(orders[idx].count * (orders[idx].item.stock === 0 || orders[idx].item.stock === undefined ? orders[idx].item.price : orders[idx].item.stock))
                     orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                     orders[idx].allSize = orders[idx].count * orders[idx].item.size
                     setOrders([...orders])
@@ -269,9 +269,8 @@ const Order =  React.memo(
                 </div>
                 <br/>
                 <div className={classes.column}>
-                    <b>Товары:</b>
-                    <br/>
-                    <br/>
+                    <b>{`Товары(${orders.length}):`}</b>
+                    {element.orders[0].status!=='обработка'?<><br/><br/></>:null}
                     {
                         orders.map((order, idx) => {
                             if(
@@ -287,7 +286,7 @@ const Order =  React.memo(
                                         <div className={classes.row}>
                                             <div className={classes.nameField}>Товар:&nbsp;</div>
                                             <a href={`/item/${order.item._id}`} target='_blank'>
-                                                <b className={classes.value}>{order.item.name}</b>
+                                                <div className={classes.value}>{order.item.name}</div>
                                             </a>
                                             <IconButton onClick={()=>{
                                                 remove(idx)
@@ -325,16 +324,21 @@ const Order =  React.memo(
                                             <div className={classes.nameField}>Общая стоимость:&nbsp;</div>
                                             <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
                                         </div>
-                                        <div className={classes.row}>
-                                            <div onClick={()=>{showCons[order._idx]=!showCons[order._idx];setShowCons({...showCons})}} style={showCons[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
-                                        </div>
                                         {
-                                            showCons[order._idx]||showReturn[order._idx]?
+                                            order.item.organization.consignation&&element.client.type==='торговая точка'?
+                                                <div className={classes.row}>
+                                                    <div onClick={()=>{showCons[order._id]=!showCons[order._id];setShowCons({...showCons})}} style={showCons[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
+                                                </div>
+                                                :null
+
+                                        }
+                                         {
+                                            showCons[order._id]||showReturn[order._id]?
                                                 <br/>
                                                 :null
                                         }
                                         {
-                                            element.client.type==='торговая точка'&&showCons[order._idx]?
+                                            element.client.type==='торговая точка'&&showCons[order._id]?
                                                 <>
                                                 <div className={classes.row}>
                                                     <div className={classes.nameField}>Консигнации:&nbsp;</div>
@@ -365,8 +369,7 @@ const Order =  React.memo(
                                                 :
                                                 null
                                         }
-                                        <br/>
-                                    </div>
+                                     </div>
                                 )
                             else if(
                                 ['менеджер', 'организация', 'агент', 'экспедитор'].includes(profile.role)&&!confirmationForwarder
@@ -397,11 +400,15 @@ const Order =  React.memo(
                                             </div>
                                         </div>
                                         <div className={classes.row}>
-                                            <div onClick={()=>{showCons[order._idx]=!showCons[order._idx];setShowCons({...showCons})}} style={showCons[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
-                                            <div onClick={()=>{showReturn[order._idx]=!showReturn[order._idx];setShowReturn({...showReturn})}} style={showReturn[order._idx]?{background: '#ffb300'}:{}} className={classes.minibtn}>ВОЗВ</div>
+                                            {order.item.organization.consignation&&element.client.type==='торговая точка'?
+                                                <div onClick={()=>{showCons[order._id]=!showCons[order._id];setShowCons({...showCons})}} style={showCons[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
+                                                :
+                                                null
+                                            }
+                                            <div onClick={()=>{showReturn[order._id]=!showReturn[order._id];setShowReturn({...showReturn})}} style={showReturn[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>ВОЗВ</div>
                                         </div>
                                         {
-                                            showCons[order._idx]||showReturn[order._idx]?
+                                            showCons[order._id]||showReturn[order._id]?
                                                 <br/>
                                                 :null
                                         }
@@ -409,7 +416,7 @@ const Order =  React.memo(
                                             element.client.type==='торговая точка'?
                                                 <>
                                                 {
-                                                    showCons[order._idx]?
+                                                    showCons[order._id]?
                                                         <>
                                                         <div className={classes.row}>
                                                             <div className={classes.nameField}>Консигнации:&nbsp;</div>
@@ -440,7 +447,7 @@ const Order =  React.memo(
                                                         :null
                                                 }
                                                 {
-                                                    showReturn[order._idx] ?
+                                                    showReturn[order._id] ?
                                                         <div className={classes.row}>
                                                             <div className={classes.nameField}>Возврат:&nbsp;</div>
                                                             <div className={classes.column}>
@@ -536,6 +543,7 @@ const Order =  React.memo(
                         })
                     }
                 </div>
+                {element.orders[0].status==='обработка'?<br/>:null}
                 {
                     consignmentPrice?
                     <div>
@@ -562,7 +570,7 @@ const Order =  React.memo(
                             {profile.role==='admin'?
                                 !['обработка','принят'].includes(element.orders[0].status)
                                 :
-                                !(['менеджер', 'организация'].includes(profile.role)&&['обработка','принят'].includes(element.orders[0].status))}
+                                !(['менеджер', 'организация', 'агент'].includes(profile.role)&&['обработка','принят'].includes(element.orders[0].status))}
                         control={
                             <Checkbox
                                 checked={taken}
@@ -623,7 +631,7 @@ const Order =  React.memo(
                             profile.role==='admin'?
                                 !['отмена','обработка'].includes(element.orders[0].status)
                                 :
-                                !(['client', 'организация', 'менеджер', 'агент'].includes(profile.role)&&['отмена','обработка'].includes(element.orders[0].status))
+                                !(['client', 'организация', 'менеджер'].includes(profile.role)&&['отмена','обработка'].includes(element.orders[0].status))
                         )}
                         control={
                             <Checkbox
@@ -743,9 +751,9 @@ const Order =  React.memo(
                         :
                         null
                 }
-                    <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
-                        Закрыть
-                    </Button>
+                <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
+                    Закрыть
+                </Button>
                     </div>
             </div>
         );

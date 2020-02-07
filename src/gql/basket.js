@@ -27,7 +27,7 @@ export const getBasket = async(client)=>{
                                     weight
                                     size
                                     organization
-                                        {_id name minimumOrder}
+                                        {_id name minimumOrder consignation}
                                 }
                             count
                             consignment

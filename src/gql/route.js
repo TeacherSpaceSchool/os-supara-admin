@@ -40,7 +40,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                                     weight
                                                     size
                                                     organization
-                                                        {_id name}
+                                                        {_id name consignation}
                                                 }
                                             count
                                             allPrice
@@ -84,7 +84,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     user 
                                         {_id role status }
                                     organization 
-                                        {_id name}
+                                        {_id name consignation}
                                 }
                             status
                             dateStart
@@ -147,7 +147,7 @@ export const getRoute = async({_id}, client)=>{
                                                     priotiry
                                                     price
                                                     organization
-                                                        {_id name}
+                                                        {_id name consignation}
                                                 }
                                             count
                                             allPrice
@@ -191,7 +191,7 @@ export const getRoute = async({_id}, client)=>{
                                     user 
                                         {_id role status }
                                     organization 
-                                        {_id name}
+                                        {_id name consignation}
                                 }
                             status
                             dateStart

@@ -158,7 +158,7 @@ const Basket = React.memo((props) => {
             if(list[i].item.organization._id===organization._id)
                 allPrice+=((list[i].item.stock===0||list[i].item.stock===undefined?list[i].item.price:list[i].item.stock)*list[i].count)
         }
-        setAllPrice(allPrice)
+        setAllPrice(Math.round(allPrice))
     };
 
     //привести к геолокации
@@ -237,7 +237,7 @@ const Basket = React.memo((props) => {
                                                                         </div>
                                                                         &nbsp;&nbsp;&nbsp;
                                                                         {
-                                                                            authenticated&&data.client.type==='торговая точка'?
+                                                                            row.item.organization.consignation&&authenticated&&data.client.type==='торговая точка'?
                                                                             <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
                                                                                 list[idx].showConsignment = !list[idx].showConsignment
                                                                                 setList([...list])
@@ -302,7 +302,7 @@ const Basket = React.memo((props) => {
                                                                         Итого:
                                                                     </div>
                                                                     <div className={classes.value}>
-                                                                        {`${(row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock) * row.count} сом`}
+                                                                        {`${Math.round((row.item.stock === 0 || row.item.stock === undefined ? row.item.price : row.item.stock) * row.count)} сом`}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -363,12 +363,17 @@ const Basket = React.memo((props) => {
                                                             }}/>
                                                             <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
                                                         </div>
-                                                        <div className={classes.showConsD} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
-                                                            list[idx].showConsignment = !list[idx].showConsignment
-                                                            setList([...list])
-                                                        }}>
-                                                            КОНС
-                                                        </div>
+                                                        {
+                                                            row.item.organization.consignation&&authenticated&&data.client.type==='торговая точка'?
+                                                                <div className={classes.showConsD} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                                    list[idx].showConsignment = !list[idx].showConsignment
+                                                                    setList([...list])
+                                                                }}>
+                                                                    КОНС
+                                                                </div>
+                                                                :
+                                                                null
+                                                        }
                                                     </div>
                                                     {row.item.apiece?
                                                         <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
@@ -408,7 +413,7 @@ const Basket = React.memo((props) => {
                                                 <TableCell align="left"
                                                 >{`${row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock} сом`}</TableCell>
                                                 <TableCell align="left">
-                                                    {`${(row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count} сом`}</TableCell>
+                                                    {`${Math.round((row.item.stock===0||row.item.stock===undefined?row.item.price:row.item.stock)*row.count)} сом`}</TableCell>
                                                 <TableCell align="center">
                                                     <IconButton onClick={()=>{removeBasketChange(idx)}} color="primary" className={classes.button} aria-label="add to shopping cart">
                                                         <CancelIcon />

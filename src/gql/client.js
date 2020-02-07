@@ -50,6 +50,46 @@ export const getClients = async({search: search, sort: sort, filter: filter}, cl
     }
 }
 
+export const getClientsWithoutDistrict = async(organization, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query ($organization: ID) {
+                        clientsWithoutDistrict(organization: $organization) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            lastActive
+                            device
+                            notification
+                            info
+                            reiting
+                            birthday
+                            type
+                            city
+                            patent 
+                            passport 
+                            certificate
+                            phone
+                            organization 
+                                {_id name}
+                            user 
+                                {_id role status login}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getClient = async({_id: _id}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

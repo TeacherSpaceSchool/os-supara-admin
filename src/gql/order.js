@@ -36,7 +36,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                             weight
                                             size
                                             organization
-                                                {_id name minimumOrder}
+                                                {_id name minimumOrder consignation}
                                         }
                                     count
                                     allPrice
@@ -120,7 +120,7 @@ export const getOrdersForRouting = async(organization)=>{
                                             size
                                             price
                                             organization
-                                                {_id name}
+                                                {_id name consignation}
                                         }
                                     count
                                     allPrice
@@ -196,7 +196,7 @@ export const getOrder = async({_id})=>{
                                             size
                                             price
                                             organization
-                                                {_id name}
+                                                {_id name consignation}
                                         }
                                     count
                                     allPrice

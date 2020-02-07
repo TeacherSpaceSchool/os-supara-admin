@@ -66,24 +66,28 @@ const CardOrganization = React.memo((props) => {
                                     {element.name}
                                 </div>
                             </div>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Телефон:&nbsp;
-                                </div>
-                                <div>
-                                    {element.phone.map((phone, idx)=>
-                                        idx<4?
-                                            <div key={`phone${idx}`} className={classes.value}>
-                                                {phone}
-                                            </div>
-                                            :
-                                            idx===4?
-                                                '...'
+                            {element.phone?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        Телефон:&nbsp;
+                                    </div>
+                                    <div>
+                                        {element.phone.map((phone, idx)=>
+                                            idx<4?
+                                                <div key={`phone${idx}`} className={classes.value}>
+                                                    {phone}
+                                                </div>
                                                 :
-                                                null
-                                    )}
+                                                idx===4?
+                                                    '...'
+                                                    :
+                                                    null
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                                :
+                                null
+                            }
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Адрес:&nbsp;
@@ -102,16 +106,20 @@ const CardOrganization = React.memo((props) => {
                                     )}
                                 </div>
                             </div>
-                            <div className={classes.row}>
-                                <div className={classes.nameField}>
-                                    Регистрация:&nbsp;
+                            {profile.role==='admin'?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        Регистрация:&nbsp;
+                                    </div>
+                                    <div className={classes.value}>
+                                        {pdDDMMYYHHMM(new Date(element.createdAt))}
+                                    </div>
                                 </div>
-                                <div className={classes.value}>
-                                    {pdDDMMYYHHMM(new Date(element.createdAt))}
-                                </div>
-                            </div>
+                                :
+                                null
+                            }
                             {
-                                element.lastActive?
+                                profile.role==='admin'&&element.lastActive?
                                     <div className={classes.row}>
                                         <div className={classes.nameField}>
                                             Активность:&nbsp;
@@ -124,7 +132,7 @@ const CardOrganization = React.memo((props) => {
                                     null
                             }
                             {
-                                element.device?
+                                profile.role==='admin'&&element.device?
                                     <div className={classes.row}>
                                         <div className={classes.value}>
                                             {element.device}

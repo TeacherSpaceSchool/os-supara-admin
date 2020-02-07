@@ -19,7 +19,9 @@ import LiveHelp from '@material-ui/icons/LiveHelp';
 import InfoIcon from '@material-ui/icons/Info';
 import GroupIcon from '@material-ui/icons/Group';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import CloudIcon from '@material-ui/icons/Cloud';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import MoneyIcon from '@material-ui/icons/Money';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
@@ -188,14 +190,14 @@ const MyDrawer = React.memo((props) => {
                     ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href='/organization/[id]' as={`/organization/${profile.organization}`}>
                             <ListItem style={{background: router.pathname.includes('organization')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
-                                <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
+                                <ListItemIcon><BusinessCenterIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Организация' />
                             </ListItem>
                         </Link>
                         :
                         <Link href='/organizations'>
                             <ListItem style={{background: router.pathname.includes('organization')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
-                                <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
+                                <ListItemIcon><BusinessCenterIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Организации' />
                             </ListItem>
                         </Link>
@@ -221,6 +223,19 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('employment')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Сотрудники' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
+                        <>
+                        <Link href={'/districts'}>
+                            <ListItem style={{background: router.pathname.includes('district')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Районы' />
                             </ListItem>
                         </Link>
                         <Divider/>
@@ -287,6 +302,19 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('statistic')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><EqualizerIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Статистика' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    ['admin'].includes(profile.role)?
+                        <>
+                        <Link href={'/integrates'}>
+                            <ListItem style={{background: router.pathname.includes('integrate')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><CloudIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Интеграция 1С' />
                             </ListItem>
                         </Link>
                         <Divider/>

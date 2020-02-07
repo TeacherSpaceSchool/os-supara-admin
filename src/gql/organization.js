@@ -23,6 +23,7 @@ export const getOrganization = async({_id: _id}, client)=>{
                             status
                             minimumOrder
                             accessToClient
+                            consignation
                           }
                     }`,
             })
@@ -52,6 +53,7 @@ export const getOrganizations = async({search: search, sort: sort, filter: filte
                             reiting
                             status
                             accessToClient
+                            consignation
                           }
                           sortOrganization {
                            name
@@ -109,8 +111,8 @@ export const addOrganization = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($image: Upload!, $minimumOrder: Int, $name: String!, $address: [String]!, $email: [String]!, $phone: [String]!, $info: String!) {
-                        addOrganization(image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($image: Upload!, $minimumOrder: Int, $name: String!, $address: [String]!, $email: [String]!, $phone: [String]!, $info: String!, $consignation: Boolean!, $accessToClient: Boolean!) {
+                        addOrganization(image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info, consignation: $consignation, accessToClient: $accessToClient) {
                              data
                         }
                     }`})
@@ -125,8 +127,8 @@ export const setOrganization = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $accessToClient: Boolean, $image: Upload, $minimumOrder: Int, $name: String, $address: [String], $email: [String], $phone: [String], $info: String) {
-                        setOrganization(_id: $_id, accessToClient: $accessToClient, image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
+                    mutation ($_id: ID!, $consignation: Boolean, $accessToClient: Boolean, $image: Upload, $minimumOrder: Int, $name: String, $address: [String], $email: [String], $phone: [String], $info: String) {
+                        setOrganization(_id: $_id, consignation: $consignation, accessToClient: $accessToClient, image: $image, minimumOrder: $minimumOrder, name: $name, address: $address, email: $email, phone: $phone, info: $info) {
                              data
                         }
                     }`})

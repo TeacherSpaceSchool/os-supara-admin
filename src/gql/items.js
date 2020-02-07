@@ -26,7 +26,7 @@ export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
                             packaging
                             reiting
                             organization
-                                {_id name}
+                                {_id name consignation}
                             hit
                             latest
                             favorite
@@ -78,7 +78,7 @@ export const getBrands = async({organization,  search,  sort}, client)=>{
                             price
                             reiting
                             organization
-                                {_id name info image}
+                                {_id name info image consignation}
                             hit
                             latest
                             favorite
@@ -120,7 +120,7 @@ export const favorites = async({ search}, client)=>{
                             price
                             reiting
                             organization
-                                {_id name}
+                                {_id name consignation}
                             hit
                             latest
                             favorite
@@ -162,7 +162,7 @@ export const getItem = async({_id}, client)=>{
                             price
                             reiting
                             organization
-                                {_id name minimumOrder}
+                                {_id name minimumOrder consignation}
                             hit
                             latest
                             favorite
@@ -251,7 +251,7 @@ export const addItem = async(element, subCategory)=>{
         await client.mutate({
             variables: {...element, subCategory: subCategory},
             mutation : gql`
-                    mutation ($priotiry: Int, $apiece: Boolean, $weight: Float!, $size: Float!, $packaging: Int!, $stock: Int!, $deliveryDays: [String], $name: String!, $image: Upload, $info: String!, $price: Int!, $subCategory: ID!, $organization: ID!, $hit: Boolean!, $latest: Boolean!) {
+                    mutation ($priotiry: Int, $apiece: Boolean, $weight: Float!, $size: Float!, $packaging: Int!, $stock: Int!, $deliveryDays: [String], $name: String!, $image: Upload, $info: String!, $price: Float!, $subCategory: ID!, $organization: ID!, $hit: Boolean!, $latest: Boolean!) {
                         addItem(priotiry: $priotiry, apiece: $apiece, weight: $weight, size: $size, packaging: $packaging, stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
                              data
                         }
@@ -267,7 +267,7 @@ export const setItem = async(element)=>{
         await client.mutate({
             variables: {...element},
             mutation : gql`
-                    mutation ($_id: ID!, $priotiry: Int, $apiece: Boolean, $weight: Float, $size: Float, $packaging: Int, $stock: Int, $deliveryDays: [String], $name: String, $image: Upload, $info: String, $price: Int, $subCategory: ID, $organization: ID, $hit: Boolean, $latest: Boolean) {
+                    mutation ($_id: ID!, $priotiry: Int, $apiece: Boolean, $weight: Float, $size: Float, $packaging: Int, $stock: Int, $deliveryDays: [String], $name: String, $image: Upload, $info: String, $price: Float, $subCategory: ID, $organization: ID, $hit: Boolean, $latest: Boolean) {
                         setItem(_id: $_id, priotiry: $priotiry, apiece: $apiece, weight: $weight, size: $size, packaging: $packaging, stock: $stock, deliveryDays: $deliveryDays, name: $name, image: $image, info: $info, price: $price, subCategory: $subCategory, organization: $organization, hit: $hit, latest: $latest) {
                              data
                         }

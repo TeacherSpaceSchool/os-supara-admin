@@ -52,11 +52,11 @@ const Orders = React.memo((props) => {
                     consignmentPayment += orders[i].consignmentPrice
             }
         }
-        setPrice(price)
-        setConsignment(consignment)
-        setConsignmentPayment(consignmentPayment)
-        setTonnage(tonnage)
-        setSize(size)
+        setPrice(Math.round(price))
+        setConsignment(Math.round(consignment))
+        setConsignmentPayment(Math.round(consignmentPayment))
+        setTonnage(Math.round(tonnage))
+        setSize(Math.round(size))
     }
     useEffect(()=>{
         setSelected([])

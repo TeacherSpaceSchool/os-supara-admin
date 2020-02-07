@@ -64,7 +64,34 @@ export const getEmployment = async({_id: _id}, client)=> {
     }
 }
 
-export const getEcspeditors = async({_id: _id})=>{
+export const getEcspeditors = async({_id: _id}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {_id: _id},
+                query: gql`
+                    query ($_id: ID) {
+                        ecspeditors(_id: $_id) {
+                            _id
+                            createdAt
+                            name
+                            email
+                            phone
+                            user 
+                                {_id role status login}
+                            organization 
+                                {_id name}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getAgents = async({_id: _id})=>{
     try{
         const client = new SingletonApolloClient().getClient()
         let res = await client
@@ -72,7 +99,7 @@ export const getEcspeditors = async({_id: _id})=>{
                 variables: {_id: _id},
                 query: gql`
                     query ($_id: ID) {
-                        ecspeditors(_id: $_id) {
+                        agents(_id: $_id) {
                             _id
                             createdAt
                             name

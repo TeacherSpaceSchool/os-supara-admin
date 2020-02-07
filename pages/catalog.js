@@ -59,7 +59,7 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(basket[id].count)
         basket[id].count+=list[idx].apiece?1:list[idx].packaging
 
-        basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
+        basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
 
         addBasket({item: list[idx]._id, count: basket[id].count})
         setBasket({...basket})
@@ -71,7 +71,7 @@ const Catalog = React.memo((props) => {
         if(basket[id].count>0) {
             basket[id].count = checkInt(basket[id].count)
             basket[id].count -= list[idx].apiece?1:list[idx].packaging
-            basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
+            basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
             if(basket[id].count>0)
                 addBasket({item: list[idx]._id, count: basket[id].count})
             else
@@ -111,7 +111,7 @@ const Catalog = React.memo((props) => {
         if(!basket[id])
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(count)
-        basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
+        basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         if(count>0)
             addBasket({item: list[idx]._id, count: basket[id].count})
         else
@@ -126,7 +126,7 @@ const Catalog = React.memo((props) => {
         if(list[idx].packaging){
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
         }
-        basket[id].allPrice = basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price)
+        basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         addBasket({item: list[idx]._id, count: basket[id].count})
         setBasket({...basket})
     }
@@ -147,7 +147,7 @@ const Catalog = React.memo((props) => {
         for(let i=0; i<keys.length; i++){
             allPrice += basket[keys[i]].allPrice
         }
-        setAllPrice(allPrice)
+        setAllPrice(Math.round(allPrice))
     },[basket])
 
     return (
