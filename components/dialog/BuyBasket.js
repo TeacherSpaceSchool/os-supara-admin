@@ -47,7 +47,7 @@ const BuyBasket =  React.memo(
         return (
             <div className={classes.main}>
                 {
-                    adss.length>0?
+                    adss&&adss.length>0?
                         <>
                         <Link href={`/ads/${organization._id}`}>
                             <div className={classes.showAds} style={{width: width}}>
@@ -82,7 +82,7 @@ const BuyBasket =  React.memo(
                     </FormGroup>
                 </FormControl>
                 <br/>
-                <Link href={'client/[id]'} as={`/client/${client._id}`} style={{width: width}}>
+                <Link href={'client/[id]'} as={`/client/${client._id}`}>
                     Добавить адрес
                 </Link>
                 <br/>

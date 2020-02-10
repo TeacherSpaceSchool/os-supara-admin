@@ -15,6 +15,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                             agent 
                                 {_id name}
                             createdAt
+                            updatedAt
                             allTonnage
                             allSize
                             orders 
@@ -23,6 +24,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                     allTonnage
                                     allSize
                                     createdAt
+                                    updatedAt
                                     item
                                         {
                                             image
@@ -60,6 +62,7 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                             info
                             address
                             paymentMethod
+                            editor
                             number
                             confirmationForwarder
                             confirmationClient
@@ -86,6 +89,28 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
     }
 }
 
+export const getOrderHistorys = async(invoice, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {invoice: invoice},
+                query: gql`
+                    query ($invoice: ID!) {
+                        orderHistorys(invoice: $invoice) {
+                            createdAt
+                            orders
+                                {item count consignment returned}
+                            editor
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getOrdersForRouting = async(organization)=>{
     try{
         const client = new SingletonApolloClient().getClient();
@@ -99,6 +124,7 @@ export const getOrdersForRouting = async(organization)=>{
                             agent 
                                 {_id name}
                             createdAt
+                            updatedAt
                             allTonnage
                             allSize
                             orders 
@@ -107,6 +133,7 @@ export const getOrdersForRouting = async(organization)=>{
                                     allTonnage
                                     allSize
                                     createdAt
+                                    updatedAt
                                     item
                                         {
                                             image
@@ -144,6 +171,7 @@ export const getOrdersForRouting = async(organization)=>{
                             info
                             address
                             paymentMethod
+                            editor
                             number
                             confirmationForwarder
                             confirmationClient
@@ -173,7 +201,8 @@ export const getOrder = async({_id})=>{
                         invoice(_id: $_id) {
                             _id
                             createdAt
-                            agent: 
+                            updatedAt
+                            agent
                                 {_id name}
                             allTonnage
                             allSize
@@ -181,6 +210,7 @@ export const getOrder = async({_id})=>{
                                 { 
                                     _id
                                     createdAt
+                                    updatedAt
                                     allTonnage
                                     allSize
                                     item
@@ -220,6 +250,7 @@ export const getOrder = async({_id})=>{
                             info
                             address
                             paymentMethod
+                            editor
                             number
                             confirmationForwarder
                             cancelClient

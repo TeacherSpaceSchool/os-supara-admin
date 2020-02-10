@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getSubCategorys } from '../../src/gql/subcategory'
-import { getEmployment } from '../../src/gql/employment'
 import { getOrganizations } from '../../src/gql/organization'
 import { getItem, addItem, setItem, onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
 import { addBasket } from '../../src/gql/basket'
@@ -77,7 +76,6 @@ const Item = React.memo((props) => {
     let [preview, setPreview] = useState(data.item!==null?data.item.image:'');
     let [image, setImage] = useState(undefined);
     let [packaging, setPackaging] = useState(data.item&&data.item.packaging?data.item.packaging:1);
-    let [employment, setEmployment] = useState({organization: ''});
     let handleChangeImage = ((event) => {
         if(event.target.files[0].size/1024/1024<50){
             setImage(event.target.files[0])
@@ -88,10 +86,9 @@ const Item = React.memo((props) => {
     })
     useEffect(()=>{
         (async()=>{
-            if(['организация', 'менеджер', 'экспедитор'].includes(profile.role)){
-                let employment = (await getEmployment({_id: profile._id})).employment
-                setOrganization(employment.organization)
-                setEmployment(employment)
+            if(!organization._id&&['организация', 'экспедитор'].includes(profile.role)){
+                let organzation = data.organizations.filter(organization=>organization._id===profile.organization)
+                setOrganization(organzation[0])
             }
         })()
     },[profile])
@@ -173,7 +170,7 @@ const Item = React.memo((props) => {
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {
-                            profile.role==='admin'||(['менеджер', 'организация'].includes(profile.role)&&organization._id===employment.organization._id)?
+                            profile.role==='admin'||(['организация'].includes(profile.role)&&organization._id===profile.organization)?
                                 data.item!==null||router.query.id==='new'?
                                     <>
                                     <div className={classes.column}>
@@ -185,10 +182,9 @@ const Item = React.memo((props) => {
                                             />
                                         </label>
                                         <br/>
-                                        {
-                                            profile.role==='admin'?
-                                                <>
-                                                <div className={classes.row}>
+                                        <div className={classes.row}>
+                                            {
+                                                profile.role==='admin'?
                                                     <FormControlLabel
                                                         labelPlacement = 'bottom'
                                                         style={{zoom: 0.82}}
@@ -202,6 +198,11 @@ const Item = React.memo((props) => {
                                                         }
                                                         label='Популярное'
                                                     />
+                                                    :
+                                                    null
+                                            }
+                                            {
+                                                profile.role==='admin'?
                                                     <FormControlLabel
                                                         labelPlacement = 'bottom'
                                                         style={{zoom: 0.82}}
@@ -215,23 +216,24 @@ const Item = React.memo((props) => {
                                                         }
                                                         label='Новинка'
                                                     />
-                                                    <FormControlLabel
-                                                        labelPlacement = 'bottom'
-                                                        style={{zoom: 0.82}}
-                                                        control={
-                                                            <Switch
-                                                                checked={apiece}
-                                                                onChange={()=>{setApiece(!apiece)}}
-                                                                color="primary"
-                                                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                                                            />
-                                                        }
-                                                        label='Поштучно'
+                                                    :
+                                                    null
+                                            }
+                                            <FormControlLabel
+                                                labelPlacement = 'bottom'
+                                                style={{zoom: 0.82}}
+                                                control={
+                                                    <Switch
+                                                        checked={apiece}
+                                                        onChange={()=>{setApiece(!apiece)}}
+                                                        color="primary"
+                                                        inputProps={{ 'aria-label': 'primary checkbox' }}
                                                     />
-                                                </div>
-                                                <br/>
-                                                </>:null
-                                        }
+                                                }
+                                                label='Поштучно'
+                                            />
+                                        </div>
+                                        <br/>
                                     </div>
                                     <div>
                                         <h1 className={classes.name}>
@@ -309,7 +311,11 @@ const Item = React.memo((props) => {
                                                     label='Цена'
                                                     value={price}
                                                     className={isMobileApp?classes.inputM:classes.inputD}
-                                                    onChange={(event)=>{setPrice(event.target.value)}}
+                                                    onChange={(event)=>{
+                                                        while((event.target.value).includes(','))
+                                                            event.target.value = (event.target.value).replace(',', '.')
+                                                        setPrice(event.target.value)
+                                                    }}
                                                     inputProps={{
                                                         'aria-label': 'description',
                                                     }}

@@ -1,38 +1,28 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import App from '../layouts/App';
-import pageListStyle from '../src/styleMUI/employment/employmentList'
-import {getEmployments} from '../src/gql/employment'
-import CardEmployment from '../components/employment/CardEmployment'
 import { connect } from 'react-redux'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import { bindActionCreators } from 'redux'
+import * as userActions from '../redux/actions/user'
+import { getOrganizations } from '../src/gql/organization'
+import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
+import CardOrganization from '../components/organization/CardOrganization'
 import Link from 'next/link';
-import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
-import { forceCheck } from 'react-lazyload';
-import CardEmploymentPlaceholder from '../components/employment/CardEmploymentPlaceholder'
+import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
-const height = 186
+import Router from 'next/router'
 
-const Employment = React.memo((props) => {
-    const { profile } = props.user;
+const Employments = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let [list, setList] = useState(data.employments);
-    const { search, filter, sort } = props.app;
-    useEffect(()=>{
-        (async()=>{
-            setList((await getEmployments({search: search, sort: sort, filter: filter})).employments)
-        })()
-    },[filter, sort, search])
-    useEffect(()=>{
-        forceCheck()
-    },[list])
+    let [list, setList] = useState(data.organizations);
+    const { profile } = props.user;
+    let height = profile.role==='admin'?126:80
     return (
-        <App searchShow={true} filters={data.filterEmployment} sorts={data.sortEmployment} pageName='Сотрудники'>
+        <App pageName='Сотрудники'>
             <Head>
                 <title>Сотрудники</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -44,31 +34,26 @@ const Employment = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/employments`}/>
             </Head>
             <div className='count'>
-                {`Всего сотрудников: ${list.length}`}
+                {`Всего организаций: ${list.length}`}
             </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardEmploymentPlaceholder height={height}/>}>
-                        <CardEmployment key={element._id} setList={setList} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                        <Link href='/employments/[id]' as={`/employments/${element._id}`}>
+                            <a>
+                                <CardOrganization key={element._id} setList={setList} element={element}/>
+                            </a>
+                        </Link>
                     </LazyLoad>
                 ):null}
             </div>
-            {['admin', 'организация'].includes(profile.role)?
-                <Link href='/employment/[id]' as={`/employment/new`}>
-                    <Fab color='primary' aria-label='add' className={classes.fab}>
-                        <AddIcon />
-                    </Fab>
-                </Link>
-                :
-                null
-            }
         </App>
     )
 })
 
-Employment.getInitialProps = async function(ctx) {
+Employments.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -77,15 +62,24 @@ Employment.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getEmployments({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: {
+            organizations:
+            (await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
+        }
     };
 };
 
 function mapStateToProps (state) {
     return {
-        app: state.app,
         user: state.user,
+        app: state.app,
     }
 }
 
-export default connect(mapStateToProps)(Employment);
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActions, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Employments);

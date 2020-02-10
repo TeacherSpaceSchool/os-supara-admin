@@ -215,12 +215,19 @@ const Catalog = React.memo((props) => {
                                                         }}>+
                                                         </div>
                                                     </div>
-                                                    &nbsp;&nbsp;&nbsp;
-                                                    <div className={classes.showCons} style={{color: basket[row._id]&&basket[row._id].showConsignment?'#ffb300':'#000'}} onClick={()=>{
-                                                        showConsignment(idx)
-                                                    }}>
-                                                        КОНС
-                                                    </div>
+                                                    {
+                                                        row.organization.consignation?
+                                                            <>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <div className={classes.showCons} style={{color: basket[row._id]&&basket[row._id].showConsignment?'#ffb300':'#000'}} onClick={()=>{
+                                                                showConsignment(idx)
+                                                            }}>
+                                                                КОНС
+                                                            </div>
+                                                            </>
+                                                            :
+                                                            null
+                                                    }
                                                 </div>
                                                 {row.apiece?
                                                     <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
@@ -285,7 +292,8 @@ const Catalog = React.memo((props) => {
                             ) {
                                 setMiniDialog('Купить', <BuyBasket bonus={bonus}
                                                                    client={client}
-                                                                   allPrice={allPrice} organization={organization}/>)
+                                                                   allPrice={allPrice}
+                                                                   organization={organization}/>)
                                 showMiniDialog(true)
                             }
                             else {

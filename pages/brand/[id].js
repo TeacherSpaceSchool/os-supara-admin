@@ -11,19 +11,21 @@ import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
-const height = 377;
+import Badge from '@material-ui/core/Badge';
+import LocalGroceryStore from '@material-ui/icons/LocalGroceryStore';
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+const height = 377;
 
 const Brand = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     const router = useRouter()
     let [list, setList] = useState(data.brands);
-    const { search, filter, sort } = props.app;
-    const { profile } = props.user;
+    const { search, filter, sort, countBasket } = props.app;
+    const { profile,authenticated } = props.user;
     useEffect(()=>{
         (async()=>{
             if(data)
@@ -50,14 +52,23 @@ const Brand = React.memo((props) => {
                     </LazyLoad>
                 ):null}
             </div>
-            {profile.role==='admin'||profile.role==='организация'||profile.role==='менеджер'?
+            {profile.role==='admin'||profile.role==='организация'?
                 <Link href='/item/[id]' as={`/item/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
                     </Fab>
                 </Link>
                 :
-                null
+                !authenticated||profile.role==='client'?
+                    <Link href='/basket'>
+                        <Fab color='primary' aria-label='add' className={classes.fab}>
+                            <Badge badgeContent={countBasket} color='secondary'>
+                                <LocalGroceryStore />
+                            </Badge>
+                        </Fab>
+                    </Link>
+                    :
+                    null
             }
             <div className='count'>
                 {

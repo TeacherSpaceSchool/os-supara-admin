@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getClients = async({search: search, sort: sort, filter: filter}, client)=>{
+export const getClients = async({search: search, sort: sort, filter: filter, date: date}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {search: search, sort: sort, filter: filter, date: date},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        clients(search: $search, sort: $sort, filter: $filter) {
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String) {
+                        clients(search: $search, sort: $sort, filter: $filter, date: $date) {
                             _id
                             image
                             createdAt

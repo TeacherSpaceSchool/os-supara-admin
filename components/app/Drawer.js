@@ -136,7 +136,7 @@ const MyDrawer = React.memo((props) => {
                 {
                     ['admin', 'client', 'организация', 'менеджер'].includes(profile.role)||!authenticated?
                         <>
-                        <Link href={`/ads${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`} as={`/organization${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`}>
+                        <Link href={`/ads${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`} as={`/ads${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`}>
                             <ListItem style={{background: router.pathname.includes('ads')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><WhatshotIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Акции' />
@@ -230,9 +230,9 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
+                    ['admin', 'организация'].includes(profile.role)?
                         <>
-                        <Link href={'/districts'}>
+                        <Link href={`/districts${['организация'].includes(profile.role)?'/[id]':''}`} as={`/districts${['организация'].includes(profile.role)?`/${profile.organization}`:''}`}>
                             <ListItem style={{background: router.pathname.includes('district')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Районы' />

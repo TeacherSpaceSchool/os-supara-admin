@@ -630,14 +630,8 @@ const Client = React.memo((props) => {
                                         <div className={classes.column}>
                                             {address?address.map((element, idx)=>
                                                 <>
-                                                {type==='торговая точка'?
-                                                    <div className={classes.value} key={idx}>
-                                                        {element[2]}
-                                                    </div>
-                                                    :null
-                                                }
                                                 <div className={classes.value} key={idx}>
-                                                    {element[0]}
+                                                    {`${element[2]?`${element[2]}, `:''}${element[0]}`}
                                                 </div>
                                                 <div className={classes.geo} style={{color: element[1]?'#ffb300':'red'}} onClick={()=>{
                                                     if(element[1]) {

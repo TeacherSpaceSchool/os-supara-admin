@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getDistricts = async({search, sort, filter}, client)=>{
+export const getDistricts = async({search, sort, organization}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {search: search, sort: sort, organization: organization},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        districts(search: $search, sort: $sort, filter: $filter) {
+                    query ($organization: ID, $search: String!, $sort: String!) {
+                        districts(organization: $organization, search: $search, sort: $sort) {
                             _id
                             createdAt
                             organization
@@ -32,14 +32,16 @@ export const getDistricts = async({search, sort, filter}, client)=>{
                                     _id
                                     name
                                 }
+                            manager
+                                { 
+                                    _id
+                                    createdAt
+                                    name
+                                }
                         }
                         sortDistrict {
                             name
                             field
-                        }
-                        filterDistrict {
-                           name
-                           value
                         }
                     }`,
             })
@@ -99,6 +101,11 @@ export const getDistrict = async({_id}, client)=>{
                                     createdAt
                                     name
                                 }
+                            manager
+                                { 
+                                    _id
+                                    name
+                                }
                         }
                     }`,
             })
@@ -108,7 +115,7 @@ export const getDistrict = async({_id}, client)=>{
     }
 }
 
-export const deleteDistrict = async(ids)=>{
+export const deleteDistrict = async(ids, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
@@ -119,7 +126,7 @@ export const deleteDistrict = async(ids)=>{
                              data
                         }
                     }`})
-        return await getDistricts(new SingletonStore().getStore().getState().app)
+        return await getDistricts({organization: organization, ...(new SingletonStore().getStore().getState().app)})
     } catch(err){
         console.error(err)
     }
@@ -131,8 +138,8 @@ export const addDistrict = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($organization: ID, $client: [ID]!, $name: String!, $agent: ID, $ecspeditor: ID) {
-                        addDistrict(organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor) {
+                    mutation ($organization: ID, $client: [ID]!, $name: String!, $agent: ID, $ecspeditor: ID, $manager: ID) {
+                        addDistrict(organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
                              data
                         }
                     }`})
@@ -147,8 +154,8 @@ export const setDistrict = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $organization: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID) {
-                        setDistrict(_id: $_id, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor) {
+                    mutation ($_id: ID!, $organization: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID, $manager: ID) {
+                        setDistrict(_id: $_id, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
                              data
                         }
                     }`})

@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getEmployments = async({search: search, sort: sort, filter: filter}, client)=>{
+export const getEmployments = async({organization, search: search, sort: sort, filter: filter}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter},
+                variables: {organization: organization, search: search, sort: sort, filter: filter},
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!) {
-                        employments(search: $search, sort: $sort, filter: $filter) {
+                    query ($organization: ID, $search: String!, $sort: String!, $filter: String!) {
+                        employments(organization: $organization, search: $search, sort: $sort, filter: $filter) {
                             _id
                             createdAt
                             name
@@ -60,6 +60,33 @@ export const getEmployment = async({_id: _id}, client)=> {
             })
         return res.data
     } catch (err) {
+        console.error(err)
+    }
+}
+
+export const getManagers = async({_id: _id}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {_id: _id},
+                query: gql`
+                    query ($_id: ID) {
+                        managers(_id: $_id) {
+                            _id
+                            createdAt
+                            name
+                            email
+                            phone
+                            user 
+                                {_id role status login}
+                            organization 
+                                {_id name}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
         console.error(err)
     }
 }
@@ -118,7 +145,7 @@ export const getAgents = async({_id: _id})=>{
     }
 }
 
-export const onoffEmployment = async(ids)=>{
+export const onoffEmployment = async(ids, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
@@ -129,13 +156,14 @@ export const onoffEmployment = async(ids)=>{
                              data
                         }
                     }`})
-        return await getEmployments(new SingletonStore().getStore().getState().app)
+        if(organization)
+            return await getEmployments({organization: organization, ...(new SingletonStore().getStore().getState().app)})
     } catch(err){
         console.error(err)
     }
 }
 
-export const deleteEmployment = async(ids)=>{
+export const deleteEmployment = async(ids, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
         await client.mutate({
@@ -146,7 +174,7 @@ export const deleteEmployment = async(ids)=>{
                              data
                         }
                     }`})
-        return await getEmployments(new SingletonStore().getStore().getState().app)
+        return await getEmployments({organization: organization, ...(new SingletonStore().getStore().getState().app)})
     } catch(err){
         console.error(err)
     }
@@ -163,8 +191,6 @@ export const setEmployments = async(element)=>{
                              data
                         }
                     }`})
-        let list = await getEmployments(new SingletonStore().getStore().getState().app)
-        return list
     } catch(err){
         console.error(err)
     }

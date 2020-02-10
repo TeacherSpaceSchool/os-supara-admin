@@ -1,77 +1,76 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
-import App from '../layouts/App';
-import pageListStyle from '../src/styleMUI/client/clientList'
-import {getClients} from '../src/gql/client'
-import CardClient from '../components/client/CardClient'
+import App from '../../layouts/App';
+import pageListStyle from '../../src/styleMUI/employment/employmentList'
+import {getEmployments} from '../../src/gql/employment'
+import CardEmployment from '../../components/employment/CardEmployment'
 import { connect } from 'react-redux'
-import Router from 'next/router'
-import { urlMain } from '../redux/constants/other'
-import LazyLoad from 'react-lazyload';
-import { forceCheck } from 'react-lazyload';
-import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
-import { getClientGqlSsr } from '../src/getClientGQL'
-import initialApp from '../src/initialApp'
-const height = 140
+import Router from 'next/router'
+import { urlMain } from '../../redux/constants/other'
+import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
+import CardEmploymentPlaceholder from '../../components/employment/CardEmploymentPlaceholder'
+import { getClientGqlSsr } from '../../src/getClientGQL'
+import initialApp from '../../src/initialApp'
+import { useRouter } from 'next/router'
+const height = 186
 
-
-const Client = React.memo((props) => {
+const Employment = React.memo((props) => {
+    const { profile } = props.user;
     const classes = pageListStyle();
     const { data } = props;
-    let [list, setList] = useState(data.clients);
-    const { search, filter, sort, date } = props.app;
-    const { profile } = props.user;
+    let [list, setList] = useState(data.employments);
+    const { search, filter, sort } = props.app;
+    const router = useRouter()
     useEffect(()=>{
         (async()=>{
-            setList((await getClients({search: search, sort: sort, filter: filter, date: date})).clients)
+            setList((await getEmployments({organization: router.query.id, search: search, sort: sort, filter: filter})).employments)
         })()
-    },[filter, sort, search, date])
+    },[filter, sort, search])
     useEffect(()=>{
         forceCheck()
     },[list])
     return (
-        <App searchShow={true} dates={true} filters={data.filterClient} sorts={data.sortClient} pageName='Клиенты'>
+        <App searchShow={true} filters={data.filterEmployment} sorts={data.sortEmployment} pageName='Сотрудники'>
             <Head>
-                <title>Клиенты</title>
+                <title>Сотрудники</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Клиенты' />
+                <meta property='og:title' content='Сотрудники' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/clients`} />
-                <link rel='canonical' href={`${urlMain}/clients`}/>
+                <meta property="og:url" content={`${urlMain}/employments/${router.query.id}`} />
+                <link rel='canonical' href={`${urlMain}/employments/${router.query.id}`}/>
             </Head>
             <div className='count'>
-                {`Всего клиентов: ${list.length}`}
+                {`Всего сотрудников: ${list.length}`}
             </div>
             <div className={classes.page}>
                 {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardClientPlaceholder height={height}/>}>
-                        <CardClient key={element._id} setList={setList} element={element}/>
+                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardEmploymentPlaceholder height={height}/>}>
+                        <CardEmployment key={element._id} setList={setList} element={element}/>
                     </LazyLoad>
                 ):null}
             </div>
-            {/*['агент', 'менеджер', 'организация'].includes(profile.role)?
-                <Link href='/client/[id]' as={`/client/new`}>
+            {['admin', 'организация'].includes(profile.role)?
+                <Link href='/employment/[id]' as={`/employment/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
                     </Fab>
                 </Link>
                 :
-                null*/
+                null
             }
         </App>
     )
 })
 
-Client.getInitialProps = async function(ctx) {
+Employment.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    let role = ctx.store.getState().user.profile.role
-    let authenticated = ctx.store.getState().user.authenticated
-    if(authenticated&&!['admin', 'организация', 'менеджер', 'агент'].includes(role))
+    if(!['admin', 'организация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -80,7 +79,7 @@ Client.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
-        data: await getClients({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getEmployments({organization: ctx.query.id, search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 
@@ -91,4 +90,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(Client);
+export default connect(mapStateToProps)(Employment);

@@ -93,20 +93,23 @@ const Items = React.memo((props) => {
                     </LazyLoad>
                 ):null}
             </div>
-            {profile.role==='admin'||profile.role==='организация'||profile.role==='менеджер'?
+            {profile.role==='admin'||profile.role==='организация'?
                 <Link href='/item/[id]' as={`/item/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
                     </Fab>
                 </Link>
                 :
-                <Link href='/basket'>
-                    <Fab color='primary' aria-label='add' className={classes.fab}>
-                        <Badge badgeContent={countBasket} color='secondary'>
-                            <LocalGroceryStore />
-                        </Badge>
-                    </Fab>
-                </Link>
+                !authenticated||profile.role==='client'?
+                    <Link href='/basket'>
+                        <Fab color='primary' aria-label='add' className={classes.fab}>
+                            <Badge badgeContent={countBasket} color='secondary'>
+                                <LocalGroceryStore />
+                            </Badge>
+                        </Fab>
+                    </Link>
+                    :
+                    null
             }
         </App>
     )

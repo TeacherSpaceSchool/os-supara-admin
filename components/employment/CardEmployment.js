@@ -74,7 +74,7 @@ const CardEmployment = React.memo((props) => {
                     <CardActions>
                         <Button onClick={async()=>{
                             const action = async() => {
-                                await onoffEmployment([element._id])
+                                await onoffEmployment([element._id], element.organization._id)
                                 setStatus(status==='active'?'deactive':'active')
                             }
                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
@@ -84,7 +84,7 @@ const CardEmployment = React.memo((props) => {
                         </Button>
                         <Button onClick={async()=>{
                             const action = async() => {
-                                const list = (await deleteEmployment([element._id])).employments
+                                const list = (await deleteEmployment([element._id], element.organization._id)).employments
                                 setList(list)
                             }
                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)

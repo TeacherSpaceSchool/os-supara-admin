@@ -4,7 +4,7 @@ import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getOrganizations } from '../../src/gql/organization'
 import { getDistrict, setDistrict, deleteDistrict, addDistrict } from '../../src/gql/district'
-import { getAgents, getEcspeditors } from '../../src/gql/employment'
+import { getAgents, getEcspeditors, getManagers } from '../../src/gql/employment'
 import { getClientsWithoutDistrict } from '../../src/gql/client'
 import districtStyle from '../../src/styleMUI/district/district'
 import { useRouter } from 'next/router'
@@ -40,6 +40,10 @@ const District = React.memo((props) => {
     let handleName =  (event) => {
         setName(event.target.value)
     };
+    let [manager, setManager] = useState(data.district&&data.district.manager?data.district.manager:{});
+    let handleManager =  (event) => {
+        setManager({_id: event.target.value, name: event.target.name})
+    };
     let [agent, setAgent] = useState(data.district&&data.district.agent?data.district.agent:{});
     let handleAgent =  (event) => {
         setAgent({_id: event.target.value, name: event.target.name})
@@ -57,6 +61,7 @@ const District = React.memo((props) => {
     let [unselectedClient, setUnselectedClient] = useState([]);
     let [agents, setAgents] = useState([]);
     let [ecspeditors, setEcspeditors] = useState([]);
+    let [managers, setManagers] = useState([]);
     let [selectType, setSelectType] = useState('Все');
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
@@ -75,10 +80,12 @@ const District = React.memo((props) => {
             if(data.district) {
                 if (router.query.id === 'new') {
                     setAgent({})
+                    setManager({})
                     setEcspeditor({})
                 }
                 if(organization._id) {
                     setAgents((await getAgents({_id: organization._id})).agents)
+                    setManagers((await getManagers({_id: organization._id})).managers)
                     setEcspeditors((await getEcspeditors({_id: organization._id})).ecspeditors)
                     setUnselectedClient((await getClientsWithoutDistrict(organization._id)).clientsWithoutDistrict)
                 }
@@ -136,6 +143,14 @@ const District = React.memo((props) => {
                                 :
                                 null
                             }
+                            <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                <InputLabel>Менеджер</InputLabel>
+                                <Select value={manager._id} onChange={handleManager}>
+                                    {managers.map((element)=>
+                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
                             <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                 <InputLabel>Агент</InputLabel>
                                 <Select value={agent._id} onChange={handleAgent}>
@@ -197,10 +212,11 @@ const District = React.memo((props) => {
                                                         client: client,
                                                         name: name,
                                                         agent: agent._id,
+                                                        manager: manager._id,
                                                         ecspeditor: ecspeditor._id
                                                     })
-                                                    Router.push('/districts')
-                                                    }
+                                                    Router.push(`/districts/${data.district.organization._id}`)
+                                                }
                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             } else {
@@ -215,6 +231,7 @@ const District = React.memo((props) => {
                                             const action = async() => {
                                                 let editElement = {_id: data.district._id, client: client.map(element=>element._id)}
                                                 if(!data.district.agent||agent._id!==data.district.agent._id)editElement.agent = agent._id;
+                                                if(!data.district.manager||manager._id!==data.district.manager._id)editElement.manager = manager._id;
                                                 if(!data.district.ecspeditor||ecspeditor._id!==data.district.ecspeditor._id)editElement.ecspeditor = ecspeditor._id;
                                                 if(name!==data.district.name)editElement.name = name;
                                                 if(organization._id!==data.district.organization._id)editElement.organization = organization._id;
@@ -229,8 +246,8 @@ const District = React.memo((props) => {
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
-                                                    await deleteDistrict([data.district._id])
-                                                    Router.push('/routes')
+                                                    await deleteDistrict([data.district._id], data.district.organization._id)
+                                                    Router.push(`/districts/${data.district.organization._id}`)
                                                 }
                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
@@ -261,7 +278,7 @@ const District = React.memo((props) => {
 
 District.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'менеджер', 'admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

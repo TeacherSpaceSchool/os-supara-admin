@@ -31,6 +31,15 @@ const CardDistrict = React.memo((props) => {
                             <div className={classes.value}>{element.organization.name}</div>
                         </div>
                         {
+                            element.manager?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Менеджер:&nbsp;</div>
+                                    <div className={classes.value}>{element.manager.name}</div>
+                                </div>
+                                :
+                                null
+                        }
+                        {
                             element.agent?
                                 <div className={classes.row}>
                                     <div className={classes.nameField}>Агент:&nbsp;</div>
@@ -62,7 +71,7 @@ const CardDistrict = React.memo((props) => {
                     ['организация', 'менеджер', 'admin'].includes(profile.role)?
                         <Button onClick={async()=>{
                             const action = async() => {
-                                setList((await deleteDistrict([element._id])).districts)
+                                setList((await deleteDistrict([element._id], element.organization._id)).districts)
                             }
                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                             showMiniDialog(true)

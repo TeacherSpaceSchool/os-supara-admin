@@ -219,7 +219,7 @@ const Client = React.memo((props) => {
                                                                     role: role,
                                                                     organization: organization._id,
                                                                 })
-                                                                Router.push('/employments')
+                                                                Router.push(`/employments/${data.employment.organization._id}`)
                                                             }
                                                             setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
@@ -263,8 +263,8 @@ const Client = React.memo((props) => {
                                                             </Button>
                                                             <Button onClick={async()=>{
                                                                 const action = async() => {
-                                                                    await deleteEmployment([data.employment._id])
-                                                                    Router.push('/employments')
+                                                                    await deleteEmployment([data.employment._id], data.employment.organization._id)
+                                                                    Router.push(`/employments/${data.employment.organization._id}`)
                                                                 }
                                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)

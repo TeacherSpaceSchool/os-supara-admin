@@ -30,6 +30,7 @@ class MyDocument extends Document {
                 <link rel="icon" sizes="192x192" href="/static/192x192.png"/>
                 <link rel="apple-touch-icon" href="/static/192x192.png"/>
                 <meta name="msapplication-square310x310logo" content="/static/192x192.png"/>
+                <meta name="google" content="notranslate"/>
             </Head>
             <body>
             <noscript>

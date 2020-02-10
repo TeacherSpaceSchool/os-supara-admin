@@ -19,6 +19,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     agent 
                                         {_id name}
                                     createdAt
+                                    updatedAt
                                     allTonnage
                                     allSize
                                     orders 
@@ -27,6 +28,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                             allTonnage
                                             allSize
                                             createdAt
+                                            updatedAt
                                             item
                                                 {
                                                     image
@@ -64,6 +66,7 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     info
                                     address
                                     paymentMethod
+                                    editor
                                     number
                                     confirmationForwarder
                                     confirmationClient
@@ -126,12 +129,14 @@ export const getRoute = async({_id}, client)=>{
                                     agent 
                                         {_id name}
                                     createdAt
+                                    updatedAt
                                     allTonnage
                                     allSize
                                     orders 
                                         { 
                                             _id
                                             createdAt
+                                            updatedAt
                                             allTonnage
                                             allSize
                                             item
@@ -171,6 +176,7 @@ export const getRoute = async({_id}, client)=>{
                                     info
                                     address
                                     paymentMethod
+                                    editor
                                     number
                                     confirmationForwarder
                                     confirmationClient
