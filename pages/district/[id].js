@@ -215,7 +215,7 @@ const District = React.memo((props) => {
                                                         manager: manager._id,
                                                         ecspeditor: ecspeditor._id
                                                     })
-                                                    Router.push(`/districts/${data.district.organization._id}`)
+                                                    Router.push(`/districts/${organization._id}`)
                                                 }
                                                 setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)

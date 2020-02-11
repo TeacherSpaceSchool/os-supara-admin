@@ -37,7 +37,7 @@ const App = React.memo(props => {
             logout(false)
     },[authenticated,])
     Router.events.on('routeChangeStart', (url, err)=>{
-        if (!router.pathname.includes(url)&&!reloadPage)
+        if (!router.pathname.includes(url)&&!router.asPath.includes(url)&&!reloadPage)
             setReloadPage(true)
         if (err&&err.cancelled&&reloadPage)
             setReloadPage(false)

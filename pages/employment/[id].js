@@ -52,7 +52,7 @@ const Client = React.memo((props) => {
         phone.splice(idx, 1);
         setPhone([...phone])
     };
-    let [login, setLogin] = useState(data.employment&&data.employment.login?data.employment.user.login:'');
+    let [login, setLogin] = useState(data.employment&&data.employment.user?data.employment.user.login:'');
     let [organization, setOrganization] = useState(data.employment&&data.employment.organization?data.employment.organization:{});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
@@ -89,7 +89,7 @@ const Client = React.memo((props) => {
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                 {
                             data.employment!==null?
-                                profile.role==='admin'||profile.role==='организация'||profile._id===data.employment.user._id?
+                                ['admin', 'организация'].includes(profile.role)||profile._id===data.employment.user._id?
                                     <>
                                     <TextField
                                             label='Логин'
@@ -100,7 +100,6 @@ const Client = React.memo((props) => {
                                                 'aria-label': 'description',
                                             }}
                                         />
-
                                         <Input
                                             placeholder={router.query.id==='new'?'Пароль':'Новый пароль'}
                                             type={hide ? 'password' : 'text' }

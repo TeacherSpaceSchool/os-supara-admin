@@ -217,9 +217,9 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация'].includes(profile.role)?
+                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
                         <>
-                        <Link href={'/employments'}>
+                        <Link href={`/employments${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`} as={`/employments${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`}>
                             <ListItem style={{background: router.pathname.includes('employment')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Сотрудники' />

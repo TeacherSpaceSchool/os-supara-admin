@@ -59,6 +59,17 @@ const Statistic = React.memo((props) => {
                         </CardActionArea>
                     </Card>
                 </Link>
+                <Link href='/statistic/unloadingorders'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Выгрузка заказов
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
             </div>
         </App>
     )
