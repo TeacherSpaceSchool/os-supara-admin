@@ -289,7 +289,7 @@ const Order =  React.memo(
                                 element.orders[0].status==='обработка'&&
                                 (
                                     profile.role==='client'||
-                                    ['менеджер', 'организация', 'агент'].includes(profile.role)||
+                                    ['менеджер', 'организация', /*'агент'*/].includes(profile.role)||
                                     profile.role==='admin'
                                 )
                             )
@@ -384,7 +384,7 @@ const Order =  React.memo(
                                      </div>
                                 )
                             else if(
-                                ['менеджер', 'организация', 'агент', 'экспедитор'].includes(profile.role)&&!confirmationForwarder
+                                ['менеджер', 'организация', /*'агент',*/ 'экспедитор'].includes(profile.role)&&!confirmationForwarder
                                 ||
                                 profile.role==='admin'
                             )
