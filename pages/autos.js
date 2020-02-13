@@ -31,11 +31,18 @@ const Autos = React.memo((props) => {
         })()
     },[sort, search, filter])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
 
     return (
-        <App searchShow={true} sorts={data.sortAuto} filters={data.filterAuto} pageName={'Транспорт'}>
+        <App checkPagination={checkPagination} searchShow={true} sorts={data.sortAuto} filters={data.filterAuto} pageName={'Транспорт'}>
             <Head>
                 <title>Транспорт</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -50,11 +57,14 @@ const Autos = React.memo((props) => {
                 {`Всего транспорта: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAutoPlaceholder height={height}/>}>
-                        <CardAuto key={element._id} setList={setList} element={element}/>
-                    </LazyLoad>
-                ):null}
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAutoPlaceholder height={height}/>}>
+                                <CardAuto key={element._id} setList={setList} element={element}/>
+                            </LazyLoad>
+                        )
+                }):null}
             </div>
             {['admin', 'организация'].includes(profile.role)?
                 <Link href='/auto/[id]' as={`/auto/new`}>

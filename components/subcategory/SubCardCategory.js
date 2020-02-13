@@ -76,7 +76,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await setSubCategory(editElement, category)).subCategorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Сохранить
@@ -85,7 +85,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await onoffSubCategory([element._id], category)).subCategorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         {element.status==='active'?'Отключить':'Включить'}
@@ -94,7 +94,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await deleteSubCategory([element._id], category)).subCategorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }}>
                                         Удалить
@@ -112,7 +112,7 @@ const CardCategory = React.memo((props) => {
                                                 let subCategorys = (await addSubCategory({name: name}, selectCategory._id)).subCategorys
                                                 setList(subCategorys)
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         } else {
                                             showSnackBar('Заполните все поля')

@@ -99,7 +99,7 @@ const CardBonus = React.memo((props) => {
                                     const list = (await setBonus({_id: element._id, target: checkInt(target), bonus: checkInt(bonus1)})).bonuses
                                     setList(list)
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
                             }} size='small' color='primary'>
                                 Сохранить

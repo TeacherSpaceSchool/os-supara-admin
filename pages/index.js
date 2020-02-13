@@ -24,14 +24,22 @@ const Index = React.memo((props) => {
     let height = profile.role==='admin'?161:83
     useEffect(()=>{
         (async()=>{
+            setPagination(100)
             setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
         })()
     },[filter, sort, search])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
             <Head>
                 <title>Азык - электронный склад связывающий производителя с торговой точкой</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -54,10 +62,13 @@ const Index = React.memo((props) => {
                     null
                 }
                 <CardCategory element={{image: '/static/allitem.svg', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardCategoryPlaceholder height={height}/>}>
-                        <CardCategory key={element._id} setList={setList} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardCategoryPlaceholder height={height}/>}>
+                                <CardCategory key={element._id} setList={setList} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
         </App>

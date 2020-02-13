@@ -33,6 +33,12 @@ const Orders = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { search, filter, sort, date } = props.app;
     const { profile } = props.user;
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     const getList = async ()=>{
         let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
         setList(orders)
@@ -42,16 +48,19 @@ const Orders = React.memo((props) => {
         let price = 0;
         let consignment = 0;
         let consignmentPayment = 0;
+        let lengthList = 0;
         for(let i=0; i<orders.length; i++){
             if(orders[i].orders[0].status!=='отмена') {
                 price += orders[i].allPrice
                 size += orders[i].allSize
+                lengthList += 1
                 tonnage += orders[i].allTonnage
                 consignment += orders[i].consignmentPrice
                 if (orders[i].paymentConsignation)
                     consignmentPayment += orders[i].consignmentPrice
             }
         }
+        setLengthList(lengthList)
         setPrice(Math.round(price))
         setConsignment(Math.round(consignment))
         setConsignmentPayment(Math.round(consignmentPayment))
@@ -63,6 +72,7 @@ const Orders = React.memo((props) => {
         getList()
     },[filter, sort, search, date])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
 
@@ -71,6 +81,7 @@ const Orders = React.memo((props) => {
     let [price, setPrice] = useState(0);
     let [consignment, setConsignment] = useState(0);
     let [consignmentPayment, setConsignmentPayment] = useState(0);
+    let [lengthList, setLengthList] = useState(0);
     let [showStat, setShowStat] = useState(false);
     let [selected, setSelected] = useState([]);
     let [anchorEl, setAnchorEl] = useState(null);
@@ -82,7 +93,7 @@ const Orders = React.memo((props) => {
     };
 
     return (
-        <App getList={getList} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App checkPagination={checkPagination} getList={getList} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
                 <title>Заказы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -95,7 +106,7 @@ const Orders = React.memo((props) => {
             </Head>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                 {
-                    `Всего заказов: ${list.length}`
+                    `Всего заказов: ${lengthList}`
                 }
                 {
                     showStat?
@@ -142,8 +153,10 @@ const Orders = React.memo((props) => {
                 }
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
                         <ClickNHold
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
                             time={1}
@@ -161,6 +174,7 @@ const Orders = React.memo((props) => {
                             <CardOrder setSelected={setSelected} selected={selected} setList={setList} key={element._id} element={element}/>
                         </ClickNHold>
                     </LazyLoad>
+                        )}
                 ):null}
             </div>
             {selected.length?
@@ -190,7 +204,7 @@ const Orders = React.memo((props) => {
                     const action = async() => {
                         setList((await deleteOrders(selected)).invoices)
                     }
-                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                     showMiniDialog(true);
                     setSelected([])
                     close()

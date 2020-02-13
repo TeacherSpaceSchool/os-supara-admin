@@ -30,11 +30,18 @@ const Brand = React.memo((props) => {
         (async()=>{
             if(data)
                 setList((await getBrands({organization: router.query.id, search: search, sort: sort})).brands)
+            setPagination(100)
             forceCheck()
         })()
     },[filter, sort, search])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
+        <App checkPagination={checkPagination} searchShow={true} sorts={data?data.sortItem:undefined} pageName={data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}>
             <Head>
                 <title>{data&&data.brands[0]?data.brands[0].organization.name:'Ничего не найдено'}</title>
                 <meta name='description' content={data&&data.brands[0]?data.brands[0].organization.info:'Ничего не найдено'} />
@@ -46,10 +53,13 @@ const Brand = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/brand/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
-                        <CardItem setList={setList} key={element._id} element={element} subCategory={element.subCategory._id}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
+                                <CardItem setList={setList} key={element._id} element={element} subCategory={element.subCategory._id}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
             {profile.role==='admin'||profile.role==='организация'?

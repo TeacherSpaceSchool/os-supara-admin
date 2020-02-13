@@ -95,7 +95,7 @@ const ItemStatistic = React.memo((props) => {
                             onChange={ event => setDateStart(event.target.value) }
                         />
                     </div>
-                    <Table row={(statisticItem.row).slice(1)} columns={statisticItem.columns}/>
+                    <Table type='item' row={(statisticItem.row).slice(1)} columns={statisticItem.columns}/>
                 </CardContent>
             </Card>
             <div className='count' onClick={()=>setShowStat(!showStat)}>

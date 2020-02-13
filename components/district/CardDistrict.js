@@ -73,7 +73,7 @@ const CardDistrict = React.memo((props) => {
                             const action = async() => {
                                 setList((await deleteDistrict([element._id], element.organization._id)).districts)
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить

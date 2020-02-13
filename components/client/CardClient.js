@@ -153,7 +153,7 @@ const CardOrganization = React.memo((props) => {
                                 await onoffClient([element._id])
                                 setStatus(status==='active'?'deactive':'active')
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             {status==='active'?'Отключить':'Включить'}
@@ -168,7 +168,7 @@ const CardOrganization = React.memo((props) => {
                             const action = async() => {
                                 setList((await deleteClient([element._id])).clients)
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить

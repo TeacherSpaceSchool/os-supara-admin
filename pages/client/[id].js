@@ -492,7 +492,7 @@ const Client = React.memo((props) => {
                                                        const action = async () => {
                                                             await setClient(editElement)
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }
                                                     else {
@@ -511,7 +511,7 @@ const Client = React.memo((props) => {
                                                                 await deleteClient([data.client._id])
                                                                 Router.push('/clients')
                                                             }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
                                                         }} size='small' color='primary'>
                                                             Удалить
@@ -525,7 +525,7 @@ const Client = React.memo((props) => {
                                                             await onoffClient([data.client._id])
                                                             setStatus(status==='active'?'deactive':'active')
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         {status==='active'?'Отключить':'Включить'}
@@ -536,7 +536,7 @@ const Client = React.memo((props) => {
                                                             const action = async() => {
                                                                 logout(true)
                                                             }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
                                                         }} size='small' color='primary'>
                                                             Выйти
@@ -566,7 +566,7 @@ const Client = React.memo((props) => {
                                                                 await addClient(editElement)
                                                                 Router.push('/clients')
                                                             }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
                                                         }
                                                         else {

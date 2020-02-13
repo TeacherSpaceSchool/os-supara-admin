@@ -62,6 +62,10 @@ const CardOrder = React.memo((props) => {
                                 element.orders[0].status
                         }</div>
                     </div>
+                    <div className={classes.row}>
+                        <div className={classes.nameField}>Время заказа:&nbsp;</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                    </div>
                     {
                         ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
                             <div className={classes.row}>
@@ -80,10 +84,6 @@ const CardOrder = React.memo((props) => {
                             :
                             null
                     }
-                    <div className={classes.row}>
-                        <div className={classes.nameField}>Время заказа:&nbsp;</div>
-                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
-                    </div>
                     {
                         element.dateDelivery?
                             <div className={classes.row}>
@@ -164,7 +164,7 @@ const CardOrder = React.memo((props) => {
                             const action = async() => {
                                 setList((await deleteOrders([element._id])).invoices)
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить

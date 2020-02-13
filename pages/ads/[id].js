@@ -26,12 +26,19 @@ const Ads = React.memo((props) => {
         })()
     },[search])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
     let height = ['организация', 'менеджер', 'admin'].includes(profile.role)?400:200
     const router = useRouter()
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} pageName={`Акции${data.organization ?` ${data.organization.name}`:''}`}>
+        <App checkPagination={checkPagination} searchShow={true} pageName={`Акции${data.organization ?` ${data.organization.name}`:''}`}>
             <Head>
                 <title>Акции{data.organization?` ${data.organization.name}`:''}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -47,10 +54,13 @@ const Ads = React.memo((props) => {
                     {`Всего акций: ${list.length}`}
                 </div>
                 {['организация', 'менеджер', 'admin'].includes(profile.role)?<CardAds organization={router.query.id} setList={setList}/>:null}
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>
-                        <CardAds organization={router.query.id} setList={setList} key={element._id} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>
+                                <CardAds organization={router.query.id} setList={setList} key={element._id} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
         </App>
@@ -59,7 +69,6 @@ const Ads = React.memo((props) => {
 
 Ads.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    ctx.store.getState().pagination.work = true
     return {
         data: {
             ...await getAdss({search: '', organization: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
@@ -72,7 +81,6 @@ function mapStateToProps (state) {
     return {
         app: state.app,
         user: state.user,
-        pagination: state.pagination
     }
 }
 

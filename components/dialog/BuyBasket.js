@@ -151,7 +151,7 @@ const BuyBasket =  React.memo(
                                         Router.push('/orders')
                                         showMiniDialog(false);
                                     }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 } else
                                     showSnackBar('Заполните все поля')
                             }

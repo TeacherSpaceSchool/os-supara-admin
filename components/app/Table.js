@@ -27,7 +27,7 @@ let getMuiTheme = () => createMuiTheme({
 
 const MyTable =  React.memo(
     (props) =>{
-        const { columns, row } = props;
+        const { columns, row, type } = props;
         let data = row.map(row=>row.data)
         const options = {
             customSort: (data, colIndex, order) => {
@@ -47,7 +47,7 @@ const MyTable =  React.memo(
             downloadOptions: {filename: 'tableDownload.csv', separator: ','},
             onCellClick: (colData, colMeta) => {
                 if(colMeta.colIndex===0&&row[colMeta.rowIndex]._id)
-                    window.open(`/client/${row[colMeta.rowIndex]._id}`,'_blank');
+                    window.open(`/${type}/${row[colMeta.rowIndex]._id}`,'_blank');
             },
         };
         return (

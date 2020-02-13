@@ -41,7 +41,7 @@ const CardOrganization = React.memo((props) => {
                                             await onoffOrganization([element._id])
                                             setStatus(status==='active'?'deactive':'active')
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                 {status==='active'?'Отключить':'Включить'}
@@ -51,7 +51,7 @@ const CardOrganization = React.memo((props) => {
                                             const list = (await deleteOrganization([element._id])).organizations
                                             setList(list)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Удалить

@@ -220,7 +220,7 @@ const Client = React.memo((props) => {
                                                                 })
                                                                 Router.push(`/employments/${data.employment.organization._id}`)
                                                             }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
                                                         } else {
                                                             showSnackBar('Заполните все поля')
@@ -241,7 +241,7 @@ const Client = React.memo((props) => {
                                                         const action = async() => {
                                                             await setEmployments(editElement)
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         Сохранить
@@ -255,7 +255,7 @@ const Client = React.memo((props) => {
                                                                     await onoffEmployment([data.employment._id])
                                                                     setStatus(status==='active'?'deactive':'active')
                                                                 }
-                                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)
                                                             }} size='small' color='primary'>
                                                                 {status==='active'?'Отключить':'Включить'}
@@ -265,7 +265,7 @@ const Client = React.memo((props) => {
                                                                     await deleteEmployment([data.employment._id], data.employment.organization._id)
                                                                     Router.push(`/employments/${data.employment.organization._id}`)
                                                                 }
-                                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)
                                                             }} size='small' color='primary'>
                                                                 Удалить
@@ -280,7 +280,7 @@ const Client = React.memo((props) => {
                                                                 const action = async() => {
                                                                     logout(true)
                                                                 }
-                                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)
                                                             }} size='small' color='primary'>
                                                                 Выйти

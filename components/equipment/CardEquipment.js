@@ -71,7 +71,7 @@ const CardEquipment = React.memo((props) => {
                                         const list = (await deleteEquipment([element._id])).equipments
                                         setList(list)
                                     }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                     showMiniDialog(true)
                                 }} size='small' color='primary'>
                                     Удалить

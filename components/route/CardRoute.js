@@ -81,7 +81,7 @@ const CardOrder = React.memo((props) => {
                             const action = async() => {
                                 setList((await deleteRoute([element._id])).routes)
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить

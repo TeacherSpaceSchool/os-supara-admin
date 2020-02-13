@@ -16,17 +16,16 @@ import Router from 'next/router'
 import { useRouter } from 'next/router';
 import { subscriptionOrder } from '../src/gql/order';
 import { useSubscription } from '@apollo/react-hooks';
-//import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 export const mainWindow = React.createRef();
 export const alert = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
-    const { showLoad } = props.appActions;
     const { profile, authenticated } = props.user;
     const { load } = props.app;
-    let { sorts, filters, getList, pageName, dates, searchShow } = props;
+    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow } = props;
     const router = useRouter();
     const [unread, setUnread] = useState({});
     const [reloadPage, setReloadPage] = useState(false);
@@ -36,15 +35,43 @@ const App = React.memo(props => {
         else if(!authenticated&&profile.role)
             logout(false)
     },[authenticated,])
+
     Router.events.on('routeChangeStart', (url, err)=>{
+
+
+        if(router.asPath!==url) {
+            if(!localStorage.scrollPostionStore)
+                localStorage.scrollPostionStore = JSON.stringify({})
+            let scrollPostionStore = JSON.parse(localStorage.scrollPostionStore)
+            let appBody = (document.getElementsByClassName('App-body'))[0]
+            scrollPostionStore[router.asPath] = appBody.scrollTop
+            localStorage.scrollPostionStore = JSON.stringify(scrollPostionStore)
+        }
+
+
         if (!router.pathname.includes(url)&&!router.asPath.includes(url)&&!reloadPage)
             setReloadPage(true)
         if (err&&err.cancelled&&reloadPage)
             setReloadPage(false)
     })
-    /*const containerRef = useBottomScrollListener(()=>{
-        if(work) next()
-    });*/
+
+    Router.events.on('routeChangeComplete', (url) => {
+        if(localStorage.scrollPostionStore) {
+            let appBody = (document.getElementsByClassName('App-body'))[0]
+            appBody.scroll({
+                top: (JSON.parse(localStorage.scrollPostionStore))[url],
+                left: 0,
+                behavior: 'instant'
+            });
+        }
+
+    });
+
+    const containerRef = useBottomScrollListener(()=>{
+        if(checkPagination)
+            checkPagination()
+    });
+
     //if(authenticated&&profile.role&&'экспедитор'!==profile.role) {
         const subscriptionOrderRes = useSubscription(subscriptionOrder);
         if(
@@ -95,7 +122,7 @@ const App = React.memo(props => {
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>
             <AppBar searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
-            <div/* ref={containerRef}*/ className='App-body'>
+            <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>
             <FullDialog/>

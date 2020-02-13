@@ -111,7 +111,7 @@ const MyAppBar = React.memo((props) => {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant='h6' className={classes.title}>
+                    <Typography onClick={() => {showDrawer(!drawer)}} variant='h6' className={classes.title}>
                         {pageName}
                     </Typography>
                     {isMobileApp?
@@ -330,7 +330,7 @@ const MyAppBar = React.memo((props) => {
                                             const action = async() => {
                                                 logout(true)
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }}>
                                             <div style={{display: 'flex', color: '#606060'}}>
@@ -561,7 +561,7 @@ const MyAppBar = React.memo((props) => {
                                             const action = async() => {
                                                 logout(true)
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }}>
                                             <div style={{display: 'flex', color: '#606060'}}>

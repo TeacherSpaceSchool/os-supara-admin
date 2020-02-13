@@ -21,8 +21,14 @@ const Employments = React.memo((props) => {
     let [list, setList] = useState(data.organizations);
     const { profile } = props.user;
     let height = profile.role==='admin'?126:80
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App pageName='Сотрудники'>
+        <App checkPagination={checkPagination} pageName='Сотрудники'>
             <Head>
                 <title>Сотрудники</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -37,14 +43,17 @@ const Employments = React.memo((props) => {
                 {`Всего организаций: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
-                        <Link href='/employments/[id]' as={`/employments/${element._id}`}>
-                            <a>
-                                <CardOrganization key={element._id} setList={setList} element={element}/>
-                            </a>
-                        </Link>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                                <Link href='/employments/[id]' as={`/employments/${element._id}`}>
+                                    <a>
+                                        <CardOrganization key={element._id} setList={setList} element={element}/>
+                                    </a>
+                                </Link>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
         </App>

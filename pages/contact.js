@@ -266,7 +266,7 @@ const Contact = React.memo((props) => {
                                                 const action = async() => {
                                                     await setContact(editElement)
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
                                                 Сохранить

@@ -142,7 +142,7 @@ const Equipment = React.memo((props) => {
                                                 await addEquipment(equipment)
                                                 Router.push('/equipments')
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         } else {
                                             showSnackBar('Заполните все поля')
@@ -161,7 +161,7 @@ const Equipment = React.memo((props) => {
                                         const action = async() => {
                                             await setEquipment(editElement)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Сохранить
@@ -172,7 +172,7 @@ const Equipment = React.memo((props) => {
                                                 await deleteEquipment([data.equipment._id])
                                                 Router.push('/equipments')
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }
                                     } size='small' color='primary'>

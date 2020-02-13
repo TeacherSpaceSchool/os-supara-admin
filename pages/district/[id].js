@@ -26,6 +26,9 @@ import dynamic from 'next/dynamic'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
+import CardClientPlaceholder from '../../components/client/CardClientPlaceholder'
+import LazyLoad from 'react-lazyload';
+const height = 140
 
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
 
@@ -34,7 +37,13 @@ const District = React.memo((props) => {
     const classes = districtStyle();
     const { data } = props;
     const router = useRouter()
-    const { isMobileApp } = props.app;
+    const {search, isMobileApp } = props.app;
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<allClient.length){
+            setPagination(pagination+100)
+        }
+    }
 
     let [name, setName] = useState(data.district?data.district.name:'');
     let handleName =  (event) => {
@@ -58,6 +67,7 @@ const District = React.memo((props) => {
     };
     let [client, setClient] = useState(data.district?data.district.client:[]);
     let [allClient, setAllClient] = useState([]);
+    let [filtredClient, setFiltredClient] = useState([]);
     let [unselectedClient, setUnselectedClient] = useState([]);
     let [agents, setAgents] = useState([]);
     let [ecspeditors, setEcspeditors] = useState([]);
@@ -95,17 +105,42 @@ const District = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.district) {
+                setPagination(100)
+                let allClient= []
                 if (selectType == 'Все')
-                    setAllClient([...client, ...unselectedClient])
+                    allClient=[...client, ...unselectedClient]
                 else if (selectType == 'Свободные')
-                    setAllClient([...unselectedClient])
+                    allClient=[...unselectedClient]
                 else if (selectType == 'Выбраные')
-                    setAllClient([...client])
+                    allClient=[...client]
+                let filtredClient = [...allClient]
+                filtredClient = filtredClient.filter(element=>
+                    ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                    (element.name.toLowerCase()).includes(search.toLowerCase())||
+                    ((element.address.filter(addres=>addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                    ((element.address.filter(addres=>(addres[2]?addres[2]:'').toLowerCase().includes(search.toLowerCase()))).length>0)
+                )
+                setFiltredClient([...filtredClient])
+                setAllClient(allClient)
             }
         })()
     },[selectType, unselectedClient, client])
+    useEffect(()=>{
+        (async()=>{
+            if(data.district) {
+                let filtredClient = [...allClient]
+                filtredClient = filtredClient.filter(element=>
+                    ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                    (element.name.toLowerCase()).includes(search.toLowerCase())||
+                    ((element.address.filter(addres=>addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                    ((element.address.filter(addres=>(addres[2]?addres[2]:'').toLowerCase().includes(search.toLowerCase()))).length>0)
+                )
+                setFiltredClient([...filtredClient])
+            }
+        })()
+    },[search])
     return (
-        <App pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
+        <App searchShow={true} checkPagination={checkPagination} pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
             <Head>
                 <title>{data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -173,31 +208,42 @@ const District = React.memo((props) => {
                                     Все
                                 </div>
                                 <div style={{background: selectType==='Свободные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Свободные')}} className={classes.selectType}>
-                                    Свободные
+                                    {`Своб. ${unselectedClient.length}`}
                                 </div>
                                 <div style={{background: selectType==='Выбраные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Выбраные')}} className={classes.selectType}>
-                                    Выбраные
+                                    {`Выбр. ${client.length}`}
                                 </div>
                             </div>
                             <br/>
                             <div className={classes.listInvoices}>
-                                {allClient?allClient.map((element, idx)=> {
-                                    return (
-                                        <div key={idx} style={isMobileApp?{alignItems: 'baseline'}:{}} className={isMobileApp?classes.column:classes.row}>
-                                            <Checkbox checked={client.includes(element)} onChange={() => {
-                                                if (!client.includes(element)) {
-                                                    client.push(element)
-                                                    unselectedClient.splice(unselectedClient.indexOf(element), 1)
-                                                } else {
-                                                    client.splice(client.indexOf(element), 1)
-                                                    unselectedClient.push(element)
-                                                }
-                                                setClient([...client])
-                                            }}
-                                            />
-                                            <CardClient element={element}/>
-                                        </div>
-                                    )
+                                {filtredClient?filtredClient.map((element, idx)=> {
+                                    if (idx <= pagination)
+                                        return (
+                                            <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
+                                                     className={isMobileApp ? classes.column : classes.row}>
+                                                    <LazyLoad scrollContainer={'.App-body'} key={element._id}
+                                                              height={height} offset={[height, 0]} debounce={0}
+                                                              once={true}
+                                                              placeholder={<CardClientPlaceholder height={height}/>}>
+                                                        <div>
+                                                            <Checkbox checked={client.includes(element)}
+                                                                      onChange={() => {
+                                                                          if (!client.includes(element)) {
+                                                                              client.push(element)
+                                                                              unselectedClient.splice(unselectedClient.indexOf(element), 1)
+                                                                          } else {
+                                                                              client.splice(client.indexOf(element), 1)
+                                                                              unselectedClient.push(element)
+                                                                          }
+                                                                          setClient([...client])
+                                                                      }}
+                                                            />
+                                                            <CardClient element={element}/>
+                                                        </div>
+                                                    </LazyLoad>
+                                                </div>
+                                        )
+                                    else return null
                                 }):null}
                             </div>
                             <div className={isMobileApp?classes.bottomRouteM:classes.bottomRouteD}>
@@ -217,7 +263,7 @@ const District = React.memo((props) => {
                                                     })
                                                     Router.push(`/districts/${organization._id}`)
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             } else {
                                                 showSnackBar('Заполните все поля')
@@ -237,7 +283,7 @@ const District = React.memo((props) => {
                                                 if(organization._id!==data.district.organization._id)editElement.organization = organization._id;
                                                 await setDistrict(editElement)
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }} size='small' color='primary'>
                                             Сохранить
@@ -249,7 +295,7 @@ const District = React.memo((props) => {
                                                     await deleteDistrict([data.district._id], data.district.organization._id)
                                                     Router.push(`/districts/${data.district.organization._id}`)
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
                                                 Удалить

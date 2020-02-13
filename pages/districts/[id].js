@@ -36,12 +36,19 @@ const Districts = React.memo((props) => {
     },[sort, search]);
     useEffect(()=>{
         (async()=>{
+            setPagination(100)
             forceCheck()
             setClients((await getClientsWithoutDistrict(router.query.id)).clientsWithoutDistrict)
         })()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App getList={getList} searchShow={true} sorts={data.sortDistrict} pageName='Районы'>
+        <App checkPagination={checkPagination} getList={getList} searchShow={true} sorts={data.sortDistrict} pageName='Районы'>
             <Head>
                 <title>Районы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -66,10 +73,13 @@ const Districts = React.memo((props) => {
                 }
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardDistrictPlaceholder/>}>
-                        <CardDistrict setList={setList} key={element._id} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardDistrictPlaceholder/>}>
+                                <CardDistrict setList={setList} key={element._id} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
             {['admin', 'организация', 'менеджер'].includes(profile.role)?
@@ -106,8 +116,7 @@ Districts.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
-        user: state.user,
-        pagination: state.pagination
+        user: state.user
     }
 }
 

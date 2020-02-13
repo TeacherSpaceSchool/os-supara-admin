@@ -95,7 +95,7 @@ const ClientStatistic = React.memo((props) => {
                             onChange={ event => setDateStart(event.target.value) }
                         />
                     </div>
-                    <Table row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
+                    <Table type='client' row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
                 </CardContent>
             </Card>
             <div className='count' onClick={()=>setShowStat(!showStat)}>

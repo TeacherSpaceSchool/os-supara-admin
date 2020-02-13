@@ -7,33 +7,36 @@ import CardClient from '../components/client/CardClient'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
-import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Link from 'next/link';
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
-const height = 140
+import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
+import LazyLoad from 'react-lazyload';
+const height = 140;
 
 
 const Client = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.clients);
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     const { search, filter, sort, date } = props.app;
-    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getClients({search: search, sort: sort, filter: filter, date: date})).clients)
         })()
     },[filter, sort, search, date])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
     return (
-        <App searchShow={true} dates={true} filters={data.filterClient} sorts={data.sortClient} pageName='Клиенты'>
+        <App checkPagination={checkPagination} searchShow={true} dates={true} filters={data.filterClient} sorts={data.sortClient} pageName='Клиенты'>
             <Head>
                 <title>Клиенты</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -48,10 +51,14 @@ const Client = React.memo((props) => {
                 {`Всего клиентов: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardClientPlaceholder height={height}/>}>
-                        <CardClient key={element._id} setList={setList} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]}
+                                      debounce={0} once={true} placeholder={<CardClientPlaceholder height={height}/>}>
+                                <CardClient key={element._id} setList={setList} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
             {/*['агент', 'менеджер', 'организация'].includes(profile.role)?

@@ -60,7 +60,7 @@ const Geo =  React.memo(
                                         await setAddressGeo(newGeo, idx)
                                         showFullDialog(false);
                                     }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                     showMiniDialog(true)
                                 }} className={classes.button}>
                                     Сохранить

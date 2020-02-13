@@ -405,7 +405,7 @@ const Item = React.memo((props) => {
                                                                 }, subCategory._id)
                                                                 Router.push(`/items/${subCategory._id}`)
                                                             }
-                                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                             showMiniDialog(true)
                                                         } else {
                                                             showSnackBar('Заполните все поля')
@@ -436,7 +436,7 @@ const Item = React.memo((props) => {
                                                             await setItem(editElement, subCategory._id)
                                                             //Router.push(`/items/${subCategory._id}`)
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         Сохранить
@@ -446,7 +446,7 @@ const Item = React.memo((props) => {
                                                             await onoffItem([data.item._id])
                                                             setStatus(status==='active'?'deactive':'active')
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         {status==='active'?'Отключить':'Включить'}
@@ -458,7 +458,7 @@ const Item = React.memo((props) => {
                                                                     await deleteItem([data.item._id], subCategory._id)
                                                                     Router.push(`/items/${subCategory._id}`)
                                                                 }
-                                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                                 showMiniDialog(true)
                                                             }} size='small' color='primary'>
                                                                 Удалить
@@ -526,7 +526,7 @@ const Item = React.memo((props) => {
                                                                 localStorage.favorites = JSON.stringify(favorites)
                                                             }
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }
                                                 }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />

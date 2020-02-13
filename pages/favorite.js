@@ -20,8 +20,15 @@ const Items = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.favorites);
     const { search } = props.app;
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     useEffect(()=>{
         (async()=>{
+            setPagination(100)
             if(!authenticated&&localStorage.favorites){
                 let favorites = JSON.parse(localStorage.favorites)
                 setList(favorites.filter(favorite => favorite.name.includes(search)))
@@ -43,10 +50,11 @@ const Items = React.memo((props) => {
         setList((await favorites({search: search})).favorites)
     };
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
     return (
-        <App searchShow={true} getList={getList} pageName='Избранное'>
+        <App checkPagination={checkPagination} searchShow={true} getList={getList} pageName='Избранное'>
             <Head>
                 <title>Избранное</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -61,10 +69,13 @@ const Items = React.memo((props) => {
                 {`Всего избранного: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
-                        <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder/>}>
+                                <CardItem setList={setList} setFavorites={setList} getList={getList} key={element._id} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
         </App>

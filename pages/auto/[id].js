@@ -168,7 +168,7 @@ const Auto = React.memo((props) => {
                                                 await addAuto(auto)
                                                 Router.push('/autos')
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         } else {
                                             showSnackBar('Заполните все поля')
@@ -188,7 +188,7 @@ const Auto = React.memo((props) => {
                                         const action = async() => {
                                             await setAuto(editElement)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Сохранить
@@ -199,7 +199,7 @@ const Auto = React.memo((props) => {
                                                 await deleteAuto([data.auto._id])
                                                 Router.push('/autos')
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }
                                     } size='small' color='primary'>

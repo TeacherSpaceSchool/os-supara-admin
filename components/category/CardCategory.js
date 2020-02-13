@@ -75,7 +75,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await setCategory(editElement)).categorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Сохранить
@@ -84,7 +84,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await onoffCategory([element._id])).categorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         {element.status==='active'?'Отключить':'Включить'}
@@ -93,7 +93,7 @@ const CardCategory = React.memo((props) => {
                                         const action = async() => {
                                             setList((await deleteCategory([element._id])).categorys)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }}>
                                         Удалить
@@ -112,7 +112,7 @@ const CardCategory = React.memo((props) => {
                                 const action = async() => {
                                     setList((await addCategory({image: image, name: name})).categorys)
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
                             } else
                                 showSnackBar('Заполните все поля')

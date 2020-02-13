@@ -108,7 +108,7 @@ const Basket = React.memo((props) => {
                 setList(list)
             }
         }
-        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
         showMiniDialog(true)
     }
     useEffect(()=>{

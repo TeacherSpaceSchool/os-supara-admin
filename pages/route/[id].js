@@ -340,7 +340,7 @@ const Route = React.memo((props) => {
                                                         Router.push('/routes')
                                                     }
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             } else {
                                                 showSnackBar('Заполните все поля')
@@ -361,7 +361,7 @@ const Route = React.memo((props) => {
                                                 await setRoute(editElement)
                                                 getInvoices()
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         }} size='small' color='primary'>
                                             Сохранить
@@ -373,7 +373,7 @@ const Route = React.memo((props) => {
                                                     await deleteRoute([data.route._id])
                                                     Router.push('/routes')
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
                                                 Удалить

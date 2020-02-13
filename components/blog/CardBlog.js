@@ -91,27 +91,27 @@ const CardBlog = React.memo((props) => {
                             element!==undefined?
                                 <>
                                 <Button onClick={async()=>{
-                            let editElement = {_id: element._id}
-                            if(title.length>0&&title!==element.title)editElement.title = title
-                            if(text.length>0&&text!==element.text)editElement.text = text
-                            if(image!==undefined)editElement.image = image
-                            const action = async() => {
-                                setList((await setBlog(editElement)).blogs)
-                            }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                            showMiniDialog(true)
-                        }} size='small' color='primary'>
-                            Сохранить
-                            </Button>
+                                    let editElement = {_id: element._id}
+                                    if(title.length>0&&title!==element.title)editElement.title = title
+                                    if(text.length>0&&text!==element.text)editElement.text = text
+                                    if(image!==undefined)editElement.image = image
+                                    const action = async() => {
+                                        setList((await setBlog(editElement)))
+                                    }
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
+                                }} size='small' color='primary'>
+                                    Сохранить
+                                </Button>
                                 <Button onClick={async()=>{
-                                const action = async() => {
-                                    setList((await deleteBlog([element._id])).blogs)
-                                }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
-                                showMiniDialog(true)
-                            }} size='small' color='primary'>
-                                Удалить
-                            </Button>
+                                    const action = async() => {
+                                        setList((await deleteBlog([element._id])))
+                                    }
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                    showMiniDialog(true)
+                                }} size='small' color='primary'>
+                                    Удалить
+                                </Button>
                                 </>
                                 :
                                 <Button onClick={async()=> {
@@ -121,9 +121,9 @@ const CardBlog = React.memo((props) => {
                                         setTitle('')
                                         setText('')
                                         const action = async() => {
-                                            setList((await addBlog({image: image, text: text, title: title})).blogs)
+                                            setList((await addBlog({image: image, text: text, title: title})))
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     } else {
                                         showSnackBar('Заполните все поля')

@@ -86,7 +86,7 @@ const CardFaq = React.memo((props) => {
                                       const action = async() => {
                                           setList((await setFaq(editElement)).faqs)
                                       }
-                                      setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                      setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                       showMiniDialog(true)
                                   }} size='small' color='primary'>
                                       Сохранить
@@ -95,7 +95,7 @@ const CardFaq = React.memo((props) => {
                                       const action = async() => {
                                           setList((await deleteFaq([element._id])).faqs)
                                       }
-                                      setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                      setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                       showMiniDialog(true)
                                   }} size='small' color='primary'>
                                       Удалить
@@ -111,7 +111,7 @@ const CardFaq = React.memo((props) => {
                                           setTitle('')
                                           setVideo('')
                                           setUrl(false)
-                                          setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                          setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                           showMiniDialog(true)
                                       } else {
                                           showSnackBar('Заполните все поля')

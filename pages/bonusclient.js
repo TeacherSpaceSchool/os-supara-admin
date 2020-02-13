@@ -27,10 +27,17 @@ const BonusClient = React.memo((props) => {
         })()
     },[sort, search])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} sorts={data.sortBonusClient} pageName={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}>
+        <App checkPagination={checkPagination} searchShow={true} sorts={data.sortBonusClient} pageName={['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}>
             <Head>
                 <title>{['admin', 'организация', 'менеджер'].includes(profile.role)?'Бонусы клиентов':'Мои бонусы'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -45,10 +52,14 @@ const BonusClient = React.memo((props) => {
                 {`Всего бонусов: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBonusClientPlaceholder height={height}/>}>
-                        <CardBonusClient key={element._id} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                        if(idx<=pagination)
+                            return(
+                                <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBonusClientPlaceholder height={height}/>}>
+                                    <CardBonusClient key={element._id} element={element}/>
+                                </LazyLoad>
+                            )
+                }
                 ):null}
             </div>
         </App>

@@ -79,7 +79,7 @@ const CardAuto = React.memo((props) => {
                                         const list = (await deleteAuto([element._id])).autos
                                         setList(list)
                                     }
-                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                     showMiniDialog(true)
                                 }} size='small' color='primary'>
                                     Удалить

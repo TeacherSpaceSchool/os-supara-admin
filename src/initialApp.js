@@ -44,6 +44,5 @@ export default async (ctx)=>{
     ctx.store.getState().app.date = ''
     ctx.store.getState().app.load = false
     ctx.store.getState().mini_dialog.show = false
-    ctx.store.getState().pagination.work = false
 
 }

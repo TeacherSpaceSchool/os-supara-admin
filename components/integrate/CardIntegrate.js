@@ -177,7 +177,7 @@ const CardIntegrate = React.memo((props) => {
                                 const action = async() => {
                                     setList((await setIntegrate1C(editElement)).integrate1Cs)
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
                             }} size='small' color='primary'>
                                 Сохранить
@@ -186,7 +186,7 @@ const CardIntegrate = React.memo((props) => {
                                 const action = async() => {
                                     setList((await deleteIntegrate1C([element._id], organization)).integrate1Cs)
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
                             }}>
                                 Удалить
@@ -203,7 +203,7 @@ const CardIntegrate = React.memo((props) => {
                                 setAgent({})
                                 setItem({})
                                 setClient({})
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
                             }} size='small' color='primary'>
                                 Добавить

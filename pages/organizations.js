@@ -30,10 +30,17 @@ const Organization = React.memo((props) => {
         })()
     },[filter, sort, search])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Организации'>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Организации'>
             <Head>
                 <title>Организации</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -48,14 +55,17 @@ const Organization = React.memo((props) => {
                 {`Всего организаций: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
-                        <Link href='/organization/[id]' as={`/organization/${element._id}`}>
-                            <a>
-                                <CardOrganization organization key={element._id} setList={setList} element={element}/>
-                            </a>
-                        </Link>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
+                                <Link href='/organization/[id]' as={`/organization/${element._id}`}>
+                                    <a>
+                                        <CardOrganization organization key={element._id} setList={setList} element={element}/>
+                                    </a>
+                                </Link>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
             {profile.role==='admin'?

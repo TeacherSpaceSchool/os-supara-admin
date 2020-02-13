@@ -287,7 +287,7 @@ const Organization = React.memo((props) => {
                                                             await addOrganization({consignation: consignation, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     } else {
                                                         showSnackBar('Заполните все поля')
@@ -311,7 +311,7 @@ const Organization = React.memo((props) => {
                                                     const action = async() => {
                                                         await setOrganization(editElement)
                                                     }
-                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                     showMiniDialog(true)
                                                 }} size='small' color='primary'>
                                                     Сохранить
@@ -323,7 +323,7 @@ const Organization = React.memo((props) => {
                                                             await onoffOrganization([data.organization._id])
                                                             setStatusO(statusO==='active'?'deactive':'active')
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         {statusO==='active'?'Отключить':'Включить'}
@@ -333,7 +333,7 @@ const Organization = React.memo((props) => {
                                                             await deleteOrganization([data.organization._id])
                                                             Router.push('/organizations')
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         Удалить

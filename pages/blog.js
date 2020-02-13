@@ -16,19 +16,26 @@ const Blog = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.blogs);
-    const { search, filter, sort } = props.app;
+    const { search, sort } = props.app;
     const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
-            setList((await getBlogs({search: search, sort: sort, filter: filter})).blogs)
+            setList(await getBlogs({search: search, sort: sort, count: 0}))
         })()
-    },[filter, sort, search])
+    },[sort, search])
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
-    let height = profile.role==='admin'?548:200
+    let height = profile.role==='admin'?390:360
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App searchShow={true} filters={data.filterBlog} sorts={data.sortBlog} pageName='Блог'>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterBlog} sorts={data.sortBlog} pageName='Блог'>
             <Head>
                 <title>Блог</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -44,10 +51,13 @@ const Blog = React.memo((props) => {
             </div>
             <div className={classes.page}>
                 {profile.role==='admin'?<CardBlog setList={setList}/>:null}
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBlogPlaceholder height={height}/>}>
-                        <CardBlog key={element._id} setList={setList} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                        if(idx<=pagination)
+                            return(
+                                <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBlogPlaceholder height={height}/>}>
+                                    <CardBlog key={element._id} setList={setList} element={element}/>
+                                </LazyLoad>
+                            )}
                 ):null}
             </div>
         </App>
@@ -57,7 +67,7 @@ const Blog = React.memo((props) => {
 Blog.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     return {
-        data: await getBlogs({search: '', sort: '-createdAt', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: {blogs: await getBlogs({search: '', sort: '-createdAt', count: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined)}
     };
 };
 

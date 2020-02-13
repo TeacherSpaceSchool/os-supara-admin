@@ -160,6 +160,10 @@ const Order =  React.memo(
                                 element.orders[0].status
                     }</div>
                 </div>
+                <div className={classes.row}>
+                    <div className={classes.nameField}>Время заказа: &nbsp;</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                </div>
                 {
                     ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
                        <a>
@@ -198,10 +202,6 @@ const Order =  React.memo(
                             :
                             'Геолокация не задана'
                     }
-                </div>
-                <div className={classes.row}>
-                    <div className={classes.nameField}>Время заказа: &nbsp;</div>
-                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
                 </div>
                 {
                     element.dateDelivery?
@@ -697,7 +697,7 @@ const Order =  React.memo(
                                     if(getInvoices)
                                         getInvoices()
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             }} className={classes.button}>
                                 Заказ выполнен
                             </Button>
@@ -717,7 +717,7 @@ const Order =  React.memo(
                                     if(getInvoices)
                                         getInvoices()
                                 }
-                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             }} className={classes.button}>
                                 Отменить заказ
                             </Button>
@@ -757,7 +757,7 @@ const Order =  React.memo(
                                     getInvoices()
                                 showMiniDialog(false);
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                         }} className={classes.button}>
                             Сохранить
                         </Button>

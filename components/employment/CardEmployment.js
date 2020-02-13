@@ -77,7 +77,7 @@ const CardEmployment = React.memo((props) => {
                                 await onoffEmployment([element._id], element.organization._id)
                                 setStatus(status==='active'?'deactive':'active')
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             {status==='active'?'Отключить':'Включить'}
@@ -87,7 +87,7 @@ const CardEmployment = React.memo((props) => {
                                 const list = (await deleteEmployment([element._id], element.organization._id)).employments
                                 setList(list)
                             }
-                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить

@@ -85,7 +85,7 @@ const CardAds = React.memo((props) => {
                                         const action = async() => {
                                             setList((await setAds(editElement, organization)).adss)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Сохранить
@@ -94,7 +94,7 @@ const CardAds = React.memo((props) => {
                                         const action = async() => {
                                             setList((await deleteAds([element._id], organization)).adss)
                                         }
-                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                         showMiniDialog(true)
                                     }} size='small' color='primary'>
                                         Удалить
@@ -110,7 +110,7 @@ const CardAds = React.memo((props) => {
                                             const action = async() => {
                                                 setList((await addAds({organization: organization, image: image, url: url, title: title}, organization)).adss)
                                             }
-                                            setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
                                         } else {
                                             showSnackBar('Заполните все поля')

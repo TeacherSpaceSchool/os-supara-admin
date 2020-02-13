@@ -30,10 +30,17 @@ const Routes = React.memo((props) => {
         getList()
     },[filter, sort, search, date]);
     useEffect(()=>{
+        setPagination(100)
         forceCheck()
     },[list])
+    let [pagination, setPagination] = useState(100);
+    const checkPagination = ()=>{
+        if(pagination<list.length){
+            setPagination(pagination+100)
+        }
+    }
     return (
-        <App getList={getList} searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
+        <App checkPagination={checkPagination} getList={getList} searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
             <Head>
                 <title>Маршрутные листы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -48,10 +55,13 @@ const Routes = React.memo((props) => {
                 {`Всего маршрутов: ${list.length}`}
             </div>
             <div className={classes.page}>
-                {list?list.map((element)=>
-                    <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardRoutePlaceholder/>}>
-                        <CardRoute setList={setList} key={element._id} element={element}/>
-                    </LazyLoad>
+                {list?list.map((element, idx)=> {
+                    if(idx<=pagination)
+                        return(
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardRoutePlaceholder/>}>
+                                <CardRoute setList={setList} key={element._id} element={element}/>
+                            </LazyLoad>
+                        )}
                 ):null}
             </div>
             {['admin', 'организация', 'менеджер'].includes(profile.role)?
@@ -69,7 +79,6 @@ const Routes = React.memo((props) => {
 
 Routes.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    ctx.store.getState().pagination.work = true
     if(!['admin', 'организация', 'менеджер', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
@@ -87,7 +96,6 @@ function mapStateToProps (state) {
     return {
         app: state.app,
         user: state.user,
-        pagination: state.pagination
     }
 }
 

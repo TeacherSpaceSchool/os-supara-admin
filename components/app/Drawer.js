@@ -63,8 +63,8 @@ const MyDrawer = React.memo((props) => {
                     :
                     <div className={classes.toolbar}/>
             }
-            <Divider />
             <List>
+                <Divider />
                 {
                     ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href={profile.role==='агент'?'/catalog':'/items/[id]'} as={profile.role==='агент'?'/catalog':'/items/all'}>

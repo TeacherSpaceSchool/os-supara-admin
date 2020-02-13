@@ -174,7 +174,7 @@ const CardItem = React.memo((props) => {
                                                     await onoffItem([element._id])
                                                     setStatus(status==='active'?'deactive':'active')
                                                 }
-                                                setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
                                                 {status==='active'?'Отключить':'Включить'}
@@ -186,7 +186,7 @@ const CardItem = React.memo((props) => {
                                                             const list = (await deleteItem([element._id], subCategory)).items
                                                             setList(list)
                                                         }
-                                                        setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }} size='small' color='primary'>
                                                         Удалить
@@ -281,7 +281,7 @@ const CardItem = React.memo((props) => {
                                                                 setFavorites(favorites)
                                                         }
                                                     }
-                                                    setMiniDialog('Вы уверенны?', <Confirmation action={action}/>)
+                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                     showMiniDialog(true)
                                                 }
                                             }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
