@@ -40,12 +40,12 @@ const App = React.memo(props => {
 
 
         if(router.asPath!==url) {
-            if(!localStorage.scrollPostionStore)
-                localStorage.scrollPostionStore = JSON.stringify({})
-            let scrollPostionStore = JSON.parse(localStorage.scrollPostionStore)
+            if(!sessionStorage.scrollPostionStore)
+                sessionStorage.scrollPostionStore = JSON.stringify({})
+            let scrollPostionStore = JSON.parse(sessionStorage.scrollPostionStore)
             let appBody = (document.getElementsByClassName('App-body'))[0]
             scrollPostionStore[router.asPath] = appBody.scrollTop
-            localStorage.scrollPostionStore = JSON.stringify(scrollPostionStore)
+            sessionStorage.scrollPostionStore = JSON.stringify(scrollPostionStore)
         }
 
 
@@ -56,10 +56,10 @@ const App = React.memo(props => {
     })
 
     Router.events.on('routeChangeComplete', (url) => {
-        if(localStorage.scrollPostionStore) {
+        if(sessionStorage.scrollPostionStore) {
             let appBody = (document.getElementsByClassName('App-body'))[0]
             appBody.scroll({
-                top: (JSON.parse(localStorage.scrollPostionStore))[url],
+                top: (JSON.parse(sessionStorage.scrollPostionStore))[url],
                 left: 0,
                 behavior: 'instant'
             });

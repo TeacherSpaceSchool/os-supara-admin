@@ -4,7 +4,7 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../redux/actions/user'
-import { getOrganizations } from '../src/gql/organization'
+import { getBrandOrganizations } from '../src/gql/items'
 import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
 import CardBrand from '../components/brand/CardBrand'
 import { urlMain } from '../redux/constants/other'
@@ -17,12 +17,12 @@ import initialApp from '../src/initialApp'
 const Organization = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let [list, setList] = useState(data.organizations);
+    let [list, setList] = useState(data.brandOrganizations);
     const { search, filter, sort } = props.app;
     const height = 80
     useEffect(()=>{
         (async()=>{
-            setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)
+            setList((await getBrandOrganizations({search: search, sort: sort, filter: filter})).brandOrganizations)
         })()
     },[filter, sort, search])
     useEffect(()=>{
@@ -68,7 +68,7 @@ Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.sort = 'name'
     return {
-        data: await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

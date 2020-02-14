@@ -384,7 +384,9 @@ const Basket = React.memo((props) => {
                                                             Добавить упаковку
                                                         </div>
                                                         :
-                                                        null
+                                                        <div className={classes.addPackaging} style={{color: '#ffb300'}}>
+                                                            Упаковок: {(list[idx].count/list[idx].item.packaging)}
+                                                        </div>
                                                     }
                                                     {
                                                         authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
