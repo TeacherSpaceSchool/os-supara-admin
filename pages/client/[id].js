@@ -146,14 +146,19 @@ const Client = React.memo((props) => {
                                             alt={'Добавить'}
                                         />
                                     </label>
-                                    <div className={classes.row}>
-                                        <b>
-                                            Регистрация:&nbsp;
-                                        </b>
-                                        <div>
-                                            {pdDDMMYYHHMM(new Date(data.client.createdAt))}
-                                        </div>
-                                    </div>
+                                    {
+                                        data.client.createdAt?
+                                            <div className={classes.row}>
+                                                <b>
+                                                    Регистрация:&nbsp;
+                                                </b>
+                                                <div>
+                                                    {pdDDMMYYHHMM(new Date(data.client.createdAt))}
+                                                </div>
+                                            </div>
+                                            :
+                                            null
+                                    }
                                     {
                                         profile.role==='admin'&&data.client.lastActive?
                                             <div className={classes.row}>
