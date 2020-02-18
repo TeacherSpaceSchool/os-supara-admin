@@ -22,12 +22,7 @@ export const getClients = async({search: search, sort: sort, filter: filter, dat
                             notification
                             info
                             reiting
-                            birthday
-                            type
                             city
-                            patent 
-                            passport 
-                            certificate
                             phone
                             organization 
                                 {_id name}
@@ -70,12 +65,7 @@ export const getClientsWithoutDistrict = async(organization, client)=>{
                             notification
                             info
                             reiting
-                            birthday
-                            type
                             city
-                            patent 
-                            passport 
-                            certificate
                             phone
                             organization 
                                 {_id name}
@@ -107,12 +97,7 @@ export const getClient = async({_id: _id}, client)=>{
                             address
                             info
                             reiting
-                            birthday
                             city
-                            type
-                            patent 
-                            passport 
-                            certificate
                             phone
                             organization 
                                 {_id name}
@@ -167,8 +152,8 @@ export const setClient = async(element, client)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: [String], $login: String, $device: String, $city: String, $type: String, $image: Upload, $patent: Upload, $passport: Upload, $certificate: Upload, $birthday: Date, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
-                        setClient(_id: $_id, device: $device, phone: $phone, login: $login, city: $city, image: $image, patent: $patent, passport: $passport, certificate: $certificate, type: $type, birthday: $birthday, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
+                    mutation ($_id: ID!, $phone: [String], $login: String, $device: String, $city: String, $image: Upload, $name: String, $email: String, $address: [[String]], $info: String, $newPass: String) {
+                        setClient(_id: $_id, device: $device, phone: $phone, login: $login, city: $city, image: $image, name: $name, email: $email, address: $address, info: $info, newPass: $newPass) {
                              data
                         }
                     }`})
@@ -185,8 +170,8 @@ export const addClient = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($image: Upload, $name: String!, $birthday: Date, $email: String, $city: String!, $address: [[String]]!, $phone: [String]!, $info: String, $type: String, $patent: Upload, $passport: Upload, $certificate: Upload) {
-                        addClient(image: $image, name: $name, birthday: $birthday, email: $email, city: $city, address: $address, phone: $phone, info: $info, type: $type, patent: $patent, passport: $passport, certificate: $certificate) {
+                    mutation ($image: Upload, $name: String!, $email: String, $city: String!, $address: [[String]]!, $phone: [String]!, $info: String, $password: String!, $login: String!) {
+                        addClient(image: $image, name: $name, email: $email, city: $city, address: $address, phone: $phone, info: $info, password: $password, login: $login) {
                              data
                         }
                     }`})

@@ -337,7 +337,7 @@ const Order =  React.memo(
                                             <div className={classes.value}>{order.allPrice}&nbsp;сом</div>
                                         </div>
                                         {
-                                            order.item.organization.consignation&&element.client.type==='торговая точка'?
+                                            order.item.organization.consignation?
                                                 <div className={classes.row}>
                                                     <div onClick={()=>{showCons[order._id]=!showCons[order._id];setShowCons({...showCons})}} style={showCons[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
                                                 </div>
@@ -350,7 +350,7 @@ const Order =  React.memo(
                                                 :null
                                         }
                                         {
-                                            element.client.type==='торговая точка'&&showCons[order._id]?
+                                            showCons[order._id]?
                                                 <>
                                                 <div className={classes.row}>
                                                     <div className={classes.nameField}>Консигнации:&nbsp;</div>
@@ -412,7 +412,7 @@ const Order =  React.memo(
                                             </div>
                                         </div>
                                         <div className={classes.row}>
-                                            {order.item.organization.consignation&&element.client.type==='торговая точка'?
+                                            {order.item.organization.consignation?
                                                 <div onClick={()=>{showCons[order._id]=!showCons[order._id];setShowCons({...showCons})}} style={showCons[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>КОНС</div>
                                                 :
                                                 null
@@ -424,9 +424,6 @@ const Order =  React.memo(
                                                 <br/>
                                                 :null
                                         }
-                                        {
-                                            element.client.type==='торговая точка'?
-                                                <>
                                                 {
                                                     showCons[order._id]?
                                                         <>
@@ -492,10 +489,6 @@ const Order =  React.memo(
                                                         </div>
                                                         : null
                                                 }
-                                                </>
-                                                :
-                                                null
-                                        }
                                         <br/>
                                     </div>
                                 )

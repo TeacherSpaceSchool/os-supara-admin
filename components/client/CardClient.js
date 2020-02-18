@@ -45,19 +45,6 @@ const CardOrganization = React.memo((props) => {
                             />
                         </label>
                         <div style={{width: 'calc(100% - 70px)'}}>
-                            {
-                                element.organization?
-                                    <div className={classes.row}>
-                                        <div className={classes.nameField}>
-                                            Организация:&nbsp;
-                                        </div>
-                                        <div className={classes.value}>
-                                            {element.organization.name}
-                                        </div>
-                                    </div>
-                                    :
-                                    null
-                            }
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
                                     Имя:&nbsp;

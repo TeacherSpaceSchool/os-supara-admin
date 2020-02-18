@@ -1,18 +1,18 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import App from '../layouts/App';
+import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as userActions from '../redux/actions/user'
-import { getOrganizations } from '../src/gql/organization'
-import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
-import CardOrganization from '../components/organization/CardOrganization'
+import * as userActions from '../../redux/actions/user'
+import { getOrganizations } from '../../src/gql/organization'
+import pageListStyle from '../../src/styleMUI/organization/orgaizationsList'
+import CardOrganization from '../../components/organization/CardOrganization'
 import Link from 'next/link';
-import { urlMain } from '../redux/constants/other'
+import { urlMain } from '../../redux/constants/other'
 import LazyLoad from 'react-lazyload';
-import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
-import { getClientGqlSsr } from '../src/getClientGQL'
-import initialApp from '../src/initialApp'
+import CardOrganizationPlaceholder from '../../components/organization/CardOrganizationPlaceholder'
+import { getClientGqlSsr } from '../../src/getClientGQL'
+import initialApp from '../../src/initialApp'
 import Router from 'next/router'
 
 const Integrates = React.memo((props) => {

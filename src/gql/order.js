@@ -53,7 +53,6 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                                     name
                                     email
                                     phone
-                                    type 
                                     user 
                                         {_id }
                                 }
@@ -162,7 +161,6 @@ export const getOrdersForRouting = async(organization)=>{
                                     name
                                     email
                                     phone 
-                                    type 
                                     user 
                                         { _id }
                                 }
@@ -241,7 +239,6 @@ export const getOrder = async({_id})=>{
                                     name
                                     email
                                     phone
-                                    type 
                                     user 
                                         {_id }
                                 }

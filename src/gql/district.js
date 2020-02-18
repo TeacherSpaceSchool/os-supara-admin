@@ -77,12 +77,7 @@ export const getDistrict = async({_id}, client)=>{
                                     notification
                                     info
                                     reiting
-                                    birthday
-                                    type
                                     city
-                                    patent 
-                                    passport 
-                                    certificate
                                     phone
                                     organization 
                                         {_id name}

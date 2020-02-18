@@ -109,8 +109,8 @@ const Sign =  React.memo(
                     null
                 }
                 <div>
-                    <div style={{width: width}} className={classes.message} onClick={()=>{setType('reg')}}>Зарегистрироваться</div>
-                    <div style={{width: width}}>Если забыли пароль то свяжитесь с нашими специалистами.</div>
+                    {/*<div style={{width: width}} className={classes.message} onClick={()=>{setType('reg')}}>Зарегистрироваться</div>*/}
+                    <div style={{width: width}}>Если забыли пароль или хотите зарегестрироваться, то перейдите в разде "Контакты" свяжитесь с нашими специалистами.</div>
                 </div>
                 <br/>
                 <div>

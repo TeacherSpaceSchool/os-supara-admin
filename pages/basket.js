@@ -237,7 +237,7 @@ const Basket = React.memo((props) => {
                                                                         </div>
                                                                         &nbsp;&nbsp;&nbsp;
                                                                         {
-                                                                            row.item.organization.consignation&&authenticated&&data.client.type==='торговая точка'?
+                                                                            row.item.organization.consignation&&authenticated?
                                                                             <div className={classes.showConsM} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
                                                                                 list[idx].showConsignment = !list[idx].showConsignment
                                                                                 setList([...list])
@@ -265,7 +265,7 @@ const Basket = React.memo((props) => {
                                                                 </div>
                                                             </div>
                                                             {
-                                                                authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
+                                                                authenticated&&list[idx].showConsignment?
                                                                     <>
                                                                     <div className={classes.row}>
                                                                         <div className={classes.valuecons}>Консигнация</div>
@@ -364,7 +364,7 @@ const Basket = React.memo((props) => {
                                                             <div className={classes.counterbtnD} onClick={()=>{increment(idx)}}>+</div>
                                                         </div>
                                                         {
-                                                            row.item.organization.consignation&&authenticated&&data.client.type==='торговая точка'?
+                                                            row.item.organization.consignation&&authenticated?
                                                                 <div className={classes.showConsD} style={{color: list[idx]&&list[idx].showConsignment?'#ffb300':'#000'}} onClick={()=>{
                                                                     list[idx].showConsignment = !list[idx].showConsignment
                                                                     setList([...list])
@@ -389,7 +389,7 @@ const Basket = React.memo((props) => {
                                                         </div>
                                                     }
                                                     {
-                                                        authenticated&&data.client.type==='торговая точка'&&list[idx].showConsignment?
+                                                        authenticated&&list[idx].showConsignment?
                                                         <>
                                                         <div className={classes.row}>
                                                             <div className={classes.valuecons}>Консигнация</div>

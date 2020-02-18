@@ -57,7 +57,6 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                             name
                                             email
                                             phone 
-                                            type 
                                             user 
                                                 {_id }
                                         }
@@ -166,8 +165,7 @@ export const getRoute = async({_id}, client)=>{
                                             _id
                                             name
                                             email
-                                            phone  
-                                            type
+                                            phone 
                                             user 
                                                 {_id }
                                         }

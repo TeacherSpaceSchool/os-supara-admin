@@ -150,7 +150,7 @@ const MyDrawer = React.memo((props) => {
                     ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href={'/clients'}>
-                            <ListItem style={{background: router.pathname.includes('client')&&!['/bonusclient', '/statistic/clientGeo', '/statistic/client'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                            <ListItem style={{background: router.pathname.includes('client')&&!['/statistic/unloadingclients', '/bonusclient', '/statistic/clientGeo', '/statistic/client'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><GroupIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Клиенты' />
                             </ListItem>
@@ -302,19 +302,6 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('statistic')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><EqualizerIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Статистика' />
-                            </ListItem>
-                        </Link>
-                        <Divider/>
-                        </>
-                        :null
-                }
-                {
-                    ['admin'].includes(profile.role)?
-                        <>
-                        <Link href={'/integrates'}>
-                            <ListItem style={{background: router.pathname.includes('integrate')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
-                                <ListItemIcon><CloudIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Интеграция 1С' />
                             </ListItem>
                         </Link>
                         <Divider/>

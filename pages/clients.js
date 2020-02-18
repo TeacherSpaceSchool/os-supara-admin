@@ -12,6 +12,9 @@ import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
 import CardClientPlaceholder from '../components/client/CardClientPlaceholder'
 import LazyLoad from 'react-lazyload';
+import Link from 'next/link';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 const height = 140;
 
 
@@ -26,6 +29,7 @@ const Client = React.memo((props) => {
         }
     }
     const { search, filter, sort, date } = props.app;
+    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             setList((await getClients({search: search, sort: sort, filter: filter, date: date})).clients)
@@ -61,14 +65,14 @@ const Client = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {/*['агент', 'менеджер', 'организация'].includes(profile.role)?
+            {['admin'].includes(profile.role)?
                 <Link href='/client/[id]' as={`/client/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
                     </Fab>
                 </Link>
                 :
-                null*/
+                null
             }
         </App>
     )
