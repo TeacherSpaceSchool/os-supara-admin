@@ -14,6 +14,8 @@ import CardOrganizationPlaceholder from '../../components/organization/CardOrgan
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import Router from 'next/router'
+import Fab from '@material-ui/core/Fab';
+import InputIcon from '@material-ui/icons/Input';
 
 const Integrates = React.memo((props) => {
     const classes = pageListStyle();
@@ -36,8 +38,8 @@ const Integrates = React.memo((props) => {
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/integrates`} />
-                <link rel='canonical' href={`${urlMain}/integrates`}/>
+                <meta property="og:url" content={`${urlMain}/statistic/integrates`} />
+                <link rel='canonical' href={`${urlMain}/statistic/integrates`}/>
             </Head>
             <div className='count'>
                 {`Всего организаций: ${list.length}`}
@@ -47,7 +49,7 @@ const Integrates = React.memo((props) => {
                     if(idx<=pagination)
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrganizationPlaceholder height={height}/>}>
-                                <Link href='/integrate/[id]' as={`/integrate/${element._id}`}>
+                                <Link href='/statistic/integrate/[id]' as={`/statistic/integrate/${element._id}`}>
                                     <a>
                                         <CardOrganization key={element._id} setList={setList} element={element}/>
                                     </a>
@@ -56,6 +58,15 @@ const Integrates = React.memo((props) => {
                         )}
                 ):null}
             </div>
+            {['admin'].includes(profile.role)?
+                <Link href='/statistic/integrate/unloadingintegrate1C'>
+                    <Fab color='primary' aria-label='add' className={classes.fab}>
+                        <InputIcon />
+                    </Fab>
+                </Link>
+                :
+                null
+            }
         </App>
     )
 })

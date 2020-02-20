@@ -65,6 +65,10 @@ const District = React.memo((props) => {
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
     };
+    let [distributer, setDistributer] = useState(router.query.id==='new'||!data.district.distributer?{}:{_id: data.district.distributer._id, name: data.district.distributer.name});
+    let handleDistributer =  (event) => {
+        setDistributer({_id: event.target.value, name: event.target.name})
+    };
     let [client, setClient] = useState(data.district?data.district.client:[]);
     let [allClient, setAllClient] = useState([]);
     let [filtredClient, setFiltredClient] = useState([]);
@@ -75,16 +79,6 @@ const District = React.memo((props) => {
     let [selectType, setSelectType] = useState('Все');
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
-    useEffect(()=>{
-        (async()=>{
-            if(data.district) {
-                if (['организация', 'менеджер'].includes(profile.role) && router.query.id === 'new') {
-                    let organization = data.organizations.filter(element => element._id === profile.organization)
-                    setOrganization(organization[0])
-                }
-            }
-        })()
-    },[profile])
     useEffect(()=>{
         (async()=>{
             if(data.district) {
@@ -334,7 +328,7 @@ District.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getDistrict({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {district: {organization: {}, client: [], name: '', agent: {}, ecspeditor: {}}},
+            ...ctx.query.id!=='new'?await getDistrict({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {district: {organization: {}, distributer: {}, client: [], name: '', agent: {}, ecspeditor: {}}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

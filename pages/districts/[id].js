@@ -82,7 +82,7 @@ const Districts = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {['admin', 'организация', 'менеджер'].includes(profile.role)?
+            {['admin'].includes(profile.role)?
                 <Link href='/district/[id]' as={`/district/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />

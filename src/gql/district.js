@@ -15,6 +15,8 @@ export const getDistricts = async({search, sort, organization}, client)=>{
                             createdAt
                             organization
                                 {_id name}
+                            distributer
+                                {_id name}
                             client
                                 { 
                                     _id
@@ -63,6 +65,8 @@ export const getDistrict = async({_id}, client)=>{
                             _id
                             createdAt
                             organization
+                                {_id name}
+                            distributer
                                 {_id name}
                             client
                                 { 
@@ -133,8 +137,8 @@ export const addDistrict = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($organization: ID, $client: [ID]!, $name: String!, $agent: ID, $ecspeditor: ID, $manager: ID) {
-                        addDistrict(organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
+                    mutation ($organization: ID, $distributer: ID, $client: [ID]!, $name: String!, $agent: ID, $ecspeditor: ID, $manager: ID) {
+                        addDistrict(distributer: $distributer, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
                              data
                         }
                     }`})
@@ -149,8 +153,8 @@ export const setDistrict = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $organization: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID, $manager: ID) {
-                        setDistrict(_id: $_id, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
+                    mutation ($_id: ID!, $distributer: ID, $organization: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID, $manager: ID) {
+                        setDistrict(distributer: $distributer, _id: $_id, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
                              data
                         }
                     }`})

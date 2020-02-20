@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import pageListStyle from '../../src/styleMUI/statistic/statistic'
 import * as userActions from '../../redux/actions/user'
+import * as snackbarActions from '../../redux/actions/snackbar'
 import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
@@ -12,36 +13,43 @@ import Router from 'next/router'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { getOrganizations } from '../../src/gql/organization'
-import { getUnloadingClients } from '../../src/gql/statistic'
+import { uploadingClients } from '../../src/gql/statistic'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-const UnloadingClients = React.memo((props) => {
+const UploadingClients = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let [organization, setOrganization] = useState({_id: 'all'});
+    let [organization, setOrganization] = useState({_id: undefined});
     const { isMobileApp } = props.app;
-    useEffect(()=>{
-        if(process.browser){
-            let appBody = document.getElementsByClassName('App-body')
-            appBody[0].style.paddingBottom = '0px'
+    const { showSnackBar } = props.snackbarActions;
+    let [document, setDocument] = useState(undefined);
+    let documentRef = useRef(null);
+    let handleChangeDocument = ((event) => {
+        if(event.target.files[0].size/1024/1024<50){
+            setDocument(event.target.files[0])
+        } else {
+            showSnackBar('Файл слишком большой')
         }
-    },[process.browser])
+    })
     return (
-        <App pageName='Выгрузка клиентов'>
+        <App pageName='Загрузка клиентов 1C'>
             <Head>
-                <title>Выгрузка клиентов</title>
+                <title>Загрузка клиентов 1C</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Выгрузка клиентов' />
+                <meta property='og:title' content='Загрузка клиентов 1C' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/statistic/unloadingclients`} />
-                <link rel='canonical' href={`${urlMain}/statistic/unloadingclients`}/>
+                <meta property="og:url" content={`${urlMain}/statistic/uploadingclients`} />
+                <link rel='canonical' href={`${urlMain}/statistic/uploadingclients`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                    <div className={classes.row}>
+                        Формат xlsx: GUID клиента из 1С, название магазина клиента, город клиента, адрес магазина клиента.
+                    </div>
                     <div className={classes.row}>
                         <Autocomplete
                             className={classes.input}
@@ -56,24 +64,39 @@ const UnloadingClients = React.memo((props) => {
                                 <TextField {...params} label='Организация' fullWidth />
                             )}
                         />
+                        <Button size='small' color='primary' onClick={()=>{documentRef.current.click()}}>
+                            {document?document.name:'Прикрепить файл'}
+                        </Button>
                     </div>
                     <br/>
                     <Button variant='contained' size='small' color='primary' onClick={async()=>{
-                        if(organization._id) {
-                            window.open(((await getUnloadingClients({
-                                organization: organization._id
-                            })).unloadingClients).data, '_blank');
+                        if(organization._id&&document) {
+                            let res = await uploadingClients({
+                                organization: organization._id,
+                                document: document
+                            });
+                            if(res.uploadingClients.data==='OK')
+                                showSnackBar('Все данные загруженны')
+
                         }
                     }}>
-                        Выгрузить
+                        Загрузить
                     </Button>
                 </CardContent>
             </Card>
+            <input
+                ref={documentRef}
+                accept='*/*'
+                style={{ display: 'none' }}
+                id='contained-button-file'
+                type='file'
+                onChange={handleChangeDocument}
+            />
         </App>
     )
 })
 
-UnloadingClients.getInitialProps = async function(ctx) {
+UploadingClients.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
@@ -99,7 +122,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
+        snackbarActions: bindActionCreators(snackbarActions, dispatch),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UnloadingClients);
+export default connect(mapStateToProps, mapDispatchToProps)(UploadingClients);

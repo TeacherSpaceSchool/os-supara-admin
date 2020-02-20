@@ -31,12 +31,12 @@ const BuyBasket =  React.memo(
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
         const width = isMobileApp? (window.innerWidth-112) : 500
-        let [address, setAddress] = useState([]);
+        let [address, setAddress] = useState([client.address[0]]);
         let [coment, setComent] = useState('');
         let handleComent =  (event) => {
             setComent(event.target.value)
         };
-        let [paymentMethod, setPaymentMethod] = useState('');
+        let [paymentMethod, setPaymentMethod] = useState('Наличные');
         let [useBonus, setUseBonus] = useState(false);
         let paymentMethods = [
             'Наличные'
@@ -59,31 +59,9 @@ const BuyBasket =  React.memo(
                         :
                         null
                 }
-                <FormControl component='fieldset' style={{width: width}}>
-                    <FormLabel component='legend'>Адреса доставки</FormLabel>
-                    <FormGroup>
-                        {
-                            client.address.map((element, idx) => (
-                                <FormControlLabel
-                                    key={idx}
-                                    onChange={(e)=>{
-                                        if(e.target.checked)
-                                            address.push(element)
-                                        else {
-                                            address.splice(address.indexOf(element), 1)
-                                        }
-                                        setAddress([...address])
-                                    }}
-                                    control={<Checkbox value={idx} />}
-                                    label={element[0]}
-                                />
-                            ))
-                        }
-                    </FormGroup>
-                </FormControl>
-                <br/>
+                <div style={{width: width}} className={classes.itogo}><b>Адрес доставки: &nbsp;</b>{client.address[0][0]}</div>
                 <Link href={'client/[id]'} as={`/client/${client._id}`}>
-                    Добавить адрес
+                    Изменить адрес
                 </Link>
                 <br/>
                 <Input
@@ -97,7 +75,7 @@ const BuyBasket =  React.memo(
                     }}
                 />
                 <br/>
-                <FormControl style={{width: width}} className={isMobileApp?classes.inputM:classes.inputD}>
+                {/*<FormControl style={{width: width}} className={isMobileApp?classes.inputM:classes.inputD}>
                     <InputLabel>Способ оплаты</InputLabel>
                     <Select value={paymentMethod} onChange={handlePaymentMethod}>
                         {paymentMethods.map((element)=>
@@ -105,7 +83,7 @@ const BuyBasket =  React.memo(
                         )}
                     </Select>
                 </FormControl>
-                <br/>
+                <br/>*/}
                 {
                     organization.minimumOrder>0?
                         <>

@@ -1,18 +1,18 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
-import App from '../../layouts/App';
+import App from '../../../layouts/App';
 import { connect } from 'react-redux'
-import { getOrganization } from '../../src/gql/organization'
-import { getIntegrate1Cs, getAgentsIntegrate1C, getClientsIntegrate1C, getEcspeditorsIntegrate1C, getItemsIntegrate1C } from '../../src/gql/integrate1C'
-import pageListStyle from '../../src/styleMUI/subcategory/subcategoryList'
-import CardIntegrate from '../../components/integrate/CardIntegrate'
+import { getOrganization } from '../../../src/gql/organization'
+import { getIntegrate1Cs, getAgentsIntegrate1C, getClientsIntegrate1C, getEcspeditorsIntegrate1C, getItemsIntegrate1C } from '../../../src/gql/integrate1C'
+import pageListStyle from '../../../src/styleMUI/subcategory/subcategoryList'
+import CardIntegrate from '../../../components/integrate/CardIntegrate'
 import { useRouter } from 'next/router'
-import { urlMain } from '../../redux/constants/other'
+import { urlMain } from '../../../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardIntegratePlaceholder from '../../components/integrate/CardIntegratePlaceholder'
-import { getClientGqlSsr } from '../../src/getClientGQL'
-import initialApp from '../../src/initialApp'
+import CardIntegratePlaceholder from '../../../components/integrate/CardIntegratePlaceholder'
+import { getClientGqlSsr } from '../../../src/getClientGQL'
+import initialApp from '../../../src/initialApp'
 
 const Integrate = React.memo((props) => {
     const classes = pageListStyle();
@@ -56,8 +56,8 @@ const Integrate = React.memo((props) => {
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/integrate/${router.query.id}`} />
-                <link rel='canonical' href={`${urlMain}/integrate/${router.query.id}`}/>
+                <meta property="og:url" content={`${urlMain}/statistic/integrate/${router.query.id}`} />
+                <link rel='canonical' href={`${urlMain}/statistic/integrate/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>
                 <div className='count' onClick={()=>setShowStat(!showStat)}>

@@ -81,6 +81,28 @@ const Statistic = React.memo((props) => {
                         </CardActionArea>
                     </Card>
                 </Link>
+                <Link href='/statistic/uploadingclients'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Загрузка клиентов 1C
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
+                <Link href='/statistic/uploadingdistricts'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Загрузка районов 1C
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
                 <Link href='/statistic/integrates'>
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
                         <CardActionArea>

@@ -41,9 +41,9 @@ const Client = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
     let [status, setStatus] = useState(data.client&&data.client.user?data.client.user.status:'');
-    let [name, setName] = useState(data.client?data.client.name:'');
-    let [email, setEmail] = useState(data.client?data.client.email:'');
-    let [phone, setPhone] = useState(data.client&&data.client.phone.length>0?data.client.phone:['+996']);
+    let [name, setName] = useState(data.client&&data.client.name?data.client.name:'');
+    let [email, setEmail] = useState(data.client&&data.client.email?data.client.email:'');
+    let [phone, setPhone] = useState(data.client&&data.client.phone&&data.client.phone.length>0?data.client.phone:['+996']);
     let addPhone = ()=>{
         phone = [...phone, '+996']
         setPhone(phone)
@@ -69,8 +69,8 @@ const Client = React.memo((props) => {
     //привести к геолокации
     if(data.client.address.length>0&&!Array.isArray(data.client.address[0])) data.client.address.map((addres)=>[addres])
 
-    let [address, setAddress] = useState(data.client&&data.client.address.length>0?data.client.address:[['']]);
-    let [city, setCity] = useState(data.client&&data.client.city?data.client.city:'');
+    let [address, setAddress] = useState(data.client&&data.client.address&&data.client.address.length>0?data.client.address:[['']]);
+    let [city, setCity] = useState(data.client&&data.client.city&&data.client.city?data.client.city:'');
 
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
@@ -95,8 +95,8 @@ const Client = React.memo((props) => {
         setAddress([...address])
     };
 
-    let [info, setInfo] = useState(data.client?data.client.info:'');
-    let [preview, setPreview] = useState(data.client?data.client.image:'');
+    let [info, setInfo] = useState(data.client&&data.client.info?data.client.info:'');
+    let [preview, setPreview] = useState(data.client&&data.client.image?data.client.image:'/static/add.png');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
         if(event.target.files[0].size/1024/1024<50){
@@ -136,7 +136,7 @@ const Client = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client?
-                        profile.role==='admin'||(data.client.user&&profile._id===data.client.user._id)?
+                        ['агент', 'admin'].includes(profile.role)||(data.client.user&&profile._id===data.client.user._id)?
                                 <>
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
@@ -159,8 +159,9 @@ const Client = React.memo((props) => {
                                             :
                                             null
                                     }
+                                    <br/>
                                     {
-                                        profile.role==='admin'&&data.client.lastActive?
+                                        ['агент', 'admin'].includes(profile.role)&&data.client.lastActive?
                                             <div className={classes.row}>
                                                 <b>
                                                     Активность:&nbsp;
@@ -221,8 +222,6 @@ const Client = React.memo((props) => {
                                         }}
                                         onChange={ event => setCity(event.target.value) }
                                     />
-                                    <br/>
-                                    <br/>
                                     {address?address.map((element, idx)=>
                                             <div key={idx}>
                                                 <FormControl className={classes.input}>
@@ -316,8 +315,6 @@ const Client = React.memo((props) => {
                                     }} size='small' color='primary'>
                                         Добавить телефон
                                     </Button>
-                                    <br/>
-                                    <br/>
 
                                     <TextField
                                         label='email'
@@ -340,7 +337,7 @@ const Client = React.memo((props) => {
                                     />
                                     <div className={classes.row}>
                                         {
-                                            (router.query.id!=='new'&&profile.role==='admin')||(data.client.user&&profile._id===data.client.user._id)?
+                                            (router.query.id!=='new'&&['агент', 'admin'].includes(profile.role))||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
                                                     if(name.length>0&&address[0].length>0&&address.length>0&&phone[0].length>0&&phone.length>0) {

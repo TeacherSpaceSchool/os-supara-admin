@@ -66,7 +66,6 @@ export default theme => ({
         marginRight: theme.spacing(1),
         textAlign: 'left',
         fontSize: '1rem',
-        fontWeight: 500
     },
     error_message: {
         marginTop: theme.spacing(1),

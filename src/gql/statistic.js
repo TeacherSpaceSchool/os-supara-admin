@@ -141,3 +141,41 @@ export const getActiveOrganization = async(client)=>{
     }
 }
 
+export const uploadingClients = async({document, organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document, organization: organization},
+                mutation: gql`
+                    mutation ($document: Upload!, $organization: ID!) {
+                        uploadingClients(document: $document, organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const uploadingDistricts = async({document, organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document, organization: organization},
+                mutation: gql`
+                    mutation ($document: Upload!, $organization: ID!) {
+                        uploadingDistricts(document: $document, organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+

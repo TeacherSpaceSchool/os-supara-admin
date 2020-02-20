@@ -57,6 +57,25 @@ export const getEcspeditorsIntegrate1C = async(organization, client)=>{
     }
 }
 
+export const unloadingIntegrate1C = async({document, organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document, organization: organization},
+                mutation: gql`
+                    mutation ($document: Upload!, $organization: ID!) {
+                        unloadingIntegrate1C(document: $document, organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getAgentsIntegrate1C = async(organization, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
