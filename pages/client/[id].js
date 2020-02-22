@@ -117,7 +117,7 @@ const Client = React.memo((props) => {
         setHide(!hide)
     };
     useEffect(()=>{
-        if(name.length===0||!city||city.length===0||phone.length===0||address.length===0||address[0].length===0||address[0][0].length===0) {
+        if(name.length===0||!city||city.length===0||phone.length===0||address.length===0||!address[0]||address[0].length===0||!address[0][0]||address[0][0].length===0) {
             showSnackBar('Обязательно заполните имя, город, номер телефона и адрес')
         }
     },[])
@@ -249,7 +249,7 @@ const Client = React.memo((props) => {
                                                     />
                                                 </FormControl>
                                                 <FormControl className={classes.input}>
-                                                    <InputLabel color={element[0]||element[0].length>0?'primary':'secondary'}>Адрес магазина</InputLabel>
+                                                    <InputLabel color={element[0]&&element[0].length>0?'primary':'secondary'}>Адрес магазина</InputLabel>
                                                     <Input
                                                         error={!element[0]||element[0].length===0}
                                                         value={element[0]}

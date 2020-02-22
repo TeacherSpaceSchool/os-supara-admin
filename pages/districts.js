@@ -43,6 +43,15 @@ const Districts = React.memo((props) => {
                 {`Всего организаций: ${list.length}`}
             </div>
             <div className={classes.page}>
+                {
+                    profile.role==='admin'?
+                        <Link href='/districts/[id]' as='/districts/super'>
+                            <a>
+                                <CardOrganization element={{name: 'AZYK.STORE', image: '/static/512x512.png'}}/>
+                            </a>
+                        </Link>
+                        :null
+                }
                 {list?list.map((element, idx)=> {
                         if(idx<=pagination)
                             return(

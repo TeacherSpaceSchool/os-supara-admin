@@ -66,7 +66,7 @@ const MyDrawer = React.memo((props) => {
             <List>
                 <Divider />
                 {
-                    ['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
+                    ['экспедитор', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                         <Link href={profile.role==='агент'?'/catalog':'/items/[id]'} as={profile.role==='агент'?'/catalog':'/items/all'}>
                             <ListItem style={{background:
                                 (

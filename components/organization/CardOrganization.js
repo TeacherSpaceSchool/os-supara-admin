@@ -34,7 +34,7 @@ const CardOrganization = React.memo((props) => {
                     </div>
                 </CardActionArea>
                 {
-                    profile.role === 'admin'&&organization ?
+                    element.name!=='AZYK.STORE'&&profile.role === 'admin'&&organization ?
                         <CardActions>
                             <Button onClick={async()=>{
                                         const action = async() => {

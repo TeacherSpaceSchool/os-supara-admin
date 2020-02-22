@@ -202,7 +202,7 @@ export const addEmployment = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($name: String!, $email: String!, $phone: [String]!, $login: String!, $password: String!, $role: String!, $organization: ID!) {
+                    mutation ($name: String!, $email: String!, $phone: [String]!, $login: String!, $password: String!, $role: String!, $organization: ID) {
                         addEmployment(name: $name, email: $email, phone: $phone, login: $login, password: $password, role: $role, organization: $organization) {
                              data
                         }

@@ -55,7 +55,7 @@ const CardEmployment = React.memo((props) => {
                                     Организация:&nbsp;
                                 </div>
                                 <div className={classes.value}>
-                                    {element.organization.name}
+                                    {element.organization?element.organization.name:'AZYK.STORE'}
                                 </div>
                             </div>
                             <div className={classes.row}>

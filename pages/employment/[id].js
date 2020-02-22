@@ -1,6 +1,6 @@
 import initialApp from '../../src/initialApp'
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import {getEmployment, setEmployments, onoffEmployment, addEmployment, deleteEmployment} from '../../src/gql/employment'
@@ -73,6 +73,12 @@ const Client = React.memo((props) => {
     const router = useRouter()
     const { logout } = props.userActions;
     let roles = ['организация', 'менеджер', 'экспедитор', 'агент']
+    let superRoles = ['суперменеджер', 'суперагент']
+    useEffect(()=>{
+        if(router.query.id!=='new'&&!organization.name){
+            setOrganization({name: 'AZYK.STORE', _id: 'super'})
+        }
+    },[])
     return (
         <App filters={data.filterSubCategory} sorts={data.sortSubCategory} pageName={data.employment!==null?router.query.id==='new'?'Добавить':data.employment.name:'Ничего не найдено'}>
             <Head>
@@ -193,10 +199,10 @@ const Client = React.memo((props) => {
                                                 onChange={handleRole}
                                                 inputProps={{
                                                     'aria-label': 'description',
-                                                    readOnly: profile._id===data.employment.user._id||!['admin', 'организация'].includes(profile.role),
+                                                    readOnly: profile._id===data.employment.user._id||!['admin'].includes(profile.role),
                                                 }}
                                             >
-                                                {roles.map((element)=>{
+                                                {(organization._id==='super'?superRoles:roles).map((element)=>{
                                                     //if(element!=='организация'||profile.role=='admin')
                                                         return <MenuItem key={element} value={element}>{element}</MenuItem>
                                                 })
@@ -216,7 +222,7 @@ const Client = React.memo((props) => {
                                                                     login: login,
                                                                     password: password,
                                                                     role: role,
-                                                                    organization: organization._id,
+                                                                    organization: organization._id!=='super'?organization._id:null,
                                                                 })
                                                                 Router.push(`/employments/${data.employment.organization._id}`)
                                                             }
@@ -316,7 +322,11 @@ Client.getInitialProps = async function(ctx) {
     return {
         data: {
             ...ctx.query.id!=='new'?await getEmployment({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{employment:{name: '',email: '',phone: [], user: {login: '',status: '',role: '',},organization: {_id: ''},}},
-            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+            organizations: [
+                {name: 'AZYK.STORE', _id: 'super'},
+                ...(await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
+            ]
+
         }
     };
 };
