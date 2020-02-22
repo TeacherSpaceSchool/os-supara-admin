@@ -9,8 +9,8 @@ import CardActions from '@material-ui/core/CardActions';
 import { deleteAds, addAds, setAds } from '../../src/gql/ads'
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
-import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
+import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import Confirmation from '../dialog/Confirmation'
 
 

@@ -17,10 +17,13 @@ import { unloadingIntegrate1C } from '../../../src/gql/integrate1C'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import * as mini_dialogActions from '../../../redux/actions/mini_dialog'
+import Confirmation from '../../../components/dialog/Confirmation'
 
 const UnloadingIntegrate1C = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     let [organization, setOrganization] = useState({_id: undefined});
     const { isMobileApp } = props.app;
     const { showSnackBar } = props.snackbarActions;
@@ -71,13 +74,16 @@ const UnloadingIntegrate1C = React.memo((props) => {
                     <br/>
                     <Button variant='contained' size='small' color='primary' onClick={async()=>{
                         if(organization._id&&document) {
-                            let res = await unloadingIntegrate1C({
-                                organization: organization._id,
-                                document: document
-                            });
-                            if(res.unloadingIntegrate1C.data==='OK')
-                                showSnackBar('Все данные загруженны')
-
+                            const action = async() => {
+                                let res = await unloadingIntegrate1C({
+                                    organization: organization._id,
+                                    document: document
+                                });
+                                if(res.unloadingIntegrate1C.data==='OK')
+                                    showSnackBar('Все данные загруженны')
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
                         }
                     }}>
                         Загрузить
@@ -123,6 +129,7 @@ function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
         snackbarActions: bindActionCreators(snackbarActions, dispatch),
+        mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
     }
 }
 
