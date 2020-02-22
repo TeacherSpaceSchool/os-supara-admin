@@ -378,7 +378,7 @@ const Client = React.memo((props) => {
                                                         :
                                                         null
                                                 }
-                                                {profile.role==='admin'?
+                                                {['агент', 'admin'].includes(profile.role)?
                                                     <Button onClick={async()=>{
                                                         const action = async() => {
                                                             await onoffClient([data.client._id])
