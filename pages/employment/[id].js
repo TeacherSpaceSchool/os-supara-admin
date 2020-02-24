@@ -95,7 +95,7 @@ const Client = React.memo((props) => {
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                 {
                             data.employment!==null?
-                                ['admin', 'организация'].includes(profile.role)||profile._id===data.employment.user._id?
+                                ['admin', 'организация'].includes(profile.role)?
                                     <>
                                     <TextField
                                             label='Логин'
@@ -311,7 +311,7 @@ const Client = React.memo((props) => {
 
 Client.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'менеджер', 'admin', 'экспедитор', 'агент'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

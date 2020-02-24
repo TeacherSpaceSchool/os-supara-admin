@@ -134,7 +134,7 @@ const CardOrganization = React.memo((props) => {
             </Link>
             <CardActions>
                 {
-                    element.user&&['агент', 'admin'].includes(profile.role) ?
+                    element.user&&['агент', 'admin', 'суперагент'].includes(profile.role) ?
                         <Button onClick={async()=>{
                             if(['admin'].includes(profile.role)) {
                                 const action = async () => {
@@ -151,8 +151,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    (!element.user&&element.organization&&profile.organization===element.organization._id&&['организация', 'менеджер', 'агент'].includes(profile.role))
-                    ||profile.role==='admin' ?
+                    profile.role==='admin' ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteClient([element._id])).clients)

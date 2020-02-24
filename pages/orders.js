@@ -104,54 +104,58 @@ const Orders = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/orders`} />
                 <link rel='canonical' href={`${urlMain}/orders`}/>
             </Head>
-            <div className='count' onClick={()=>setShowStat(!showStat)}>
-                {
-                    `Всего заказов: ${lengthList}`
-                }
-                {
-                    showStat?
-                        <>
-                        <br/>
-                        <br/>
-                        {`Всего сумма: ${price} сом`}
+            {
+                ['admin', 'client'].includes(profile.role)?
+                    <div className='count' onClick={()=>setShowStat(!showStat)}>
                         {
-                            consignment?
+                            `Всего заказов: ${lengthList}`
+                        }
+                        {
+                            showStat?
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего консигнаций: ${consignment} сом`}
-                                <br/>
-                                <br/>
-                                {`Оплачено консигнаций: ${consignmentPayment} сом`}
+                                {`Всего сумма: ${price} сом`}
+                                {
+                                    consignment?
+                                        <>
+                                        <br/>
+                                        <br/>
+                                        {`Всего консигнаций: ${consignment} сом`}
+                                        <br/>
+                                        <br/>
+                                        {`Оплачено консигнаций: ${consignmentPayment} сом`}
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    tonnage?
+                                        <>
+                                        <br/>
+                                        <br/>
+                                        {`Всего тонаж: ${tonnage} кг`}
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    size?
+                                        <>
+                                        <br/>
+                                        <br/>
+                                        {`Всего кубатура: ${size} см³`}
+                                        </>
+                                        :
+                                        null
+                                }
                                 </>
                                 :
                                 null
                         }
-                        {
-                            tonnage?
-                                <>
-                                <br/>
-                                <br/>
-                                {`Всего тонаж: ${tonnage} кг`}
-                                </>
-                                :
-                                null
-                        }
-                        {
-                            size?
-                                <>
-                                <br/>
-                                <br/>
-                                {`Всего кубатура: ${size} см³`}
-                                </>
-                                :
-                                null
-                        }
-                        </>
-                        :
-                        null
-                }
-            </div>
+                    </div>
+                    :null
+            }
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
@@ -220,7 +224,7 @@ const Orders = React.memo((props) => {
 
 Orders.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер', 'client', 'агент'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'организация', 'менеджер', 'client', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

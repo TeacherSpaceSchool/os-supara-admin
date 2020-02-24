@@ -165,7 +165,7 @@ const Order =  React.memo(
                     <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
                 </div>
                 {
-                    ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
+                    ['admin', 'суперагент', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
                        <a>
                            <div style={{cursor: 'pointer'}} className={classes.row} onClick={()=>{setMiniDialog('История', <HistoryOrder invoice={element._id}/>)}}>
                                <div className={classes.nameField}>Изменен:&nbsp;</div>
@@ -290,7 +290,7 @@ const Order =  React.memo(
                                 (
                                     profile.role==='client'||
                                     ['менеджер', 'организация', /*'агент'*/].includes(profile.role)||
-                                    profile.role==='admin'
+                                    ['admin', 'суперагент'].includes(profile.role)
                                 )
                             )
                                 return(
@@ -386,7 +386,7 @@ const Order =  React.memo(
                             else if(
                                 ['менеджер', 'организация', /*'агент',*/ 'экспедитор'].includes(profile.role)&&!confirmationForwarder
                                 ||
-                                profile.role==='admin'
+                                ['admin', 'суперагент'].includes(profile.role)
                             )
                                 return(
                                     <div key={idx} className={classes.column}>
@@ -553,7 +553,7 @@ const Order =  React.memo(
                     consignmentPrice?
                     <div>
                         <FormControlLabel
-                            disabled={!['менеджер', 'организация', 'admin'].includes(profile.role)}
+                            disabled={!['менеджер', 'организация', 'admin', 'суперагент'].includes(profile.role)}
                             control={
                                 <Checkbox
                                     checked={paymentConsignation}
@@ -572,7 +572,7 @@ const Order =  React.memo(
                 <div>
                     <FormControlLabel
                         disabled=
-                            {profile.role==='admin'?
+                            {['admin', 'суперагент'].includes(profile.role)?
                                 !['обработка','принят'].includes(element.orders[0].status)
                                 :
                                 !(['менеджер', 'организация', 'агент'].includes(profile.role)&&['обработка','принят'].includes(element.orders[0].status))}
@@ -633,7 +633,7 @@ const Order =  React.memo(
                 <div>
                     <FormControlLabel
                         disabled={(
-                            profile.role==='admin'?
+                            ['admin', 'суперагент'].includes(profile.role)?
                                 !['отмена','обработка'].includes(element.orders[0].status)
                                 :
                                 !(['client', 'организация', 'менеджер'].includes(profile.role)&&['отмена','обработка'].includes(element.orders[0].status))
@@ -654,7 +654,7 @@ const Order =  React.memo(
                                 }
                                 onChange={()=>{
                                     if('client'===profile.role) setCancelClient(!cancelClient);
-                                    else if('admin'===profile.role){
+                                    else if(['admin', 'суперагент'].includes(profile.role)){
                                         if(element.cancelClient!=undefined)
                                             setCancelClient(!cancelClient)
                                         else
@@ -720,7 +720,7 @@ const Order =  React.memo(
                     */}
                     <div>
                 {
-                    ((profile.role==='client'||['менеджер', 'организация', 'агент', 'экспедитор'].includes(profile.role)||profile.role==='admin'))?
+                    ((profile.role==='client'||['менеджер', 'организация', 'агент', 'экспедитор'].includes(profile.role)||['admin', 'суперагент'].includes(profile.role)))?
                         <Button variant='contained' color='primary' onClick={()=>{
                             const action = async() => {
 

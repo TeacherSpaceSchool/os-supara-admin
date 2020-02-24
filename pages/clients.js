@@ -82,7 +82,7 @@ Client.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     let role = ctx.store.getState().user.profile.role
     let authenticated = ctx.store.getState().user.authenticated
-    if(authenticated&&!['admin', 'организация', 'менеджер', 'агент'].includes(role))
+    if(authenticated&&!['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

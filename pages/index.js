@@ -83,12 +83,12 @@ Index.getInitialProps = async function(ctx) {
     if(!(!authenticated||['admin', 'client'].includes(role)||!role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
-                Location: ['суперагент','агент'].includes(role)?'catalog':'/items/all'
+                Location: ['суперагент','агент'].includes(role)?'/catalog':'/items/all'
             })
             ctx.res.end()
         }
         else {
-            Router.push(['суперагент','агент'].includes(role)?'catalog':'/items/all')
+            Router.push(['суперагент','агент'].includes(role)?'/catalog':'/items/all')
         }
     return {
         data: await getCategorys({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)

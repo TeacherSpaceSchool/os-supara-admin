@@ -312,7 +312,7 @@ const MyAppBar = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    authenticated&&profile.role!=='admin'?
+                                    profile.role==='client'?
                                         <MenuItem>
                                             <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
                                                 <a style={{display: 'flex', color: '#606060'}}>
@@ -543,7 +543,7 @@ const MyAppBar = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    authenticated&&profile.role!=='admin'?
+                                    profile.role==='client'?
                                         <MenuItem>
                                             <Link href={`/${profile.role==='client'?'client':'employment'}/[id]`} as={`/${profile.role==='client'?'client':'employment'}/${profile._id}`}>
                                                 <a style={{display: 'flex', color: '#606060'}}>

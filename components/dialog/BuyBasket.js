@@ -108,7 +108,7 @@ const BuyBasket =  React.memo(
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
-                        if(organization.minimumOrder===0||organization.minimumOrder<allPrice) {
+                        if(!organization.minimumOrder===0||organization.minimumOrder<allPrice) {
                             let proofeAddress = address.length > 0
                             if(proofeAddress){
                                 for (let i = 0; i<address.length; i++){

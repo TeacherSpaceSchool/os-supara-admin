@@ -136,7 +136,7 @@ const Client = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client?
-                        ['агент', 'admin'].includes(profile.role)||(data.client.user&&profile._id===data.client.user._id)?
+                        ['агент', 'admin', 'суперагент'].includes(profile.role)||(data.client.user&&profile._id===data.client.user._id)?
                                 <>
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
@@ -147,7 +147,7 @@ const Client = React.memo((props) => {
                                         />
                                     </label>
                                     {
-                                        data.client.createdAt?
+                                        ['admin', 'суперагент'].includes(profile.role)&&data.client.createdAt?
                                             <div className={classes.row}>
                                                 <b>
                                                     Регистрация:&nbsp;
@@ -161,7 +161,7 @@ const Client = React.memo((props) => {
                                     }
                                     <br/>
                                     {
-                                        ['агент', 'admin'].includes(profile.role)&&data.client.lastActive?
+                                        ['admin', 'суперагент'].includes(profile.role)&&data.client.lastActive?
                                             <div className={classes.row}>
                                                 <b>
                                                     Активность:&nbsp;
@@ -337,7 +337,7 @@ const Client = React.memo((props) => {
                                     />
                                     <div className={classes.row}>
                                         {
-                                            (router.query.id!=='new'&&['агент', 'admin'].includes(profile.role))||(data.client.user&&profile._id===data.client.user._id)?
+                                            (router.query.id!=='new'&&['агент', 'admin', 'суперагент'].includes(profile.role))||(data.client.user&&profile._id===data.client.user._id)?
                                                 <>
                                                 <Button onClick={async()=>{
                                                     if(name.length>0&&address[0].length>0&&address.length>0&&phone[0].length>0&&phone.length>0) {
@@ -378,7 +378,7 @@ const Client = React.memo((props) => {
                                                         :
                                                         null
                                                 }
-                                                {['агент', 'admin'].includes(profile.role)?
+                                                {['агент', 'admin', 'суперагент'].includes(profile.role)?
                                                     <Button onClick={async()=>{
                                                         const action = async() => {
                                                             await onoffClient([data.client._id])

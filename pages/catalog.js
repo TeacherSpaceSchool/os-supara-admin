@@ -9,13 +9,12 @@ import {checkInt} from '../src/lib';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
-import { getItems } from '../src/gql/items';
+import {getBrands} from '../src/gql/items';
 import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
 import { urlMain } from '../redux/constants/other'
 import { getBonusesClient } from '../src/gql/bonusclient'
 import TextField from '@material-ui/core/TextField';
-import {getOrganization} from '../src/gql/organization'
 import {getClients} from '../src/gql/client'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -25,22 +24,43 @@ import Divider from '@material-ui/core/Divider';
 import LazyLoad from 'react-lazyload';
 import CardCatalogPlaceholder from '../components/catalog/CardCatalogPlaceholder'
 import initialApp from '../src/initialApp'
+import { getBrandOrganizations } from '../src/gql/items'
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
+    const { profile } = props.user;
     const { data } = props;
     const clients = data.clients;
     const { search, filter, sort } = props.app;
-    const [list, setList] = useState(data.items);
+    const [list, setList] = useState(data.brands);
     const [basket, setBasket] = useState({});
-    const organization = data.organization
+    let [bonusesClient, setBonusesClient] = useState(data.bonusesClient);
+    let [organization, setOrganization] = useState({});
+    let handleOrganization = async (organization) => {
+        await deleteBasketAll()
+        setBasket({})
+        bonusesClient = (await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient
+        setBonusesClient(bonusesClient.filter(bonusClient=>bonusClient.bonus.organization._id===organization._id))
+        setOrganization(organization)
+    };
     useEffect(()=>{
         (async()=>{
-            setList((await getItems({subCategory: 'all', search: search, sort: sort, filter: filter})).items)
+            if(profile.organization){
+                setBonusesClient((await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient)
+                organization = data.brandOrganizations.filter(elem=>elem._id===profile.organization)[0]
+                setOrganization({...organization})
+            }
         })()
-    },[filter, sort, search])
+    },[])
+    useEffect(()=>{
+        (async()=>{
+            if(organization._id){
+                setList((await getBrands({organization: organization._id, search: search, sort: sort})).brands)
+            }
+        })()
+    },[filter, sort, search, organization])
     useEffect(()=>{
         setPagination(100)
         forceCheck()
@@ -156,7 +176,6 @@ const Catalog = React.memo((props) => {
             setPagination(pagination+100)
         }
     }
-
     return (
         <App checkPagination={checkPagination} searchShow={true} pageName='Каталог'>
             <Head>
@@ -171,10 +190,30 @@ const Catalog = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                    {
+                        profile.role==='суперагент'?
+                            <>
+                            <Autocomplete
+                                className={classes.input}
+                                options={data.brandOrganizations}
+                                getOptionLabel={option => option.name}
+                                onChange={(event, newValue) => {
+                                    handleOrganization(newValue)
+                                }}
+                                noOptionsText='Ничего не найдено'
+                                renderInput={params => (
+                                    <TextField {...params} label='Выберите организацию' variant='outlined' fullWidth />
+                                )}
+                            />
+                            <br/>
+                            </>
+                            :null
+
+                    }
                     <Autocomplete
                         className={classes.input}
                         options={clients}
-                        getOptionLabel={option => option.name}
+                        getOptionLabel={option => `${option.name}${option.address&&option.address[0]?` (${option.address[0][2]?`${option.address[0][2]}, `:''}${option.address[0][0]})`:''}`}
                         onChange={(event, newValue) => {
                             handleClient(newValue)
                         }}
@@ -334,10 +373,11 @@ Catalog.getInitialProps = async function(ctx) {
     await deleteBasketAll()
     return {
         data: {
-            ...await getItems({subCategory: 'all', search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getBonusesClient({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getClients({search: '', sort: '-name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getOrganization({_id: ctx.store.getState().user.profile.organization}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+            brands: [],
+            organization: {},
+            bonusesClient: [],
+            ...await getClients({search: '', sort: '-name', filter: 'all'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

@@ -23,6 +23,7 @@ export const getBrandOrganizations = async({search: search, sort: sort, filter: 
                             status
                             accessToClient
                             consignation
+                            minimumOrder
                           }
                           sortOrganization {
                            name
