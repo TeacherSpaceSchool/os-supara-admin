@@ -67,9 +67,15 @@ const Orders = React.memo((props) => {
         setTonnage(Math.round(tonnage))
         setSize(Math.round(size))
     }
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
-        setSelected([])
-        getList()
+        if(searchTimeOut)
+            clearTimeout(searchTimeOut)
+        searchTimeOut = setTimeout(async()=>{
+            setSelected([])
+            getList()
+        }, 1000)
+        setSearchTimeOut(searchTimeOut)
     },[filter, sort, search, date])
     useEffect(()=>{
         setPagination(100)

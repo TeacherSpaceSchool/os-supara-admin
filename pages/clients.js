@@ -30,9 +30,15 @@ const Client = React.memo((props) => {
     }
     const { search, filter, sort, date } = props.app;
     const { profile } = props.user;
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
         (async()=>{
-            setList((await getClients({search: search, sort: sort, filter: filter, date: date})).clients)
+            if(searchTimeOut)
+                clearTimeout(searchTimeOut)
+            searchTimeOut = setTimeout(async()=>{
+                setList((await getClients({search: search, sort: sort, filter: filter, date: date})).clients)
+            }, 1000)
+            setSearchTimeOut(searchTimeOut)
         })()
     },[filter, sort, search, date])
     useEffect(()=>{
