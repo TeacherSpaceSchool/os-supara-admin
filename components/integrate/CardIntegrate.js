@@ -20,7 +20,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const CardIntegrate = React.memo((props) => {
     const classes = cardCategoryStyle();
-    const { element, setList, organization, items, clients, agents, ecspeditors } = props;
+    const { element, setList, organization, items, clients, agents, ecspeditors, list, idx, getList } = props;
     const { isMobileApp } = props.app;
     //addCard
     let [guid, setGuid] = useState(element?element.guid:'');
@@ -175,7 +175,12 @@ const CardIntegrate = React.memo((props) => {
                                 if(agent)editElement.agent = agent._id
                                 if(item)editElement.item = item._id
                                 const action = async() => {
-                                    setList((await setIntegrate1C(editElement)).integrate1Cs)
+                                    let res = await setIntegrate1C(editElement)
+                                    if(res){
+                                        let _list = [...list]
+                                        _list[idx] = res
+                                        setList(_list)
+                                    }
                                 }
                                 setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
@@ -184,7 +189,10 @@ const CardIntegrate = React.memo((props) => {
                             </Button>
                             <Button size='small' color='primary' onClick={()=>{
                                 const action = async() => {
-                                    setList((await deleteIntegrate1C([element._id], organization)).integrate1Cs)
+                                    await deleteIntegrate1C([element._id], organization)
+                                    let _list = [...list]
+                                    _list.splice(idx, 1)
+                                    setList(_list)
                                 }
                                 setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                 showMiniDialog(true)
@@ -195,7 +203,10 @@ const CardIntegrate = React.memo((props) => {
                             :
                             <Button onClick={async()=> {
                                 const action = async() => {
-                                    setList((await addIntegrate1C({guid: guid, organization: organization, ecspeditor: ecspeditor._id, client: client._id, agent: agent._id, item: item._id})).integrate1Cs)
+                                    let element = {guid: guid, organization: organization, ecspeditor: ecspeditor._id, client: client._id, agent: agent._id, item: item._id}
+                                    let res = await addIntegrate1C(element)
+                                    if(res)
+                                        setList([res, ...list])
                                 }
                                 setGuid('')
                                 setType('')

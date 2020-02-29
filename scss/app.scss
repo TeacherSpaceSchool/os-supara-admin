@@ -55,6 +55,22 @@ html{
     width: calc(100% - #{$app-drawer-width});
   }
 }
+
+.pagination {
+  position: fixed;
+  padding: 5px;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-end;
+  top: $app-bar-height-m;
+  width: 100%;
+  @media screen and (min-width: $break-small) {
+    top: $app-bar-height-d;
+    right: 10px;
+  }
+}
+
 a {
   text-decoration: none;
   color: #ffb300;

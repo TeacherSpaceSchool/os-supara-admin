@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getClients = async({search: search, sort: sort, filter: filter, date: date}, client)=>{
+export const getClients = async(arg, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter, date: date},
+                variables: arg,
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!, $date: String) {
-                        clients(search: $search, sort: $sort, filter: $filter, date: $date) {
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String, $skip: Int) {
+                        clients(search: $search, sort: $sort, filter: $filter, date: $date, skip: $skip) {
                             _id
                             image
                             createdAt
@@ -37,6 +37,23 @@ export const getClients = async({search: search, sort: sort, filter: filter, dat
                            name
                            value
                           }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getClientsSimpleStatistic = async(arg, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: arg,
+                query: gql`
+                    query ($search: String!, $filter: String!, $date: String) {
+                        clientsSimpleStatistic(search: $search, filter: $filter, date: $date)
                     }`,
             })
         return res.data
@@ -124,7 +141,6 @@ export const onoffClient = async(ids)=>{
                              data
                         }
                     }`})
-        return await getClients(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }
@@ -141,7 +157,6 @@ export const deleteClient = async(ids)=>{
                              data
                         }
                     }`})
-        return await getClients(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }

@@ -26,6 +26,7 @@ const Confirmation =  React.memo(
                         await action()
                         await showLoad(false)
                     }  catch (err) {
+                        console.error(err)
                         showSnackBar('Ошибка')
                     }
                 }} aria-label='Delete'>

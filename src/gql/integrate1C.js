@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getIntegrate1Cs = async({search: search, filter: filter}, organization, client)=>{
+export const getIntegrate1Cs = async(arg, organization, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, organization: organization, filter: filter},
+                variables: {...arg, organization: organization},
                 query: gql`
-                    query ($search: String!, $organization: ID!, $filter: String!) {
-                        integrate1Cs(search: $search, organization: $organization, filter: $filter) {
+                    query ($search: String!, $organization: ID!, $filter: String!, $skip: Int) {
+                        integrate1Cs(search: $search, organization: $organization, filter: $filter, skip: $skip) {
                             _id
                             createdAt
                             ecspeditor
@@ -29,6 +29,23 @@ export const getIntegrate1Cs = async({search: search, filter: filter}, organizat
                            name
                            value
                           }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getIntegrate1CsSimpleStatistic = async(arg, organization, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {...arg, organization: organization},
+                query: gql`
+                    query ($search: String!, $organization: ID!, $filter: String!) {
+                        integrate1CsSimpleStatistic(search: $search, organization: $organization, filter: $filter)
                     }`,
             })
         return res.data
@@ -178,7 +195,6 @@ export const deleteIntegrate1C = async(ids, organization)=>{
                              data
                         }
                     }`})
-        return await getIntegrate1Cs(new SingletonStore().getStore().getState().app, organization)
     } catch(err){
         console.error(err)
     }
@@ -187,16 +203,27 @@ export const deleteIntegrate1C = async(ids, organization)=>{
 export const addIntegrate1C = async(element)=>{
     try{
         const client = new SingletonApolloClient().getClient()
-        await client.mutate({
+        let res = await client.mutate({
             variables: element,
             mutation : gql`
                     mutation ($organization: ID!, $item: ID, $client: ID, $guid: String, $agent: ID, $ecspeditor: ID) {
                         addIntegrate1C(organization: $organization, item: $item, client: $client, guid: $guid, agent: $agent, ecspeditor: $ecspeditor) {
-                             data
+                            _id
+                            createdAt
+                            ecspeditor
+                                {_id name}
+                            guid
+                            organization
+                                {_id name}
+                            client
+                                {_id name}
+                            agent
+                                {_id name}
+                            item
+                                {_id name}
                         }
                     }`})
-        let list = await getIntegrate1Cs(new SingletonStore().getStore().getState().app, element.organization)
-        return list
+        return res.data.addIntegrate1C
     } catch(err){
         console.error(err)
     }
@@ -205,16 +232,27 @@ export const addIntegrate1C = async(element)=>{
 export const setIntegrate1C = async(element)=>{
     try{
         const client = new SingletonApolloClient().getClient()
-        await client.mutate({
+        let res = await client.mutate({
             variables: element,
             mutation : gql`
                     mutation ($_id: ID!, $item: ID, $client: ID, $guid: String, $agent: ID, $ecspeditor: ID) {
                         setIntegrate1C(_id: $_id, item: $item, client: $client, guid: $guid, agent: $agent, ecspeditor: $ecspeditor) {
-                             data
-                        }
+                        _id
+                            createdAt
+                            ecspeditor
+                                {_id name}
+                            guid
+                            organization
+                                {_id name}
+                            client
+                                {_id name}
+                            agent
+                                {_id name}
+                            item
+                                {_id name}
+                       }
                     }`})
-        let list = await getIntegrate1Cs(new SingletonStore().getStore().getState().app, element.organization)
-        return list
+        return res.data.setIntegrate1C
     } catch(err){
         console.error(err)
     }

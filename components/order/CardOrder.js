@@ -16,7 +16,7 @@ import { deleteOrders } from '../../src/gql/order'
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
-    const { element, setList, route, getInvoices, setSelected, selected } = props;
+    const { element, setList, route, getInvoices, setSelected, selected, list, idx } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { profile, authenticated} = props.user;
     const statusColor = {
@@ -36,7 +36,7 @@ const CardOrder = React.memo((props) => {
     return (
         <Card className={classes.card}>
             <CardActionArea onClick={()=>{
-                if(!selected.length){setMiniDialog('Заказ', <Order getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}
+                if(!selected.length){setMiniDialog('Заказ', <Order idx={idx} list={list} getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}
                 else {
                     if(selected.includes(element._id)) {
                         let _selected = selected.filter((i)=>i!==element._id)
@@ -162,7 +162,10 @@ const CardOrder = React.memo((props) => {
                     profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
-                                setList((await deleteOrders([element._id])).invoices)
+                                await deleteOrders([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
                             }
                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)

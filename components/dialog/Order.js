@@ -22,7 +22,7 @@ const Order =  React.memo(
         const { isMobileApp } = props.app;
         const { profile, authenticated } = props.user;
         const { showMiniDialog, setMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
-        const { classes, element, setList, getInvoices } = props;
+        const { classes, element, setList, getInvoices, list, idx } = props;
         let [orders, setOrders] = useState(element.orders);
         let [allPrice, setAllPrice] = useState(element.allPrice);
         let [consignmentPrice, setConsignmentPrice] = useState(element.consignmentPrice);
@@ -742,12 +742,16 @@ const Order =  React.memo(
                                         name: order.item.name,
                                         returned: taken!==true?0:order.returned, consignment: order.consignment, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
 
-                                let invoices = (await setOrder({orders: sendOrders, invoice: element._id})).invoices
-
-                                if(setList)
+                                let res = await setOrder({orders: sendOrders, invoice: element._id})
+                                if(res) {
+                                    let _list = [...list]
+                                    _list[idx] = res
+                                    setList(_list)
+                                }
+                                /*if(setList)
                                     setList(invoices)
                                 if(getInvoices)
-                                    getInvoices()
+                                    getInvoices()*/
                                 showMiniDialog(false);
                             }
                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)

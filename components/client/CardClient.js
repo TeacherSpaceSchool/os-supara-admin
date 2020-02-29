@@ -18,7 +18,7 @@ import Confirmation from '../../components/dialog/Confirmation'
 
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
-    const { element, setList } = props;
+    const { element, setList, idx, list } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
@@ -154,7 +154,10 @@ const CardOrganization = React.memo((props) => {
                     profile.role==='admin' ?
                         <Button onClick={async()=>{
                             const action = async() => {
-                                setList((await deleteClient([element._id])).clients)
+                                await deleteClient([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
                             }
                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)

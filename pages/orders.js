@@ -18,7 +18,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Confirmation from '../components/dialog/Confirmation'
-import { deleteOrders } from '../src/gql/order'
+import { deleteOrders, getInvoicesSimpleStatistic } from '../src/gql/order'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import { bindActionCreators } from 'redux'
 import Badge from '@material-ui/core/Badge';
@@ -28,44 +28,26 @@ const height = 225
 const Orders = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-
+    let [simpleStatistic, setSimpleStatistic] = useState(['0']);
     let [list, setList] = useState(data.invoices);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { search, filter, sort, date } = props.app;
     const { profile } = props.user;
-    let [pagination, setPagination] = useState(100);
-    const checkPagination = ()=>{
-        if(pagination<list.length){
-            setPagination(pagination+100)
+    let [paginationWork, setPaginationWork] = useState(true);
+    const checkPagination = async()=>{
+        if(paginationWork){
+            let addedList = (await getOrders({search: search, sort: sort, filter: filter, date: date, skip: list.length})).invoices
+            if(addedList.length>0){
+                setList([...list, ...addedList])
+            }
+            else
+                setPaginationWork(false)
         }
     }
     const getList = async ()=>{
-        let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date})).invoices
+        let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date, skip: 0})).invoices
         setList(orders)
-
-        let tonnage = 0;
-        let size = 0;
-        let price = 0;
-        let consignment = 0;
-        let consignmentPayment = 0;
-        let lengthList = 0;
-        for(let i=0; i<orders.length; i++){
-            if(orders[i].orders[0].status!=='отмена') {
-                price += orders[i].allPrice
-                size += orders[i].allSize
-                lengthList += 1
-                tonnage += orders[i].allTonnage
-                consignment += orders[i].consignmentPrice
-                if (orders[i].paymentConsignation)
-                    consignmentPayment += orders[i].consignmentPrice
-            }
-        }
-        setLengthList(lengthList)
-        setPrice(Math.round(price))
-        setConsignment(Math.round(consignment))
-        setConsignmentPayment(Math.round(consignmentPayment))
-        setTonnage(Math.round(tonnage))
-        setSize(Math.round(size))
+        setSimpleStatistic((await getInvoicesSimpleStatistic({search: search, filter: filter, date: date})).invoicesSimpleStatistic)
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
@@ -74,20 +56,13 @@ const Orders = React.memo((props) => {
         searchTimeOut = setTimeout(async()=>{
             setSelected([])
             getList()
-        }, 1000)
+            forceCheck()
+            setPaginationWork(true);
+            (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+        }, 500)
         setSearchTimeOut(searchTimeOut)
     },[filter, sort, search, date])
-    useEffect(()=>{
-        setPagination(100)
-        forceCheck()
-    },[list])
 
-    let [tonnage, setTonnage] = useState(0);
-    let [size, setSize] = useState(0);
-    let [price, setPrice] = useState(0);
-    let [consignment, setConsignment] = useState(0);
-    let [consignmentPayment, setConsignmentPayment] = useState(0);
-    let [lengthList, setLengthList] = useState(0);
     let [showStat, setShowStat] = useState(false);
     let [selected, setSelected] = useState([]);
     let [anchorEl, setAnchorEl] = useState(null);
@@ -99,7 +74,7 @@ const Orders = React.memo((props) => {
     };
 
     return (
-        <App checkPagination={checkPagination} getList={getList} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App checkPagination={checkPagination} setList={setList} list={list} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
             <Head>
                 <title>Заказы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -111,46 +86,46 @@ const Orders = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/orders`}/>
             </Head>
             {
-                ['admin', 'client'].includes(profile.role)?
+                ['admin', 'client', 'организация'].includes(profile.role)?
                     <div className='count' onClick={()=>setShowStat(!showStat)}>
                         {
-                            `Всего заказов: ${lengthList}`
+                            `Всего заказов: ${simpleStatistic[0]}`
                         }
                         {
                             showStat?
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего сумма: ${price} сом`}
+                                {simpleStatistic[1]&&simpleStatistic[1]!=='0'?`Всего сумма: ${simpleStatistic[1]} сом`:null}
                                 {
-                                    consignment?
+                                    simpleStatistic[2]&&simpleStatistic[2]!=='0'?
                                         <>
                                         <br/>
                                         <br/>
-                                        {`Всего консигнаций: ${consignment} сом`}
+                                        {`Всего консигнаций: ${simpleStatistic[2]} сом`}
                                         <br/>
                                         <br/>
-                                        {`Оплачено консигнаций: ${consignmentPayment} сом`}
+                                        {`Оплачено консигнаций: ${simpleStatistic[3]} сом`}
                                         </>
                                         :
                                         null
                                 }
                                 {
-                                    tonnage?
+                                    simpleStatistic[4]&&simpleStatistic[4]!=='0'?
                                         <>
                                         <br/>
                                         <br/>
-                                        {`Всего тонаж: ${tonnage} кг`}
+                                        {`Всего тонаж: ${simpleStatistic[4]} кг`}
                                         </>
                                         :
                                         null
                                 }
                                 {
-                                    size?
+                                    simpleStatistic[5]&&simpleStatistic[5]!=='0'?
                                         <>
                                         <br/>
                                         <br/>
-                                        {`Всего кубатура: ${size} см³`}
+                                        {`Всего кубатура: ${simpleStatistic[5]} см³`}
                                         </>
                                         :
                                         null
@@ -164,12 +139,11 @@ const Orders = React.memo((props) => {
             }
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
-                    if(idx<=pagination)
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
                         <ClickNHold
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
-                            time={1}
+                            time={3}
                             onClickNHold={()=>{
                                 if(profile.role==='admin')
                                     if(selected.includes(element._id)) {
@@ -181,7 +155,7 @@ const Orders = React.memo((props) => {
 
                             }}
                         >
-                            <CardOrder setSelected={setSelected} selected={selected} setList={setList} key={element._id} element={element}/>
+                            <CardOrder list={list} idx={idx} setSelected={setSelected} selected={selected} setList={setList} key={element._id} element={element}/>
                         </ClickNHold>
                     </LazyLoad>
                         )}
@@ -240,7 +214,7 @@ Orders.getInitialProps = async function(ctx) {
             Router.push('/')
     ctx.store.getState().app.sort = '-createdAt'
     return {
-        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 

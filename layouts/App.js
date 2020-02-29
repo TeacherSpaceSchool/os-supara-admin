@@ -25,7 +25,7 @@ const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
     const { profile, authenticated } = props.user;
     const { load } = props.app;
-    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow } = props;
+    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow, setList, list } = props;
     const router = useRouter();
     const [unread, setUnread] = useState({});
     const [reloadPage, setReloadPage] = useState(false);
@@ -66,13 +66,17 @@ const App = React.memo(props => {
 
     });
 
-    const containerRef = useBottomScrollListener(()=>{
-        if(checkPagination)
-            checkPagination()
+    const containerRef = useBottomScrollListener(async()=>{
+        if(checkPagination) {
+            await setReloadPage(true)
+            await checkPagination()
+            await setReloadPage(false)
+        }
     });
 
     //if(authenticated&&profile.role&&'экспедитор'!==profile.role) {
         const subscriptionOrderRes = useSubscription(subscriptionOrder);
+    useEffect( ()=>{
         if(
             authenticated&&
             profile.role&&
@@ -80,8 +84,31 @@ const App = React.memo(props => {
             subscriptionOrderRes.data&&
             profile._id!==subscriptionOrderRes.data.reloadOrder.who
         ) {
-            if (router.pathname === '/orders')
-                getList()
+            if (router.pathname === '/orders') {
+                if(subscriptionOrderRes.data.reloadOrder.type==='ADD'){
+                    setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
+                }
+                else if(subscriptionOrderRes.data.reloadOrder.type==='SET'){
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
+                            _list[i]=subscriptionOrderRes.data.reloadOrder.invoice
+                        }
+                    }
+                    setList([..._list])
+                }
+                else if(subscriptionOrderRes.data.reloadOrder.type==='DELETE'){
+                    let index = 0
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
+                            index = i
+                        }
+                    }
+                    _list.splice(index, 1);
+                    setList([..._list])
+                }
+            }
             else {
                 if(!unread.orders) {
                     unread.orders = true
@@ -93,6 +120,7 @@ const App = React.memo(props => {
                     alert.current.play()*/
             }
         }
+    },[subscriptionOrderRes.data])
     //}
     useEffect( ()=>{
         (async ()=>{

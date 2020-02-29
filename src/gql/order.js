@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getOrders = async({search, sort, filter, date}, client)=>{
+export const getOrders = async(args, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, sort: sort, filter: filter, date: date},
+                variables: args,
                 query: gql`
-                    query ($search: String!, $sort: String!, $filter: String!, $date: String!) {
-                        invoices(search: $search, sort: $sort, filter: $filter, date: $date) {
+                    query ($search: String!, $sort: String!, $filter: String!, $date: String!, $skip: Int) {
+                        invoices(search: $search, sort: $sort, filter: $filter, date: $date, skip: $skip) {
                             _id
                             agent 
                                 {_id name}
@@ -80,6 +80,23 @@ export const getOrders = async({search, sort, filter, date}, client)=>{
                            name
                            value
                         }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getInvoicesSimpleStatistic = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($search: String!, $filter: String!, $date: String!) {
+                        invoicesSimpleStatistic(search: $search, filter: $filter, date: $date) 
                     }`,
             })
         return res.data
@@ -293,7 +310,6 @@ export const deleteOrders = async(ids)=>{
                              data
                         }
                     }`})
-        return await getOrders(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }
@@ -336,15 +352,74 @@ export const setInvoice = async(element)=>{
 export const setOrder = async(element)=>{
     try{
         const client = new SingletonApolloClient().getClient()
-        await client.mutate({
+        let res = await client.mutate({
             variables: element,
             mutation : gql`
                     mutation ($orders: [OrderInput], $invoice: ID) {
                         setOrder(orders: $orders, invoice: $invoice) {
-                             data
+                             _id
+                            createdAt
+                            updatedAt
+                            agent
+                                {_id name}
+                            allTonnage
+                            allSize
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    updatedAt
+                                    allTonnage
+                                    allSize
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            apiece
+                                            priotiry
+                                            packaging
+                                            weight
+                                            size
+                                            price
+                                            organization
+                                                {_id name consignation}
+                                        }
+                                    count
+                                    allPrice
+                                    consignment
+                                    returned
+                                    consignmentPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            consignmentPrice
+                            info
+                            address
+                            paymentMethod
+                            editor
+                            number
+                            confirmationForwarder
+                            cancelClient
+                            cancelForwarder
+                            paymentConsignation
+                            confirmationClient
+                            taken
+                            dateDelivery
+                            usedBonus
                         }
                     }`})
-        return await getOrders(new SingletonStore().getStore().getState().app)
+        return res.data.setOrder
     } catch(err){
         console.error(err)
     }
@@ -354,6 +429,69 @@ export const subscriptionOrder = gql`
   subscription  {
     reloadOrder {
       who
+      invoice {
+                             _id
+                            createdAt
+                            updatedAt
+                            agent
+                                {_id name}
+                            allTonnage
+                            allSize
+                            orders 
+                                { 
+                                    _id
+                                    createdAt
+                                    updatedAt
+                                    allTonnage
+                                    allSize
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            apiece
+                                            priotiry
+                                            packaging
+                                            weight
+                                            size
+                                            price
+                                            organization
+                                                {_id name consignation}
+                                        }
+                                    count
+                                    allPrice
+                                    consignment
+                                    returned
+                                    consignmentPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            consignmentPrice
+                            info
+                            address
+                            paymentMethod
+                            editor
+                            number
+                            confirmationForwarder
+                            cancelClient
+                            cancelForwarder
+                            paymentConsignation
+                            confirmationClient
+                            taken
+                            dateDelivery
+                            usedBonus
+                        }
+      type
     }
   }
 `

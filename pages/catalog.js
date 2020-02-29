@@ -25,6 +25,7 @@ import LazyLoad from 'react-lazyload';
 import CardCatalogPlaceholder from '../components/catalog/CardCatalogPlaceholder'
 import initialApp from '../src/initialApp'
 import { getBrandOrganizations } from '../src/gql/items'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
@@ -32,8 +33,39 @@ const Catalog = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     const { profile } = props.user;
     const { data } = props;
-    const clients = data.clients;
+    const [clients, setClients] = useState([]);
     const { search, filter, sort } = props.app;
+    const [inputValue, setInputValue] = React.useState('');
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        (async()=>{
+            if (inputValue.length<3) {
+                setClients([]);
+                if(open)
+                    setOpen(false)
+                if(loading)
+                    setLoading(false)
+            }
+            else {
+                if(!loading)
+                    setLoading(true)
+                if(searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async()=>{
+                    setClients((await getClients({search: inputValue, sort: '-name', filter: 'all'})).clients)
+                    if(!open)
+                        setOpen(true)
+                    setLoading(false)
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
+        })()
+    }, [inputValue]);
+    const handleChange = event => {
+        setInputValue(event.target.value);
+    };
     const [list, setList] = useState(data.brands);
     const [basket, setBasket] = useState({});
     let [bonusesClient, setBonusesClient] = useState(data.bonusesClient);
@@ -70,6 +102,7 @@ const Catalog = React.memo((props) => {
     let handleClient =  (client) => {
         setClient(client)
         setBonus((data.bonusesClient.filter(bonusClient=>bonusClient.client._id===client._id))[0])
+        setOpen(false)
     };
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
@@ -190,6 +223,32 @@ const Catalog = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                    <Autocomplete
+                        open={open}
+                        disableOpenOnFocus
+                        className={classes.input}
+                        options={clients}
+                        getOptionLabel={option => `${option.name}${option.address&&option.address[0]?` (${option.address[0][2]?`${option.address[0][2]}, `:''}${option.address[0][0]})`:''}`}
+                        onChange={(event, newValue) => {
+                            handleClient(newValue)
+                        }}
+                        noOptionsText='Ничего не найдено'
+                        renderInput={params => (
+                            <TextField {...params} label='Выберите клиента' variant='outlined' fullWidth
+                                       onChange={handleChange}
+                                               InputProps={{
+                                                   ...params.InputProps,
+                                                   endAdornment: (
+                                                       <React.Fragment>
+                                                           {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                                           {params.InputProps.endAdornment}
+                                                       </React.Fragment>
+                                                   ),
+                                               }}
+                            />
+                        )}
+                    />
+                    <br/>
                     {
                         profile.role==='суперагент'?
                             <>
@@ -210,19 +269,6 @@ const Catalog = React.memo((props) => {
                             :null
 
                     }
-                    <Autocomplete
-                        className={classes.input}
-                        options={clients}
-                        getOptionLabel={option => `${option.name}${option.address&&option.address[0]?` (${option.address[0][2]?`${option.address[0][2]}, `:''}${option.address[0][0]})`:''}`}
-                        onChange={(event, newValue) => {
-                            handleClient(newValue)
-                        }}
-                        noOptionsText='Ничего не найдено'
-                        renderInput={params => (
-                            <TextField {...params} label='Выберите клиента' variant='outlined' fullWidth />
-                        )}
-                    />
-                    <br/>
                     {
                         list.map((row, idx) => {
                             let price
@@ -376,7 +422,6 @@ Catalog.getInitialProps = async function(ctx) {
             brands: [],
             organization: {},
             bonusesClient: [],
-            ...await getClients({search: '', sort: '-name', filter: 'all'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };

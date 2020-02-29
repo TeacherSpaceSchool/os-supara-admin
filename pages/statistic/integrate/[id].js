@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import App from '../../../layouts/App';
 import { connect } from 'react-redux'
 import { getOrganization } from '../../../src/gql/organization'
-import { getIntegrate1Cs, getAgentsIntegrate1C, getClientsIntegrate1C, getEcspeditorsIntegrate1C, getItemsIntegrate1C } from '../../../src/gql/integrate1C'
+import { getIntegrate1Cs, getAgentsIntegrate1C, getClientsIntegrate1C, getEcspeditorsIntegrate1C, getItemsIntegrate1C, getIntegrate1CsSimpleStatistic } from '../../../src/gql/integrate1C'
 import pageListStyle from '../../../src/styleMUI/subcategory/subcategoryList'
 import CardIntegrate from '../../../components/integrate/CardIntegrate'
 import { useRouter } from 'next/router'
@@ -19,6 +19,7 @@ const Integrate = React.memo((props) => {
     const { data } = props;
     const router = useRouter()
     let [list, setList] = useState(data.integrate1Cs);
+    let [simpleStatistic, setSimpleStatistic] = useState(['0']);
     let [items, setItems] = useState(data.itemsIntegrate1C);
     let [agents, setAgents] = useState(data.agentsIntegrate1C);
     let [ecspeditors, setEcspeditors] = useState(data.ecspeditorsIntegrate1C);
@@ -26,27 +27,37 @@ const Integrate = React.memo((props) => {
     const { search, filter } = props.app;
     let [showStat, setShowStat] = useState(false);
     let height = 189
-    useEffect(()=>{
-        (async()=>{
-            setList((await getIntegrate1Cs({search: search, filter: filter}, router.query.id)).integrate1Cs)
-        })()
-    },[filter,  search])
-    useEffect(()=>{
-        (async()=>{
-            forceCheck()
-            setPagination(100)
-            setItems((await getItemsIntegrate1C(router.query.id)).itemsIntegrate1C)
-            setAgents((await getAgentsIntegrate1C(router.query.id)).agentsIntegrate1C)
-            setEcspeditors((await getEcspeditorsIntegrate1C(router.query.id)).ecspeditorsIntegrate1C)
-            setClients((await getClientsIntegrate1C(router.query.id)).clientsIntegrate1C)
-        })()
-    },[list])
-    let [pagination, setPagination] = useState(100);
-    const checkPagination = ()=>{
-        if(pagination<list.length){
-            setPagination(pagination+100)
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    let [paginationWork, setPaginationWork] = useState(true);
+    const checkPagination = async()=>{
+        if(paginationWork){
+            let addedList = (await getIntegrate1Cs({search: search, filter: filter, skip: list.length}, router.query.id)).integrate1Cs
+            if(addedList.length>0){
+                setList([...list, ...addedList])
+            }
+            else
+                setPaginationWork(false)
         }
     }
+    const getList = async()=>{
+        setList((await getIntegrate1Cs({search: search, filter: filter, skip: 0}, router.query.id)).integrate1Cs)
+        setSimpleStatistic((await getIntegrate1CsSimpleStatistic({search: search, filter: filter}, router.query.id)).integrate1CsSimpleStatistic[0])
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+        forceCheck()
+        setItems((await getItemsIntegrate1C(router.query.id)).itemsIntegrate1C)
+        setAgents((await getAgentsIntegrate1C(router.query.id)).agentsIntegrate1C)
+        setEcspeditors((await getEcspeditorsIntegrate1C(router.query.id)).ecspeditorsIntegrate1C)
+        setClients((await getClientsIntegrate1C(router.query.id)).clientsIntegrate1C)
+    }
+    useEffect(()=>{
+        if(searchTimeOut)
+            clearTimeout(searchTimeOut)
+        searchTimeOut = setTimeout(async()=>{
+            await getList()
+        }, 500)
+        setSearchTimeOut(searchTimeOut)
+    },[filter, search])
     return (
         <App checkPagination={checkPagination} searchShow={true} filters={data.filterIntegrate1C} pageName={data.organization?data.organization.name:'Ничего не найдено'}>
             <Head>
@@ -61,7 +72,7 @@ const Integrate = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 <div className='count' onClick={()=>setShowStat(!showStat)}>
-                    {`Всего интеграций: ${list.length}`}
+                    {`Всего интеграций: ${simpleStatistic}`}
                     {
                         showStat?
                             <>
@@ -82,14 +93,12 @@ const Integrate = React.memo((props) => {
                             null
                     }
                 </div>
-                <CardIntegrate organization={router.query.id} items={items} clients={clients} agents={agents} ecspeditors={ecspeditors} setList={setList}/>
-
+                <CardIntegrate list={list} organization={router.query.id} items={items} clients={clients} agents={agents} ecspeditors={ecspeditors} setList={setList}/>
                 {data.organization?
                     list?list.map((element, idx)=> {
-                        if(idx<=pagination)
                             return(
                                 <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardIntegratePlaceholder height={height}/>}>
-                                    <CardIntegrate element={element} organization={router.query.id} items={items} clients={clients} agents={agents} ecspeditors={ecspeditors} setList={setList}/>
+                                    <CardIntegrate list={list} idx={idx} element={element} organization={router.query.id} items={items} clients={clients} agents={agents} ecspeditors={ecspeditors} setList={setList}/>
                                 </LazyLoad>
                             )}
                     ):null
@@ -104,7 +113,7 @@ Integrate.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     return {
         data: {
-            ...(await getIntegrate1Cs({search: '', filter: ''}, ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):null)),
+            ...(await getIntegrate1Cs({search: '', filter: '', skip: 0}, ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):null)),
             ...(await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):null)),
             ...(await getItemsIntegrate1C(ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):null)),
             ...(await getAgentsIntegrate1C(ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):null)),
