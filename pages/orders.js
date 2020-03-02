@@ -55,7 +55,7 @@ const Orders = React.memo((props) => {
             clearTimeout(searchTimeOut)
         searchTimeOut = setTimeout(async()=>{
             setSelected([])
-            getList()
+            await getList()
             forceCheck()
             setPaginationWork(true);
             (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
