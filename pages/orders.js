@@ -145,7 +145,7 @@ const Orders = React.memo((props) => {
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
                             time={3}
                             onClickNHold={()=>{
-                                if(profile.role==='admin')
+                                if(profile.role==='admin'&&element.orders[0].status==='отмена')
                                     if(selected.includes(element._id)) {
                                         selected = selected.filter((i)=>i!==element._id)
                                         setSelected([...selected])
@@ -186,7 +186,15 @@ const Orders = React.memo((props) => {
             >
                 <MenuItem onClick={async()=>{
                     const action = async() => {
-                        setList((await deleteOrders(selected)).invoices)
+                        let _list = [...list]
+                        for(let i=0; i<_list.length; i++){
+                            if(selected.includes(_list[i].idx)) {
+                                _list.splice(i, 1)
+                                i-=1
+                            }
+                        }
+                        setList(_list)
+                        await deleteOrders(selected)
                     }
                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                     showMiniDialog(true);

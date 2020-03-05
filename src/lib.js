@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 const regexpUA = /(Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|iOS|Mobile)/
 
 export const checkMobile = (ua)=>{

@@ -69,6 +69,7 @@ export const getOrders = async(args, client)=>{
                             cancelForwarder
                             paymentConsignation
                             taken
+                            sync
                             dateDelivery
                             usedBonus
                         }
@@ -194,6 +195,7 @@ export const getOrdersForRouting = async(organization)=>{
                             cancelForwarder
                             paymentConsignation
                             taken
+                            sync
                             dateDelivery
                             usedBonus
                         }
@@ -272,6 +274,7 @@ export const getOrder = async({_id})=>{
                             paymentConsignation
                             confirmationClient
                             taken
+                            sync
                             dateDelivery
                             usedBonus
                         }
@@ -415,6 +418,7 @@ export const setOrder = async(element)=>{
                             paymentConsignation
                             confirmationClient
                             taken
+                            sync
                             dateDelivery
                             usedBonus
                         }
@@ -488,6 +492,7 @@ export const subscriptionOrder = gql`
                             paymentConsignation
                             confirmationClient
                             taken
+                            sync
                             dateDelivery
                             usedBonus
                         }

@@ -15,6 +15,12 @@ export default makeStyles({
         flexDirection: 'row',
         alignItems: 'baseline'
     },
+    sync: {
+        position: 'absolute',
+        bottom: 15,
+        right: 15,
+        fontSize: 23
+    },
     number: {
         marginBottom: 10,
         fontWeight: 'bold',

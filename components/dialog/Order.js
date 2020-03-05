@@ -23,7 +23,7 @@ const Order =  React.memo(
         const { profile, authenticated } = props.user;
         const { showMiniDialog, setMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
         const { classes, element, setList, getInvoices, list, idx } = props;
-        let [orders, setOrders] = useState(element.orders);
+        let [orders, setOrders] = useState([...element.orders]);
         let [allPrice, setAllPrice] = useState(element.allPrice);
         let [consignmentPrice, setConsignmentPrice] = useState(element.consignmentPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
@@ -36,6 +36,7 @@ const Order =  React.memo(
         let [confirmationClient, setConfirmationClient] = useState(element.confirmationClient);
         let [cancelForwarder, setCancelForwarder] = useState(element.cancelForwarder!=undefined&&element.cancelForwarder);
         let [cancelClient, setCancelClient] = useState(element.cancelClient!=undefined&&element.cancelClient);
+        let [changeOrders, setChangeOrders] = useState(false);
         const width = isMobileApp? (window.innerWidth-112) : 500;
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
@@ -55,6 +56,7 @@ const Order =  React.memo(
             setAllTonnage(Math.round(allTonnage))
             setAllSize(Math.round(allSize))
             setConsignmentPrice(consignmentPrice)
+            setChangeOrders(true)
         }
         let increment = (idx)=>{
             if(orders[idx].item.apiece)
@@ -725,25 +727,32 @@ const Order =  React.memo(
                             const action = async() => {
 
                                 let invoice = {invoice: element._id}
-                                if(element.taken!==taken)invoice.taken=taken
-                                if(element.confirmationClient!==confirmationClient)invoice.confirmationClient=confirmationClient
-                                if(element.confirmationForwarder!==confirmationForwarder)invoice.confirmationForwarder=confirmationForwarder
-                                if(element.cancelClient!==cancelClient)invoice.cancelClient=cancelClient
-                                if(element.cancelForwarder!==cancelForwarder)invoice.cancelForwarder=cancelForwarder
-                                if(element.paymentConsignation!==paymentConsignation)invoice.paymentConsignation=paymentConsignation
+                                if(element.taken!==taken)invoice.taken=taken;
+                                if(element.confirmationClient!==confirmationClient) invoice.confirmationClient=confirmationClient;
+                                if(element.confirmationForwarder!==confirmationForwarder) invoice.confirmationForwarder=confirmationForwarder;
+                                if(element.cancelClient!==cancelClient) invoice.cancelClient=cancelClient;
+                                if(element.cancelForwarder!==cancelForwarder) invoice.cancelForwarder=cancelForwarder;
+                                if(element.paymentConsignation!==paymentConsignation) invoice.paymentConsignation=paymentConsignation;
                                 await setInvoice(invoice)
 
-                                let sendOrders;
-                                //if(element.orders[0].status!=='обработка') sendOrders = []
-                                /*else */
-                                    sendOrders = orders.map((order)=>{return {
-                                        _id: order._id,
-                                        consignmentPrice: order.consignmentPrice,
-                                        name: order.item.name,
-                                        returned: taken!==true?0:order.returned, consignment: order.consignment, count: order.count, allPrice: order.allPrice, allTonnage: order.allTonnage, allSize: order.allSize, status: order.status}})
-
+                                let sendOrders = [];
+                                if(changeOrders)
+                                    sendOrders = orders.map((order) => {
+                                        return {
+                                            _id: order._id,
+                                            consignmentPrice: order.consignmentPrice,
+                                            name: order.item.name,
+                                            returned: taken !== true ? 0 : order.returned,
+                                            consignment: order.consignment,
+                                            count: order.count,
+                                            allPrice: order.allPrice,
+                                            allTonnage: order.allTonnage,
+                                            allSize: order.allSize,
+                                            status: order.status
+                                        }
+                                    })
                                 let res = await setOrder({orders: sendOrders, invoice: element._id})
-                                if(res) {
+                                if (res) {
                                     let _list = [...list]
                                     _list[idx] = res
                                     setList(_list)

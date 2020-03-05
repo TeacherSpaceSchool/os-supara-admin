@@ -13,6 +13,8 @@ import { pdDDMMYYHHMM } from '../../src/lib'
 import Order from '../dialog/Order'
 import Confirmation from '../../components/dialog/Confirmation'
 import { deleteOrders } from '../../src/gql/order'
+import SyncOn from '@material-ui/icons/Sync';
+import SyncOff from '@material-ui/icons/SyncDisabled';
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
@@ -35,15 +37,26 @@ const CardOrder = React.memo((props) => {
     },[element,])
     return (
         <Card className={classes.card}>
+            {
+                ['admin', 'организация', 'суперагент', 'менеджер'].includes(profile.role)?
+                    [1,2].includes(element.sync)?
+                        <SyncOn style={{color: element.sync===1?'orange':'green'}} className={classes.sync}/>
+                        :
+                        <SyncOff color='secondary' className={classes.sync}/>
+                    :
+                    null
+            }
             <CardActionArea onClick={()=>{
                 if(!selected.length){setMiniDialog('Заказ', <Order idx={idx} list={list} getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}
                 else {
-                    if(selected.includes(element._id)) {
-                        let _selected = selected.filter((i)=>i!==element._id)
-                        setSelected([..._selected])
+                    if(element.orders[0].status==='отмена') {
+                        if (selected.includes(element._id)) {
+                            let _selected = selected.filter((i) => i !== element._id)
+                            setSelected([..._selected])
+                        }
+                        else
+                            setSelected([...selected, element._id])
                     }
-                    else
-                        setSelected([...selected, element._id])
                 }
             }}>
                 <CardContent className={classes.column}>
@@ -159,7 +172,7 @@ const CardOrder = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    profile.role==='admin'&&!selected.length ?
+                    element.orders[0].status==='отмена'&&profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteOrders([element._id])

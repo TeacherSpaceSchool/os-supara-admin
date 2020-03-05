@@ -38,7 +38,7 @@ const App = React.memo(props => {
 
     Router.events.on('routeChangeStart', (url, err)=>{
 
-        if(router.asPath!==url&&router.asPath.includes('items')) {
+        if(router.asPath!==url&&(router.asPath.includes('items')||router.asPath.includes('brand'))) {
             if(!sessionStorage.scrollPostionStore)
                 sessionStorage.scrollPostionStore = JSON.stringify({})
             let scrollPostionStore = JSON.parse(sessionStorage.scrollPostionStore)
