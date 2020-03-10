@@ -33,6 +33,7 @@ function CustomTooltip({ getStyle, primaryAxis, datum }) {
                 : [],
         [datum, getStyle]
     )
+    console.log(data)
     return datum ? (
         <div
             style={{
@@ -50,30 +51,10 @@ function CustomTooltip({ getStyle, primaryAxis, datum }) {
             </h3>
             <div
                 style={{
-                    width: '300px',
                     height: '200px',
                     display: 'flex'
                 }}
             >
-                <Chart
-                    data={data}
-                    dark
-                    series={{ type: 'bar' }}
-                    axes={[
-                        {
-                            primary: true,
-                            position: 'bottom',
-                            type: 'ordinal'
-                        },
-                        {
-                            position: 'left',
-                            type: 'linear'
-                        }
-                    ]}
-                    getDatumStyle={datum => ({
-                        color: datum.originalDatum.color
-                    })}
-                />
             </div>
         </div>
     ) : null
@@ -125,15 +106,6 @@ const ChartStatistic = React.memo((props) => {
         }),
         []
     )
-    const tooltip = React.useMemo(
-        () => ({
-            render: ({ datum, primaryAxis, getStyle }) => {
-                return <CustomTooltip {...{ getStyle, primaryAxis, datum }} />
-            }
-        }),
-        []
-    )
-    console.log(statisticOrderChart)
     return (
         <App pageName='Графики заказов'>
             <Head>
@@ -191,15 +163,18 @@ const ChartStatistic = React.memo((props) => {
                         statisticOrderChart?
                             <div
                                 style={{
-                                    width: isMobileApp?'calc(100vw - 32px)':'calc(100vw - 332px)',
-                                    height: isMobileApp?'calc(100vh - 202px)':'calc(100vh - 214px)'
+                                    width: isMobileApp?'calc(100vw - 32px)':'calc(100vw - 340px)',
+                                    height: isMobileApp?'calc(100vh - 202px)':'calc(100vh - 222px)'
                                 }}
                             >
                                 <Chart
                                     series={series}
                                     data={statisticOrderChart}
                                     axes={axes}
-                                    tooltip={tooltip}/>
+                                    tooltip
+                                    primaryCursor
+                                    secondaryCursor
+                                />
                             </div>
                             :
                             null
