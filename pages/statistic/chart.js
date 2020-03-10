@@ -169,7 +169,7 @@ const ChartStatistic = React.memo((props) => {
                             >
                                 <Chart
                                     series={series}
-                                    data={statisticOrderChart}
+                                    data={statisticOrderChart.geoStatistic}
                                     axes={axes}
                                     tooltip
                                     primaryCursor
@@ -181,6 +181,13 @@ const ChartStatistic = React.memo((props) => {
                     }
                 </CardContent>
             </Card>
+            <div className='count' onClick={()=>setShowStat(!showStat)}>
+                {
+                    statisticOrderChart?
+                        `${statisticOrderChart.all} сом`
+                        :null
+                }
+            </div>
         </App>
     )
 })

@@ -91,8 +91,12 @@ export const getStatisticOrderChart = async({company, dateStart, dateType}, clie
                 query: gql`
                     query ($company: String, $dateStart: Date, $dateType: String) {
                         statisticOrderChart(company: $company, dateStart: $dateStart, dateType: $dateType) {
-                            label
-                            data
+                            all
+                            geoStatistic
+                                {
+                                    label
+                                    data
+                                }
                         }
                     }`,
             })
