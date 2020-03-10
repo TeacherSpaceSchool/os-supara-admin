@@ -7,7 +7,7 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import { getStatisticClientGeo, getActiveItem, getActiveOrganization } from '../../src/gql/statistic'
-import { Map, YMaps, Placemark } from 'react-yandex-maps';
+import { Map, YMaps, Placemark, Clusterer } from 'react-yandex-maps';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -27,7 +27,7 @@ const ClientGeoStatistic = React.memo((props) => {
     let [organization, setOrganization] = useState(null);
     let [items, setItems] = useState([]);
     let [item, setItem] = useState(null);
-    let [statisticClientGeo, setStatisticClientGeo] = useState(data.statisticClientGeo);
+    let [statisticClientGeo, setStatisticClientGeo] = useState(undefined);
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
@@ -62,27 +62,34 @@ const ClientGeoStatistic = React.memo((props) => {
                     <link rel='canonical' href={`${urlMain}/statistic/clientGeo`}/>
                 </Head>
                 {
-                    process.browser?
+                    process.browser&&statisticClientGeo?
                         <div style={{height: window.innerHeight-64, width: isMobileApp?window.innerWidth:window.innerWidth-300, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             {
                                 load?<CircularProgress/>:null
                             }
                             <div style={{display: load?'none':'block'}}>
                                 <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-64} width={isMobileApp?window.innerWidth:window.innerWidth-300}
-                                         state={{ center: [42.8700000, 74.5900000], zoom: 12 }}
+                                         state={{ center: [42.8700000, 74.5900000], zoom: 10 }}
                                     >
                                         {
                                             statisticClientGeo?
-                                                (statisticClientGeo.slice(1)).map(
-                                                    (element, idx) => {
-                                                        return <Placemark
-                                                            onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
-                                                            key={idx}
-                                                            options={{iconColor: element.data[1]}}
-                                                            properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
-                                                            geometry={element.address[1].split(', ')}/>
-                                                    }
-                                                )
+                                                <Clusterer
+                                                    options={{
+                                                        preset: 'islands#invertedVioletClusterIcons',
+                                                        groupByCoordinates: false,
+                                                    }}
+                                                >
+                                                    {(statisticClientGeo.slice(1)).map(
+                                                        (element, idx) => {
+                                                            return <Placemark
+                                                                onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
+                                                                key={idx}
+                                                                options={{iconColor: element.data[1]}}
+                                                                properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
+                                                                geometry={element.address[1].split(', ')}/>
+                                                        }
+                                                    )}
+                                                </Clusterer>
                                                 :
                                                 null
                                         }
@@ -125,9 +132,13 @@ const ClientGeoStatistic = React.memo((props) => {
                 :
                 null
         }
-        <div className='count'>
-            {`${parseInt(statisticClientGeo[0].data[0])+parseInt(statisticClientGeo[0].data[1])+parseInt(statisticClientGeo[0].data[2])}(${statisticClientGeo[0].data[0]}|${statisticClientGeo[0].data[1]}|${statisticClientGeo[0].data[2]})`}
-        </div>
+        {
+            statisticClientGeo?
+                <div className='count'>
+                    {`${parseInt(statisticClientGeo[0].data[0])+parseInt(statisticClientGeo[0].data[1])+parseInt(statisticClientGeo[0].data[2])}(${statisticClientGeo[0].data[0]}|${statisticClientGeo[0].data[1]}|${statisticClientGeo[0].data[2]})`}
+                </div>
+                :null
+        }
         </>
     )
 })
@@ -144,7 +155,6 @@ ClientGeoStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getStatisticClientGeo({}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

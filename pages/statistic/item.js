@@ -14,6 +14,8 @@ import { getStatisticItem, getActiveOrganization } from '../../src/gql/statistic
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { bindActionCreators } from 'redux'
+import * as appActions from '../../redux/actions/app'
 
 const ItemStatistic = React.memo((props) => {
 
@@ -23,13 +25,21 @@ const ItemStatistic = React.memo((props) => {
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('month');
-    let [statisticItem, setStatisticItem] = useState(data.statisticItem);
+    let [statisticItem, setStatisticItem] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState({_id: 'all'});
+    const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin')
-                setStatisticItem((await getStatisticItem({company: organization?organization._id: 'all', dateStart: dateStart?dateStart:null, dateType: dateType})).statisticItem)
+            if(profile.role==='admin') {
+                await showLoad(true)
+                setStatisticItem((await getStatisticItem({
+                    company: organization ? organization._id : 'all',
+                    dateStart: dateStart ? dateStart : null,
+                    dateType: dateType
+                })).statisticItem)
+                await showLoad(false)
+            }
         })()
     },[organization, dateStart, dateType])
     useEffect(()=>{
@@ -95,29 +105,39 @@ const ItemStatistic = React.memo((props) => {
                             onChange={ event => setDateStart(event.target.value) }
                         />
                     </div>
-                    <Table type='item' row={(statisticItem.row).slice(1)} columns={statisticItem.columns}/>
+                    {
+                        statisticItem?
+                            <Table type='item' row={(statisticItem.row).slice(1)} columns={statisticItem.columns}/>
+                            :null
+                    }
                 </CardContent>
             </Card>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
-                {`Активных товаров: ${statisticItem.row[0].data[0]}`}
                 {
-                    showStat?
+                    statisticItem?
                         <>
-                        <br/>
-                        <br/>
-                        {`Всего прибыль: ${statisticItem.row[0].data[1]} сом`}
-                        <br/>
-                        <br/>
-                        {`Конс: ${statisticItem.row[0].data[2]} сом`}
-                        <br/>
-                        <br/>
-                        {`Выполнено: ${statisticItem.row[0].data[3]} шт`}
-                        <br/>
-                        <br/>
-                        {`Отменено: ${statisticItem.row[0].data[4]} шт`}
+                        {`Активных товаров: ${statisticItem.row[0].data[0]}`}
+                        {
+                            showStat?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Всего прибыль: ${statisticItem.row[0].data[1]} сом`}
+                                <br/>
+                                <br/>
+                                {`Конс: ${statisticItem.row[0].data[2]} сом`}
+                                <br/>
+                                <br/>
+                                {`Выполнено: ${statisticItem.row[0].data[3]} шт`}
+                                <br/>
+                                <br/>
+                                {`Отменено: ${statisticItem.row[0].data[4]} шт`}
+                                </>
+                                :
+                                null
+                        }
                         </>
-                        :
-                        null
+                        :null
                 }
             </div>
         </App>
@@ -136,7 +156,6 @@ ItemStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getStatisticItem({company: 'all'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
@@ -149,4 +168,12 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(ItemStatistic);
+function mapDispatchToProps(dispatch) {
+    return {
+
+        appActions: bindActionCreators(appActions, dispatch),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemStatistic);

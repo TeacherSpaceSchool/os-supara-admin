@@ -153,8 +153,8 @@ export const setDistrict = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $distributer: ID, $organization: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID, $manager: ID) {
-                        setDistrict(distributer: $distributer, _id: $_id, organization: $organization, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
+                    mutation ($_id: ID!, $distributer: ID, $client: [ID], $name: String, $agent: ID, $ecspeditor: ID, $manager: ID) {
+                        setDistrict(distributer: $distributer, _id: $_id, client: $client, name: $name, agent: $agent, ecspeditor: $ecspeditor, manager: $manager) {
                              data
                         }
                     }`})

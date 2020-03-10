@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as appActions from '../../redux/actions/app'
+import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import Done from '@material-ui/icons/Done';
 import Clear from '@material-ui/icons/Clear';

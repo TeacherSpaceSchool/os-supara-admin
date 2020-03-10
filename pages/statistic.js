@@ -37,12 +37,23 @@ const Statistic = React.memo((props) => {
                         </CardActionArea>
                     </Card>
                 </Link>
+                <Link href='/statistic/active'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Статистика активности
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
                 <Link href='/statistic/client'>
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
                         <CardActionArea>
                             <div className={classes.line}>
                                 <h3 className={classes.input}>
-                                    Клиенты
+                                    Статистика клиентов
                                 </h3>
                             </div>
                         </CardActionArea>
@@ -53,7 +64,29 @@ const Statistic = React.memo((props) => {
                         <CardActionArea>
                             <div className={classes.line}>
                                 <h3 className={classes.input}>
-                                    Товары
+                                    Статистика товаров
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
+                <Link href='/statistic/order'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Статистика заказов
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
+                <Link href='/statistic/chart'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Графики заказов
                                 </h3>
                             </div>
                         </CardActionArea>

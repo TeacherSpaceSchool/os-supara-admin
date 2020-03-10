@@ -8,36 +8,99 @@ import CardContent from '@material-ui/core/CardContent';
 import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
-import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticClient, getActiveOrganization } from '../../src/gql/statistic'
+import { getStatisticOrderChart, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
+import { Chart } from 'react-charts'
 
-const ClientStatistic = React.memo((props) => {
+function CustomTooltip({ getStyle, primaryAxis, datum }) {
+    const data = React.useMemo(
+        () =>
+            datum
+                ? [
+                    {
+                        data: datum.group.map(d => ({
+                            primary: d.series.label,
+                            secondary: d.secondary,
+                            color: getStyle(d).fill
+                        }))
+                    }
+                ]
+                : [],
+        [datum, getStyle]
+    )
+    return datum ? (
+        <div
+            style={{
+                color: 'white',
+                pointerEvents: 'none'
+            }}
+        >
+            <h3
+                style={{
+                    display: 'block',
+                    textAlign: 'center'
+                }}
+            >
+                {primaryAxis.format(datum.primary)}
+            </h3>
+            <div
+                style={{
+                    width: '300px',
+                    height: '200px',
+                    display: 'flex'
+                }}
+            >
+                <Chart
+                    data={data}
+                    dark
+                    series={{ type: 'bar' }}
+                    axes={[
+                        {
+                            primary: true,
+                            position: 'bottom',
+                            type: 'ordinal'
+                        },
+                        {
+                            position: 'left',
+                            type: 'linear'
+                        }
+                    ]}
+                    getDatumStyle={datum => ({
+                        color: datum.originalDatum.color
+                    })}
+                />
+            </div>
+        </div>
+    ) : null
+}
+
+const ChartStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
-    let [dateType, setDateType] = useState('month');
-    let [statisticClient, setStatisticClient] = useState(undefined);
+    let [dateType, setDateType] = useState('day');
+    let [statisticOrderChart, setStatisticOrderChart] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
-    let [organization, setOrganization] = useState({_id: 'all'});
+    let [organization, setOrganization] = useState(undefined);
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
                 await showLoad(true)
-                setStatisticClient((await getStatisticClient({
-                    company: organization ? organization._id : 'all',
-                    dateStart: dateStart ? dateStart : null,
+                dateStart=dateStart?dateStart:new Date();
+                setStatisticOrderChart((await getStatisticOrderChart({
+                    company: organization ? organization._id : undefined,
+                    dateStart: dateStart,
                     dateType: dateType
-                })).statisticClient)
+                })).statisticOrderChart)
                 await showLoad(false)
             }
         })()
@@ -49,26 +112,45 @@ const ClientStatistic = React.memo((props) => {
         }
     },[process.browser])
 
+    const axes = React.useMemo(
+        () => [
+            { primary: true, type: 'ordinal', position: 'bottom' },
+            { position: 'left', type: 'linear', stacked: true }
+        ],
+        []
+    )
+    const series = React.useMemo(
+        () => ({
+            type: 'bar'
+        }),
+        []
+    )
+    const tooltip = React.useMemo(
+        () => ({
+            render: ({ datum, primaryAxis, getStyle }) => {
+                return <CustomTooltip {...{ getStyle, primaryAxis, datum }} />
+            }
+        }),
+        []
+    )
+    console.log(statisticOrderChart)
     return (
-        <App pageName='Статистика клиентов'>
+        <App pageName='Графики заказов'>
             <Head>
-                <title>Статистика клиентов</title>
+                <title>Графики заказов</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Статистика клиентов' />
+                <meta property='og:title' content='Графики заказов' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/client`} />
-                <link rel='canonical' href={`${urlMain}/statistic/client`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/chart`} />
+                <link rel='canonical' href={`${urlMain}/statistic/chart`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     <div className={classes.row}>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
                             День
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('week')} size='small' color={dateType==='week'?'primary':''}>
-                            Неделя
                         </Button>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('month')} size='small' color={dateType==='month'?'primary':''}>
                             Месяц
@@ -106,45 +188,29 @@ const ClientStatistic = React.memo((props) => {
                         />
                     </div>
                     {
-                        statisticClient?
-                            <Table type='client' row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
-                            :null
+                        statisticOrderChart?
+                            <div
+                                style={{
+                                    width: isMobileApp?'calc(100vw - 32px)':'calc(100vw - 332px)',
+                                    height: isMobileApp?'calc(100vh - 202px)':'calc(100vh - 214px)'
+                                }}
+                            >
+                                <Chart
+                                    series={series}
+                                    data={statisticOrderChart}
+                                    axes={axes}
+                                    tooltip={tooltip}/>
+                            </div>
+                            :
+                            null
                     }
                 </CardContent>
             </Card>
-            <div className='count' onClick={()=>setShowStat(!showStat)}>
-                {
-                    statisticClient?
-                        <>
-                        {`Активных клиентов: ${statisticClient.row[0].data[0]}`}
-                        {
-                            showStat?
-                                <>
-                                <br/>
-                                <br/>
-                                {`Всего прибыль: ${statisticClient.row[0].data[1]} сом`}
-                                <br/>
-                                <br/>
-                                {`Конс: ${statisticClient.row[0].data[2]} сом`}
-                                <br/>
-                                <br/>
-                                {`Заказов выполнено: ${statisticClient.row[0].data[3]} шт`}
-                                <br/>
-                                <br/>
-                                {`Заказов отменено: ${statisticClient.row[0].data[4]} шт`}
-                                </>
-                                :
-                                null
-                        }
-                        </>
-                        :null
-                }
-            </div>
         </App>
     )
 })
 
-ClientStatistic.getInitialProps = async function(ctx) {
+ChartStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
@@ -176,4 +242,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientStatistic);
+export default connect(mapStateToProps, mapDispatchToProps)(ChartStatistic);

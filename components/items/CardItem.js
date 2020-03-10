@@ -134,39 +134,71 @@ const CardItem = React.memo((props) => {
                         </>
                 }
                 </div>
-                                        <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                           <a>
-                                               <img
-                                                   className={classes.media}
-                                                   src={element.image}
-                                                   alt={element.info}
-                                               />
-                                           </a>
-                                        </Link>
-                                        <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                            <a className={classes.name}>
-                                                {element.name}
-                                            </a>
-                                        </Link>
-                                        <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
-                                            <div className={classes.row}>
-                                            {
-                                                element.stock===0||element.stock===undefined?
-                                                    <div className={classes.price}>
-                                                        {`${element.price} сом`}
-                                                    </div>
-                                                    :
-                                                    <>
-                                                    <div className={classes.crossedPrice}>
-                                                        {`${element.price}`}
-                                                    </div>
-                                                    <div className={classes.stockPrice}>
-                                                        {`${element.stock} сом`}
-                                                    </div>
-                                                    </>
-                                            }
-                                            </div>
-                                        </Link>
+                {profile.role==='client'||!authenticated?
+                    <>
+                    <img
+                        className={classes.media}
+                        src={element.image}
+                        alt={element.info}
+                    />
+                    <div className={classes.name}>
+                        {element.name}
+                    </div>
+                    <div className={classes.row}>
+                            {
+                                element.stock===0||element.stock===undefined?
+                                    <div className={classes.price}>
+                                        {`${element.price} сом`}
+                                    </div>
+                                    :
+                                    <>
+                                    <div className={classes.crossedPrice}>
+                                        {`${element.price}`}
+                                    </div>
+                                    <div className={classes.stockPrice}>
+                                        {`${element.stock} сом`}
+                                    </div>
+                                    </>
+                            }
+                        </div>
+                    </>
+                    :
+                    <>
+                    <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
+                        <a>
+                            <img
+                                className={classes.media}
+                                src={element.image}
+                                alt={element.info}
+                            />
+                        </a>
+                    </Link>
+                    <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
+                        <a className={classes.name}>
+                            {element.name}
+                        </a>
+                    </Link>
+                    <Link href='/item/[id]' as={`/item/${element!==undefined?element._id:'new'}`}>
+                        <div className={classes.row}>
+                            {
+                                element.stock===0||element.stock===undefined?
+                                    <div className={classes.price}>
+                                        {`${element.price} сом`}
+                                    </div>
+                                    :
+                                    <>
+                                    <div className={classes.crossedPrice}>
+                                        {`${element.price}`}
+                                    </div>
+                                    <div className={classes.stockPrice}>
+                                        {`${element.stock} сом`}
+                                    </div>
+                                    </>
+                            }
+                        </div>
+                    </Link>
+                    </>
+                }
                                         {['admin','организация'].includes(profile.role)?
                                             <>
                                             <Button onClick={async()=>{

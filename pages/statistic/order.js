@@ -10,14 +10,14 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticClient, getActiveOrganization } from '../../src/gql/statistic'
+import { getStatisticOrder, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
 
-const ClientStatistic = React.memo((props) => {
+const OrderStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
@@ -25,19 +25,19 @@ const ClientStatistic = React.memo((props) => {
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('month');
-    let [statisticClient, setStatisticClient] = useState(undefined);
+    let [statisticOrder, setStatisticOrder] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
-    let [organization, setOrganization] = useState({_id: 'all'});
+    let [organization, setOrganization] = useState(undefined);
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
                 await showLoad(true)
-                setStatisticClient((await getStatisticClient({
-                    company: organization ? organization._id : 'all',
+                setStatisticOrder((await getStatisticOrder({
+                    company: organization ? organization._id : undefined,
                     dateStart: dateStart ? dateStart : null,
                     dateType: dateType
-                })).statisticClient)
+                })).statisticOrder)
                 await showLoad(false)
             }
         })()
@@ -50,16 +50,16 @@ const ClientStatistic = React.memo((props) => {
     },[process.browser])
 
     return (
-        <App pageName='Статистика клиентов'>
+        <App pageName='Статистика заказов'>
             <Head>
-                <title>Статистика клиентов</title>
+                <title>Статистика заказов</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Статистика клиентов' />
+                <meta property='og:title' content='Статистика заказов' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/client`} />
-                <link rel='canonical' href={`${urlMain}/statistic/client`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/order`} />
+                <link rel='canonical' href={`${urlMain}/statistic/order`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
@@ -106,32 +106,32 @@ const ClientStatistic = React.memo((props) => {
                         />
                     </div>
                     {
-                        statisticClient?
-                            <Table type='client' row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
+                        statisticOrder?
+                            <Table type='item' row={(statisticOrder.row).slice(1)} columns={statisticOrder.columns}/>
                             :null
                     }
                 </CardContent>
             </Card>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                 {
-                    statisticClient?
+                    statisticOrder?
                         <>
-                        {`Активных клиентов: ${statisticClient.row[0].data[0]}`}
+                        {`${organization?'Районов':'Компаний'}: ${statisticOrder.row[0].data[0]}`}
                         {
                             showStat?
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего прибыль: ${statisticClient.row[0].data[1]} сом`}
+                                {`Всего прибыль: ${statisticOrder.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
-                                {`Конс: ${statisticClient.row[0].data[2]} сом`}
+                                {`Конс: ${statisticOrder.row[0].data[2]} сом`}
                                 <br/>
                                 <br/>
-                                {`Заказов выполнено: ${statisticClient.row[0].data[3]} шт`}
+                                {`Выполнено: ${statisticOrder.row[0].data[3]} шт`}
                                 <br/>
                                 <br/>
-                                {`Заказов отменено: ${statisticClient.row[0].data[4]} шт`}
+                                {`Отменено: ${statisticOrder.row[0].data[4]} шт`}
                                 </>
                                 :
                                 null
@@ -144,7 +144,7 @@ const ClientStatistic = React.memo((props) => {
     )
 })
 
-ClientStatistic.getInitialProps = async function(ctx) {
+OrderStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
@@ -176,4 +176,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientStatistic);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderStatistic);

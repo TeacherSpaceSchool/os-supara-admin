@@ -1,6 +1,27 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 
+export const getStatisticOrder = async({company, dateStart, dateType}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {company: company, dateStart: dateStart, dateType: dateType},
+                query: gql`
+                    query ($company: String, $dateStart: Date, $dateType: String) {
+                        statisticOrder(company: $company, dateStart: $dateStart, dateType: $dateType) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getStatisticClient = async({company, dateStart, dateType}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -22,6 +43,26 @@ export const getStatisticClient = async({company, dateStart, dateType}, client)=
     }
 }
 
+export const getStatisticClientActivity = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        statisticClientActivity {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getUnloadingOrders = async({organization, dateStart}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -31,6 +72,26 @@ export const getUnloadingOrders = async({organization, dateStart}, client)=>{
                 query: gql`
                     query ($organization: ID!, $dateStart: Date!) {
                         unloadingOrders(organization: $organization, dateStart: $dateStart) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getStatisticOrderChart = async({company, dateStart, dateType}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {company: company, dateStart: dateStart, dateType: dateType},
+                query: gql`
+                    query ($company: String, $dateStart: Date, $dateType: String) {
+                        statisticOrderChart(company: $company, dateStart: $dateStart, dateType: $dateType) {
+                            label
                             data
                         }
                     }`,

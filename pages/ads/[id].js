@@ -29,7 +29,7 @@ const Ads = React.memo((props) => {
         setPagination(100)
         forceCheck()
     },[list])
-    let height = ['организация', 'менеджер', 'admin'].includes(profile.role)?400:200
+    let height = ['организация', 'admin'].includes(profile.role)?400:200
     const router = useRouter()
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
@@ -53,7 +53,7 @@ const Ads = React.memo((props) => {
                 <div className='count'>
                     {`Всего акций: ${list.length}`}
                 </div>
-                {['организация', 'менеджер', 'admin'].includes(profile.role)?<CardAds organization={router.query.id} setList={setList}/>:null}
+                {['организация', 'admin'].includes(profile.role)?<CardAds organization={router.query.id} setList={setList}/>:null}
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
                         return(

@@ -88,14 +88,14 @@ const District = React.memo((props) => {
                     setEcspeditor({})
                 }
                 if(organization._id) {
-                    setAgents((await getAgents({_id: organization._id})).agents)
-                    setManagers((await getManagers({_id: organization._id})).managers)
-                    setEcspeditors((await getEcspeditors({_id: organization._id})).ecspeditors)
+                    setAgents((await getAgents({_id: distributer._id?distributer._id:organization._id})).agents)
+                    setManagers((await getManagers({_id: distributer._id?distributer._id:organization._id})).managers)
+                    setEcspeditors((await getEcspeditors({_id: distributer._id?distributer._id:organization._id})).ecspeditors)
                     setUnselectedClient((await getClientsWithoutDistrict(organization._id)).clientsWithoutDistrict)
                 }
             }
         })()
-    },[organization])
+    },[organization, distributer])
     useEffect(()=>{
         (async()=>{
             if(data.district) {
@@ -166,6 +166,22 @@ const District = React.memo((props) => {
                                     <Select value={organization._id}onChange={handleOrganization}>
                                         {data.organizations.map((element)=>
                                             <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                :
+                                null
+                            }
+                            {organization._id&&profile.role==='admin'?
+                                <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                    <InputLabel>Дистрибьютор</InputLabel>
+                                    <Select value={distributer._id}onChange={handleDistributer}>
+                                        <MenuItem value={null}>Без</MenuItem>
+                                        {data.organizations.map((element)=> {
+                                            if(organization._id!==element._id)
+                                                return(<MenuItem key={element._id} value={element._id}
+                                                          ola={element.name}>{element.name}</MenuItem>)
+                                            }
                                         )}
                                     </Select>
                                 </FormControl>
@@ -253,7 +269,8 @@ const District = React.memo((props) => {
                                                         name: name,
                                                         agent: agent._id,
                                                         manager: manager._id,
-                                                        ecspeditor: ecspeditor._id
+                                                        ecspeditor: ecspeditor._id,
+                                                        distributer: distributer._id
                                                     })
                                                     Router.push(`/districts/${organization._id}`)
                                                 }
@@ -273,8 +290,8 @@ const District = React.memo((props) => {
                                                 if(!data.district.agent||agent._id!==data.district.agent._id)editElement.agent = agent._id;
                                                 if(!data.district.manager||manager._id!==data.district.manager._id)editElement.manager = manager._id;
                                                 if(!data.district.ecspeditor||ecspeditor._id!==data.district.ecspeditor._id)editElement.ecspeditor = ecspeditor._id;
+                                                if(!data.district.distributer||distributer._id!==data.district.distributer._id)editElement.distributer = distributer._id;
                                                 if(name!==data.district.name)editElement.name = name;
-                                                if(organization._id!==data.district.organization._id)editElement.organization = organization._id;
                                                 await setDistrict(editElement)
                                             }
                                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)

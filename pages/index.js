@@ -4,28 +4,25 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../redux/actions/user'
-import { getCategorys } from '../src/gql/category'
-import pageListStyle from '../src/styleMUI/category/categoryList'
-import CardCategory from '../components/category/CardCategory'
+import { getBrandOrganizations } from '../src/gql/items'
+import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
+import CardBrand from '../components/brand/CardBrand'
 import { urlMain } from '../redux/constants/other'
-import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardCategoryPlaceholder from '../components/category/CardCategoryPlaceholder'
+import CardBrandPlaceholder from '../components/brand/CardBrandPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
 
-const Index = React.memo((props) => {
+const Organization = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let [list, setList] = useState(data.categorys);
+    let [list, setList] = useState(data.brandOrganizations);
     const { search, filter, sort } = props.app;
-    const { profile } = props.user;
-    let height = profile.role==='admin'?161:83
+    const height = 80
     useEffect(()=>{
         (async()=>{
-            setPagination(100)
-            setList((await getCategorys({search: search, sort: sort, filter: filter})).categorys)
+            setList((await getBrandOrganizations({search: search, sort: sort, filter: filter})).brandOrganizations)
         })()
     },[filter, sort, search])
     useEffect(()=>{
@@ -39,59 +36,39 @@ const Index = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterOrganization} sorts={data.sortOrganization} pageName='Бренды'>
             <Head>
-                <title>Азык - электронный склад связывающий производителя с торговой точкой</title>
+                <title>Бренды</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Азык - электронный склад связывающий производителя с торговой точкой' />
+                <meta property='og:title' content='Бренды' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}`} />
-                <link rel='canonical' href={`${urlMain}`}/>
+                <meta property="og:url" content={`${urlMain}/brands`} />
+                <link rel='canonical' href={`${urlMain}/brands`}/>
             </Head>
+            <div className='count'>
+                {`Всего брендов: ${list.length}`}
+            </div>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего категорий: ${list.length}`}
-                </div>
-                {profile.role==='admin'?
-                    <>
-                    <CardCategory setList={setList}/>
-                    </>
-                    :
-                    null
-                }
-                <CardCategory element={{image: '/static/allitem.svg', name: 'Все подкатегории', _id: 'all'}} setList='all'/>
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
                         return(
-                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardCategoryPlaceholder height={height}/>}>
-                                <CardCategory key={element._id} setList={setList} element={element}/>
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBrandPlaceholder height={height}/>}>
+                                <CardBrand key={element._id} element={element}/>
                             </LazyLoad>
-                        )}
-                ):null}
+                        )
+                }):null}
             </div>
         </App>
     )
 })
 
-Index.getInitialProps = async function(ctx) {
+Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    let role = ctx.store.getState().user.profile.role
     ctx.store.getState().app.sort = 'name'
-    let authenticated = ctx.store.getState().user.authenticated
-    if(!(!authenticated||['admin', 'client'].includes(role)||!role))
-        if(ctx.res) {
-            ctx.res.writeHead(302, {
-                Location: ['суперагент','агент'].includes(role)?'/catalog':'/items/all'
-            })
-            ctx.res.end()
-        }
-        else {
-            Router.push(['суперагент','агент'].includes(role)?'/catalog':'/items/all')
-        }
     return {
-        data: await getCategorys({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 
@@ -108,4 +85,4 @@ function mapDispatchToProps(dispatch) {
      }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Organization);

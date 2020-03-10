@@ -66,11 +66,24 @@ const MyDrawer = React.memo((props) => {
             <List>
                 <Divider />
                 {
+                    ['admin', 'client'].includes(profile.role)||!authenticated?
+                        <>
+                        <Link href='/'>
+                            <ListItem style={{background: router.pathname===('/')||router.pathname.includes('brand')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><CopyrightIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Бренды' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
                     ['экспедитор', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                         <Link href={['агент', 'суперагент'].includes(profile.role)?'/catalog':'/items/[id]'} as={['агент', 'суперагент'].includes(profile.role)?'/catalog':'/items/all'}>
                             <ListItem style={{background:
                                 (
-                                    router.pathname===('/')
+                                    router.pathname===('/category')
                                     ||
                                     router.pathname.includes('subcategory')
                                     ||
@@ -84,14 +97,14 @@ const MyDrawer = React.memo((props) => {
                             </ListItem>
                         </Link>
                         :
-                        <Link href='/'>
-                            <ListItem style={{background: router.pathname===('/')
+                        <Link href='/category'>
+                            <ListItem style={{background: router.pathname===('/category')
                             ||
                             router.pathname.includes('subcategory')
                             ||
                             router.pathname.includes('item')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Товары' />
+                                <ListItemText primary='Категории' />
                             </ListItem>
                         </Link>
                 }
@@ -203,19 +216,6 @@ const MyDrawer = React.memo((props) => {
                         </Link>
                 }
                 <Divider/>
-                {
-                    ['admin', 'client'].includes(profile.role)||!authenticated?
-                        <>
-                        <Link href='/brands'>
-                            <ListItem style={{background: (router.pathname).includes('brand')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
-                                <ListItemIcon><CopyrightIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Бренды' />
-                            </ListItem>
-                        </Link>
-                        <Divider/>
-                        </>
-                        :null
-                }
                 {
                     ['admin', 'организация', 'менеджер'].includes(profile.role)?
                         <>
