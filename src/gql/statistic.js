@@ -106,6 +106,27 @@ export const getStatisticOrderChart = async({company, dateStart, dateType}, clie
     }
 }
 
+export const getCheckOrder = async(data, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: data,
+                query: gql`
+                    query ($company: String, $today: Date!) {
+                        checkOrder(company: $company, today: $today) {
+                            columns
+                            row 
+                                {data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getUnloadingClients = async({organization}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

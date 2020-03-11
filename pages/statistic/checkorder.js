@@ -8,129 +8,56 @@ import CardContent from '@material-ui/core/CardContent';
 import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
+import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticOrderChart, getActiveOrganization } from '../../src/gql/statistic'
+import { getCheckOrder, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
-import { Chart } from 'react-charts'
 
-function CustomTooltip({ getStyle, primaryAxis, datum }) {
-    const data = React.useMemo(
-        () =>
-            datum
-                ? [
-                    {
-                        data: datum.group.map(d => ({
-                            primary: d.series.label,
-                            secondary: d.secondary,
-                            color: getStyle(d).fill
-                        }))
-                    }
-                ]
-                : [],
-        [datum, getStyle]
-    )
-    console.log(data)
-    return datum ? (
-        <div
-            style={{
-                color: 'white',
-                pointerEvents: 'none'
-            }}
-        >
-            <h3
-                style={{
-                    display: 'block',
-                    textAlign: 'center'
-                }}
-            >
-                {primaryAxis.format(datum.primary)}
-            </h3>
-            <div
-                style={{
-                    height: '200px',
-                    display: 'flex'
-                }}
-            >
-            </div>
-        </div>
-    ) : null
-}
-
-const ChartStatistic = React.memo((props) => {
+const CheckOrder = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
-    let [dateType, setDateType] = useState('day');
-    let [statisticOrderChart, setStatisticOrderChart] = useState(undefined);
-    let [showStat, setShowStat] = useState(false);
-    let [organization, setOrganization] = useState(undefined);
+    let [checkOrder, setCheckOrder] = useState(undefined);
+    let [organization, setOrganization] = useState({_id: undefined});
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
                 await showLoad(true)
-                dateStart=dateStart?dateStart:new Date();
-                setStatisticOrderChart((await getStatisticOrderChart({
-                    company: organization ? organization._id : undefined,
-                    dateStart: dateStart,
-                    dateType: dateType
-                })).statisticOrderChart)
+                setCheckOrder((await getCheckOrder({
+                    company: organization?organization._id:undefined,
+                    today: dateStart ? dateStart : new Date(),
+                })).checkOrder)
                 await showLoad(false)
             }
         })()
-    },[organization, dateStart, dateType])
+    },[organization, dateStart])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
-
-    const axes = React.useMemo(
-        () => [
-            { primary: true, type: 'ordinal', position: 'bottom' },
-            { position: 'left', type: 'linear', stacked: true }
-        ],
-        []
-    )
-    const series = React.useMemo(
-        () => ({
-            type: 'bar'
-        }),
-        []
-    )
     return (
-        <App pageName='Графики заказов'>
+        <App pageName='Проверка заказов'>
             <Head>
-                <title>Графики заказов</title>
+                <title>Проверка заказов</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Графики заказов' />
+                <meta property='og:title' content='Проверка заказов' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/chart`} />
-                <link rel='canonical' href={`${urlMain}/statistic/chart`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/checkorder`} />
+                <link rel='canonical' href={`${urlMain}/statistic/checkorder`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    <div className={classes.row}>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
-                            День
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('month')} size='small' color={dateType==='month'?'primary':''}>
-                            Месяц
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('year')} size='small' color={dateType==='year'?'primary':''}>
-                            Год
-                        </Button>
-                    </div>
                     <div className={classes.row}>
                         <Autocomplete
                             className={classes.input}
@@ -147,7 +74,7 @@ const ChartStatistic = React.memo((props) => {
                         />
                         <TextField
                             className={classes.input}
-                            label='Дата начала'
+                            label='Дата'
                             type='date'
                             InputLabelProps={{
                                 shrink: true,
@@ -160,31 +87,19 @@ const ChartStatistic = React.memo((props) => {
                         />
                     </div>
                     {
-                        statisticOrderChart?
-                            <div
-                                style={{
-                                    width: isMobileApp?'calc(100vw - 42px)':'calc(100vw - 350px)',
-                                    height: isMobileApp?'calc(100vh - 202px)':'calc(100vh - 222px)'
-                                }}
-                            >
-                                <Chart
-                                    series={series}
-                                    data={statisticOrderChart.geoStatistic}
-                                    axes={axes}
-                                    tooltip
-                                    primaryCursor
-                                    secondaryCursor
-                                />
-                            </div>
-                            :
-                            null
+                        checkOrder?
+                            <Table type='item' row={(checkOrder.row).slice(1)} columns={checkOrder.columns}/>
+                            :null
                     }
                 </CardContent>
             </Card>
-            <div className='count' onClick={()=>setShowStat(!showStat)}>
+            <div className='count'>
                 {
-                    statisticOrderChart?
-                        `${statisticOrderChart.all} сом`
+                    checkOrder?
+                        <>
+                        {`Повторяющихся: ${checkOrder.row[0].data[0]}`}<br/><br/>
+                        {`Несинхронизированых: ${checkOrder.row[0].data[1]}`}
+                        </>
                         :null
                 }
             </div>
@@ -192,7 +107,7 @@ const ChartStatistic = React.memo((props) => {
     )
 })
 
-ChartStatistic.getInitialProps = async function(ctx) {
+CheckOrder.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
@@ -224,4 +139,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChartStatistic);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOrder);

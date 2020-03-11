@@ -7,7 +7,7 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import { getStatisticClientGeo, getActiveItem, getActiveOrganization } from '../../src/gql/statistic'
-import { Map, YMaps, Placemark, Clusterer } from 'react-yandex-maps';
+import { Map, YMaps, Placemark, ObjectManager } from 'react-yandex-maps';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -28,6 +28,9 @@ const ClientGeoStatistic = React.memo((props) => {
     let [items, setItems] = useState([]);
     let [item, setItem] = useState(null);
     let [statisticClientGeo, setStatisticClientGeo] = useState(undefined);
+    let [greenData, setGreenData] = useState([]);
+    let [yellowData, setYellowData] = useState([]);
+    let [redData, setRedData] = useState([]);
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
@@ -47,6 +50,40 @@ const ClientGeoStatistic = React.memo((props) => {
             }
         })()
     },[item, items, organization])
+    useEffect(()=>{
+        (async()=>{
+            if(profile.role==='admin'&&statisticClientGeo) {
+                let _greenData = []
+                let _yellowData = []
+                let _redData = []
+                let data
+                for(let i=1;i<statisticClientGeo.length;i++){
+                    data = {
+                        type: 'Feature',
+                            id: statisticClientGeo[i].client,
+                            geometry: {
+                            type: 'Point',
+                                coordinates: statisticClientGeo[i].address[1].split(', ')
+                        },
+                        properties: {
+                            iconColor: statisticClientGeo[i].data[1],
+                                iconCaption: `${statisticClientGeo[i].data[0]==='true' ? `🔔` : '🔕'}${statisticClientGeo[i].address[2] ? `${statisticClientGeo[i].address[2]}, ` : ''}${statisticClientGeo[i].address[0]}`
+                        }
+                    }
+                    if(statisticClientGeo[i].data[1]==='red')
+                        _redData.push(data)
+                    else if(statisticClientGeo[i].data[1]==='green')
+                        _greenData.push(data)
+                    else
+                        _yellowData.push(data)
+                }
+                setGreenData(_greenData)
+                setRedData(_redData)
+                setYellowData(_yellowData)
+            }
+        })()
+    },[statisticClientGeo])
+
     return (
         <>
         <YMaps>
@@ -71,27 +108,63 @@ const ClientGeoStatistic = React.memo((props) => {
                                 <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-64} width={isMobileApp?window.innerWidth:window.innerWidth-300}
                                          state={{ center: [42.8700000, 74.5900000], zoom: 10 }}
                                     >
+                                    <ObjectManager
+                                        options={{
+                                            clusterize: true,
+                                            gridSize: 32,
+                                        }}
+                                        objects={{
+                                            openBalloonOnClick: true,
+                                            preset: 'islands#redDotIcon',
+                                        }}
+                                        clusters={{
+                                            preset: 'islands#redClusterIcons',
+                                        }}
+                                        features={redData}
+                                    />
+                                    <ObjectManager
+                                        options={{
+                                            clusterize: true,
+                                            gridSize: 32,
+                                        }}
+                                        objects={{
+                                            openBalloonOnClick: true,
+                                            preset: 'islands#greenDotIcon',
+                                        }}
+                                        clusters={{
+                                            preset: 'islands#greenClusterIcons',
+                                        }}
+                                        features={greenData}
+                                    />
+                                    <ObjectManager
+                                        options={{
+                                            clusterize: true,
+                                            gridSize: 32,
+                                        }}
+                                        objects={{
+                                            openBalloonOnClick: true,
+                                            preset: 'islands#yellowDotIcon',
+                                        }}
+                                        clusters={{
+                                            preset: 'islands#yellowClusterIcons',
+                                        }}
+                                        features={yellowData}
+                                    />
                                         {
-                                            statisticClientGeo?
-                                                <Clusterer
-                                                    options={{
-                                                        preset: 'islands#invertedVioletClusterIcons',
-                                                        groupByCoordinates: false,
-                                                    }}
-                                                >
-                                                    {(statisticClientGeo.slice(1)).map(
+                                           /* statisticClientGeo?
+                                                (statisticClientGeo.slice(1)).map(
                                                         (element, idx) => {
                                                             return <Placemark
                                                                 onClick={()=>{window.open(`/client/${element.client}`,'_blank');}}
                                                                 key={idx}
                                                                 options={{iconColor: element.data[1]}}
-                                                                properties={{iconCaption: `${element.data[0]==='true' ? `🔔` : '🔕'}${element.address[2] ? `${element.address[2]}, ` : ''}${element.address[0]}`}}
+                                                                properties={{iconCaption: }}
                                                                 geometry={element.address[1].split(', ')}/>
                                                         }
-                                                    )}
-                                                </Clusterer>
+                                                    )
                                                 :
                                                 null
+                                                */
                                         }
                                 </Map>
                             </div>
