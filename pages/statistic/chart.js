@@ -63,9 +63,14 @@ const ChartStatistic = React.memo((props) => {
         ],
         []
     )
-    const series = React.useMemo(
+    const seriesBar = React.useMemo(
         () => ({
             type: 'bar'
+        }),
+        []
+    )
+    const seriesLines = React.useMemo(
+        () => ({
         }),
         []
     )
@@ -131,7 +136,7 @@ const ChartStatistic = React.memo((props) => {
                                 }}
                             >
                                 <Chart
-                                    series={series}
+                                    series={organization?seriesLines:seriesBar}
                                     data={statisticOrderChart.chartStatistic}
                                     axes={axes}
                                     tooltip
