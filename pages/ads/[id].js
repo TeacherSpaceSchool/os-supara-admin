@@ -13,6 +13,7 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import { getOrganization } from '../../src/gql/organization'
 import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 const Ads = React.memo((props) => {
     const classes = pageListStyle();
@@ -69,6 +70,14 @@ const Ads = React.memo((props) => {
 
 Ads.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     return {
         data: {
             ...await getAdss({search: '', organization: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

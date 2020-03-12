@@ -31,27 +31,7 @@ const CardItem = React.memo((props) => {
     let [latest, setLatest] = useState(element.latest);
     let [apiece, setApiece] = useState(element.apiece);
     useEffect(()=>{
-        if(!authenticated){
-            if(localStorage.favorites==undefined)
-                localStorage.favorites = JSON.stringify([])
-            else {
-                let favorites = JSON.parse(localStorage.favorites)
-                for(let i=0; i<favorites.length; i++){
-                    if(favorites[i]._id == element._id)
-                        setFavorite(true)
-                }
-            }
-            if(localStorage.basket==undefined)
-                localStorage.basket = JSON.stringify([])
-            else {
-                let basket = JSON.parse(localStorage.basket)
-                for(let i=0; i<basket.length; i++){
-                    if(basket[i].item._id == element._id)
-                        setBasket(true)
-                }
-            }
-
-        } else {
+        if(authenticated){
             setBasket((element.basket).includes(profile._id))
         }
     },[])
@@ -134,7 +114,7 @@ const CardItem = React.memo((props) => {
                         </>
                 }
                 </div>
-                {profile.role==='client'||!authenticated?
+                {profile.role==='client'?
                     <>
                     <img
                         className={classes.media}
@@ -226,39 +206,15 @@ const CardItem = React.memo((props) => {
                                             }
                                             </>
                                             :
-                                            ['агент', 'client'].includes(profile.role)||!authenticated?
+                                            ['агент', 'client'].includes(profile.role)?
                                                 <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={async()=>{
                                                     if(!basket) {
-                                                        if (['агент', 'client'].includes(profile.role))
-                                                            addBasket({item: element._id, count: element.apiece?1:element.packaging})
-                                                        else if (!authenticated) {
-                                                            let basket = JSON.parse(localStorage.basket);
-                                                            let index = -1
-                                                            for (let i = 0; i < basket.length; i++) {
-                                                                if (basket[i].item._id == element._id)
-                                                                    index = i
-                                                            }
-                                                            if (index === -1)
-                                                                basket.push({item: element, count: element.apiece?1:element.packaging})
-                                                            localStorage.basket = JSON.stringify(basket)
-                                                        }
+                                                        addBasket({item: element._id, count: element.apiece?1:element.packaging})
                                                         showSnackBar('Товар добавлен в корзину')
                                                         setBasket(true)
                                                     }
                                                     else {
-                                                        if(authenticated) {
-                                                            await deleteBasket([element._id])
-                                                        } else {
-                                                            let list = JSON.parse(localStorage.basket)
-                                                            let index = -1
-                                                            for (let i = 0; i < list.length; i++) {
-                                                                if (list[i].item._id == element._id)
-                                                                    index = i
-                                                            }
-                                                            if (index !== -1)
-                                                                list.splice(index, 1)
-                                                            localStorage.basket = JSON.stringify(list)
-                                                        }
+                                                        await deleteBasket([element._id])
                                                         showSnackBar('Товар удален из корзины')
                                                         setBasket(false)
                                                     }
@@ -268,55 +224,28 @@ const CardItem = React.memo((props) => {
                                                 null
                                         }
 
-                {profile.role==='client'||!authenticated?
+                {profile.role==='client'?
                                             <Star className={classes.buttonToggle} onClick={async ()=>{
                                                 let index
-                                                if(profile.role==='client') {
-                                                    await favoriteItem([element._id])
-                                                    index = favorite.indexOf(profile._id)
-                                                    if (index === -1) {
-                                                        favorite.push(profile._id)
+                                                await favoriteItem([element._id])
+                                                index = favorite.indexOf(profile._id)
+                                                if (index === -1) {
+                                                    favorite.push(profile._id)
+                                                    setFavorite([...favorite])
+                                                    if (getList !== undefined)
+                                                        getList()
+                                                }
+                                                if (index !== -1) {
+                                                    const action = async() => {
+                                                        favorite.splice(index, 1)
                                                         setFavorite([...favorite])
                                                         if (getList !== undefined)
                                                             getList()
                                                     }
-                                                }
-                                                else if(!authenticated) {
-                                                    let favorites = JSON.parse(localStorage.favorites);
-                                                    index = -1
-                                                    for(let i=0; i<favorites.length; i++){
-                                                        if(favorites[i]._id == element._id)
-                                                            index = i
-                                                    }
-                                                    if(index===-1) {
-                                                        favorites.push(element)
-                                                        setFavorite(true)
-                                                        localStorage.favorites = JSON.stringify(favorites)
-                                                        if (setFavorites)
-                                                            setFavorites(favorites)
-                                                    }
-                                                }
-                                                if (index !== -1) {
-                                                    const action = async() => {
-                                                        if(profile.role==='client') {
-                                                            favorite.splice(index, 1)
-                                                            setFavorite([...favorite])
-                                                            if (getList !== undefined)
-                                                                getList()
-                                                        }
-                                                        else if(!authenticated) {
-                                                            let favorites = JSON.parse(localStorage.favorites);
-                                                            favorites.splice(index, 1)
-                                                            setFavorite(false)
-                                                            localStorage.favorites = JSON.stringify(favorites)
-                                                            if(setFavorites)
-                                                                setFavorites(favorites)
-                                                        }
-                                                    }
                                                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                     showMiniDialog(true)
                                                 }
-                                            }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
+                                            }} style={{color: (profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
                                             :
                                             null
                                         }

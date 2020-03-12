@@ -44,23 +44,12 @@ export const getCountBasket = async()=>{
     try{
         const client = new SingletonApolloClient().getClient()
         let res;
-        if(new SingletonStore().getStore().getState().user.authenticated)
             res = await client.query({
                 query : gql`
                     query {
                         countBasket 
                     }`
             })
-        else{
-            if(localStorage.basket==undefined) {
-                localStorage.basket = JSON.stringify([])
-                res = { data: { countBasket: 0}}
-            }
-            else {
-                let basket = JSON.parse(localStorage.basket)
-                res = {data: {countBasket: basket.length}}
-            }
-        }
         new SingletonStore().getStore().dispatch(setCountBasket(res.data.countBasket))
     } catch(err){
         console.error(err)

@@ -11,6 +11,7 @@ import { forceCheck } from 'react-lazyload';
 import CardFaqPlaceholder from '../components/faq/CardFaqPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import Router from 'next/router'
 
 const Faqs = React.memo((props) => {
     const classes = pageListStyle();
@@ -66,6 +67,14 @@ const Faqs = React.memo((props) => {
 
 Faqs.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     return {
         data: await getFaqs({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
     };

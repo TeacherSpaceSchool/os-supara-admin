@@ -16,6 +16,7 @@ import { forceCheck } from 'react-lazyload';
 import CardOrganizationPlaceholder from '../components/organization/CardOrganizationPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import Router from 'next/router'
 
 const Organization = React.memo((props) => {
     const classes = pageListStyle();
@@ -83,6 +84,14 @@ const Organization = React.memo((props) => {
 
 Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)

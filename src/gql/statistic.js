@@ -92,7 +92,7 @@ export const getStatisticOrderChart = async({company, dateStart, dateType}, clie
                     query ($company: String, $dateStart: Date, $dateType: String) {
                         statisticOrderChart(company: $company, dateStart: $dateStart, dateType: $dateType) {
                             all
-                            geoStatistic
+                            chartStatistic
                                 {
                                     label
                                     data

@@ -17,6 +17,7 @@ import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardItemPlaceholder from '../../components/items/CardItemPlaceholder'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import Router from 'next/router'
 const height = 377;
 
 const Brand = React.memo((props) => {
@@ -69,7 +70,7 @@ const Brand = React.memo((props) => {
                     </Fab>
                 </Link>
                 :
-                !authenticated||profile.role==='client'?
+                profile.role==='client'?
                     <Link href='/basket'>
                         <Fab color='primary' aria-label='add' className={classes.fab}>
                             <Badge badgeContent={countBasket} color='secondary'>
@@ -91,6 +92,14 @@ const Brand = React.memo((props) => {
 
 Brand.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getBrands({organization: ctx.query.id, search: '', sort: ctx.store.getState().app.sort}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

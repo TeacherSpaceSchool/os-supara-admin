@@ -80,15 +80,15 @@ Index.getInitialProps = async function(ctx) {
     let role = ctx.store.getState().user.profile.role
     ctx.store.getState().app.sort = 'name'
     let authenticated = ctx.store.getState().user.authenticated
-    if(!(!authenticated||['admin', 'client'].includes(role)||!role))
+    if(!['admin', 'client'].includes(role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
-                Location: ['суперагент','агент'].includes(role)?'/catalog':'/items/all'
+                Location: ['суперагент','агент'].includes(role)?'/catalog':!authenticated?'/contact':'/items/all'
             })
             ctx.res.end()
         }
         else {
-            Router.push(['суперагент','агент'].includes(role)?'/catalog':'/items/all')
+            Router.push(['суперагент','агент'].includes(role)?'/catalog':!authenticated?'/contact':'/items/all')
         }
     return {
         data: await getCategorys({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)

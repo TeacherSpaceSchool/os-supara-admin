@@ -435,6 +435,14 @@ const Organization = React.memo((props) => {
 
 Organization.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     return {
         data: {
             ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0,consignation: false,accessToClient: false}}

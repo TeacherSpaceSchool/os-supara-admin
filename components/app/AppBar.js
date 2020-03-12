@@ -285,7 +285,7 @@ const MyAppBar = React.memo((props) => {
                                 onClose={handleCloseProfile}
                             >
                                 {
-                                    !authenticated||['client'].includes(profile.role)?
+                                    'client'===profile.role?
                                         <MenuItem>
                                             <Badge badgeContent={countBasket} color='secondary'>
                                                 <Link href='/basket'>
@@ -300,7 +300,7 @@ const MyAppBar = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    !authenticated||profile.role==='client'?
+                                    profile.role==='client'?
                                         <MenuItem>
                                             <Link href='/favorite'>
                                                 <a style={{display: 'flex', color: '#606060'}}>
@@ -516,7 +516,7 @@ const MyAppBar = React.memo((props) => {
                                 onClose={handleCloseProfile}
                             >
                                 {
-                                    !authenticated||['client'].includes(profile.role)?
+                                    'client'===profile.role?
                                         <MenuItem>
                                             <Badge badgeContent={countBasket} color='secondary'>
                                                 <Link href='/basket'>
@@ -531,7 +531,7 @@ const MyAppBar = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    !authenticated||profile.role==='client'?
+                                    profile.role==='client'?
                                         <MenuItem>
                                             <Link href='/favorite'>
                                                 <a style={{display: 'flex', color: '#606060'}}>

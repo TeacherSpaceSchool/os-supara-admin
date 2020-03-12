@@ -20,6 +20,7 @@ import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import Router from 'next/router'
 
 const Items = React.memo((props) => {
     const classes = pageListStyle();
@@ -56,7 +57,7 @@ const Items = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/items/${router.query.id}`}/>
             </Head>
             {
-                !authenticated||['client', 'admin'].includes(profile.role)?
+                ['client', 'admin'].includes(profile.role)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
                             <a>
@@ -127,6 +128,14 @@ const Items = React.memo((props) => {
 
 Items.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getItems({subCategory: ctx.query.id, search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

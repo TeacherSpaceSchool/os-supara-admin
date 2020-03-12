@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
+import Router from 'next/router'
 
 const Subcategory = React.memo((props) => {
     const classes = pageListStyle();
@@ -60,7 +61,7 @@ const Subcategory = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/subcategory/${router.query.id}`}/>
             </Head>
             {
-                !authenticated||['client', 'admin'].includes(profile.role)?
+                ['client', 'admin'].includes(profile.role)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
                             <a>
@@ -103,6 +104,14 @@ const Subcategory = React.memo((props) => {
 
 Subcategory.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     ctx.store.getState().app.sort = 'name'
     return {
         data: await getSubCategorys({category: ctx.query.id, search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),

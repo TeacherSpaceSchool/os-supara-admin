@@ -29,23 +29,9 @@ const Items = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             setPagination(100)
-            if(!authenticated&&localStorage.favorites){
-                let favorites = JSON.parse(localStorage.favorites)
-                setList(favorites.filter(favorite => favorite.name.includes(search)))
-            }
-            else setList((await favorites({search: search})).favorites)
+            setList((await favorites({search: search})).favorites)
         })()
     },[search])
-    useEffect(()=>{
-        (async()=>{
-            if(!authenticated){
-                if(!localStorage.favorites) {
-                    localStorage.favorites = JSON.stringify([])
-                }
-                setList(JSON.parse(localStorage.favorites))
-            }
-        })()
-    },[])
     let getList = async()=>{
         setList((await favorites({search: search})).favorites)
     };
@@ -84,7 +70,7 @@ const Items = React.memo((props) => {
 
 Items.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if('client'!==ctx.store.getState().user.profile.role&&ctx.store.getState().user.authenticated)
+    if('client'!==ctx.store.getState().user.profile.role)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

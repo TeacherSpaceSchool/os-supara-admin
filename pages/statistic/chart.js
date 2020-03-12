@@ -17,49 +17,6 @@ import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
 import { Chart } from 'react-charts'
 
-function CustomTooltip({ getStyle, primaryAxis, datum }) {
-    const data = React.useMemo(
-        () =>
-            datum
-                ? [
-                    {
-                        data: datum.group.map(d => ({
-                            primary: d.series.label,
-                            secondary: d.secondary,
-                            color: getStyle(d).fill
-                        }))
-                    }
-                ]
-                : [],
-        [datum, getStyle]
-    )
-    console.log(data)
-    return datum ? (
-        <div
-            style={{
-                color: 'white',
-                pointerEvents: 'none'
-            }}
-        >
-            <h3
-                style={{
-                    display: 'block',
-                    textAlign: 'center'
-                }}
-            >
-                {primaryAxis.format(datum.primary)}
-            </h3>
-            <div
-                style={{
-                    height: '200px',
-                    display: 'flex'
-                }}
-            >
-            </div>
-        </div>
-    ) : null
-}
-
 const ChartStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
@@ -77,11 +34,17 @@ const ChartStatistic = React.memo((props) => {
             if(profile.role==='admin') {
                 await showLoad(true)
                 dateStart=dateStart?dateStart:new Date();
-                setStatisticOrderChart((await getStatisticOrderChart({
+                let _statisticOrderChart = (await getStatisticOrderChart({
                     company: organization ? organization._id : undefined,
                     dateStart: dateStart,
                     dateType: dateType
-                })).statisticOrderChart)
+                })).statisticOrderChart
+                for(let i=0; i<_statisticOrderChart.chartStatistic.length;i++){
+                    for(let i1=0; i1<_statisticOrderChart.chartStatistic[i].data.length;i1++){
+                        _statisticOrderChart.chartStatistic[i].data[i1] = [_statisticOrderChart.chartStatistic[i].data[i1][0], parseInt(_statisticOrderChart.chartStatistic[i].data[i1][1])]
+                    }
+                }
+                setStatisticOrderChart(_statisticOrderChart)
                 await showLoad(false)
             }
         })()
@@ -169,7 +132,7 @@ const ChartStatistic = React.memo((props) => {
                             >
                                 <Chart
                                     series={series}
-                                    data={statisticOrderChart.geoStatistic}
+                                    data={statisticOrderChart.chartStatistic}
                                     axes={axes}
                                     tooltip
                                     primaryCursor

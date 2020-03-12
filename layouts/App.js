@@ -122,29 +122,6 @@ const App = React.memo(props => {
         }
     },[subscriptionOrderRes.data])
     //}
-    useEffect( ()=>{
-        (async ()=>{
-            if(authenticated&&profile.role==='client'){
-                if(localStorage.favorites&&localStorage.favorites!=='[]') {
-                    let favorites = JSON.parse(localStorage.favorites)
-                    favorites = favorites.map(element => element._id)
-                    await addFavoriteItem(favorites)
-                    localStorage.favorites = JSON.stringify([])
-                    if (getList !== undefined)
-                        await getList()
-                }
-                if(localStorage.basket&&localStorage.basket!=='[]') {
-                    let basket = JSON.parse(localStorage.basket)
-                    for(let i=0; i<basket.length; i++){
-                        await addBasket({item: basket[i].item._id, count: basket[i].count})
-                    }
-                    localStorage.basket = '[]'
-                    if (getList !== undefined)
-                        await getList()
-                }
-            }
-        })()
-    },[])
     return(
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>

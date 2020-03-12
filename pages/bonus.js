@@ -13,6 +13,7 @@ import { forceCheck } from 'react-lazyload';
 import CardBonusPlaceholder from '../components/bonus/CardBonusPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import Router from 'next/router'
 
 const Bonus = React.memo((props) => {
     const classes = pageListStyle();
@@ -68,6 +69,14 @@ const Bonus = React.memo((props) => {
 
 Bonus.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     return {
         data: await getBonuses({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };

@@ -92,21 +92,6 @@ const Item = React.memo((props) => {
             }
         })()
     },[profile])
-    useEffect(()=>{
-        if(!authenticated){
-            if(localStorage.favorites==undefined)
-                localStorage.favorites = JSON.stringify([])
-            else if(data.item!==null){
-                let favorites = JSON.parse(localStorage.favorites)
-                for(let i=0; i<favorites.length; i++){
-                    if(favorites[i]._id == data.item._id)
-                        setFavorite(true)
-                }
-            }
-            if(localStorage.basket==undefined)
-                localStorage.basket = JSON.stringify([])
-        }
-    },[])
     //BUY
     let [count, setCount] = useState(data.item.apiece?1:packaging);
     let increment = ()=>{
@@ -139,7 +124,7 @@ const Item = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/item/${router.query.id}`}/>
             </Head>
             {
-                (router.query.id!=='new'&&(!authenticated||['client', 'admin'].includes(profile.role))&&data.item.subCategory)?
+                (router.query.id!=='new'&&['client', 'admin'].includes(profile.role)&&data.item.subCategory)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
                         <Link href='/'>
                             <a>
@@ -487,49 +472,26 @@ const Item = React.memo((props) => {
                                             alt={data.item.info}
                                         />
                                         {
-                                            profile.role==='client'||!authenticated?
+                                            profile.role==='client'?
                                                 <>
                                                 <Star className={classes.buttonToggle} onClick={async ()=>{
                                                     let index
-                                                    if(profile.role==='client') {
                                                         await favoriteItem([data.item._id])
                                                         index = favorite.indexOf(profile._id)
                                                         if (index === -1) {
                                                             favorite.push(profile._id)
                                                             setFavorite([...favorite])
                                                         }
-                                                    }
-                                                    else if(!authenticated) {
-                                                        let favorites = JSON.parse(localStorage.favorites);
-                                                        index = -1
-                                                        for(let i=0; i<favorites.length; i++){
-                                                            if(favorites[i]._id == data.item._id)
-                                                                index = i
-                                                        }
-                                                        if(index===-1){
-                                                            favorites.push(data.item)
-                                                            setFavorite(true)
-                                                            localStorage.favorites = JSON.stringify(favorites)
-                                                        }
-                                                    }
 
                                                     if (index !== -1) {
                                                         const action = async() => {
-                                                            if(profile.role==='client') {
                                                                 favorite.splice(index, 1)
                                                                 setFavorite([...favorite])
-                                                            }
-                                                            else if(!authenticated) {
-                                                                let favorites = JSON.parse(localStorage.favorites);
-                                                                favorites.splice(index, 1)
-                                                                setFavorite(false)
-                                                                localStorage.favorites = JSON.stringify(favorites)
-                                                            }
                                                         }
                                                         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                         showMiniDialog(true)
                                                     }
-                                                }} style={{color: (!authenticated&&favorite===true)||(profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
+                                                }} style={{color: (profile.role=='client'&&favorite.includes(profile._id))?'#ffb300':'#e1e1e1'}}  />
                                                 <div className={classes.chipList}>
                                                     {
                                                         data.item.latest?
@@ -592,7 +554,7 @@ const Item = React.memo((props) => {
                                         </div>
                                         <br/>
                                         {
-                                            ['client'].includes(profile.role)||!authenticated?
+                                            ['client'].includes(profile.role)?
                                                 <>
                                                 {
                                                     isMobileApp?
@@ -624,22 +586,10 @@ const Item = React.memo((props) => {
                                                                 className={classes.button}
                                                                 onClick={()=>{
                                                                     if(count>0) {
-                                                                        if (['client'].includes(profile.role))
-                                                                            addBasket({
+                                                                        addBasket({
                                                                                 item: data.item._id,
                                                                                 count: count > 0 ? checkInt(count) : 1
                                                                             })
-                                                                        else if (!authenticated) {
-                                                                            let basket = JSON.parse(localStorage.basket);
-                                                                            let index = -1
-                                                                            for (let i = 0; i < basket.length; i++) {
-                                                                                if (basket[i].item._id == data.item._id)
-                                                                                    index = i
-                                                                            }
-                                                                            if (index === -1)
-                                                                                basket.push({item: data.item, count: count > 0 ? checkInt(count) : 1})
-                                                                            localStorage.basket = JSON.stringify(basket)
-                                                                        }
                                                                         showSnackBar('Товар добавлен в корзину')
                                                                         getCountBasket()
                                                                     }
@@ -666,22 +616,10 @@ const Item = React.memo((props) => {
                                                                 className={classes.button}
                                                                 onClick={()=>{
                                                                     if(count>0) {
-                                                                        if (['client'].includes(profile.role))
                                                                             addBasket({
                                                                                 item: data.item._id,
                                                                                 count: count > 0 ? checkInt(count) : 1
                                                                             })
-                                                                        else if (!authenticated) {
-                                                                            let basket = JSON.parse(localStorage.basket);
-                                                                            let index = -1
-                                                                            for (let i = 0; i < basket.length; i++) {
-                                                                                if (basket[i].item._id == data.item._id)
-                                                                                    index = i
-                                                                            }
-                                                                            if (index === -1)
-                                                                                basket.push({item: data.item, count: count > 0 ? count : 1})
-                                                                            localStorage.basket = JSON.stringify(basket)
-                                                                        }
                                                                         showSnackBar('Товар добавлен в корзину')
                                                                         getCountBasket()
                                                                     }
@@ -772,6 +710,14 @@ const Item = React.memo((props) => {
 
 Item.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/contact'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/contact')
     return {
         data: {
             ...ctx.query.id!=='new'?await getItem({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{

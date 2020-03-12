@@ -88,39 +88,15 @@ const Basket = React.memo((props) => {
         count = checkInt(count)
         if(count<1)
             count = 1
-        if(authenticated)
-            setBasket({_id: list[idx]._id, count: count, consignment})
-        else {
-            let list = JSON.parse(localStorage.basket);
-            list[idx].count = count;
-            localStorage.basket = JSON.stringify(list);
-        }
+        setBasket({_id: list[idx]._id, count: count, consignment})
     }
     let removeBasketChange= async (idx)=>{
         const action = async() => {
-            if(authenticated) {
-                setList((await deleteBasket([list[idx]._id])).baskets)
-            } else {
-                let list = JSON.parse(localStorage.basket)
-                list.splice(idx, 1)
-                localStorage.basket = JSON.stringify(list)
-                await getCountBasket()
-                setList(list)
-            }
+            setList((await deleteBasket([list[idx]._id])).baskets)
         }
         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
         showMiniDialog(true)
     }
-    useEffect(()=>{
-        (async()=>{
-            if(!authenticated){
-                if(localStorage.basket==undefined) {
-                    localStorage.basket = JSON.stringify([])
-                }
-                setList(JSON.parse(localStorage.basket))
-            }
-        })()
-    },[])
     useEffect(()=>{
         (async()=>{
             organizations = []
@@ -476,7 +452,7 @@ const Basket = React.memo((props) => {
 
 Basket.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['client'].includes(ctx.store.getState().user.profile.role)&&ctx.store.getState().user.authenticated)
+    if('client'!==ctx.store.getState().user.profile.role)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
