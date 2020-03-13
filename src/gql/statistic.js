@@ -82,15 +82,15 @@ export const getUnloadingOrders = async({organization, dateStart}, client)=>{
     }
 }
 
-export const getStatisticOrderChart = async({company, dateStart, dateType}, client)=>{
+export const getStatisticOrderChart = async({company, dateStart, dateType, type}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {company: company, dateStart: dateStart, dateType: dateType},
+                variables: {company: company, dateStart: dateStart, dateType: dateType, type: type},
                 query: gql`
-                    query ($company: String, $dateStart: Date, $dateType: String) {
-                        statisticOrderChart(company: $company, dateStart: $dateStart, dateType: $dateType) {
+                    query ($company: String, $dateStart: Date, $dateType: String, $type: String) {
+                        statisticOrderChart(company: $company, dateStart: $dateStart, dateType: $dateType, type: $type) {
                             all
                             chartStatistic
                                 {

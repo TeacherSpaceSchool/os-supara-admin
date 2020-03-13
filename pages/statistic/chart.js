@@ -26,6 +26,7 @@ const ChartStatistic = React.memo((props) => {
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('day');
     let [typeChart, setTypeChart] = useState('bar');
+    let [type, setType] = useState('money');
     let [statisticOrderChart, setStatisticOrderChart] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState(undefined);
@@ -38,7 +39,8 @@ const ChartStatistic = React.memo((props) => {
                 let _statisticOrderChart = (await getStatisticOrderChart({
                     company: organization ? organization._id : undefined,
                     dateStart: dateStart,
-                    dateType: dateType
+                    dateType: dateType,
+                    type: type
                 })).statisticOrderChart
                 for(let i=0; i<_statisticOrderChart.chartStatistic.length;i++){
                     for(let i1=0; i1<_statisticOrderChart.chartStatistic[i].data.length;i1++){
@@ -49,7 +51,7 @@ const ChartStatistic = React.memo((props) => {
                 await showLoad(false)
             }
         })()
-    },[organization, dateStart, dateType])
+    },[organization, dateStart, dateType, type])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -57,10 +59,17 @@ const ChartStatistic = React.memo((props) => {
         }
     },[process.browser])
 
-    const axes = React.useMemo(
+    const axesBar = React.useMemo(
         () => [
             { primary: true, type: 'ordinal', position: 'bottom' },
             { position: 'left', type: 'linear', stacked: true }
+        ],
+        []
+    )
+    const axesLines = React.useMemo(
+        () => [
+            { primary: true, type: 'ordinal', position: 'bottom' },
+            { type: 'linear', position: 'left', stacked: false }
         ],
         []
     )
@@ -95,6 +104,12 @@ const ChartStatistic = React.memo((props) => {
                         </Button>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setTypeChart('line')} size='small' color={typeChart==='line'?'primary':''}>
                             Линии
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setType('money')} size='small' color={type==='money'?'primary':''}>
+                            Прибыль
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setType('order')} size='small' color={type==='order'?'primary':''}>
+                            Заказы
                         </Button>
                     </div>
                     <div className={classes.row}>
@@ -138,20 +153,49 @@ const ChartStatistic = React.memo((props) => {
                     </div>
                     {
                         statisticOrderChart?
-                            <div
-                                style={{
-                                    width: isMobileApp?'calc(100vw - 42px)':'calc(100vw - 350px)',
-                                    height: isMobileApp?'calc(100vh - 220px)':'calc(100vh - 235px)'
-                                }}
-                            >
-                                <Chart
-                                    series={typeChart==='line'?seriesLines:seriesBar}
-                                    data={statisticOrderChart.chartStatistic}
-                                    axes={axes}
-                                    tooltip
-                                    primaryCursor
-                                    secondaryCursor
-                                />
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: isMobileApp?'calc(100vw - 32px)':'calc(100vw - 332px)'
+                            }}>
+                                <div
+                                    style={{
+                                        width: isMobileApp?'calc(100vw - 42px)':'calc(100vw - 350px)',
+                                        height: isMobileApp?'calc(100vh - 260px)':'calc(100vh - 275px)'
+                                    }}
+                                >
+                                    {
+                                        dateType==='day'?
+                                            <Chart
+                                                series={typeChart==='line'?seriesLines:seriesBar}
+                                                data={statisticOrderChart.chartStatistic}
+                                                axes={typeChart==='line'?axesLines:axesBar}
+                                                tooltip
+                                                primaryCursor
+                                                secondaryCursor
+                                            />
+                                            :
+                                            dateType==='month'?
+                                                <Chart
+                                                    series={typeChart==='line'?seriesLines:seriesBar}
+                                                    data={statisticOrderChart.chartStatistic}
+                                                    axes={typeChart==='line'?axesLines:axesBar}
+                                                    tooltip
+                                                    primaryCursor
+                                                    secondaryCursor
+                                                />
+                                                :
+                                                <Chart
+                                                    series={typeChart==='line'?seriesLines:seriesBar}
+                                                    data={statisticOrderChart.chartStatistic}
+                                                    axes={typeChart==='line'?axesLines:axesBar}
+                                                    tooltip
+                                                    primaryCursor
+                                                    secondaryCursor
+                                                />
+                                    }
+                                </div>
                             </div>
                             :
                             null
@@ -161,7 +205,7 @@ const ChartStatistic = React.memo((props) => {
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                 {
                     statisticOrderChart?
-                        `${statisticOrderChart.all} сом`
+                        `${statisticOrderChart.all} ${type==='money'?'сом':'заказы'}`
                         :null
                 }
             </div>
