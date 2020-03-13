@@ -70,6 +70,8 @@ export const getRoutes = async({search, sort, filter, date}, client)=>{
                                     confirmationForwarder
                                     confirmationClient
                                     cancelClient
+                            distributer
+                                {_id name}
                                     cancelForwarder
                                     paymentConsignation
                                     taken
@@ -180,6 +182,8 @@ export const getRoute = async({_id}, client)=>{
                                     confirmationForwarder
                                     confirmationClient
                                     cancelClient
+                            distributer
+                                {_id name}
                                     cancelForwarder
                                     paymentConsignation
                                     taken

@@ -227,6 +227,17 @@ const Order =  React.memo(
                     </div>
                 </a>
                 {
+                    element.distributer?
+                        <a href={`/organization/${element.distributer._id}`} target='_blank'>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Дистрибьютор:&nbsp;</div>
+                                <div className={classes.value}>{element.distributer.name}</div>
+                            </div>
+                        </a>
+                        :
+                        null
+                }
+                {
                     element.usedBonus&&element.usedBonus>0?
                         <div className={classes.row}>
                             <div className={classes.nameField}>Использованный бонус:&nbsp;</div>

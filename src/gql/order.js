@@ -66,6 +66,8 @@ export const getOrders = async(args, client)=>{
                             confirmationForwarder
                             confirmationClient
                             cancelClient
+                            distributer
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             taken
@@ -192,6 +194,8 @@ export const getOrdersForRouting = async(organization)=>{
                             confirmationForwarder
                             confirmationClient
                             cancelClient
+                            distributer
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             taken
@@ -270,6 +274,8 @@ export const getOrder = async({_id})=>{
                             number
                             confirmationForwarder
                             cancelClient
+                            distributer
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             confirmationClient
@@ -414,6 +420,8 @@ export const setOrder = async(element)=>{
                             number
                             confirmationForwarder
                             cancelClient
+                            distributer
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             confirmationClient
@@ -488,6 +496,8 @@ export const subscriptionOrder = gql`
                             number
                             confirmationForwarder
                             cancelClient
+                            distributer
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             confirmationClient

@@ -25,6 +25,7 @@ const ChartStatistic = React.memo((props) => {
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('day');
+    let [typeChart, setTypeChart] = useState('bar');
     let [statisticOrderChart, setStatisticOrderChart] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState(undefined);
@@ -89,6 +90,14 @@ const ChartStatistic = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     <div className={classes.row}>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setTypeChart('bar')} size='small' color={typeChart==='bar'?'primary':''}>
+                            Бар
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setTypeChart('line')} size='small' color={typeChart==='line'?'primary':''}>
+                            Линии
+                        </Button>
+                    </div>
+                    <div className={classes.row}>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
                             День
                         </Button>
@@ -132,11 +141,11 @@ const ChartStatistic = React.memo((props) => {
                             <div
                                 style={{
                                     width: isMobileApp?'calc(100vw - 42px)':'calc(100vw - 350px)',
-                                    height: isMobileApp?'calc(100vh - 202px)':'calc(100vh - 222px)'
+                                    height: isMobileApp?'calc(100vh - 220px)':'calc(100vh - 235px)'
                                 }}
                             >
                                 <Chart
-                                    series={organization?seriesLines:seriesBar}
+                                    series={typeChart==='line'?seriesLines:seriesBar}
                                     data={statisticOrderChart.chartStatistic}
                                     axes={axes}
                                     tooltip

@@ -120,6 +120,15 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.value}>{element.orders[0].item.organization.name}</div>
                     </div>
                     {
+                        element.distributer&&element.distributer.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Дистрибьютор: &nbsp;</div>
+                                <div className={classes.value}>{element.distributer.name}</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
                         element.usedBonus&&element.usedBonus>0?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Использованный бонус:&nbsp;</div>
