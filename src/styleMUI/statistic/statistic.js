@@ -18,5 +18,8 @@ export default makeStyles({
         width: 'calc(50% - 10px)',
         margin: 5
     },
+    rowStatic: {
+        margin: 5
+    },
 
 })

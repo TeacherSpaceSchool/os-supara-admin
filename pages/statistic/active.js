@@ -23,6 +23,7 @@ const ClientStatisticActive = React.memo((props) => {
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
+    let [showStat, setShowStat] = useState(false);
     return (
         <App pageName='Статистика активности'>
             <Head>
@@ -38,7 +39,31 @@ const ClientStatisticActive = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
 
-                    <Table type='client' row={data.statisticClientActivity.row} columns={data.statisticClientActivity.columns}/>
+                    <Table type='client' row={data.statisticClientActivity.row.slice(1)} columns={data.statisticClientActivity.columns}/>
+                    <div className='count' onClick={()=>setShowStat(!showStat)}>
+                        {
+                            data.statisticClientActivity?
+                                <>
+                                <div className={classes.rowStatic}>{`Всего активность: ${data.statisticClientActivity.row[0].data[0]}`}</div>
+                                <div className={classes.rowStatic}>{`Всего заказов: ${data.statisticClientActivity.row[0].data[5]}`}</div>
+                                <div className={classes.rowStatic}>{`Без заказов: ${data.statisticClientActivity.row[0].data[4]}`}</div>
+                                {
+                                    showStat?
+                                        <>
+                                        <div className={classes.rowStatic}>{`Сегодня активность: ${data.statisticClientActivity.row[0].data[1]}`}</div>
+                                        <div className={classes.rowStatic}>{`Сегодня заказов: ${data.statisticClientActivity.row[0].data[6]}`}</div>
+                                        <div className={classes.rowStatic}>{`Недельная активность: ${data.statisticClientActivity.row[0].data[2]}`}</div>
+                                        <div className={classes.rowStatic}>{`Недельные заказы: ${data.statisticClientActivity.row[0].data[7]}`}</div>
+                                        <div className={classes.rowStatic}>{`Месячная активность: ${data.statisticClientActivity.row[0].data[3]}`}</div>
+                                        <div className={classes.rowStatic}>{`Месячные заказы: ${data.statisticClientActivity.row[0].data[8]}`}</div>
+                                        </>
+                                        :
+                                        null
+                                }
+                                </>
+                                :null
+                        }
+                    </div>
 
                 </CardContent>
             </Card>

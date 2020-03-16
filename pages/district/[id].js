@@ -65,10 +65,6 @@ const District = React.memo((props) => {
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
     };
-    let [distributer, setDistributer] = useState(router.query.id==='new'||!data.district.distributer?{}:{_id: data.district.distributer._id, name: data.district.distributer.name});
-    let handleDistributer =  (event) => {
-        setDistributer({_id: event.target.value, name: event.target.name})
-    };
     let [client, setClient] = useState(data.district?data.district.client:[]);
     let [allClient, setAllClient] = useState([]);
     let [filtredClient, setFiltredClient] = useState([]);
@@ -88,14 +84,14 @@ const District = React.memo((props) => {
                     setEcspeditor({})
                 }
                 if(organization._id) {
-                    setAgents((await getAgents({_id: distributer._id?distributer._id:organization._id})).agents)
-                    setManagers((await getManagers({_id: distributer._id?distributer._id:organization._id})).managers)
-                    setEcspeditors((await getEcspeditors({_id: distributer._id?distributer._id:organization._id})).ecspeditors)
+                    setAgents((await getAgents({_id: organization._id})).agents)
+                    setManagers((await getManagers({_id: organization._id})).managers)
+                    setEcspeditors((await getEcspeditors({_id: organization._id})).ecspeditors)
                     setUnselectedClient((await getClientsWithoutDistrict(organization._id)).clientsWithoutDistrict)
                 }
             }
         })()
-    },[organization, distributer])
+    },[organization])
     useEffect(()=>{
         (async()=>{
             if(data.district) {
@@ -166,22 +162,6 @@ const District = React.memo((props) => {
                                     <Select value={organization._id}onChange={handleOrganization}>
                                         {data.organizations.map((element)=>
                                             <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                        )}
-                                    </Select>
-                                </FormControl>
-                                :
-                                null
-                            }
-                            {organization._id&&profile.role==='admin'?
-                                <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
-                                    <InputLabel>Дистрибьютор</InputLabel>
-                                    <Select value={distributer._id}onChange={handleDistributer}>
-                                        <MenuItem value={null}>Без</MenuItem>
-                                        {data.organizations.map((element)=> {
-                                            if(organization._id!==element._id)
-                                                return(<MenuItem key={element._id} value={element._id}
-                                                          ola={element.name}>{element.name}</MenuItem>)
-                                            }
                                         )}
                                     </Select>
                                 </FormControl>
@@ -270,7 +250,6 @@ const District = React.memo((props) => {
                                                         agent: agent._id,
                                                         manager: manager._id,
                                                         ecspeditor: ecspeditor._id,
-                                                        distributer: distributer._id
                                                     })
                                                     Router.push(`/districts/${organization._id}`)
                                                 }
@@ -290,7 +269,6 @@ const District = React.memo((props) => {
                                                 if(!data.district.agent||agent._id!==data.district.agent._id)editElement.agent = agent._id;
                                                 if(!data.district.manager||manager._id!==data.district.manager._id)editElement.manager = manager._id;
                                                 if(!data.district.ecspeditor||ecspeditor._id!==data.district.ecspeditor._id)editElement.ecspeditor = ecspeditor._id;
-                                                if(!data.district.distributer||distributer._id!==data.district.distributer._id)editElement.distributer = distributer._id;
                                                 if(name!==data.district.name)editElement.name = name;
                                                 await setDistrict(editElement)
                                             }
@@ -345,7 +323,7 @@ District.getInitialProps = async function(ctx) {
                 Router.push('/')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getDistrict({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {district: {organization: {}, distributer: {}, client: [], name: '', agent: {}, ecspeditor: {}}},
+            ...ctx.query.id!=='new'?await getDistrict({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {district: {organization: {}, client: [], name: '', agent: {}, ecspeditor: {}}},
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

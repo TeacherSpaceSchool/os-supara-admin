@@ -116,7 +116,7 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.value}>{element.client.name}</div>
                     </div>
                     <div className={classes.row}>
-                        <div className={classes.nameField}>Поставщик:&nbsp;</div>
+                        <div className={classes.nameField}>Производитель:&nbsp;</div>
                         <div className={classes.value}>{element.orders[0].item.organization.name}</div>
                     </div>
                     {

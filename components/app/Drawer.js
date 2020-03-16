@@ -19,7 +19,7 @@ import LiveHelp from '@material-ui/icons/LiveHelp';
 import InfoIcon from '@material-ui/icons/Info';
 import GroupIcon from '@material-ui/icons/Group';
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import CloudIcon from '@material-ui/icons/Cloud';
+import LocalShipping from '@material-ui/icons/LocalShipping';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
@@ -238,6 +238,19 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('district')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Районы' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    'admin'===profile.role?
+                        <>
+                        <Link href={'/distributers'} as={'/districts'}>
+                            <ListItem style={{background: router.pathname.includes('distributers')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><LocalShipping color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Дистрибьюторы' />
                             </ListItem>
                         </Link>
                         <Divider/>
