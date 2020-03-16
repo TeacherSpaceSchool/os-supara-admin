@@ -25,7 +25,6 @@ const CardOrganization = React.memo((props) => {
     let [status, setStatus] = useState(element.user?element.user.status:'');
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
-            <Link href='/client/[id]' as={`/client/${element._id}`}>
                <CardActionArea>
                     <CardContent className={classes.line}>
                         {
@@ -37,13 +36,16 @@ const CardOrganization = React.memo((props) => {
                                 :
                                 null
                         }
-                        <label htmlFor='contained-button-file'>
-                            <img
-                                className={classes.media}
-                                src={element.image?element.image:'/static/add.png'}
-                                alt={element.name}
-                            />
-                        </label>
+                        <Link href='/client/[id]' as={`/client/${element._id}`}>
+                            <a>
+                                <img
+                                    className={classes.media}
+                                    src={element.image?element.image:'/static/add.png'}
+                                    alt={element.name}
+                                />
+                            </a>
+                        </Link>
+                        <Link href='/client/[id]' as={`/client/${element._id}`}>
                         <div style={{width: 'calc(100% - 70px)'}}>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>
@@ -129,9 +131,9 @@ const CardOrganization = React.memo((props) => {
                                     null
                             }
                         </div>
+                        </Link>
                     </CardContent>
             </CardActionArea>
-            </Link>
             <CardActions>
                 {
                     element.user&&['агент', 'admin', 'суперагент'].includes(profile.role) ?
