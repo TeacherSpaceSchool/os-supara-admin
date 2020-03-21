@@ -110,7 +110,7 @@ const ClientGeoStatistic = React.memo((props) => {
                                     >
                                     <ObjectManager
                                         options={{
-                                            clusterize: false,
+                                            clusterize: true,
                                             gridSize: 32,
                                         }}
                                         objects={{
@@ -124,7 +124,7 @@ const ClientGeoStatistic = React.memo((props) => {
                                     />
                                     <ObjectManager
                                         options={{
-                                            clusterize: false,
+                                            clusterize: true,
                                             gridSize: 32,
                                         }}
                                         objects={{
@@ -138,7 +138,7 @@ const ClientGeoStatistic = React.memo((props) => {
                                     />
                                     <ObjectManager
                                         options={{
-                                            clusterize: false,
+                                            clusterize: true,
                                             gridSize: 32,
                                         }}
                                         objects={{
