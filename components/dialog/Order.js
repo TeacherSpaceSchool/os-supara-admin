@@ -38,7 +38,7 @@ const Order =  React.memo(
         let [cancelClient, setCancelClient] = useState(element.cancelClient!=undefined&&element.cancelClient);
         let [changeOrders, setChangeOrders] = useState(false);
         const width = isMobileApp? (window.innerWidth-112) : 500;
-        const allowOrganization = (['менеджер', 'организация', /*'агент'*/].includes(profile.role)&&((profile.organization===element.orders[0].item.organization._id&&!element.distributer&&!element.distributer._id)||(element.distributer&&element.distributer._id&&profile.organization===element.distributer._id)))
+        const allowOrganization = (['менеджер', 'организация', 'агент'].includes(profile.role)&&((profile.organization===element.orders[0].item.organization._id&&!element.distributer&&!element.distributer._id)||(element.distributer&&element.distributer._id&&profile.organization===element.distributer._id)))
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
             allTonnage=0

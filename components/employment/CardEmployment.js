@@ -84,7 +84,7 @@ const CardEmployment = React.memo((props) => {
                         </Button>
                         <Button onClick={async()=>{
                             const action = async() => {
-                                const list = (await deleteEmployment([element._id], element.organization._id)).employments
+                                const list = (await deleteEmployment([element._id], element.organization?element.organization._id:'super')).employments
                                 setList(list)
                             }
                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
