@@ -274,9 +274,7 @@ const Returned =  React.memo(
                     />
                 </div>
                 <div>
-                {
-                    allowOrganization?
-                        <Button variant='contained' color='primary' onClick={()=>{
+                    <Button variant='contained' color='primary' onClick={()=>{
                             const action = async() => {
                                 let returned = {returned: element._id}
                                 if(element.confirmationForwarder!==confirmationForwarder) returned.confirmationForwarder=confirmationForwarder;
@@ -296,12 +294,9 @@ const Returned =  React.memo(
                         }} className={classes.button}>
                             Сохранить
                         </Button>
-                        :
-                        null
-                }
-                <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
-                    Закрыть
-                </Button>
+                        <Button variant='contained' color='secondary' onClick={()=>{showMiniDialog(false);}} className={classes.button}>
+                            Закрыть
+                        </Button>
                     </div>
             </div>
         );
