@@ -25,6 +25,7 @@ const AgentHistoryGeo = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
+    let organizations = [{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization];
     let [agentHistoryGeo, setAgentHistoryGeo] = useState(undefined);
     let [organization, setOrganization] = useState({_id: undefined});
     let [agents, setAgents] = useState([]);
@@ -98,7 +99,7 @@ const AgentHistoryGeo = React.memo((props) => {
                             profile.role==='admin'?
                                 <Autocomplete
                                     className={classes.input}
-                                    options={data.activeOrganization}
+                                    options={organizations}
                                     getOptionLabel={option => option.name}
                                     value={organization}
                                     onChange={(event, newValue) => {
