@@ -275,7 +275,7 @@ const Returned =  React.memo(
                 </div>
                 <div>
                 {
-                    ((allowOrganization||['admin', 'суперагент'].includes(profile.role)))?
+                    allowOrganization?
                         <Button variant='contained' color='primary' onClick={()=>{
                             const action = async() => {
                                 let returned = {returned: element._id}
