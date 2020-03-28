@@ -77,6 +77,14 @@ const District = React.memo((props) => {
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
         (async()=>{
+            if(router.query.id==='new'&&profile.organization){
+                let organzation = data.organizations.filter(organization=>organization._id===profile.organization)
+                setOrganization(organzation[0])
+            }
+        })()
+    },[profile])
+    useEffect(()=>{
+        (async()=>{
             if(data.district) {
                 if (router.query.id === 'new') {
                     setAgent({})

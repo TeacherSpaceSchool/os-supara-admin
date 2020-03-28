@@ -1,42 +1,44 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import App from '../layouts/App';
-import CardOrder from '../components/order/CardOrder'
-import pageListStyle from '../src/styleMUI/orders/orderList'
-import {getOrders} from '../src/gql/order'
+import CardReturned from '../components/returned/CardReturned'
+import pageListStyle from '../src/styleMUI/returned/returnedList'
+import {getReturneds} from '../src/gql/returned'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardOrderPlaceholder from '../components/order/CardOrderPlaceholder'
+import CardReturnedPlaceholder from '../components/returned/CardReturnedPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
 import ClickNHold from 'react-click-n-hold';
 import Fab from '@material-ui/core/Fab';
 import SettingsIcon from '@material-ui/icons/Settings';
+import AddIcon from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Confirmation from '../components/dialog/Confirmation'
-import { deleteOrders, getInvoicesSimpleStatistic } from '../src/gql/order'
+import { deleteReturneds, getReturnedsSimpleStatistic } from '../src/gql/returned'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import { bindActionCreators } from 'redux'
 import Badge from '@material-ui/core/Badge';
+import Link from 'next/link';
 const height = 225
 
 
-const Orders = React.memo((props) => {
+const Returneds = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [simpleStatistic, setSimpleStatistic] = useState(['0']);
     let [list, setList] = useState(data.invoices);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
-    const { search, filter, sort, date } = props.app;
+    const { search, sort, date } = props.app;
     const { profile } = props.user;
     let [paginationWork, setPaginationWork] = useState(true);
     const checkPagination = async()=>{
         if(paginationWork){
-            let addedList = (await getOrders({search: search, sort: sort, filter: filter, date: date, skip: list.length})).invoices
+            let addedList = (await getReturneds({search: search, sort: sort, filter: filter, date: date, skip: list.length})).invoices
             if(addedList.length>0){
                 setList([...list, ...addedList])
             }
@@ -45,9 +47,9 @@ const Orders = React.memo((props) => {
         }
     }
     const getList = async ()=>{
-        let orders = (await getOrders({search: search, sort: sort, filter: filter, date: date, skip: 0})).invoices
-        setList(orders)
-        setSimpleStatistic((await getInvoicesSimpleStatistic({search: search, filter: filter, date: date})).invoicesSimpleStatistic)
+        let returneds = (await getReturneds({search: search, sort: sort, date: date, skip: 0})).returneds
+        setList(returneds)
+        setSimpleStatistic((await getReturnedsSimpleStatistic({search: search, date: date})).returnedsSimpleStatistic)
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
@@ -61,7 +63,7 @@ const Orders = React.memo((props) => {
             (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
         }, 500)
         setSearchTimeOut(searchTimeOut)
-    },[filter, sort, search, date])
+    },[sort, search, date])
 
     let [showStat, setShowStat] = useState(false);
     let [selected, setSelected] = useState([]);
@@ -74,16 +76,16 @@ const Orders = React.memo((props) => {
     };
 
     return (
-        <App checkPagination={checkPagination} setList={setList} list={list} searchShow={true} dates={true} filters={data.filterInvoice} sorts={data.sortInvoice} pageName='Заказы'>
+        <App checkPagination={checkPagination} setList={setList} list={list} searchShow={true} dates={true} sorts={data.sortReturned} pageName='Возвраты'>
             <Head>
-                <title>Заказы</title>
+                <title>Возвраты</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Заказы' />
+                <meta property='og:title' content='Возвраты' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/orders`} />
-                <link rel='canonical' href={`${urlMain}/orders`}/>
+                <meta property="og:url" content={`${urlMain}/returneds`} />
+                <link rel='canonical' href={`${urlMain}/returneds`}/>
             </Head>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                         {
@@ -136,7 +138,7 @@ const Orders = React.memo((props) => {
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
                         return(
-                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
+                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardReturnedPlaceholder/>}>
                         <ClickNHold
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
                             time={3}
@@ -151,7 +153,7 @@ const Orders = React.memo((props) => {
 
                             }}
                         >
-                            <CardOrder list={list} idx={idx} setSelected={setSelected} selected={selected} setList={setList} key={element._id} element={element}/>
+                            <CardReturned list={list} idx={idx} setSelected={setSelected} selected={selected} setList={setList} key={element._id} element={element}/>
                         </ClickNHold>
                     </LazyLoad>
                         )}
@@ -164,7 +166,11 @@ const Orders = React.memo((props) => {
                     </Badge>
                 </Fab>
                 :
-                null
+                <Link href='/returned/new'>
+                    <Fab color='primary' aria-label='add' className={classes.fab}>
+                        <AddIcon />
+                    </Fab>
+                </Link>
             }
             <Menu
                 anchorEl={anchorEl}
@@ -190,7 +196,7 @@ const Orders = React.memo((props) => {
                             }
                         }
                         setList(_list)
-                        await deleteOrders(selected)
+                        await deleteReturneds(selected)
                     }
                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                     showMiniDialog(true);
@@ -206,9 +212,9 @@ const Orders = React.memo((props) => {
     )
 })
 
-Orders.getInitialProps = async function(ctx) {
+Returneds.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер', 'client', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -218,7 +224,7 @@ Orders.getInitialProps = async function(ctx) {
             Router.push('/')
     ctx.store.getState().app.sort = '-createdAt'
     return {
-        data: await getOrders({search: '', sort: '-createdAt', filter: '', date: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: await getReturneds({search: '', sort: '-createdAt', date: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
     };
 };
 
@@ -235,4 +241,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(Returneds);

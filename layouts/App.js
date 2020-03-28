@@ -15,6 +15,7 @@ import '../scss/app.scss'
 import Router from 'next/router'
 import { useRouter } from 'next/router';
 import { subscriptionOrder } from '../src/gql/order';
+import { subscriptionReturned } from '../src/gql/returned';
 import { useSubscription } from '@apollo/react-hooks';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
@@ -75,7 +76,53 @@ const App = React.memo(props => {
     });
 
     //if(authenticated&&profile.role&&'экспедитор'!==profile.role) {
-        const subscriptionOrderRes = useSubscription(subscriptionOrder);
+    const subscriptionOrderRes = useSubscription(subscriptionOrder);
+    const subscriptionReturnedRes = useSubscription(subscriptionReturned);
+    useEffect( ()=>{
+        if(
+            authenticated&&
+            profile.role&&
+            'экспедитор'!==profile.role&&
+            subscriptionReturnedRes.data&&
+            profile._id!==subscriptionReturnedRes.data.reloadReturned.who
+        ) {
+            if (router.pathname === '/returneds') {
+                if(subscriptionReturnedRes.data.reloadReturned.type==='ADD'){
+                    setList([subscriptionReturnedRes.data.reloadReturned.invoice, ...list])
+                }
+                else if(subscriptionReturnedRes.data.reloadReturned.type==='SET'){
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionReturnedRes.data.reloadReturned.returned._id){
+                            _list[i]=subscriptionReturnedRes.data.reloadReturned.returned
+                        }
+                    }
+                    setList([..._list])
+                }
+                else if(subscriptionReturnedRes.data.reloadReturned.type==='DELETE'){
+                    let index = 0
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionReturnedRes.data.reloadReturned.returned._id){
+                            index = i
+                        }
+                    }
+                    _list.splice(index, 1);
+                    setList([..._list])
+                }
+            }
+            else {
+                if(!unread.returneds) {
+                    unread.returneds = true
+                    setUnread({...unread})
+                }
+                if( navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                    navigator.vibrate(200);
+                /*if (alert.current)
+                    alert.current.play()*/
+            }
+        }
+    },[subscriptionReturnedRes.data])
     useEffect( ()=>{
         if(
             authenticated&&

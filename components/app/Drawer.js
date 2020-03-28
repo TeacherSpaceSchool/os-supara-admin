@@ -188,6 +188,20 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
+                    ['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
+                        <>
+                        <Link href='/returneds'>
+                            <ListItem style={{background: router.pathname==='/returneds'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><ReceiptIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Возвраты' />
+                                <Badge color='secondary' variant='dot' invisible={!unread.returneds}/>
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
                     ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role)?
                         <>
                         <Link href='/routes'>
@@ -238,6 +252,19 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('district')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary='Районы' />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
+                        <>
+                        <Link href={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`:'/agentroute/[id]'} as={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер', 'агент'].includes(profile.role)?`/${profile.organization}`:''}`:'/agentroute/agent'}>
+                            <ListItem style={{background: router.pathname.includes('agentroute')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><FormatListNumberedIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary={profile.role==='агент'?'Маршрут агента':'Маршруты агентов'} />
                             </ListItem>
                         </Link>
                         <Divider/>

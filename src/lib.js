@@ -13,7 +13,7 @@ export const getJWT = (auth)=>{
     return res!==null?res[0].trim().replace('jwt=', ''):undefined
 }
 export const checkInt = (int) => {
-    if(int.length>1&&int[0]==='0')
+    if(int&&int.length>1&&int[0]==='0')
         int = int.substring(1)
     return isNaN(parseInt(int))?0:parseInt(int)
 }

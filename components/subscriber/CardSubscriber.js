@@ -38,6 +38,7 @@ const NotificationStatistic = React.memo((props) => {
                                 </div>
                             </CardActionArea>
                         </CardContent>
+                        {/*
                         <CardActions>
                             <Button onClick={async()=> {
                                 const action = async() => {
@@ -50,6 +51,7 @@ const NotificationStatistic = React.memo((props) => {
                                 Удалить
                             </Button>
                         </CardActions>
+                        */}
                     </Card>
     );
 })
