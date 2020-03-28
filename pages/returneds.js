@@ -38,7 +38,7 @@ const Returneds = React.memo((props) => {
     let [paginationWork, setPaginationWork] = useState(true);
     const checkPagination = async()=>{
         if(paginationWork){
-            let addedList = (await getReturneds({search: search, sort: sort, filter: filter, date: date, skip: list.length})).invoices
+            let addedList = (await getReturneds({search: search, sort: sort, date: date, skip: list.length})).invoices
             if(addedList.length>0){
                 setList([...list, ...addedList])
             }
@@ -89,7 +89,7 @@ const Returneds = React.memo((props) => {
             </Head>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                         {
-                            `Всего заказов: ${simpleStatistic[0]}`
+                            `Всего возвратов: ${simpleStatistic[0]}`
                         }
                         {
                             showStat?
