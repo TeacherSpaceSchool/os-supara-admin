@@ -9,11 +9,15 @@ import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { onoffClient, deleteClient } from '../../src/gql/client'
+import { addAgentHistoryGeo } from '../../src/gql/agentHistoryGeo'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import CardActions from '@material-ui/core/CardActions';
 import NotificationsActive from '@material-ui/icons/NotificationsActive';
 import NotificationsOff from '@material-ui/icons/NotificationsOff';
 import Confirmation from '../../components/dialog/Confirmation'
+import * as snackbarActions from '../../redux/actions/snackbar'
+import {getGeoDistance} from '../../src/lib'
+import Router from 'next/router'
 
 
 const CardOrganization = React.memo((props) => {
@@ -23,6 +27,7 @@ const CardOrganization = React.memo((props) => {
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     let [status, setStatus] = useState(element.user?element.user.status:'');
+    const { showSnackBar } = props.snackbarActions;
     return (
         <Card className={isMobileApp?classes.cardM:classes.cardD}>
                <CardActionArea>
@@ -136,7 +141,33 @@ const CardOrganization = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    element.user&&['агент', 'admin', 'суперагент'].includes(profile.role) ?
+                    ['агент', 'суперагент'].includes(profile.role) ?
+                        <Button onClick={async()=>{
+                            const action = () => {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(async(position)=>{
+                                        let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(element.address[0][1].split(', ')))
+                                        if(distance<100){
+                                            await addAgentHistoryGeo({client: element._id, geo: `${position.coords.latitude}, ${position.coords.longitude}`})
+                                            Router.push(`/catalog?client=${element._id}`)
+                                        }
+                                        else
+                                            showSnackBar('Вы слишком далеко')
+                                    });
+                                } else {
+                                    showSnackBar('Геолокация не поддерживается')
+                                }
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Посетил
+                        </Button>
+                        :
+                        null
+                }
+                {
+                    element.user&&['admin', 'суперагент'].includes(profile.role) ?
                         <Button onClick={async()=>{
                             if(['admin'].includes(profile.role)) {
                                 const action = async () => {
@@ -184,6 +215,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
+        snackbarActions: bindActionCreators(snackbarActions, dispatch),
     }
 }
 

@@ -14,6 +14,7 @@ import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
 import { urlMain } from '../redux/constants/other'
 import { getBonusesClient } from '../src/gql/bonusclient'
+import { getClient } from '../src/gql/client'
 import TextField from '@material-ui/core/TextField';
 import {getClients} from '../src/gql/client'
 import { getClientGqlSsr } from '../src/getClientGQL'
@@ -98,7 +99,7 @@ const Catalog = React.memo((props) => {
         forceCheck()
     },[list])
     let [bonus, setBonus] = useState({});
-    let [client, setClient] = useState();
+    let [client, setClient] = useState(data.client);
     let handleClient =  (client) => {
         setClient(client)
         setBonus((data.bonusesClient.filter(bonusClient=>bonusClient.client._id===client._id))[0])
@@ -223,19 +224,31 @@ const Catalog = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    <Autocomplete
-                        open={open}
-                        disableOpenOnFocus
-                        className={classes.input}
-                        options={clients}
-                        getOptionLabel={option => `${option.name}${option.address&&option.address[0]?` (${option.address[0][2]?`${option.address[0][2]}, `:''}${option.address[0][0]})`:''}`}
-                        onChange={(event, newValue) => {
-                            handleClient(newValue)
-                        }}
-                        noOptionsText='Ничего не найдено'
-                        renderInput={params => (
-                            <TextField {...params} label='Выберите клиента' variant='outlined' fullWidth
-                                       onChange={handleChange}
+                    {
+                        data.client?
+                            <TextField
+                                label='Клиент'
+                                value={data.client.name}
+                                className={classes.input}
+                                inputProps={{
+                                    'aria-label': 'description',
+                                    readOnly: true,
+                                }}
+                            />
+                            :
+                            <Autocomplete
+                                open={open}
+                                disableOpenOnFocus
+                                className={classes.input}
+                                options={clients}
+                                getOptionLabel={option => `${option.name}${option.address&&option.address[0]?` (${option.address[0][2]?`${option.address[0][2]}, `:''}${option.address[0][0]})`:''}`}
+                                onChange={(event, newValue) => {
+                                    handleClient(newValue)
+                                }}
+                                noOptionsText='Ничего не найдено'
+                                renderInput={params => (
+                                    <TextField {...params} label='Выберите клиента' variant='outlined' fullWidth
+                                               onChange={handleChange}
                                                InputProps={{
                                                    ...params.InputProps,
                                                    endAdornment: (
@@ -245,9 +258,10 @@ const Catalog = React.memo((props) => {
                                                        </React.Fragment>
                                                    ),
                                                }}
+                                    />
+                                )}
                             />
-                        )}
-                    />
+                    }
                     <br/>
                     {
                         data.brandOrganizations.length>1||profile.role==='супергент'?
@@ -417,11 +431,15 @@ Catalog.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     await deleteBasketAll()
+
+
+
     return {
         data: {
             brands: [],
             organization: {},
             bonusesClient: [],
+            client: ctx.query.client?(await getClient({_id: ctx.query.client}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).client:undefined,
             ...await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };

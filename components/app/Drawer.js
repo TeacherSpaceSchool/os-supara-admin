@@ -202,19 +202,6 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role)?
-                        <>
-                        <Link href='/routes'>
-                            <ListItem style={{background: router.pathname==='/routes'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
-                                <ListItemIcon><FormatListNumberedIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Маршрутные листы' />
-                            </ListItem>
-                        </Link>
-                        <Divider/>
-                        </>
-                        :null
-                }
-                {
                     authenticated?['экспедитор', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <Link href='/organization/[id]' as={`/organization/${profile.organization}`}>
                             <ListItem style={{background: router.pathname.includes('organization')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
@@ -265,6 +252,19 @@ const MyDrawer = React.memo((props) => {
                             <ListItem style={{background: router.pathname.includes('agentroute')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><FormatListNumberedIcon color='inherit'/></ListItemIcon>
                                 <ListItemText primary={profile.role==='агент'?'Маршрут агента':'Маршруты агентов'} />
+                            </ListItem>
+                        </Link>
+                        <Divider/>
+                        </>
+                        :null
+                }
+                {
+                    ['admin', 'организация', 'менеджер', 'экспедитор'].includes(profile.role)?
+                        <>
+                        <Link href='/routes'>
+                            <ListItem style={{background: router.pathname==='/routes'?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
+                                <ListItemIcon><FormatListNumberedIcon color='inherit'/></ListItemIcon>
+                                <ListItemText primary='Маршрутные листы' />
                             </ListItem>
                         </Link>
                         <Divider/>

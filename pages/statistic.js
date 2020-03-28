@@ -26,6 +26,17 @@ const Statistic = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/statistics`}/>
             </Head>
             <div className={classes.page}>
+                <Link href='/statistic/agenthistorygeo'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    История посещений
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
                 <Link href='/statistic/subscriber'>
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
                         <CardActionArea>

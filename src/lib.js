@@ -17,6 +17,25 @@ export const checkInt = (int) => {
         int = int.substring(1)
     return isNaN(parseInt(int))?0:parseInt(int)
 }
+export const getGeoDistance = (lat1, lon1, lat2, lon2) => {
+    lat1 = parseFloat(lat1)
+    lon1 = parseFloat(lon1)
+    lat2 = parseFloat(lat2)
+    lon2 = parseFloat(lon2)
+    let deg2rad = Math.PI / 180;
+    lat1 *= deg2rad;
+    lon1 *= deg2rad;
+    lat2 *= deg2rad;
+    lon2 *= deg2rad;
+    let diam = 12742000; // Diameter of the earth in km (2 * 6371)
+    let dLat = lat2 - lat1;
+    let dLon = lon2 - lon1;
+    let a = (
+        (1 - Math.cos(dLat)) +
+        (1 - Math.cos(dLon)) * Math.cos(lat1) * Math.cos(lat2)
+    ) / 2;
+    return parseInt(diam * Math.asin(Math.sqrt(a)))
+}
 export const checkFloat = (float) => {
     return isNaN(parseFloat(float))?0:parseFloat(float)
 }

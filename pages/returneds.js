@@ -31,14 +31,14 @@ const Returneds = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [simpleStatistic, setSimpleStatistic] = useState(['0']);
-    let [list, setList] = useState(data.invoices);
+    let [list, setList] = useState(data.returneds);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { search, sort, date } = props.app;
     const { profile } = props.user;
     let [paginationWork, setPaginationWork] = useState(true);
     const checkPagination = async()=>{
         if(paginationWork){
-            let addedList = (await getReturneds({search: search, sort: sort, date: date, skip: list.length})).invoices
+            let addedList = (await getReturneds({search: search, sort: sort, date: date, skip: list.length})).returneds
             if(addedList.length>0){
                 setList([...list, ...addedList])
             }
