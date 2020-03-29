@@ -65,7 +65,7 @@ const Geo =  React.memo(
                                      state={{ center: geo, zoom: 18 }}>
                                     <TrafficControl options={{ float: 'right' }} />
                                     {clients.map((client, idx)=> {
-                                            if(client.address[0]&&client.address[0][1]) return <Placemark
+                                            if(client.user.status==='active'&&client.address[0]&&client.address[0][1]) return <Placemark
                                                 onClick={() => {
                                                     if(['агент', 'суперагент'].includes(profile.role)) {
                                                         const action = () => {
@@ -96,7 +96,7 @@ const Geo =  React.memo(
                                                     draggable: false,
                                                     iconColor: '#ffb300'
                                                 }}
-                                                properties={{iconCaption: client.name}}
+                                                properties={{iconCaption: `${client.address[2] ? `${client.address[2]}, ` : ''}${client.address[0]}`}}
                                                 geometry={client.address[0][1].split(', ')}/>
                                         }
                                     )}
@@ -115,7 +115,7 @@ const Geo =  React.memo(
                                 <Map instanceRef={(ref) => setMap(ref)} onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: ['42.8700000', '74.5900000'], zoom: 12 }}>
                                     <TrafficControl options={{ float: 'right' }} />
                                     {clients.map((client, idx)=> {
-                                        if(client.address[0]&&client.address[0][1]) return <Placemark
+                                        if(client.user.status==='active'&&client.address[0]&&client.address[0][1]) return <Placemark
                                             onClick={() => {
                                                 if(['агент', 'суперагент'].includes(profile.role)) {
                                                     const action = () => {
@@ -146,7 +146,7 @@ const Geo =  React.memo(
                                                 draggable: false,
                                                 iconColor: '#ffb300'
                                             }}
-                                            properties={{iconCaption: client.name}}
+                                            properties={{iconCaption: `${client.address[2] ? `${client.address[2]}, ` : ''}${client.address[0]}`}}
                                             geometry={client.address[0][1].split(', ')}/>
                                     }
                                     )}
