@@ -97,7 +97,7 @@ const Districts = React.memo((props) => {
 
 Districts.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

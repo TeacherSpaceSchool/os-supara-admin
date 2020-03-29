@@ -28,7 +28,7 @@ const CardDistrict = React.memo((props) => {
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Организация:&nbsp;</div>
-                            <div className={classes.value}>{element.organization.name}</div>
+                            <div className={classes.value}>{element.organization?element.organization.name:'AZYK.STORE'}</div>
                         </div>
                         {
                             element.manager?
@@ -68,7 +68,7 @@ const CardDistrict = React.memo((props) => {
             </Link>
             <CardActions>
                 {
-                    ['организация', 'менеджер', 'admin'].includes(profile.role)?
+                    ['организация', 'admin'].includes(profile.role)?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteDistrict([element._id], element.organization._id)).districts)

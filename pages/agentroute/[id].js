@@ -26,6 +26,7 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import CardClientPlaceholder from '../../components/client/CardClientPlaceholder'
 import LazyLoad from 'react-lazyload';
+import GeoRouteAgent from '../../components/dialog/GeoRouteAgent'
 const height = 140
 
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
@@ -54,7 +55,7 @@ const AgentRoute = React.memo((props) => {
         setDistrict(district)
         setClients([[],[],[],[],[],[],[]])
     };
-    let [organization, setOrganization] = useState(router.query.id==='new'||!data.agentRoute?{}:{_id: data.agentRoute.organization._id, name: data.agentRoute.organization.name});
+    let [organization, setOrganization] = useState(router.query.id==='new'||!data.agentRoute?{}:data.agentRoute.organization?{_id: data.agentRoute.organization._id, name: data.agentRoute.organization.name}:{name: 'AZYK.STORE', _id: 'super'});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
         setClients([[],[],[],[],[],[],[]])
@@ -62,7 +63,7 @@ const AgentRoute = React.memo((props) => {
     let [clients, setClients] = useState(data.agentRoute?data.agentRoute.clients:[[],[],[],[],[],[],[]]);
     let [filtredClient, setFiltredClient] = useState([]);
     let [dayWeek, setDayWeek] = useState(0);
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
         (async()=>{
@@ -117,7 +118,7 @@ const AgentRoute = React.memo((props) => {
                                 onChange={handleName}
                                 inputProps={{
                                     'aria-label': 'description',
-                                    readOnly: profile.role==='агент',
+                                    readOnly: ['агент', 'суперагент'].includes(profile.role),
                                 }}
                             />
                         {router.query.id==='new'&&profile.role==='admin'?
@@ -181,7 +182,7 @@ const AgentRoute = React.memo((props) => {
                                 {filtredClient?filtredClient.map((element, idx)=> {
                                     if (idx <= pagination) {
                                         let selected = clients[dayWeek].includes(element._id)
-                                        if(profile.role!=='агент'||selected)
+                                        if(!['агент', 'суперагент'].includes(profile.role)||selected)
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                  className={isMobileApp ? classes.column : classes.row}>
@@ -191,7 +192,7 @@ const AgentRoute = React.memo((props) => {
                                                           placeholder={<CardClientPlaceholder height={height}/>}>
                                                     <div>
                                                         {
-                                                            profile.role!=='агент'?
+                                                            !['агент', 'суперагент'].includes(profile.role)?
                                                                 <Checkbox checked={selected}
                                                                           onChange={() => {
                                                                               if (!selected) {
@@ -213,64 +214,69 @@ const AgentRoute = React.memo((props) => {
                                     else return null
                                 }):null}
                             </div>
-                        {
-                            profile.role!=='агент'?
-                                <div className={isMobileApp?classes.bottomRouteM:classes.bottomRouteD}>
-                                    {
-                                        router.query.id==='new'?
-                                            <Button onClick={async()=>{
-                                                if (name.length>0&&district._id&&organization._id) {
-                                                    const action = async() => {
-                                                        await addAgentRoute({
-                                                            organization: organization._id,
-                                                            clients: clients,
-                                                            name: name,
-                                                            district: district._id,
-                                                        })
-                                                        Router.push(`/agentroutes/${organization._id}`)
-                                                    }
-                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                                    showMiniDialog(true)
-                                                } else {
-                                                    showSnackBar('Заполните все поля')
+                        <div className={isMobileApp?classes.bottomRouteM:classes.bottomRouteD}>
+                            <Button onClick={async()=>{
+                                let map = district.client.filter(client => clients[dayWeek].includes(client._id))
+                                setFullDialog('Маршрут', <GeoRouteAgent clients={map}/>)
+                                showFullDialog(true)
+                            }} size='small' color='primary'>
+                                Карта
+                            </Button>
+                            {
+                                !['агент', 'суперагент'].includes(profile.role)?
+                                    router.query.id==='new'?
+                                        <Button onClick={async()=>{
+                                            if (name.length>0&&district._id&&organization._id) {
+                                                const action = async() => {
+                                                    await addAgentRoute({
+                                                        organization: organization._id,
+                                                        clients: clients,
+                                                        name: name,
+                                                        district: district._id,
+                                                    })
+                                                    Router.push(`/agentroutes/${organization._id}`)
                                                 }
-                                            }} size='small' color='primary'>
-                                                Добавить
-                                            </Button>
-                                            :
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                showMiniDialog(true)
+                                            } else {
+                                                showSnackBar('Заполните все поля')
+                                            }
+                                        }} size='small' color='primary'>
+                                            Добавить
+                                        </Button>
+                                        :
+                                        <>
+                                        <Button onClick={async()=>{
+                                            const action = async() => {
+                                                let editElement = {_id: data.agentRoute._id, clients: clients}
+                                                if(name.length>0&&name!==data.agentRoute.name)editElement.name = name;
+                                                await setAgentRoute(editElement)
+                                            }
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        }} size='small' color='primary'>
+                                            Сохранить
+                                        </Button>
+                                        {['организация', 'менеджер', 'admin'].includes(profile.role)?
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
-                                                    let editElement = {_id: data.agentRoute._id, clients: clients}
-                                                    if(name.length>0&&name!==data.agentRoute.name)editElement.name = name;
-                                                    await setAgentRoute(editElement)
+                                                    await deleteAgentRoute([data.agentRoute._id], data.agentRoute.organization._id)
+                                                    Router.push(`/agentroutes/${data.agentRoute.organization._id}`)
                                                 }
                                                 setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
-                                                Сохранить
+                                                Удалить
                                             </Button>
-                                            {['организация', 'менеджер', 'admin'].includes(profile.role)?
-                                                <>
-                                                <Button onClick={async()=>{
-                                                    const action = async() => {
-                                                        await deleteAgentRoute([data.agentRoute._id], data.agentRoute.organization._id)
-                                                        Router.push(`/agentroutes/${data.agentRoute.organization._id}`)
-                                                    }
-                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                                    showMiniDialog(true)
-                                                }} size='small' color='primary'>
-                                                    Удалить
-                                                </Button>
-                                                </>
-                                                :
-                                                null
-                                            }
                                             </>
-                                    }
-                                </div>
-                                :null
-                        }
+                                            :
+                                            null
+                                        }
+                                        </>
+                                    :null
+                            }
+                        </div>
                             </>
                         :'Ничего не найдено'}
                 </CardContent>
@@ -281,7 +287,7 @@ const AgentRoute = React.memo((props) => {
 
 AgentRoute.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'admin', 'менеджер', 'агент'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'admin', 'менеджер', 'суперагент', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -292,7 +298,7 @@ AgentRoute.getInitialProps = async function(ctx) {
     return {
         data: {
             ...ctx.query.id!=='new'?await getAgentRoute({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {agentRoute: {organization: {}, clients: [[],[],[],[],[],[],[]], name: '', district: {}}},
-            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            organizations: [{name: 'AZYK.STORE', _id: 'super'}, ...(await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations]
         }
     };
 };

@@ -233,12 +233,12 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация'].includes(profile.role)?
+                    ['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                         <>
-                        <Link href={`/districts${['организация'].includes(profile.role)?'/[id]':''}`} as={`/districts${['организация'].includes(profile.role)?`/${profile.organization}`:''}`}>
+                        <Link href={['организация', 'менеджер', 'admin'].includes(profile.role)?`/districts${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`:'/district/[id]'} as={['организация', 'менеджер', 'admin'].includes(profile.role)?`/districts${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`:'/district/agent'}>
                             <ListItem style={{background: router.pathname.includes('district')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><LocationCityIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Районы' />
+                                <ListItemText primary={['агент', 'суперагент'].includes(profile.role)?'Район':'Районы'} />
                             </ListItem>
                         </Link>
                         <Divider/>
@@ -246,12 +246,12 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
+                    ['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                         <>
-                        <Link href={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`:'/agentroute/[id]'} as={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер', 'агент'].includes(profile.role)?`/${profile.organization}`:''}`:'/agentroute/agent'}>
+                        <Link href={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер'].includes(profile.role)?'/[id]':''}`:'/agentroute/[id]'} as={['организация', 'менеджер', 'admin'].includes(profile.role)?`/agentroutes${['организация', 'менеджер'].includes(profile.role)?`/${profile.organization}`:''}`:'/agentroute/agent'}>
                             <ListItem style={{background: router.pathname.includes('agentroute')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><FormatListNumberedIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary={profile.role==='агент'?'Маршрут агента':'Маршруты агентов'} />
+                                <ListItemText primary={['агент', 'суперагент'].includes(profile.role)?'Маршрут агента':'Маршруты агентов'} />
                             </ListItem>
                         </Link>
                         <Divider/>

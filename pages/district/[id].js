@@ -31,6 +31,7 @@ import LazyLoad from 'react-lazyload';
 const height = 140
 
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
+const GeoRouteAgent = dynamic(() => import('../../components/dialog/GeoRouteAgent'))
 
 const District = React.memo((props) => {
     const { profile } = props.user;
@@ -61,7 +62,7 @@ const District = React.memo((props) => {
     let handleEcspeditor =  (event) => {
         setEcspeditor({_id: event.target.value, name: event.target.name})
     };
-    let [organization, setOrganization] = useState(router.query.id==='new'||!data.district?{}:{_id: data.district.organization._id, name: data.district.organization.name});
+    let [organization, setOrganization] = useState(router.query.id==='new'||!data.district?{}:data.district.organization?{_id: data.district.organization._id, name: data.district.organization.name}:{name: 'AZYK.STORE', _id: 'super'});
     let handleOrganization =  (event) => {
         setOrganization({_id: event.target.value, name: event.target.name})
     };
@@ -72,8 +73,8 @@ const District = React.memo((props) => {
     let [agents, setAgents] = useState([]);
     let [ecspeditors, setEcspeditors] = useState([]);
     let [managers, setManagers] = useState([]);
-    let [selectType, setSelectType] = useState('Все');
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    let [selectType, setSelectType] = useState(['admin', 'организация'].includes(profile.role)?'Все':'Выбраные');
+    const { setMiniDialog, showMiniDialog, setFullDialog, showFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
         (async()=>{
@@ -115,8 +116,8 @@ const District = React.memo((props) => {
                 filtredClient = filtredClient.filter(element=>
                     ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
                     (element.name.toLowerCase()).includes(search.toLowerCase())||
-                    ((element.address.filter(addres=>addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
-                    ((element.address.filter(addres=>(addres[2]?addres[2]:'').toLowerCase().includes(search.toLowerCase()))).length>0)
+                    ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                    ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
                 )
                 setFiltredClient([...filtredClient])
                 setAllClient(allClient)
@@ -130,8 +131,8 @@ const District = React.memo((props) => {
                 filtredClient = filtredClient.filter(element=>
                     ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
                     (element.name.toLowerCase()).includes(search.toLowerCase())||
-                    ((element.address.filter(addres=>addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
-                    ((element.address.filter(addres=>(addres[2]?addres[2]:'').toLowerCase().includes(search.toLowerCase()))).length>0)
+                    ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                    ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
                 )
                 setFiltredClient([...filtredClient])
             }
@@ -162,6 +163,7 @@ const District = React.memo((props) => {
                                 onChange={handleName}
                                 inputProps={{
                                     'aria-label': 'description',
+                                    readOnly: ['менеджер', 'агент', 'суперагент'].includes(profile.role),
                                 }}
                             />
                             {(router.query.id==='new')&&profile.role==='admin'?
@@ -174,44 +176,93 @@ const District = React.memo((props) => {
                                     </Select>
                                 </FormControl>
                                 :
+                                <TextField
+                                    label='Организация'
+                                    value={organization.name}
+                                    className={isMobileApp?classes.inputM:classes.inputDF}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                        readOnly: true
+                                    }}
+                                />
+                            }
+                            {['admin', 'организация'].includes(profile.role)?
+                                <FormControl className={isMobileApp ? classes.inputM : classes.inputDF}>
+                                    <InputLabel>Менеджер</InputLabel>
+                                    <Select value={manager._id} onChange={handleManager}>
+                                        {managers.map((element) =>
+                                            <MenuItem key={element._id} value={element._id}
+                                                      ola={element.name}>{element.name}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                :
+                                <TextField
+                                    label='Менеджер'
+                                    value={manager.name}
+                                    className={isMobileApp?classes.inputM:classes.inputDF}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                        readOnly: true
+                                    }}
+                                />
+                            }
+                            {['admin', 'организация'].includes(profile.role)?
+                                <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                    <InputLabel>Агент</InputLabel>
+                                    <Select value={agent._id} onChange={handleAgent}>
+                                        {agents.map((element)=>
+                                            <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                :
+                                <TextField
+                                    label='Агент'
+                                    value={agent.name}
+                                    className={isMobileApp?classes.inputM:classes.inputDF}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                        readOnly: true
+                                    }}
+                                />
+                            }
+                            {['admin', 'организация'].includes(profile.role)?
+                                <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
+                                    <InputLabel>Экспедитор</InputLabel>
+                                    <Select value={ecspeditor._id} onChange={handleEcspeditor}>
+                                        {ecspeditors.map((element)=>
+                                            <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                :
+                                <TextField
+                                    label='Экспедитор'
+                                    value={ecspeditor.name}
+                                    className={isMobileApp?classes.inputM:classes.inputDF}
+                                    inputProps={{
+                                        'aria-label': 'description',
+                                        readOnly: true
+                                    }}
+                                />
+                            }
+                            <br/>
+                            {['admin', 'организация'].includes(profile.role)?
+                                <div style={{ justifyContent: 'center' }} className={classes.row}>
+                                    <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
+                                        Все
+                                    </div>
+                                    <div style={{background: selectType==='Свободные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Свободные')}} className={classes.selectType}>
+                                        {`Своб. ${unselectedClient.length}`}
+                                    </div>
+                                    <div style={{background: selectType==='Выбраные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Выбраные')}} className={classes.selectType}>
+                                        {`Выбр. ${client.length}`}
+                                    </div>
+                                </div>
+                                :
                                 null
                             }
-                            <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
-                                <InputLabel>Менеджер</InputLabel>
-                                <Select value={manager._id} onChange={handleManager}>
-                                    {managers.map((element)=>
-                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
-                            <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
-                                <InputLabel>Агент</InputLabel>
-                                <Select value={agent._id} onChange={handleAgent}>
-                                    {agents.map((element)=>
-                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
-                            <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
-                                <InputLabel>Экспедитор</InputLabel>
-                                <Select value={ecspeditor._id} onChange={handleEcspeditor}>
-                                    {ecspeditors.map((element)=>
-                                        <MenuItem key={element._id} value={element._id} ola={element.name}>{element.name}</MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
-                            <br/>
-                            <div style={{ justifyContent: 'center' }} className={classes.row}>
-                                <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
-                                    Все
-                                </div>
-                                <div style={{background: selectType==='Свободные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Свободные')}} className={classes.selectType}>
-                                    {`Своб. ${unselectedClient.length}`}
-                                </div>
-                                <div style={{background: selectType==='Выбраные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Выбраные')}} className={classes.selectType}>
-                                    {`Выбр. ${client.length}`}
-                                </div>
-                            </div>
                             <br/>
                             <div className={classes.listInvoices}>
                                 {filtredClient?filtredClient.map((element, idx)=> {
@@ -224,7 +275,8 @@ const District = React.memo((props) => {
                                                               once={true}
                                                               placeholder={<CardClientPlaceholder height={height}/>}>
                                                         <div>
-                                                            <Checkbox checked={client.includes(element)}
+                                                            {['admin', 'организация'].includes(profile.role)?
+                                                                <Checkbox checked={client.includes(element)}
                                                                       onChange={() => {
                                                                           if (!client.includes(element)) {
                                                                               client.push(element)
@@ -235,7 +287,10 @@ const District = React.memo((props) => {
                                                                           }
                                                                           setClient([...client])
                                                                       }}
-                                                            />
+                                                                />
+                                                                :
+                                                                null
+                                                            }
                                                             <CardClient element={element}/>
                                                         </div>
                                                     </LazyLoad>
@@ -245,63 +300,72 @@ const District = React.memo((props) => {
                                 }):null}
                             </div>
                             <div className={isMobileApp?classes.bottomRouteM:classes.bottomRouteD}>
+                                <Button onClick={async()=>{
+                                    setFullDialog('Маршрут', <GeoRouteAgent clients={client}/>)
+                                    showFullDialog(true)
+                                }} size='small' color='primary'>
+                                    Карта
+                                </Button>
                                 {
-                                    router.query.id==='new'?
-                                        <Button onClick={async()=>{
-                                            if (name.length>0) {
-                                                const action = async() => {
-                                                    client = client.map(element=>element._id)
-                                                    await addDistrict({
-                                                        organization: organization._id,
-                                                        client: client,
-                                                        name: name,
-                                                        agent: agent._id,
-                                                        manager: manager._id,
-                                                        ecspeditor: ecspeditor._id,
-                                                    })
-                                                    Router.push(`/districts/${organization._id}`)
+                                    ['admin', 'организация'].includes(profile.role)?
+                                        router.query.id==='new'?
+                                            <Button onClick={async()=>{
+                                                if (name.length>0) {
+                                                    const action = async() => {
+                                                        client = client.map(element=>element._id)
+                                                        await addDistrict({
+                                                            organization: organization._id,
+                                                            client: client,
+                                                            name: name,
+                                                            agent: agent._id,
+                                                            manager: manager._id,
+                                                            ecspeditor: ecspeditor._id,
+                                                        })
+                                                        Router.push(`/districts/${organization._id}`)
+                                                    }
+                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                    showMiniDialog(true)
+                                                } else {
+                                                    showSnackBar('Заполните все поля')
                                                 }
-                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                                showMiniDialog(true)
-                                            } else {
-                                                showSnackBar('Заполните все поля')
-                                            }
-                                        }} size='small' color='primary'>
-                                            Добавить
-                                        </Button>
-                                        :
-                                        <>
-                                        <Button onClick={async()=>{
-                                            const action = async() => {
-                                                let editElement = {_id: data.district._id, client: client.map(element=>element._id)}
-                                                if(!data.district.agent||agent._id!==data.district.agent._id)editElement.agent = agent._id;
-                                                if(!data.district.manager||manager._id!==data.district.manager._id)editElement.manager = manager._id;
-                                                if(!data.district.ecspeditor||ecspeditor._id!==data.district.ecspeditor._id)editElement.ecspeditor = ecspeditor._id;
-                                                if(name!==data.district.name)editElement.name = name;
-                                                await setDistrict(editElement)
-                                            }
-                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                            showMiniDialog(true)
-                                        }} size='small' color='primary'>
-                                            Сохранить
-                                        </Button>
-                                        {['организация', 'менеджер', 'admin'].includes(profile.role)?
+                                            }} size='small' color='primary'>
+                                                Добавить
+                                            </Button>
+                                            :
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
-                                                    await deleteDistrict([data.district._id], data.district.organization._id)
-                                                    Router.push(`/districts/${data.district.organization._id}`)
+                                                    let editElement = {_id: data.district._id, client: client.map(element=>element._id)}
+                                                    if(!data.district.agent||agent._id!==data.district.agent._id)editElement.agent = agent._id;
+                                                    if(!data.district.manager||manager._id!==data.district.manager._id)editElement.manager = manager._id;
+                                                    if(!data.district.ecspeditor||ecspeditor._id!==data.district.ecspeditor._id)editElement.ecspeditor = ecspeditor._id;
+                                                    if(name!==data.district.name)editElement.name = name;
+                                                    await setDistrict(editElement)
                                                 }
                                                 setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)
                                             }} size='small' color='primary'>
-                                                Удалить
+                                                Сохранить
                                             </Button>
+                                            {['организация', 'менеджер', 'admin'].includes(profile.role)?
+                                                <>
+                                                <Button onClick={async()=>{
+                                                    const action = async() => {
+                                                        await deleteDistrict([data.district._id], data.district.organization._id)
+                                                        Router.push(`/districts/${data.district.organization._id}`)
+                                                    }
+                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                    showMiniDialog(true)
+                                                }} size='small' color='primary'>
+                                                    Удалить
+                                                </Button>
+                                                </>
+                                                :
+                                                null
+                                            }
                                             </>
-                                            :
-                                            null
-                                        }
-                                        </>
+                                        :
+                                        null
                                 }
                             </div>
                             </>
@@ -321,7 +385,7 @@ const District = React.memo((props) => {
 
 District.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'admin', 'агент', 'суперагент', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -332,7 +396,7 @@ District.getInitialProps = async function(ctx) {
     return {
         data: {
             ...ctx.query.id!=='new'?await getDistrict({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined): {district: {organization: {}, client: [], name: '', agent: {}, ecspeditor: {}}},
-            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            organizations: [{name: 'AZYK.STORE', _id: 'super'}, ...(await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations]
         }
     };
 };

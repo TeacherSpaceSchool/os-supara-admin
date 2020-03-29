@@ -139,6 +139,11 @@ export default makeStyles({
         justifyContent: 'center',
         width: '100%'
     },
+    fab: {
+        position: 'fixed!important',
+        bottom: '20px',
+        right: '20px'
+    },
     geo: {
         width: 200,
         textAlign: 'center',

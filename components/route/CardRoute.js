@@ -58,8 +58,8 @@ const CardOrder = React.memo((props) => {
                                 null
                         }
                         <div className={classes.row}>
-                            <div className={classes.nameField}>Компания:&nbsp;</div>
-                            <div className={classes.value}>{element.employment.organization.name}</div>
+                            <div className={classes.nameField}>Организация:&nbsp;</div>
+                            <div className={classes.value}>{element.organization?element.organization.name:'AZYK.STORE'}</div>
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Экспедитор:&nbsp;</div>

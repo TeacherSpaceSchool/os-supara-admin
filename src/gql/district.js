@@ -58,7 +58,7 @@ export const getDistrict = async({_id}, client)=>{
             .query({
                 variables: {_id: _id},
                 query: gql`
-                    query ($_id: ID!) {
+                    query ($_id: ID) {
                         district(_id: $_id) {
                             _id
                             createdAt
