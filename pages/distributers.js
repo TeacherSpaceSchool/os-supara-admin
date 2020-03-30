@@ -73,7 +73,7 @@ Distributers.getInitialProps = async function(ctx) {
     return {
         data: {
             organizations:
-                (await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
+                (await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
         }
     };
 };

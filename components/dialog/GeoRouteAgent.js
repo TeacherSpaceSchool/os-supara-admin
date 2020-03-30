@@ -65,39 +65,40 @@ const Geo =  React.memo(
                                      state={{ center: geo, zoom: 18 }}>
                                     <TrafficControl options={{ float: 'right' }} />
                                     {clients.map((client, idx)=> {
-                                            if(client.user.status==='active'&&client.address[0]&&client.address[0][1]) return <Placemark
-                                                onClick={() => {
-                                                    if(['агент', 'суперагент'].includes(profile.role)) {
-                                                        const action = () => {
-                                                            if (navigator.geolocation) {
-                                                                navigator.geolocation.getCurrentPosition(async (position) => {
-                                                                    let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(client.address[0][1].split(', ')))
-                                                                    if (distance < 100) {
-                                                                        await addAgentHistoryGeo({
-                                                                            client: client._id,
-                                                                            geo: `${position.coords.latitude}, ${position.coords.longitude}`
-                                                                        })
-                                                                        Router.push(`/catalog?client=${client._id}`)
-                                                                    }
-                                                                    else
-                                                                        showSnackBar('Вы слишком далеко')
-                                                                });
-                                                            } else {
-                                                                showSnackBar('Геолокация не поддерживается')
+                                            if(client.user.status==='active'&&client.address[0]&&client.address[0][1])
+                                                return <Placemark
+                                                    onClick={() => {
+                                                        if(['агент', 'суперагент'].includes(profile.role)) {
+                                                            const action = () => {
+                                                                if (navigator.geolocation) {
+                                                                    navigator.geolocation.getCurrentPosition(async (position) => {
+                                                                        let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(client.address[0][1].split(', ')))
+                                                                        if (distance < 100) {
+                                                                            await addAgentHistoryGeo({
+                                                                                client: client._id,
+                                                                                geo: `${position.coords.latitude}, ${position.coords.longitude}`
+                                                                            })
+                                                                            Router.push(`/catalog?client=${client._id}`)
+                                                                        }
+                                                                        else
+                                                                            showSnackBar('Вы слишком далеко')
+                                                                    });
+                                                                } else {
+                                                                    showSnackBar('Геолокация не поддерживается')
+                                                                }
                                                             }
+                                                            setMiniDialog('Подтвердить посещение?', <Confirmation
+                                                                action={action}/>)
+                                                            showMiniDialog(true)
                                                         }
-                                                        setMiniDialog('Подтвердить посещение?', <Confirmation
-                                                            action={action}/>)
-                                                        showMiniDialog(true)
-                                                    }
-                                                }}
-                                                key={idx}
-                                                options={{
-                                                    draggable: false,
-                                                    iconColor: '#ffb300'
-                                                }}
-                                                properties={{iconCaption: `${client.address[2] ? `${client.address[2]}, ` : ''}${client.address[0]}`}}
-                                                geometry={client.address[0][1].split(', ')}/>
+                                                    }}
+                                                    key={idx}
+                                                    options={{
+                                                        draggable: false,
+                                                        iconColor: '#ffb300'
+                                                    }}
+                                                    properties={{iconCaption: `${client.address[0][2] ? `${client.address[0][2]}, ` : ''}${client.address[0][0]}`}}
+                                                    geometry={client.address[0][1].split(', ')}/>
                                         }
                                     )}
                                     {geo?
@@ -146,7 +147,7 @@ const Geo =  React.memo(
                                                 draggable: false,
                                                 iconColor: '#ffb300'
                                             }}
-                                            properties={{iconCaption: `${client.address[2] ? `${client.address[2]}, ` : ''}${client.address[0]}`}}
+                                            properties={{iconCaption: `${client.address[0][2] ? `${client.address[0][2]}, ` : ''}${client.address[0][0]}`}}
                                             geometry={client.address[0][1].split(', ')}/>
                                     }
                                     )}

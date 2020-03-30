@@ -61,6 +61,8 @@ const AgentRoute = React.memo((props) => {
         setClients([[],[],[],[],[],[],[]])
     };
     let [clients, setClients] = useState(data.agentRoute?data.agentRoute.clients:[[],[],[],[],[],[],[]]);
+    let [allClient, setAllClient] = useState([]);
+    let [selectType, setSelectType] = useState(['агент', 'суперагент'].includes(profile.role)?'Выбраные':'Все');
     let [filtredClient, setFiltredClient] = useState([]);
     let [dayWeek, setDayWeek] = useState(0);
     const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
@@ -84,13 +86,38 @@ const AgentRoute = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.agentRoute&&district.client) {
-                let filtredClient = [...district.client]
-                filtredClient = filtredClient.filter(element=>
-                    ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
-                    (element.name.toLowerCase()).includes(search.toLowerCase())||
-                    ((element.address.filter(addres=>addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
-                    ((element.address.filter(addres=>(addres[2]?addres[2]:'').toLowerCase().includes(search.toLowerCase()))).length>0)
-                )
+                setPagination(100)
+                let allClient= []
+                if (selectType == 'Все')
+                    allClient=[...district.client]
+                else if (selectType == 'Свободные')
+                    allClient=district.client.filter(client=>!clients[dayWeek].includes(client._id))
+                else if (selectType == 'Выбраные')
+                    allClient=district.client.filter(client=>clients[dayWeek].includes(client._id))
+                let filtredClient = [...allClient]
+                if(search.length>0)
+                    filtredClient = filtredClient.filter(element=>
+                        ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                        (element.name.toLowerCase()).includes(search.toLowerCase())||
+                        ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                        ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
+                    )
+                setFiltredClient([...filtredClient])
+                setAllClient(allClient)
+            }
+        })()
+    },[selectType, clients, district, dayWeek])
+    useEffect(()=>{
+        (async()=>{
+            if(data.agentRoute&&district.client) {
+                let filtredClient = [...allClient]
+                if(search.length>0)
+                    filtredClient = filtredClient.filter(element=>
+                        ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                        (element.name.toLowerCase()).includes(search.toLowerCase())||
+                        ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                        ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
+                    )
                 setFiltredClient([...filtredClient])
             }
         })()
@@ -152,6 +179,22 @@ const AgentRoute = React.memo((props) => {
                                     readOnly: true
                                 }}
                             />
+                        }
+                        <br/>
+                        {['admin', 'организация', 'менеджер'].includes(profile.role)?
+                            <div style={{ justifyContent: 'center' }} className={classes.row}>
+                                <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
+                                    Все
+                                </div>
+                                <div style={{background: selectType==='Свободные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Свободные')}} className={classes.selectType}>
+                                    Своб
+                                </div>
+                                <div style={{background: selectType==='Выбраные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Выбраные')}} className={classes.selectType}>
+                                    Выбр
+                                </div>
+                            </div>
+                            :
+                            null
                         }
                         <br/>
                             <div style={{ justifyContent: 'center' }} className={classes.row}>

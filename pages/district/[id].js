@@ -113,12 +113,13 @@ const District = React.memo((props) => {
                 else if (selectType == 'Выбраные')
                     allClient=[...client]
                 let filtredClient = [...allClient]
-                filtredClient = filtredClient.filter(element=>
-                    ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
-                    (element.name.toLowerCase()).includes(search.toLowerCase())||
-                    ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
-                    ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
-                )
+                if(search.length>0)
+                    filtredClient = filtredClient.filter(element=>
+                        ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                        (element.name.toLowerCase()).includes(search.toLowerCase())||
+                        ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                        ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
+                    )
                 setFiltredClient([...filtredClient])
                 setAllClient(allClient)
             }
@@ -128,12 +129,13 @@ const District = React.memo((props) => {
         (async()=>{
             if(data.district) {
                 let filtredClient = [...allClient]
-                filtredClient = filtredClient.filter(element=>
-                    ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
-                    (element.name.toLowerCase()).includes(search.toLowerCase())||
-                    ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
-                    ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
-                )
+                if(search.length>0)
+                    filtredClient = filtredClient.filter(element=>
+                        ((element.phone.filter(phone => phone.toLowerCase().includes(search.toLowerCase()))).length > 0) ||
+                        (element.name.toLowerCase()).includes(search.toLowerCase())||
+                        ((element.address.filter(addres=>addres[0]&&addres[0].toLowerCase().includes(search.toLowerCase()))).length>0)||
+                        ((element.address.filter(addres=>addres[2]&&addres[2].toLowerCase().includes(search.toLowerCase()))).length>0)
+                    )
                 setFiltredClient([...filtredClient])
             }
         })()

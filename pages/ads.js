@@ -77,7 +77,7 @@ Ads.getInitialProps = async function(ctx) {
         data: {
             organizations:
                 ctx.store.getState().user.profile.role==='admin'?
-                    (await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
+                    (await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations
                     :
                     (await getAdsOrganizations(ctx.req?await getClientGqlSsr(ctx.req):undefined)).adsOrganizations
         }

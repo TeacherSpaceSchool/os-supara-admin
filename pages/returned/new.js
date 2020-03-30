@@ -279,7 +279,6 @@ const Catalog = React.memo((props) => {
                                     proofeAddress = client.address[i][0].length > 0
                                 }
                                 const action = async() => {
-                                    console.log(items)
                                     await addReturned({
                                         info: '',
                                         address: client.address[0],

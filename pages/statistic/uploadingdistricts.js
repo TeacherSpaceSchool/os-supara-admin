@@ -114,7 +114,9 @@ UploadingDistricts.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data:
-            await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req ? await getClientGqlSsr(ctx.req) : undefined),
+            {
+                organizations: [{name: 'AZYK.STORE', _id: 'super'}, ...(await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations]
+            }
     }
 };
 

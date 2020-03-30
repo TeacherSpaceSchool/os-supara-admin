@@ -210,7 +210,6 @@ const Catalog = React.memo((props) => {
             setPagination(pagination+100)
         }
     }
-    console.log(clients)
     return (
         <App checkPagination={checkPagination} searchShow={true} pageName='Каталог'>
             <Head>

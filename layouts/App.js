@@ -172,7 +172,7 @@ const App = React.memo(props => {
     return(
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>
-            <AppBar searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
+            <AppBar unread={unread} searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
             <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>

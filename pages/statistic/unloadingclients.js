@@ -16,12 +16,14 @@ import { getUnloadingClients } from '../../src/gql/statistic'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import * as appActions from '../../redux/actions/app'
 
 const UnloadingClients = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [organization, setOrganization] = useState({_id: 'all'});
     const { isMobileApp } = props.app;
+    const { showLoad } = props.appActions;
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -60,9 +62,11 @@ const UnloadingClients = React.memo((props) => {
                     <br/>
                     <Button variant='contained' size='small' color='primary' onClick={async()=>{
                         if(organization._id) {
+                            await showLoad(true)
                             window.open(((await getUnloadingClients({
                                 organization: organization._id
                             })).unloadingClients).data, '_blank');
+                            await showLoad(false)
                         }
                     }}>
                         Выгрузить
@@ -85,7 +89,9 @@ UnloadingClients.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data:
-            await getOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req ? await getClientGqlSsr(ctx.req) : undefined),
+            {
+                organizations: [{name: 'AZYK.STORE', _id: 'super'}, ...(await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organizations]
+            }
     }
 };
 
@@ -98,6 +104,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        appActions: bindActionCreators(appActions, dispatch),
         userActions: bindActionCreators(userActions, dispatch),
     }
 }

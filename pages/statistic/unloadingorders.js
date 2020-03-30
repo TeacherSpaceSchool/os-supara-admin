@@ -15,6 +15,7 @@ import { getActiveOrganization, getUnloadingOrders } from '../../src/gql/statist
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import * as appActions from '../../redux/actions/app'
 
 const UnloadingOrders = React.memo((props) => {
     const classes = pageListStyle();
@@ -28,6 +29,7 @@ const UnloadingOrders = React.memo((props) => {
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
+    const { showLoad } = props.appActions;
     return (
         <App pageName='Выгрузка заказов'>
             <Head>
@@ -73,10 +75,12 @@ const UnloadingOrders = React.memo((props) => {
                     <br/>
                     <Button variant='contained' size='small' color='primary' onClick={async()=>{
                         if(organization._id&&date) {
+                            await showLoad(true)
                             window.open(((await getUnloadingOrders({
                                 organization: organization._id,
                                 dateStart: date
                             })).unloadingOrders).data, '_blank');
+                            await showLoad(false)
                         }
                     }}>
                         Выгрузить
@@ -112,6 +116,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        appActions: bindActionCreators(appActions, dispatch),
         userActions: bindActionCreators(userActions, dispatch),
     }
 }

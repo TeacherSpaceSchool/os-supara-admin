@@ -38,7 +38,7 @@ import SetDate from '../dialog/SetDate'
 const MyAppBar = React.memo((props) => {
     //props
     const classes = appbarStyle();
-    const { filters, sorts, pageName, dates, searchShow } = props
+    const { filters, sorts, pageName, dates, searchShow, unread } = props
     const { drawer, search, filter, sort, isMobileApp, countBasket, date } = props.app;
     const { showDrawer, setSearch, setFilter, setSort, setDate } = props.appActions;
     const { authenticated, profile } = props.user;
@@ -109,7 +109,9 @@ const MyAppBar = React.memo((props) => {
                         onClick={() => {showDrawer(!drawer)}}
                         color='inherit'
                     >
-                        <MenuIcon/>
+                        <Badge variant='dot' invisible={!isMobileApp||!unread.orders&&!unread.returneds} color='secondary'>
+                            <MenuIcon/>
+                        </Badge>
                     </IconButton>
                     <Typography onClick={() => {showDrawer(!drawer)}} variant='h6' className={classes.title}>
                         {pageName}

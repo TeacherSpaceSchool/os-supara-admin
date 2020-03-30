@@ -184,7 +184,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    profile.role==='admin' ?
+                    profile.role==='admin'&&list ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteClient([element._id])
