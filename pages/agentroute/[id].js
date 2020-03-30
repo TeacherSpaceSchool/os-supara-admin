@@ -62,7 +62,7 @@ const AgentRoute = React.memo((props) => {
     };
     let [clients, setClients] = useState(data.agentRoute?data.agentRoute.clients:[[],[],[],[],[],[],[]]);
     let [allClient, setAllClient] = useState([]);
-    let [selectType, setSelectType] = useState(['агент', 'суперагент'].includes(profile.role)?'Выбраные':'Все');
+    let [selectType, setSelectType] = useState(/*['агент', 'суперагент'].includes(profile.role)?'Выбраные':*/'Все');
     let [filtredClient, setFiltredClient] = useState([]);
     let [dayWeek, setDayWeek] = useState(0);
     const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
@@ -109,7 +109,7 @@ const AgentRoute = React.memo((props) => {
     },[selectType, clients, district, dayWeek])
     useEffect(()=>{
         (async()=>{
-            if(data.agentRoute&&district.client) {
+            if(data.agentRoute&&district.client&&allClient.length>0) {
                 let filtredClient = [...allClient]
                 if(search.length>0)
                     filtredClient = filtredClient.filter(element=>
@@ -181,7 +181,7 @@ const AgentRoute = React.memo((props) => {
                             />
                         }
                         <br/>
-                        {['admin', 'организация', 'менеджер'].includes(profile.role)?
+                        {/*['admin', 'организация', 'менеджер'].includes(profile.role)*/true?
                             <div style={{ justifyContent: 'center' }} className={classes.row}>
                                 <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
                                     Все
@@ -225,7 +225,7 @@ const AgentRoute = React.memo((props) => {
                                 {filtredClient?filtredClient.map((element, idx)=> {
                                     if (idx <= pagination) {
                                         let selected = clients[dayWeek].includes(element._id)
-                                        if(!['агент', 'суперагент'].includes(profile.role)||selected)
+                                        if(/*!['агент', 'суперагент'].includes(profile.role)||selected*/true)
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                  className={isMobileApp ? classes.column : classes.row}>
@@ -235,7 +235,7 @@ const AgentRoute = React.memo((props) => {
                                                           placeholder={<CardClientPlaceholder height={height}/>}>
                                                     <div>
                                                         {
-                                                            !['агент', 'суперагент'].includes(profile.role)?
+                                                            /*!['агент', 'суперагент'].includes(profile.role)*/true?
                                                                 <Checkbox checked={selected}
                                                                           onChange={() => {
                                                                               if (!selected) {
@@ -266,7 +266,7 @@ const AgentRoute = React.memo((props) => {
                                 Карта
                             </Button>
                             {
-                                !['агент', 'суперагент'].includes(profile.role)?
+                                /*!['агент', 'суперагент'].includes(profile.role)*/true?
                                     router.query.id==='new'?
                                         <Button onClick={async()=>{
                                             if (name.length>0&&district._id&&organization._id) {

@@ -73,7 +73,7 @@ const District = React.memo((props) => {
     let [agents, setAgents] = useState([]);
     let [ecspeditors, setEcspeditors] = useState([]);
     let [managers, setManagers] = useState([]);
-    let [selectType, setSelectType] = useState(['admin', 'организация'].includes(profile.role)?'Все':'Выбраные');
+    let [selectType, setSelectType] = useState(['admin', 'организация', 'менеджер'].includes(profile.role)?'Все':'Выбраные');
     const { setMiniDialog, showMiniDialog, setFullDialog, showFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
@@ -127,7 +127,7 @@ const District = React.memo((props) => {
     },[selectType, unselectedClient, client])
     useEffect(()=>{
         (async()=>{
-            if(data.district) {
+            if(data.district&&allClient.length>0) {
                 let filtredClient = [...allClient]
                 if(search.length>0)
                     filtredClient = filtredClient.filter(element=>
@@ -250,7 +250,7 @@ const District = React.memo((props) => {
                                 />
                             }
                             <br/>
-                            {['admin', 'организация'].includes(profile.role)?
+                            {['admin', 'организация', 'менеджер'].includes(profile.role)?
                                 <div style={{ justifyContent: 'center' }} className={classes.row}>
                                     <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
                                         Все
@@ -277,7 +277,7 @@ const District = React.memo((props) => {
                                                               once={true}
                                                               placeholder={<CardClientPlaceholder height={height}/>}>
                                                         <div>
-                                                            {['admin', 'организация'].includes(profile.role)?
+                                                            {['admin', 'организация', 'менеджер'].includes(profile.role)?
                                                                 <Checkbox checked={client.includes(element)}
                                                                       onChange={() => {
                                                                           if (!client.includes(element)) {
@@ -309,7 +309,7 @@ const District = React.memo((props) => {
                                     Карта
                                 </Button>
                                 {
-                                    ['admin', 'организация'].includes(profile.role)?
+                                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
                                         router.query.id==='new'?
                                             <Button onClick={async()=>{
                                                 if (name.length>0) {
@@ -349,7 +349,7 @@ const District = React.memo((props) => {
                                             }} size='small' color='primary'>
                                                 Сохранить
                                             </Button>
-                                            {['организация', 'менеджер', 'admin'].includes(profile.role)?
+                                            {['организация', 'admin'].includes(profile.role)?
                                                 <>
                                                 <Button onClick={async()=>{
                                                     const action = async() => {
