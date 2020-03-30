@@ -62,7 +62,7 @@ const AgentRoute = React.memo((props) => {
     };
     let [clients, setClients] = useState(data.agentRoute?data.agentRoute.clients:[[],[],[],[],[],[],[]]);
     let [allClient, setAllClient] = useState([]);
-    let [selectType, setSelectType] = useState(/*['агент', 'суперагент'].includes(profile.role)?'Выбраные':*/'Все');
+    let [selectType, setSelectType] = useState(['агент', 'суперагент'].includes(profile.role)?'Выбраные':'Все');
     let [filtredClient, setFiltredClient] = useState([]);
     let [dayWeek, setDayWeek] = useState(0);
     const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
