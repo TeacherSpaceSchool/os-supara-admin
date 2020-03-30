@@ -167,16 +167,14 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    element.user&&['admin', 'суперагент'].includes(profile.role) ?
+                    element.user&&['admin', 'суперагент', 'агент'].includes(profile.role) ?
                         <Button onClick={async()=>{
-                            if(['admin'].includes(profile.role)) {
-                                const action = async () => {
-                                    await onoffClient([element._id])
-                                    setStatus(status === 'active' ? 'deactive' : 'active')
-                                }
-                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                showMiniDialog(true)
+                            const action = async () => {
+                                await onoffClient([element._id])
+                                setStatus(status === 'active' ? 'deactive' : 'active')
                             }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
                         }} size='small' color='primary'>
                             {status==='active'?'Отключить':'Включить'}
                         </Button>

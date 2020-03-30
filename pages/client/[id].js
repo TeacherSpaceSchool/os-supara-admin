@@ -136,7 +136,7 @@ const Client = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={isMobileApp?classes.column:classes.row} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     {data.client?
-                        ['admin', 'суперагент'].includes(profile.role)||(data.client.user&&profile._id===data.client.user._id)?
+                        ['admin', 'суперагент', 'агент'].includes(profile.role)||(data.client.user&&profile._id===data.client.user._id)?
                                 <>
                                 <div className={classes.column}>
                                     <label htmlFor='contained-button-file'>
