@@ -112,6 +112,18 @@ const CardOrganization = React.memo((props) => {
                                 :
                                 null
                             }
+                            {profile.role==='admin'&&element.updatedAt?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>
+                                        Изменен:&nbsp;
+                                    </div>
+                                    <div className={classes.value}>
+                                        {pdDDMMYYHHMM(new Date(element.updatedAt))}
+                                    </div>
+                                </div>
+                                :
+                                null
+                            }
                             {
                                 profile.role==='admin'&&element.lastActive?
                                     <div className={classes.row}>

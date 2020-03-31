@@ -23,6 +23,7 @@ export const getClients = async(arg, client)=>{
                             info
                             reiting
                             city
+                            updatedAt
                             phone
                             organization 
                                 {_id name}
@@ -80,6 +81,7 @@ export const getClientsTrash = async(arg, client)=>{
                             lastActive
                             device
                             notification
+                            updatedAt
                             info
                             reiting
                             city
