@@ -91,6 +91,88 @@ export const getOrders = async(args, client)=>{
     }
 }
 
+export const getOrdersTrash = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($search: String!, $skip: Int) {
+                        invoicesTrash(search: $search, skip: $skip) {
+                            _id
+                            agent 
+                                {_id name}
+                            createdAt
+                            updatedAt
+                            allTonnage
+                            allSize
+                            del
+                            orders 
+                                { 
+                                    _id
+                                    allTonnage
+                                    allSize
+                                    createdAt
+                                    updatedAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            apiece
+                                            priotiry
+                                            price
+                                            packaging
+                                            weight
+                                            size
+                                            organization
+                                                {_id name minimumOrder consignation}
+                                        }
+                                    count
+                                    allPrice
+                                    consignment
+                                    returned
+                                    consignmentPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            consignmentPrice
+                            info
+                            address
+                            paymentMethod
+                            editor
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            cancelClient
+                            distributer
+                                {_id name}
+                            cancelForwarder
+                            paymentConsignation
+                            taken
+                            sync
+                            dateDelivery
+                            usedBonus
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getInvoicesSimpleStatistic = async(args, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -100,6 +182,23 @@ export const getInvoicesSimpleStatistic = async(args, client)=>{
                 query: gql`
                     query ($search: String!, $filter: String!, $date: String!) {
                         invoicesSimpleStatistic(search: $search, filter: $filter, date: $date) 
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getInvoicesTrashSimpleStatistic = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($search: String!) {
+                        invoicesTrashSimpleStatistic(search: $search) 
                     }`,
             })
         return res.data
@@ -316,6 +415,22 @@ export const deleteOrders = async(ids)=>{
             mutation : gql`
                     mutation ($_id: [ID]!) {
                         deleteOrders(_id: $_id) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreOrders = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreOrders(_id: $_id) {
                              data
                         }
                     }`})

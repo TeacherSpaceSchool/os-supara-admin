@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import { onoffClient, deleteClient } from '../../src/gql/client'
+import { onoffClient, deleteClient, restoreClient } from '../../src/gql/client'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import CardActions from '@material-ui/core/CardActions';
 import NotificationsActive from '@material-ui/icons/NotificationsActive';
@@ -167,7 +167,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    element.user&&['admin', 'суперагент', 'агент'].includes(profile.role) ?
+                    element.del!=='deleted'&&element.user&&['admin', 'суперагент', 'агент'].includes(profile.role) ?
                         <Button onClick={async()=>{
                             const action = async () => {
                                 await onoffClient([element._id])
@@ -182,7 +182,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    profile.role==='admin'&&list ?
+                    element.del!=='deleted'&&profile.role==='admin'&&list ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteClient([element._id])
@@ -194,6 +194,23 @@ const CardOrganization = React.memo((props) => {
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить
+                        </Button>
+                        :
+                        null
+                }
+                {
+                    profile.role==='admin'&&list&&element.del==='deleted' ?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                await restoreClient([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Восстановить
                         </Button>
                         :
                         null

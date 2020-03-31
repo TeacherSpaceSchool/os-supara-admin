@@ -12,7 +12,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import Order from '../dialog/Order'
 import Confirmation from '../../components/dialog/Confirmation'
-import { deleteOrders } from '../../src/gql/order'
+import { deleteOrders, restoreOrders } from '../../src/gql/order'
 import SyncOn from '@material-ui/icons/Sync';
 import SyncOff from '@material-ui/icons/SyncDisabled';
 
@@ -181,7 +181,7 @@ const CardOrder = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    element.orders[0].status==='отмена'&&profile.role==='admin'&&!selected.length ?
+                    element.del!=='deleted'&&element.orders[0].status==='отмена'&&profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteOrders([element._id])
@@ -193,6 +193,23 @@ const CardOrder = React.memo((props) => {
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить
+                        </Button>
+                        :
+                        null
+                }
+                {
+                    element.del==='deleted'&&profile.role==='admin'?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                await restoreOrders([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Восстановить
                         </Button>
                         :
                         null

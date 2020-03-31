@@ -62,6 +62,59 @@ export const getClientsSimpleStatistic = async(arg, client)=>{
     }
 }
 
+export const getClientsTrash = async(arg, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: arg,
+                query: gql`
+                    query ($search: String!, $skip: Int) {
+                        clientsTrash(search: $search, skip: $skip) {
+                            _id
+                            image
+                            createdAt
+                            name
+                            email
+                            address
+                            lastActive
+                            device
+                            notification
+                            info
+                            reiting
+                            city
+                            del
+                            phone
+                            organization 
+                                {_id name}
+                            user 
+                                {_id role status login}
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getClientsTrashSimpleStatistic = async(arg, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: arg,
+                query: gql`
+                    query ($search: String!) {
+                        clientsTrashSimpleStatistic(search: $search)
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getClientsWithoutDistrict = async(organization, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -154,6 +207,22 @@ export const deleteClient = async(ids)=>{
             mutation : gql`
                     mutation ($_id: [ID]!) {
                         deleteClient(_id: $_id) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreClient = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreClient(_id: $_id) {
                              data
                         }
                     }`})

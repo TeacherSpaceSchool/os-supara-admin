@@ -25,6 +25,7 @@ import CardCatalogPlaceholder from '../../components/catalog/CardCatalogPlacehol
 import initialApp from '../../src/initialApp'
 import { getBrandOrganizations } from '../../src/gql/items'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReturnedConfirmed from '../../components/dialog/ReturnedConfirmed'
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
@@ -273,22 +274,12 @@ const Catalog = React.memo((props) => {
                                 }
                             }
                             if (
-                                client._id && proofeAddress && client.name.length > 0 && client.phone.length > 0
+                                proofeAddress && client.name.length > 0 && client.phone.length > 0
                             ) {
-                                for (let i = 0; i < client.address.length; i++) {
-                                    proofeAddress = client.address[i][0].length > 0
-                                }
-                                const action = async() => {
-                                    await addReturned({
-                                        info: '',
-                                        address: client.address[0],
-                                        organization: organization._id,
-                                        client: client._id,
-                                        items: Object.values(items)
-                                    })
-                                    Router.push('/returneds')
-                                }
-                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                setMiniDialog('Оформление возврата', <ReturnedConfirmed items={items}
+                                                                   client={client}
+                                                                   allPrice={allPrice}
+                                                                   organization={organization}/>)
                                 showMiniDialog(true)
                             }
                             else
@@ -300,7 +291,7 @@ const Catalog = React.memo((props) => {
                     else
                         showSnackBar('Добавьте товар в корзину')
                 }}>
-                    Сохранить
+                    Добавить
                 </div>
             </div>
         </App>
