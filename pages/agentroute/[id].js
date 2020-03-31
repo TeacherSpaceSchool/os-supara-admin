@@ -39,7 +39,7 @@ const AgentRoute = React.memo((props) => {
     const {search, isMobileApp } = props.app;
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
-        if(pagination<filtredClient){
+        if(pagination<filtredClient.length){
             setPagination(pagination+100)
         }
     }
@@ -225,7 +225,6 @@ const AgentRoute = React.memo((props) => {
                                 {filtredClient?filtredClient.map((element, idx)=> {
                                     if (idx <= pagination) {
                                         let selected = clients[dayWeek].includes(element._id)
-                                        if(/*!['агент', 'суперагент'].includes(profile.role)||selected*/true)
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                  className={isMobileApp ? classes.column : classes.row}>
@@ -236,17 +235,17 @@ const AgentRoute = React.memo((props) => {
                                                     <div>
                                                         {
                                                             /*!['агент', 'суперагент'].includes(profile.role)*/true?
-                                                                <Checkbox checked={selected}
-                                                                          onChange={() => {
-                                                                              if (!selected) {
-                                                                                  clients[dayWeek].push(element._id)
-                                                                              } else {
-                                                                                  clients[dayWeek].splice(clients[dayWeek].indexOf(element._id), 1)
-                                                                              }
-                                                                              setClients([...clients])
-                                                                          }}
-                                                                />
-                                                                :null
+                                                            <Checkbox checked={selected}
+                                                                      onChange={() => {
+                                                                          if (!selected) {
+                                                                              clients[dayWeek].push(element._id)
+                                                                          } else {
+                                                                              clients[dayWeek].splice(clients[dayWeek].indexOf(element._id), 1)
+                                                                          }
+                                                                          setClients([...clients])
+                                                                      }}
+                                                            />
+                                                            :null
                                                         }
                                                         <CardClient element={element}/>
                                                     </div>
