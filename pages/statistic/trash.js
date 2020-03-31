@@ -71,13 +71,11 @@ const Trash = React.memo((props) => {
                         <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]}
                                   debounce={0} once={true} placeholder={<CardClientPlaceholder height={height}/>}>
                             {
-                                filter==='Клиенты'&&element.user?
+                                filter==='Клиенты'&&element.name?
                                     <CardClient list={list} idx={idx} key={element._id} setList={setList} element={element}/>
                                     :
                                     filter==='Заказы'&&element.orders?
-                                        <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardOrderPlaceholder/>}>
-                                            <CardOrder selected={[]} list={list} idx={idx} setList={setList} key={element._id} element={element}/>
-                                        </LazyLoad>
+                                        <CardOrder selected={[]} list={list} idx={idx} setList={setList} key={element._id} element={element}/>
                                         :
                                         null
                             }
