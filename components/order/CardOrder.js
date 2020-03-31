@@ -38,7 +38,7 @@ const CardOrder = React.memo((props) => {
     return (
         <Card className={classes.card}>
             {
-                ['admin', 'организация', 'суперагент', 'менеджер'].includes(profile.role)?
+                ['admin', 'организация', 'суперагент', 'менеджер', 'агент'].includes(profile.role)?
                     [1,2].includes(element.sync)?
                         <SyncOn style={{color: element.sync===1?'orange':'green'}} className={classes.sync}/>
                         :
@@ -77,13 +77,13 @@ const CardOrder = React.memo((props) => {
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Время заказа:&nbsp;</div>
-                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
                     </div>
                     {
                         ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Изменен:&nbsp;</div>
-                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(new Date(element.orders[0].updatedAt))}${element.editor?`, ${element.editor}`:''}`}</div>
+                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(element.orders[0].updatedAt)}${element.editor?`, ${element.editor}`:''}`}</div>
                             </div>
                             :
                             null
@@ -101,7 +101,7 @@ const CardOrder = React.memo((props) => {
                         element.dateDelivery?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Время доставки:&nbsp;</div>
-                                <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
+                                <div className={classes.value}>{pdDDMMYYHHMM(element.dateDelivery)}</div>
                             </div>
                             :
                             null

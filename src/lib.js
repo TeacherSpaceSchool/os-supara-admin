@@ -41,38 +41,33 @@ export const checkFloat = (float) => {
 }
 export const pdDDMMYYYY = (date) =>
 {
-    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
-    date = JSON.stringify(date).split('-')
-    date = date[2].split('T')[0]+'.'+date[1]+'.'+date[0].replace('"', '')
+    date = new Date(date)
+    date = `${date.getDate()<10?'0':''}${date.getDate()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getFullYear()}`
     return date
 }
 export const pdDDMMYY = (date) =>
 {
-    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
-    date = JSON.stringify(date).split('-')
-    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)
+    date = new Date(date)
+    date = `${date.getDate()<10?'0':''}${date.getDate()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getYear()-100}`
     return date
 }
 export const pdDatePicker = (date) =>
 {
-    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
-    date = JSON.stringify(date).split('-')
-    date = date[0].replace('"', '')+'-'+date[1]+'-'+date[2].split('T')[0]
+    date = new Date(date)
+    date = `${date.getFullYear()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getDate()<10?'0':''}${date.getDate()}`
     return date
 }
 export const pdDDMMYYHHMM = (date) =>
 {
-    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
-    date = JSON.stringify(date).split('-')
-    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
+    date = new Date(date)
+    date = `${date.getDate()<10?'0':''}${date.getDate()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getYear()-100} ${date.getHours()<10?'0':''}${date.getHours()}:${date.getMinutes()<10?'0':''}${date.getMinutes()}`
     return date
 }
 export const pdDDMMYYHHMMCancel = (date) =>
 {
-    date.setHours(date.getHours() - (date.getTimezoneOffset()/60));
+    date = new Date(date)
     date.setMinutes(date.getMinutes() + 10);
-    date = JSON.stringify(date).split('-')
-    date = date[2].split('T')[0]+'.'+date[1]+'.'+(date[0].replace('"', '')).substring(2,4)+' '+date[2].split('T')[1].split(':')[0]+':'+date[2].split('T')[1].split(':')[1]
+    date = `${date.getDate()<10?'0':''}${date.getDate()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getYear()-100} ${date.getHours()<10?'0':''}${date.getHours()}:${date.getMinutes()<10?'0':''}${date.getMinutes()}`
     return date
 }
 export const validMail = (mail) =>

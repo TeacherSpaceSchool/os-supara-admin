@@ -153,7 +153,7 @@ const Client = React.memo((props) => {
                                                     Регистрация:&nbsp;
                                                 </b>
                                                 <div>
-                                                    {pdDDMMYYHHMM(new Date(data.client.createdAt))}
+                                                    {pdDDMMYYHHMM(data.client.createdAt)}
                                                 </div>
                                             </div>
                                             :
@@ -167,7 +167,7 @@ const Client = React.memo((props) => {
                                                     Активность:&nbsp;
                                                 </b>
                                                 <div>
-                                                    {pdDDMMYYHHMM(new Date(data.client.lastActive))}
+                                                    {pdDDMMYYHHMM(data.client.lastActive)}
                                                 </div>
                                             </div>
                                             :

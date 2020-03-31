@@ -84,14 +84,14 @@ const Returned =  React.memo(
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Время возврата: &nbsp;</div>
-                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
                 </div>
                 {
                     (['admin', 'суперагент'].includes(profile.role)||allowOrganization)&&element.updatedAt!==element.createdAt?
                        <a>
                            <div style={{cursor: 'pointer'}} className={classes.row} onClick={()=>{setMiniDialog('История', <HistoryReturned invoice={element._id}/>)}}>
                                <div className={classes.nameField}>Изменен:&nbsp;</div>
-                               <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.updatedAt))}</div>
+                               <div className={classes.value}>{pdDDMMYYHHMM(element.updatedAt)}</div>
                             </div>
                        </a>
                         :

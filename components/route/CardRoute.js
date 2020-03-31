@@ -36,7 +36,7 @@ const CardOrder = React.memo((props) => {
                         </div>
                         <div className={classes.row}>
                             <div className={classes.nameField}>Дата:&nbsp;</div>
-                            <div className={classes.value}>{pdDDMMYY(new Date(element.dateStart))}</div>
+                            <div className={classes.value}>{pdDDMMYY(element.dateStart)}</div>
                         </div>
                         {
                             element.allTonnage?

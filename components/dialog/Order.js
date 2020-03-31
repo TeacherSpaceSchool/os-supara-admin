@@ -165,14 +165,14 @@ const Order =  React.memo(
                 </div>
                 <div className={classes.row}>
                     <div className={classes.nameField}>Время заказа: &nbsp;</div>
-                    <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                    <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
                 </div>
                 {
                     (['admin', 'суперагент'].includes(profile.role)||allowOrganization)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
                        <a>
                            <div style={{cursor: 'pointer'}} className={classes.row} onClick={()=>{setMiniDialog('История', <HistoryOrder invoice={element._id}/>)}}>
                                <div className={classes.nameField}>Изменен:&nbsp;</div>
-                               <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.orders[0].updatedAt))}</div>
+                               <div className={classes.value}>{pdDDMMYYHHMM(element.orders[0].updatedAt)}</div>
                             </div>
                        </a>
                         :
@@ -210,7 +210,7 @@ const Order =  React.memo(
                     element.dateDelivery?
                         <div className={classes.row}>
                             <div className={classes.nameField}>Время доставки:&nbsp;</div>
-                            <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.dateDelivery))}</div>
+                            <div className={classes.value}>{new Date(element.dateDelivery)}</div>
                         </div>
                         :
                         null
@@ -683,7 +683,7 @@ const Order =  React.memo(
                             !element.cancelClient&&!element.cancelForwarder?
                                 'Заказ отменен'
                                 :
-                                `Заказ отменен ${element.cancelClient?'клиентом':' поставщиком'}. Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(new Date(element.cancelClient)):pdDDMMYYHHMMCancel(new Date(element.cancelForwarder))}`
+                                `Заказ отменен ${element.cancelClient?'клиентом':' поставщиком'}. Востановить заказ до ${element.cancelClient?pdDDMMYYHHMMCancel(element.cancelClient):pdDDMMYYHHMMCancel(element.cancelForwarder)}`
                         }
                     />
                 </div>

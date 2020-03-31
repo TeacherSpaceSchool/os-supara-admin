@@ -30,7 +30,7 @@ const CardReturned = React.memo((props) => {
     return (
         <Card className={classes.card}>
             {
-                ['admin', 'организация', 'суперагент', 'менеджер'].includes(profile.role)?
+                ['admin', 'организация', 'суперагент', 'агент', 'менеджер'].includes(profile.role)?
                     [1,2].includes(element.sync)?
                         <SyncOn style={{color: element.sync===1?'orange':'green'}} className={classes.sync}/>
                         :
@@ -60,13 +60,13 @@ const CardReturned = React.memo((props) => {
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Время возврата:&nbsp;</div>
-                        <div className={classes.value}>{pdDDMMYYHHMM(new Date(element.createdAt))}</div>
+                        <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
                     </div>
                     {
                         ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.updatedAt!==element.createdAt?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Изменен:&nbsp;</div>
-                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(new Date(element.updatedAt))}${element.editor?`, ${element.editor}`:''}`}</div>
+                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(element.updatedAt)}${element.editor?`, ${element.editor}`:''}`}</div>
                             </div>
                             :
                             null
