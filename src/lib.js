@@ -54,7 +54,7 @@ export const pdDDMMYY = (date) =>
 export const pdDatePicker = (date) =>
 {
     date = new Date(date)
-    date = `${date.getFullYear()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getDate()<10?'0':''}${date.getDate()}`
+    date = `${date.getFullYear()}-${date.getMonth()<9?'0':''}${date.getMonth()+1}-${date.getDate()<10?'0':''}${date.getDate()}`
     return date
 }
 export const pdDDMMYYHHMM = (date) =>
