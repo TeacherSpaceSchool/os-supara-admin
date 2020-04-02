@@ -93,6 +93,45 @@ export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
     }
 }
 
+export const getItemsTrash = async({search}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {search: search},
+                query: gql`
+                    query ($search: String!) {
+                        itemsTrash( search: $search) {
+                            _id
+                            subCategory
+                                {_id name}
+                            name
+                            status
+                            createdAt                  
+                            stock
+                            image
+                            info
+                            price
+                            apiece
+                            priotiry
+                            packaging
+                            reiting
+                            organization
+                                {_id name consignation}
+                            hit
+                            latest
+                            favorite
+                            basket
+                            del
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getBrands = async({organization,  search,  sort}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -231,6 +270,22 @@ export const deleteItem = async(ids, subCategory)=>{
                         }
                     }`})
         return await getItems({subCategory: subCategory, ...(new SingletonStore().getStore().getState().app)})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreItem = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreItem(_id: $_id) {
+                             data
+                        }
+                    }`})
     } catch(err){
         console.error(err)
     }

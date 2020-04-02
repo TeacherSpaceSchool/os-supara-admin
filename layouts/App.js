@@ -133,7 +133,18 @@ const App = React.memo(props => {
         ) {
             if (router.pathname === '/orders') {
                 if(subscriptionOrderRes.data.reloadOrder.type==='ADD'){
-                    setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
+                    let have = false
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
+                            _list[i]=subscriptionOrderRes.data.reloadOrder.invoice
+                            have = true
+                        }
+                    }
+                    if(have)
+                        setList([..._list])
+                    else
+                        setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
                 }
                 else if(subscriptionOrderRes.data.reloadOrder.type==='SET'){
                     let _list = [...list]

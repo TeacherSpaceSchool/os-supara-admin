@@ -21,7 +21,7 @@ const Blog = React.memo((props) => {
     const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
-            setList(await getBlogs({search: search, sort: sort, count: 0}))
+            setList(await getBlogs({search: search, sort: sort}))
         })()
     },[sort, search])
     useEffect(()=>{
@@ -76,7 +76,7 @@ Blog.getInitialProps = async function(ctx) {
         } else
             Router.push('/contact')
     return {
-        data: {blogs: await getBlogs({search: '', sort: '-createdAt', count: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined)}
+        data: {blogs: await getBlogs({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined)}
     };
 };
 

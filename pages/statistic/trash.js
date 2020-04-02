@@ -4,6 +4,9 @@ import App from '../../layouts/App';
 import pageListStyle from '../../src/styleMUI/client/clientList'
 import {getClientsTrash, getClientsTrashSimpleStatistic} from '../../src/gql/client'
 import {getOrdersTrash, getInvoicesTrashSimpleStatistic} from '../../src/gql/order'
+import {getReturnedsTrash, getReturnedsTrashSimpleStatistic} from '../../src/gql/returned'
+import {getOrganizationsTrash} from '../../src/gql/organization'
+import {getItemsTrash} from '../../src/gql/items'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
@@ -12,8 +15,10 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import CardClientPlaceholder from '../../components/client/CardClientPlaceholder'
 import CardClient from '../../components/client/CardClient'
-import CardOrderPlaceholder from '../../components/order/CardOrderPlaceholder'
 import CardOrder from '../../components/order/CardOrder'
+import CardReturned from '../../components/returned/CardReturned'
+import CardItem from '../../components/items/CardItem'
+import CardOrganization from '../../components/organization/CardOrganization'
 import LazyLoad from 'react-lazyload';
 const height = 140;
 
@@ -22,17 +27,30 @@ const Trash = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.clientsTrash);
+    let [type, setType] = useState('Клиенты');
     let [simpleStatistic, setSimpleStatistic] = useState(['0']);
     let [paginationWork, setPaginationWork] = useState(true);
     const { search, filter } = props.app;
+    let [pagination, setPagination] = useState(100);
     const checkPagination = async()=>{
         if(paginationWork){
-            let addedList = filter==='Клиенты'?(await getClientsTrash({search: search, skip: list.length})).clientsTrash:(await getOrdersTrash({search: search, skip: list.length})).invoicesTrash
-            if(addedList.length>0){
-                setList([...list, ...addedList])
+            if(['Клиенты', 'Заказы', 'Возвраты'].includes(filter)){
+                let addedList
+                if(filter==='Клиенты')
+                    addedList = (await getClientsTrash({search: search, skip: list.length})).clientsTrash
+                else if(filter==='Заказы')
+                    addedList = (await getOrdersTrash({search: search, skip: list.length})).invoicesTrash
+                else if(filter==='Возвраты')
+                    addedList = (await getReturnedsTrash({search: search, skip: list.length})).returnedsTrash
+                if(addedList.length>0){
+                    setList([...list, ...addedList])
+                }
+                else
+                    setPaginationWork(false)
             }
-            else
-                setPaginationWork(false)
+            else if(['Товары', 'Организации'].includes(filter)){
+                setPagination(pagination+100)
+            }
         }
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
@@ -41,17 +59,41 @@ const Trash = React.memo((props) => {
             if(searchTimeOut)
                 clearTimeout(searchTimeOut)
             searchTimeOut = setTimeout(async()=>{
-                setList(filter==='Клиенты'?(await getClientsTrash({search: search, skip: 0})).clientsTrash:(await getOrdersTrash({search: search, skip: 0})).invoicesTrash)
-                setSimpleStatistic(filter==='Клиенты'?(await getClientsTrashSimpleStatistic({search: search})).clientsTrashSimpleStatistic[0]:(await getInvoicesTrashSimpleStatistic({search: search})).invoicesTrashSimpleStatistic[0])
+                if(filter==='Клиенты'){
+                    list = (await getClientsTrash({search: search, skip: 0})).clientsTrash
+                    simpleStatistic = (await getClientsTrashSimpleStatistic({search: search})).clientsTrashSimpleStatistic
+
+                }
+                else if(filter==='Заказы'){
+                    list = (await getOrdersTrash({search: search, skip: 0})).invoicesTrash
+                    simpleStatistic = (await getInvoicesTrashSimpleStatistic({search: search})).invoicesTrashSimpleStatistic
+                }
+                else if(filter==='Возвраты'){
+                    list = (await getReturnedsTrash({search: search, skip: 0})).returnedsTrash
+                    simpleStatistic = (await getReturnedsTrashSimpleStatistic({search: search})).returnedsTrashSimpleStatistic
+                }
+                else if(filter==='Товары'){
+                    list = (await getItemsTrash({search: search})).itemsTrash
+                    simpleStatistic = [list.length]
+                }
+                else if(filter==='Организации'){
+                    list = (await getOrganizationsTrash({search: search})).organizationsTrash
+                    simpleStatistic = [list.length]
+                }
+                setList(list)
+                setSimpleStatistic(simpleStatistic)
+                setType(filter)
                 forceCheck()
                 setPaginationWork(true);
+                setPagination(100);
                 (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
             }, 500)
             setSearchTimeOut(searchTimeOut)
         })()
     },[filter, search])
+    const filters = [{name: 'Клиенты', value: 'Клиенты'}, {name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}, {name: 'Товары', value: 'Товары'}, {name: 'Организации', value: 'Организации'}]
     return (
-        <App checkPagination={checkPagination} searchShow={true} filters={[{name: 'Клиенты', value: 'Клиенты'}, {name: 'Заказы', value: 'Заказы'}]} pageName='Корзина'>
+        <App checkPagination={checkPagination} searchShow={true} filters={filters} pageName='Корзина'>
             <Head>
                 <title>Корзина</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -63,7 +105,7 @@ const Trash = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/statistic/trash`}/>
             </Head>
             <div className='count'>
-                {`Всего: ${simpleStatistic}`}
+                {`Всего: ${simpleStatistic[0]}`}
             </div>
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
@@ -71,13 +113,25 @@ const Trash = React.memo((props) => {
                         <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]}
                                   debounce={0} once={true} placeholder={<CardClientPlaceholder height={height}/>}>
                             {
-                                filter==='Клиенты'&&element.name?
-                                    <CardClient list={list} idx={idx} key={element._id} setList={setList} element={element}/>
-                                    :
-                                    filter==='Заказы'&&element.orders?
+                                type===filter?
+                                    type==='Клиенты'?
+                                        <CardClient list={list} idx={idx} key={element._id} setList={setList} element={element}/>
+                                        :
+                                    type==='Заказы'&&element.orders?
                                         <CardOrder selected={[]} list={list} idx={idx} setList={setList} key={element._id} element={element}/>
                                         :
+                                    type==='Возвраты'&&element.items?
+                                        <CardReturned selected={[]} list={list} idx={idx} setList={setList} key={element._id} element={element}/>
+                                        :
+                                    type==='Товары'?
+                                        <CardItem setList={setList} key={element._id} element={element} list={list}/>
+                                        :
+                                    type==='Организации'?
+                                        <CardOrganization list={list} key={element._id} setList={setList} element={element}/>
+                                        :
                                         null
+                                    :
+                                    null
                             }
                         </LazyLoad>
                     )}

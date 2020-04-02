@@ -1,6 +1,62 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
-import { SingletonStore } from '../singleton/store';
+
+export const getReturnedsTrash = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($search: String!,  $skip: Int) {
+                        returnedsTrash(search: $search, skip: $skip) {
+                            _id
+                            createdAt
+                            updatedAt
+                            items
+                                {
+                                    _id
+                                    item
+                                    count
+                                    allPrice
+                                    allTonnage
+                                    allSize
+                                    weight
+                                    size
+                                    price
+                                }
+                            allTonnage
+                            allSize
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            editor
+                            number
+                            confirmationForwarder
+                            distributer
+                                {_id name}
+                            organization
+                                {_id name}
+                            cancelForwarder
+                            sync
+                            del
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
 
 export const getReturneds = async(args, client)=>{
     try{
@@ -54,6 +110,23 @@ export const getReturneds = async(args, client)=>{
                             name
                             field
                         }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getReturnedsTrashSimpleStatistic = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($search: String!) {
+                        returnedsTrashSimpleStatistic(search: $search) 
                     }`,
             })
         return res.data
@@ -123,6 +196,22 @@ export const deleteReturneds = async(ids)=>{
             mutation : gql`
                     mutation ($_id: [ID]!) {
                         deleteReturneds(_id: $_id) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreReturneds = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreReturneds(_id: $_id) {
                              data
                         }
                     }`})

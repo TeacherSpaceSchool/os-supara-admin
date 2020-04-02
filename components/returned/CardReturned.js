@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,7 +12,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import { pdDDMMYYHHMM } from '../../src/lib'
 import Returned from '../dialog/Returned'
 import Confirmation from '../../components/dialog/Confirmation'
-import { deleteReturneds } from '../../src/gql/returned'
+import { deleteReturneds, restoreReturneds } from '../../src/gql/returned'
 import SyncOn from '@material-ui/icons/Sync';
 import SyncOff from '@material-ui/icons/SyncDisabled';
 
@@ -125,7 +125,7 @@ const CardReturned = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    status==='отмена'&&profile.role==='admin'&&!selected.length ?
+                    element.del!=='deleted'&&status==='отмена'&&profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteReturneds([element._id])
@@ -137,6 +137,23 @@ const CardReturned = React.memo((props) => {
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить
+                        </Button>
+                        :
+                        null
+                }
+                {
+                    element.del==='deleted'&&profile.role==='admin'?
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                await restoreReturneds([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Восстановить
                         </Button>
                         :
                         null

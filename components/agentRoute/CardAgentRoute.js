@@ -30,10 +30,15 @@ const CardAgentRoute = React.memo((props) => {
                             <div className={classes.nameField}>Организация:&nbsp;</div>
                             <div className={classes.value}>{element.organization?element.organization.name:'AZYK.STORE'}</div>
                         </div>
-                        <div className={classes.row}>
-                            <div className={classes.nameField}>Район:&nbsp;</div>
-                            <div className={classes.value}>{element.district.name}</div>
-                        </div>
+                        {
+                            element.district?
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Район:&nbsp;</div>
+                                    <div className={classes.value}>{element.district.name}</div>
+                                </div>
+                                :
+                                null
+                        }
                     </CardContent>
                 </CardActionArea>
             </Link>

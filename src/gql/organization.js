@@ -71,6 +71,37 @@ export const getOrganizations = async({search: search, sort: sort, filter: filte
     }
 }
 
+export const getOrganizationsTrash = async({search: search}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {search: search},
+                query: gql`
+                    query ($search: String!) {
+                        organizationsTrash(search: $search) {
+                            _id
+                            createdAt
+                            name
+                            image
+                            address
+                            email
+                            phone
+                            info
+                            reiting
+                            status
+                            accessToClient
+                            consignation
+                            del
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const deleteOrganization = async(ids)=>{
     try{
         const client = new SingletonApolloClient().getClient()
@@ -79,6 +110,24 @@ export const deleteOrganization = async(ids)=>{
             mutation : gql`
                     mutation ($_id: [ID]!) {
                         deleteOrganization(_id: $_id) {
+                             data
+                        }
+                    }`})
+        let list = await getOrganizations(new SingletonStore().getStore().getState().app)
+        return list
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreOrganization = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreOrganization(_id: $_id) {
                              data
                         }
                     }`})

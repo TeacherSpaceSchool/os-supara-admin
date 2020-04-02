@@ -81,7 +81,7 @@ const CardAds = React.memo((props) => {
                                         let editElement = {_id: element._id}
                                         if(title.length>0&&title!==element.title)editElement.title = title
                                         if(url.length>0&&url!==element.url)editElement.url = url
-                                        if(image!==undefined)editElement.image = image
+                                        if(image)editElement.image = image
                                         const action = async() => {
                                             setList((await setAds(editElement, organization)).adss)
                                         }
@@ -102,7 +102,7 @@ const CardAds = React.memo((props) => {
                                     </>
                                     :
                                     <Button onClick={async()=> {
-                                        if (image !== undefined && url.length > 0 && title.length > 0) {
+                                        if (image && url.length > 0 && title.length > 0) {
                                             setImage(undefined)
                                             setPreview('/static/add.png')
                                             setTitle('')
@@ -130,7 +130,7 @@ const CardAds = React.memo((props) => {
                         />
                     </Card>
                     :
-                    element!==undefined?
+                    element?
                         <Card className={isMobileApp?classes.cardM:classes.cardD}>
                             <CardActionArea>
                                 <a href={element.url}>

@@ -7,14 +7,13 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import { onoffOrganization, deleteOrganization } from '../../src/gql/organization'
+import { onoffOrganization, deleteOrganization, restoreOrganization } from '../../src/gql/organization'
 import Confirmation from '../../components/dialog/Confirmation'
-import organization from '../../src/styleMUI/organization/organization';
 
 
 const CardOrganization = React.memo((props) => {
     const classes = cardOrganizationStyle();
-    const { element, setList, organization } = props;
+    const { element, setList, organization, list } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
@@ -34,7 +33,7 @@ const CardOrganization = React.memo((props) => {
                     </div>
                 </CardActionArea>
                 {
-                    element.name!=='AZYK.STORE'&&profile.role === 'admin'&&organization ?
+                    element.del!=='deleted'&&element.name!=='AZYK.STORE'&&profile.role === 'admin'&&organization ?
                         <CardActions>
                             <Button onClick={async()=>{
                                         const action = async() => {
@@ -60,6 +59,25 @@ const CardOrganization = React.memo((props) => {
                         :
                         null
                 }
+            {
+                element.del==='deleted'&&profile.role==='admin'?
+                    <CardActions>
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                await restoreOrganization([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Восстановить
+                        </Button>
+                    </CardActions>
+                    :
+                    null
+            }
         </Card>
     );
 })

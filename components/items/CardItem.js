@@ -9,7 +9,7 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import Star from '@material-ui/icons/Star';
 import Link from 'next/link';
-import { onoffItem, deleteItem, favoriteItem } from '../../src/gql/items'
+import { onoffItem, deleteItem, favoriteItem, restoreItem } from '../../src/gql/items'
 import { addBasket, getCountBasket, deleteBasket } from '../../src/gql/basket'
 import Button from '@material-ui/core/Button';
 import Confirmation from '../dialog/Confirmation'
@@ -20,7 +20,7 @@ import { setItem } from '../../src/gql/items'
 
 const CardItem = React.memo((props) => {
     const classes = cardItemStyle();
-    const { element, setList, subCategory, getList, setFavorites } = props;
+    const { element, setList, subCategory, getList, setFavorites, list } = props;
     const { profile, authenticated } = props.user;
     let [status, setStatus] = useState(element!==undefined?element.status:'');
     let [favorite, setFavorite] = useState(element!==undefined&&element.favorite!==undefined?element.favorite:[]);
@@ -39,7 +39,7 @@ const CardItem = React.memo((props) => {
         <Card className={classes.card}>
             <CardContent className={classes.column}>
                 <div className={classes.chipList}>{
-                    profile.role==='admin'?
+                    element.del!=='deleted'&&profile.role==='admin'?
                         <>
                             <FormControlLabel
                                 style={{zoom: 0.75, background: 'rgba(229, 229, 229, 0.3)'}}
@@ -180,6 +180,7 @@ const CardItem = React.memo((props) => {
                     </>
                 }
                                         {'admin'===profile.role||('организация'===profile.role&&profile.organization===element.organization._id)?
+                                            element.del!=='deleted'?
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
@@ -205,6 +206,22 @@ const CardItem = React.memo((props) => {
                                                     </Button>:null
                                             }
                                             </>
+                                                :
+                                                element.del==='deleted'&&profile.role==='admin'?
+                                                    <Button onClick={async()=>{
+                                                        const action = async() => {
+                                                            await restoreItem([element._id])
+                                                            let _list = [...list]
+                                                            _list.splice(_list.indexOf(element), 1)
+                                                            setList(_list)
+                                                        }
+                                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                        showMiniDialog(true)
+                                                    }} size='small' color='primary'>
+                                                        Восстановить
+                                                    </Button>
+                                                    :
+                                                    null
                                             :
                                             ['агент', 'client'].includes(profile.role)?
                                                 <AddShoppingCart style={{color: basket?'#ffb300':'#e1e1e1'}}  className={classes.button} onClick={async()=>{
@@ -224,7 +241,7 @@ const CardItem = React.memo((props) => {
                                                 null
                                         }
 
-                {profile.role==='client'?
+                {element.del!=='deleted'&&profile.role==='client'?
                                             <Star className={classes.buttonToggle} onClick={async ()=>{
                                                 let index
                                                 await favoriteItem([element._id])
