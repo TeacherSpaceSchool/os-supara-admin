@@ -88,7 +88,18 @@ const App = React.memo(props => {
         ) {
             if (router.pathname === '/returneds') {
                 if(subscriptionReturnedRes.data.reloadReturned.type==='ADD'){
-                    setList([subscriptionReturnedRes.data.reloadReturned.invoice, ...list])
+                    let have = false
+                    let _list = [...list]
+                    for(let i=0; i<_list.length; i++){
+                        if(_list[i]._id===subscriptionOrderRes.data.reloadReturned.returned._id){
+                            _list[i]=subscriptionOrderRes.data.reloadReturned.returned
+                            have = true
+                        }
+                    }
+                    if(have)
+                        setList([..._list])
+                    else
+                        setList([subscriptionOrderRes.data.reloadReturned.returned, ...list])
                 }
                 else if(subscriptionReturnedRes.data.reloadReturned.type==='SET'){
                     let _list = [...list]

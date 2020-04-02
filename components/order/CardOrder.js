@@ -34,7 +34,7 @@ const CardOrder = React.memo((props) => {
             priceAfterReturn += (element.orders[i].allPrice-element.orders[i].returned*(element.orders[i].item.stock?element.orders[i].item.stock:element.orders[i].item.price))
         }
         setPriceAfterReturn(priceAfterReturn)
-    },[element,])
+    },[element, element.orders, ])
     return (
         <Card className={classes.card}>
             {
