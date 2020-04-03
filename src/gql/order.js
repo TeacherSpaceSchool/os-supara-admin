@@ -61,6 +61,11 @@ export const getOrders = async(args, client)=>{
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder
@@ -151,6 +156,11 @@ export const getOrdersTrash = async(args, client)=>{
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder
@@ -199,6 +209,23 @@ export const getInvoicesTrashSimpleStatistic = async(args, client)=>{
                 query: gql`
                     query ($search: String!) {
                         invoicesTrashSimpleStatistic(search: $search) 
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const isOrderToday = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($organization: ID!) {
+                        isOrderToday(organization: $organization) 
                     }`,
             })
         return res.data
@@ -288,6 +315,11 @@ export const getOrdersForRouting = async(organization)=>{
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder
@@ -369,6 +401,11 @@ export const getOrder = async({_id})=>{
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder
@@ -462,8 +499,8 @@ export const setInvoice = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean, $paymentConsignation: Boolean) {
-                        setInvoice(taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder, paymentConsignation: $paymentConsignation) {
+                    mutation ($adss: [ID], $taken: Boolean, $invoice: ID!, $confirmationClient: Boolean, $confirmationForwarder: Boolean, $cancelClient: Boolean, $cancelForwarder: Boolean, $paymentConsignation: Boolean) {
+                        setInvoice(adss: $adss, taken: $taken, invoice: $invoice, confirmationClient: $confirmationClient, confirmationForwarder: $confirmationForwarder, cancelClient: $cancelClient, cancelForwarder: $cancelForwarder, paymentConsignation: $paymentConsignation) {
                              data
                         }
                     }`})
@@ -531,6 +568,11 @@ export const setOrder = async(element)=>{
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder
@@ -541,6 +583,7 @@ export const setOrder = async(element)=>{
                             paymentConsignation
                             confirmationClient
                             taken
+                            adss
                             sync
                             dateDelivery
                             usedBonus
@@ -607,6 +650,11 @@ export const subscriptionOrder = gql`
                             info
                             address
                             paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
                             editor
                             number
                             confirmationForwarder

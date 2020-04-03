@@ -13,6 +13,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import Select from '@material-ui/core/Select';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
@@ -26,6 +28,8 @@ import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import CardClientPlaceholder from '../../components/client/CardClientPlaceholder'
 import LazyLoad from 'react-lazyload';
+import VerticalAlignBottom from '@material-ui/icons/VerticalAlignBottom';
+import VerticalAlignTop from '@material-ui/icons/VerticalAlignTop';
 import GeoRouteAgent from '../../components/dialog/GeoRouteAgent'
 const height = 140
 
@@ -92,8 +96,9 @@ const AgentRoute = React.memo((props) => {
                     allClient=[...district.client]
                 else if (selectType == 'Свободные')
                     allClient=district.client.filter(client=>!clients[dayWeek].includes(client._id))
-                else if (selectType == 'Выбраные')
-                    allClient=district.client.filter(client=>clients[dayWeek].includes(client._id))
+                else if (selectType == 'Выбраные') {
+                    allClient = clients[dayWeek].map(client=>district.client.find(client1=>client1._id===client))
+                }
                 let filtredClient = [...allClient]
                 if(search.length>0)
                     filtredClient = filtredClient.filter(element=>
@@ -228,25 +233,66 @@ const AgentRoute = React.memo((props) => {
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                  className={isMobileApp ? classes.column : classes.row}>
+                                                {
+                                                    /*!['агент', 'суперагент'].includes(profile.role)*/true?
+                                                    <div className={isMobileApp ? classes.row : classes.column}>
+                                                        <Checkbox checked={selected}
+                                                                  onChange={() => {
+                                                                      if (!selected) {
+                                                                          clients[dayWeek].push(element._id)
+                                                                      } else {
+                                                                          clients[dayWeek].splice(clients[dayWeek].indexOf(element._id), 1)
+                                                                      }
+                                                                      setClients([...clients])
+                                                                  }}
+                                                        />
+                                                        {
+                                                            selectType==='Выбраные'?
+                                                                <>
+                                                                {
+                                                                    filtredClient[idx-1]?
+                                                                        <Tooltip title='Вверх'>
+                                                                            <IconButton
+                                                                                onClick={()=>{
+                                                                                    clients[dayWeek][idx] = filtredClient[idx - 1]._id
+                                                                                    clients[dayWeek][idx - 1] = filtredClient[idx]._id
+                                                                                    setClients([...clients])
+                                                                                }}
+                                                                                color='inherit'
+                                                                            >
+                                                                                <VerticalAlignTop />
+                                                                            </IconButton>
+                                                                        </Tooltip>
+                                                                        :null
+                                                                }
+                                                                {
+                                                                    filtredClient[idx+1]?
+                                                                        <Tooltip title='Вниз'>
+                                                                            <IconButton
+                                                                                onClick={()=>{
+                                                                                    clients[dayWeek][idx] = filtredClient[idx + 1]._id
+                                                                                    clients[dayWeek][idx + 1] = filtredClient[idx]._id
+                                                                                    setClients([...clients])
+                                                                                }}
+                                                                                color='inherit'
+                                                                            >
+                                                                                <VerticalAlignBottom />
+                                                                            </IconButton>
+                                                                        </Tooltip>
+                                                                        :null
+                                                                }
+                                                                </>
+                                                                :
+                                                                null
+                                                        }
+                                                    </div>
+                                                    :null
+                                                }
                                                 <LazyLoad scrollContainer={'.App-body'} key={element._id}
                                                           height={height} offset={[height, 0]} debounce={0}
                                                           once={true}
                                                           placeholder={<CardClientPlaceholder height={height}/>}>
                                                     <div>
-                                                        {
-                                                            /*!['агент', 'суперагент'].includes(profile.role)*/true?
-                                                            <Checkbox checked={selected}
-                                                                      onChange={() => {
-                                                                          if (!selected) {
-                                                                              clients[dayWeek].push(element._id)
-                                                                          } else {
-                                                                              clients[dayWeek].splice(clients[dayWeek].indexOf(element._id), 1)
-                                                                          }
-                                                                          setClients([...clients])
-                                                                      }}
-                                                            />
-                                                            :null
-                                                        }
                                                         <CardClient element={element}/>
                                                     </div>
                                                 </LazyLoad>

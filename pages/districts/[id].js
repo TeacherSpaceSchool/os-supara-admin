@@ -32,15 +32,24 @@ const Districts = React.memo((props) => {
         setList((await getDistricts({organization: router.query.id, search: search, sort: sort})).districts)
     }
     useEffect(()=>{
-        getList()
-    },[sort, search]);
-    useEffect(()=>{
         (async()=>{
             setPagination(100)
             forceCheck()
             setClients((await getClientsWithoutDistrict(router.query.id)).clientsWithoutDistrict)
         })()
     },[list])
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    useEffect(()=>{
+        (async()=>{
+            if(searchTimeOut)
+                clearTimeout(searchTimeOut)
+            searchTimeOut = setTimeout(async()=>{
+                getList();
+                (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+            }, 500)
+            setSearchTimeOut(searchTimeOut)
+        })()
+    },[sort, search])
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
         if(pagination<list.length){

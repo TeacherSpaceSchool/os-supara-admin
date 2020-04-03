@@ -11,6 +11,7 @@ import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDDMMYYHHMM, pdDDMMYYHHMMCancel } from '../../src/lib'
 import Confirmation from './Confirmation'
 import Geo from '../../components/dialog/Geo'
+import OrderAdss from '../../components/dialog/OrderAdss'
 import HistoryOrder from '../../components/dialog/HistoryOrder'
 import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -24,6 +25,7 @@ const Order =  React.memo(
         const { showMiniDialog, setMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
         const { classes, element, setList, getInvoices, list, idx } = props;
         let [orders, setOrders] = useState([...element.orders]);
+        let [adss, setAdss] = useState([...element.adss]);
         let [allPrice, setAllPrice] = useState(element.allPrice);
         let [consignmentPrice, setConsignmentPrice] = useState(element.consignmentPrice);
         let [allTonnage, setAllTonnage] = useState(element.allTonnage);
@@ -238,6 +240,28 @@ const Order =  React.memo(
                         :
                         null
                 }
+
+                    <div
+                         onClick={()=>{
+                                setFullDialog('Акции', <OrderAdss organization={element.orders[0].item.organization._id} setAdss={setAdss} adss={adss}/>)
+                                showFullDialog(true)
+                         }}
+                         className={classes.row}>
+                        <div className={classes.nameField}>Акции:&nbsp;</div>
+                        <div style={{cursor: 'pointer', ...(!adss[0]?{color: 'red'}:{color: '#ffb300'})}}>
+                            {adss.length>0?adss.map((ads, idx)=>
+                                    idx<4? <div key={`ads${idx}`} className={classes.value}>
+                                            {ads.title}
+                                        </div>
+                                        :
+                                        idx===4?
+                                            '...'
+                                            :
+                                            null
+                            ):<div className={classes.value}>нет</div>}
+                            </div>
+                        </div>
+
                 {
                     element.usedBonus&&element.usedBonus>0?
                         <div className={classes.row}>
@@ -738,7 +762,7 @@ const Order =  React.memo(
                         <Button variant='contained' color='primary' onClick={()=>{
                             const action = async() => {
 
-                                let invoice = {invoice: element._id}
+                                let invoice = {invoice: element._id, adss: adss.map(ads=>ads._id)}
                                 if(element.taken!==taken)invoice.taken=taken;
                                 if(element.confirmationClient!==confirmationClient) invoice.confirmationClient=confirmationClient;
                                 if(element.confirmationForwarder!==confirmationForwarder) invoice.confirmationForwarder=confirmationForwarder;

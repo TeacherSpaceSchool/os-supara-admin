@@ -154,6 +154,12 @@ const CardOrganization = React.memo((props) => {
             <CardActions>
                 {
                     ['агент', 'суперагент'].includes(profile.role) ?
+                        <>
+                        <Button onClick={async()=>{
+                            window.open(`/catalog?client=${element._id}`, '_blank');
+                        }} size='small' color='primary'>
+                            Купить
+                        </Button>
                         <Button onClick={async()=>{
                             const action = () => {
                                 if (navigator.geolocation) {
@@ -161,7 +167,8 @@ const CardOrganization = React.memo((props) => {
                                         let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(element.address[0][1].split(', ')))
                                         if(distance<100){
                                             await addAgentHistoryGeo({client: element._id, geo: `${position.coords.latitude}, ${position.coords.longitude}`})
-                                            Router.push(`/catalog?client=${element._id}`)
+                                            window.open(`/catalog?client=${element._id}`, '_blank');
+                                            //Router.push(`/catalog?client=${element._id}`)
                                         }
                                         else
                                             showSnackBar('Вы слишком далеко')
@@ -175,6 +182,7 @@ const CardOrganization = React.memo((props) => {
                         }} size='small' color='primary'>
                             Посетил
                         </Button>
+                        </>
                         :
                         null
                 }

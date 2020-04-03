@@ -131,8 +131,6 @@ export const restoreOrganization = async(ids)=>{
                              data
                         }
                     }`})
-        let list = await getOrganizations(new SingletonStore().getStore().getState().app)
-        return list
     } catch(err){
         console.error(err)
     }

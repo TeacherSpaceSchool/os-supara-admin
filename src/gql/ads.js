@@ -67,6 +67,30 @@ export const getAdss = async({search: search, organization: organization}, clien
     }
 }
 
+export const getAdssTrash = async({search: search, organization: organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {search: search, organization: organization},
+                query: gql`
+                    query ($search: String!, $organization: ID!) {
+                        adssTrash(search: $search, organization: $organization) {
+                            _id
+                            image
+                            url
+                            title
+                            del
+                            createdAt
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const deleteAds = async(ids, organization)=>{
     try{
         const client = new SingletonApolloClient().getClient()
@@ -79,6 +103,22 @@ export const deleteAds = async(ids, organization)=>{
                         }
                     }`})
         return await getAdss({...new SingletonStore().getStore().getState().app, organization: organization})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreAds = async(ids, organization)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreAds(_id: $_id) {
+                             data
+                        }
+                    }`})
     } catch(err){
         console.error(err)
     }

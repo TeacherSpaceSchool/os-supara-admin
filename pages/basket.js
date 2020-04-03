@@ -17,6 +17,7 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import * as snackbarActions from '../redux/actions/snackbar'
 import { getBasket, setBasket, deleteBasket, getCountBasket } from '../src/gql/basket';
+import { isOrderToday } from '../src/gql/order';
 import { getClient } from '../src/gql/client';
 import Router from 'next/router'
 import BuyBasket from '../components/dialog/BuyBasket'
@@ -412,7 +413,7 @@ const Basket = React.memo((props) => {
                     <div className={isMobileApp?classes.value:classes.priceAllText}>Общая стоимость</div>
                     <div className={isMobileApp?classes.priceAllM:classes.priceAll}>{`${allPrice} сом`}</div>
                 </div>
-                <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
+                <div className={isMobileApp?classes.buyM:classes.buyD} onClick={async()=>{
                     if(allPrice>0)
                         if (authenticated) {
                             let address = data.client.address
@@ -424,10 +425,12 @@ const Basket = React.memo((props) => {
                             }
                             if (proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0
                             ) {
+                                let agent = (await isOrderToday({organization: organization._id})).isOrderToday
                                 setMiniDialog('Купить', <BuyBasket
                                     adss={ads}
                                     bonus={bonus}
                                     client={data.client}
+                                    agent={agent}
                                     allPrice={allPrice} organization={organization}/>)
                                 showMiniDialog(true)
                             }

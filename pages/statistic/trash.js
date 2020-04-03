@@ -6,6 +6,7 @@ import {getClientsTrash, getClientsTrashSimpleStatistic} from '../../src/gql/cli
 import {getOrdersTrash, getInvoicesTrashSimpleStatistic} from '../../src/gql/order'
 import {getReturnedsTrash, getReturnedsTrashSimpleStatistic} from '../../src/gql/returned'
 import {getOrganizationsTrash} from '../../src/gql/organization'
+import {getAdssTrash} from '../../src/gql/ads'
 import {getItemsTrash} from '../../src/gql/items'
 import { connect } from 'react-redux'
 import Router from 'next/router'
@@ -17,6 +18,7 @@ import CardClientPlaceholder from '../../components/client/CardClientPlaceholder
 import CardClient from '../../components/client/CardClient'
 import CardOrder from '../../components/order/CardOrder'
 import CardReturned from '../../components/returned/CardReturned'
+import CardAds from '../../components/ads/CardAds'
 import CardItem from '../../components/items/CardItem'
 import CardOrganization from '../../components/organization/CardOrganization'
 import LazyLoad from 'react-lazyload';
@@ -80,6 +82,10 @@ const Trash = React.memo((props) => {
                     list = (await getOrganizationsTrash({search: search})).organizationsTrash
                     simpleStatistic = [list.length]
                 }
+                else if(filter==='Акции'){
+                    list = (await getAdssTrash({search: search})).adsTrash
+                    simpleStatistic = [list.length]
+                }
                 setList(list)
                 setSimpleStatistic(simpleStatistic)
                 setType(filter)
@@ -91,7 +97,7 @@ const Trash = React.memo((props) => {
             setSearchTimeOut(searchTimeOut)
         })()
     },[filter, search])
-    const filters = [{name: 'Клиенты', value: 'Клиенты'}, {name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}, {name: 'Товары', value: 'Товары'}, {name: 'Организации', value: 'Организации'}]
+    const filters = [{name: 'Клиенты', value: 'Клиенты'}, {name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}, {name: 'Акции', value: 'Акции'}, {name: 'Товары', value: 'Товары'}, {name: 'Организации', value: 'Организации'}]
     return (
         <App checkPagination={checkPagination} searchShow={true} filters={filters} pageName='Корзина'>
             <Head>
@@ -128,6 +134,9 @@ const Trash = React.memo((props) => {
                                         :
                                     type==='Организации'?
                                         <CardOrganization list={list} key={element._id} setList={setList} element={element}/>
+                                        :
+                                    type==='Акции'?
+                                        <CardAds list={list} key={element._id} setList={setList} element={element}/>
                                         :
                                         null
                                     :

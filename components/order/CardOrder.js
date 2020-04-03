@@ -129,6 +129,27 @@ const CardOrder = React.memo((props) => {
                             null
                     }
                     {
+                        element.adss&&element.adss.length>0?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Акции:&nbsp;</div>
+                                <div>
+                                    {element.adss.map((ads, idx)=>
+                                        idx<4?
+                                            <div key={`ads${idx}`} className={classes.value}>
+                                                {ads.title}
+                                            </div>
+                                            :
+                                            idx===4?
+                                                '...'
+                                                :
+                                                null
+                                    )}
+                                </div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
                         element.usedBonus&&element.usedBonus>0?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Использованный бонус:&nbsp;</div>

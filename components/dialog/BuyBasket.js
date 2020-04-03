@@ -26,7 +26,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice, organization, bonus, adss } = props;
+        const { client, allPrice, organization, bonus, adss, agent } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
@@ -85,7 +85,7 @@ const BuyBasket =  React.memo(
                 </FormControl>
                 <br/>*/}
                 {
-                    organization.minimumOrder>0?
+                    !agent&&organization.minimumOrder>0?
                         <>
                         <div style={{width: width}} className={classes.itogo}><b>Минимальный заказ:</b>{` ${organization.minimumOrder} сом`}</div>
                         </>
@@ -108,7 +108,7 @@ const BuyBasket =  React.memo(
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
-                        if(!organization.minimumOrder===0||organization.minimumOrder<allPrice) {
+                        if(agent||!organization.minimumOrder===0||organization.minimumOrder<allPrice) {
                             let proofeAddress = address.length > 0
                             if(proofeAddress){
                                 for (let i = 0; i<address.length; i++){

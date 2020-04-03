@@ -63,7 +63,7 @@ const Geo =  React.memo(
                                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                     showMiniDialog(true)
                                 }} className={classes.button}>
-                                    Задать
+                                    Принять
                                 </Button>
                                 :null
                         }

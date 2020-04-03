@@ -14,6 +14,10 @@ import * as snackbarActions from '../../redux/actions/snackbar'
 import Confirmation from '../dialog/Confirmation'
 import PdfViewer from '../../components/dialog/PdfViewer'
 import VideoViewer from '../../components/dialog/VideoViewer'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const CardFaq = React.memo((props) => {
     const classes = cardFaqStyle();
@@ -39,6 +43,11 @@ const CardFaq = React.memo((props) => {
     let handleTitle =  (event) => {
         setTitle(event.target.value)
     };
+    let types = ['клиенты', 'сотрудники']
+    let [typex, setTypex] = useState(element&&element.typex?element.typex:'клиенты');
+    let handleTypex =  (event) => {
+        setTypex(event.target.value)
+    };
     const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     let faqRef = useRef(null);
@@ -48,6 +57,19 @@ const CardFaq = React.memo((props) => {
               profile.role === 'admin' ?
                   <Card className={isMobileApp?classes.cardM:classes.cardD}>
                       <CardContent>
+                          <FormControl className={classes.input}>
+                              <InputLabel>Тип</InputLabel>
+                              <Select
+                                  value={typex}
+                                  onChange={handleTypex}
+                              >
+                                  {types.map((element)=>
+                                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                                  )}
+                              </Select>
+                          </FormControl>
+                          <br/>
+                          <br/>
                           <TextField
                               label='Имя'
                               value={title}
@@ -83,6 +105,7 @@ const CardFaq = React.memo((props) => {
                                       if(title.length>0&&title!==element.title)editElement.title = title
                                       if(video!==element.video)editElement.video = video
                                       if(file!==undefined)editElement.file = file
+                                      if(typex!==element.typex)editElement.typex = typex
                                       const action = async() => {
                                           setList((await setFaq(editElement)).faqs)
                                       }
@@ -105,10 +128,11 @@ const CardFaq = React.memo((props) => {
                                   <Button onClick={async()=> {
                                       if (title.length > 0) {
                                           const action = async() => {
-                                              setList((await addFaq({video: video, file: file, title: title})).faqs)
+                                              setList((await addFaq({typex: typex, video: video, file: file, title: title})).faqs)
                                           }
                                           setFile(undefined)
                                           setTitle('')
+                                          setTypex('клиенты')
                                           setVideo('')
                                           setUrl(false)
                                           setMiniDialog('Вы уверены?', <Confirmation action={action}/>)

@@ -6,7 +6,7 @@ import cardAdsStyle from '../../src/styleMUI/ads/cardAds'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
-import { deleteAds, addAds, setAds } from '../../src/gql/ads'
+import { deleteAds, addAds, setAds, restoreAds } from '../../src/gql/ads'
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as snackbarActions from '../../redux/actions/snackbar'
@@ -16,7 +16,7 @@ import Confirmation from '../dialog/Confirmation'
 
 const CardAds = React.memo((props) => {
     const classes = cardAdsStyle();
-    const { element, setList, organization } = props;
+    const { element, setList, organization, list } = props;
     const { profile } = props.user;
     const { isMobileApp } = props.app;
     //addCard
@@ -75,49 +75,63 @@ const CardAds = React.memo((props) => {
                             </CardContent>
                         <CardActions>
                             {
-                                element!==undefined?
-                                    <>
-                                    <Button onClick={async()=>{
-                                        let editElement = {_id: element._id}
-                                        if(title.length>0&&title!==element.title)editElement.title = title
-                                        if(url.length>0&&url!==element.url)editElement.url = url
-                                        if(image)editElement.image = image
-                                        const action = async() => {
-                                            setList((await setAds(editElement, organization)).adss)
-                                        }
-                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                        showMiniDialog(true)
-                                    }} size='small' color='primary'>
-                                        Сохранить
-                                    </Button>
-                                    <Button onClick={async()=>{
-                                        const action = async() => {
-                                            setList((await deleteAds([element._id], organization)).adss)
-                                        }
-                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                        showMiniDialog(true)
-                                    }} size='small' color='primary'>
-                                        Удалить
-                                    </Button>
-                                    </>
-                                    :
-                                    <Button onClick={async()=> {
-                                        if (image && url.length > 0 && title.length > 0) {
-                                            setImage(undefined)
-                                            setPreview('/static/add.png')
-                                            setTitle('')
-                                            setUrl('')
+                                element.del!=='deleted'?
+                                    element!==undefined?
+                                        <>
+                                        <Button onClick={async()=>{
+                                            let editElement = {_id: element._id}
+                                            if(title.length>0&&title!==element.title)editElement.title = title
+                                            if(url.length>0&&url!==element.url)editElement.url = url
+                                            if(image)editElement.image = image
                                             const action = async() => {
-                                                setList((await addAds({organization: organization, image: image, url: url, title: title}, organization)).adss)
+                                                setList((await setAds(editElement, organization)).adss)
                                             }
                                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                             showMiniDialog(true)
-                                        } else {
-                                            showSnackBar('Заполните все поля')
+                                        }} size='small' color='primary'>
+                                            Сохранить
+                                        </Button>
+                                        <Button onClick={async()=>{
+                                            const action = async() => {
+                                                setList((await deleteAds([element._id], organization)).adss)
+                                            }
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        }} size='small' color='primary'>
+                                            Удалить
+                                        </Button>
+                                        </>
+                                        :
+                                        <Button onClick={async()=> {
+                                            if (image && url.length > 0 && title.length > 0) {
+                                                setImage(undefined)
+                                                setPreview('/static/add.png')
+                                                setTitle('')
+                                                setUrl('')
+                                                const action = async() => {
+                                                    setList((await addAds({organization: organization, image: image, url: url, title: title}, organization)).adss)
+                                                }
+                                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                showMiniDialog(true)
+                                            } else {
+                                                showSnackBar('Заполните все поля')
+                                            }
                                         }
-                                    }
-                                    } size='small' color='primary'>
-                                        Добавить
+                                        } size='small' color='primary'>
+                                            Добавить
+                                        </Button>
+                                    :
+                                    <Button onClick={async()=>{
+                                        const action = async() => {
+                                            await restoreAds([element._id])
+                                            let _list = [...list]
+                                            _list.splice(_list.indexOf(element), 1)
+                                            setList(_list)
+                                        }
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }} size='small' color='primary'>
+                                        Восстановить
                                     </Button>
                             }
                         </CardActions>
