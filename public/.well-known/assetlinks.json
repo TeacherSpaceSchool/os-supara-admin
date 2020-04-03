@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.azyk.store",
+    "sha256_cert_fingerprints":
+    ["AB:09:FD:14:A6:BD:C8:F3:36:24:84:F0:E8:51:F0:4A:21:6C:7A:E7:36:49:6D:87:B2:77:F1:67:40:5F:B8:93"]
+  }
+}]
