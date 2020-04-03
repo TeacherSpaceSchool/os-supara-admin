@@ -584,6 +584,10 @@ export const setOrder = async(element)=>{
                             confirmationClient
                             taken
                             adss
+                                { 
+                                    _id
+                                    title
+                                }
                             sync
                             dateDelivery
                             usedBonus
