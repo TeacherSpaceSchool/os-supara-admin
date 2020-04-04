@@ -74,47 +74,104 @@ const App = React.memo(props => {
             await setReloadPage(false)
         }
     });
-
-    //if(authenticated&&profile.role&&'экспедитор'!==profile.role) {
-    const subscriptionOrderRes = useSubscription(subscriptionOrder);
-    const subscriptionReturnedRes = useSubscription(subscriptionReturned);
+    let subscriptionOrderRes = useSubscription(subscriptionOrder);
     useEffect( ()=>{
-        if(
-            authenticated&&
-            profile.role&&
-            'экспедитор'!==profile.role&&
-            subscriptionReturnedRes.data&&
-            profile._id!==subscriptionReturnedRes.data.reloadReturned.who
+        if (
+                subscriptionOrderRes &&
+                authenticated &&
+                profile.role &&
+                'экспедитор' !== profile.role &&
+                subscriptionOrderRes.data &&
+                subscriptionOrderRes.data.reloadOrder &&
+                profile._id !== subscriptionOrderRes.data.reloadOrder.who
+        ) {
+                if (router.pathname === '/orders') {
+                    if (subscriptionOrderRes.data.reloadOrder.type === 'ADD') {
+                        let have = false
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
+                                _list[i] = subscriptionOrderRes.data.reloadOrder.invoice
+                                have = true
+                            }
+                        }
+                        if (have)
+                            setList([..._list])
+                        else
+                            setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
+                    }
+                    else if (subscriptionOrderRes.data.reloadOrder.type === 'SET') {
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
+                                _list[i] = subscriptionOrderRes.data.reloadOrder.invoice
+                            }
+                        }
+                        setList([..._list])
+                    }
+                    else if (subscriptionOrderRes.data.reloadOrder.type === 'DELETE') {
+                        let index = 0
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
+                                index = i
+                            }
+                        }
+                        _list.splice(index, 1);
+                        setList([..._list])
+                    }
+                }
+                else {
+                    if (!unread.orders) {
+                        unread.orders = true
+                        setUnread({...unread})
+                    }
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
+                    /*if (alert.current)
+                        alert.current.play()*/
+                }
+            }
+    },[subscriptionOrderRes.data])
+        /*let subscriptionReturnedRes = useSubscription(subscriptionReturned);
+        if (
+            subscriptionReturnedRes &&
+            authenticated &&
+            profile.role &&
+            'экспедитор' !== profile.role &&
+            subscriptionReturnedRes.data &&
+            subscriptionReturnedRes.data.reloadReturned &&
+            profile._id !== subscriptionReturnedRes.data.reloadReturned.who
         ) {
             if (router.pathname === '/returneds') {
-                if(subscriptionReturnedRes.data.reloadReturned.type==='ADD'){
+                if (subscriptionReturnedRes.data.reloadReturned.type === 'ADD') {
                     let have = false
                     let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionOrderRes.data.reloadReturned.returned._id){
-                            _list[i]=subscriptionOrderRes.data.reloadReturned.returned
+                    for (let i = 0; i < _list.length; i++) {
+                        if (_list[i]._id === subscriptionOrderRes.data.reloadReturned.returned._id) {
+                            _list[i] = subscriptionOrderRes.data.reloadReturned.returned
                             have = true
                         }
                     }
-                    if(have)
+                    if (have)
                         setList([..._list])
                     else
                         setList([subscriptionOrderRes.data.reloadReturned.returned, ...list])
                 }
-                else if(subscriptionReturnedRes.data.reloadReturned.type==='SET'){
+                else if (subscriptionReturnedRes.data.reloadReturned.type === 'SET') {
                     let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionReturnedRes.data.reloadReturned.returned._id){
-                            _list[i]=subscriptionReturnedRes.data.reloadReturned.returned
+                    for (let i = 0; i < _list.length; i++) {
+                        if (_list[i]._id === subscriptionReturnedRes.data.reloadReturned.returned._id) {
+                            _list[i] = subscriptionReturnedRes.data.reloadReturned.returned
                         }
                     }
                     setList([..._list])
                 }
-                else if(subscriptionReturnedRes.data.reloadReturned.type==='DELETE'){
+                else if (subscriptionReturnedRes.data.reloadReturned.type === 'DELETE') {
                     let index = 0
                     let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionReturnedRes.data.reloadReturned.returned._id){
+                    for (let i = 0; i < _list.length; i++) {
+                        if (_list[i]._id === subscriptionReturnedRes.data.reloadReturned.returned._id) {
                             index = i
                         }
                     }
@@ -123,74 +180,17 @@ const App = React.memo(props => {
                 }
             }
             else {
-                if(!unread.returneds) {
+                if (!unread.returneds) {
                     unread.returneds = true
                     setUnread({...unread})
                 }
-                if( navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
                     navigator.vibrate(200);
-                /*if (alert.current)
-                    alert.current.play()*/
             }
-        }
-    },[subscriptionReturnedRes.data])
-    useEffect( ()=>{
-        if(
-            authenticated&&
-            profile.role&&
-            'экспедитор'!==profile.role&&
-            subscriptionOrderRes.data&&
-            profile._id!==subscriptionOrderRes.data.reloadOrder.who
-        ) {
-            if (router.pathname === '/orders') {
-                if(subscriptionOrderRes.data.reloadOrder.type==='ADD'){
-                    let have = false
-                    let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
-                            _list[i]=subscriptionOrderRes.data.reloadOrder.invoice
-                            have = true
-                        }
-                    }
-                    if(have)
-                        setList([..._list])
-                    else
-                        setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
-                }
-                else if(subscriptionOrderRes.data.reloadOrder.type==='SET'){
-                    let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
-                            _list[i]=subscriptionOrderRes.data.reloadOrder.invoice
-                        }
-                    }
-                    setList([..._list])
-                }
-                else if(subscriptionOrderRes.data.reloadOrder.type==='DELETE'){
-                    let index = 0
-                    let _list = [...list]
-                    for(let i=0; i<_list.length; i++){
-                        if(_list[i]._id===subscriptionOrderRes.data.reloadOrder.invoice._id){
-                            index = i
-                        }
-                    }
-                    _list.splice(index, 1);
-                    setList([..._list])
-                }
-            }
-            else {
-                if(!unread.orders) {
-                    unread.orders = true
-                    setUnread({...unread})
-                }
-                if( navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
-                    navigator.vibrate(200);
-                /*if (alert.current)
-                    alert.current.play()*/
-            }
-        }
-    },[subscriptionOrderRes.data])
-    //}
+        }*/
+
+
+
     return(
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>

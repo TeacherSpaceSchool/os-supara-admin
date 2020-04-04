@@ -35,7 +35,10 @@ export let register = (update) => {
                         .then(function (subscription) {
                             isSubscribed = !(subscription === null);
                             if (isSubscribed) {
-                                if (update||!localStorage.browserNumber) {
+                                saveSubscription(subscription);
+                                isSubscribed = true;
+                                resolve()
+                                /*if (update||!localStorage.browserNumber) {
                                     subscription.unsubscribe().then(function () {
                                         saveSubscription(subscription);
                                         isSubscribed = true;
@@ -47,7 +50,7 @@ export let register = (update) => {
                                 }
                                 else{
                                     resolve()
-                                }
+                                }*/
                             } else {
                                 swRegistration.pushManager.subscribe({
                                     userVisibleOnly: true,

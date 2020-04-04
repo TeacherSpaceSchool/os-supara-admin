@@ -75,8 +75,8 @@ const CardAds = React.memo((props) => {
                             </CardContent>
                         <CardActions>
                             {
-                                element.del!=='deleted'?
-                                    element!==undefined?
+                                   element!==undefined?
+                                        element.del!=='deleted'?
                                         <>
                                         <Button onClick={async()=>{
                                             let editElement = {_id: element._id}
@@ -101,6 +101,19 @@ const CardAds = React.memo((props) => {
                                             Удалить
                                         </Button>
                                         </>
+                                            :
+                                        <Button onClick={async()=>{
+                                const action = async() => {
+                                await restoreAds([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                showMiniDialog(true)
+                            }} size='small' color='primary'>
+                                Восстановить
+                                </Button>
                                         :
                                         <Button onClick={async()=> {
                                             if (image && url.length > 0 && title.length > 0) {
@@ -120,19 +133,6 @@ const CardAds = React.memo((props) => {
                                         } size='small' color='primary'>
                                             Добавить
                                         </Button>
-                                    :
-                                    <Button onClick={async()=>{
-                                        const action = async() => {
-                                            await restoreAds([element._id])
-                                            let _list = [...list]
-                                            _list.splice(_list.indexOf(element), 1)
-                                            setList(_list)
-                                        }
-                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                        showMiniDialog(true)
-                                    }} size='small' color='primary'>
-                                        Восстановить
-                                    </Button>
                             }
                         </CardActions>
                         <input

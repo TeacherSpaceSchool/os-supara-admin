@@ -83,7 +83,7 @@ const Trash = React.memo((props) => {
                     simpleStatistic = [list.length]
                 }
                 else if(filter==='Акции'){
-                    list = (await getAdssTrash({search: search})).adsTrash
+                    list = (await getAdssTrash({search: search})).adssTrash
                     simpleStatistic = [list.length]
                 }
                 setList(list)

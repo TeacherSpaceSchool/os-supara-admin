@@ -19,6 +19,15 @@ const Subscriber = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.subscribers);
     let height = 214
+    let failed = 0
+    let delivered = 0
+    for(let i=0; i<data.subscribers.length; i++){
+        if(data.subscribers[i].status==='доставлено')
+            delivered+=1
+        else
+            failed+=1
+    }
+    let [showStat, setShowStat] = useState(false);
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
         if(pagination<list.length){
@@ -39,8 +48,21 @@ const Subscriber = React.memo((props) => {
                 <meta property='og:url' content={`${urlMain}/statistic/subscriber`} />
                 <link rel='canonical' href={`${urlMain}/statistic/subscriber`}/>
             </Head>
-            <div className='count'>
+            <div className='count' onClick={()=>setShowStat(!showStat)}>
                 {`Всего подписчиков: ${list.length}`}
+                {
+                    showStat?
+                        <>
+                        <br/>
+                        <br/>
+                        {`Доставлено: ${delivered}`}
+                        <br/>
+                        <br/>
+                        {`Провалено: ${failed}`}
+                        </>
+                        :
+                        null
+                }
             </div>
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {

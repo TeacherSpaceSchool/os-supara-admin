@@ -27,7 +27,7 @@ export default withRedux(configureStore, { debug: false })(
             new SingletonStore(store)
             if(process.browser){
                 checkDisableSubscribe()
-                register()
+                register(true)
             }
             let client = process.browser?new SingletonApolloClient().getClient():getClientGqlSsr()
 

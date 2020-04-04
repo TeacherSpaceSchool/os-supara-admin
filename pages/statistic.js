@@ -191,6 +191,17 @@ const Statistic = React.memo((props) => {
                         </CardActionArea>
                     </Card>
                 </Link>
+                <Link href='/statistic/integrateoutshoro'>
+                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                        <CardActionArea>
+                            <div className={classes.line}>
+                                <h3 className={classes.input}>
+                                    Выгрузка интеграции 1С
+                                </h3>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Link>
                 <Link href='/statistic/trash'>
                     <Card className={isMobileApp?classes.cardM:classes.cardD}>
                         <CardActionArea>

@@ -74,8 +74,8 @@ export const getAdssTrash = async({search: search, organization: organization}, 
             .query({
                 variables: {search: search, organization: organization},
                 query: gql`
-                    query ($search: String!, $organization: ID!) {
-                        adssTrash(search: $search, organization: $organization) {
+                    query ($search: String!) {
+                        adssTrash(search: $search) {
                             _id
                             image
                             url

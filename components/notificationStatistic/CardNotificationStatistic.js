@@ -10,6 +10,7 @@ import { addNotificationStatistic } from '../../src/gql/notificationStatisticAzy
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as snackbarActions from '../../redux/actions/snackbar'
+import {pdDDMMYYHHMM} from '../../src/lib'
 import Confirmation from '../dialog/Confirmation'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 
@@ -79,6 +80,10 @@ const NotificationStatistic = React.memo((props) => {
                     <Card className={classes.card}>
                         <CardContent>
                             <CardActionArea>
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Создан:&nbsp;</div>
+                                    <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
+                                </div>
                                 <div className={classes.row}>
                                     <div className={classes.nameField}>Заголовок:&nbsp;</div>
                                     <div className={classes.value}>{title}</div>
