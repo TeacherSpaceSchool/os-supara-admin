@@ -12,9 +12,83 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 
 const Statistic = React.memo((props) => {
     const classes = pageListStyle();
-    const { isMobileApp } = props.app;
+    const { isMobileApp, search } = props.app;
+    const list = [
+        {
+            name: 'Выгрузка заказов',
+            link: '/statistic/unloadingorders',
+        },
+        {
+            name: 'Выгрузка интеграции 1С',
+            link: '/statistic/integrateoutshoro',
+        },
+        {
+            name: 'Выгрузка клиентов',
+            link: '/statistic/unloadingclients',
+        },
+        {
+            name: 'Графики заказов',
+            link: '/statistic/chart'
+        },
+        {
+            name: 'Загрузка клиентов 1C',
+            link: '/statistic/uploadingclients',
+        },
+        {
+            name: 'Загрузка районов 1C',
+            link: '/statistic/uploadingdistricts',
+        },
+        {
+            name: 'Интеграция 1С',
+            link: '/statistic/integrates',
+        },
+        {
+            name: 'История посещений',
+            link: '/statistic/agenthistorygeo'
+        },
+        {
+            name: 'Карта продаж',
+            link: '/statistic/clientGeo'
+        },
+        {
+            name: 'Корзина',
+            link: '/statistic/trash',
+        },
+        {
+            name: 'Подписчики',
+            link: '/statistic/subscriber'
+        },
+        {
+            name: 'Проверка заказов',
+            link:'/statistic/checkorder',
+        },
+        {
+            name: 'Проверка интеграции клиентов',
+            link:'/statistic/checkintegrateclient',
+        },
+        {
+            name: 'Пуш-уведомления',
+            link: '/statistic/notificationStatistic'
+        },
+        {
+            name: 'Статистика активности',
+            link: '/statistic/active'
+        },
+        {
+            name: 'Статистика клиентов',
+            link: '/statistic/client'
+        },
+        {
+            name: 'Статистика товаров',
+            link: '/statistic/item'
+        },
+        {
+            name: 'Статистика заказов',
+            link: '/statistic/order'
+        },
+    ]
     return (
-        <App pageName='Статистика'>
+        <App searchShow={true} pageName='Статистика'>
             <Head>
                 <title>Статистика</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -26,193 +100,22 @@ const Statistic = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/statistics`}/>
             </Head>
             <div className={classes.page}>
-                <Link href='/statistic/agenthistorygeo'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    История посещений
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/subscriber'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Подписчики
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/notificationStatistic'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Пуш-уведомления
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/clientGeo'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Карта продаж
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/active'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Статистика активности
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/client'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Статистика клиентов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/item'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Статистика товаров
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/order'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Статистика заказов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/chart'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Графики заказов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/checkorder'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Проверка заказов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/unloadingorders'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Выгрузка заказов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/unloadingclients'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Выгрузка клиентов
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/uploadingclients'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Загрузка клиентов 1C
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/uploadingdistricts'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Загрузка районов 1C
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/integrates'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Интеграция 1С
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/integrateoutshoro'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Выгрузка интеграции 1С
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
-                <Link href='/statistic/trash'>
-                    <Card className={isMobileApp?classes.cardM:classes.cardD}>
-                        <CardActionArea>
-                            <div className={classes.line}>
-                                <h3 className={classes.input}>
-                                    Корзина
-                                </h3>
-                            </div>
-                        </CardActionArea>
-                    </Card>
-                </Link>
+                {list.map((element, idx)=> {
+                    if(element.name.toLowerCase().includes(search.toLowerCase()))
+                        return(
+                            <Link key={idx} href={element.link}>
+                                <Card className={isMobileApp?classes.cardM:classes.cardD}>
+                                    <CardActionArea>
+                                        <div className={classes.line}>
+                                            <h3 className={classes.input}>
+                                                {element.name}
+                                            </h3>
+                                        </div>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        )}
+                )}
             </div>
         </App>
     )

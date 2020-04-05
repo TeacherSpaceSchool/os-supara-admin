@@ -50,7 +50,7 @@ export const addFaq = async(element)=>{
             variables: element,
             mutation : gql`
                     mutation ($file: Upload, $title: String!, $video: String, $typex: String!) {
-                        addFaq(file: $file, title: $title, typex: $typex) {
+                        addFaq(file: $file, title: $title, video: $video, typex: $typex) {
                              data
                         }
                     }`})
