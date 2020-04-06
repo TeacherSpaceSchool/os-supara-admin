@@ -7,7 +7,7 @@ let getMuiTheme = () => createMuiTheme({
         MUIDataTableBodyCell: {
             root: {
                 textOverflow: 'ellipsis',
-                maxHeight: '500px',
+                maxHeight: '450px',
                 maxWidth: '200px',
                 overflow: 'hidden',
                 wordWrap: 'break-word'
