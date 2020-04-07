@@ -423,7 +423,7 @@ const Catalog = React.memo((props) => {
 
 Catalog.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['суперагент','агент'].includes(ctx.store.getState().user.profile.role))
+    if(!['организация', 'менеджер', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

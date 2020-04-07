@@ -34,6 +34,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import Badge from '@material-ui/core/Badge';
+import LocalGroceryStore from '@material-ui/icons/LocalGroceryStore';
 
 
 const MyDrawer = React.memo((props) => {
@@ -79,37 +80,47 @@ const MyDrawer = React.memo((props) => {
                         :null
                 }
                 {
-                    authenticated?['экспедитор', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
-                        <Link href={['агент', 'суперагент'].includes(profile.role)?'/catalog':'/items/[id]'} as={['агент', 'суперагент'].includes(profile.role)?'/catalog':'/items/all'}>
-                            <ListItem style={{background:
-                                (
-                                    router.pathname===('/category')
+                    ['экспедитор', 'организация', 'менеджер'].includes(profile.role)?
+                        <Link href={'/items/[id]'} as={'/items/all'}>
+                                <ListItem style={{background:
+                                    (
+                                        router.pathname===('/category')
+                                        ||
+                                        router.pathname.includes('subcategory')
+                                        ||
+                                        router.pathname.includes('item')
+                                    )&&!router.pathname.includes('statistic')?
+                                        '#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                    <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
+                                    <ListItemText primary={'Товары'} />
+                                </ListItem>
+                            </Link>
+                        :
+                        ['client'].includes(profile.role)?
+                            <Link href='/category'>
+                                    <ListItem style={{background: router.pathname===('/category')
                                     ||
                                     router.pathname.includes('subcategory')
                                     ||
-                                    router.pathname.includes('item')
-                                    ||
-                                    router.pathname.includes('catalog')
-                                )&&!router.pathname.includes('statistic')?
-                                    '#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
-                                <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary={['агент', 'суперагент'].includes(profile.role)?'Каталог':'Товары'} />
-                            </ListItem>
-                        </Link>
-                        :
-                        <Link href='/category'>
-                            <ListItem style={{background: router.pathname===('/category')
-                            ||
-                            router.pathname.includes('subcategory')
-                            ||
-                            router.pathname.includes('item')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
-                                <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Категории' />
+                                    router.pathname.includes('item')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                        <ListItemIcon><ReorderIcon color='inherit'/></ListItemIcon>
+                                        <ListItemText primary='Категории' />
+                                    </ListItem>
+                                </Link>
+                            :
+                            null
+                }
+                <Divider/>
+                {
+                   ['организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
+                        <Link href={'/catalog'} as={'/catalog'}>
+                            <ListItem style={{background:router.pathname.includes('catalog')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                <ListItemIcon><LocalGroceryStore color='inherit'/></ListItemIcon>
+                                <ListItemText primary={'Каталог'} />
                             </ListItem>
                         </Link>
                         :null
                 }
-                <Divider/>
                 {
                     ['admin', 'client', 'организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                         <>
