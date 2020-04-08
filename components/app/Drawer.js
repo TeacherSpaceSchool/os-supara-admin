@@ -113,12 +113,15 @@ const MyDrawer = React.memo((props) => {
                 <Divider/>
                 {
                    ['организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
+                       <>
                         <Link href={'/catalog'} as={'/catalog'}>
                             <ListItem style={{background:router.pathname.includes('catalog')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                 <ListItemIcon><LocalGroceryStore color='inherit'/></ListItemIcon>
                                 <ListItemText primary={'Каталог'} />
                             </ListItem>
                         </Link>
+                       <Divider/>
+                       </>
                         :null
                 }
                 {

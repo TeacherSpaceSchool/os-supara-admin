@@ -71,6 +71,15 @@ const CardReturned = React.memo((props) => {
                             :
                             null
                     }
+                    {
+                        element.agent&&element.agent.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Агент: &nbsp;</div>
+                                <div className={classes.value}>{element.agent.name}</div>
+                            </div>
+                            :
+                            null
+                    }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Адрес:&nbsp;</div>
                         <div className={classes.value}>{`${element.address[2]?`${element.address[2]}, `:''}${element.address[0]}`}</div>

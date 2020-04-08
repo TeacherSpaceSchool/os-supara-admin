@@ -42,6 +42,8 @@ export const getReturnedsTrash = async(args, client)=>{
                             editor
                             number
                             confirmationForwarder
+                            agent
+                                {_id name}
                             distributer
                                 {_id name}
                             organization
@@ -99,6 +101,8 @@ export const getReturneds = async(args, client)=>{
                             editor
                             number
                             confirmationForwarder
+                            agent
+                                {_id name}
                             distributer
                                 {_id name}
                             organization
@@ -260,6 +264,8 @@ export const setReturned = async(element)=>{
                             editor
                             number
                             confirmationForwarder
+                            agent
+                                {_id name}
                             distributer
                                 {_id name}
                             organization
@@ -309,6 +315,8 @@ export const subscriptionReturned = gql`
                             editor
                             number
                             confirmationForwarder
+                            agent
+                                {_id name}
                             distributer
                                 {_id name}
                             organization

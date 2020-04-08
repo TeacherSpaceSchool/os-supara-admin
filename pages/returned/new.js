@@ -186,7 +186,7 @@ const Catalog = React.memo((props) => {
                     />
                     <br/>
                     {
-                        data.brandOrganizations.length>1||profile.organization?
+                        !profile.organization?
                             <>
                             <Autocomplete
                                 className={classes.input}
