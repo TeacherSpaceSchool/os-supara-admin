@@ -72,6 +72,15 @@ const CardReturned = React.memo((props) => {
                             null
                     }
                     {
+                        ['агент', 'организация', 'менеджер', 'admin'].includes(profile.role)&&element.district?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Район: &nbsp;</div>
+                                <div className={classes.value}>{element.district}</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
                         element.agent&&element.agent.name?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Агент: &nbsp;</div>
