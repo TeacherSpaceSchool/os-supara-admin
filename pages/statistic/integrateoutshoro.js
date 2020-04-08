@@ -4,7 +4,7 @@ import App from '../../layouts/App';
 import CardIntegrateOutShoroPlaceholder from '../../components/IntegrateOutShoro/CardIntegrateOutShoroPlaceholder'
 import CardIntegrateOutShoro from '../../components/IntegrateOutShoro/CardIntegrateOutShoro'
 import pageListStyle from '../../src/styleMUI/orders/orderList'
-import {statisticOutXMLReturnedShoros, statisticOutXMLShoros, outXMLReturnedShoros, outXMLShoros, deleteOutXMLReturnedShoroAll, deleteOutXMLShoroAll} from '../../src/gql/integrateOutShoro'
+import {statisticOutXMLReturnedShoros, statisticOutXMLShoros, outXMLReturnedShoros, outXMLShoros, deleteOutXMLReturnedShoroAll, deleteOutXMLShoroAll, outXMLClientShoros, statisticOutXMLClientShoros} from '../../src/gql/integrateOutShoro'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
@@ -34,7 +34,14 @@ const IntegrateOutShoro = React.memo((props) => {
     let [type, setType] = useState('Заказы');
     const checkPagination = async()=>{
         if(paginationWork){
-            let addedList = type==='Возвраты'?(await outXMLReturnedShoros({search: search, filter: filter, skip: list.length})).outXMLReturnedShoros:(await outXMLShoros({search: search, filter: filter, skip: list.length})).outXMLShoros
+            let addedList =
+                type==='Возвраты'?
+                    (await outXMLReturnedShoros({search: search, filter: filter, skip: list.length})).outXMLReturnedShoros
+                    :
+                type==='Заказы'?
+                    (await outXMLShoros({search: search, filter: filter, skip: list.length})).outXMLShoros
+                    :
+                    (await outXMLClientShoros({skip: list.length})).outXMLClientShoros
             if(addedList.length>0){
                 setList([...list, ...addedList])
             }
@@ -43,8 +50,24 @@ const IntegrateOutShoro = React.memo((props) => {
         }
     }
     const getList = async ()=>{
-        setList(type==='Возвраты'?(await outXMLReturnedShoros({search: search, filter: filter, skip: 0})).outXMLReturnedShoros:(await outXMLShoros({search: search, filter: filter, skip: 0})).outXMLShoros)
-        setSimpleStatistic(type==='Возвраты'?(await statisticOutXMLReturnedShoros()).statisticOutXMLReturnedShoros:(await statisticOutXMLShoros()).statisticOutXMLShoros)
+        setList(
+            type==='Возвраты'?
+                (await outXMLReturnedShoros({search: search, filter: filter, skip: 0})).outXMLReturnedShoros
+                :
+                type==='Заказы'?
+                (await outXMLShoros({search: search, filter: filter, skip: 0})).outXMLShoros
+                :
+                (await outXMLClientShoros({skip: 0})).outXMLClientShoros
+        )
+        setSimpleStatistic(
+            type==='Возвраты'?
+                (await statisticOutXMLReturnedShoros()).statisticOutXMLReturnedShoros
+                :
+                type==='Заказы'?
+                (await statisticOutXMLShoros()).statisticOutXMLShoros
+                    :
+                    (await statisticOutXMLClientShoros()).statisticOutXMLClientShoros
+        )
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
@@ -86,12 +109,24 @@ const IntegrateOutShoro = React.memo((props) => {
                         {
                             showStat?
                                 <>
-                                <br/>
-                                <br/>
-                                {`Обработка: ${simpleStatistic[1]}`}
-                                <br/>
-                                <br/>
-                                {`Ошибка: ${simpleStatistic[2]}`}
+                                {
+                                    simpleStatistic[1]?
+                                        <>
+                                        <br/>
+                                        <br/>
+                                        {`Обработка: ${simpleStatistic[1]}`}
+                                        </>
+                                        :null
+                                }
+                                {
+                                    simpleStatistic[2]?
+                                        <>
+                                        <br/>
+                                        <br/>
+                                        {`Ошибка: ${simpleStatistic[2]}`}
+                                        </>
+                                        :null
+                                }
                                 </>
                                 :
                                 null
@@ -131,15 +166,24 @@ const IntegrateOutShoro = React.memo((props) => {
                     setType('Возвраты')
                     close()
                 }}>Возвраты</MenuItem>
-                <MenuItem onClick={async()=>{
-                    const action = async() => {
-                        type==='Возвраты'?await deleteOutXMLReturnedShoroAll():await deleteOutXMLShoroAll()
-                    }
-                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                    showMiniDialog(true);
-                    await getList()
+                <MenuItem style={{background: type==='Клиенты'?'rgba(51, 143, 255, 0.29)': '#fff'}} onClick={async()=>{
+                    setType('Клиенты')
                     close()
-                }}>Удалить все</MenuItem>
+                }}>Клиенты</MenuItem>
+                {
+                    type!=='Клиенты'?
+                        <MenuItem onClick={async()=>{
+                            const action = async() => {
+                                type==='Возвраты'?await deleteOutXMLReturnedShoroAll():await deleteOutXMLShoroAll()
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true);
+                            await getList()
+                            close()
+                        }}>Удалить все</MenuItem>
+                        :
+                        null
+                }
                 <MenuItem onClick={async()=>{
                     close()
                 }}>Отменить</MenuItem>

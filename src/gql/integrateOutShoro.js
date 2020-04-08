@@ -2,6 +2,46 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
+export const outXMLClientShoros = async(arg, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {...arg},
+                query: gql`
+                    query ($skip: Int) {
+                        outXMLClientShoros(skip: $skip) {
+                            _id
+                            createdAt
+                            guid
+                            client
+                                {name _id address}
+                            exc
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const statisticOutXMLClientShoros = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query{
+                        statisticOutXMLClientShoros
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const outXMLShoros = async(arg, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -132,6 +172,22 @@ export const setDateOutXMLShoro = async(ids)=>{
             mutation : gql`
                     mutation ($_id: ID!, $date: String!) {
                         setDateOutXMLShoro(_id: $_id, date: $date) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const deleteOutXMLClientShoro = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: ID!) {
+                        deleteOutXMLClientShoro(_id: $_id) {
                              data
                         }
                     }`})
