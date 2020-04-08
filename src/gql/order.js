@@ -71,6 +71,7 @@ export const getOrders = async(args, client)=>{
                             confirmationForwarder
                             confirmationClient
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -166,6 +167,7 @@ export const getOrdersTrash = async(args, client)=>{
                             confirmationForwarder
                             confirmationClient
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -325,6 +327,7 @@ export const getOrdersForRouting = async(organization)=>{
                             confirmationForwarder
                             confirmationClient
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -410,6 +413,7 @@ export const getOrder = async({_id})=>{
                             number
                             confirmationForwarder
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -577,6 +581,7 @@ export const setOrder = async(element)=>{
                             number
                             confirmationForwarder
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -663,6 +668,7 @@ export const subscriptionOrder = gql`
                             number
                             confirmationForwarder
                             cancelClient
+                            district
                             distributer
                                 {_id name}
                             cancelForwarder
