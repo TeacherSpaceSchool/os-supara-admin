@@ -71,6 +71,15 @@ const AgentRoute = React.memo((props) => {
     let [dayWeek, setDayWeek] = useState(0);
     const { setMiniDialog, showMiniDialog, showFullDialog, setFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
+    /*useEffect(()=>{
+        (async()=>{
+            let clients = clients;
+            for(let i=0; i<7; i++){
+                clients[i] = clients[i].filter(client=>(district.client.filter(client1=>client1._id===client)).length>0)
+            }
+            setClients(clients)
+        })()
+    },[])*/
     useEffect(()=>{
         (async()=>{
             if(router.query.id==='new'&&profile.organization){
@@ -98,7 +107,7 @@ const AgentRoute = React.memo((props) => {
                     allClient=district.client.filter(client=>!clients[dayWeek].includes(client._id))
                 else if (selectType == 'Выбраные') {
                     allClient = clients[dayWeek].map(client=>district.client.find(client1=>client1._id===client))
-                    allClient = clients[dayWeek].filter(client=>client._id)
+                    allClient = allClient.filter(client=>client._id)
                 }
                 let filtredClient = [...allClient]
                 if(search.length>0)
