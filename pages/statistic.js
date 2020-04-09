@@ -13,78 +13,107 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 const Statistic = React.memo((props) => {
     const classes = pageListStyle();
     const { isMobileApp, search } = props.app;
+    const { profile } = props.user;
     const list = [
         {
             name: 'Выгрузка заказов',
             link: '/statistic/unloadingorders',
+            role: ['admin']
         },
         {
             name: 'Выгрузка интеграции 1С',
             link: '/statistic/integrateoutshoro',
+            role: ['admin']
         },
         {
             name: 'Выгрузка клиентов',
             link: '/statistic/unloadingclients',
+            role: ['admin']
         },
         {
             name: 'Графики заказов',
-            link: '/statistic/chart'
+            link: '/statistic/chart',
+            role: ['admin']
         },
         {
             name: 'Загрузка клиентов 1C',
             link: '/statistic/uploadingclients',
+            role: ['admin']
         },
         {
             name: 'Загрузка районов 1C',
             link: '/statistic/uploadingdistricts',
+            role: ['admin']
         },
         {
             name: 'Интеграция 1С',
             link: '/statistic/integrates',
+            role: ['admin']
         },
         {
             name: 'История посещений',
-            link: '/statistic/agenthistorygeo'
+            link: '/statistic/agenthistorygeo',
+            role: ['admin']
         },
         {
             name: 'Карта продаж',
-            link: '/statistic/clientGeo'
+            link: '/statistic/clientGeo',
+            role: ['admin']
         },
         {
             name: 'Корзина',
             link: '/statistic/trash',
+            role: ['admin']
+        },
+        {
+            name: 'Логистика заказов',
+            link: '/statistic/logisticorder',
+            role: ['admin', 'организация', 'менеджер', 'агент']
         },
         {
             name: 'Подписчики',
-            link: '/statistic/subscriber'
+            link: '/statistic/subscriber',
+            role: ['admin']
         },
         {
             name: 'Проверка заказов',
             link:'/statistic/checkorder',
+            role: ['admin']
         },
         {
             name: 'Проверка интеграции клиентов',
             link:'/statistic/checkintegrateclient',
+            role: ['admin']
         },
         {
             name: 'Пуш-уведомления',
-            link: '/statistic/notificationStatistic'
+            link: '/statistic/notificationStatistic',
+            role: ['admin']
+        },
+        {
+            name: 'Статистика агентов',
+            link: '/statistic/agents',
+            role: ['admin']
         },
         {
             name: 'Статистика активности',
-            link: '/statistic/active'
+            link: '/statistic/active',
+            role: ['admin']
         },
         {
             name: 'Статистика клиентов',
-            link: '/statistic/client'
+            link: '/statistic/client',
+            role: ['admin']
         },
         {
             name: 'Статистика товаров',
-            link: '/statistic/item'
+            link: '/statistic/item',
+            role: ['admin']
         },
         {
             name: 'Статистика заказов',
-            link: '/statistic/order'
+            link: '/statistic/order',
+            role: ['admin']
         },
     ]
     return (
@@ -101,7 +130,7 @@ const Statistic = React.memo((props) => {
             </Head>
             <div className={classes.page}>
                 {list.map((element, idx)=> {
-                    if(element.name.toLowerCase().includes(search.toLowerCase()))
+                    if(element.name.toLowerCase().includes(search.toLowerCase())&&element.role.includes(profile.role))
                         return(
                             <Link key={idx} href={element.link}>
                                 <Card className={isMobileApp?classes.cardM:classes.cardD}>
@@ -123,7 +152,7 @@ const Statistic = React.memo((props) => {
 
 Statistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'организация', 'менеджер', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

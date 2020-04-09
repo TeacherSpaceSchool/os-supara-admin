@@ -21,5 +21,10 @@ export default makeStyles({
     rowStatic: {
         margin: 5
     },
+    fab: {
+        position: 'fixed!important',
+        bottom: '20px',
+        right: '20px'
+    },
 
 })

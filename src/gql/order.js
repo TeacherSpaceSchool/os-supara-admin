@@ -72,6 +72,7 @@ export const getOrders = async(args, client)=>{
                             confirmationClient
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -168,6 +169,7 @@ export const getOrdersTrash = async(args, client)=>{
                             confirmationClient
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -328,6 +330,7 @@ export const getOrdersForRouting = async(organization)=>{
                             confirmationClient
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -414,6 +417,7 @@ export const getOrder = async({_id})=>{
                             confirmationForwarder
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -492,6 +496,23 @@ export const approveOrders = async(element)=>{
                         }
                     }`})
         return await getOrders(new SingletonStore().getStore().getState().app)
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const setInvoicesLogic = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: element,
+            mutation : gql`
+                    mutation ($track: Int, $forwarder: ID, $invoices: [ID]!) {
+                        setInvoicesLogic(track: $track, forwarder: $forwarder, invoices: $invoices) {
+                             data
+                        }
+                    }`})
+        //return await getOrders(new SingletonStore().getStore().getState().app)
     } catch(err){
         console.error(err)
     }
@@ -582,6 +603,7 @@ export const setOrder = async(element)=>{
                             confirmationForwarder
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -669,6 +691,7 @@ export const subscriptionOrder = gql`
                             confirmationForwarder
                             cancelClient
                             district
+                            track
                             distributer
                                 {_id name}
                             cancelForwarder

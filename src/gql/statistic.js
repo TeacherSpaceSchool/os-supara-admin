@@ -188,6 +188,27 @@ export const getStatisticItem = async({company, dateStart, dateType}, client)=>{
     }
 }
 
+export const getStatisticAgents = async({company, dateStart, dateType}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {company: company, dateStart: dateStart, dateType: dateType},
+                query: gql`
+                    query ($company: String, $dateStart: Date, $dateType: String) {
+                        statisticAgents(company: $company, dateStart: $dateStart, dateType: $dateType) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getStatisticClientGeo = async({organization, item}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

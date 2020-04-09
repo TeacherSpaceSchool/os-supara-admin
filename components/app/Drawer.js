@@ -358,7 +358,7 @@ const MyDrawer = React.memo((props) => {
                     :null
                 }
                 {
-                    ['admin'].includes(profile.role)?
+                    ['admin', 'организация', 'менеджер', 'агент'].includes(profile.role)?
                         <>
                         <Link href={'/statistic'}>
                             <ListItem style={{background: router.pathname.includes('statistic')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>

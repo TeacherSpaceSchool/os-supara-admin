@@ -12,6 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardClient from '../../components/client/CardClient';
 import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
+import LazyLoad from 'react-lazyload';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -27,7 +28,6 @@ import { urlMain } from '../../redux/constants/other'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import CardClientPlaceholder from '../../components/client/CardClientPlaceholder'
-import LazyLoad from 'react-lazyload';
 const height = 140
 
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
