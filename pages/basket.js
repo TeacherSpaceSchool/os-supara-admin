@@ -55,34 +55,34 @@ const Basket = React.memo((props) => {
             list[idx].count+=1
         else
             list[idx].count+=list[idx].item.packaging
-        await setBasketChange(idx, list[idx].count)
         setList([...list])
+        await setBasketChange(idx, list[idx].count)
     }
     let decrement = async(idx)=>{
         if(list[idx].item.apiece&&list[idx].count>1) {
             list[idx].count -= 1
-            await setBasketChange(idx, list[idx].count)
             setList([...list])
+            await setBasketChange(idx, list[idx].count)
         }
         else if(!list[idx].item.apiece&&list[idx].count>list[idx].item.packaging) {
             list[idx].count -= list[idx].item.packaging
-            await setBasketChange(idx, list[idx].count)
             setList([...list])
+            await setBasketChange(idx, list[idx].count)
 
         }
     }
     let incrementConsignment = async(idx)=>{
         if(list[idx].consignment<list[idx].count) {
             list[idx].consignment += 1
-            await setBasketChange(idx, list[idx].count, list[idx].consignment)
             setList([...list])
+            await setBasketChange(idx, list[idx].count, list[idx].consignment)
         }
     }
     let decrementConsignment = async(idx)=>{
         if(list[idx].consignment>0) {
             list[idx].consignment -= 1
-            await setBasketChange(idx, list[idx].count, list[idx].consignment)
             setList([...list])
+            await setBasketChange(idx, list[idx].count, list[idx].consignment)
         }
     }
     let setBasketChange= async(idx, count, consignment)=>{

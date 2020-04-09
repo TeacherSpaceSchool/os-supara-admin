@@ -114,8 +114,8 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(basket[id].count)
         basket[id].count+=list[idx].apiece?1:list[idx].packaging
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
-        await addBasket({item: list[idx]._id, count: basket[id].count})
         setBasket({...basket})
+        await addBasket({item: list[idx]._id, count: basket[id].count})
     }
     let decrement = async (idx)=>{
         let id = list[idx]._id
@@ -125,11 +125,11 @@ const Catalog = React.memo((props) => {
             basket[id].count = checkInt(basket[id].count)
             basket[id].count -= list[idx].apiece?1:list[idx].packaging
             basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
+            setBasket({...basket})
             if(basket[id].count>0)
                 await addBasket({item: list[idx]._id, count: basket[id].count})
             else
                 await deleteBasket([list[idx]._id])
-            setBasket({...basket})
         }
     }
     let incrementConsignment = async(idx)=>{
@@ -138,8 +138,8 @@ const Catalog = React.memo((props) => {
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].consignment<basket[id].count) {
             basket[id].consignment += 1
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
             setBasket({...basket})
+            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     let decrementConsignment = async(idx)=>{
@@ -148,8 +148,8 @@ const Catalog = React.memo((props) => {
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].consignment>0) {
             basket[id].consignment -= 1
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
             setBasket({...basket})
+            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     let showConsignment = (idx)=>{
@@ -165,11 +165,11 @@ const Catalog = React.memo((props) => {
             basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(count)
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
+        setBasket({...basket})
         if(count>0)
             await addBasket({item: list[idx]._id, count: basket[id].count})
         else
             await deleteBasket([list[idx]._id])
-        setBasket({...basket})
     }
     let addPackaging= async(idx)=>{
         let id = list[idx]._id
@@ -180,8 +180,8 @@ const Catalog = React.memo((props) => {
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
         }
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
-        await addBasket({item: list[idx]._id, count: basket[id].count})
         setBasket({...basket})
+        await addBasket({item: list[idx]._id, count: basket[id].count})
     }
     let addPackagingConsignment = async(idx)=>{
         let id = list[idx]._id
@@ -190,8 +190,8 @@ const Catalog = React.memo((props) => {
         let consignment = (parseInt(basket[id].consignment/list[idx].packaging)+1)*list[idx].packaging
         if(consignment<=basket[id].count){
             basket[id].consignment = consignment
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
             setBasket({...basket})
+            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     useEffect(()=>{
