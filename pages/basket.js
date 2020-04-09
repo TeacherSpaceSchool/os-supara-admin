@@ -50,46 +50,46 @@ const Basket = React.memo((props) => {
     let [organizations, setOrganizations] = useState([]);
     let [allPrice, setAllPrice] = useState(0);
     const { isMobileApp } = props.app;
-    let increment = (idx)=>{
+    let increment = async(idx)=>{
         if(list[idx].item.apiece)
             list[idx].count+=1
         else
             list[idx].count+=list[idx].item.packaging
-        setBasketChange(idx, list[idx].count)
+        await setBasketChange(idx, list[idx].count)
         setList([...list])
     }
-    let decrement = (idx)=>{
+    let decrement = async(idx)=>{
         if(list[idx].item.apiece&&list[idx].count>1) {
             list[idx].count -= 1
-            setBasketChange(idx, list[idx].count)
+            await setBasketChange(idx, list[idx].count)
             setList([...list])
         }
         else if(!list[idx].item.apiece&&list[idx].count>list[idx].item.packaging) {
             list[idx].count -= list[idx].item.packaging
-            setBasketChange(idx, list[idx].count)
+            await setBasketChange(idx, list[idx].count)
             setList([...list])
 
         }
     }
-    let incrementConsignment = (idx)=>{
+    let incrementConsignment = async(idx)=>{
         if(list[idx].consignment<list[idx].count) {
             list[idx].consignment += 1
-            setBasketChange(idx, list[idx].count, list[idx].consignment)
+            await setBasketChange(idx, list[idx].count, list[idx].consignment)
             setList([...list])
         }
     }
-    let decrementConsignment = (idx)=>{
+    let decrementConsignment = async(idx)=>{
         if(list[idx].consignment>0) {
             list[idx].consignment -= 1
-            setBasketChange(idx, list[idx].count, list[idx].consignment)
+            await setBasketChange(idx, list[idx].count, list[idx].consignment)
             setList([...list])
         }
     }
-    let setBasketChange= (idx, count, consignment)=>{
+    let setBasketChange= async(idx, count, consignment)=>{
         count = checkInt(count)
         if(count<1)
             count = 1
-        setBasket({_id: list[idx]._id, count: count, consignment})
+        await setBasket({_id: list[idx]._id, count: count, consignment})
     }
     let removeBasketChange= async (idx)=>{
         const action = async() => {
