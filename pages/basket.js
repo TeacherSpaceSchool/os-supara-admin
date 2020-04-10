@@ -414,7 +414,7 @@ const Basket = React.memo((props) => {
                     <div className={isMobileApp?classes.priceAllM:classes.priceAll}>{`${allPrice} сом`}</div>
                 </div>
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={async()=>{
-                    if(allPrice>0)
+                    if(allPrice>0) {
                         if (authenticated) {
                             let address = data.client.address
                             let proofeAddress = address.length > 0
@@ -426,7 +426,9 @@ const Basket = React.memo((props) => {
                             if (proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0
                             ) {
                                 let agent = (await isOrderToday({organization: organization._id})).isOrderToday
+                                let basket = list.map(element=>{return{_id: element.item._id, count: element.count, consignment: element.consignment}})
                                 setMiniDialog('Купить', <BuyBasket
+                                    basket={basket}
                                     adss={ads}
                                     bonus={bonus}
                                     client={data.client}
@@ -443,6 +445,7 @@ const Basket = React.memo((props) => {
                             setMiniDialog('Купить', <Sign/>)
                             showMiniDialog(true)
                         }
+                    }
                     else
                         showSnackBar('Добавьте товар в корзину')
                 }}>

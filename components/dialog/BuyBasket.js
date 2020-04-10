@@ -49,6 +49,7 @@ const BuyBasket =  React.memo(
         };
         useEffect(()=>{
             (async()=>{
+                console.log(basket)
                 for (let i = 0; i < basket.length; i++) {
                     if(basket[i].count>0)
                         await addBasket({item: basket[i]._id, count: basket[i].count, consignment: basket[i].consignment})
