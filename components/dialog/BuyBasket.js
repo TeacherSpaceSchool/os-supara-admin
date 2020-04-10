@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
@@ -46,6 +46,14 @@ const BuyBasket =  React.memo(
         let handlePaymentMethod =  (event) => {
             setPaymentMethod(event.target.value)
         };
+        useEffect(()=>{
+            (async()=>{
+                for (let i = 0; i < basket.length; i++) {
+                    if(basket[i].count>0)
+                        await addBasket({item: basket[i]._id, count: basket[i].count, consignment: basket[i].consignment})
+                }
+            })()
+        },[])
         return (
             <div className={classes.main}>
                 {
@@ -128,10 +136,6 @@ const BuyBasket =  React.memo(
                             if(proofeAddress) {
                                 if (paymentMethod.length > 0) {
                                     const action = async () => {
-                                        for (let i = 0; i < basket.length; i++) {
-                                            if(basket[i].count>0)
-                                                await addBasket({item: basket[i]._id, count: basket[i].count, consignment: basket[i].consignment})
-                                        }
                                         await addOrders({
                                             noSplit: noSplit,
                                             info: coment,

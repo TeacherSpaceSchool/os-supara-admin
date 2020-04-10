@@ -201,7 +201,7 @@ const LogistiOorder = React.memo((props) => {
                             if (idx <= pagination)
                                 return (
                                     <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
-                                         className={isMobileApp ? classes.column : classes.row}>
+                                         className={isMobileApp ? classes.column1 : classes.row1}>
                                         <Checkbox checked={selectedOrders.includes(element._id)}
                                                   onChange={() => {
                                                       if (!selectedOrders.includes(element._id)) {
@@ -216,9 +216,7 @@ const LogistiOorder = React.memo((props) => {
                                                   height={height} offset={[height, 0]} debounce={0}
                                                   once={true}
                                                   placeholder={<CardOrderPlaceholder height={height}/>}>
-                                            <div>
-                                                <CardOrder element={element}/>
-                                            </div>
+                                            <CardOrder element={element}/>
                                         </LazyLoad>
                                     </div>
                                 )

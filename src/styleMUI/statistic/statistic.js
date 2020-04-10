@@ -21,6 +21,15 @@ export default makeStyles({
         display: 'flex',
         flexDirection: 'column',
     },
+    row1:{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    column1:{
+        display: 'flex',
+        flexDirection: 'column',
+    },
     input: {
         width: 'calc(50% - 10px)',
         margin: 5
