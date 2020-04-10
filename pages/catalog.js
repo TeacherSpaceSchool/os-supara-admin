@@ -20,7 +20,7 @@ import {getClients} from '../src/gql/client'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { forceCheck } from 'react-lazyload';
-import { addBasket, deleteBasket, deleteBasketAll } from '../src/gql/basket';
+import { deleteBasketAll } from '../src/gql/basket';
 import Divider from '@material-ui/core/Divider';
 import LazyLoad from 'react-lazyload';
 import CardCatalogPlaceholder from '../components/catalog/CardCatalogPlaceholder'
@@ -110,88 +110,75 @@ const Catalog = React.memo((props) => {
     let increment = async (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(basket[id].count)
         basket[id].count+=list[idx].apiece?1:list[idx].packaging
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
-        await addBasket({item: list[idx]._id, count: basket[id].count})
     }
     let decrement = async (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].count>0) {
             basket[id].count = checkInt(basket[id].count)
             basket[id].count -= list[idx].apiece?1:list[idx].packaging
             basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
             setBasket({...basket})
-            if(basket[id].count>0)
-                await addBasket({item: list[idx]._id, count: basket[id].count})
-            else
-                await deleteBasket([list[idx]._id])
         }
     }
     let incrementConsignment = async(idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].consignment<basket[id].count) {
             basket[id].consignment += 1
             setBasket({...basket})
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     let decrementConsignment = async(idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         if(basket[id].consignment>0) {
             basket[id].consignment -= 1
             setBasket({...basket})
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     let showConsignment = (idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].showConsignment = !basket[id].showConsignment
         setBasket({...basket})
     }
     let setBasketChange= async(idx, count)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(count)
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
-        if(count>0)
-            await addBasket({item: list[idx]._id, count: basket[id].count})
-        else
-            await deleteBasket([list[idx]._id])
     }
     let addPackaging= async(idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].count = checkInt(basket[id].count)
         if(list[idx].packaging){
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
         }
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
-        await addBasket({item: list[idx]._id, count: basket[id].count})
     }
     let addPackagingConsignment = async(idx)=>{
         let id = list[idx]._id
         if(!basket[id])
-            basket[id] = {idx: id, count: 0, allPrice: 0, consignment: 0}
+            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         let consignment = (parseInt(basket[id].consignment/list[idx].packaging)+1)*list[idx].packaging
         if(consignment<=basket[id].count){
             basket[id].consignment = consignment
             setBasket({...basket})
-            await addBasket({item: list[idx]._id, count: basket[id].count, consignment: basket[id].consignment})
         }
     }
     useEffect(()=>{
@@ -383,7 +370,7 @@ const Catalog = React.memo((props) => {
                     <div className={isMobileApp?classes.value:classes.priceAllText}>Общая стоимость</div>
                     <div className={isMobileApp?classes.nameM:classes.priceAll}>{`${allPrice} сом`}</div>
                 </div>
-                <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
+                <div className={isMobileApp?classes.buyM:classes.buyD} onClick={async ()=>{
                     if(allPrice>0) {
                         if(client&&client._id) {
                             let proofeAddress = client.address.length > 0
@@ -398,6 +385,7 @@ const Catalog = React.memo((props) => {
                                 setMiniDialog('Купить', <BuyBasket bonus={bonus}
                                                                    agent={true}
                                                                    client={client}
+                                                                   basket = {Object.values(basket)}
                                                                    allPrice={allPrice}
                                                                    organization={organization}/>)
                                 showMiniDialog(true)

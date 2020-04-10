@@ -272,29 +272,27 @@ const District = React.memo((props) => {
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                      className={isMobileApp ? classes.column : classes.row}>
+                                                {['admin', 'организация', 'менеджер'].includes(profile.role)?
+                                                    <Checkbox checked={client.includes(element)}
+                                                              onChange={() => {
+                                                                  if (!client.includes(element)) {
+                                                                      client.push(element)
+                                                                      unselectedClient.splice(unselectedClient.indexOf(element), 1)
+                                                                  } else {
+                                                                      client.splice(client.indexOf(element), 1)
+                                                                      unselectedClient.push(element)
+                                                                  }
+                                                                  setClient([...client])
+                                                              }}
+                                                    />
+                                                    :
+                                                    null
+                                                }
                                                     <LazyLoad scrollContainer={'.App-body'} key={element._id}
                                                               height={height} offset={[height, 0]} debounce={0}
                                                               once={true}
                                                               placeholder={<CardClientPlaceholder height={height}/>}>
-                                                        <div>
-                                                            {['admin', 'организация', 'менеджер'].includes(profile.role)?
-                                                                <Checkbox checked={client.includes(element)}
-                                                                      onChange={() => {
-                                                                          if (!client.includes(element)) {
-                                                                              client.push(element)
-                                                                              unselectedClient.splice(unselectedClient.indexOf(element), 1)
-                                                                          } else {
-                                                                              client.splice(client.indexOf(element), 1)
-                                                                              unselectedClient.push(element)
-                                                                          }
-                                                                          setClient([...client])
-                                                                      }}
-                                                                />
-                                                                :
-                                                                null
-                                                            }
-                                                            <CardClient element={element}/>
-                                                        </div>
+                                                        <CardClient element={element}/>
                                                     </LazyLoad>
                                                 </div>
                                         )

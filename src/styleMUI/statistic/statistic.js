@@ -1,5 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
+    listInvoices: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '100%'
+    },
     page: {
         overflowX: 'auto',
         marginBottom: 8,

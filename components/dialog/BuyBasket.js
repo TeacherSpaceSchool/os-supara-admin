@@ -22,17 +22,19 @@ import Router from 'next/router'
 import Confirmation from './Confirmation'
 import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
+import { addBasket } from '../../src/gql/basket';
 
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice, organization, bonus, adss, agent } = props;
+        const { client, allPrice, organization, bonus, adss, agent, basket } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { classes } = props;
         const width = isMobileApp? (window.innerWidth-112) : 500
         let [address, setAddress] = useState([client.address[0]]);
         let [coment, setComent] = useState('');
+        let [noSplit, setNoSplit] = useState(false);
         let handleComent =  (event) => {
             setComent(event.target.value)
         };
@@ -104,6 +106,14 @@ const BuyBasket =  React.memo(
                         :
                         null
                 }
+                <FormControlLabel
+                    style={{width: width}}
+                    onChange={(e)=>{
+                        setNoSplit(e.target.checked)
+                    }}
+                    control={<Checkbox/>}
+                    label={'Cчет фактура'}
+                />
                 <div style={{width: width}} className={classes.itogo}><b>Итого:</b>{` ${useBonus?(allPrice*address.length)-bonus.addedBonus:allPrice*address.length} сом`}</div>
                 <br/>
                 <div>
@@ -118,7 +128,12 @@ const BuyBasket =  React.memo(
                             if(proofeAddress) {
                                 if (paymentMethod.length > 0) {
                                     const action = async () => {
+                                        for (let i = 0; i < basket.length; i++) {
+                                            if(basket[i].count>0)
+                                                await addBasket({item: basket[i]._id, count: basket[i].count, consignment: basket[i].consignment})
+                                        }
                                         await addOrders({
+                                            noSplit: noSplit,
                                             info: coment,
                                             usedBonus: useBonus,
                                             paymentMethod: paymentMethod,

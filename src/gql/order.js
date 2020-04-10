@@ -98,6 +98,102 @@ export const getOrders = async(args, client)=>{
     }
 }
 
+export const getOrdersFromDistrict = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($organization: ID!, $district: ID!, $date: String!) {
+                        invoicesFromDistrict(organization: $organization, district: $district, date: $date) {
+                            _id
+                            agent 
+                                {_id name}
+                            createdAt
+                            updatedAt
+                            allTonnage
+                            allSize
+                            orders 
+                                { 
+                                    _id
+                                    allTonnage
+                                    allSize
+                                    createdAt
+                                    updatedAt
+                                    item
+                                        {
+                                            image
+                                            _id
+                                            name    
+                                            stock 
+                                            apiece
+                                            priotiry
+                                            price
+                                            packaging
+                                            weight
+                                            size
+                                            organization
+                                                {_id name minimumOrder consignation}
+                                        }
+                                    count
+                                    allPrice
+                                    consignment
+                                    returned
+                                    consignmentPrice
+                                    status
+                                 }
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            consignmentPrice
+                            info
+                            address
+                            paymentMethod
+                            adss
+                                { 
+                                    _id
+                                    title
+                                }
+                            editor
+                            number
+                            confirmationForwarder
+                            confirmationClient
+                            cancelClient
+                            district
+                            track
+                            distributer
+                                {_id name}
+                            cancelForwarder
+                            paymentConsignation
+                            taken
+                            sync
+                            dateDelivery
+                            usedBonus
+                        }
+                        sortInvoice {
+                            name
+                            field
+                        }
+                        filterInvoice {
+                           name
+                           value
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getOrdersTrash = async(args, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -442,8 +538,8 @@ export const addOrders = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($info: String, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!, $client: ID!) {
-                        addOrders(usedBonus: $usedBonus, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization, client: $client) {
+                    mutation ($info: String, $noSplit: Boolean, $usedBonus: Boolean, $paymentMethod: String, $address: [[String]], $organization: ID!, $client: ID!) {
+                        addOrders(usedBonus: $usedBonus, noSplit: $noSplit, info: $info, paymentMethod: $paymentMethod, address: $address, organization: $organization, client: $client) {
                              data
                         }
                     }`})

@@ -135,7 +135,7 @@ const MyAppBar = React.memo((props) => {
                             :
                             <>
                             {
-                                searchShow||filters||sorts?
+                                dates||searchShow||filters||sorts?
                                     <IconButton
                                         aria-owns={openMobileMenu ? 'menu-appbar' : undefined}
                                         aria-haspopup='true'

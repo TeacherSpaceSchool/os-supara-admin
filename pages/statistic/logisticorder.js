@@ -16,7 +16,7 @@ import { getActiveOrganization } from '../../src/gql/statistic'
 import { checkInt } from '../../src/lib'
 import { getEcspeditors } from '../../src/gql/employment'
 import { getDistricts } from '../../src/gql/district'
-import { getOrders, setInvoicesLogic } from '../../src/gql/order'
+import { getOrdersFromDistrict, setInvoicesLogic } from '../../src/gql/order'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
@@ -32,10 +32,9 @@ const height = 225
 const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'))
 
 const LogistiOorder = React.memo((props) => {
-
     const classes = pageListStyle();
     const { data } = props;
-    const { isMobileApp, date } = props.app;
+    let { isMobileApp, date } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog} = props.mini_dialogActions;
     let [ecspeditors, setEcspeditors] = useState([]);
@@ -48,7 +47,7 @@ const LogistiOorder = React.memo((props) => {
     let [lengthList, setLengthList] = useState(0);
     let [selectedOrders, setSelectedOrders] = useState([]);
     let [orders, setOrders] = useState([]);
-    let [district, setDistrict] = useState(undefined);
+    let [district, setDistrict] = useState(profile.role==='агент'?{_id: profile.organization}:undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState(profile.organization?{_id: profile.organization}:undefined);
     const { showLoad } = props.appActions;
@@ -61,6 +60,9 @@ const LogistiOorder = React.memo((props) => {
     }
     useEffect(()=>{
         (async()=>{
+            setSelectedOrders([])
+            setEcspeditor(undefined)
+            setOrders([])
             if(organization){
                 await showLoad(true)
                 setDistricts((await getDistricts({search: '', sort: '-name', organization: organization._id})).districts)
@@ -71,22 +73,21 @@ const LogistiOorder = React.memo((props) => {
                 setDistricts([])
                 setEcspeditors([])
             }
-            setSelectedOrders([])
-            setEcspeditor(undefined)
-            setOrders([])
         })()
     },[organization])
     useEffect(()=>{
         (async()=>{
-            if(district&&date){
+            setSelectedOrders([])
+            if(district){
+                if(!date)
+                    date = new Date
                 await showLoad(true)
-                setOrders((await getOrders({search: '', sort: '-createdAt', filter: '', date: date})).invoices)
+                setOrders((await getOrdersFromDistrict({organization: organization._id, district: district._id, date: date})).invoicesFromDistrict)
                 await showLoad(false)
             }
             else {
                 setOrders([])
             }
-            setSelectedOrders([])
         })()
     },[district, date])
     useEffect(()=>{
@@ -148,19 +149,24 @@ const LogistiOorder = React.memo((props) => {
                                 :
                                 null
                         }
-                        <Autocomplete
-                            className={classes.input}
-                            options={districts}
-                            getOptionLabel={option => option.name}
-                            value={district}
-                            onChange={(event, newValue) => {
-                                setDistrict(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Район' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role!=='агент'?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={districts}
+                                    getOptionLabel={option => option.name}
+                                    value={district}
+                                    onChange={(event, newValue) => {
+                                        setDistrict(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Район' fullWidth />
+                                    )}
+                                />
+                                :
+                                null
+                        }
                     </div>
                     <div className={classes.row}>
                         <Autocomplete
@@ -190,44 +196,44 @@ const LogistiOorder = React.memo((props) => {
                             }}
                         />
                     </div>
-                    {orders?orders.map((element, idx)=> {
-                        if (idx <= pagination)
-                            return (
-                                <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
-                                     className={isMobileApp ? classes.column : classes.row}>
-                                    <LazyLoad scrollContainer={'.App-body'} key={element._id}
-                                              height={height} offset={[height, 0]} debounce={0}
-                                              once={true}
-                                              placeholder={<CardOrderPlaceholder height={height}/>}>
-                                        <div>
-                                            {['admin', 'организация', 'менеджер'].includes(profile.role)?
-                                                <Checkbox checked={selectedOrders.includes(element._id)}
-                                                          onChange={() => {
-                                                              if (!selectedOrders.includes(element._id)) {
-                                                                  selectedOrders.push(element._id)
-                                                              } else {
-                                                                  selectedOrders.splice(selectedOrders.indexOf(element._id), 1)
-                                                              }
-                                                              setSelectedOrders([...selectedOrders])
-                                                          }}
-                                                />
-                                                :
-                                                null
-                                            }
-                                            <CardOrder element={element}/>
-                                        </div>
-                                    </LazyLoad>
-                                </div>
-                            )
-                        else return null
-                    }):null}
+                    <div className={classes.listInvoices}>
+                        {orders?orders.map((element, idx)=> {
+                            if (idx <= pagination)
+                                return (
+                                    <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
+                                         className={isMobileApp ? classes.column : classes.row}>
+                                        <Checkbox checked={selectedOrders.includes(element._id)}
+                                                  onChange={() => {
+                                                      if (!selectedOrders.includes(element._id)) {
+                                                          selectedOrders.push(element._id)
+                                                      } else {
+                                                          selectedOrders.splice(selectedOrders.indexOf(element._id), 1)
+                                                      }
+                                                      setSelectedOrders([...selectedOrders])
+                                                  }}
+                                        />
+                                        <LazyLoad scrollContainer={'.App-body'} key={element._id}
+                                                  height={height} offset={[height, 0]} debounce={0}
+                                                  once={true}
+                                                  placeholder={<CardOrderPlaceholder height={height}/>}>
+                                            <div>
+                                                <CardOrder element={element}/>
+                                            </div>
+                                        </LazyLoad>
+                                    </div>
+                                )
+                            else return null
+                        }):null}
+                    </div>
                 </CardContent>
             </Card>
             <Fab onClick={()=>{
-                if(selectedOrders.length>0&&ecspeditor&&track!==undefined){
-                    console.log(selectedOrders, ecspeditor, track)
+                if(selectedOrders.length>0&&(ecspeditor||track!==undefined)){
                     const action = async() => {
-                        await setInvoicesLogic({track: track, forwarder: ecspeditor._id, invoices: selectedOrders})
+                        let element = {invoices: selectedOrders}
+                        if(ecspeditor) element.ecspeditor = ecspeditor._id
+                        if(track!==undefined) element.track = track
+                        await setInvoicesLogic(element)
                     }
                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                     showMiniDialog(true)
