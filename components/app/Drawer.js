@@ -81,6 +81,7 @@ const MyDrawer = React.memo((props) => {
                 }
                 {
                     ['экспедитор', 'организация', 'менеджер'].includes(profile.role)?
+                        <>
                         <Link href={'/items/[id]'} as={'/items/all'}>
                                 <ListItem style={{background:
                                     (
@@ -95,8 +96,11 @@ const MyDrawer = React.memo((props) => {
                                     <ListItemText primary={'Товары'} />
                                 </ListItem>
                             </Link>
+                        <Divider/>
+                        </>
                         :
-                        ['client'].includes(profile.role)?
+                        ['client', 'admin'].includes(profile.role)?
+                            <>
                             <Link href='/category'>
                                     <ListItem style={{background: router.pathname===('/category')
                                     ||
@@ -107,10 +111,11 @@ const MyDrawer = React.memo((props) => {
                                         <ListItemText primary='Категории' />
                                     </ListItem>
                                 </Link>
+                            <Divider/>
+                            </>
                             :
                             null
                 }
-                <Divider/>
                 {
                    ['организация', 'менеджер', 'агент', 'суперагент'].includes(profile.role)?
                        <>

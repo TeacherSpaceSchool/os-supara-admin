@@ -40,6 +40,7 @@ const BuyBasket =  React.memo(
         };
         let [paymentMethod, setPaymentMethod] = useState('Наличные');
         let [useBonus, setUseBonus] = useState(false);
+        let [unlock, setUnlock] = useState(false);
         let paymentMethods = [
             'Наличные'
         ]
@@ -52,6 +53,7 @@ const BuyBasket =  React.memo(
                     if(basket[i].count>0)
                         await addBasket({item: basket[i]._id, count: basket[i].count, consignment: basket[i].consignment})
                 }
+                setUnlock(true)
             })()
         },[])
         return (
@@ -126,37 +128,40 @@ const BuyBasket =  React.memo(
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
-                        if(agent||!organization.minimumOrder===0||organization.minimumOrder<allPrice) {
-                            let proofeAddress = address.length > 0
-                            if(proofeAddress){
-                                for (let i = 0; i<address.length; i++){
-                                    proofeAddress = address[i][0].length > 0
+                        if(unlock) {
+                            if (agent || !organization.minimumOrder === 0 || organization.minimumOrder < allPrice) {
+                                let proofeAddress = address.length > 0
+                                if (proofeAddress) {
+                                    for (let i = 0; i < address.length; i++) {
+                                        proofeAddress = address[i][0].length > 0
+                                    }
+                                }
+                                if (proofeAddress) {
+                                    if (paymentMethod.length > 0) {
+                                        const action = async () => {
+                                            await addOrders({
+                                                noSplit: noSplit,
+                                                info: coment,
+                                                usedBonus: useBonus,
+                                                paymentMethod: paymentMethod,
+                                                address: address,
+                                                organization: organization._id,
+                                                client: client._id
+                                            })
+                                            Router.push('/orders')
+                                            showMiniDialog(false);
+                                        }
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                    } else
+                                        showSnackBar('Заполните все поля')
+                                }
+                                else {
+                                    showSnackBar('Укажите адрес точнее')
                                 }
                             }
-                            if(proofeAddress) {
-                                if (paymentMethod.length > 0) {
-                                    const action = async () => {
-                                        await addOrders({
-                                            noSplit: noSplit,
-                                            info: coment,
-                                            usedBonus: useBonus,
-                                            paymentMethod: paymentMethod,
-                                            address: address,
-                                            organization: organization._id,
-                                            client: client._id
-                                        })
-                                        Router.push('/orders')
-                                        showMiniDialog(false);
-                                    }
-                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                } else
-                                    showSnackBar('Заполните все поля')
-                            }
                             else {
-                                showSnackBar('Укажите адрес точнее')
+                                showSnackBar('Сумма заказа должна быть выше минимальной')
                             }
-                        } else {
-                            showSnackBar('Сумма заказа должна быть выше минимальной')
                         }
                     }} className={classes.button}>
                         Купить
