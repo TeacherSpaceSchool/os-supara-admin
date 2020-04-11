@@ -7,16 +7,18 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import { deleteAds, addAds, setAds, restoreAds } from '../../src/gql/ads'
+import { checkInt } from '../../src/lib'
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import Confirmation from '../dialog/Confirmation'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 const CardAds = React.memo((props) => {
     const classes = cardAdsStyle();
-    const { element, setList, organization, list } = props;
+    const { element, setList, organization, list, items } = props;
     const { profile } = props.user;
     const { isMobileApp } = props.app;
     //addCard
@@ -34,6 +36,11 @@ const CardAds = React.memo((props) => {
     let handleTitle =  (event) => {
         setTitle(event.target.value)
     };
+    let [count, setCount] = useState(element?element.count:0);
+    let handleCount=  (event) => {
+        setCount(checkInt(event.target.value))
+    };
+    let [item, setItem] = useState(element?element.item:undefined);
     let [url, setUrl] = useState(element?element.url:'');
     let handleUrl =  (event) => {
         setUrl(event.target.value)
@@ -61,7 +68,7 @@ const CardAds = React.memo((props) => {
                                         'aria-label': 'description',
                                     }}
                                 />
-                                <br/>
+                            <br/>
                                 <br/>
                                 <TextField
                                     label='URL'
@@ -72,6 +79,30 @@ const CardAds = React.memo((props) => {
                                         'aria-label': 'description',
                                     }}
                                 />
+                            <br/>
+                            <br/>
+                            <Autocomplete
+                                className={classes.input}
+                                options={items}
+                                getOptionLabel={option => option.name}
+                                value={item}
+                                onChange={(event, newValue) => {
+                                    setItem(newValue)
+                                }}
+                                noOptionsText='Ничего не найдено'
+                                renderInput={params => (
+                                    <TextField {...params} label='Товар' fullWidth />
+                                )}/>
+                            <br/>
+                            <TextField
+                                label='Количество'
+                                value={count}
+                                className={classes.input}
+                                onChange={handleCount}
+                                inputProps={{
+                                    'aria-label': 'description',
+                                }}
+                            />
                             </CardContent>
                         <CardActions>
                             {
@@ -82,6 +113,8 @@ const CardAds = React.memo((props) => {
                                             let editElement = {_id: element._id}
                                             if(title.length>0&&title!==element.title)editElement.title = title
                                             if(url.length>0&&url!==element.url)editElement.url = url
+                                            if(count!==element.count)editElement.count = count
+                                            editElement.item = item?item._id:undefined
                                             if(image)editElement.image = image
                                             const action = async() => {
                                                 setList((await setAds(editElement, organization)).adss)
@@ -121,8 +154,10 @@ const CardAds = React.memo((props) => {
                                                 setPreview('/static/add.png')
                                                 setTitle('')
                                                 setUrl('')
+                                                setCount(0)
+                                                setItem(undefined)
                                                 const action = async() => {
-                                                    setList((await addAds({organization: organization, image: image, url: url, title: title}, organization)).adss)
+                                                    setList((await addAds({count: count, item: item?item._id:undefined, organization: organization, image: image, url: url, title: title}, organization)).adss)
                                                 }
                                                 setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                                                 showMiniDialog(true)

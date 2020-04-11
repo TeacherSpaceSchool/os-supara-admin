@@ -85,6 +85,9 @@ const Catalog = React.memo((props) => {
                 organization = data.brandOrganizations.filter(elem=>elem._id===profile.organization)[0]
                 setOrganization({...organization})
             }
+            if(sessionStorage.catalog&&sessionStorage.catalog!=='{}'){
+                setBasket(JSON.parse(sessionStorage.catalog))
+            }
         })()
     },[])
     useEffect(()=>{
@@ -115,6 +118,7 @@ const Catalog = React.memo((props) => {
         basket[id].count+=list[idx].apiece?1:list[idx].packaging
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
+        sessionStorage.catalog = JSON.stringify(basket)
     }
     let decrement = async (idx)=>{
         let id = list[idx]._id
@@ -125,6 +129,7 @@ const Catalog = React.memo((props) => {
             basket[id].count -= list[idx].apiece?1:list[idx].packaging
             basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
             setBasket({...basket})
+            sessionStorage.catalog = JSON.stringify(basket)
         }
     }
     let incrementConsignment = async(idx)=>{
@@ -134,6 +139,7 @@ const Catalog = React.memo((props) => {
         if(basket[id].consignment<basket[id].count) {
             basket[id].consignment += 1
             setBasket({...basket})
+            sessionStorage.catalog = JSON.stringify(basket)
         }
     }
     let decrementConsignment = async(idx)=>{
@@ -143,6 +149,7 @@ const Catalog = React.memo((props) => {
         if(basket[id].consignment>0) {
             basket[id].consignment -= 1
             setBasket({...basket})
+            sessionStorage.catalog = JSON.stringify(basket)
         }
     }
     let showConsignment = (idx)=>{
@@ -151,6 +158,7 @@ const Catalog = React.memo((props) => {
             basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
         basket[id].showConsignment = !basket[id].showConsignment
         setBasket({...basket})
+        sessionStorage.catalog = JSON.stringify(basket)
     }
     let setBasketChange= async(idx, count)=>{
         let id = list[idx]._id
@@ -159,6 +167,7 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(count)
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
+        sessionStorage.catalog = JSON.stringify(basket)
     }
     let addPackaging= async(idx)=>{
         let id = list[idx]._id
@@ -170,6 +179,7 @@ const Catalog = React.memo((props) => {
         }
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
+        sessionStorage.catalog = JSON.stringify(basket)
     }
     let addPackagingConsignment = async(idx)=>{
         let id = list[idx]._id
@@ -179,6 +189,7 @@ const Catalog = React.memo((props) => {
         if(consignment<=basket[id].count){
             basket[id].consignment = consignment
             setBasket({...basket})
+            sessionStorage.catalog = JSON.stringify(basket)
         }
     }
     useEffect(()=>{

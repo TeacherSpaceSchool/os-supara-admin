@@ -124,6 +124,82 @@ export const getReturneds = async(args, client)=>{
     }
 }
 
+export const getReturnedsFromDistrict = async(args, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: args,
+                query: gql`
+                    query ($organization: ID!, $district: ID!, $date: String!) {
+                        returnedsFromDistrict(organization: $organization, date: $date, district: $district) {
+                            _id
+                            createdAt
+                            updatedAt
+                            items
+                                {
+                                    _id
+                                    item
+                                    count
+                                    allPrice
+                                    allTonnage
+                                    allSize
+                                    weight
+                                    size
+                                    price
+                                }
+                            allTonnage
+                            allSize
+                            client 
+                                { 
+                                    _id
+                                    name
+                                    email
+                                    phone
+                                    user 
+                                        {_id }
+                                }
+                            allPrice
+                            info
+                            address
+                            editor
+                            number
+                            confirmationForwarder
+                            district
+                            agent
+                                {_id name}
+                            distributer
+                                {_id name}
+                            organization
+                                {_id name}
+                            cancelForwarder
+                            sync
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const setReturnedLogic = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: element,
+            mutation : gql`
+                    mutation ($track: Int, $forwarder: ID, $returneds: [ID]!) {
+                        setReturnedLogic(track: $track, forwarder: $forwarder, returneds: $returneds) {
+                             data
+                        }
+                    }`})
+        //return await getOrders(new SingletonStore().getStore().getState().app)
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getReturnedsTrashSimpleStatistic = async(args, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

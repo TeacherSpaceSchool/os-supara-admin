@@ -10,13 +10,16 @@ import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import CardOrder from '../../components/order/CardOrder'
+import CardReturned from '../../components/returned/CardReturned'
 import CardOrderPlaceholder from '../../components/order/CardOrderPlaceholder'
+import CardReturnedPlaceholder from '../../components/returned/CardReturnedPlaceholder'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import { getActiveOrganization } from '../../src/gql/statistic'
 import { checkInt } from '../../src/lib'
 import { getEcspeditors } from '../../src/gql/employment'
 import { getDistricts } from '../../src/gql/district'
 import { getOrdersFromDistrict, setInvoicesLogic } from '../../src/gql/order'
+import { getReturnedsFromDistrict, setReturnedLogic } from '../../src/gql/returned'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
@@ -34,10 +37,11 @@ const Confirmation = dynamic(() => import('../../components/dialog/Confirmation'
 const LogistiOorder = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
-    let { isMobileApp, date } = props.app;
+    let { isMobileApp, date, filter } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog} = props.mini_dialogActions;
     let [ecspeditors, setEcspeditors] = useState([]);
+    let [type, setType] = useState('Заказы');
     let [ecspeditor, setEcspeditor] = useState(undefined);
     let [districts, setDistricts] = useState([]);
     let [price, setPrice] = useState(0);
@@ -82,14 +86,20 @@ const LogistiOorder = React.memo((props) => {
                 if(!date)
                     date = new Date
                 await showLoad(true)
-                setOrders((await getOrdersFromDistrict({organization: organization._id, district: district._id, date: date})).invoicesFromDistrict)
+                setOrders(
+                    filter==='Заказы'?
+                        (await getOrdersFromDistrict({organization: organization._id, district: district._id, date: date})).invoicesFromDistrict
+                        :
+                        (await getReturnedsFromDistrict({organization: organization._id, district: district._id, date: date})).returnedsFromDistrict
+                )
                 await showLoad(false)
             }
             else {
                 setOrders([])
             }
+            setType(filter)
         })()
-    },[district, date])
+    },[district, date, filter])
     useEffect(()=>{
         (async()=>{
             price = 0
@@ -98,7 +108,7 @@ const LogistiOorder = React.memo((props) => {
             lengthList = 0
             for(let i=0; i<orders.length; i++){
                 if(selectedOrders.includes(orders[i]._id)) {
-                    if (orders[i].allPrice) {
+                    if (orders[i].orders&&orders[i].allPrice) {
                         for(let i1=0; i1<orders[i].orders.length;i1++){
                             price += (orders[i].orders[i1].allPrice - orders[i].orders[i1].returned * (orders[i].orders[i1].allPrice / orders[i].orders[i1].count))
                         }
@@ -116,13 +126,14 @@ const LogistiOorder = React.memo((props) => {
             setLengthList(lengthList)
         })()
     },[selectedOrders])
+    const filters = [{name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}]
 
     return (
-        <App pageName='Логистика заказов' dates={true} checkPagination={checkPagination}>
+        <App pageName='Логистика' dates={true} checkPagination={checkPagination} filters={filters}>
             <Head>
-                <title>Логистика заказов</title>
+                <title>Логистика</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Логистика заказов' />
+                <meta property='og:title' content='Логистика' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
@@ -215,8 +226,16 @@ const LogistiOorder = React.memo((props) => {
                                         <LazyLoad scrollContainer={'.App-body'} key={element._id}
                                                   height={height} offset={[height, 0]} debounce={0}
                                                   once={true}
-                                                  placeholder={<CardOrderPlaceholder height={height}/>}>
-                                            <CardOrder element={element}/>
+                                                  placeholder={filter==='Заказы'?<CardOrderPlaceholder height={height}/>:<CardReturnedPlaceholder/>}>
+                                            {
+                                                type==='Заказы'?
+                                                    <CardOrder element={element}/>
+                                                    :
+                                                type==='Возвраты'?
+                                                    <CardReturned element={element}/>
+                                                    :
+                                                    null
+                                            }
                                         </LazyLoad>
                                     </div>
                                 )
@@ -228,10 +247,12 @@ const LogistiOorder = React.memo((props) => {
             <Fab onClick={()=>{
                 if(selectedOrders.length>0&&(ecspeditor||track!==undefined)){
                     const action = async() => {
-                        let element = {invoices: selectedOrders}
-                        if(ecspeditor) element.ecspeditor = ecspeditor._id
-                        if(track!==undefined) element.track = track
-                        await setInvoicesLogic(element)
+                        if(selectedOrders.length>0) {
+                            let element = {invoices: selectedOrders, returneds: selectedOrders}
+                            if (ecspeditor) element.ecspeditor = ecspeditor._id
+                            if (track !== undefined) element.track = track
+                            type === 'Заказы' ? await setInvoicesLogic(element) : setReturnedLogic(element)
+                        }
                     }
                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                     showMiniDialog(true)
@@ -248,15 +269,21 @@ const LogistiOorder = React.memo((props) => {
                         {
                             showStat?
                                 <>
+                                {price?<>
                                 <br/>
                                 <br/>
-                                {`Прибыль: ${price} сом`}
+                                {`Сумма: ${price} сом`}
+                                </>:null}
+                                {weight?<>
                                 <br/>
                                 <br/>
                                 {`Тоннаж: ${weight} кг`}
+                                </>:null}
+                                {size?<>
                                 <br/>
                                 <br/>
                                 {`Кубатура: ${size} см³`}
+                                </>:null}
                                 </>
                                 :
                                 null
@@ -271,6 +298,7 @@ const LogistiOorder = React.memo((props) => {
 
 LogistiOorder.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    ctx.store.getState().app.filter = 'Заказы'
     if(!['admin', 'организация', 'агент', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

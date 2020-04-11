@@ -66,7 +66,7 @@ const Statistic = React.memo((props) => {
             role: ['admin']
         },
         {
-            name: 'Логистика заказов',
+            name: 'Логистика',
             link: '/statistic/logisticorder',
             role: ['admin', 'организация', 'менеджер', 'агент']
         },
@@ -98,6 +98,11 @@ const Statistic = React.memo((props) => {
         {
             name: 'Статистика активности',
             link: '/statistic/active',
+            role: ['admin']
+        },
+        {
+            name: 'Статистика возвратов',
+            link: '/statistic/returneds',
             role: ['admin']
         },
         {

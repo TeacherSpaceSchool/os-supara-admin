@@ -63,9 +63,9 @@ const Subcategory = React.memo((props) => {
             {
                 ['client', 'admin'].includes(profile.role)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
-                        <Link href='/'>
+                        <Link href='/category'>
                             <a>
-                                Товары
+                                Категории
                             </a>
                         </Link>
                         <Typography color='textPrimary'>

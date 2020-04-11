@@ -126,9 +126,9 @@ const Item = React.memo((props) => {
             {
                 (router.query.id!=='new'&&['client', 'admin'].includes(profile.role)&&data.item.subCategory)?
                     <Breadcrumbs style={{margin: 20}} aria-label='breadcrumb'>
-                        <Link href='/'>
+                        <Link href='/category'>
                             <a>
-                                Товары
+                                Категории
                             </a>
                         </Link>
                         <Link href='/subcategory/[id]' as={`/subcategory/${data.item.subCategory.category._id}`}>

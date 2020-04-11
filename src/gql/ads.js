@@ -32,6 +32,12 @@ export const getAds = async()=>{
                         ads {
                             _id
                             image
+                            count
+                            item
+                                {
+                                    _id
+                                    name    
+                                }
                             url
                             title
                             createdAt
@@ -58,6 +64,12 @@ export const getAdss = async({search: search, organization: organization}, clien
                             url
                             title
                             createdAt
+                            count
+                            item
+                                {
+                                    _id
+                                    name    
+                                }
                           }
                     }`,
             })
@@ -81,6 +93,12 @@ export const getAdssTrash = async({search: search, organization: organization}, 
                             url
                             title
                             del
+                            count
+                            item
+                                {
+                                    _id
+                                    name    
+                                }
                             createdAt
                           }
                     }`,
@@ -130,8 +148,8 @@ export const addAds = async(element, organization)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($image: Upload!, $url: String!, $title: String!, $organization: ID!) {
-                        addAds(image: $image, url: $url, title: $title, organization: $organization) {
+                    mutation ($image: Upload!, $url: String!, $title: String!, $organization: ID!, $item: ID, $count: Int) {
+                        addAds(image: $image, url: $url, title: $title, organization: $organization, item: $item, count: $count) {
                              data
                         }
                     }`})
@@ -147,8 +165,8 @@ export const setAds = async(element, organization)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $image: Upload, $url: String, $title: String) {
-                        setAds(_id: $_id, image: $image, url: $url, title: $title) {
+                    mutation ($_id: ID!, $image: Upload, $url: String, $title: String, $item: ID, $count: Int) {
+                        setAds(_id: $_id, image: $image, url: $url, title: $title, item: $item, count: $count) {
                              data
                         }
                     }`})

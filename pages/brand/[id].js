@@ -26,7 +26,7 @@ const Brand = React.memo((props) => {
     const router = useRouter()
     let [list, setList] = useState(data.brands);
     const { search, filter, sort, countBasket } = props.app;
-    const { profile,authenticated } = props.user;
+    const { profile } = props.user;
     useEffect(()=>{
         (async()=>{
             if(data)

@@ -14,6 +14,7 @@ import initialApp from '../../src/initialApp'
 import { getOrganization } from '../../src/gql/organization'
 import { useRouter } from 'next/router'
 import Router from 'next/router'
+import {getBrands} from '../../src/gql/items';
 
 const Ads = React.memo((props) => {
     const classes = pageListStyle();
@@ -54,12 +55,12 @@ const Ads = React.memo((props) => {
                 <div className='count'>
                     {`Всего акций: ${list.length}`}
                 </div>
-                {['организация', 'admin'].includes(profile.role)?<CardAds organization={router.query.id} setList={setList}/>:null}
+                {['организация', 'admin'].includes(profile.role)?<CardAds items={data.brands} organization={router.query.id} setList={setList}/>:null}
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardAdsPlaceholder height={height}/>}>
-                                <CardAds organization={router.query.id} setList={setList} key={element._id} element={element}/>
+                                <CardAds items={data.brands} organization={router.query.id} setList={setList} key={element._id} element={element}/>
                             </LazyLoad>
                         )}
                 ):null}
@@ -81,7 +82,8 @@ Ads.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getAdss({search: '', organization: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+            ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getBrands({organization: ctx.query.id, search: '', sort: ctx.store.getState().app.sort}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         },
     };
 };
