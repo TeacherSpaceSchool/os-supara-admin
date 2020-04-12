@@ -73,6 +73,8 @@ export const getOrders = async(args, client)=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -169,6 +171,8 @@ export const getOrdersFromDistrict = async(args, client)=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -266,6 +270,8 @@ export const getOrdersTrash = async(args, client)=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -427,6 +433,8 @@ export const getOrdersForRouting = async(organization)=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -514,6 +522,8 @@ export const getOrder = async({_id})=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -700,6 +710,8 @@ export const setOrder = async(element)=>{
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder
@@ -788,6 +800,8 @@ export const subscriptionOrder = gql`
                             cancelClient
                             district
                             track
+                            forwarder
+                                {_id name}
                             distributer
                                 {_id name}
                             cancelForwarder

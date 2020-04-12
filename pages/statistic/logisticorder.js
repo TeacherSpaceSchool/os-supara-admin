@@ -27,7 +27,9 @@ import * as appActions from '../../redux/actions/app'
 import Checkbox from '@material-ui/core/Checkbox';
 import LazyLoad from 'react-lazyload';
 import Fab from '@material-ui/core/Fab';
-import SaveIcon from '@material-ui/icons/Save';
+import SettingsIcon from '@material-ui/icons/Settings';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import * as snackbarActions from '../../redux/actions/snackbar'
 import dynamic from 'next/dynamic'
 
@@ -112,6 +114,8 @@ const LogistiOorder = React.memo((props) => {
                         for(let i1=0; i1<orders[i].orders.length;i1++){
                             price += (orders[i].orders[i1].allPrice - orders[i].orders[i1].returned * (orders[i].orders[i1].allPrice / orders[i].orders[i1].count))
                         }
+                    } else if (orders[i].allPrice) {
+                        price += orders[i].allPrice
                     }
                     if (orders[i].allSize)
                         size += orders[i].allSize
@@ -127,6 +131,13 @@ const LogistiOorder = React.memo((props) => {
         })()
     },[selectedOrders])
     const filters = [{name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}]
+    let [anchorEl, setAnchorEl] = useState(null);
+    let open = event => {
+        setAnchorEl(event.currentTarget);
+    };
+    let close = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <App pageName='Логистика' dates={true} checkPagination={checkPagination} filters={filters}>
@@ -228,7 +239,7 @@ const LogistiOorder = React.memo((props) => {
                                                   once={true}
                                                   placeholder={filter==='Заказы'?<CardOrderPlaceholder height={height}/>:<CardReturnedPlaceholder/>}>
                                             {
-                                                type==='Заказы'?
+                                                type==='Заказы'&&element.orders?
                                                     <CardOrder element={element}/>
                                                     :
                                                 type==='Возвраты'?
@@ -244,23 +255,48 @@ const LogistiOorder = React.memo((props) => {
                     </div>
                 </CardContent>
             </Card>
-            <Fab onClick={()=>{
-                if(selectedOrders.length>0&&(ecspeditor||track!==undefined)){
-                    const action = async() => {
-                        if(selectedOrders.length>0) {
-                            let element = {invoices: selectedOrders, returneds: selectedOrders}
-                            if (ecspeditor) element.ecspeditor = ecspeditor._id
-                            if (track !== undefined) element.track = track
-                            type === 'Заказы' ? await setInvoicesLogic(element) : setReturnedLogic(element)
-                        }
-                    }
-                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                    showMiniDialog(true)
-                }
-                else showSnackBar('Заполните все поля')
-            }} color='primary' aria-label='add' className={classes.fab}>
-                    <SaveIcon />
+            <Fab onClick={open} color='primary' aria-label='add' className={classes.fab}>
+                <SettingsIcon />
             </Fab>
+            <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={close}
+                className={classes.menu}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+            >
+                <MenuItem onClick={async()=>{
+                    if(selectedOrders.length>0&&(ecspeditor||track!==undefined)){
+                        const action = async() => {
+                            if(selectedOrders.length>0) {
+                                let element = {invoices: selectedOrders, returneds: selectedOrders}
+                                if (ecspeditor) element.forwarder = ecspeditor._id
+                                if (track !== undefined) element.track = track
+                                type === 'Заказы' ? await setInvoicesLogic(element) : setReturnedLogic(element)
+                            }
+                        }
+                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                        showMiniDialog(true)
+                    }
+                    else showSnackBar('Заполните все поля')
+                    close()
+                }}>Сохранить</MenuItem>
+                <MenuItem onClick={async()=>{
+                    setSelectedOrders(orders.map(order=>order._id))
+                    close()
+                }}>Выбрать все</MenuItem>
+                <MenuItem onClick={async()=>{
+                    setSelectedOrders([])
+                    close()
+                }}>Отменить выбор</MenuItem>
+            </Menu>
             <div className='count' onClick={()=>setShowStat(!showStat)}>
                 {
                     selectedOrders?

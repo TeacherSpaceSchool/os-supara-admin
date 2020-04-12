@@ -187,7 +187,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    element.del!=='deleted'&&element.user&&['admin', 'суперагент', 'агент'].includes(profile.role) ?
+                    element.del!=='deleted'&&element.user&&['admin', 'суперагент'/*, 'агент'*/].includes(profile.role) ?
                         <Button onClick={async()=>{
                             const action = async () => {
                                 await onoffClient([element._id])

@@ -42,6 +42,9 @@ export const getReturnedsTrash = async(args, client)=>{
                             editor
                             number
                             confirmationForwarder
+                            track
+                            forwarder
+                                {_id name}
                             district
                             agent
                                 {_id name}
@@ -102,6 +105,9 @@ export const getReturneds = async(args, client)=>{
                             editor
                             number
                             confirmationForwarder
+                            track
+                            forwarder
+                                {_id name}
                             district
                             agent
                                 {_id name}
@@ -165,6 +171,9 @@ export const getReturnedsFromDistrict = async(args, client)=>{
                             editor
                             number
                             confirmationForwarder
+                            track
+                            forwarder
+                                {_id name}
                             district
                             agent
                                 {_id name}
@@ -342,6 +351,9 @@ export const setReturned = async(element)=>{
                             editor
                             number
                             confirmationForwarder
+                            track
+                            forwarder
+                                {_id name}
                             district
                             agent
                                 {_id name}
@@ -394,6 +406,9 @@ export const subscriptionReturned = gql`
                             editor
                             number
                             confirmationForwarder
+                            track
+                            forwarder
+                                {_id name}
                             district
                             agent
                                 {_id name}

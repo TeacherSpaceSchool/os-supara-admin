@@ -74,7 +74,7 @@ const CardReturned = React.memo((props) => {
                     {
                         ['агент', 'организация', 'менеджер', 'admin'].includes(profile.role)&&element.district?
                             <div className={classes.row}>
-                                <div className={classes.nameField}>Район: &nbsp;</div>
+                                <div className={classes.nameField}>Район:&nbsp;</div>
                                 <div className={classes.value}>{element.district}</div>
                             </div>
                             :
@@ -83,8 +83,17 @@ const CardReturned = React.memo((props) => {
                     {
                         element.agent&&element.agent.name?
                             <div className={classes.row}>
-                                <div className={classes.nameField}>Агент: &nbsp;</div>
+                                <div className={classes.nameField}>Агент:&nbsp;</div>
                                 <div className={classes.value}>{element.agent.name}</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
+                        element.forwarder&&element.forwarder.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Экспедитор:&nbsp;</div>
+                                <div className={classes.value}>{`${element.forwarder.name}, рейс ${element.track}`}</div>
                             </div>
                             :
                             null

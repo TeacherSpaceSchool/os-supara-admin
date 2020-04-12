@@ -200,6 +200,24 @@ const Order =  React.memo(
                         :
                         null
                 }
+                {
+                    element.track!==undefined?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Рейс:&nbsp;</div>
+                            <div className={classes.value}>{element.track}</div>
+                        </div>
+                        :
+                        null
+                }
+                {
+                    element.forwarder&&element.forwarder.name?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>Экспедитор:&nbsp;</div>
+                            <div className={classes.value}>{element.forwarder.name}</div>
+                        </div>
+                        :
+                        null
+                }
                 <div className={classes.row}>
                     <div className={classes.nameField}>Адрес: &nbsp;</div>
                     <div className={classes.value}>{`${element.address[2]?`${element.address[2]}, `:''}${element.address[0]}`}</div>

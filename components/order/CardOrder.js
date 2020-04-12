@@ -107,6 +107,15 @@ const CardOrder = React.memo((props) => {
                             null
                     }
                     {
+                        element.forwarder&&element.forwarder.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Экспедитор:&nbsp;</div>
+                                <div className={classes.value}>{`${element.forwarder.name}, рейс ${element.track}`}</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
                         element.dateDelivery?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Время доставки:&nbsp;</div>
