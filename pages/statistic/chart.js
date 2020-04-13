@@ -21,7 +21,7 @@ const ChartStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
-    const { isMobileApp } = props.app;
+    const { isMobileApp, filter } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('day');
@@ -40,7 +40,8 @@ const ChartStatistic = React.memo((props) => {
                     company: organization ? organization._id : undefined,
                     dateStart: dateStart,
                     dateType: dateType,
-                    type: type
+                    type: type,
+                    online: filter
                 })).statisticOrderChart
                 for(let i=0; i<_statisticOrderChart.chartStatistic.length;i++){
                     for(let i1=0; i1<_statisticOrderChart.chartStatistic[i].data.length;i1++){
@@ -51,7 +52,7 @@ const ChartStatistic = React.memo((props) => {
                 await showLoad(false)
             }
         })()
-    },[organization, dateStart, dateType, type])
+    },[organization, dateStart, dateType, type, filter])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -84,8 +85,9 @@ const ChartStatistic = React.memo((props) => {
         }),
         []
     )
+    const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
-        <App pageName='Графики заказов'>
+        <App pageName='Графики заказов' filters={filters}>
             <Head>
                 <title>Графики заказов</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -215,6 +217,7 @@ const ChartStatistic = React.memo((props) => {
 
 ChartStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    ctx.store.getState().app.filter = false
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

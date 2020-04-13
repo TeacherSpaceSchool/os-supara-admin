@@ -21,7 +21,7 @@ const ItemStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
-    const { isMobileApp } = props.app;
+    const { isMobileApp, filter } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
     let [dateType, setDateType] = useState('month');
@@ -36,12 +36,13 @@ const ItemStatistic = React.memo((props) => {
                 setStatisticItem((await getStatisticItem({
                     company: organization ? organization._id : 'all',
                     dateStart: dateStart ? dateStart : null,
-                    dateType: dateType
+                    dateType: dateType,
+                    online: filter
                 })).statisticItem)
                 await showLoad(false)
             }
         })()
-    },[organization, dateStart, dateType])
+    },[organization, dateStart, dateType, filter])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -49,8 +50,9 @@ const ItemStatistic = React.memo((props) => {
         }
     },[process.browser])
 
+    const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
-        <App pageName='Статистика товаров'>
+        <App pageName='Статистика товаров' filters={filters}>
             <Head>
                 <title>Статистика товаров</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -146,6 +148,7 @@ const ItemStatistic = React.memo((props) => {
 
 ItemStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    ctx.store.getState().app.filter = false
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {

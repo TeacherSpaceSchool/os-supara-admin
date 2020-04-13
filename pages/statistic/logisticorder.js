@@ -279,6 +279,14 @@ const LogistiOorder = React.memo((props) => {
                                 let element = {invoices: selectedOrders, returneds: selectedOrders}
                                 if (ecspeditor) element.forwarder = ecspeditor._id
                                 if (track !== undefined) element.track = track
+                                orders = orders.map(order=>{
+                                    if(selectedOrders.includes(order._id)){
+                                        order.track = track;
+                                        if(ecspeditor)order.forwarder = ecspeditor
+                                    }
+                                    return(order)
+                                })
+                                setOrders([...orders])
                                 type === 'Заказы' ? await setInvoicesLogic(element) : setReturnedLogic(element)
                             }
                         }
