@@ -101,6 +101,11 @@ const Statistic = React.memo((props) => {
             role: ['admin']
         },
         {
+            name: 'Статистика акций',
+            link: '/statistic/adss',
+            role: ['admin']
+        },
+        {
             name: 'Статистика возвратов',
             link: '/statistic/returneds',
             role: ['admin']

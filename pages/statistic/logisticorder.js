@@ -293,7 +293,9 @@ const LogistiOorder = React.memo((props) => {
                         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                         showMiniDialog(true)
                     }
-                    else showSnackBar('Заполните все поля')
+                    else {
+                        showSnackBar('Заполните все поля');
+                    }
                     close()
                 }}>Сохранить</MenuItem>
                 <MenuItem onClick={async()=>{
