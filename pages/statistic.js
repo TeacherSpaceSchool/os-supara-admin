@@ -16,6 +16,11 @@ const Statistic = React.memo((props) => {
     const { profile } = props.user;
     const list = [
         {
+            name: 'Акционная интеграции 1С',
+            link: '/statistic/outxmlads',
+            role: ['admin']
+        },
+        {
             name: 'Выгрузка заказов',
             link: '/statistic/unloadingorders',
             role: ['admin']
