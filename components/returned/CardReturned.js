@@ -93,7 +93,7 @@ const CardReturned = React.memo((props) => {
                         element.forwarder&&element.forwarder.name?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Экспедитор:&nbsp;</div>
-                                <div className={classes.value}>{`${element.forwarder.name}, рейс ${element.track}`}</div>
+                                <div className={classes.value}>{`${element.forwarder.name}, р${element.track}`}</div>
                             </div>
                             :
                             null

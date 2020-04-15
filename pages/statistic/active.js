@@ -43,33 +43,38 @@ const ClientStatisticActive = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-
-                    <Table type='client' row={statisticActive.row.slice(1)} columns={statisticActive.columns}/>
-                    <div className='count' onClick={()=>setShowStat(!showStat)}>
-                        {
-                            statisticActive?
-                                <>
-                                <div className={classes.rowStatic}>{`Всего активность: ${statisticActive.row[0].data[0]}`}</div>
-                                <div className={classes.rowStatic}>{`Без активности: ${statisticActive.row[0].data[9]}`}</div>
-                                <div className={classes.rowStatic}>{`Всего заказов: ${statisticActive.row[0].data[5]}`}</div>
-                                <div className={classes.rowStatic}>{`Без заказов: ${statisticActive.row[0].data[4]}`}</div>
+                    {
+                        statisticActive?
+                            <>
+                            <Table type='client' row={statisticActive.row.slice(1)} columns={statisticActive.columns}/>
+                            <div className='count' onClick={()=>setShowStat(!showStat)}>
                                 {
-                                    showStat?
+                                    statisticActive?
                                         <>
-                                        <div className={classes.rowStatic}>{`Сегодня активность: ${statisticActive.row[0].data[1]}`}</div>
-                                        <div className={classes.rowStatic}>{`Сегодня заказов: ${statisticActive.row[0].data[6]}`}</div>
-                                        <div className={classes.rowStatic}>{`Недельная активность: ${statisticActive.row[0].data[2]}`}</div>
-                                        <div className={classes.rowStatic}>{`Недельные заказы: ${statisticActive.row[0].data[7]}`}</div>
-                                        <div className={classes.rowStatic}>{`Месячная активность: ${statisticActive.row[0].data[3]}`}</div>
-                                        <div className={classes.rowStatic}>{`Месячные заказы: ${statisticActive.row[0].data[8]}`}</div>
+                                        <div className={classes.rowStatic}>{`Всего активность: ${statisticActive.row[0].data[0]}`}</div>
+                                        <div className={classes.rowStatic}>{`Без активности: ${statisticActive.row[0].data[9]}`}</div>
+                                        <div className={classes.rowStatic}>{`Всего заказов: ${statisticActive.row[0].data[5]}`}</div>
+                                        <div className={classes.rowStatic}>{`Без заказов: ${statisticActive.row[0].data[4]}`}</div>
+                                        {
+                                            showStat?
+                                                <>
+                                                <div className={classes.rowStatic}>{`Сегодня активность: ${statisticActive.row[0].data[1]}`}</div>
+                                                <div className={classes.rowStatic}>{`Сегодня заказов: ${statisticActive.row[0].data[6]}`}</div>
+                                                <div className={classes.rowStatic}>{`Недельная активность: ${statisticActive.row[0].data[2]}`}</div>
+                                                <div className={classes.rowStatic}>{`Недельные заказы: ${statisticActive.row[0].data[7]}`}</div>
+                                                <div className={classes.rowStatic}>{`Месячная активность: ${statisticActive.row[0].data[3]}`}</div>
+                                                <div className={classes.rowStatic}>{`Месячные заказы: ${statisticActive.row[0].data[8]}`}</div>
+                                                </>
+                                                :
+                                                null
+                                        }
                                         </>
-                                        :
-                                        null
+                                        :null
                                 }
-                                </>
-                                :null
-                        }
-                    </div>
+                            </div>
+                            </>
+                            :null
+                    }
 
                 </CardContent>
             </Card>
