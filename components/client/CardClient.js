@@ -162,7 +162,7 @@ const CardOrganization = React.memo((props) => {
                         </Button>
                         <Button onClick={async()=>{
                             const action = () => {
-                                if (navigator.geolocation) {
+                                if (navigator.geolocation&&element.address[0][1].includes(', ')) {
                                     navigator.geolocation.getCurrentPosition(async(position)=>{
                                         let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(element.address[0][1].split(', ')))
                                         if(distance<100){

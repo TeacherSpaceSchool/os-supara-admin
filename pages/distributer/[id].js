@@ -77,7 +77,6 @@ const Distributer = React.memo((props) => {
             }
         })()
     },[search])
-    console.log(allOrganizations)
     return (
         <App searchShow={true} checkPagination={checkPagination} pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
             <Head>

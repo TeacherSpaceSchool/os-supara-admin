@@ -40,7 +40,7 @@ const AgentHistoryGeo = React.memo((props) => {
     },[])
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin'&&organization._id) {
+            if(profile.role==='admin'&&organization&&organization._id) {
                 setAgents((await getAgents({_id: organization._id})).agents)
                 setAgent({_id: undefined})
             }

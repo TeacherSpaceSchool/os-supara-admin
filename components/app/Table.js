@@ -15,7 +15,7 @@ let getMuiTheme = () => createMuiTheme({
         },
         MuiPaper: {
             root: {
-                minWidth: '100%'
+                minWidth: '100%',
             },
             elevation4:{
                 boxShadow: 'none'
@@ -53,13 +53,15 @@ const MyTable =  React.memo(
             },
         };
         return (
-            <MuiThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable
-                    data={data}
-                    columns={columns}
-                    options={options}
-                />
-            </MuiThemeProvider>
+            <div  style={{zoom: 0.99}}>
+                <MuiThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        data={data}
+                        columns={columns}
+                        options={options}
+                    />
+                </MuiThemeProvider>
+            </div>
         );
     }
 )

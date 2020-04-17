@@ -39,6 +39,7 @@ const Organization = React.memo((props) => {
     let [accessToClient, setAccessToClient] = useState(data.organization&&data.organization.accessToClient!==null?data.organization.accessToClient:false);
     let [consignation, setConsignation] = useState(data.organization&&data.organization.consignation!==null?data.organization.consignation:false);
     let [minimumOrder, setMinimumOrder] = useState(data.organization!==null?data.organization.minimumOrder:0);
+    let [priotiry, setPriotiry] = useState(data.organization!==null?data.organization.priotiry:0);
     let [address, setAddress] = useState(data.organization?data.organization.address:[]);
     let [newAddress, setNewAddress] = useState('');
     let addAddress = ()=>{
@@ -174,6 +175,17 @@ const Organization = React.memo((props) => {
                                             }}
                                         />
                                     </FormControl>
+                                    <FormControl className={isMobileApp?classes.inputM:classes.inputD}>
+                                        <InputLabel>Приоритет</InputLabel>
+                                        <Input
+                                            type={isMobileApp?'number':'text'}
+                                            value={priotiry}
+                                            onChange={(event)=>{setPriotiry(event.target.value)}}
+                                            inputProps={{
+                                                'aria-label': 'description',
+                                            }}
+                                        />
+                                    </FormControl>
                                     {address.map((element, idx)=>
                                         <FormControl  key={idx} className={isMobileApp?classes.inputM:classes.inputD}>
                                             <InputLabel>Адрес{idx+1}</InputLabel>
@@ -284,7 +296,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({consignation: consignation, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
+                                                            await addOrganization({priotiry: checkInt(priotiry),consignation: consignation, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
@@ -308,6 +320,7 @@ const Organization = React.memo((props) => {
                                                     if(accessToClient!==data.organization.accessToClient)editElement.accessToClient = accessToClient
                                                     if(consignation!==data.organization.consignation)editElement.consignation = consignation
                                                     if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = checkInt(minimumOrder)
+                                                    if(priotiry!==data.organization.priotiry)editElement.priotiry = checkInt(priotiry)
                                                     const action = async() => {
                                                         await setOrganization(editElement)
                                                     }
@@ -445,7 +458,7 @@ Organization.getInitialProps = async function(ctx) {
             Router.push('/contact')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',minimumOrder: 0,consignation: false,accessToClient: false}}
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',priotiry: 0,minimumOrder: 0,consignation: false,accessToClient: false}}
         }
 
     };
