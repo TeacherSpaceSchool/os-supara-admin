@@ -22,9 +22,8 @@ const AgentHistoryGeo = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
-    const { isMobileApp } = props.app;
+    const { isMobileApp, date } = props.app;
     const { profile } = props.user;
-    let [dateStart, setDateStart] = useState(null);
     let organizations = [{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization];
     let [agentHistoryGeo, setAgentHistoryGeo] = useState(undefined);
     let [organization, setOrganization] = useState({_id: undefined});
@@ -49,16 +48,17 @@ const AgentHistoryGeo = React.memo((props) => {
     },[organization])
     useEffect(()=>{
         (async()=>{
-            if(agent._id) {
+            if(organization&&organization._id){
                 await showLoad(true)
                 setAgentHistoryGeo((await getAgentHistoryGeos({
-                    agent: agent._id,
-                    date: dateStart,
+                    agent: agent?agent._id:undefined,
+                    date: date,
+                    organization: organization._id
                 })).agentHistoryGeos)
                 await showLoad(false)
             }
         })()
-    },[agent, dateStart])
+    },[agent, date])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -66,7 +66,7 @@ const AgentHistoryGeo = React.memo((props) => {
         }
     },[process.browser])
     return (
-        <App pageName='История посещений'>
+        <App pageName='История посещений' dates={true}>
             <Head>
                 <title>История посещений</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -79,21 +79,6 @@ const AgentHistoryGeo = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    <div className={classes.row}>
-                        <TextField
-                            className={classes.input}
-                            label='Дата'
-                            type='date'
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={dateStart}
-                            inputProps={{
-                                'aria-label': 'description',
-                            }}
-                            onChange={ event => setDateStart(event.target.value) }
-                        />
-                    </div>
                     <div className={classes.row}>
                         {
                             profile.role==='admin'?
@@ -134,6 +119,13 @@ const AgentHistoryGeo = React.memo((props) => {
                     }
                 </CardContent>
             </Card>
+            {
+                agentHistoryGeo?
+                    <div className='count'>
+                        {`Всего точек: ${agentHistoryGeo.row.length}`}
+                    </div>
+                    :null
+            }
         </App>
     )
 })

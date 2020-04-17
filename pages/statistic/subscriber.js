@@ -80,7 +80,7 @@ const Subscriber = React.memo((props) => {
 
 Subscriber.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!ctx.store.getState().user.profile.role==='admin')
+    if(ctx.store.getState().user.profile.role!=='admin')
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/contact'

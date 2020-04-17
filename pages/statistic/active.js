@@ -9,18 +9,27 @@ import Router from 'next/router'
 import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
-import { getStatisticClientActivity } from '../../src/gql/statistic'
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { getStatisticClientActivity, getActiveOrganization } from '../../src/gql/statistic'
+import { getClientGqlSsr } from '../../src/getClientGQL'
+import * as appActions from '../../redux/actions/app'
+import { bindActionCreators } from 'redux'
 
 const ClientStatisticActive = React.memo((props) => {
-
+    const { data } = props;
     const classes = pageListStyle();
     const { isMobileApp, filter } = props.app;
+    const { showLoad } = props.appActions;
     let [statisticActive, setStatisticActive] = useState(undefined);
+    let [organization, setOrganization] = useState(undefined);
     useEffect(()=>{
         (async()=>{
-        setStatisticActive((await getStatisticClientActivity(filter, undefined)).statisticClientActivity)
+            await showLoad(true)
+            setStatisticActive((await getStatisticClientActivity({online: filter, ...(organization&&organization._id?{organization: organization._id}:{})}, undefined)).statisticClientActivity)
+            await showLoad(false)
         })()
-    },[filter])
+    },[filter, organization])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -43,6 +52,21 @@ const ClientStatisticActive = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
+                    <div className={classes.row}>
+                        <Autocomplete
+                            className={classes.input}
+                            options={data.activeOrganization}
+                            getOptionLabel={option => option.name}
+                            value={organization}
+                            onChange={(event, newValue) => {
+                                setOrganization(newValue)
+                            }}
+                            noOptionsText='Ничего не найдено'
+                            renderInput={params => (
+                                <TextField {...params} label='Организация' fullWidth />
+                            )}
+                        />
+                    </div>
                     {
                         statisticActive?
                             <>
@@ -94,6 +118,9 @@ ClientStatisticActive.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     return {
+        data: {
+            ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+        }
     };
 };
 
@@ -104,4 +131,12 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(ClientStatisticActive);
+function mapDispatchToProps(dispatch) {
+    return {
+
+        appActions: bindActionCreators(appActions, dispatch),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientStatisticActive);

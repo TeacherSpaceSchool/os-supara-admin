@@ -5,6 +5,7 @@ import pageListStyle from '../../src/styleMUI/client/clientList'
 import {getClientsTrash, getClientsTrashSimpleStatistic} from '../../src/gql/client'
 import {getOrdersTrash, getInvoicesTrashSimpleStatistic} from '../../src/gql/order'
 import {getReturnedsTrash, getReturnedsTrashSimpleStatistic} from '../../src/gql/returned'
+import {getEmploymentsTrash} from '../../src/gql/employment'
 import {getOrganizationsTrash} from '../../src/gql/organization'
 import {getAdssTrash} from '../../src/gql/ads'
 import {getItemsTrash} from '../../src/gql/items'
@@ -21,6 +22,7 @@ import CardReturned from '../../components/returned/CardReturned'
 import CardAds from '../../components/ads/CardAds'
 import CardItem from '../../components/items/CardItem'
 import CardOrganization from '../../components/organization/CardOrganization'
+import CardEmployment from '../../components/employment/CardEmployment'
 import LazyLoad from 'react-lazyload';
 const height = 140;
 
@@ -50,7 +52,7 @@ const Trash = React.memo((props) => {
                 else
                     setPaginationWork(false)
             }
-            else if(['Товары', 'Организации'].includes(filter)){
+            else if(['Товары', 'Организации', 'Сотрудники'].includes(filter)){
                 setPagination(pagination+100)
             }
         }
@@ -86,6 +88,10 @@ const Trash = React.memo((props) => {
                     list = (await getAdssTrash({search: search})).adssTrash
                     simpleStatistic = [list.length]
                 }
+                else if(filter==='Сотрудники'){
+                    list = (await getEmploymentsTrash({search: search})).employmentsTrash
+                    simpleStatistic = [list.length]
+                }
                 setList(list)
                 setSimpleStatistic(simpleStatistic)
                 setType(filter)
@@ -97,7 +103,15 @@ const Trash = React.memo((props) => {
             setSearchTimeOut(searchTimeOut)
         })()
     },[filter, search])
-    const filters = [{name: 'Клиенты', value: 'Клиенты'}, {name: 'Заказы', value: 'Заказы'}, {name: 'Возвраты', value: 'Возвраты'}, {name: 'Акции', value: 'Акции'}, {name: 'Товары', value: 'Товары'}, {name: 'Организации', value: 'Организации'}]
+    const filters = [
+        {name: 'Акции', value: 'Акции'},
+        {name: 'Возвраты', value: 'Возвраты'},
+        {name: 'Заказы', value: 'Заказы'},
+        {name: 'Клиенты', value: 'Клиенты'},
+        {name: 'Организации', value: 'Организации'},
+        {name: 'Сотрудники', value: 'Сотрудники'},
+        {name: 'Товары', value: 'Товары'},
+        ]
     return (
         <App checkPagination={checkPagination} searchShow={true} filters={filters} pageName='Корзина'>
             <Head>
@@ -137,9 +151,12 @@ const Trash = React.memo((props) => {
                                         :
                                     type==='Акции'?
                                         <CardAds list={list} key={element._id} setList={setList} element={element}/>
+                                            :
+                                    type==='Сотрудники'?
+                                        <CardEmployment list={list} key={element._id} setList={setList} element={element}/>
                                         :
                                         null
-                                    :
+                                :
                                     null
                             }
                         </LazyLoad>

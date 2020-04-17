@@ -9,12 +9,12 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
-import { onoffEmployment, deleteEmployment  } from '../../src/gql/employment'
+import { onoffEmployment, deleteEmployment, restoreEmployment  } from '../../src/gql/employment'
 import Confirmation from '../../components/dialog/Confirmation'
 
 const CardEmployment = React.memo((props) => {
     const classes = cardEmploymentStyle();
-    const { element, setList } = props;
+    const { element, setList, list } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
@@ -70,7 +70,7 @@ const CardEmployment = React.memo((props) => {
             </CardActionArea>
 </Link>
             {
-                (profile.role === 'admin' || profile.role === 'организация') && profile._id!==element.user._id ?
+                element.del!=='deleted'&&(profile.role === 'admin' || profile.role === 'организация') && profile._id!==element.user._id ?
                     <CardActions>
                         <Button onClick={async()=>{
                             const action = async() => {
@@ -91,6 +91,25 @@ const CardEmployment = React.memo((props) => {
                             showMiniDialog(true)
                         }} size='small' color='primary'>
                             Удалить
+                        </Button>
+                    </CardActions>
+                    :
+                    null
+            }
+            {
+                element.del==='deleted'?
+                    <CardActions>
+                        <Button onClick={async()=>{
+                            const action = async() => {
+                                await restoreEmployment([element._id])
+                                let _list = [...list]
+                                _list.splice(_list.indexOf(element), 1)
+                                setList(_list)
+                            }
+                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                            showMiniDialog(true)
+                        }} size='small' color='primary'>
+                            Восстановить
                         </Button>
                     </CardActions>
                     :

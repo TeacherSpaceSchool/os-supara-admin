@@ -17,6 +17,9 @@ export const getNotificationStatistics = async({search: search}, client)=>{
                             text
                             delivered
                             failed
+                            tag
+                            url
+                            icon
                         }
                     }`,
             })
@@ -32,8 +35,8 @@ export const addNotificationStatistic = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($text: String!, $title: String!) {
-                        addNotificationStatistic(text: $text, title: $title) {
+                    mutation ($text: String!, $title: String!, $tag: String, $url: String, $icon: Upload) {
+                        addNotificationStatistic(text: $text, title: $title, tag: $tag, url: $url, icon: $icon) {
                              data
                         }
                     }`})

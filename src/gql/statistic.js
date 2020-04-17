@@ -64,15 +64,15 @@ export const getStatisticClient = async({company, dateStart, dateType, online}, 
     }
 }
 
-export const getStatisticClientActivity = async(online, client)=>{
+export const getStatisticClientActivity = async({online, organization}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {online: online},
+                variables: {online: online, organization: organization},
                 query: gql`
-                    query ($online: Boolean) {
-                        statisticClientActivity (online: $online) {
+                    query ($online: Boolean, $organization: ID) {
+                        statisticClientActivity (online: $online, organization: $organization) {
                             columns
                             row 
                                 {_id data}

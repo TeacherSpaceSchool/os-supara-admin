@@ -115,6 +115,9 @@ const ChartStatistic = React.memo((props) => {
                         </Button>
                     </div>
                     <div className={classes.row}>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('time')} size='small' color={dateType==='time'?'primary':''}>
+                            Часы
+                        </Button>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
                             День
                         </Button>

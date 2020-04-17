@@ -24,7 +24,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import MoneyIcon from '@material-ui/icons/Money';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
+import EqualizerIcon from '@material-ui/icons/Build';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
@@ -368,7 +368,7 @@ const MyDrawer = React.memo((props) => {
                         <Link href={'/statistic'}>
                             <ListItem style={{background: router.pathname.includes('statistic')?'#f5f5f5':'#ffffff'}} button onClick={()=>{setUncoverBonus(false);showDrawer(false)}}>
                                 <ListItemIcon><EqualizerIcon color='inherit'/></ListItemIcon>
-                                <ListItemText primary='Статистика' />
+                                <ListItemText primary='Инструменты' />
                             </ListItem>
                         </Link>
                         <Divider/>

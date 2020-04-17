@@ -2,6 +2,34 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
+export const getEmploymentsTrash = async({search: search}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {search: search},
+                query: gql`
+                    query ($search: String!) {
+                        employmentsTrash(search: $search) {
+                            _id
+                            createdAt
+                            name
+                            email
+                            del
+                            phone
+                            user 
+                                {_id role status login}
+                            organization 
+                                {_id name}
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getEmployments = async({organization, search: search, sort: sort, filter: filter}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -158,6 +186,22 @@ export const onoffEmployment = async(ids, organization)=>{
                     }`})
         if(organization)
             return await getEmployments({organization: organization, ...(new SingletonStore().getStore().getState().app)})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const restoreEmployment = async(ids)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        restoreEmployment(_id: $_id) {
+                             data
+                        }
+                    }`})
     } catch(err){
         console.error(err)
     }

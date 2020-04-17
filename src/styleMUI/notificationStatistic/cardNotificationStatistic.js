@@ -33,4 +33,15 @@ export default makeStyles({
         fontFamily: 'Roboto',
         wordBreak: 'break-all'
     },
+    mediaM: {
+        objectFit: 'cover',
+        height: 'calc((100vw - 40px) / 3)',
+        width: 'calc(100vw - 40px)'
+    },
+    mediaD: {
+        objectFit: 'cover',
+        height: 200,
+        width: 600,
+        cursor: 'pointer'
+    },
 })

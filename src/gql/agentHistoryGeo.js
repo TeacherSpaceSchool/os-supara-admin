@@ -9,8 +9,8 @@ export const getAgentHistoryGeos = async(arg, client)=>{
             .query({
                 variables: arg,
                 query: gql`
-                    query ($agent: ID!, $date: String) {
-                        agentHistoryGeos(agent: $agent, date: $date) {
+                    query ($organization: ID, $agent: ID, $date: String) {
+                        agentHistoryGeos(organization: $organization, agent: $agent, date: $date) {
                             columns
                             row 
                                 {_id data}
