@@ -124,7 +124,7 @@ const ItemStatistic = React.memo((props) => {
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего прибыль: ${statisticItem.row[0].data[1]} сом`}
+                                {`Всего выручка: ${statisticItem.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
                                 {`Выполнено: ${statisticItem.row[0].data[2]} шт`}

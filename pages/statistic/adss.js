@@ -124,7 +124,7 @@ const AdssStatistic = React.memo((props) => {
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего прибыль: ${statisticAdss.row[0].data[1]} сом`}
+                                {`Всего выручка: ${statisticAdss.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
                                 {`Выполнено: ${statisticAdss.row[0].data[2]} шт`}

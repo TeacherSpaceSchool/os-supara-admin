@@ -10,39 +10,35 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
-import { getStatisticClient, getActiveOrganization } from '../../src/gql/statistic'
+import { getStatisticAgentsWorkTime, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
 
-const ClientStatistic = React.memo((props) => {
+const AgentsWorkTime = React.memo((props) => {
 
     const classes = pageListStyle();
     const { data } = props;
-    const { isMobileApp, filter } = props.app;
+    const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(null);
-    let [dateType, setDateType] = useState('month');
-    let [statisticClient, setStatisticClient] = useState(undefined);
-    let [showStat, setShowStat] = useState(false);
-    let [organization, setOrganization] = useState({_id: 'all'});
+    let [statisticOrder, setStatisticOrder] = useState(undefined);
+    let [organization, setOrganization] = useState(undefined);
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin') {
+            if(profile.role==='admin'&&organization&&organization._id) {
+                console.log(dateStart)
                 await showLoad(true)
-                setStatisticClient((await getStatisticClient({
-                    company: organization ? organization._id : 'all',
-                    dateStart: dateStart ? dateStart : null,
-                    dateType: dateType,
-                    online: filter
-                })).statisticClient)
+                setStatisticOrder((await getStatisticAgentsWorkTime({
+                    organization: organization ? organization._id : undefined,
+                    date: dateStart ? dateStart : null
+                })).statisticAgentsWorkTime)
                 await showLoad(false)
             }
         })()
-    },[organization, dateStart, dateType, filter])
+    },[organization, dateStart])
     useEffect(()=>{
         if(process.browser){
             let appBody = document.getElementsByClassName('App-body')
@@ -50,35 +46,20 @@ const ClientStatistic = React.memo((props) => {
         }
     },[process.browser])
 
-    const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
-        <App pageName='Статистика клиентов' filters={filters}>
+        <App pageName='Рабочие часы' >
             <Head>
-                <title>Статистика клиентов</title>
+                <title>Рабочие часы</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Статистика клиентов' />
+                <meta property='og:title' content='Рабочие часы' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/client`} />
-                <link rel='canonical' href={`${urlMain}/statistic/client`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/agentsworktime`} />
+                <link rel='canonical' href={`${urlMain}/statistic/agentsworktime`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    <div className={classes.row}>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('day')} size='small' color={dateType==='day'?'primary':''}>
-                            День
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('week')} size='small' color={dateType==='week'?'primary':''}>
-                            Неделя
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('month')} size='small' color={dateType==='month'?'primary':''}>
-                            Месяц
-                        </Button>
-                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setDateType('year')} size='small' color={dateType==='year'?'primary':''}>
-                            Год
-                        </Button>
-                    </div>
                     <div className={classes.row}>
                         <Autocomplete
                             className={classes.input}
@@ -95,7 +76,7 @@ const ClientStatistic = React.memo((props) => {
                         />
                         <TextField
                             className={classes.input}
-                            label='Дата начала'
+                            label='Дата'
                             type='date'
                             InputLabelProps={{
                                 shrink: true,
@@ -108,45 +89,17 @@ const ClientStatistic = React.memo((props) => {
                         />
                     </div>
                     {
-                        statisticClient?
-                            <Table type='client' row={(statisticClient.row).slice(1)} columns={statisticClient.columns}/>
+                        statisticOrder?
+                            <Table type='item' row={statisticOrder.row} columns={statisticOrder.columns}/>
                             :null
                     }
                 </CardContent>
             </Card>
-            <div className='count' onClick={()=>setShowStat(!showStat)}>
-                {
-                    statisticClient?
-                        <>
-                        {`Активных клиентов: ${statisticClient.row[0].data[0]}`}
-                        {
-                            showStat?
-                                <>
-                                <br/>
-                                <br/>
-                                {`Всего выручка: ${statisticClient.row[0].data[1]} сом`}
-                                <br/>
-                                <br/>
-                                {`Заказов выполнено: ${statisticClient.row[0].data[2]} шт`}
-                                <br/>
-                                <br/>
-                                {`Конс: ${statisticClient.row[0].data[3]} сом`}
-                                <br/>
-                                <br/>
-                                {`Заказов отменено: ${statisticClient.row[0].data[4]} шт`}
-                                </>
-                                :
-                                null
-                        }
-                        </>
-                        :null
-                }
-            </div>
         </App>
     )
 })
 
-ClientStatistic.getInitialProps = async function(ctx) {
+AgentsWorkTime.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.filter = false
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
@@ -159,7 +112,10 @@ ClientStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            activeOrganization: [
+                {name: 'AZYK.STORE', _id: 'super'},
+                ...(await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined)).activeOrganization
+            ]
         }
     };
 };
@@ -179,4 +135,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientStatistic);
+export default connect(mapStateToProps, mapDispatchToProps)(AgentsWorkTime);

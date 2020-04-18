@@ -108,7 +108,7 @@ const ChartStatistic = React.memo((props) => {
                             Линии
                         </Button>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setType('money')} size='small' color={type==='money'?'primary':''}>
-                            Прибыль
+                            Выручка
                         </Button>
                         <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setType('order')} size='small' color={type==='order'?'primary':''}>
                             Заказы

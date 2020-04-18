@@ -36,8 +36,23 @@ const list = {
             role: ['admin']
         },
         {
-            name: 'Статистика активности',
-            link: '/statistic/active',
+            name: 'Активность клиентов',
+            link: '/statistic/activeclient',
+            role: ['admin']
+        },
+        {
+            name: 'Активность организаций',
+            link: '/statistic/activeorganization',
+            role: ['admin']
+        },
+        {
+            name: 'Активность товаров',
+            link: '/statistic/activeitem',
+            role: ['admin']
+        },
+        {
+            name: 'Рабочие часы',
+            link: '/statistic/agentsworktime',
             role: ['admin']
         },
         {

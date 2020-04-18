@@ -85,6 +85,48 @@ export const getStatisticClientActivity = async({online, organization}, client)=
     }
 }
 
+export const getStatisticItemActivity = async({online, organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {online: online, organization: organization},
+                query: gql`
+                    query ($online: Boolean, $organization: ID) {
+                        statisticItemActivity (online: $online, organization: $organization) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getStatisticOrganizationActivity = async({online, organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {online: online, organization: organization},
+                query: gql`
+                    query ($online: Boolean, $organization: ID) {
+                        statisticOrganizationActivity (online: $online, organization: $organization) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getUnloadingOrders = async({organization, dateStart}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -95,6 +137,27 @@ export const getUnloadingOrders = async({organization, dateStart}, client)=>{
                     query ($organization: ID!, $dateStart: Date!) {
                         unloadingOrders(organization: $organization, dateStart: $dateStart) {
                             data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getStatisticAgentsWorkTime = async({organization, date}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization, date: date},
+                query: gql`
+                    query ($organization: String, $date: Date) {
+                        statisticAgentsWorkTime(organization: $organization, date: $date) {
+                            columns
+                            row 
+                                {_id data}
                         }
                     }`,
             })

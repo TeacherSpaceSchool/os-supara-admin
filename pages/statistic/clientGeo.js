@@ -11,12 +11,15 @@ import { Map, YMaps, Placemark, ObjectManager } from 'react-yandex-maps';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import { bindActionCreators } from 'redux'
+import * as appActions from '../../redux/actions/app'
 
 const ClientGeoStatistic = React.memo((props) => {
 
     const { data } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
+    const { showLoad } = props.appActions;
     let [load, setLoad] = useState(true);
     useEffect(()=>{
         if(process.browser){
@@ -46,7 +49,9 @@ const ClientGeoStatistic = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
+                await showLoad(true)
                 setStatisticClientGeo((await getStatisticClientGeo({organization: organization ? organization._id : null, item: item ? item._id : null})).statisticClientGeo)
+                await showLoad(false)
             }
         })()
     },[item, items, organization])
@@ -240,4 +245,12 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(ClientGeoStatistic);
+function mapDispatchToProps(dispatch) {
+    return {
+
+        appActions: bindActionCreators(appActions, dispatch),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientGeoStatistic);

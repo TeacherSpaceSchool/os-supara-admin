@@ -180,6 +180,14 @@ const NotificationStatistic = React.memo((props) => {
                                     <div className={classes.nameField}>Доставлено:&nbsp;</div>
                                     <div className={classes.value}>{element.delivered}</div>
                                 </div>
+                                {
+                                    element.click!=undefined?
+                                        <div className={classes.row}>
+                                            <div className={classes.nameField}>Кликов:&nbsp;</div>
+                                            <div className={classes.value}>{element.click}</div>
+                                        </div>
+                                        :null
+                                }
                                 <div className={classes.row}>
                                     <div className={classes.nameField}>Провалено:&nbsp;</div>
                                     <div className={classes.value}>{element.failed}</div>

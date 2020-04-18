@@ -20,6 +20,7 @@ export const getNotificationStatistics = async({search: search}, client)=>{
                             tag
                             url
                             icon
+                            click
                         }
                     }`,
             })

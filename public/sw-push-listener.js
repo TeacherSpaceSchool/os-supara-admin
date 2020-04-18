@@ -13,7 +13,7 @@ self.addEventListener('push', function (event) {
             tag: _data.tag,
             silent: false,
             vibrate: [200, 100, 200, 100, 200, 100, 200],
-            data: _data.url
+            data: _data
         })
     );
 });
@@ -21,9 +21,18 @@ self.addEventListener('push', function (event) {
 //notification url redirect event click
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
+
+    fetch('https://azyk.store:3000/push/clicknotification', {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: `notification=${event.notification.data._id}`
+    })
+
     event.waitUntil(
         clients.matchAll({
-            type: "window"
+            type: 'window'
         })
             .then(function (clientList) {
                 for (let i = 0; i < clientList.length; i++) {
@@ -32,7 +41,7 @@ self.addEventListener('notificationclick', function (event) {
                         return client.focus();
                 }
                 if (clients.openWindow) {
-                    return clients.openWindow(event.notification.data?event.notification.data:notificationUrl);
+                    return clients.openWindow(event.notification.data?event.notification.data.url:notificationUrl);
                 }
             })
     );

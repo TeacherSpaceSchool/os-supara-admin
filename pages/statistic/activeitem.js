@@ -11,12 +11,12 @@ import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { getStatisticClientActivity, getActiveOrganization } from '../../src/gql/statistic'
+import { getStatisticItemActivity, getActiveOrganization } from '../../src/gql/statistic'
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import * as appActions from '../../redux/actions/app'
 import { bindActionCreators } from 'redux'
 
-const ClientStatisticActive = React.memo((props) => {
+const ItemStatisticActive = React.memo((props) => {
     const { data } = props;
     const classes = pageListStyle();
     const { isMobileApp, filter } = props.app;
@@ -26,7 +26,7 @@ const ClientStatisticActive = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             await showLoad(true)
-            setStatisticActive((await getStatisticClientActivity({online: filter, ...(organization&&organization._id?{organization: organization._id}:{})}, undefined)).statisticClientActivity)
+            setStatisticActive((await getStatisticItemActivity({online: filter, ...(organization&&organization._id?{organization: organization._id}:{})}, undefined)).statisticItemActivity)
             await showLoad(false)
         })()
     },[filter, organization])
@@ -39,16 +39,16 @@ const ClientStatisticActive = React.memo((props) => {
     let [showStat, setShowStat] = useState(false);
     const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
-        <App pageName='Статистика активности' filters={filters}>
+        <App pageName='Активность товаров' filters={filters}>
             <Head>
-                <title>Статистика активности</title>
+                <title>Активность товаров</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Статистика активности' />
+                <meta property='og:title' content='Активность товаров' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property='og:url' content={`${urlMain}/statistic/active`} />
-                <link rel='canonical' href={`${urlMain}/statistic/active`}/>
+                <meta property='og:url' content={`${urlMain}/statistic/activeitem`} />
+                <link rel='canonical' href={`${urlMain}/statistic/activeitem`}/>
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
@@ -70,30 +70,7 @@ const ClientStatisticActive = React.memo((props) => {
                     {
                         statisticActive?
                             <>
-                            <Table type='client' row={statisticActive.row.slice(1)} columns={statisticActive.columns}/>
-                            <div className='count' onClick={()=>setShowStat(!showStat)}>
-                                {
-                                    statisticActive?
-                                        <>
-                                        <div className={classes.rowStatic}>{`Всего активность: ${statisticActive.row[0].data[0]} Без активности: ${statisticActive.row[0].data[9]}`}</div>
-                                        <div className={classes.rowStatic}>{`Всего заказов: ${statisticActive.row[0].data[5]} Без заказов: ${statisticActive.row[0].data[4]}`}</div>
-                                        {
-                                            showStat?
-                                                <>
-                                                <div className={classes.rowStatic}>{`Сегодня активность: ${statisticActive.row[0].data[1]}`}</div>
-                                                <div className={classes.rowStatic}>{`Сегодня заказов: ${statisticActive.row[0].data[6]}`}</div>
-                                                <div className={classes.rowStatic}>{`Недельная активность: ${statisticActive.row[0].data[2]}`}</div>
-                                                <div className={classes.rowStatic}>{`Недельные заказы: ${statisticActive.row[0].data[7]}`}</div>
-                                                <div className={classes.rowStatic}>{`Месячная активность: ${statisticActive.row[0].data[3]}`}</div>
-                                                <div className={classes.rowStatic}>{`Месячные заказы: ${statisticActive.row[0].data[8]}`}</div>
-                                                </>
-                                                :
-                                                null
-                                        }
-                                        </>
-                                        :null
-                                }
-                            </div>
+                            <Table type='client' row={statisticActive.row} columns={statisticActive.columns}/>
                             </>
                             :null
                     }
@@ -104,9 +81,9 @@ const ClientStatisticActive = React.memo((props) => {
     )
 })
 
-ClientStatisticActive.getInitialProps = async function(ctx) {
+ItemStatisticActive.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    ctx.store.getState().app.filter = true
+    ctx.store.getState().app.filter = false
     if(!['admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
@@ -137,4 +114,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientStatisticActive);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemStatisticActive);
