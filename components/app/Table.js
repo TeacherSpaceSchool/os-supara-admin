@@ -53,7 +53,7 @@ const MyTable =  React.memo(
             },
         };
         return (
-            <div  style={{zoom: 0.99, width: '100%'}}>
+            <div  style={{zoom: 0.94, width: '100%'}}>
                 <MuiThemeProvider theme={getMuiTheme()}>
                     <MUIDataTable
                         data={data}
