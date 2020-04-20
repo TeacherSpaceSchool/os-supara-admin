@@ -37,11 +37,11 @@ const ClientGeoStatistic = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin') {
+                setItem(null)
                 if(organization)
                     setItems((await getActiveItem({organization: organization._id})).activeItem)
                 else
                     setItems([])
-                setItem(null)
                 //setStatisticClientGeo((await getStatisticClientGeo({organization: organization ? organization._id : null})).statisticClientGeo)
             }
         })()
@@ -54,7 +54,7 @@ const ClientGeoStatistic = React.memo((props) => {
                 await showLoad(false)
             }
         })()
-    },[item/*, items, organization*/])
+    },[item, items/*, organization*/])
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin'&&statisticClientGeo) {

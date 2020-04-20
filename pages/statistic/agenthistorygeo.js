@@ -30,8 +30,11 @@ const AgentHistoryGeo = React.memo((props) => {
     let [organization, setOrganization] = useState({_id: undefined});
     let [agents, setAgents] = useState([]);
     let [count, setCount] = useState(0);
+    let [order, setOrder] = useState(0);
+    let [cancel, setCancel] = useState(0);
     let [agent, setAgent] = useState({_id: undefined});
     const { showLoad } = props.appActions;
+    let [showStat, setShowStat] = useState(false);
     useEffect(()=>{
         (async()=>{
             if(profile.role!=='admin') {
@@ -61,13 +64,25 @@ const AgentHistoryGeo = React.memo((props) => {
                 })).agentHistoryGeos
                 setAgentHistoryGeo(agentHistoryGeos)
                 count = 0
-                for(let i=1;i<agentHistoryGeos.row.length;i++){
-                    if(agent&&agent._id)
-                        count+=1
-                    else
-                        count+=checkInt(agentHistoryGeos.row[i][1])
+                cancel = 0
+                order = 0
+                for(let i=0;i<agentHistoryGeos.row.length;i++){
+                    if(agent&&agent._id) {
+                        count += 1
+                        if (agentHistoryGeos.row[i].data[4]==='заказ')
+                            order+=1
+                        else
+                            cancel+=1
+                    }
+                    else {
+                        count+=checkInt(agentHistoryGeos.row[i].data[1])
+                        order+=checkInt(agentHistoryGeos.row[i].data[2])
+                        cancel+=checkInt(agentHistoryGeos.row[i].data[3])
+                    }
                 }
                 setCount(count)
+                setOrder(order)
+                setCancel(cancel)
                 await showLoad(false)
             }
         })()
@@ -134,8 +149,21 @@ const AgentHistoryGeo = React.memo((props) => {
             </Card>
             {
                 agentHistoryGeo?
-                    <div className='count'>
-                        {`Всего точек: ${count}`}
+                    <div className='count' onClick={()=>{setShowStat(!showStat)}}>
+                        {`Посещений: ${count}`}
+                        {
+                            showStat?
+                                <>
+                                <br/>
+                                <br/>
+                                {`Заказов: ${order}`}
+                                <br/>
+                                <br/>
+                                {`Отказов: ${cancel}`}
+                                </>
+                                :
+                                null
+                        }
                     </div>
                     :null
             }
