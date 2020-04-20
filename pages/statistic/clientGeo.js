@@ -54,7 +54,7 @@ const ClientGeoStatistic = React.memo((props) => {
                 await showLoad(false)
             }
         })()
-    },[item, items, organization])
+    },[item/*, items, organization*/])
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin'&&statisticClientGeo) {
