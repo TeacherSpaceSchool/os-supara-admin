@@ -17,6 +17,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
+import {checkInt} from '../../src/lib'
 
 const AgentHistoryGeo = React.memo((props) => {
 
@@ -28,11 +29,13 @@ const AgentHistoryGeo = React.memo((props) => {
     let [agentHistoryGeo, setAgentHistoryGeo] = useState(undefined);
     let [organization, setOrganization] = useState({_id: undefined});
     let [agents, setAgents] = useState([]);
+    let [count, setCount] = useState(0);
     let [agent, setAgent] = useState({_id: undefined});
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
             if(profile.role!=='admin') {
+                setCount(0)
                 setAgents((await getAgents({})).agents)
                 setAgent({_id: undefined})
             }
@@ -41,6 +44,7 @@ const AgentHistoryGeo = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(profile.role==='admin'&&organization&&organization._id) {
+                setCount(0)
                 setAgents((await getAgents({_id: organization._id})).agents)
                 setAgent({_id: undefined})
             }
@@ -50,11 +54,20 @@ const AgentHistoryGeo = React.memo((props) => {
         (async()=>{
             if(organization&&organization._id){
                 await showLoad(true)
-                setAgentHistoryGeo((await getAgentHistoryGeos({
+                let agentHistoryGeos = (await getAgentHistoryGeos({
                     agent: agent?agent._id:undefined,
                     date: date,
                     organization: organization._id
-                })).agentHistoryGeos)
+                })).agentHistoryGeos
+                setAgentHistoryGeo(agentHistoryGeos)
+                count = 0
+                for(let i=1;i<agentHistoryGeos.row.length;i++){
+                    if(agent&&agent._id)
+                        count+=1
+                    else
+                        count+=checkInt(agentHistoryGeos.row[i][1])
+                }
+                setCount(count)
                 await showLoad(false)
             }
         })()
@@ -122,7 +135,7 @@ const AgentHistoryGeo = React.memo((props) => {
             {
                 agentHistoryGeo?
                     <div className='count'>
-                        {`Всего точек: ${agentHistoryGeo.row.length}`}
+                        {`Всего точек: ${count}`}
                     </div>
                     :null
             }

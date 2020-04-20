@@ -16,26 +16,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const list = {
     statistic: [
         {
-            name: 'Графики заказов',
-            link: '/statistic/chart',
-            role: ['admin']
-        },
-        {
-            name: 'История посещений',
-            link: '/statistic/agenthistorygeo',
-            role: ['admin']
-        },
-        {
-            name: 'Карта продаж',
-            link: '/statistic/clientGeo',
-            role: ['admin']
-        },
-        {
-            name: 'Статистика агентов',
-            link: '/statistic/agents',
-            role: ['admin']
-        },
-        {
             name: 'Активность клиентов',
             link: '/statistic/activeclient',
             role: ['admin']
@@ -51,8 +31,28 @@ const list = {
             role: ['admin']
         },
         {
+            name: 'Графики заказов',
+            link: '/statistic/chart',
+            role: ['admin']
+        },
+        {
+            name: 'История посещений',
+            link: '/statistic/agenthistorygeo',
+            role: ['admin']
+        },
+        {
+            name: 'Карта продаж',
+            link: '/statistic/clientGeo',
+            role: ['admin']
+        },
+        {
             name: 'Рабочие часы',
             link: '/statistic/agentsworktime',
+            role: ['admin']
+        },
+        {
+            name: 'Статистика агентов',
+            link: '/statistic/agents',
             role: ['admin']
         },
         {
