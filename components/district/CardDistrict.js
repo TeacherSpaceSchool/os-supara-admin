@@ -71,7 +71,7 @@ const CardDistrict = React.memo((props) => {
                     ['организация', 'admin'].includes(profile.role)?
                         <Button onClick={async()=>{
                             const action = async() => {
-                                setList((await deleteDistrict([element._id], element.organization._id)).districts)
+                                setList((await deleteDistrict([element._id], element.organization?element.organization._id:'super')).districts)
                             }
                             setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
                             showMiniDialog(true)
