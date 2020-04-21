@@ -186,6 +186,63 @@ export const getUnloadingAdsOrders = async({organization, dateStart}, client)=>{
     }
 }
 
+export const getUnloadingEmployments = async({organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query ($organization: ID!) {
+                        unloadingEmployments(organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getUnloadingDistricts = async({organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query ($organization: ID!) {
+                        unloadingDistricts(organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getUnloadingAgentRoutes = async({organization}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization},
+                query: gql`
+                    query ($organization: ID!) {
+                        unloadingAgentRoutes(organization: $organization) {
+                            data
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getStatisticOrderChart = async({company, dateStart, dateType, type, online}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
@@ -385,6 +442,25 @@ export const getActiveOrganization = async(client)=>{
                         activeOrganization {
                             name
                             _id
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const uploadingAgentRoute = async({document, agentRoute}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document, agentRoute: agentRoute},
+                mutation: gql`
+                    mutation ($document: Upload!, $agentRoute: ID!) {
+                        uploadingAgentRoute(document: $document, agentRoute: $agentRoute) {
+                            data
                         }
                     }`,
             })

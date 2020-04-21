@@ -120,8 +120,23 @@ const list = {
             role: ['admin']
         },
         {
+            name: 'Выгрузка интеграции 1С',
+            link: '/statistic/integrateoutshoro',
+            role: ['admin']
+        },
+        {
             name: 'Загрузка клиентов 1C',
             link: '/statistic/uploadingclients',
+            role: ['admin']
+        },
+        {
+            name: 'Загрузка GUID клиентов 1C',
+            link: '/statistic/unloadingintegrate1C',
+            role: ['admin']
+        },
+        {
+            name: 'Загрузка маршрутов 1C',
+            link: '/statistic/uploadingagentroute',
             role: ['admin']
         },
         {
@@ -148,13 +163,23 @@ const list = {
             role: ['admin']
         },
         {
-            name: 'Выгрузка интеграции 1С',
-            link: '/statistic/integrateoutshoro',
+            name: 'Выгрузка клиентов',
+            link: '/statistic/unloadingclients',
             role: ['admin']
         },
         {
-            name: 'Выгрузка клиентов',
-            link: '/statistic/unloadingclients',
+            name: 'Выгрузка маршрутов',
+            link: '/statistic/unloadingagentroutes',
+            role: ['admin']
+        },
+        {
+            name: 'Выгрузка районов',
+            link: '/statistic/unloadingdistricts',
+            role: ['admin']
+        },
+        {
+            name: 'Выгрузка сотрудников',
+            link: '/statistic/unloadingemployments',
             role: ['admin']
         },
     ]

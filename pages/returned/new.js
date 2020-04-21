@@ -69,12 +69,17 @@ const Catalog = React.memo((props) => {
     const [list, setList] = useState(data.brands);
     const [items, setItems] = useState({});
     let [organization, setOrganization] = useState({});
+    let [geo, setGeo] = useState(undefined);
     let handleOrganization = async (organization) => {
         setItems({})
         setOrganization(organization)
     };
     useEffect(()=>{
         (async()=>{
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition((position)=>{
+                    setGeo(position)
+                })
             if(profile.organization){
                 organization = data.brandOrganizations.filter(elem=>elem._id===profile.organization)[0]
                 setOrganization({...organization})
@@ -267,19 +272,17 @@ const Catalog = React.memo((props) => {
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={()=>{
                     if(allPrice>0) {
                         if(client&&client._id) {
-                            let proofeAddress = client.address.length > 0
-                            if (proofeAddress) {
-                                for (let i = 0; i < client.address.length; i++) {
-                                    proofeAddress = client.address[i][0].length > 0
-                                }
-                            }
+                            let proofeAddress = client.address[0]&&client.address[0][0].length > 0
                             if (
                                 proofeAddress && client.name.length > 0 && client.phone.length > 0
                             ) {
-                                setMiniDialog('Оформление возврата', <ReturnedConfirmed items={items}
-                                                                   client={client}
-                                                                   allPrice={allPrice}
-                                                                   organization={organization}/>)
+                                setMiniDialog('Оформление возврата',
+                                    <ReturnedConfirmed items={items}
+                                                       client={client}
+                                                       geo={geo}
+                                                       allPrice={allPrice}
+                                                       organization={organization}/>
+                                )
                                 showMiniDialog(true)
                             }
                             else

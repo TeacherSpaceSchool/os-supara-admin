@@ -14,8 +14,6 @@ import CardOrganizationPlaceholder from '../../components/organization/CardOrgan
 import { getClientGqlSsr } from '../../src/getClientGQL'
 import initialApp from '../../src/initialApp'
 import Router from 'next/router'
-import Fab from '@material-ui/core/Fab';
-import InputIcon from '@material-ui/icons/Input';
 
 const Integrates = React.memo((props) => {
     const classes = pageListStyle();
@@ -45,6 +43,15 @@ const Integrates = React.memo((props) => {
                 {`Всего организаций: ${list.length}`}
             </div>
             <div className={classes.page}>
+                {
+                    profile.role==='admin'?
+                        <Link href='/statistic/integrate/[id]' as='/statistic/integrate/super'>
+                            <a>
+                                <CardOrganization element={{name: 'AZYK.STORE', image: '/static/512x512.png'}}/>
+                            </a>
+                        </Link>
+                        :null
+                }
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
                         return(
@@ -58,15 +65,6 @@ const Integrates = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {['admin'].includes(profile.role)?
-                <Link href='/statistic/integrate/unloadingintegrate1C'>
-                    <Fab color='primary' aria-label='add' className={classes.fab}>
-                        <InputIcon />
-                    </Fab>
-                </Link>
-                :
-                null
-            }
         </App>
     )
 })

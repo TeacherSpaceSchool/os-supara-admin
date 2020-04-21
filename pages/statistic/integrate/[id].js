@@ -13,6 +13,7 @@ import { forceCheck } from 'react-lazyload';
 import CardIntegratePlaceholder from '../../../components/integrate/CardIntegratePlaceholder'
 import { getClientGqlSsr } from '../../../src/getClientGQL'
 import initialApp from '../../../src/initialApp'
+import Router from 'next/router'
 
 const Integrate = React.memo((props) => {
     const classes = pageListStyle();
@@ -59,15 +60,15 @@ const Integrate = React.memo((props) => {
         setSearchTimeOut(searchTimeOut)
     },[filter, search])
     return (
-        <App checkPagination={checkPagination} searchShow={true} filters={data.filterIntegrate1C} pageName={data.organization?data.organization.name:'Ничего не найдено'}>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterIntegrate1C} pageName={data.organization?data.organization.name:'AZYK.STORE'}>
             <Head>
-                <title>{data.organization?data.organization.name:'Ничего не найдено'}</title>
+                <title>{data.organization?data.organization.name:'AZYK.STORE'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content={data.organization!==null?data.organization.name:'Ничего не найдено'} />
+                <meta property='og:title' content={data.organization?data.organization.name:'AZYK.STORE'} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/statistic/integrate/${router.query.id}`} />
+                <meta property='og:url' content={`${urlMain}/statistic/integrate/${router.query.id}`} />
                 <link rel='canonical' href={`${urlMain}/statistic/integrate/${router.query.id}`}/>
             </Head>
             <div className={classes.page}>
@@ -94,7 +95,7 @@ const Integrate = React.memo((props) => {
                     }
                 </div>
                 <CardIntegrate list={list} organization={router.query.id} items={items} clients={clients} agents={agents} ecspeditors={ecspeditors} setList={setList}/>
-                {data.organization?
+                {
                     list?list.map((element, idx)=> {
                             return(
                                 <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardIntegratePlaceholder height={height}/>}>
@@ -102,7 +103,6 @@ const Integrate = React.memo((props) => {
                                 </LazyLoad>
                             )}
                     ):null
-                    :null
                 }
             </div>
         </App>
@@ -111,6 +111,14 @@ const Integrate = React.memo((props) => {
 
 Integrate.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        } else
+            Router.push('/')
     return {
         data: {
             ...(await getIntegrate1Cs({search: '', filter: '', skip: 0}, ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):null)),

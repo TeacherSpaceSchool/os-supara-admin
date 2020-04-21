@@ -11,11 +11,13 @@ import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import Router from 'next/router'
 import Confirmation from './Confirmation'
 import Link from 'next/link';
+import { addAgentHistoryGeo } from '../../src/gql/agentHistoryGeo'
+import {getGeoDistance} from '../../src/lib'
 
 const ReturnedConfirmed =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice, organization, items } = props;
+        const { client, allPrice, organization, items, geo } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { classes } = props;
         const width = isMobileApp? (window.innerWidth-112) : 500
@@ -46,6 +48,13 @@ const ReturnedConfirmed =  React.memo(
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
                         const action = async () => {
+                            if (geo&&client.address[0][1].includes(', ')) {
+                                let distance = getGeoDistance(geo.coords.latitude, geo.coords.longitude, ...(client.address[0][1].split(', ')))
+                                if(distance<100){
+                                    await addAgentHistoryGeo({client: client._id, geo: `${geo.coords.latitude}, ${geo.coords.longitude}`})
+                                }
+                            }
+
                             await addReturned({
                                 info: coment,
                                 address: client.address[0],

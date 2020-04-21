@@ -7,32 +7,33 @@ import { addOrders } from '../../src/gql/order'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import * as snackbarActions from '../../redux/actions/snackbar'
 import * as userActions from '../../redux/actions/user'
-import FormLabel from '@material-ui/core/FormLabel';
+/*import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';*/
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import Router from 'next/router'
 import Confirmation from './Confirmation'
 import Link from 'next/link';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { addBasket } from '../../src/gql/basket';
+import { addAgentHistoryGeo } from '../../src/gql/agentHistoryGeo'
+import {getGeoDistance} from '../../src/lib'
 
 const BuyBasket =  React.memo(
     (props) =>{
         const { isMobileApp } = props.app;
-        const { client, allPrice, organization, bonus, adss, agent, basket } = props;
+        const { client, allPrice, organization, bonus, adss, agent, basket, geo, classes } = props;
         const { showMiniDialog, setMiniDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
-        const { classes } = props;
         const width = isMobileApp? (window.innerWidth-112) : 500
-        let [address, setAddress] = useState([client.address[0]]);
+        const address = [client.address[0]];
         let [coment, setComent] = useState('');
         let [noSplit, setNoSplit] = useState(false);
         let handleComent =  (event) => {
@@ -41,12 +42,12 @@ const BuyBasket =  React.memo(
         let [paymentMethod, setPaymentMethod] = useState('Наличные');
         let [useBonus, setUseBonus] = useState(false);
         let [unlock, setUnlock] = useState(false);
-        let paymentMethods = [
+        /*let paymentMethods = [
             'Наличные'
         ]
         let handlePaymentMethod =  (event) => {
             setPaymentMethod(event.target.value)
-        };
+        };*/
         useEffect(()=>{
             (async()=>{
                 for (let i = 0; i < basket.length; i++) {
@@ -130,35 +131,32 @@ const BuyBasket =  React.memo(
                     <Button variant='contained' color='primary' onClick={async()=>{
                         if(unlock) {
                             if (agent || !organization.minimumOrder === 0 || organization.minimumOrder < allPrice) {
-                                let proofeAddress = address.length > 0
-                                if (proofeAddress) {
-                                    for (let i = 0; i < address.length; i++) {
-                                        proofeAddress = address[i][0].length > 0
-                                    }
-                                }
-                                if (proofeAddress) {
-                                    if (paymentMethod.length > 0) {
-                                        const action = async () => {
-                                            sessionStorage.catalog = '{}'
-                                            await addOrders({
-                                                noSplit: noSplit,
-                                                info: coment,
-                                                usedBonus: useBonus,
-                                                paymentMethod: paymentMethod,
-                                                address: address,
-                                                organization: organization._id,
-                                                client: client._id
-                                            })
-                                            Router.push('/orders')
-                                            showMiniDialog(false);
-                                        }
-                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                    } else
-                                        showSnackBar('Заполните все поля')
-                                }
-                                else {
-                                    showSnackBar('Укажите адрес точнее')
-                                }
+                               if (paymentMethod.length > 0) {
+                                   const action = async () => {
+                                       if (agent&&geo&&client.address[0][1].includes(', ')) {
+                                           let distance = getGeoDistance(geo.coords.latitude, geo.coords.longitude, ...(client.address[0][1].split(', ')))
+                                           if(distance<100){
+                                               await addAgentHistoryGeo({client: client._id, geo: `${geo.coords.latitude}, ${geo.coords.longitude}`})
+                                           }
+                                       }
+
+                                       sessionStorage.catalog = '{}'
+                                       await addOrders({
+                                           noSplit: noSplit,
+                                           info: coment,
+                                           usedBonus: useBonus,
+                                           paymentMethod: paymentMethod,
+                                           address: address,
+                                           organization: organization._id,
+                                           client: client._id
+                                       })
+                                       Router.push('/orders')
+                                       showMiniDialog(false);
+                                   }
+                                   setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                               }
+                               else
+                                   showSnackBar('Заполните все поля')
                             }
                             else {
                                 showSnackBar('Сумма заказа должна быть выше минимальной')

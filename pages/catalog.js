@@ -69,19 +69,25 @@ const Catalog = React.memo((props) => {
     };
     const [list, setList] = useState(data.brands);
     const [basket, setBasket] = useState({});
-    let [bonusesClient, setBonusesClient] = useState(data.bonusesClient);
+    //let [bonusesClient, setBonusesClient] = useState(data.bonusesClient);
     let [organization, setOrganization] = useState({});
+    let [geo, setGeo] = useState(undefined);
     let handleOrganization = async (organization) => {
         await deleteBasketAll()
         setBasket({})
-        bonusesClient = (await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient
-        setBonusesClient(bonusesClient.filter(bonusClient=>bonusClient.bonus.organization._id===organization._id))
+        /*bonusesClient = (await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient
+        setBonusesClient(bonusesClient.filter(bonusClient=>bonusClient.bonus.organization._id===organization._id))*/
         setOrganization(organization)
     };
     useEffect(()=>{
         (async()=>{
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition((position)=>{
+                    setGeo(position)
+                })
+
             if(profile.organization){
-                setBonusesClient((await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient)
+                //setBonusesClient((await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient)
                 organization = data.brandOrganizations.filter(elem=>elem._id===profile.organization)[0]
                 setOrganization({...organization})
             }
@@ -101,11 +107,11 @@ const Catalog = React.memo((props) => {
         setPagination(100)
         forceCheck()
     },[list])
-    let [bonus, setBonus] = useState({});
+    //let [bonus, setBonus] = useState({});
     let [client, setClient] = useState(data.client);
     let handleClient =  (client) => {
         setClient(client)
-        setBonus((data.bonusesClient.filter(bonusClient=>bonusClient.client._id===client._id))[0])
+        //setBonus((data.bonusesClient.filter(bonusClient=>bonusClient.client._id===client._id))[0])
         setOpen(false)
     };
     let [allPrice, setAllPrice] = useState(0);
@@ -118,47 +124,39 @@ const Catalog = React.memo((props) => {
         basket[id].count+=list[idx].apiece?1:list[idx].packaging
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
-        sessionStorage.catalog = JSON.stringify(basket)
     }
     let decrement = async (idx)=>{
         let id = list[idx]._id
-        if(!basket[id])
-            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
-        if(basket[id].count>0) {
-            basket[id].count = checkInt(basket[id].count)
-            basket[id].count -= list[idx].apiece?1:list[idx].packaging
-            basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
-            setBasket({...basket})
-            sessionStorage.catalog = JSON.stringify(basket)
+        if(basket[id]){
+            if(basket[id].count>0) {
+                basket[id].count = checkInt(basket[id].count)
+                basket[id].count -= list[idx].apiece?1:list[idx].packaging
+                basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
+                setBasket({...basket})
+            }
         }
     }
     let incrementConsignment = async(idx)=>{
         let id = list[idx]._id
-        if(!basket[id])
-            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
-        if(basket[id].consignment<basket[id].count) {
+        if(basket[id]&&basket[id].consignment<basket[id].count) {
             basket[id].consignment += 1
             setBasket({...basket})
-            sessionStorage.catalog = JSON.stringify(basket)
         }
     }
     let decrementConsignment = async(idx)=>{
         let id = list[idx]._id
-        if(!basket[id])
-            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
-        if(basket[id].consignment>0) {
+        if(basket[id]&&basket[id].consignment>0) {
             basket[id].consignment -= 1
             setBasket({...basket})
-            sessionStorage.catalog = JSON.stringify(basket)
         }
+
     }
     let showConsignment = (idx)=>{
         let id = list[idx]._id
-        if(!basket[id])
-            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
-        basket[id].showConsignment = !basket[id].showConsignment
-        setBasket({...basket})
-        sessionStorage.catalog = JSON.stringify(basket)
+        if(basket[id]) {
+            basket[id].showConsignment = !basket[id].showConsignment
+            setBasket({...basket})
+        }
     }
     let setBasketChange= async(idx, count)=>{
         let id = list[idx]._id
@@ -167,7 +165,6 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(count)
         basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
         setBasket({...basket})
-        sessionStorage.catalog = JSON.stringify(basket)
     }
     let addPackaging= async(idx)=>{
         let id = list[idx]._id
@@ -176,23 +173,22 @@ const Catalog = React.memo((props) => {
         basket[id].count = checkInt(basket[id].count)
         if(list[idx].packaging){
             basket[id].count = (parseInt(basket[id].count/list[idx].packaging)+1)*list[idx].packaging
+            basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
+            setBasket({...basket})
         }
-        basket[id].allPrice = Math.round(basket[id].count*(list[idx].stock?list[idx].stock:list[idx].price))
-        setBasket({...basket})
-        sessionStorage.catalog = JSON.stringify(basket)
     }
     let addPackagingConsignment = async(idx)=>{
         let id = list[idx]._id
-        if(!basket[id])
-            basket[id] = {_id: id, count: 0, allPrice: 0, consignment: 0}
-        let consignment = (parseInt(basket[id].consignment/list[idx].packaging)+1)*list[idx].packaging
-        if(consignment<=basket[id].count){
-            basket[id].consignment = consignment
-            setBasket({...basket})
-            sessionStorage.catalog = JSON.stringify(basket)
+        if(basket[id]){
+            let consignment = (parseInt(basket[id].consignment/list[idx].packaging)+1)*list[idx].packaging
+            if(consignment<=basket[id].count){
+                basket[id].consignment = consignment
+                setBasket({...basket})
+            }
         }
     }
     useEffect(()=>{
+        sessionStorage.catalog = JSON.stringify(basket)
         let keys = Object.keys(basket)
         allPrice = 0
         for(let i=0; i<keys.length; i++){
@@ -384,21 +380,17 @@ const Catalog = React.memo((props) => {
                 <div className={isMobileApp?classes.buyM:classes.buyD} onClick={async ()=>{
                     if(allPrice>0) {
                         if(client&&client._id) {
-                            let proofeAddress = client.address.length > 0
-                            if (proofeAddress) {
-                                for (let i = 0; i < client.address.length; i++) {
-                                    proofeAddress = client.address[i][0].length > 0
-                                }
-                            }
+                            let proofeAddress = client.address[0]&&client.address[0][0].length > 0
                             if (
                                 client._id && proofeAddress && client.name.length > 0 && client.phone.length > 0
                             ) {
-                                setMiniDialog('Купить', <BuyBasket bonus={bonus}
-                                                                   agent={true}
-                                                                   client={client}
-                                                                   basket = {Object.values(basket)}
-                                                                   allPrice={allPrice}
-                                                                   organization={organization}/>)
+                                setMiniDialog('Купить', <BuyBasket
+                                    geo={geo}
+                                    agent={true}
+                                    client={client}
+                                    basket = {Object.values(basket)}
+                                    allPrice={allPrice}
+                                    organization={organization}/>)
                                 showMiniDialog(true)
                             }
                             else {

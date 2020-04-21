@@ -183,7 +183,7 @@ const Order =  React.memo(
                        <a>
                            <div style={{cursor: 'pointer'}} className={classes.row} onClick={()=>{setMiniDialog('История', <HistoryOrder invoice={element._id}/>)}}>
                                <div className={classes.nameField}>Изменен:&nbsp;</div>
-                               <div className={classes.value}>{pdDDMMYYHHMM(element.orders[0].updatedAt)}</div>
+                               <div className={classes.value}>{`${pdDDMMYYHHMM(element.orders[0].updatedAt)}${element.editor?`, ${element.editor}`:''}`}</div>
                             </div>
                        </a>
                         :

@@ -29,10 +29,10 @@ const AgentHistoryGeo = React.memo((props) => {
     let [agentHistoryGeo, setAgentHistoryGeo] = useState(undefined);
     let [organization, setOrganization] = useState({_id: undefined});
     let [agents, setAgents] = useState([]);
+    let [agent, setAgent] = useState({_id: undefined});
     let [count, setCount] = useState(0);
     let [order, setOrder] = useState(0);
     let [cancel, setCancel] = useState(0);
-    let [agent, setAgent] = useState({_id: undefined});
     const { showLoad } = props.appActions;
     let [showStat, setShowStat] = useState(false);
     useEffect(()=>{
