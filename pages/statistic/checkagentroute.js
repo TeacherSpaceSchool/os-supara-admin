@@ -47,6 +47,12 @@ const CheckAgentRoute = React.memo((props) => {
             }
         })()
     },[agentRoute])
+    useEffect(()=>{
+        if(process.browser){
+            let appBody = document.getElementsByClassName('App-body')
+            appBody[0].style.paddingBottom = '0px'
+        }
+    },[process.browser])
     return (
         <App pageName='Проверка маршрутов'>
             <Head>
