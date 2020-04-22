@@ -289,13 +289,9 @@ const Catalog = React.memo((props) => {
                                     <LazyLoad scrollContainer={'.App-body'} key={row._id} offset={[186, 0]} debounce={0} once={true}  placeholder={<CardCatalogPlaceholder/>}>
                                         <div>
                                             <div className={classes.line}>
-                                                <a href={`/item/${row._id}`} target='_blank'>
-                                                    <img className={classes.media} src={row.image}/>
-                                                </a>
+                                                <img className={classes.media} src={row.image}/>
                                                 <div className={classes.column}>
-                                                    <a href={`/item/${row._id}`} target='_blank'>
-                                                        <div className={classes.value}>{row.name}</div>
-                                                    </a>
+                                                    <div className={classes.value}>{row.name}</div>
                                                     <b className={classes.value}>
                                                         {`${price} сом`}
                                                     </b>

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import CardOrder from '../components/order/CardOrder'
 import pageListStyle from '../src/styleMUI/orders/orderList'
@@ -28,6 +28,7 @@ const height = 225
 const Orders = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+    const initialRender = useRef(true);
     let [simpleStatistic, setSimpleStatistic] = useState(['0']);
     let [list, setList] = useState(data.invoices);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
@@ -51,16 +52,20 @@ const Orders = React.memo((props) => {
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
-        if(searchTimeOut)
-            clearTimeout(searchTimeOut)
-        searchTimeOut = setTimeout(async()=>{
-            setSelected([])
-            await getList()
-            forceCheck()
-            setPaginationWork(true);
-            (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
-        }, 500)
-        setSearchTimeOut(searchTimeOut)
+        if(initialRender.current) {
+            initialRender.current = false;
+        } else {
+            if(searchTimeOut)
+                clearTimeout(searchTimeOut)
+            searchTimeOut = setTimeout(async()=>{
+                setSelected([])
+                await getList()
+                forceCheck()
+                setPaginationWork(true);
+                (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+            }, 500)
+            setSearchTimeOut(searchTimeOut)
+        }
     },[filter, sort, search, date])
 
     let [showStat, setShowStat] = useState(false);

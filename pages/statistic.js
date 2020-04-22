@@ -108,6 +108,11 @@ const list = {
             role: ['admin']
         },
         {
+            name: 'Проверка маршрутов',
+            link:'/statistic/checkagentroute',
+            role: ['admin']
+        },
+        {
             name: 'Пуш-уведомления',
             link: '/statistic/notificationStatistic',
             role: ['admin']
