@@ -15,26 +15,20 @@ import Confirmation from '../../components/dialog/Confirmation'
 import { deleteOrders, restoreOrders } from '../../src/gql/order'
 import SyncOn from '@material-ui/icons/Sync';
 import SyncOff from '@material-ui/icons/SyncDisabled';
+import {getOrder} from '../../src/gql/order'
 
 const CardOrder = React.memo((props) => {
     const classes = cardOrderStyle();
     const { element, setList, route, getInvoices, setSelected, selected, list, idx } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { profile, authenticated} = props.user;
+    const status = element.taken?'принят':element.cancelForwarder||element.cancelClient?'отмена':element.confirmationForwarder&&element.confirmationClient?'выполнен':'обработка'
     const statusColor = {
         'обработка': 'orange',
         'принят': 'blue',
         'выполнен': 'green',
         'отмена': 'red'
     }
-    let [priceAfterReturn, setPriceAfterReturn] = useState(0);
-    useEffect(()=>{
-        priceAfterReturn = 0
-        for(let i=0; i<element.orders.length; i++){
-            priceAfterReturn += (element.orders[i].allPrice-element.orders[i].returned*(element.orders[i].item.stock?element.orders[i].item.stock:element.orders[i].item.price))
-        }
-        setPriceAfterReturn(priceAfterReturn)
-    },[element, element.orders, ])
     return (
         <Card className={classes.card}>
             {
@@ -46,10 +40,17 @@ const CardOrder = React.memo((props) => {
                     :
                     null
             }
-            <CardActionArea onClick={()=>{
-                if(!selected.length){setMiniDialog('Заказ', <Order idx={idx} list={list} getInvoices={getInvoices} route={route} element={element} setList={setList}/>); showMiniDialog(true)}
+            <CardActionArea onClick={async()=>{
+                if(!selected.length){
+                    let _elemenet = (await getOrder({_id: element._id})).invoice
+                    if(_elemenet) {
+                        setMiniDialog('Заказ', <Order idx={idx} list={list} getInvoices={getInvoices} route={route}
+                                                      element={_elemenet} setList={setList}/>);
+                        showMiniDialog(true)
+                    }
+                }
                 else {
-                    if(element.orders[0].status==='отмена') {
+                    if(element.cancelForwarder||element.cancelClient) {
                         if (selected.includes(element._id)) {
                             let _selected = selected.filter((i) => i !== element._id)
                             setSelected([..._selected])
@@ -62,17 +63,17 @@ const CardOrder = React.memo((props) => {
                 <CardContent className={classes.column}>
                     <div className={classes.row}>
                         <div className={classes.number}>{element.number}</div>&nbsp;
-                        <div className={classes.status} style={{background: statusColor[element.orders[0].status]}}>{
-                            element.orders[0].status==='принят'&&(element.confirmationForwarder||element.confirmationClient)?
+                        <div className={classes.status} style={{background: statusColor[status]}}>{
+                            element.confirmationForwarder||element.confirmationClient?
                                 element.confirmationClient?
                                     'подтвержден клиентом'
                                     :
                                     element.confirmationForwarder?
                                         'доставлен поставщиком'
                                         :
-                                        element.orders[0].status
+                                        status
                                 :
-                                element.orders[0].status
+                                status
                         }</div>
                     </div>
                     <div className={classes.row}>
@@ -80,10 +81,10 @@ const CardOrder = React.memo((props) => {
                         <div className={classes.value}>{pdDDMMYYHHMM(element.createdAt)}</div>
                     </div>
                     {
-                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.orders[0].updatedAt!==element.orders[0].createdAt?
+                        ['admin', 'организация', 'менеджер'].includes(profile.role)&&element.updatedAt!==element.createdAt?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Изменен:&nbsp;</div>
-                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(element.orders[0].updatedAt)}${element.editor?`, ${element.editor}`:''}`}</div>
+                                <div className={classes.value} style={{whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}>{`${pdDDMMYYHHMM(element.updatedAt)}${element.editor?`, ${element.editor}`:''}`}</div>
                             </div>
                             :
                             null
@@ -135,7 +136,7 @@ const CardOrder = React.memo((props) => {
                     </div>
                     <div className={classes.row}>
                         <div className={classes.nameField}>Производитель:&nbsp;</div>
-                        <div className={classes.value}>{element.orders[0].item.organization.name}</div>
+                        <div className={classes.value}>{element.organization.name}</div>
                     </div>
                     {
                         element.distributer&&element.distributer.name?
@@ -177,8 +178,10 @@ const CardOrder = React.memo((props) => {
                             null
                     }
                     <div className={classes.row}>
-                        <div className={classes.nameField}>Сумма&nbsp;{priceAfterReturn!==element.allPrice?'(факт./итого)':''}:</div>
-                        <div className={classes.value}>{priceAfterReturn!==element.allPrice?`${priceAfterReturn} сом/${element.allPrice} сом`:`${element.allPrice} сом`}</div>
+                        <div className={classes.nameField}>Сумма{element.returnedPrice?' (факт./итого)':''}:</div>
+                        <div className={classes.value}>
+                            {element.returnedPrice?`${element.allPrice-element.returnedPrice} сом/${element.allPrice} сом`:`${element.allPrice} сом`}
+                        </div>
                     </div>
                     {
                         element.consignmentPrice?
@@ -220,7 +223,7 @@ const CardOrder = React.memo((props) => {
             </CardActionArea>
             <CardActions>
                 {
-                    element.del!=='deleted'&&element.orders[0].status==='отмена'&&profile.role==='admin'&&!selected.length ?
+                    element.del!=='deleted'&&status==='отмена'&&profile.role==='admin'&&!selected.length ?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 await deleteOrders([element._id])

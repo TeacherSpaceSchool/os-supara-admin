@@ -18,35 +18,6 @@ export const getOrders = async(args, client)=>{
                             updatedAt
                             allTonnage
                             allSize
-                            orders 
-                                { 
-                                    _id
-                                    allTonnage
-                                    allSize
-                                    createdAt
-                                    updatedAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            apiece
-                                            priotiry
-                                            price
-                                            packaging
-                                            weight
-                                            size
-                                            organization
-                                                {_id name minimumOrder consignation}
-                                        }
-                                    count
-                                    allPrice
-                                    consignment
-                                    returned
-                                    consignmentPrice
-                                    status
-                                 }
                             client 
                                 { 
                                     _id
@@ -58,6 +29,7 @@ export const getOrders = async(args, client)=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -76,6 +48,8 @@ export const getOrders = async(args, client)=>{
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation
@@ -116,35 +90,6 @@ export const getOrdersFromDistrict = async(args, client)=>{
                             updatedAt
                             allTonnage
                             allSize
-                            orders 
-                                { 
-                                    _id
-                                    allTonnage
-                                    allSize
-                                    createdAt
-                                    updatedAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            apiece
-                                            priotiry
-                                            price
-                                            packaging
-                                            weight
-                                            size
-                                            organization
-                                                {_id name minimumOrder consignation}
-                                        }
-                                    count
-                                    allPrice
-                                    consignment
-                                    returned
-                                    consignmentPrice
-                                    status
-                                 }
                             client 
                                 { 
                                     _id
@@ -156,6 +101,7 @@ export const getOrdersFromDistrict = async(args, client)=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -174,6 +120,8 @@ export const getOrdersFromDistrict = async(args, client)=>{
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation
@@ -215,35 +163,6 @@ export const getOrdersTrash = async(args, client)=>{
                             allTonnage
                             allSize
                             del
-                            orders 
-                                { 
-                                    _id
-                                    allTonnage
-                                    allSize
-                                    createdAt
-                                    updatedAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            apiece
-                                            priotiry
-                                            price
-                                            packaging
-                                            weight
-                                            size
-                                            organization
-                                                {_id name minimumOrder consignation}
-                                        }
-                                    count
-                                    allPrice
-                                    consignment
-                                    returned
-                                    consignmentPrice
-                                    status
-                                 }
                             client 
                                 { 
                                     _id
@@ -255,6 +174,7 @@ export const getOrdersTrash = async(args, client)=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -350,8 +270,6 @@ export const getOrderHistorys = async(invoice, client)=>{
                     query ($invoice: ID!) {
                         orderHistorys(invoice: $invoice) {
                             createdAt
-                            orders
-                                {item count consignment returned}
                             editor
                         }
                     }`,
@@ -378,35 +296,6 @@ export const getOrdersForRouting = async(organization)=>{
                             updatedAt
                             allTonnage
                             allSize
-                            orders 
-                                { 
-                                    _id
-                                    allTonnage
-                                    allSize
-                                    createdAt
-                                    updatedAt
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            apiece
-                                            priotiry
-                                            packaging
-                                            weight
-                                            size
-                                            price
-                                            organization
-                                                {_id name consignation}
-                                        }
-                                    count
-                                    allPrice
-                                    consignment
-                                    returned
-                                    consignmentPrice
-                                    status
-                                 }
                             client 
                                 { 
                                     _id
@@ -418,6 +307,7 @@ export const getOrdersForRouting = async(organization)=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -436,6 +326,8 @@ export const getOrdersForRouting = async(organization)=>{
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation
@@ -487,8 +379,6 @@ export const getOrder = async({_id})=>{
                                             weight
                                             size
                                             price
-                                            organization
-                                                {_id name consignation}
                                         }
                                     count
                                     allPrice
@@ -508,6 +398,7 @@ export const getOrder = async({_id})=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -525,6 +416,8 @@ export const getOrder = async({_id})=>{
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation
@@ -656,35 +549,6 @@ export const setOrder = async(element)=>{
                                 {_id name}
                             allTonnage
                             allSize
-                            orders 
-                                { 
-                                    _id
-                                    createdAt
-                                    updatedAt
-                                    allTonnage
-                                    allSize
-                                    item
-                                        {
-                                            image
-                                            _id
-                                            name    
-                                            stock 
-                                            apiece
-                                            priotiry
-                                            packaging
-                                            weight
-                                            size
-                                            price
-                                            organization
-                                                {_id name consignation}
-                                        }
-                                    count
-                                    allPrice
-                                    consignment
-                                    returned
-                                    consignmentPrice
-                                    status
-                                 }
                             client 
                                 { 
                                     _id
@@ -696,6 +560,7 @@ export const setOrder = async(element)=>{
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -713,6 +578,8 @@ export const setOrder = async(element)=>{
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation
@@ -786,6 +653,7 @@ export const subscriptionOrder = gql`
                                 }
                             allPrice
                             consignmentPrice
+                            returnedPrice
                             info
                             address
                             paymentMethod
@@ -803,6 +671,8 @@ export const subscriptionOrder = gql`
                             forwarder
                                 {_id name}
                             distributer
+                                {_id name}
+                            organization
                                 {_id name}
                             cancelForwarder
                             paymentConsignation

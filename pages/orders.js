@@ -149,7 +149,8 @@ const Orders = React.memo((props) => {
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
                             time={3}
                             onClickNHold={()=>{
-                                if(profile.role==='admin'&&element.orders[0].status==='отмена')
+                                console.log(element)
+                                if(profile.role==='admin'&&(element.cancelClient||element.cancelForwarder))
                                     if(selected.includes(element._id)) {
                                         selected = selected.filter((i)=>i!==element._id)
                                         setSelected([...selected])
