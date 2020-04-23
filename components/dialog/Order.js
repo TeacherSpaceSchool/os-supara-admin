@@ -66,7 +66,7 @@ const Order =  React.memo(
                 orders[idx].count+=1
             else
                 orders[idx].count+=orders[idx].item.packaging
-            orders[idx].allPrice = Math.round(orders[idx].count * (orders[idx].allPrice / orders[idx].count))
+            orders[idx].allPrice = Math.round(orders[idx].count * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
             orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
             orders[idx].allSize = orders[idx].count * orders[idx].item.size
             setOrders([...orders])
@@ -74,10 +74,10 @@ const Order =  React.memo(
         }
         let decrement = (idx)=>{
             if(orders[idx].count>1&&orders[idx].item.apiece) {
-                let takePrice = (orders[idx].allPrice / orders[idx].count)
+                let takePrice = (orders[idx].allPrice / (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
                 if(!element.organization.minimumOrder||((allPrice-takePrice)>=element.organization.minimumOrder)) {
                     orders[idx].count -= 1
-                    orders[idx].allPrice = Math.round(orders[idx].count * (orders[idx].allPrice / orders[idx].count))
+                    orders[idx].allPrice = Math.round(orders[idx].count * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
                     orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                     orders[idx].allSize = orders[idx].count * orders[idx].item.size
                     setOrders([...orders])
@@ -86,10 +86,10 @@ const Order =  React.memo(
                     showSnackBar('Сумма не может быть меньше минимальной')
             }
             else if(orders[idx].count>orders[idx].item.packaging&&!orders[idx].item.apiece) {
-                let takePrice = orders[idx].item.packaging * (orders[idx].allPrice / orders[idx].count)
+                let takePrice = orders[idx].item.packaging * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                 if(!element.organization.minimumOrder||((allPrice-takePrice)>=element.organization.minimumOrder)) {
                     orders[idx].count -= orders[idx].item.packaging
-                    orders[idx].allPrice = Math.round(orders[idx].count * (orders[idx].allPrice / orders[idx].count))
+                    orders[idx].allPrice = Math.round(orders[idx].count * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
                     orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                     orders[idx].allSize = orders[idx].count * orders[idx].item.size
                     setOrders([...orders])
@@ -101,7 +101,7 @@ const Order =  React.memo(
         let incrementConsignation = (idx)=>{
             if(orders[idx].consignment<orders[idx].count){
                 orders[idx].consignment+=1
-                orders[idx].consignmentPrice = Math.round(orders[idx].consignment*(orders[idx].allPrice / orders[idx].count))
+                orders[idx].consignmentPrice = Math.round(orders[idx].consignment*(!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
                 setOrders([...orders])
                 canculateAllPrice()
             }
@@ -109,7 +109,7 @@ const Order =  React.memo(
         let decrementConsignation = (idx)=>{
             if(orders[idx].consignment>0) {
                 orders[idx].consignment -= 1
-                orders[idx].consignmentPrice = Math.round(orders[idx].consignment*(orders[idx].allPrice / orders[idx].count))
+                orders[idx].consignmentPrice = Math.round(orders[idx].consignment*(!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock))
                 setOrders([...orders])
                 canculateAllPrice()
             }
@@ -374,7 +374,7 @@ const Order =  React.memo(
                                                     orders[idx].item.apiece?
                                                         <div className={classes.addPackaging} style={{color: '#ffb300'}} onClick={()=>{
                                                             orders[idx].count = (parseInt(orders[idx].count/order.item.packaging)+1)*order.item.packaging
-                                                            orders[idx].allPrice = orders[idx].count * (orders[idx].allPrice / orders[idx].count)
+                                                            orders[idx].allPrice = orders[idx].count * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                                                             orders[idx].allTonnage = orders[idx].count * orders[idx].item.weight
                                                             setOrders([...orders])
                                                             canculateAllPrice()
@@ -421,7 +421,7 @@ const Order =  React.memo(
                                                             if(consignment<=orders[idx].count){
                                                                 orders[idx].consignment = consignment
                                                             }
-                                                            orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].allPrice / orders[idx].count)
+                                                            orders[idx].consignmentPrice = orders[idx].consignment * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                                                             setOrders([...orders])
                                                             canculateAllPrice()
                                                         }}>
@@ -496,7 +496,7 @@ const Order =  React.memo(
                                                                     if(consignment<=orders[idx].count){
                                                                         orders[idx].consignment = consignment
                                                                     }
-                                                                    orders[idx].consignmentPrice = orders[idx].consignment * (orders[idx].allPrice / orders[idx].count)
+                                                                    orders[idx].consignmentPrice = orders[idx].consignment * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                                                                     setOrders([...orders])
                                                                     canculateAllPrice()
                                                                 }}>
