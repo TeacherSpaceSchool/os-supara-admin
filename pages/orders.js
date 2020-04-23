@@ -52,20 +52,23 @@ const Orders = React.memo((props) => {
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     useEffect(()=>{
-        if(initialRender.current) {
-            initialRender.current = false;
-        } else {
-            if(searchTimeOut)
-                clearTimeout(searchTimeOut)
-            searchTimeOut = setTimeout(async()=>{
-                setSelected([])
-                await getList()
-                forceCheck()
-                setPaginationWork(true);
-                (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
-            }, 500)
-            setSearchTimeOut(searchTimeOut)
-        }
+        (async ()=>{
+            if(initialRender.current) {
+                initialRender.current = false;
+                setSimpleStatistic((await getInvoicesSimpleStatistic({search: search, filter: filter, date: date})).invoicesSimpleStatistic)
+            } else {
+                if(searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async()=>{
+                    setSelected([])
+                    await getList()
+                    forceCheck()
+                    setPaginationWork(true);
+                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
+        })()
     },[filter, sort, search, date])
 
     let [showStat, setShowStat] = useState(false);
