@@ -131,9 +131,6 @@ const ClientStatistic = React.memo((props) => {
                                 <br/>
                                 <br/>
                                 {`Конс: ${statisticClient.row[0].data[3]} сом`}
-                                <br/>
-                                <br/>
-                                {`Заказов отменено: ${statisticClient.row[0].data[4]} шт`}
                                 </>
                                 :
                                 null

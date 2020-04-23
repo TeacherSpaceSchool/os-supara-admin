@@ -131,9 +131,6 @@ const ItemStatistic = React.memo((props) => {
                                 <br/>
                                 <br/>
                                 {`Конс: ${statisticItem.row[0].data[3]} сом`}
-                                <br/>
-                                <br/>
-                                {`Отменено: ${statisticItem.row[0].data[4]} шт`}
                                 </>
                                 :
                                 null
