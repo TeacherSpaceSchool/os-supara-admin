@@ -16,6 +16,7 @@ const CardError = React.memo((props) => {
                 <div className={classes.date}>
                     {pdDDMMYYHHMM(element.createdAt)}
                 </div>
+                <br/>
                 <div className={classes.row}>
                     <div className={classes.nameField}>
                         Ошибка:&nbsp;
