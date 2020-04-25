@@ -81,7 +81,7 @@ const Equipments = React.memo((props) => {
 
 Equipments.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!(ctx.store.getState().user.role))
+    if(!(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
