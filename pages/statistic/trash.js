@@ -137,7 +137,7 @@ const Trash = React.memo((props) => {
                                     type==='Клиенты'?
                                         <CardClient list={list} idx={idx} key={element._id} setList={setList} element={element}/>
                                         :
-                                    type==='Заказы'&&element.orders?
+                                    type==='Заказы'?
                                         <CardOrder selected={[]} list={list} idx={idx} setList={setList} key={element._id} element={element}/>
                                         :
                                     type==='Возвраты'&&element.items?

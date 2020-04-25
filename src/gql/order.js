@@ -194,6 +194,8 @@ export const getOrdersTrash = async(args, client)=>{
                                 {_id name}
                             distributer
                                 {_id name}
+                            organization
+                                {_id name}
                             cancelForwarder
                             paymentConsignation
                             taken
