@@ -71,7 +71,7 @@ const Ads = React.memo((props) => {
 
 Ads.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!ctx.store.getState().user.authenticated)
+    if(!ctx.store.getState().user.role)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/contact'

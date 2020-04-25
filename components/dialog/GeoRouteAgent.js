@@ -69,27 +69,8 @@ const Geo =  React.memo(
                                                 return <Placemark
                                                     onClick={() => {
                                                         if(['агент', 'суперагент'].includes(profile.role)) {
-                                                            const action = () => {
-                                                                if (navigator.geolocation) {
-                                                                    navigator.geolocation.getCurrentPosition(async (position) => {
-                                                                        let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(client.address[0][1].split(', ')))
-                                                                        if (distance < 100) {
-                                                                            await addAgentHistoryGeo({
-                                                                                client: client._id,
-                                                                                geo: `${position.coords.latitude}, ${position.coords.longitude}`
-                                                                            })
-                                                                            Router.push(`/catalog?client=${client._id}`)
-                                                                        }
-                                                                        else
-                                                                            showSnackBar('Вы слишком далеко')
-                                                                    });
-                                                                } else {
-                                                                    showSnackBar('Геолокация не поддерживается')
-                                                                }
-                                                            }
-                                                            setMiniDialog('Подтвердить посещение?', <Confirmation
-                                                                action={action}/>)
-                                                            showMiniDialog(true)
+                                                            Router.push(`/catalog?client=${client._id}`)
+                                                            showFullDialog(false)
                                                         }
                                                     }}
                                                     key={idx}
@@ -119,27 +100,8 @@ const Geo =  React.memo(
                                         if(client.user.status==='active'&&client.address[0]&&client.address[0][1]) return <Placemark
                                             onClick={() => {
                                                 if(['агент', 'суперагент'].includes(profile.role)) {
-                                                    const action = () => {
-                                                        if (navigator.geolocation) {
-                                                            navigator.geolocation.getCurrentPosition(async (position) => {
-                                                                let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(client.address[0][1].split(', ')))
-                                                                if (distance < 100) {
-                                                                    await addAgentHistoryGeo({
-                                                                        client: client._id,
-                                                                        geo: `${position.coords.latitude}, ${position.coords.longitude}`
-                                                                    })
-                                                                    Router.push(`/catalog?client=${client._id}`)
-                                                                }
-                                                                else
-                                                                    showSnackBar('Вы слишком далеко')
-                                                            });
-                                                        } else {
-                                                            showSnackBar('Геолокация не поддерживается')
-                                                        }
-                                                    }
-                                                    setMiniDialog('Подтвердить посещение?', <Confirmation
-                                                        action={action}/>)
-                                                    showMiniDialog(true)
+                                                    Router.push(`/catalog?client=${client._id}`)
+                                                    showFullDialog(false)
                                                 }
                                             }}
                                             key={idx}

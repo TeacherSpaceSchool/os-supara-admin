@@ -117,6 +117,11 @@ const list = {
             link: '/statistic/notificationStatistic',
             role: ['admin']
         },
+        {
+            name: 'Сбои',
+            link: '/statistic/error',
+            role: ['admin']
+        },
     ],
     integrate: [
         {
