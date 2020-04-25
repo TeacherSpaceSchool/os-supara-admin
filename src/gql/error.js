@@ -12,7 +12,8 @@ export const getErrors = async(client)=>{
                         errors {
                             _id
                             createdAt
-                            data
+                            err
+                            path
                           }
                     }`,
             })

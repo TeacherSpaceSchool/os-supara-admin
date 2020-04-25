@@ -16,9 +16,27 @@ const CardError = React.memo((props) => {
                 <div className={classes.date}>
                     {pdDDMMYYHHMM(element.createdAt)}
                 </div>
-                <div className={classes.data}>
-                    {element.data}
+                <div className={classes.row}>
+                    <div className={classes.nameField}>
+                        Ошибка:&nbsp;
+                    </div>
+                    <div className={classes.value}>
+                        {element.err}
+                    </div>
                 </div>
+                {
+                    element.path?
+                        <div className={classes.row}>
+                            <div className={classes.nameField}>
+                                Путь:&nbsp;
+                            </div>
+                            <div className={classes.value}>
+                                {element.path}
+                            </div>
+                        </div>
+                        :
+                        null
+                }
             </CardContent>
         </Card>
     );
