@@ -39,11 +39,11 @@ const Index = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Товары'>
+        <App checkPagination={checkPagination} searchShow={true} filters={data.filterCategory} sorts={data.sortCategory} pageName='Категории'>
             <Head>
-                <title>Азык - электронный склад связывающий производителя с торговой точкой</title>
+                <title>Категории</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Азык - электронный склад связывающий производителя с торговой точкой' />
+                <meta property='og:title' content='Категории' />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />

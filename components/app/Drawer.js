@@ -99,7 +99,7 @@ const MyDrawer = React.memo((props) => {
                         <Divider/>
                         </>
                         :
-                        ['client', 'admin'].includes(profile.role)?
+                        [/*'client', */'admin'].includes(profile.role)?
                             <>
                             <Link href='/category'>
                                     <ListItem style={{background: (router.pathname===('/category')

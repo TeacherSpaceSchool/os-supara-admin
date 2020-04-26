@@ -10,8 +10,9 @@ const CardBrand = React.memo((props) => {
     const classes = cardOrganizationStyle();
     const { element } = props;
     const { isMobileApp } = props.app;
+    const { profile } = props.user;
     return (
-        <Link href='/brand/[id]' as={`/brand/${element._id}`}>
+        <Link href={`/${profile.role==='client'?'catalog':'brand'}/[id]`} as={`/${profile.role==='client'?'catalog':'brand'}/${element._id}`}>
             <Card className={isMobileApp?classes.cardM:classes.cardD}>
                 <CardActionArea>
                        <div className={classes.line}>
