@@ -174,7 +174,7 @@ const Catalog = React.memo((props) => {
                                                     setFullDialog(row.name, <Image imgSrc={row.image}/>)
                                                     showFullDialog(true)
                                                 }}/>
-                                                <div className={classes.column}>
+                                                <div className={classes.column} style={{width: 'calc(100% - 132px)'}}>
                                                     <div className={classes.value}>{row.name}</div>
                                                     <b className={classes.value}>
                                                         {`${price} сом`}

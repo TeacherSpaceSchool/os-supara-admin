@@ -135,13 +135,12 @@ export default makeStyles({
         flexDirection: 'row',
     },
     media: {
-        width: 100,
-        height: 100,
+        width: '100px!important',
+        height: '100px!important',
         objectFit: 'contain',
-        marginRight: 10
+        //marginRight: 10
     },
     counter: {
-        width: 127,
         borderRadius: 5,
         overflow: 'hidden',
         border: '1px solid #e6e6e6',
@@ -152,8 +151,8 @@ export default makeStyles({
     counterbtn: {
         userSelect: 'none',
         cursor: 'pointer',
-        width: 25,
-        height: 25,
+        width: 40,
+        height: 30,
         fontSize: '1rem',
         fontWeight: 700,
         background: '#e6e6e6',
@@ -164,7 +163,7 @@ export default makeStyles({
     },
     counternmbr: {
         width: 77,
-        height: 25,
+        height: 30,
         outline: 'none',
         border: 'none',
         fontSize: '1rem',

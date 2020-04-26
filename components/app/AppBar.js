@@ -287,7 +287,7 @@ const MyAppBar = React.memo((props) => {
                                 onClose={handleCloseProfile}
                             >
                                 {
-                                    'client'===profile.role?
+                                    /*'client'===profile.role?
                                         <MenuItem>
                                             <Badge badgeContent={countBasket} color='secondary'>
                                                 <Link href='/basket'>
@@ -299,7 +299,7 @@ const MyAppBar = React.memo((props) => {
                                             </Badge>
                                         </MenuItem>
                                         :
-                                        null
+                                        null*/
                                 }
                                 {
                                     profile.role==='client'?
@@ -518,7 +518,7 @@ const MyAppBar = React.memo((props) => {
                                 onClose={handleCloseProfile}
                             >
                                 {
-                                    'client'===profile.role?
+                                    /*'client'===profile.role?
                                         <MenuItem>
                                             <Badge badgeContent={countBasket} color='secondary'>
                                                 <Link href='/basket'>
@@ -530,7 +530,7 @@ const MyAppBar = React.memo((props) => {
                                             </Badge>
                                         </MenuItem>
                                         :
-                                        null
+                                        null*/
                                 }
                                 {
                                     profile.role==='client'?
