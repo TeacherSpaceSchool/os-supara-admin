@@ -38,6 +38,7 @@ const Distributer = React.memo((props) => {
             setPagination(pagination+100)
         }
     }
+    const organization = router.query.id==='super'?{name: 'AZYK.STORE', _id: 'super'}:data.organization
     let [organizations, setOrganizations] = useState(data.distributer?data.distributer.organizations:[]);
     let [allOrganizations, setAllOrganizations] = useState([]);
     let [filtredOrganizations, setFiltredOrganizations] = useState([]);
@@ -48,7 +49,7 @@ const Distributer = React.memo((props) => {
     const _new = !data.distributer
     useEffect(()=>{
         (async()=>{
-            if(data.organization) {
+            if(organization) {
                 setPagination(100)
                 let allOrganizations= []
                 if (selectType == 'Все')
@@ -68,7 +69,7 @@ const Distributer = React.memo((props) => {
     },[selectType, organizations, ])
     useEffect(()=>{
         (async()=>{
-            if(data.organization&&allOrganizations.length>0) {
+            if(organization&&allOrganizations.length>0) {
                 let filtredOrganizations = [...allOrganizations]
                 filtredOrganizations = filtredOrganizations.filter(element=>
                     (element.name.toLowerCase()).includes(search.toLowerCase())
@@ -80,9 +81,9 @@ const Distributer = React.memo((props) => {
     return (
         <App searchShow={true} checkPagination={checkPagination} pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
             <Head>
-                <title>{data.organization?data.organization.name:'Ничего не найдено'}</title>
+                <title>{organization?organization.name:'Ничего не найдено'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content={data.organization?data.organization.name:'Ничего не найдено'} />
+                <meta property='og:title' content={organization?organization.name:'Ничего не найдено'} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
@@ -90,12 +91,12 @@ const Distributer = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/distributer/${router.query.id}`}/>
             </Head>
             <Card className={isMobileApp?classes.pageM:classes.pageD}>
-                {data.organization?
+                {organization?
                     <>
                     <CardContent className={classes.column}>
                             <TextField
                                 label='Название'
-                                value={data.organization.name}
+                                value={organization.name}
                                 className={isMobileApp?classes.inputM:classes.inputDF}
                                 inputProps={{
                                     'aria-label': 'description',
@@ -152,7 +153,7 @@ const Distributer = React.memo((props) => {
                                         if(_new){
                                             organizations = organizations.map(element=>element._id)
                                             await addDistributer({
-                                                distributer: data.organization._id,
+                                                distributer: organization._id,
                                                 organizations: organizations
                                             })
                                         }

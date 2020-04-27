@@ -15,36 +15,36 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const list = {
     statistic: [
-        {
+        /*{
             name: 'Активность клиентов',
             link: '/statistic/activeclient',
             role: ['admin']
-        },
-        {
+        },*/
+        /*{
             name: 'Активность организаций',
             link: '/statistic/activeorganization',
             role: ['admin']
-        },
-        {
+        },*/
+        /*{
             name: 'Активность товаров',
             link: '/statistic/activeitem',
             role: ['admin']
-        },
-        {
+        },*/
+        /*{
             name: 'Графики заказов',
             link: '/statistic/chart',
             role: ['admin']
-        },
+        },*/
         {
             name: 'История посещений',
             link: '/statistic/agenthistorygeo',
             role: ['admin']
         },
-        {
+        /*{
             name: 'Карта продаж',
             link: '/statistic/clientGeo',
             role: ['admin']
-        },
+        },*/
         {
             name: 'Рабочие часы',
             link: '/statistic/agentsworktime',
@@ -70,7 +70,7 @@ const list = {
             link: '/statistic/order',
             role: ['admin']
         },
-        {
+        /*{
             name: 'Статистика клиентов',
             link: '/statistic/client',
             role: ['admin']
@@ -79,7 +79,7 @@ const list = {
             name: 'Статистика товаров',
             link: '/statistic/item',
             role: ['admin']
-        },
+        },*/
     ],
     tools: [
         {
@@ -180,6 +180,11 @@ const list = {
         {
             name: 'Выгрузка маршрутов',
             link: '/statistic/unloadingagentroutes',
+            role: ['admin']
+        },
+        {
+            name: 'Выгрузка накладных',
+            link: '/statistic/unloadinginvoices',
             role: ['admin']
         },
         {
