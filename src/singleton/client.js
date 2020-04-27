@@ -22,7 +22,7 @@ export class SingletonApolloClient {
             return SingletonApolloClient.instance;
         }
         SingletonApolloClient.instance = this;
-        this.jwt = getJWT(req?req.headers.cookie:document.cookie)
+        this.jwt = getJWT(req?req.headers.cookie:document&&document.cookie?document.cookie:'')
         const uploadLink = createUploadLink({
             uri: urlGQL,
             fetch: fetch,

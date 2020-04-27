@@ -138,7 +138,7 @@ export default makeStyles({
         width: '100px!important',
         height: '100px!important',
         objectFit: 'contain',
-        //marginRight: 10
+        marginRight: 10
     },
     counter: {
         borderRadius: 5,

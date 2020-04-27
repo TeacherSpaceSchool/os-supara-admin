@@ -37,6 +37,8 @@ const Catalog = React.memo((props) => {
     const [basket, setBasket] = useState({});
     useEffect(()=>{
         (async()=>{
+            //await deleteBasketAll()
+
             if(sessionStorage.catalog&&sessionStorage.catalog!=='{}'){
                 setBasket(JSON.parse(sessionStorage.catalog))
             }
@@ -44,7 +46,6 @@ const Catalog = React.memo((props) => {
     },[])
     useEffect(()=>{
         (async()=>{
-            console.log(sort)
             setList((await getBrands({organization: router.query.id, search: search, sort: sort})).brands)
         })()
     },[filter, sort, search])
@@ -174,7 +175,7 @@ const Catalog = React.memo((props) => {
                                                     setFullDialog(row.name, <Image imgSrc={row.image}/>)
                                                     showFullDialog(true)
                                                 }}/>
-                                                <div className={classes.column} style={{width: 'calc(100% - 132px)'}}>
+                                                <div className={classes.column} style={{width: 'calc(100% - 142px)'}}>
                                                     <div className={classes.value}>{row.name}</div>
                                                     <b className={classes.value}>
                                                         {`${price} сом`}
@@ -297,7 +298,7 @@ Catalog.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
             Router.push('/')
-    await deleteBasketAll()
+    await deleteBasketAll(ctx.req?await getClientGqlSsr(ctx.req):undefined)
     return {
         data: {
             ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{}),

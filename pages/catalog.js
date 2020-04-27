@@ -86,6 +86,7 @@ const Catalog = React.memo((props) => {
                     setGeo(position)
                 })
 
+            //await deleteBasketAll()
             if(profile.organization){
                 //setBonusesClient((await getBonusesClient({search: '', sort: '-createdAt'})).bonusesClient)
                 organization = data.brandOrganizations.filter(elem=>elem._id===profile.organization)[0]
@@ -290,7 +291,7 @@ const Catalog = React.memo((props) => {
                                         <div>
                                             <div className={classes.line}>
                                                 <img className={classes.media} src={row.image}/>
-                                                <div className={classes.column}>
+                                                <div className={classes.column} style={{width: 'calc(100% - 142px)'}}>
                                                     <div className={classes.value}>{row.name}</div>
                                                     <b className={classes.value}>
                                                         {`${price} сом`}
@@ -416,10 +417,7 @@ Catalog.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
             Router.push('/')
-    await deleteBasketAll()
-
-
-
+    await deleteBasketAll(ctx.req?await getClientGqlSsr(ctx.req):undefined)
     return {
         data: {
             brands: [],
