@@ -220,6 +220,7 @@ const LogistiOorder = React.memo((props) => {
                     </div>
                     <div className={classes.listInvoices}>
                         {orders?orders.map((element, idx)=> {
+                            console.log(element)
                             if (idx <= pagination)
                                 return (
                                     <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
@@ -239,7 +240,7 @@ const LogistiOorder = React.memo((props) => {
                                                   once={true}
                                                   placeholder={filter==='Заказы'?<CardOrderPlaceholder height={height}/>:<CardReturnedPlaceholder/>}>
                                             {
-                                                type==='Заказы'&&element.orders?
+                                                type==='Заказы'?
                                                     <CardOrder element={element}/>
                                                     :
                                                 type==='Возвраты'?

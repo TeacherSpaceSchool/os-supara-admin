@@ -74,12 +74,12 @@ const list = {
             name: 'Статистика клиентов',
             link: '/statistic/client',
             role: ['admin']
-        },*/
+        },
         {
             name: 'Статистика товаров',
             link: '/statistic/item',
             role: ['admin']
-        },
+        }*/
     ],
     tools: [
         {

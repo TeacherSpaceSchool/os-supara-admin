@@ -21,7 +21,9 @@ const UnloadingInvoices = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [date, setDate] = useState(null);
-    let [organization, setOrganization] = useState({_id: 'all'});
+    let [all, setAll] = useState(false);
+    let [organization, setOrganization] = useState(undefined);
+    let [forwarder, setForwarder] = useState(undefined);
     const { isMobileApp } = props.app;
     useEffect(()=>{
         if(process.browser){
@@ -73,12 +75,36 @@ const UnloadingInvoices = React.memo((props) => {
                         />
                     </div>
                     <br/>
+                    <div className={classes.row}>
+                        <Autocomplete
+                            className={classes.input}
+                            options={[{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization]}
+                            getOptionLabel={option => option.name}
+                            value={forwarder}
+                            onChange={(event, newValue) => {
+                                setForwarder(newValue)
+                            }}
+                            noOptionsText='Ничего не найдено'
+                            renderInput={params => (
+                                <TextField {...params} label='Поставщик' fullWidth />
+                            )}
+                        />
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setAll(true)} size='small' color={all?'primary':''}>
+                            Все
+                        </Button>
+                        <Button style={{width: 50, margin: 5}} variant='contained' onClick={()=>setAll(false)} size='small' color={!all?'primary':''}>
+                            Свои
+                        </Button>
+                    </div>
+                    <br/>
                     <Button variant='contained' size='small' color='primary' onClick={async()=>{
                         if(organization._id&&date) {
                             await showLoad(true)
                             window.open(((await getUnloadingInvoices({
                                 organization: organization._id,
-                                dateStart: date
+                                dateStart: date,
+                                all: all,
+                                forwarder: forwarder?forwarder._id:null
                             })).unloadingInvoices).data, '_blank');
                             await showLoad(false)
                         }

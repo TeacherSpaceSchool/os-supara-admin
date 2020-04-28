@@ -146,15 +146,15 @@ export const getUnloadingOrders = async({organization, dateStart}, client)=>{
     }
 }
 
-export const getUnloadingInvoices = async({organization, dateStart}, client)=>{
+export const getUnloadingInvoices = async({organization, dateStart, forwarder, all}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {organization: organization, dateStart: dateStart},
+                variables: {organization: organization, dateStart: dateStart, forwarder: forwarder, all: all},
                 query: gql`
-                    query ($organization: ID!, $dateStart: Date!) {
-                        unloadingInvoices(organization: $organization, dateStart: $dateStart) {
+                    query ($organization: ID!, $dateStart: Date!, $forwarder: ID, $all: Boolean) {
+                        unloadingInvoices(organization: $organization, dateStart: $dateStart, forwarder: $forwarder, all: $all) {
                             data
                         }
                     }`,
