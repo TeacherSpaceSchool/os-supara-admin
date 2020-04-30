@@ -30,11 +30,11 @@ const list = {
             link: '/statistic/activeitem',
             role: ['admin']
         },
-        /*{
+        {
             name: 'Графики заказов',
             link: '/statistic/chart',
             role: ['admin']
-        },*/
+        },
         {
             name: 'История посещений',
             link: '/statistic/agenthistorygeo',
