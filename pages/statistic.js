@@ -15,21 +15,21 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const list = {
     statistic: [
-        /*{
+        {
             name: 'Активность клиентов',
             link: '/statistic/activeclient',
             role: ['admin']
-        },*/
-        /*{
+        },
+        {
             name: 'Активность организаций',
             link: '/statistic/activeorganization',
             role: ['admin']
-        },*/
-        /*{
+        },
+        {
             name: 'Активность товаров',
             link: '/statistic/activeitem',
             role: ['admin']
-        },*/
+        },
         /*{
             name: 'Графики заказов',
             link: '/statistic/chart',
