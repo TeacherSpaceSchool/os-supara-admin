@@ -40,11 +40,11 @@ const list = {
             link: '/statistic/agenthistorygeo',
             role: ['admin']
         },
-        /*{
+        {
             name: 'Карта продаж',
             link: '/statistic/clientGeo',
             role: ['admin']
-        },*/
+        },
         {
             name: 'Рабочие часы',
             link: '/statistic/agentsworktime',
