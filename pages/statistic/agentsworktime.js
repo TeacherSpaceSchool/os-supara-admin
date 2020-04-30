@@ -15,6 +15,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
+import { pdDatePicker } from '../../src/lib'
 
 const AgentsWorkTime = React.memo((props) => {
 
@@ -22,7 +23,7 @@ const AgentsWorkTime = React.memo((props) => {
     const { data } = props;
     const { isMobileApp } = props.app;
     const { profile } = props.user;
-    let [dateStart, setDateStart] = useState(null);
+    let [dateStart, setDateStart] = useState(pdDatePicker(new Date()));
     let [statisticOrder, setStatisticOrder] = useState(undefined);
     let [organization, setOrganization] = useState(undefined);
     const { showLoad } = props.appActions;

@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as appActions from '../../redux/actions/app'
+import { pdDatePicker } from '../../src/lib'
 
 const ClientStatistic = React.memo((props) => {
 
@@ -23,8 +24,8 @@ const ClientStatistic = React.memo((props) => {
     const { data } = props;
     const { isMobileApp, filter } = props.app;
     const { profile } = props.user;
-    let [dateStart, setDateStart] = useState(null);
-    let [dateType, setDateType] = useState('month');
+    let [dateStart, setDateStart] = useState(pdDatePicker(new Date()));
+    let [dateType, setDateType] = useState('day');
     let [statisticClient, setStatisticClient] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState({_id: 'all'});

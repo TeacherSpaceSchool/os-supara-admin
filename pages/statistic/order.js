@@ -10,6 +10,7 @@ import { urlMain } from '../../redux/constants/other'
 import initialApp from '../../src/initialApp'
 import Table from '../../components/app/Table'
 import { getClientGqlSsr } from '../../src/getClientGQL'
+import { pdDatePicker } from '../../src/lib'
 import { getStatisticOrder, getActiveOrganization } from '../../src/gql/statistic'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -23,8 +24,8 @@ const OrderStatistic = React.memo((props) => {
     const { data } = props;
     const { isMobileApp, filter } = props.app;
     const { profile } = props.user;
-    let [dateStart, setDateStart] = useState(null);
-    let [dateType, setDateType] = useState('month');
+    let [dateStart, setDateStart] = useState(pdDatePicker(new Date()));
+    let [dateType, setDateType] = useState('day');
     let [statisticOrder, setStatisticOrder] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState(undefined);
@@ -49,7 +50,7 @@ const OrderStatistic = React.memo((props) => {
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
-
+    console.log(dateStart)
     const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
         <App pageName='Статистика заказов' filters={filters}>
@@ -156,7 +157,7 @@ OrderStatistic.getInitialProps = async function(ctx) {
             Router.push('/')
     return {
         data: {
-            ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };
