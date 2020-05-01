@@ -24,7 +24,7 @@ const Organization = React.memo((props) => {
     let [list, setList] = useState(data.organizations);
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
-    let height = profile.role==='admin'?126:80
+    let height = 80
     useEffect(()=>{
         (async()=>{
             setList((await getOrganizations({search: search, sort: sort, filter: filter})).organizations)

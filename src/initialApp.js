@@ -34,7 +34,8 @@ export default async (ctx)=>{
                     device: `${ua.device.vendor ? `${ua.device.vendor}-` : ''}${deviceModel} | ${ua.os.name ? `${ua.os.name}-` : ''}${ua.os.version ? ua.os.version : ''} | ${ua.browser.name ? `${ua.browser.name}-` : ''}${ua.browser.version ? ua.browser.version : ''}`
                 }, await getClientGqlSsr(ctx.req))
             }
-        } else {
+        }
+        else {
             ctx.store.getState().user.profile = {}
         }
     }
@@ -44,5 +45,6 @@ export default async (ctx)=>{
     ctx.store.getState().app.date = ''
     ctx.store.getState().app.load = false
     ctx.store.getState().mini_dialog.show = false
+    ctx.store.getState().mini_dialog.showFull = false
 
 }

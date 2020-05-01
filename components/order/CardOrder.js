@@ -22,7 +22,8 @@ const CardOrder = React.memo((props) => {
     const { element, setList, route, getInvoices, setSelected, selected, list, idx } = props;
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { profile, authenticated} = props.user;
-    const status = element.taken?'принят':element.cancelForwarder||element.cancelClient?'отмена':element.confirmationForwarder&&element.confirmationClient?'выполнен':'обработка'
+    const status =
+        element.taken?'принят':element.cancelForwarder||element.cancelClient?'отмена':element.confirmationForwarder&&element.confirmationClient?'выполнен':'обработка'
     const statusColor = {
         'обработка': 'orange',
         'принят': 'blue',

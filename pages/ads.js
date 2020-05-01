@@ -20,8 +20,7 @@ const Ads = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.organizations);
-    const { profile } = props.user;
-    let height = profile.role==='admin'?126:80
+    let height = 80
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
         if(pagination<list.length){

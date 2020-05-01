@@ -473,7 +473,7 @@ const Order =  React.memo(
                                                 :
                                                 null
                                             }
-                                            <div onClick={()=>{showReturn[order._id]=!showReturn[order._id];setShowReturn({...showReturn})}} style={showReturn[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>ВОЗВ</div>
+                                            <div onClick={()=>{showReturn[order._id]=!showReturn[order._id];setShowReturn({...showReturn})}} style={showReturn[order._id]?{background: '#ffb300'}:{}} className={classes.minibtn}>ОТКАЗ</div>
                                         </div>
                                         {
                                             showCons[order._id]||showReturn[order._id]?
@@ -514,7 +514,7 @@ const Order =  React.memo(
                                                 {
                                                     showReturn[order._id] ?
                                                         <div className={classes.row}>
-                                                            <div className={classes.nameField}>Возврат:&nbsp;</div>
+                                                            <div className={classes.nameField}>Отказ:&nbsp;</div>
                                                             <div className={classes.column}>
                                                                 <div className={classes.row}>
                                                                     <div className={classes.counterbtn} onClick={() => {
@@ -591,7 +591,7 @@ const Order =  React.memo(
                                             order.returned?
                                                 <>
                                                 <div className={classes.row}>
-                                                    <div className={classes.nameField}>Возврат:&nbsp;</div>
+                                                    <div className={classes.nameField}>Отказ:&nbsp;</div>
                                                     <div className={classes.value}>{order.returned}&nbsp;шт</div>
                                                 </div>
                                                 </>

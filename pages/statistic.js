@@ -70,11 +70,11 @@ const list = {
             link: '/statistic/order',
             role: ['admin']
         },
-        /*{
+        {
             name: 'Статистика клиентов',
             link: '/statistic/client',
             role: ['admin']
-        },*/
+        },
         /*{
             name: 'Статистика товаров',
             link: '/statistic/item',
