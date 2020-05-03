@@ -66,6 +66,11 @@ const list = {
             role: ['admin']
         },
         {
+            name: 'Статистика дистрибьюторов',
+            link: '/statistic/distributer',
+            role: ['admin']
+        },
+        {
             name: 'Статистика заказов',
             link: '/statistic/order',
             role: ['admin']

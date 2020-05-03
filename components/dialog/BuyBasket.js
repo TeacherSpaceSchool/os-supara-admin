@@ -63,7 +63,7 @@ const BuyBasket =  React.memo(
                     adss&&adss.length>0?
                         <>
                         <Link href={`/ads/${organization._id}`}>
-                            <div className={classes.showAds} style={{width: width}}>
+                            <div onClick={()=>{showMiniDialog(false)}} className={classes.showAds} style={{width: width}}>
                                 <WhatshotIcon color='inherit'/>&nbsp;Просмотреть акции
                             </div>
                         </Link>

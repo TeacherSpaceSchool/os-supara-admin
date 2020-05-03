@@ -2,15 +2,15 @@ import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 import { SingletonStore } from '../singleton/store';
 
-export const getDistributers = async({search, distributer}, client)=>{
+export const getDistributers = async({search, sort}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()
         let res = await client
             .query({
-                variables: {search: search, distributer: distributer},
+                variables: {search: search, sort: sort},
                 query: gql`
-                    query ($distributer: ID, $search: String!) {
-                        distributers(distributer: $distributer, search: $search) {
+                    query ($sort: String!, $search: String!) {
+                        distributers(sort: $sort, search: $search) {
                             _id
                             createdAt
                             distributer

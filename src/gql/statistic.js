@@ -186,6 +186,27 @@ export const getStatisticAgentsWorkTime = async({organization, date}, client)=>{
     }
 }
 
+export const getStatisticDistributer = async({distributer, organization, dateStart, dateType, type}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {distributer: distributer, organization: organization, dateStart: dateStart, dateType: dateType, type: type},
+                query: gql`
+                    query ($distributer: ID!, $organization: ID, $dateStart: Date, $dateType: String, $type: String) {
+                        statisticDistributer(distributer: $distributer, organization: $organization, dateStart: $dateStart, dateType: $dateType, type: $type) {
+                            columns
+                            row 
+                                {_id data}
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getUnloadingAdsOrders = async({organization, dateStart}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

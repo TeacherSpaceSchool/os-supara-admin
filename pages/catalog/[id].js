@@ -25,6 +25,7 @@ import LazyLoad from 'react-lazyload';
 import CardCatalogPlaceholder from '../../components/catalog/CardCatalogPlaceholder'
 import initialApp from '../../src/initialApp'
 import { getOrganization } from '../../src/gql/organization'
+import {getAdss} from '../../src/gql/ads'
 
 const Catalog = React.memo((props) => {
     const classes = pageListStyle();
@@ -270,6 +271,7 @@ const Catalog = React.memo((props) => {
                                 client={data.client}
                                 basket = {Object.values(basket)}
                                 allPrice={allPrice}
+                                adss={data.adss}
                                 organization={data.organization}/>)
                             showMiniDialog(true)
                         }
@@ -305,6 +307,7 @@ Catalog.getInitialProps = async function(ctx) {
             ...await getBonusesClient({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getBrands({organization: ctx.query.id, search: '', sort: '-name'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getAdss({search: '', organization: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

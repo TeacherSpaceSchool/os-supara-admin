@@ -37,7 +37,7 @@ const App = React.memo(props => {
             logout(false)
     },[authenticated,])
 
-    Router.events.on('routeChangeStart', (url, err)=>{
+    Router.events.on('routeChangeStart', async (url, err)=>{
 
         if(router.asPath!==url&&(router.asPath.includes('items')||router.asPath.includes('brand'))) {
             if(!sessionStorage.scrollPostionStore)
@@ -223,7 +223,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
-        appActions: bindActionCreators(appActions, dispatch),
+        appActions: bindActionCreators(appActions, dispatch)
     }
 }
 
