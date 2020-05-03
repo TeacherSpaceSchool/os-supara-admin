@@ -70,7 +70,7 @@ const CardEmployment = React.memo((props) => {
             </CardActionArea>
 </Link>
             {
-                element.del!=='deleted'&&(profile.role === 'admin' || profile.role === 'организация') && profile._id!==element.user._id ?
+                element.del!=='deleted'&&(profile.role === 'admin' || ['суперорганизация', 'организация'].includes(profile.role)) && profile._id!==element.user._id ?
                     <CardActions>
                         <Button onClick={async()=>{
                             const action = async() => {

@@ -40,7 +40,7 @@ const Order =  React.memo(
         let [cancelClient, setCancelClient] = useState(element.cancelClient!=undefined&&element.cancelClient);
         let [changeOrders, setChangeOrders] = useState(false);
         const width = isMobileApp? (window.innerWidth-112) : 500;
-        const allowOrganization = (['менеджер', 'организация', 'агент'].includes(profile.role)&&((profile.organization===element.organization._id&&!element.distributer)||(element.distributer&&profile.organization===element.distributer._id)))
+        const allowOrganization = (['менеджер', 'суперорганизация', 'организация', 'агент'].includes(profile.role)&&((profile.organization===element.organization._id&&!element.distributer)||(element.distributer&&profile.organization===element.distributer._id)))
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
             allTonnage=0
@@ -734,7 +734,7 @@ const Order =  React.memo(
                         (
                             (profile.role==='client'&&'принят'===element.orders[0].status&&!element.confirmationClient)
                             ||
-                            (['менеджер', 'организация'].includes(profile.role)&&'принят'===element.orders[0].status&&!element.confirmationForwarder)
+                            (['менеджер', 'суперорганизация', 'организация'].includes(profile.role)&&'принят'===element.orders[0].status&&!element.confirmationForwarder)
                             ||
                             profile.role==='admin'
                         )?
@@ -755,7 +755,7 @@ const Order =  React.memo(
                     }
                     {
                         (profile.role==='client'&&element.orders[0].status==='обработка')
-                        ||(['менеджер', 'организация'].includes(profile.role)&&['обработка', 'принят'].includes(element.orders[0].status)&&!element.confirmationForwarder
+                        ||(['менеджер', 'суперорганизация', 'организация'].includes(profile.role)&&['обработка', 'принят'].includes(element.orders[0].status)&&!element.confirmationForwarder
                         ||profile.role==='admin')?
                             <Button variant='contained' color='primary' onClick={()=>{
                                 let _id = element.orders.map(order=>order._id)

@@ -24,7 +24,7 @@ const Equipments = React.memo((props) => {
     let [list, setList] = useState(data.equipments);
     const { search, sort, filter } = props.app;
     const { profile } = props.user;
-    let height = ['организация', 'admin'].includes(profile.role)?186:140
+    let height = ['суперорганизация', 'организация', 'admin'].includes(profile.role)?186:140
     useEffect(()=>{
         (async()=>{
             setList((await getEquipments({search: search, sort: sort, filter: filter})).equipments)
@@ -66,7 +66,7 @@ const Equipments = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {['admin', 'организация'].includes(profile.role)?
+            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                 <Link href='/equipment/[id]' as={`/equipment/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />

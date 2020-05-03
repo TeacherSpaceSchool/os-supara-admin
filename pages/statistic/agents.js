@@ -32,7 +32,6 @@ const AgentsStatistic = React.memo((props) => {
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin') {
                 await showLoad(true)
                 setStatistic((await getStatisticAgents({
                     company: organization ? organization._id : undefined,
@@ -40,7 +39,6 @@ const AgentsStatistic = React.memo((props) => {
                     dateType: dateType
                 })).statisticAgents)
                 await showLoad(false)
-            }
         })()
     },[organization, dateStart, dateType])
     useEffect(()=>{
@@ -79,19 +77,24 @@ const AgentsStatistic = React.memo((props) => {
                         </Button>
                     </div>
                     <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={[{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization]}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role==='admin'?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={[{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization]}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth />
+                                    )}
+                                />
+                                :
+                                null
+                        }
                         <TextField
                             className={classes.input}
                             label='Дата начала'
@@ -144,7 +147,7 @@ const AgentsStatistic = React.memo((props) => {
 
 AgentsStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

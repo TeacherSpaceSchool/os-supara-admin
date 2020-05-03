@@ -74,7 +74,7 @@ const Route = React.memo((props) => {
     useEffect(()=>{
         (async()=>{
             if(data.route) {
-                if (['организация', 'менеджер'].includes(profile.role) && router.query.id === 'new') {
+                if (['суперорганизация', 'организация', 'менеджер'].includes(profile.role) && router.query.id === 'new') {
                     let organization = data.organizations.filter(element => element._id === profile.organization)
                     setOrganization(organization[0])
                 }
@@ -83,7 +83,7 @@ const Route = React.memo((props) => {
     },[profile])
     useEffect(()=>{
         (async()=>{
-            if(data.route&&['организация', 'менеджер', 'admin'].includes(profile.role)) {
+            if(data.route&&['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role)) {
                 setUnselectedInvoices((await getOrdersForRouting()).invoicesForRouting)
             }
         })()
@@ -205,7 +205,7 @@ const Route = React.memo((props) => {
                             }
                             <br/>
                             {
-                                (router.query.id==='new'||status==='создан')&&['admin', 'организация', 'менеджер'].includes(profile.role)?
+                                (router.query.id==='new'||status==='создан')&&['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?
                                     <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                         <InputLabel>Экспедитор</InputLabel>
                                         <Select value={employment._id} onChange={handleEmployment}>
@@ -366,7 +366,7 @@ const Route = React.memo((props) => {
                                         }} size='small' color='primary'>
                                             Сохранить
                                         </Button>
-                                        {['организация', 'менеджер', 'admin'].includes(profile.role)&&status==='создан'?
+                                        {['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role)&&status==='создан'?
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
@@ -402,7 +402,7 @@ const Route = React.memo((props) => {
 
 Route.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
+    if(!['суперорганизация', 'организация', 'менеджер', 'admin', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

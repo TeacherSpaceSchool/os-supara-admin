@@ -64,7 +64,7 @@ const CardEquipment = React.memo((props) => {
                 </CardActionArea>
                 </Link>
                     {
-                        ['организация', 'admin'].includes(profile.role) ?
+                        ['суперорганизация', 'организация', 'admin'].includes(profile.role) ?
                             <CardActions>
                                 <Button onClick={async()=>{
                                     const action = async() => {

@@ -25,12 +25,11 @@ const AgentsWorkTime = React.memo((props) => {
     const { profile } = props.user;
     let [dateStart, setDateStart] = useState(pdDatePicker(new Date()));
     let [statisticOrder, setStatisticOrder] = useState(undefined);
-    let [organization, setOrganization] = useState(undefined);
+    let [organization, setOrganization] = useState(profile.organization?{_id: profile.organization}:undefined);
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin'&&organization&&organization._id) {
-                console.log(dateStart)
+            if(organization&&organization._id) {
                 await showLoad(true)
                 setStatisticOrder((await getStatisticAgentsWorkTime({
                     organization: organization ? organization._id : undefined,
@@ -62,19 +61,22 @@ const AgentsWorkTime = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={data.activeOrganization}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role==='admin'?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={data.activeOrganization}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth />
+                                    )}
+                                />
+                                :null}
                         <TextField
                             className={classes.input}
                             label='Дата'
@@ -103,7 +105,7 @@ const AgentsWorkTime = React.memo((props) => {
 AgentsWorkTime.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.filter = false
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
@@ -115,7 +117,7 @@ AgentsWorkTime.getInitialProps = async function(ctx) {
         data: {
             activeOrganization: [
                 {name: 'AZYK.STORE', _id: 'super'},
-                ...(await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined)).activeOrganization
+                ...(ctx.store.getState().user.profile.role==='суперорганизация'?[]:(await getActiveOrganization(ctx.req?await getClientGqlSsr(ctx.req):undefined)).activeOrganization)
             ]
         }
     };

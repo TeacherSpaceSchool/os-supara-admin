@@ -41,7 +41,7 @@ const CardBonus = React.memo((props) => {
                             </h3>
                         </Link>
                         {
-                            ['организация', 'менеджер', 'admin'].includes(profile.role)?
+                            ['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role)?
                                 <>
                                 <TextField
                                     type={isMobileApp?'number':'text'}
@@ -92,7 +92,7 @@ const CardBonus = React.memo((props) => {
                 </CardContent>
             </CardActionArea>
                 {
-                    ['организация', 'менеджер', 'admin'].includes(profile.role) ?
+                    ['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role) ?
                         <CardActions>
                             <Button onClick={async()=>{
                                 const action = async() => {

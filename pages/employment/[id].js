@@ -73,6 +73,8 @@ const Client = React.memo((props) => {
     const router = useRouter()
     const { logout } = props.userActions;
     let roles = ['организация', 'менеджер', 'экспедитор', 'агент']
+    if(profile.role==='admin')
+        roles.push('суперорганизация')
     let superRoles = ['суперменеджер', 'суперагент']
     useEffect(()=>{
         if(router.query.id!=='new'&&!organization.name){
@@ -95,7 +97,7 @@ const Client = React.memo((props) => {
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                 {
                             data.employment!==null?
-                                ['admin', 'организация'].includes(profile.role)?
+                                ['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                     <>
                                     <TextField
                                             label='Логин'
@@ -203,7 +205,7 @@ const Client = React.memo((props) => {
                                                 }}
                                             >
                                                 {(organization._id==='super'?superRoles:roles).map((element)=>{
-                                                    //if(element!=='организация'||profile.role=='admin')
+                                                    //if(!['admin', 'суперорганизация', 'организация'].includes(profile.role))
                                                         return <MenuItem key={element} value={element}>{element}</MenuItem>
                                                 })
                                                 }
@@ -254,7 +256,7 @@ const Client = React.memo((props) => {
                                                     </Button>
 
                                                     {
-                                                        profile._id!==data.employment.user._id&&['admin', 'организация'].includes(profile.role)?
+                                                        profile._id!==data.employment.user._id&&['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                                             <>
                                                             <Button onClick={async()=>{
                                                                 const action = async() => {
@@ -311,7 +313,7 @@ const Client = React.memo((props) => {
 
 Client.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['суперорганизация', 'организация', 'admin'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

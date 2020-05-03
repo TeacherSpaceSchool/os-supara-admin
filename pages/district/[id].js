@@ -73,7 +73,7 @@ const District = React.memo((props) => {
     let [agents, setAgents] = useState([]);
     let [ecspeditors, setEcspeditors] = useState([]);
     let [managers, setManagers] = useState([]);
-    let [selectType, setSelectType] = useState(['admin', 'организация', 'менеджер'].includes(profile.role)?'Все':'Выбраные');
+    let [selectType, setSelectType] = useState(['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?'Все':'Выбраные');
     const { setMiniDialog, showMiniDialog, setFullDialog, showFullDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     useEffect(()=>{
@@ -188,7 +188,7 @@ const District = React.memo((props) => {
                                     }}
                                 />
                             }
-                            {['admin', 'организация'].includes(profile.role)?
+                            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                 <FormControl className={isMobileApp ? classes.inputM : classes.inputDF}>
                                     <InputLabel>Менеджер</InputLabel>
                                     <Select value={manager._id} onChange={handleManager}>
@@ -209,7 +209,7 @@ const District = React.memo((props) => {
                                     }}
                                 />
                             }
-                            {['admin', 'организация'].includes(profile.role)?
+                            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                 <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                     <InputLabel>Агент</InputLabel>
                                     <Select value={agent._id} onChange={handleAgent}>
@@ -229,7 +229,7 @@ const District = React.memo((props) => {
                                     }}
                                 />
                             }
-                            {['admin', 'организация'].includes(profile.role)?
+                            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                 <FormControl className={isMobileApp?classes.inputM:classes.inputDF}>
                                     <InputLabel>Экспедитор</InputLabel>
                                     <Select value={ecspeditor._id} onChange={handleEcspeditor}>
@@ -250,7 +250,7 @@ const District = React.memo((props) => {
                                 />
                             }
                             <br/>
-                            {['admin', 'организация', 'менеджер'].includes(profile.role)?
+                            {['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?
                                 <div style={{ justifyContent: 'center' }} className={classes.row}>
                                     <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
                                         Все
@@ -272,7 +272,7 @@ const District = React.memo((props) => {
                                         return (
                                             <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
                                                      className={isMobileApp ? classes.column : classes.row}>
-                                                {['admin', 'организация', 'менеджер'].includes(profile.role)?
+                                                {['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?
                                                     <Checkbox checked={client.includes(element)}
                                                               onChange={() => {
                                                                   if (!client.includes(element)) {
@@ -307,7 +307,7 @@ const District = React.memo((props) => {
                                     Карта
                                 </Button>
                                 {
-                                    ['admin', 'организация', 'менеджер'].includes(profile.role)?
+                                    ['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?
                                         router.query.id==='new'?
                                             <Button onClick={async()=>{
                                                 if (name.length>0) {
@@ -347,7 +347,7 @@ const District = React.memo((props) => {
                                             }} size='small' color='primary'>
                                                 Сохранить
                                             </Button>
-                                            {['организация', 'admin'].includes(profile.role)?
+                                            {['суперорганизация', 'организация', 'admin'].includes(profile.role)?
                                                 <>
                                                 <Button onClick={async()=>{
                                                     const action = async() => {
@@ -385,7 +385,7 @@ const District = React.memo((props) => {
 
 District.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'admin', 'агент', 'суперагент', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+    if(!['суперорганизация', 'организация', 'admin', 'агент', 'суперагент', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

@@ -67,7 +67,7 @@ const Equipment = React.memo((props) => {
                             onChange={(event)=>{setNumber(event.target.value)}}
                             inputProps={{
                                 'aria-label': 'description',
-                                readOnly: !['admin', 'организация'].includes(profile.role),
+                                readOnly: !['admin', 'суперорганизация', 'организация'].includes(profile.role),
                             }}
                         />
                         <TextField
@@ -77,7 +77,7 @@ const Equipment = React.memo((props) => {
                             onChange={(event)=>{setName(event.target.value)}}
                             inputProps={{
                                 'aria-label': 'description',
-                                readOnly: !['admin', 'организация'].includes(profile.role),
+                                readOnly: !['admin', 'суперорганизация', 'организация'].includes(profile.role),
                             }}
                         />
                         {
@@ -99,7 +99,7 @@ const Equipment = React.memo((props) => {
                                 null
                         }
                         {
-                            ['admin', 'организация'].includes(profile.role)?
+                            ['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                                 <Autocomplete
                                     className={classes.input}
                                     options={clients}

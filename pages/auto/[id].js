@@ -73,7 +73,7 @@ const Auto = React.memo((props) => {
                             onChange={(event)=>{setNumber(event.target.value)}}
                             inputProps={{
                                 'aria-label': 'description',
-                                readOnly: !['admin', 'организация'].includes(profile.role),
+                                readOnly: !['admin', 'суперорганизация', 'организация'].includes(profile.role),
                             }}
                         />
                         <TextField
@@ -88,7 +88,7 @@ const Auto = React.memo((props) => {
                             }
                             inputProps={{
                                 'aria-label': 'description',
-                                readOnly: !['admin', 'организация'].includes(profile.role),
+                                readOnly: !['admin', 'суперорганизация', 'организация'].includes(profile.role),
                             }}
                         />
                         <TextField
@@ -103,7 +103,7 @@ const Auto = React.memo((props) => {
                             }
                             inputProps={{
                                 'aria-label': 'description',
-                                readOnly: !['admin', 'организация'].includes(profile.role),
+                                readOnly: !['admin', 'суперорганизация', 'организация'].includes(profile.role),
                             }}
                         />
                         {

@@ -91,7 +91,7 @@ const Districts = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {['admin', 'организация'].includes(profile.role)?
+            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                 <Link href='/district/[id]' as={`/district/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
@@ -106,7 +106,7 @@ const Districts = React.memo((props) => {
 
 Districts.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

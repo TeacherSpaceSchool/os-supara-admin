@@ -44,7 +44,7 @@ const CardAgentRoute = React.memo((props) => {
             </Link>
             <CardActions>
                 {
-                    ['организация', 'менеджер', 'admin'].includes(profile.role)?
+                    ['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role)?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteAgentRoute([element._id], element.organization._id)).agentRoutes)

@@ -196,7 +196,7 @@ const AgentRoute = React.memo((props) => {
                             />
                         }
                         <br/>
-                        {/*['admin', 'организация', 'менеджер'].includes(profile.role)*/true?
+                        {/*['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)*/true?
                             <div style={{ justifyContent: 'center' }} className={classes.row}>
                                 <div style={{background: selectType==='Все'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Все')}} className={classes.selectType}>
                                     Все
@@ -355,7 +355,7 @@ const AgentRoute = React.memo((props) => {
                                         }} size='small' color='primary'>
                                             Сохранить
                                         </Button>
-                                        {['организация', 'менеджер', 'admin'].includes(profile.role)?
+                                        {['суперорганизация', 'организация', 'менеджер', 'admin'].includes(profile.role)?
                                             <>
                                             <Button onClick={async()=>{
                                                 const action = async() => {
@@ -385,7 +385,7 @@ const AgentRoute = React.memo((props) => {
 
 AgentRoute.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['организация', 'admin', 'менеджер', 'суперагент', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
+    if(!['суперорганизация', 'организация', 'admin', 'менеджер', 'суперагент', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

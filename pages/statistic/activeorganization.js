@@ -21,6 +21,7 @@ const OrganizationStatisticActive = React.memo((props) => {
     const classes = pageListStyle();
     const { isMobileApp, filter } = props.app;
     const { showLoad } = props.appActions;
+    const { profile } = props.user;
     let [statisticActive, setStatisticActive] = useState(undefined);
     let [organization, setOrganization] = useState(undefined);
     useEffect(()=>{
@@ -52,21 +53,26 @@ const OrganizationStatisticActive = React.memo((props) => {
             </Head>
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
-                    <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={data.activeOrganization}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
-                    </div>
+                    {
+                        profile.role==='admin'?
+                            <div className={classes.row}>
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={data.activeOrganization}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth />
+                                    )}
+                                />
+                            </div>
+                            :
+                            null
+                    }
                     {
                         statisticActive?
                             <>
@@ -88,7 +94,7 @@ const OrganizationStatisticActive = React.memo((props) => {
 OrganizationStatisticActive.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.filter = false
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

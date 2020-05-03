@@ -29,11 +29,11 @@ const DistributerStatistic = React.memo((props) => {
     let [statistic, setStatistic] = useState(undefined);
     let [showStat, setShowStat] = useState(false);
     let [organization, setOrganization] = useState(undefined);
-    let [distributer, setDistributer] = useState(undefined);
+    let [distributer, setDistributer] = useState(profile.organization?{distributer: {_id: profile.organization}}:undefined);
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin'&&distributer) {
+            if(distributer) {
                 await showLoad(true)
                 setStatistic((await getStatisticDistributer({
                     distributer: distributer.distributer._id,
@@ -53,7 +53,7 @@ const DistributerStatistic = React.memo((props) => {
         }
     },[process.browser])
 
-    const filters = [{name: 'Организации', value: 'all'}, {name: 'Районы', value: 'districts'}]
+    const filters = [{name: 'Организации', value: 'all'}, {name: 'Районы', value: 'districts'}, {name: 'Агенты', value: 'agents'}]
     return (
         <App pageName='Статистика дистрибьюторов' dates={true} filters={filters}>
             <Head>
@@ -83,19 +83,24 @@ const DistributerStatistic = React.memo((props) => {
                         </Button>
                     </div>
                     <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={data.distributers}
-                            getOptionLabel={option => option.distributer.name}
-                            value={distributer}
-                            onChange={(event, newValue) => {
-                                setDistributer(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Дистрибьютор' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role === 'admin' ?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={data.distributers}
+                                    getOptionLabel={option => option.distributer.name}
+                                    value={distributer}
+                                    onChange={(event, newValue) => {
+                                        setDistributer(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Дистрибьютор' fullWidth/>
+                                    )}
+                                />
+                                :
+                                null
+                        }
                         <Autocomplete
                             className={classes.input}
                             options={distributer?distributer.organizations:[]}
@@ -150,7 +155,7 @@ DistributerStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.filter = 'all'
     ctx.store.getState().app.date = pdDatePicker(new Date())
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

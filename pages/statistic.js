@@ -18,67 +18,67 @@ const list = {
         {
             name: 'Активность клиентов',
             link: '/statistic/activeclient',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Активность организаций',
             link: '/statistic/activeorganization',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Активность товаров',
             link: '/statistic/activeitem',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Графики заказов',
             link: '/statistic/chart',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'История посещений',
             link: '/statistic/agenthistorygeo',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Карта продаж',
             link: '/statistic/clientGeo',
-            role: ['admin']
+            role: ['admin',]
         },
         {
             name: 'Рабочие часы',
             link: '/statistic/agentsworktime',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика агентов',
             link: '/statistic/agents',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика акций',
             link: '/statistic/adss',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика возвратов',
             link: '/statistic/returneds',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика дистрибьюторов',
             link: '/statistic/distributer',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика заказов',
             link: '/statistic/order',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         {
             name: 'Статистика клиентов',
             link: '/statistic/client',
-            role: ['admin']
+            role: ['admin', 'суперорганизация']
         },
         /*{
             name: 'Статистика товаров',
@@ -95,7 +95,7 @@ const list = {
         {
             name: 'Логистика',
             link: '/statistic/logisticorder',
-            role: ['admin', 'организация', 'менеджер', 'агент']
+            role: ['admin', 'суперорганизация', 'организация', 'менеджер', 'агент']
         },
         {
             name: 'Подписчики',
@@ -115,7 +115,7 @@ const list = {
         {
             name: 'Проверка маршрутов',
             link:'/statistic/checkagentroute',
-            role: ['admin']
+            role: ['суперорганизация', 'admin']
         },
         {
             name: 'Пуш-уведомления',
@@ -170,7 +170,7 @@ const list = {
         {
             name: 'Выгрузка акционных заказов',
             link: '/statistic/unloadingadsorders',
-            role: ['admin', 'организация']
+            role: ['admin', 'суперорганизация', 'организация']
         },
         {
             name: 'Выгрузка заказов',
@@ -381,7 +381,7 @@ const Statistic = React.memo((props) => {
 
 Statistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер', 'агент'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация', 'менеджер', 'агент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

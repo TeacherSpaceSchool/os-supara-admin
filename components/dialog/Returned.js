@@ -30,7 +30,7 @@ const Returned =  React.memo(
         let [confirmationForwarder, setConfirmationForwarder] = useState(element.confirmationForwarder);
         let [cancelForwarder, setCancelForwarder] = useState(element.cancelForwarder!=undefined&&element.cancelForwarder);
         const width = isMobileApp? (window.innerWidth-112) : 500;
-        const allowOrganization = (['менеджер', 'организация', 'агент'].includes(profile.role)&&((profile.organization===element.organization._id&&!element.distributer)||(element.distributer&&profile.organization===element.distributer._id)))
+        const allowOrganization = (['менеджер', 'суперорганизация', 'организация', 'агент'].includes(profile.role)&&((profile.organization===element.organization._id&&!element.distributer)||(element.distributer&&profile.organization===element.distributer._id)))
         const { showSnackBar } = props.snackbarActions;
         let canculateAllPrice = ()=>{
             allTonnage=0

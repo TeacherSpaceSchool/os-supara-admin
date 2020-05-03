@@ -179,7 +179,7 @@ const CardItem = React.memo((props) => {
                     </Link>
                     </>
                 }
-                                        {'admin'===profile.role||('организация'===profile.role&&profile.organization===element.organization._id)?
+                                        {'admin'===profile.role||(['суперорганизация', 'организация'].includes(profile.role)&&profile.organization===element.organization._id)?
                                             element.del!=='deleted'?
                                             <>
                                             <Button onClick={async()=>{

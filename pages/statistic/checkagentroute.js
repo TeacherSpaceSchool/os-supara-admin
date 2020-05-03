@@ -23,14 +23,14 @@ const CheckAgentRoute = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     const { showLoad } = props.appActions;
-    let [organization, setOrganization] = useState({_id: undefined});
+    let [organization, setOrganization] = useState({_id: profile.organization?profile.organization:undefined});
     let [agentRoutes, setAgentRoutes] = useState([]);
     let [agentRoute, setAgentRoute] = useState({_id: undefined});
     const { isMobileApp } = props.app;
     let [checkAgentRoute, setCheckAgentRoute] = useState(undefined);
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin'&&organization&&organization._id) {
+            if(organization&&organization._id) {
                 setAgentRoutes((await getAgentRoutes({search: '', organization: organization._id})).agentRoutes)
                 setAgentRoute({_id: undefined})
             }
@@ -68,19 +68,24 @@ const CheckAgentRoute = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={data.organizations}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role === 'admin' ?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={data.organizations}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth/>
+                                    )}
+                                />
+                                :
+                                null
+                        }
                         <Autocomplete
                             className={classes.input}
                             options={agentRoutes}
@@ -116,7 +121,7 @@ const CheckAgentRoute = React.memo((props) => {
 
 CheckAgentRoute.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

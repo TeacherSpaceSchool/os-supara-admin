@@ -104,7 +104,7 @@ const Items = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {profile.role==='admin'||profile.role==='организация'?
+            {['admin', 'суперорганизация', 'организация'].includes(profile.role)?
                 <Link href='/item/[id]' as={`/item/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />

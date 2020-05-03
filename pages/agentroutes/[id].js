@@ -68,7 +68,7 @@ const AgentRoutes = React.memo((props) => {
                         )}
                 ):null}
             </div>
-            {['admin', 'организация', 'менеджер'].includes(profile.role)?
+            {['admin', 'суперорганизация', 'организация', 'менеджер'].includes(profile.role)?
                 <Link href='/agentroute/[id]' as={`/agentroute/new`}>
                     <Fab color='primary' aria-label='add' className={classes.fab}>
                         <AddIcon />
@@ -83,7 +83,7 @@ const AgentRoutes = React.memo((props) => {
 
 AgentRoutes.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

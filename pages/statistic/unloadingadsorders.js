@@ -99,7 +99,7 @@ const UnloadingAdsOrders = React.memo((props) => {
 
 UnloadingAdsOrders.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

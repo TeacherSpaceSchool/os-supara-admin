@@ -86,7 +86,7 @@ const Item = React.memo((props) => {
     })
     useEffect(()=>{
         (async()=>{
-            if(!organization._id&&['организация', 'экспедитор'].includes(profile.role)){
+            if(!organization._id&&['суперорганизация', 'организация', 'экспедитор'].includes(profile.role)){
                 let organzation = data.organizations.filter(organization=>organization._id===profile.organization)
                 setOrganization(organzation[0])
             }
@@ -155,7 +155,7 @@ const Item = React.memo((props) => {
             <Card className={classes.page}>
                     <CardContent className={isMobileApp?classes.column:classes.row}>
                         {
-                            profile.role==='admin'||(['организация'].includes(profile.role)&&organization._id===profile.organization)?
+                            profile.role==='admin'||(['суперорганизация', 'организация'].includes(profile.role)&&organization._id===profile.organization)?
                                 data.item!==null||router.query.id==='new'?
                                     <>
                                     <div className={classes.column}>

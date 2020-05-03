@@ -68,7 +68,7 @@ const CardDistrict = React.memo((props) => {
             </Link>
             <CardActions>
                 {
-                    ['организация', 'admin'].includes(profile.role)?
+                    ['суперорганизация', 'организация', 'admin'].includes(profile.role)?
                         <Button onClick={async()=>{
                             const action = async() => {
                                 setList((await deleteDistrict([element._id], element.organization?element.organization._id:'super')).districts)

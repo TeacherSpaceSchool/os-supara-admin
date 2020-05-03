@@ -25,9 +25,9 @@ const AgentHistoryGeo = React.memo((props) => {
     const { data } = props;
     const { isMobileApp, date } = props.app;
     const { profile } = props.user;
-    let organizations = [{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization];
+    let organizations = profile.organization?[]:[{name: 'AZYK.STORE', _id: 'super'}, ...data.activeOrganization];
     let [agentHistoryGeo, setAgentHistoryGeo] = useState(undefined);
-    let [organization, setOrganization] = useState({_id: undefined});
+    let [organization, setOrganization] = useState({_id: profile.organization?profile.organization:undefined});
     let [agents, setAgents] = useState([]);
     let [agent, setAgent] = useState({_id: undefined});
     let [count, setCount] = useState(0);
@@ -46,7 +46,7 @@ const AgentHistoryGeo = React.memo((props) => {
     },[])
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin'&&organization&&organization._id) {
+            if(organization&&organization._id) {
                 setCount(0)
                 setAgents((await getAgents({_id: organization._id})).agents)
                 setAgent({_id: undefined})
@@ -173,7 +173,7 @@ const AgentHistoryGeo = React.memo((props) => {
 
 AgentHistoryGeo.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

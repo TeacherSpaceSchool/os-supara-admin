@@ -33,7 +33,6 @@ const ChartStatistic = React.memo((props) => {
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            if(profile.role==='admin') {
                 await showLoad(true)
                 dateStart=dateStart?dateStart:new Date();
                 let _statisticOrderChart = (await getStatisticOrderChart({
@@ -50,7 +49,6 @@ const ChartStatistic = React.memo((props) => {
                 }
                 setStatisticOrderChart(_statisticOrderChart)
                 await showLoad(false)
-            }
         })()
     },[organization, dateStart, dateType, type, filter])
     useEffect(()=>{
@@ -129,19 +127,22 @@ const ChartStatistic = React.memo((props) => {
                         </Button>
                     </div>
                     <div className={classes.row}>
-                        <Autocomplete
-                            className={classes.input}
-                            options={data.activeOrganization}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
+                        {
+                            profile.role==='admin'?
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={data.activeOrganization}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth />
+                                    )}
+                                />
+                                :null}
                         <TextField
                             className={classes.input}
                             label='Дата начала'
@@ -221,7 +222,7 @@ const ChartStatistic = React.memo((props) => {
 ChartStatistic.getInitialProps = async function(ctx) {
     await initialApp(ctx)
     ctx.store.getState().app.filter = false
-    if(!['admin'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
