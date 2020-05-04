@@ -149,7 +149,6 @@ const Orders = React.memo((props) => {
                             style={{background: selected.includes(element._id)?'rgba(51, 143, 255, 0.29)':null}}
                             time={3}
                             onClickNHold={()=>{
-                                console.log(element)
                                 if(profile.role==='admin'&&(element.cancelClient||element.cancelForwarder))
                                     if(selected.includes(element._id)) {
                                         selected = selected.filter((i)=>i!==element._id)
@@ -217,7 +216,7 @@ const Orders = React.memo((props) => {
 
 Orders.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер', 'client', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация', 'менеджер', 'client', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

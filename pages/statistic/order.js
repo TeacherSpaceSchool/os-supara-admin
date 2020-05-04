@@ -48,7 +48,6 @@ const OrderStatistic = React.memo((props) => {
             appBody[0].style.paddingBottom = '0px'
         }
     },[process.browser])
-    console.log(dateStart)
     const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
         <App pageName='Статистика заказов' filters={filters}>

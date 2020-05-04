@@ -220,7 +220,6 @@ const LogistiOorder = React.memo((props) => {
                     </div>
                     <div className={classes.listInvoices}>
                         {orders?orders.map((element, idx)=> {
-                            console.log(element)
                             if (idx <= pagination)
                                 return (
                                     <div key={idx} style={isMobileApp ? {alignItems: 'baseline'} : {}}
