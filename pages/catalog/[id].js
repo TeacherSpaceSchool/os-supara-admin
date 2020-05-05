@@ -267,7 +267,7 @@ const Catalog = React.memo((props) => {
                             data.client._id && proofeAddress && data.client.name.length > 0 && data.client.phone.length > 0
                         ) {
                             setMiniDialog('Купить', <BuyBasket
-                                agent={true}
+                                agent={false}
                                 client={data.client}
                                 basket = {Object.values(basket)}
                                 allPrice={allPrice}
