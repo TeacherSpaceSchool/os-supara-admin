@@ -24,6 +24,7 @@ export const alert = React.createRef();
 
 const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
+    const { setIsMobileApp } = props.appActions;
     const { profile, authenticated } = props.user;
     const { load } = props.app;
     let { checkPagination, sorts, filters, getList, pageName, dates, searchShow, setList, list } = props;
@@ -35,7 +36,12 @@ const App = React.memo(props => {
             setProfile()
         else if(!authenticated&&profile.role)
             logout(false)
-    },[authenticated,])
+    },[authenticated])
+    useEffect( ()=>{
+        if(mainWindow.current&&mainWindow.current.offsetWidth<900) {
+            setIsMobileApp(true)
+        }
+    },[mainWindow])
 
     Router.events.on('routeChangeStart', async (url, err)=>{
 
