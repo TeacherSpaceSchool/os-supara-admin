@@ -47,7 +47,9 @@ export const getOrders = async(args, client)=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -119,7 +121,9 @@ export const getOrdersFromDistrict = async(args, client)=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -192,7 +196,9 @@ export const getOrdersTrash = async(args, client)=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -327,7 +333,9 @@ export const getOrdersForRouting = async(organization)=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -417,7 +425,9 @@ export const getOrder = async({_id})=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -579,7 +589,9 @@ export const setOrder = async(element)=>{
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -672,7 +684,9 @@ export const subscriptionOrder = gql`
                             track
                             forwarder
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}

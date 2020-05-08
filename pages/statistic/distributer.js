@@ -82,9 +82,9 @@ const DistributerStatistic = React.memo((props) => {
                             Год
                         </Button>
                     </div>
-                    <div className={classes.row}>
-                        {
-                            profile.role === 'admin' ?
+                    {
+                        profile.role === 'admin' ?
+                            <div className={classes.row}>
                                 <Autocomplete
                                     className={classes.input}
                                     options={data.distributers}
@@ -98,23 +98,23 @@ const DistributerStatistic = React.memo((props) => {
                                         <TextField {...params} label='Дистрибьютор' fullWidth/>
                                     )}
                                 />
-                                :
-                                null
-                        }
-                        <Autocomplete
-                            className={classes.input}
-                            options={distributer?distributer.organizations:[]}
-                            getOptionLabel={option => option.name}
-                            value={organization}
-                            onChange={(event, newValue) => {
-                                setOrganization(newValue)
-                            }}
-                            noOptionsText='Ничего не найдено'
-                            renderInput={params => (
-                                <TextField {...params} label='Организация' fullWidth />
-                            )}
-                        />
-                    </div>
+                                <Autocomplete
+                                    className={classes.input}
+                                    options={distributer?distributer.sales:[]}
+                                    getOptionLabel={option => option.name}
+                                    value={organization}
+                                    onChange={(event, newValue) => {
+                                        setOrganization(newValue)
+                                    }}
+                                    noOptionsText='Ничего не найдено'
+                                    renderInput={params => (
+                                        <TextField {...params} label='Организация' fullWidth />
+                                    )}
+                                />
+                            </div>
+                            :
+                            null
+                    }
                     {
                         statistic?
                             <Table type='item' row={(statistic.row).slice(1)} columns={statistic.columns}/>

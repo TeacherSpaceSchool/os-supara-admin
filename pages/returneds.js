@@ -214,7 +214,7 @@ const Returneds = React.memo((props) => {
 
 Returneds.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'менеджер', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'суперорганизация', 'организация', 'менеджер', 'агент', 'суперагент'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

@@ -48,7 +48,9 @@ export const getReturnedsTrash = async(args, client)=>{
                             district
                             agent
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -111,7 +113,9 @@ export const getReturneds = async(args, client)=>{
                             district
                             agent
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -177,7 +181,9 @@ export const getReturnedsFromDistrict = async(args, client)=>{
                             district
                             agent
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -357,7 +363,9 @@ export const setReturned = async(element)=>{
                             district
                             agent
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}
@@ -412,7 +420,9 @@ export const subscriptionReturned = gql`
                             district
                             agent
                                 {_id name}
-                            distributer
+                            sale
+                                {_id name}
+                            provider
                                 {_id name}
                             organization
                                 {_id name}

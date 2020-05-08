@@ -1,6 +1,23 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
 
+export const getStatisticGeoOrder = async({organization, dateStart}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: {organization: organization, dateStart: dateStart},
+                query: gql`
+                    query ($organization: ID!, $dateStart: Date) {
+                        statisticGeoOrder(organization: $organization, dateStart: $dateStart) 
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getStatisticOrder = async({company, dateStart, dateType, online}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

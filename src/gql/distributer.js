@@ -15,7 +15,9 @@ export const getDistributers = async({search, sort}, client)=>{
                             createdAt
                             distributer
                                 {_id name}
-                            organizations
+                            sales
+                                {_id name}
+                            provider
                                 {_id name}
                         }
                     }`,
@@ -69,8 +71,10 @@ export const getDistributer = async({_id}, client)=>{
                             createdAt
                             distributer
                                 {_id name}
-                            organizations
-                                {_id name image}
+                            sales
+                                {_id name}
+                            provider
+                                {_id name}
                         }
                     }`,
             })
@@ -103,8 +107,8 @@ export const addDistributer = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($distributer: ID!, $organizations: [ID]) {
-                        addDistributer(distributer: $distributer, organizations: $organizations) {
+                    mutation ($distributer: ID!, $sales: [ID], $provider: [ID]) {
+                        addDistributer(distributer: $distributer, sales: $sales, provider: $provider) {
                              data
                         }
                     }`})
@@ -119,8 +123,8 @@ export const setDistributer = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $organizations: [ID]) {
-                        setDistributer(_id: $_id, organizations: $organizations) {
+                    mutation ($_id: ID!, $sales: [ID], $provider: [ID]) {
+                        setDistributer(_id: $_id, sales: $sales, provider: $provider) {
                              data
                         }
                     }`})

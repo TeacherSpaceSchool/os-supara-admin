@@ -38,6 +38,7 @@ const ItemStatisticActive = React.memo((props) => {
         }
     },[process.browser])
     const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
+    let [showStat, setShowStat] = useState(false);
     return (
         <App pageName='Активность товаров' filters={filters}>
             <Head>
@@ -74,7 +75,19 @@ const ItemStatisticActive = React.memo((props) => {
                     {
                         statisticActive?
                             <>
-                            <Table type='client' row={statisticActive.row} columns={statisticActive.columns}/>
+                            <Table type='client' row={statisticActive.row.slice(1)} columns={statisticActive.columns}/>
+                            <div className='count' onClick={()=>setShowStat(!showStat)}>
+                                <div className={classes.rowStatic}>{`Всего клиентов: ${statisticActive.row[0].data[0]}`}</div>
+                                {
+                                    showStat?
+                                        <>
+                                        <div className={classes.rowStatic}>{`Всего заказов: ${statisticActive.row[0].data[1]}`}</div>
+                                        <div className={classes.rowStatic}>{`Всего выручка: ${statisticActive.row[0].data[2]}`}</div>
+                                        </>
+                                        :
+                                        null
+                                }
+                            </div>
                             </>
                             :null
                     }

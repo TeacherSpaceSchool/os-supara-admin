@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import App from '../../layouts/App';
 import { connect } from 'react-redux'
 import { getOrganization } from '../../src/gql/organization'
-import { getDistributer, setDistributer, deleteDistributer, addDistributer, getOrganizationsWithoutDistributer } from '../../src/gql/distributer'
+import { getDistributer, setDistributer, addDistributer } from '../../src/gql/distributer'
+import { getOrganizations } from '../../src/gql/organization'
 import distributerStyle from '../../src/styleMUI/distributer/distributer'
 import { useRouter } from 'next/router'
 import Card from '@material-ui/core/Card';
@@ -31,55 +32,45 @@ const Distributer = React.memo((props) => {
     const classes = distributerStyle();
     const { data } = props;
     const router = useRouter()
-    const {search, isMobileApp } = props.app;
+    const {search, isMobileApp, filter } = props.app;
     let [pagination, setPagination] = useState(100);
     const checkPagination = ()=>{
         if(pagination<allOrganizations.length){
             setPagination(pagination+100)
         }
     }
+    let allOrganizations = data.organizations;
     const organization = router.query.id==='super'?{name: 'AZYK.STORE', _id: 'super'}:data.organization
-    let [organizations, setOrganizations] = useState(data.distributer?data.distributer.organizations:[]);
-    let [allOrganizations, setAllOrganizations] = useState([]);
+    let [sales, setSales] = useState(data.distributer?data.distributer.sales:[]);
+    let [provider, setProvider] = useState(data.distributer?data.distributer.provider:[]);
+
     let [filtredOrganizations, setFiltredOrganizations] = useState([]);
-    let unselectedOrganizations = data.organizationsWithoutDistributer;
     let [selectType, setSelectType] = useState('Все');
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     const _new = !data.distributer
+
     useEffect(()=>{
         (async()=>{
             if(organization) {
                 setPagination(100)
-                let allOrganizations= []
+                let filtredOrganizations = []
                 if (selectType == 'Все')
-                    allOrganizations=[...organizations, ...unselectedOrganizations]
+                    filtredOrganizations=allOrganizations.filter((element)=>element._id!==organization._id&&element.name.toLowerCase().includes(search.toLowerCase()))
                 else if (selectType == 'Свободные')
-                    allOrganizations=[...unselectedOrganizations]
+                    filtredOrganizations=allOrganizations.filter((element)=>(filter==='sales'?!sales.includes(element._id):!provider.includes(element._id))&&element._id!==organization._id&&element.name.toLowerCase().includes(search.toLowerCase()))
                 else if (selectType == 'Выбраные')
-                    allOrganizations=[...organizations]
-                setAllOrganizations(allOrganizations)
-                let filtredOrganizations = [...allOrganizations]
-                filtredOrganizations = filtredOrganizations.filter(element=>
-                    (element.name.toLowerCase()).includes(search.toLowerCase())
-                )
+                    filtredOrganizations=allOrganizations.filter((element)=>(filter==='sales'?sales.includes(element._id):provider.includes(element._id))&&element._id!==organization._id&&element.name.toLowerCase().includes(search.toLowerCase()))
                 setFiltredOrganizations([...filtredOrganizations])
             }
         })()
-    },[selectType, organizations, ])
-    useEffect(()=>{
-        (async()=>{
-            if(organization&&allOrganizations.length>0) {
-                let filtredOrganizations = [...allOrganizations]
-                filtredOrganizations = filtredOrganizations.filter(element=>
-                    (element.name.toLowerCase()).includes(search.toLowerCase())
-                )
-                setFiltredOrganizations([...filtredOrganizations])
-            }
-        })()
-    },[search])
+    },[selectType, sales, provider, search])
+    const filters = [
+        {name: 'Отдел продаж', value: 'sales'},
+        {name: 'Поставщик', value: 'provider'},
+    ]
     return (
-        <App searchShow={true} checkPagination={checkPagination} pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
+        <App searchShow={true} filters={filters} checkPagination={checkPagination} pageName={data.district?router.query.id==='new'?'Добавить':data.district.name:'Ничего не найдено'}>
             <Head>
                 <title>{organization?organization.name:'Ничего не найдено'}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
@@ -109,10 +100,10 @@ const Distributer = React.memo((props) => {
                                     Все
                                 </div>
                                 <div style={{background: selectType==='Свободные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Свободные')}} className={classes.selectType}>
-                                    {`Своб. ${unselectedOrganizations.length}`}
+                                    Своб
                                 </div>
                                 <div style={{background: selectType==='Выбраные'?'#ffb300':'#ffffff'}} onClick={()=>{setSelectType('Выбраные')}} className={classes.selectType}>
-                                    {`Выбр. ${organizations.length}`}
+                                    Выбр
                                 </div>
                             </div>
                             <br/>
@@ -127,16 +118,14 @@ const Distributer = React.memo((props) => {
                                                               once={true}
                                                               placeholder={<CardOrganizationPlaceholder height={height}/>}>
                                                         <div>
-                                                            <Checkbox checked={organizations.includes(element)}
+                                                            <Checkbox checked={filter==='sales'?sales.includes(element._id):provider.includes(element._id)}
                                                                       onChange={() => {
-                                                                          if (!organizations.includes(element)) {
-                                                                              organizations.push(element)
-                                                                              unselectedOrganizations.splice(unselectedOrganizations.indexOf(element), 1)
+                                                                          if (filter==='sales'?!sales.includes(element._id):!provider.includes(element._id)) {
+                                                                              (filter==='sales'?sales:provider).push(element._id)
                                                                           } else {
-                                                                              organizations.splice(organizations.indexOf(element), 1)
-                                                                              unselectedOrganizations.push(element)
+                                                                              (filter==='sales'?sales:provider).splice((filter==='sales'?sales:provider).indexOf(element._id), 1)
                                                                           }
-                                                                          setOrganizations([...organizations])
+                                                                          filter==='sales'?setSales([...sales]):setProvider([...provider])
                                                                       }}
                                                             />
                                                             <CardOrganization element={element}/>
@@ -151,16 +140,17 @@ const Distributer = React.memo((props) => {
                                 <Button onClick={async()=>{
                                     const action = async() => {
                                         if(_new){
-                                            organizations = organizations.map(element=>element._id)
                                             await addDistributer({
                                                 distributer: organization._id,
-                                                organizations: organizations
+                                                sales: sales,
+                                                provider: provider
                                             })
                                         }
                                         else {
                                             let editElement = {
                                                 _id: data.distributer._id,
-                                                organizations: organizations.map(element => element._id)
+                                                sales: sales,
+                                                provider: provider
                                             }
                                             await setDistributer(editElement)
                                         }
@@ -185,6 +175,7 @@ const Distributer = React.memo((props) => {
 
 Distributer.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    ctx.store.getState().app.filter = 'sales'
     if('admin'!==ctx.store.getState().user.profile.role)
         if(ctx.res) {
             ctx.res.writeHead(302, {
@@ -193,10 +184,16 @@ Distributer.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
                 Router.push('/')
+    let distributer = await getDistributer({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+    if(distributer){
+        distributer = distributer.distributer
+        distributer.sales = distributer.sales.map(element=>element._id)
+        distributer.provider = distributer.provider.map(element=>element._id)
+    }
     return {
         data: {
-            ...await getDistributer({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getOrganizationsWithoutDistributer(ctx.query.id, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            distributer: distributer,
+            ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

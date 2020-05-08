@@ -41,8 +41,13 @@ const list = {
             role: ['admin', 'суперорганизация']
         },
         {
-            name: 'Карта продаж',
+            name: 'Карта клиентов',
             link: '/statistic/clientGeo',
+            role: ['admin',]
+        },
+        {
+            name: 'Карта заказов',
+            link: '/statistic/ordergeo',
             role: ['admin',]
         },
         {

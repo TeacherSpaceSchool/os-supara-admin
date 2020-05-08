@@ -111,10 +111,19 @@ const CardReturned = React.memo((props) => {
                         <div className={classes.value}>{element.organization.name}</div>
                     </div>
                     {
-                        element.distributer&&element.distributer.name?
+                        element.sale&&element.sale.name?
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Дистрибьютор: &nbsp;</div>
-                                <div className={classes.value}>{element.distributer.name}</div>
+                                <div className={classes.value}>{element.sale.name}</div>
+                            </div>
+                            :
+                            null
+                    }
+                    {
+                        element.provider&&element.provider.name?
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Поставщик: &nbsp;</div>
+                                <div className={classes.value}>{element.provider.name}</div>
                             </div>
                             :
                             null

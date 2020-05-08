@@ -47,17 +47,17 @@ const Returned =  React.memo(
         }
         let increment = (idx)=>{
             items[idx].count+=1
-            items[idx].allPrice = items[idx].price * items[idx].count
-            items[idx].allTonnage = items[idx].count * items[idx].weight
-            items[idx].allSize = items[idx].count * items[idx].size
+            items[idx].allPrice = Math.round(items[idx].price * items[idx].count)
+            items[idx].allTonnage = Math.round(items[idx].count * items[idx].weight)
+            items[idx].allSize = Math.round(items[idx].count * items[idx].size)
             canculateAllPrice()
         }
         let decrement = (idx)=>{
             if(items[idx].count>1) {
                 items[idx].count -= 1
-                items[idx].allPrice = items[idx].price * items[idx].count
-                items[idx].allTonnage = items[idx].count * items[idx].weight
-                items[idx].allSize = items[idx].count * items[idx].size
+                items[idx].allPrice = Math.round(items[idx].price * items[idx].count)
+                items[idx].allTonnage = Math.round(items[idx].count * items[idx].weight)
+                items[idx].allSize = Math.round(items[idx].count * items[idx].size)
                 canculateAllPrice()
             }
         }
@@ -127,11 +127,22 @@ const Returned =  React.memo(
                     </div>
                 </a>
                 {
-                    element.distributer?
-                        <a href={`/organization/${element.distributer._id}`} target='_blank'>
+                    element.sales?
+                        <a href={`/organization/${element.sales._id}`} target='_blank'>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Дистрибьютор:&nbsp;</div>
-                                <div className={classes.value}>{element.distributer.name}</div>
+                                <div className={classes.value}>{element.sales.name}</div>
+                            </div>
+                        </a>
+                        :
+                        null
+                }
+                {
+                    element.provider?
+                        <a href={`/organization/${element.provider._id}`} target='_blank'>
+                            <div className={classes.row}>
+                                <div className={classes.nameField}>Поставщик:&nbsp;</div>
+                                <div className={classes.value}>{element.provider.name}</div>
                             </div>
                         </a>
                         :
