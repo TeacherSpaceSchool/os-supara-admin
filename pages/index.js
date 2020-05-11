@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -23,6 +23,26 @@ const Organization = React.memo((props) => {
     const { search, filter, sort } = props.app;
     const { profile } = props.user;
     const height = 80
+    const popularItemsRef = useRef(null);
+    const widthPopularItemsRef = useRef(0);
+    const searchTimeOutRef = useRef(null);
+    useEffect(()=>{
+        searchTimeOutRef.current = setInterval(() => {
+            if(popularItemsRef.current){
+                widthPopularItemsRef.current+=120
+                if(widthPopularItemsRef.current>=popularItemsRef.current.offsetWidth)
+                    widthPopularItemsRef.current=0
+                popularItemsRef.current.scrollTo({
+                    top: 0,
+                    left: widthPopularItemsRef.current,
+                    behavior: 'smooth'
+                });
+            }
+        }, 10000)
+        return ()=>{
+            clearTimeout(searchTimeOutRef.current)
+        }
+    });
     useEffect(()=>{
         (async()=>{
             setList((await getBrandOrganizations({search: search, sort: sort, filter: filter})).brandOrganizations)
@@ -55,7 +75,7 @@ const Organization = React.memo((props) => {
             </div>
             {
                 profile.role==='client'&&data.popularItems&&data.popularItems.length>0?
-                    <div className={classes.populars}>
+                    <div ref={popularItemsRef} className={classes.populars}>
                         {data.popularItems.map((element)=> <CardPopularItem key={element._id} element={element}/>)}
                     </div>
                     :

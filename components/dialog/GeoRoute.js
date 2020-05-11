@@ -30,7 +30,7 @@ const Geo =  React.memo(
         const searchTimeOutRef = useRef(null);
         useEffect(()=>{
             if (navigator.geolocation) {
-                searchTimeOutRef.current = setTimeout(() => {
+                searchTimeOutRef.current = setInterval(() => {
                     navigator.geolocation.getCurrentPosition((position) => {
                         setGeo([position.coords.latitude, position.coords.longitude])
                     });
