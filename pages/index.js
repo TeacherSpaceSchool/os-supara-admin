@@ -20,16 +20,29 @@ const Organization = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.brandOrganizations);
-    const { search, filter, sort } = props.app;
+    const { search, filter, sort, isMobileApp } = props.app;
     const { profile } = props.user;
     const height = 80
     const popularItemsRef = useRef(null);
     const widthPopularItemsRef = useRef(0);
     const searchTimeOutRef = useRef(null);
+    let [widthPopularItem, setWidthPopularItem] = useState(0);
+    useEffect(()=>{
+        if(process.browser&&data.popularItems&&data.popularItems.length>0){
+            if(isMobileApp){
+                let width = document.getElementsByClassName('App-body')
+                width = (width[0].offsetWidth-60)/4
+                setWidthPopularItem(width)
+            }
+            else
+                setWidthPopularItem(100)
+        }
+    },[process.browser]);
+
     useEffect(()=>{
         searchTimeOutRef.current = setInterval(() => {
             if(popularItemsRef.current){
-                widthPopularItemsRef.current+=120
+                widthPopularItemsRef.current+=(widthPopularItem+20)
                 if(widthPopularItemsRef.current>=popularItemsRef.current.offsetWidth)
                     widthPopularItemsRef.current=0
                 popularItemsRef.current.scrollTo({
@@ -74,9 +87,9 @@ const Organization = React.memo((props) => {
                 {`Всего брендов: ${list.length}`}
             </div>
             {
-                profile.role==='client'&&data.popularItems&&data.popularItems.length>0?
+                profile.role==='client'&&data.popularItems&&data.popularItems.length>0&&widthPopularItem?
                     <div ref={popularItemsRef} className={classes.populars}>
-                        {data.popularItems.map((element)=> <CardPopularItem key={element._id} element={element}/>)}
+                        {data.popularItems.map((element)=> <CardPopularItem widthPopularItem={widthPopularItem} key={element._id} element={element}/>)}
                     </div>
                     :
                     null

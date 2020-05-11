@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles({
     card: {
-        width: 100,
         height: 152,
         margin: 10,
         position: 'relative',
@@ -15,13 +14,11 @@ export default makeStyles({
     },
     mediaPopular: {
         height: 100,
-        width: 100,
         objectFit: 'contain',
         marginBottom: 10,
         cursor: 'pointer'
     },
     namePopular: {
-        width: 90,
         color: 'black',
         fontSize: '0.6875rem',
         fontFamily: 'Roboto',
