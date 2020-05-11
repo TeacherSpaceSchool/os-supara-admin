@@ -143,11 +143,11 @@ const Catalog = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} sorts={data?data.sortItem:undefined} searchShow={true} pageName='Каталог'>
+        <App defaultOpenSearch={router.query.search} checkPagination={checkPagination} sorts={data?data.sortItem:undefined} searchShow={true} pageName={data.organization.name}>
             <Head>
-                <title>Каталог</title>
+                <title>{data.organization.name}</title>
                 <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Каталог' />
+                <meta property='og:title' content={data.organization.name} />
                 <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
@@ -170,7 +170,7 @@ const Catalog = React.memo((props) => {
                             if(idx<=pagination)
                                 return(
                                     <LazyLoad scrollContainer={'.App-body'} key={row._id} offset={[186, 0]} debounce={0} once={true}  placeholder={<CardCatalogPlaceholder/>}>
-                                        <div>
+                                        <div style={{width: '100%'}}>
                                             <div className={classes.line}>
                                                 <img className={classes.media} src={row.image} onClick={()=>{
                                                     setFullDialog(row.name, <Image imgSrc={row.image}/>)
@@ -301,12 +301,15 @@ Catalog.getInitialProps = async function(ctx) {
         } else
             Router.push('/')
     await deleteBasketAll(ctx.req?await getClientGqlSsr(ctx.req):undefined)
+    if(ctx.query.search){
+        ctx.store.getState().app.search = ctx.query.search
+    }
     return {
         data: {
             ...(ctx.store.getState().user.profile._id?await getClient({_id: ctx.store.getState().user.profile._id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{}),
             ...await getBonusesClient({search: '', sort: '-createdAt'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getBrands({organization: ctx.query.id, search: '', sort: '-name'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getBrands({organization: ctx.query.id, search: ctx.query.search?ctx.query.search:'', sort: '-name'}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getAdss({search: '', organization: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };

@@ -37,6 +37,11 @@ export default makeStyles({
     rowStatic: {
         margin: 5
     },
+    dateStatistic: {
+        width: 5,
+        height: 5,
+        margin: 5
+    },
     fab: {
         position: 'fixed!important',
         bottom: '20px',

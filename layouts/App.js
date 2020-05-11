@@ -26,8 +26,8 @@ const App = React.memo(props => {
     const { setProfile, logout } = props.userActions;
     const { setIsMobileApp } = props.appActions;
     const { profile, authenticated } = props.user;
-    const { load } = props.app;
-    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow, setList, list } = props;
+    const { load, search } = props.app;
+    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow, setList, list, defaultOpenSearch } = props;
     const router = useRouter();
     const [unread, setUnread] = useState({});
     const [reloadPage, setReloadPage] = useState(false);
@@ -92,7 +92,7 @@ const App = React.memo(props => {
                 profile._id !== subscriptionOrderRes.data.reloadOrder.who
         ) {
                 if (router.pathname === '/orders') {
-                    if (subscriptionOrderRes.data.reloadOrder.type === 'ADD') {
+                    if (subscriptionOrderRes.data.reloadOrder.type === 'ADD'&&!search.length) {
                         let have = false
                         let _list = [...list]
                         for (let i = 0; i < _list.length; i++) {
@@ -200,7 +200,7 @@ const App = React.memo(props => {
     return(
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>
-            <AppBar unread={unread} searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
+            <AppBar unread={unread} defaultOpenSearch={defaultOpenSearch} searchShow={searchShow} dates={dates} pageName={pageName} sorts={sorts} filters={filters}/>
             <div ref={containerRef} className='App-body'>
                 {props.children}
             </div>

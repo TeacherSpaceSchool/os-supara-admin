@@ -432,6 +432,8 @@ const Order =  React.memo(
                                                             if(consignment<=orders[idx].count){
                                                                 orders[idx].consignment = consignment
                                                             }
+                                                            else
+                                                                orders[idx].consignment = orders[idx].count
                                                             orders[idx].consignmentPrice = orders[idx].consignment * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                                                             setOrders([...orders])
                                                             canculateAllPrice()
@@ -507,6 +509,8 @@ const Order =  React.memo(
                                                                     if(consignment<=orders[idx].count){
                                                                         orders[idx].consignment = consignment
                                                                     }
+                                                                    else
+                                                                        orders[idx].consignment = orders[idx].count
                                                                     orders[idx].consignmentPrice = orders[idx].consignment * (!orders[idx].item.stock?orders[idx].item.price:orders[idx].item.stock)
                                                                     setOrders([...orders])
                                                                     canculateAllPrice()
@@ -547,6 +551,8 @@ const Order =  React.memo(
                                                                     if (returned <= orders[idx].count) {
                                                                         orders[idx].returned = returned
                                                                     }
+                                                                    else
+                                                                        orders[idx].returned = orders[idx].count
                                                                     setOrders([...orders])
                                                                     canculateAllPrice()
                                                                 }}>

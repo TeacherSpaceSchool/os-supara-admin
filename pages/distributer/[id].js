@@ -184,17 +184,26 @@ Distributer.getInitialProps = async function(ctx) {
             ctx.res.end()
         } else
                 Router.push('/')
-    let distributer = await getDistributer({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+    let distributer = (await getDistributer({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).distributer
+    let organization = (await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined)).organization
+
     if(distributer){
         distributer = distributer.distributer
         distributer.sales = distributer.sales.map(element=>element._id)
         distributer.provider = distributer.provider.map(element=>element._id)
     }
+    else {
+        distributer = {
+            distributer: organization,
+            sales: [],
+            provider: [],
+        }
+    }
     return {
         data: {
             distributer: distributer,
             ...await getOrganizations({search: '', sort: 'name', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            organization: organization
         }
     };
 };

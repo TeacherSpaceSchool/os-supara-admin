@@ -18,20 +18,10 @@ import GpsFixed from '@material-ui/icons/GpsFixed';
 
 const Geo =  React.memo(
     (props) =>{
-        const { showFullDialog, setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+        const { showFullDialog } = props.mini_dialogActions;
         const { showSnackBar } = props.snackbarActions;
         const { profile } = props.user;
         const { classes, clients } = props;
-
-        /*let getGeo = () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position)=>{
-                    setNewGeo(position.coords.latitude+', '+position.coords.longitude)
-                });
-            } else {
-                showSnackBar('Геолокация не поддерживается')
-            }
-        }*/
         let [geo, setGeo] = useState(null);
         const searchTimeOutRef = useRef(null);
         useEffect(()=>{
@@ -49,7 +39,6 @@ const Geo =  React.memo(
             }
         });
         let [load, setLoad] = useState(true);
-        let [map, setMap] = useState(null);
         let [follow, setFollow] = useState(false);
 
         return (
@@ -61,7 +50,7 @@ const Geo =  React.memo(
                         }
                         {geo&&follow?
                             <div style={{display: load?'none':'block'}}>
-                                <Map instanceRef={(ref) => setMap(ref)} onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: ['42.8700000', '74.5900000'], zoom: 12 }}
+                                <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: ['42.8700000', '74.5900000'], zoom: 12 }}
                                      state={{ center: geo, zoom: 18 }}>
                                     <TrafficControl options={{ float: 'right' }} />
                                     {clients.map((client, idx)=> {
@@ -94,7 +83,7 @@ const Geo =  React.memo(
                             </div>
                             :
                             <div style={{display: load?'none':'block'}}>
-                                <Map instanceRef={(ref) => setMap(ref)} onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: ['42.8700000', '74.5900000'], zoom: 12 }}>
+                                <Map onLoad={()=>{setLoad(false)}} height={window.innerHeight-128} width={window.innerWidth-48} defaultState={{ center: ['42.8700000', '74.5900000'], zoom: 12 }}>
                                     <TrafficControl options={{ float: 'right' }} />
                                     {clients.map((client, idx)=> {
                                         if(client.user.status==='active'&&client.address[0]&&client.address[0][1]) return <Placemark

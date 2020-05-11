@@ -165,7 +165,7 @@ const CardOrganization = React.memo((props) => {
                                 if (navigator.geolocation&&element.address[0][1].includes(', ')) {
                                     navigator.geolocation.getCurrentPosition(async(position)=>{
                                         let distance = getGeoDistance(position.coords.latitude, position.coords.longitude, ...(element.address[0][1].split(', ')))
-                                        if(distance<100){
+                                        if(distance<500){
                                             await addAgentHistoryGeo({client: element._id, geo: `${position.coords.latitude}, ${position.coords.longitude}`})
                                             window.open(`/catalog?client=${element._id}`, '_blank');
                                             //Router.push(`/catalog?client=${element._id}`)
@@ -187,7 +187,7 @@ const CardOrganization = React.memo((props) => {
                         null
                 }
                 {
-                    element.del!=='deleted'&&element.user&&['admin', 'суперагент', 'агент', 'суперорганизация', 'организация'].includes(profile.role) ?
+                    list&&element.del!=='deleted'&&element.user&&['admin', 'суперагент', 'агент', 'суперорганизация', 'организация'].includes(profile.role) ?
                         <Button onClick={async()=>{
                             const action = async () => {
                                 await onoffClient([element._id])

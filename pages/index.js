@@ -4,9 +4,10 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../redux/actions/user'
-import { getBrandOrganizations } from '../src/gql/items'
+import { getBrandOrganizations, getPopularItems } from '../src/gql/items'
 import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
 import CardBrand from '../components/brand/CardBrand'
+import CardPopularItem from '../components/items/CardPopularItem'
 import { urlMain } from '../redux/constants/other'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
@@ -20,6 +21,7 @@ const Organization = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.brandOrganizations);
     const { search, filter, sort } = props.app;
+    const { profile } = props.user;
     const height = 80
     useEffect(()=>{
         (async()=>{
@@ -51,6 +53,14 @@ const Organization = React.memo((props) => {
             <div className='count'>
                 {`Всего брендов: ${list.length}`}
             </div>
+            {
+                profile.role==='client'&&data.popularItems&&data.popularItems.length>0?
+                    <div className={classes.populars}>
+                        {data.popularItems.map((element)=> <CardPopularItem key={element._id} element={element}/>)}
+                    </div>
+                    :
+                    null
+            }
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
                     if(idx<=pagination)
@@ -81,7 +91,10 @@ Organization.getInitialProps = async function(ctx) {
             Router.push(['суперагент','агент'].includes(role)?'/catalog':!authenticated?'/contact':'/items/all')
         }
     return {
-        data: await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: {
+            ...await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getPopularItems(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+        }
     };
 };
 

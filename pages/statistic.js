@@ -103,6 +103,11 @@ const list = {
             role: ['admin', 'суперорганизация', 'организация', 'менеджер', 'агент']
         },
         {
+            name: 'Дни поставки',
+            link: '/statistic/deliverydate',
+            role: ['admin', 'суперорганизация', 'организация', 'менеджер', 'агент']
+        },
+        {
             name: 'Подписчики',
             link: '/statistic/subscriber',
             role: ['admin']

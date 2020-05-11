@@ -37,6 +37,7 @@ const Organization = React.memo((props) => {
     let [statusO, setStatusO] = useState(data.organization?data.organization.status:'');
     let [name, setName] = useState(data.organization?data.organization.name:'');
     let [accessToClient, setAccessToClient] = useState(data.organization&&data.organization.accessToClient!==null?data.organization.accessToClient:false);
+    let [onlyDistrict, setOnlyDistrict] = useState(data.organization&&data.organization.onlyDistrict!==null?data.organization.onlyDistrict:false);
     let [consignation, setConsignation] = useState(data.organization&&data.organization.consignation!==null?data.organization.consignation:false);
     let [minimumOrder, setMinimumOrder] = useState(data.organization!==null?data.organization.minimumOrder:0);
     let [priotiry, setPriotiry] = useState(data.organization!==null?data.organization.priotiry:0);
@@ -148,6 +149,17 @@ const Organization = React.memo((props) => {
                                                     />
                                                 }
                                                 label='Консигнации'
+                                            />
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch
+                                                        checked={onlyDistrict}
+                                                        onChange={()=>{setOnlyDistrict(!onlyDistrict)}}
+                                                        color="primary"
+                                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                    />
+                                                }
+                                                label='Только в районах'
                                             />
                                             </>
                                             :
@@ -296,7 +308,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({priotiry: checkInt(priotiry),consignation: consignation, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
+                                                            await addOrganization({priotiry: checkInt(priotiry),consignation: consignation, onlyDistrict: onlyDistrict, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
@@ -318,6 +330,7 @@ const Organization = React.memo((props) => {
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
                                                     if(accessToClient!==data.organization.accessToClient)editElement.accessToClient = accessToClient
+                                                    if(onlyDistrict!==data.organization.onlyDistrict)editElement.onlyDistrict = onlyDistrict
                                                     if(consignation!==data.organization.consignation)editElement.consignation = consignation
                                                     if(minimumOrder!==data.organization.minimumOrder)editElement.minimumOrder = checkInt(minimumOrder)
                                                     if(priotiry!==data.organization.priotiry)editElement.priotiry = checkInt(priotiry)
@@ -458,7 +471,7 @@ Organization.getInitialProps = async function(ctx) {
             Router.push('/contact')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',priotiry: 0,minimumOrder: 0,consignation: false,accessToClient: false}}
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',priotiry: 0,minimumOrder: 0,consignation: false,accessToClient: false, onlyDistrict: false}}
         }
 
     };

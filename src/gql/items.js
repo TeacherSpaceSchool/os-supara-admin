@@ -41,6 +41,30 @@ export const getBrandOrganizations = async({search: search, sort: sort, filter: 
     }
 }
 
+export const getPopularItems = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        popularItems {
+                            _id
+                            name    
+                            image
+                            organization
+                                {_id}
+                            hit
+                            latest
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getItems = async({subCategory,  search,  sort,  filter}, client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

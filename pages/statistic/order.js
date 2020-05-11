@@ -127,13 +127,16 @@ const OrderStatistic = React.memo((props) => {
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего выручка: ${statisticOrder.row[0].data[1]} сом`}
+                                {`Выручка: ${statisticOrder.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
                                 {`Выполнено: ${statisticOrder.row[0].data[2]} шт`}
                                 <br/>
                                 <br/>
-                                {`Конс: ${statisticOrder.row[0].data[3]} сом`}
+                                {`Отказов: ${statisticOrder.row[0].data[3]} сом`}
+                                <br/>
+                                <br/>
+                                {`Конс: ${statisticOrder.row[0].data[4]} сом`}
                                 </>
                                 :
                                 null

@@ -47,11 +47,10 @@ const ReturnedConfirmed =  React.memo(
                 <br/>
                 <div>
                     <Button variant='contained' color='primary' onClick={async()=>{
-                        console.log(items)
                         const action = async () => {
                             if (geo&&client.address[0][1].includes(', ')) {
                                 let distance = getGeoDistance(geo.coords.latitude, geo.coords.longitude, ...(client.address[0][1].split(', ')))
-                                if(distance<100){
+                                if(distance<500){
                                     await addAgentHistoryGeo({client: client._id, geo: `${geo.coords.latitude}, ${geo.coords.longitude}`})
                                 }
                             }
