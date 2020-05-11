@@ -31,14 +31,13 @@ const Organization = React.memo((props) => {
         if(process.browser&&data.popularItems&&data.popularItems.length>0){
             if(isMobileApp){
                 let width = document.getElementsByClassName('App-body')
-                width = (width[0].offsetWidth-60)/4
+                width = (width[0].offsetWidth-60)/3
                 setWidthPopularItem(width)
             }
             else
                 setWidthPopularItem(100)
         }
     },[process.browser]);
-
     useEffect(()=>{
         searchTimeOutRef.current = setInterval(() => {
             if(popularItemsRef.current){
