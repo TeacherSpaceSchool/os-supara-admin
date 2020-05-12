@@ -126,13 +126,16 @@ const AgentsStatistic = React.memo((props) => {
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего выручка: ${statistic.row[0].data[1]} сом`}
+                                {`Выручка: ${statistic.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
                                 {`Выполнено: ${statistic.row[0].data[2]} шт`}
                                 <br/>
                                 <br/>
-                                {`Конс: ${statistic.row[0].data[3]} сом`}
+                                {`Отказов: ${statistic.row[0].data[3]} сом`}
+                                <br/>
+                                <br/>
+                                {`Конс: ${statistic.row[0].data[4]} сом`}
                                 </>
                                 :
                                 null

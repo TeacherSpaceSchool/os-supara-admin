@@ -77,12 +77,13 @@ const ItemStatisticActive = React.memo((props) => {
                             <>
                             <Table type='client' row={statisticActive.row.slice(1)} columns={statisticActive.columns}/>
                             <div className='count' onClick={()=>setShowStat(!showStat)}>
-                                <div className={classes.rowStatic}>{`Всего клиентов: ${statisticActive.row[0].data[0]}`}</div>
+                                <div className={classes.rowStatic}>{`Клиентов: ${statisticActive.row[0].data[0]}`}</div>
                                 {
                                     showStat?
                                         <>
-                                        <div className={classes.rowStatic}>{`Всего заказов: ${statisticActive.row[0].data[1]}`}</div>
-                                        <div className={classes.rowStatic}>{`Всего выручка: ${statisticActive.row[0].data[2]}`}</div>
+                                        <div className={classes.rowStatic}>{`Выполнено: ${statisticActive.row[0].data[1]}`}</div>
+                                        <div className={classes.rowStatic}>{`Выручка: ${statisticActive.row[0].data[2]}`}</div>
+                                        <div className={classes.rowStatic}>{`Возвратов: ${statisticActive.row[0].data[3]}`}</div>
                                         </>
                                         :
                                         null

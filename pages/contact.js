@@ -348,11 +348,25 @@ const Contact = React.memo((props) => {
                                                         Телефон:&nbsp;
                                                     </div>
                                                     <div className={classes.column}>
-                                                        {phone.map((element, idx)=>
-                                                            <a href={`tel:${element}`} key={idx} className={classes.value}>
-                                                                {element}
-                                                            </a>
-                                                        )}
+                                                        {phone.map((element, idx)=>{
+                                                            let tel = ''
+                                                            for(let i=0; i<element.length; i++){
+                                                                if('0123456789+'.includes(element[i]))
+                                                                    tel+=element[i]
+                                                            }
+                                                            if(tel.length>11)
+                                                                return (
+                                                                    <a href={`tel:${tel}`} key={idx} className={classes.value}>
+                                                                        {element}
+                                                                    </a>
+                                                                )
+                                                            else
+                                                                return (
+                                                                    <div key={idx} className={classes.value}>
+                                                                        {element}
+                                                                    </div>
+                                                                )
+                                                        })}
                                                     </div>
                                                 </div>
                                                 <div className={classes.row}>

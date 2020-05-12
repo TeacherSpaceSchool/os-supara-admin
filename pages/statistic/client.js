@@ -122,19 +122,22 @@ const ClientStatistic = React.memo((props) => {
                 {
                     statisticClient?
                         <>
-                        {`Активных клиентов: ${statisticClient.row[0].data[0]}`}
+                        {`Клиентов: ${statisticClient.row[0].data[0]}`}
                         {
                             showStat?
                                 <>
                                 <br/>
                                 <br/>
-                                {`Всего выручка: ${statisticClient.row[0].data[1]} сом`}
+                                {`Выручка: ${statisticClient.row[0].data[1]} сом`}
                                 <br/>
                                 <br/>
-                                {`Заказов выполнено: ${statisticClient.row[0].data[2]} шт`}
+                                {`Выполнено: ${statisticClient.row[0].data[2]} шт`}
                                 <br/>
                                 <br/>
-                                {`Конс: ${statisticClient.row[0].data[3]} сом`}
+                                {`Отказов: ${statisticClient.row[0].data[3]} сом`}
+                                <br/>
+                                <br/>
+                                {`Конс: ${statisticClient.row[0].data[4]} сом`}
                                 </>
                                 :
                                 null

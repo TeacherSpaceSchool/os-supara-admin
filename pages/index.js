@@ -42,7 +42,7 @@ const Organization = React.memo((props) => {
         searchTimeOutRef.current = setInterval(() => {
             if(popularItemsRef.current){
                 widthPopularItemsRef.current+=(widthPopularItem+20)
-                if(widthPopularItemsRef.current>=popularItemsRef.current.offsetWidth)
+                if(widthPopularItemsRef.current>=(popularItemsRef.current.scrollWidth-popularItemsRef.current.offsetWidth+11))
                     widthPopularItemsRef.current=0
                 popularItemsRef.current.scrollTo({
                     top: 0,
@@ -50,7 +50,7 @@ const Organization = React.memo((props) => {
                     behavior: 'smooth'
                 });
             }
-        }, 10000)
+        }, 5000)
         return ()=>{
             clearTimeout(searchTimeOutRef.current)
         }
