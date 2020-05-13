@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../redux/actions/user'
 import { getBrandOrganizations, getPopularItems } from '../src/gql/items'
-import { getAllAdss } from '../src/gql/ads'
 import pageListStyle from '../src/styleMUI/organization/orgaizationsList'
 import CardBrand from '../components/brand/CardBrand'
 import CardPopularItem from '../components/items/CardPopularItem'
@@ -25,11 +24,8 @@ const Organization = React.memo((props) => {
     const { profile } = props.user;
     const height = 80
     const popularItemsRef = useRef(null);
-    const allAdssRef = useRef(null);
     const widthPopularItemsRef = useRef(0);
     const searchTimeOutRef = useRef(null);
-    const searchTimeOutAdssRef = useRef(null);
-    const widthAllAdssRef = useRef(0);
     let [widthPopularItem, setWidthPopularItem] = useState(0);
     useEffect(()=>{
         if(process.browser&&data.popularItems&&data.popularItems.length>0){
@@ -55,21 +51,8 @@ const Organization = React.memo((props) => {
                 });
             }
         }, 5000)
-        searchTimeOutAdssRef.current = setInterval(() => {
-            if(allAdssRef.current){
-                widthAllAdssRef.current+=1
-                if(widthAllAdssRef.current>=(allAdssRef.current.scrollWidth-allAdssRef.current.offsetWidth))
-                    widthAllAdssRef.current=0
-                allAdssRef.current.scrollTo({
-                    top: 0,
-                    left: widthAllAdssRef.current,
-                    behavior: 'instant'
-                });
-            }
-        }, 50)
         return ()=>{
             clearTimeout(searchTimeOutRef.current)
-            clearTimeout(searchTimeOutAdssRef.current)
         }
     });
     useEffect(()=>{
@@ -99,13 +82,9 @@ const Organization = React.memo((props) => {
                 <meta property="og:url" content={`${urlMain}/brands`} />
                 <link rel='canonical' href={`${urlMain}/brands`}/>
             </Head>
-            {
-                /*
-            <div className='count' style={{bottom: 35}}>
+            <div className='count'>
                 {`Всего брендов: ${list.length}`}
             </div>
-                 */
-            }
             {
                 profile.role==='client'&&data.popularItems&&data.popularItems.length>0&&widthPopularItem?
                     <div ref={popularItemsRef} className={classes.populars}>
@@ -124,14 +103,6 @@ const Organization = React.memo((props) => {
                         )
                 }):null}
             </div>
-            {
-                profile.role==='client'&&data.allAdss&&data.allAdss.length>0?
-                    <div ref={allAdssRef} className={classes.allAdss}>
-                        {data.allAdss.map((element)=> <div className={classes.ads} key={element._id}>{element.title}</div>)}
-                    </div>
-                    :
-                    null
-            }
         </App>
     )
 })
@@ -155,7 +126,6 @@ Organization.getInitialProps = async function(ctx) {
         data: {
             ...await getBrandOrganizations({search: '', sort: ctx.store.getState().app.sort, filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getPopularItems(ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getAllAdss(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
 };
