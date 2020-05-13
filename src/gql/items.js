@@ -18,6 +18,7 @@ export const getBrandOrganizations = async({search: search, sort: sort, filter: 
                             address
                             email
                             phone
+                            miniInfo
                             info
                             reiting
                             status

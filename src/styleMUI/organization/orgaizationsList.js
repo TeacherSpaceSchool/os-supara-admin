@@ -7,6 +7,7 @@ export default makeStyles({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+        position: 'relative',
         flexWrap: 'wrap'
     },
     populars: {
@@ -18,6 +19,26 @@ export default makeStyles({
         '&::-webkit-scrollbar': {
             display: 'none',
         },
+    },
+    allAdss: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        overflowX: 'scroll',
+        flex: 'none',
+        background: 'white',
+        '&::-webkit-scrollbar': {
+            display: 'none',
+        },
+    },
+    ads: {
+        fontSize: '0.875rem',
+        margin: 8,
+        fontWeight: 'bold',
     },
     fab: {
         position: 'fixed!important',

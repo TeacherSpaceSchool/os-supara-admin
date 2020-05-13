@@ -22,6 +22,27 @@ export const getAdsOrganizations = async(client)=>{
     }
 }
 
+export const getAllAdss = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        allAdss {
+                            _id
+                            image
+                            url
+                            title
+                          }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getAds = async()=>{
     try{
         const client = new SingletonApolloClient().getClient()

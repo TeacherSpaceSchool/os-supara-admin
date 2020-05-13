@@ -87,6 +87,7 @@ const Organization = React.memo((props) => {
         setPhone([...phone])
     };
     let [info, setInfo] = useState(data.organization!==null?data.organization.info:'');
+    let [miniInfo, setMiniInfo] = useState(data.organization!==null?data.organization.miniInfo:'');
     let [preview, setPreview] = useState(data.organization!==null?data.organization.image:'');
     let [image, setImage] = useState(undefined);
     let handleChangeImage = ((event) => {
@@ -172,6 +173,15 @@ const Organization = React.memo((props) => {
                                         value={name}
                                         className={isMobileApp?classes.inputM:classes.inputD}
                                         onChange={(event)=>{setName(event.target.value)}}
+                                        inputProps={{
+                                            'aria-label': 'description',
+                                        }}
+                                    />
+                                    <TextField
+                                        label='Профиль'
+                                        value={miniInfo}
+                                        className={isMobileApp?classes.inputM:classes.inputD}
+                                        onChange={(event)=>{setMiniInfo(event.target.value)}}
                                         inputProps={{
                                             'aria-label': 'description',
                                         }}
@@ -308,7 +318,7 @@ const Organization = React.memo((props) => {
                                                 <Button onClick={async()=>{
                                                     if (image!==undefined&&name.length>0&&email.length>0&&address.length>0&&phone.length>0&&info.length>0) {
                                                         const action = async() => {
-                                                            await addOrganization({priotiry: checkInt(priotiry),consignation: consignation, onlyDistrict: onlyDistrict, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
+                                                            await addOrganization({miniInfo: miniInfo, priotiry: checkInt(priotiry),consignation: consignation, onlyDistrict: onlyDistrict, accessToClient: accessToClient, image: image, name: name, address: address, email: email, phone: phone, info: info, minimumOrder: checkInt(minimumOrder)})
                                                             Router.push('/organizations')
                                                         }
                                                         setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
@@ -329,6 +339,7 @@ const Organization = React.memo((props) => {
                                                     if(email.length>0&&email!==data.organization.email)editElement.email = email
                                                     if(phone.length>0&&phone!==data.organization.phone)editElement.phone = phone
                                                     if(info.length>0&&info!==data.organization.info)editElement.info = info
+                                                    if(miniInfo.length>0&&miniInfo!==data.organization.miniInfo)editElement.miniInfo = miniInfo
                                                     if(accessToClient!==data.organization.accessToClient)editElement.accessToClient = accessToClient
                                                     if(onlyDistrict!==data.organization.onlyDistrict)editElement.onlyDistrict = onlyDistrict
                                                     if(consignation!==data.organization.consignation)editElement.consignation = consignation
@@ -471,7 +482,7 @@ Organization.getInitialProps = async function(ctx) {
             Router.push('/contact')
     return {
         data: {
-            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',priotiry: 0,minimumOrder: 0,consignation: false,accessToClient: false, onlyDistrict: false}}
+            ...ctx.query.id!=='new'?await getOrganization({_id: ctx.query.id}, ctx.req?await getClientGqlSsr(ctx.req):undefined):{organization:{name: '',image: '/static/add.png',address: [],email: [],phone: [],info: '',miniInfo: '',priotiry: 0,minimumOrder: 0,consignation: false,accessToClient: false, onlyDistrict: false}}
         }
 
     };

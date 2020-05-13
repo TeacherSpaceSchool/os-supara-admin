@@ -45,6 +45,7 @@ export const getOrganizationsWithoutDistributer = async(distributer, client)=>{
                             email
                             phone
                             info
+                            miniInfo
                             reiting
                             status
                             accessToClient

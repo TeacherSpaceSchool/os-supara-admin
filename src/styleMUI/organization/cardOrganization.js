@@ -29,7 +29,6 @@ export default makeStyles({
     },
     input: {
         marginBottom: 5,
-        width: 'calc(100% - 70px)',
         fontSize: '1rem',
         fontFamily: 'Roboto'
     },
@@ -39,5 +38,15 @@ export default makeStyles({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+    },
+    column:{
+        display: 'flex',
+        flexDirection: 'column',
+        width: 'calc(100% - 70px)',
+    },
+    value: {
+        fontSize: '0.875rem',
+        fontFamily: 'Roboto',
+        wordBreak: 'break-all'
     },
 })

@@ -21,9 +21,19 @@ const CardBrand = React.memo((props) => {
                                 src={element.image}
                                 alt={element.name}
                             />
-                            <h3 className={classes.input}>
-                                {element.name}
-                            </h3>
+                           <div className={classes.column}>
+                               <h3 className={classes.input}>
+                                   {element.name}
+                               </h3>
+                               {
+                                   element.miniInfo?
+                                       <div className={classes.value}>
+                                           {element.miniInfo}
+                                       </div>
+                                       :
+                                       null
+                               }
+                           </div>
                         </div>
                 </CardActionArea>
             </Card>
