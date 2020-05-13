@@ -63,7 +63,7 @@ const Organization = React.memo((props) => {
                 allAdssRef.current.scrollTo({
                     top: 0,
                     left: widthAllAdssRef.current,
-                    behavior: 'smooth'
+                    behavior: 'instant'
                 });
             }
         }, 50)

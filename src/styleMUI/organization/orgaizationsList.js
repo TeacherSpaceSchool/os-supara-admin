@@ -22,6 +22,7 @@ export default makeStyles({
     },
     allAdss: {
         position: 'absolute',
+        height: 36,
         bottom: 0,
         left: 0,
         width: '100%',
