@@ -25,7 +25,7 @@ module.exports =
                             }
                         ]
                     },
-                    ...(process.env.URL==='cant.syt'?{
+                    ...(process.env.URL==='os-kantsut.xyz'?{
                         onDemandEntries : {
                             maxInactiveAge :  1000*60*60*24*10,
                             pagesBufferLength: 2,

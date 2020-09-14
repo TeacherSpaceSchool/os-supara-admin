@@ -1,13 +1,13 @@
-let notificationUrl = 'https://cant.syt';
+let notificationUrl = 'https://os-kantsut.xyz';
 //notification registered feature for getting update automatically from server api
 self.addEventListener('push', function (event) {
     let _data = event.data ?
         event.data.json()
         :
-        {title: 'CANT.SYT', message: 'Не забудьте сделать свой заказ', tag: 'CANT.SYT', url: 'https://cant.syt', icon: 'https://cant.syt/static/192x192.png'};
+        {title: 'os-kantsut.xyz', message: 'Не забудьте сделать свой заказ', tag: 'os-kantsut.xyz', url: 'https://os-kantsut.xyz', icon: 'https://os-kantsut.xyz/static/192x192.png'};
     event.waitUntil(
         self.registration.showNotification(_data.title, {
-            badge: 'https://cant.syt/static/192x192.png',
+            badge: 'https://os-kantsut.xyz/static/192x192.png',
             body: _data.message,
             icon: _data.icon,
             tag: _data.tag,
@@ -22,7 +22,7 @@ self.addEventListener('push', function (event) {
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
 
-    fetch('https://cant.syt:3000/push/clicknotification', {
+    fetch('https://os-kantsut.xyz:3000/push/clicknotification', {
         method: 'post',
         headers: {
             'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'

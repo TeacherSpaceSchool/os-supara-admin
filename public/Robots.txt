@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://cant.syt/sitemap.xml
+Sitemap: https://os-kantsut.xyz/sitemap.xml

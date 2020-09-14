@@ -3,7 +3,7 @@ export let urlGQLws
 export let urlMain
 export let urlSubscribe
 export let applicationKey
-if(process.env.URL==='cant.syt') {
+if(process.env.URL==='os-kantsut.xyz') {
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `wss://${process.env.URL}:3000/graphql`
     urlSubscribe = `https://${process.env.URL}:3000/subscribe`
