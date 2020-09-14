@@ -1,34 +1,33 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import App from '../layouts/App';
-import CardRoute from '../components/route/CardRoute'
-import pageListStyle from '../src/styleMUI/route/routeList'
-import {getRoutes} from '../src/gql/route'
-import { connect } from 'react-redux'
+import { getRoutes } from '../src/gql/route'
+import { getRoles } from '../src/gql/role'
+import { getDivisionsForRoute } from '../src/gql/division'
+import pageListStyle from '../src/styleMUI/list'
+import CardRoute from '../components/CardRoute'
 import { urlMain } from '../redux/constants/other'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Link from 'next/link';
 import Router from 'next/router'
 import { getClientGqlSsr } from '../src/getClientGQL'
-const height = 210
-import LazyLoad from 'react-lazyload';
-import { forceCheck } from 'react-lazyload';
-import CardRoutePlaceholder from '../components/route/CardRoutePlaceholder'
 import initialApp from '../src/initialApp'
+import { forceCheck } from 'react-lazyload';
+import LazyLoad from 'react-lazyload';
+import CardRoutePlaceholder from '../components/CardPlaceholder'
+import { connect } from 'react-redux'
 
 const Routes = React.memo((props) => {
-    const { profile } = props.user;
     const classes = pageListStyle();
     const { data } = props;
+    const roles = ['специалист', 'бухгалтерия', 'кассир', 'снабженец', 'генеральный директор', 'финансовый директор', ...data.roles.map(element=>element.name)]
     let [list, setList] = useState(data.routes);
-    const { search, filter, sort, date } = props.app;
-    let getList = async()=>{
-        setList((await getRoutes({search: search, sort: sort, filter: filter, date: date})).routes)
-    }
+    const { search } = props.app;
+    const height = 100
     useEffect(()=>{
-        getList()
-    },[filter, sort, search, date]);
+        (async()=>{
+            setPagination(100)
+            setList((await getRoutes({search: search})).routes)
+        })()
+    },[search])
     useEffect(()=>{
         setPagination(100)
         forceCheck()
@@ -40,62 +39,61 @@ const Routes = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} getList={getList} searchShow={true} dates={true} filters={data.filterRoute} sorts={data.sortRoute} pageName='Маршрутные листы'>
+        <App checkPagination={checkPagination} searchShow={true} pageName='Маршруты'>
             <Head>
-                <title>Маршрутные листы</title>
-                <meta name='description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
-                <meta property='og:title' content='Маршрутные листы' />
-                <meta property='og:description' content='Азык – это онлайн платформа для заказа товаров оптом, разработанная специально для малого и среднего бизнеса.  Она объединяет производителей и торговые точки напрямую, сокращая расходы и повышая продажи. Азык предоставляет своим пользователям мощные технологии для масштабирования и развития своего бизнеса.' />
+                <title>Маршруты</title>
+                <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
+                <meta property='og:title' content='Маршруты' />
+                <meta property='og:description' content='Система предназначена для ведения списка заявок на приобретение' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
                 <meta property="og:url" content={`${urlMain}/routes`} />
                 <link rel='canonical' href={`${urlMain}/routes`}/>
             </Head>
-            <div className='count'>
-                {`Всего маршрутов: ${list.length}`}
-            </div>
             <div className={classes.page}>
+                <CardRoute divisionsForRoute={data.divisionsForRoute} roles={roles} setList={setList} list={list}/>
                 {list?list.map((element, idx)=> {
-                    if(idx<=pagination)
-                        return(
-                            <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardRoutePlaceholder/>}>
-                                <CardRoute setList={setList} key={element._id} element={element}/>
-                            </LazyLoad>
-                        )}
+                        if (idx <= pagination) {
+                            return (
+                                <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height}
+                                          offset={[height, 0]} debounce={0} once={true}
+                                          placeholder={<CardRoutePlaceholder height={height}/>}>
+                                    <CardRoute divisionsForRoute={data.divisionsForRoute} roles={roles} key={element._id} setList={setList} list={list}
+                                                  idx={idx} element={element}/>
+                                </LazyLoad>
+                            )
+                        }
+                    }
                 ):null}
             </div>
-            {['admin', 'организация', 'менеджер'].includes(profile.role)?
-                <Link href='/route/[id]' as={`/route/new`}>
-                    <Fab color='primary' aria-label='add' className={classes.fab}>
-                        <AddIcon />
-                    </Fab>
-                </Link>
-                :
-                null
-            }
         </App>
     )
 })
 
 Routes.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'организация', 'суперорганизация', 'менеджер', 'экспедитор'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'менеджер'].includes(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'
             })
             ctx.res.end()
-        } else
+        }
+        else {
             Router.push('/')
+        }
     return {
-        data: await getRoutes({search: '', sort: '-createdAt', filter: '', date: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+        data: {
+            ...await getRoutes({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getRoles({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getDivisionsForRoute(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+        }
     };
 };
 
 function mapStateToProps (state) {
     return {
         app: state.app,
-        user: state.user,
     }
 }
 

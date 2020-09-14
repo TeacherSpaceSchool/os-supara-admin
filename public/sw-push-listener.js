@@ -1,13 +1,13 @@
-let notificationUrl = 'https://azyk.store';
+let notificationUrl = 'https://cant.syt';
 //notification registered feature for getting update automatically from server api
 self.addEventListener('push', function (event) {
     let _data = event.data ?
         event.data.json()
         :
-        {title: 'AZYK.STORE', message: 'Не забудьте сделать свой заказ', tag: 'AZYK.STORE', url: 'https://azyk.store', icon: 'https://azyk.store/static/192x192.png'};
+        {title: 'CANT.SYT', message: 'Не забудьте сделать свой заказ', tag: 'CANT.SYT', url: 'https://cant.syt', icon: 'https://cant.syt/static/192x192.png'};
     event.waitUntil(
         self.registration.showNotification(_data.title, {
-            badge: 'https://azyk.store/static/192x192.png',
+            badge: 'https://cant.syt/static/192x192.png',
             body: _data.message,
             icon: _data.icon,
             tag: _data.tag,
@@ -22,7 +22,7 @@ self.addEventListener('push', function (event) {
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
 
-    fetch('https://azyk.store:3000/push/clicknotification', {
+    fetch('https://cant.syt:3000/push/clicknotification', {
         method: 'post',
         headers: {
             'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'

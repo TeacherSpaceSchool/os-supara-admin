@@ -1,0 +1,133 @@
+import { gql } from 'apollo-boost';
+import { SingletonApolloClient } from '../singleton/client';
+import { SingletonStore } from '../singleton/store';
+
+export const getItems = async(element, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: element,
+                query: gql`
+                    query ($category: ID, $search: String!) {
+                        items(category: $category, search: $search) {
+                            _id
+                            createdAt 
+                            category
+                                {_id name}
+                            name
+                            GUID
+                        }
+                        filterItem {
+                           name
+                           value
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getItemsTrash = async(element, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: element,
+                query: gql`
+                    query ($search: String!) {
+                        itemsTrash( search: $search) {
+                            _id
+                            createdAt 
+                            category
+                                {_id name}
+                            name
+                            GUID
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getItem = async(element, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                variables: element,
+                query: gql`
+                    query (_id: ID!) {
+                        item(_id: $_id) {
+                            _id
+                            createdAt 
+                            category
+                                {_id name}
+                            name
+                            GUID
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const deleteItem = async(ids, subCategory)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {_id: ids},
+            mutation : gql`
+                    mutation ($_id: [ID]!) {
+                        deleteItem(_id: $_id) {
+                             data
+                        }
+                    }`})
+        return await getItems({subCategory: subCategory, ...(new SingletonStore().getStore().getState().app)})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const addItem = async(element, subCategory)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        let res = await client.mutate({
+            variables: {...element, subCategory: subCategory},
+            mutation : gql`
+                    mutation ($name: String!, $category: ID!, $GUID: String) {
+                        addItem(name: $name, category: $category, GUID: $GUID) {
+                            _id
+                            createdAt 
+                            category
+                                {_id name}
+                            name
+                        }
+                    }`})
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const setItem = async(element)=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            variables: {...element},
+            mutation : gql`
+                    mutation ($_id: ID!, $name: String, $category: ID, $GUID: String) {
+                        setItem(_id: $_id, name: $name, category: $category, GUID: $GUID) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}

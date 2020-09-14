@@ -6,18 +6,15 @@ import SnackBar from '../components/app/SnackBar'
 import Drawer from '../components/app/Drawer'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addFavoriteItem } from '../src/gql/items'
-import { addBasket } from '../src/gql/basket'
 import * as userActions from '../redux/actions/user'
 import * as appActions from '../redux/actions/app'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import '../scss/app.scss'
 import Router from 'next/router'
 import { useRouter } from 'next/router';
-import { subscriptionOrder } from '../src/gql/order';
-import { subscriptionReturned } from '../src/gql/returned';
-import { useSubscription } from '@apollo/react-hooks';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { useSubscription } from '@apollo/react-hooks';
+import { subscriptionData } from '../src/gql/data';
 
 export const mainWindow = React.createRef();
 export const alert = React.createRef();
@@ -27,7 +24,7 @@ const App = React.memo(props => {
     const { setIsMobileApp } = props.appActions;
     const { profile, authenticated } = props.user;
     const { load, search } = props.app;
-    let { checkPagination, sorts, filters, getList, pageName, dates, searchShow, setList, list, defaultOpenSearch } = props;
+    let { checkPagination, sorts, filters, pageName, dates, searchShow, setList, list, defaultOpenSearch } = props;
     const router = useRouter();
     const [unread, setUnread] = useState({});
     const [reloadPage, setReloadPage] = useState(false);
@@ -45,7 +42,7 @@ const App = React.memo(props => {
 
     Router.events.on('routeChangeStart', async (url, err)=>{
 
-        if(router.asPath!==url&&(router.asPath.includes('items')||router.asPath.includes('brand'))) {
+        if(router.asPath!==url&&(router.asPath.includes('applications')||router.asPath.includes('divisions'))) {
             if(!sessionStorage.scrollPostionStore)
                 sessionStorage.scrollPostionStore = JSON.stringify({})
             let scrollPostionStore = JSON.parse(sessionStorage.scrollPostionStore)
@@ -80,122 +77,209 @@ const App = React.memo(props => {
             await setReloadPage(false)
         }
     });
-    let subscriptionOrderRes = useSubscription(subscriptionOrder);
+
+
+    let subscriptionDataRes = useSubscription(subscriptionData);
     useEffect( ()=>{
         if (
-                subscriptionOrderRes &&
-                authenticated &&
-                profile.role &&
-                'экспедитор' !== profile.role &&
-                subscriptionOrderRes.data &&
-                subscriptionOrderRes.data.reloadOrder &&
-                profile._id !== subscriptionOrderRes.data.reloadOrder.who
+            subscriptionDataRes &&
+            authenticated &&
+            profile.role &&
+            subscriptionDataRes.data &&
+            subscriptionDataRes.data.reloadData
         ) {
-                if (router.pathname === '/orders') {
-                    if (subscriptionOrderRes.data.reloadOrder.type === 'ADD'&&!search.length) {
-                        let have = false
-                        let _list = [...list]
-                        for (let i = 0; i < _list.length; i++) {
-                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
-                                _list[i] = subscriptionOrderRes.data.reloadOrder.invoice
-                                have = true
-                            }
-                        }
-                        if (have)
-                            setList([..._list])
-                        else
-                            setList([subscriptionOrderRes.data.reloadOrder.invoice, ...list])
+            if(subscriptionDataRes.data.reloadData.application){
+                if (router.pathname === '/applications') {
+                    if (subscriptionDataRes.data.reloadData.type === 'ADD'&&!search.length) {
+                        setList([subscriptionDataRes.data.reloadData.application, ...list])
                     }
-                    else if (subscriptionOrderRes.data.reloadOrder.type === 'SET') {
+                    else if (subscriptionDataRes.data.reloadData.type === 'SET') {
                         let _list = [...list]
                         for (let i = 0; i < _list.length; i++) {
-                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
-                                _list[i] = subscriptionOrderRes.data.reloadOrder.invoice
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.application._id) {
+                                _list[i] = subscriptionDataRes.data.reloadData.application
                             }
                         }
                         setList([..._list])
                     }
-                    else if (subscriptionOrderRes.data.reloadOrder.type === 'DELETE') {
-                        let index = 0
+                    else if (subscriptionDataRes.data.reloadData.type === 'DELETE') {
+                        let index = undefined
                         let _list = [...list]
                         for (let i = 0; i < _list.length; i++) {
-                            if (_list[i]._id === subscriptionOrderRes.data.reloadOrder.invoice._id) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.application._id) {
                                 index = i
                             }
                         }
-                        _list.splice(index, 1);
-                        setList([..._list])
+                        if(index!==undefined) {
+                            _list.splice(index, 1);
+                            setList([..._list])
+                        }
                     }
                 }
                 else {
-                    if (!unread.orders) {
-                        unread.orders = true
+                    if (!unread.applications) {
+                        unread.applications = true
                         setUnread({...unread})
                     }
                     if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
                         navigator.vibrate(200);
-                    /*if (alert.current)
-                        alert.current.play()*/
                 }
+
             }
-    },[subscriptionOrderRes.data])
-        /*let subscriptionReturnedRes = useSubscription(subscriptionReturned);
-        if (
-            subscriptionReturnedRes &&
-            authenticated &&
-            profile.role &&
-            'экспедитор' !== profile.role &&
-            subscriptionReturnedRes.data &&
-            subscriptionReturnedRes.data.reloadReturned &&
-            profile._id !== subscriptionReturnedRes.data.reloadReturned.who
-        ) {
-            if (router.pathname === '/returneds') {
-                if (subscriptionReturnedRes.data.reloadReturned.type === 'ADD') {
-                    let have = false
-                    let _list = [...list]
-                    for (let i = 0; i < _list.length; i++) {
-                        if (_list[i]._id === subscriptionOrderRes.data.reloadReturned.returned._id) {
-                            _list[i] = subscriptionOrderRes.data.reloadReturned.returned
-                            have = true
-                        }
+            else if(subscriptionDataRes.data.reloadData.cashConsumable){
+                if (router.pathname === '/cashconsumables') {
+                    if (subscriptionDataRes.data.reloadData.type === 'ADD'&&!search.length) {
+                        setList([subscriptionDataRes.data.reloadData.cashConsumable, ...list])
                     }
-                    if (have)
+                    else if (subscriptionDataRes.data.reloadData.type === 'SET') {
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.cashConsumable._id) {
+                                _list[i] = subscriptionDataRes.data.reloadData.cashConsumable
+                            }
+                        }
                         setList([..._list])
-                    else
-                        setList([subscriptionOrderRes.data.reloadReturned.returned, ...list])
-                }
-                else if (subscriptionReturnedRes.data.reloadReturned.type === 'SET') {
-                    let _list = [...list]
-                    for (let i = 0; i < _list.length; i++) {
-                        if (_list[i]._id === subscriptionReturnedRes.data.reloadReturned.returned._id) {
-                            _list[i] = subscriptionReturnedRes.data.reloadReturned.returned
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'DELETE') {
+                        let index = undefined
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.cashConsumable._id) {
+                                index = i
+                            }
+                        }
+                        if(index!==undefined) {
+                            _list.splice(index, 1);
+                            setList([..._list])
                         }
                     }
-                    setList([..._list])
                 }
-                else if (subscriptionReturnedRes.data.reloadReturned.type === 'DELETE') {
-                    let index = 0
-                    let _list = [...list]
-                    for (let i = 0; i < _list.length; i++) {
-                        if (_list[i]._id === subscriptionReturnedRes.data.reloadReturned.returned._id) {
-                            index = i
+                else {
+                    if (!unread.cashConsumables) {
+                        unread.cashConsumables = true
+                        setUnread({...unread})
+                    }
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
+                }
+
+            }
+            else if(subscriptionDataRes.data.reloadData.waybill){
+                if (router.pathname === '/waybills') {
+                    if (subscriptionDataRes.data.reloadData.type === 'ADD'&&!search.length) {
+                        setList([subscriptionDataRes.data.reloadData.waybill, ...list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'SET') {
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.waybill._id) {
+                                _list[i] = subscriptionDataRes.data.reloadData.waybill
+                            }
+                        }
+                        setList([..._list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'DELETE') {
+                        let index = undefined
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.waybill._id) {
+                                index = i
+                            }
+                        }
+                        if(index!==undefined) {
+                            _list.splice(index, 1);
+                            setList([..._list])
                         }
                     }
-                    _list.splice(index, 1);
-                    setList([..._list])
+                }
+                else {
+                    if (!unread.waybills) {
+                        unread.waybills = true
+                        setUnread({...unread})
+                    }
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
+                }
+
+            }
+            else if(subscriptionDataRes.data.reloadData.expenseReport){
+                if (router.pathname === '/expensereports') {
+                    if (subscriptionDataRes.data.reloadData.type === 'ADD'&&!search.length) {
+                        setList([subscriptionDataRes.data.reloadData.expenseReport, ...list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'SET') {
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.expenseReport._id) {
+                                _list[i] = subscriptionDataRes.data.reloadData.expenseReport
+                            }
+                        }
+                        setList([..._list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'DELETE') {
+                        let index = undefined
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.expenseReport._id) {
+                                index = i
+                            }
+                        }
+                        if(index!==undefined) {
+                            _list.splice(index, 1);
+                            setList([..._list])
+                        }
+                    }
+                }
+                else {
+                    if (!unread.expenseReports) {
+                        unread.expenseReports = true
+                        setUnread({...unread})
+                    }
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
                 }
             }
-            else {
-                if (!unread.returneds) {
-                    unread.returneds = true
-                    setUnread({...unread})
+            else if(subscriptionDataRes.data.reloadData.balance){
+                if (router.pathname === '/balances') {
+                    if (subscriptionDataRes.data.reloadData.type === 'ADD'&&!search.length) {
+                        setList([subscriptionDataRes.data.reloadData.balance, ...list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'SET') {
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.balance._id) {
+                                _list[i] = subscriptionDataRes.data.reloadData.balance
+                            }
+                        }
+                        setList([..._list])
+                    }
+                    else if (subscriptionDataRes.data.reloadData.type === 'DELETE') {
+                        let index = undefined
+                        let _list = [...list]
+                        for (let i = 0; i < _list.length; i++) {
+                            if (_list[i]._id === subscriptionDataRes.data.reloadData.balance._id) {
+                                index = i
+                            }
+                        }
+                        if(index!==undefined) {
+                            _list.splice(index, 1);
+                            setList([..._list])
+                        }
+                    }
                 }
-                if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
-                    navigator.vibrate(200);
+                else {
+                    if (!unread.balances) {
+                        unread.balances = true
+                        setUnread({...unread})
+                    }
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
+                }
+
             }
-        }*/
 
-
+        }
+    },[subscriptionDataRes.data])
 
     return(
         <div ref={mainWindow} className='App'>

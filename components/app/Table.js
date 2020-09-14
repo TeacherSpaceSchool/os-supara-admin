@@ -27,7 +27,7 @@ let getMuiTheme = () => createMuiTheme({
 
 const MyTable =  React.memo(
     (props) =>{
-        const { columns, row, type } = props;
+        const { columns, row, dateStart, dateEnd } = props;
         let data = row.map(row=>row.data)
         const options = {
             customSort: (data, colIndex, order) => {
@@ -42,14 +42,14 @@ const MyTable =  React.memo(
             selectableRows: 'none',
             print: false,
             pagination: true,
-            rowsPerPage: 100,
-            rowsPerPageOptions: [100],
+            rowsPerPage: 1000,
+            rowsPerPageOptions: [1000],
             count: data.length,
             responsive: 'scroll',
             downloadOptions: {filename: 'tableDownload.csv', separator: ','},
             onCellClick: (colData, colMeta) => {
-                if(colMeta.colIndex===0&&row[colMeta.rowIndex]._id)
-                    window.open(`/${type}/${row[colMeta.rowIndex]._id}`,'_blank');
+                if(row[colMeta.rowIndex]&&row[colMeta.rowIndex]._id&&dateStart&&dateEnd)
+                    window.open(`/applications?supplier=${row[colMeta.rowIndex]._id}&dateStart=${dateStart}&dateEnd=${dateEnd}`,'_blank');
             },
         };
         return (

@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
 import { pdDatePicker } from '../../src/lib'
 
-const SetDate =  React.memo(
+const SetSuplier =  React.memo(
     (props) =>{
         const { classes } = props;
         let [dateChange, setDateChange] = useState(pdDatePicker(new Date()));
@@ -65,8 +65,8 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-SetDate.propTypes = {
+SetSuplier.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(dialogContentStyle)(SetDate));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(dialogContentStyle)(SetSuplier));

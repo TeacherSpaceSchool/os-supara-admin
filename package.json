@@ -1,14 +1,14 @@
 {
-  "name": "azyk-admin",
+  "name": "cantsyt-admin",
   "version": "1.0.0",
-  "description": "azyk-app",
+  "description": "cantsyt-app",
   "main": "index.js",
   "scripts": {
     "dev": "set dev=true&& set URL=localhost&& next -p 80",
     "build": "set URL=localhost&& next build",
     "start": "set URL=localhost&& node server.js",
-    "build-server": "URL=azyk.store next build",
-    "start-server": "URL=azyk.store node server.js",
+    "build-server": "URL=cant.syt next build",
+    "start-server": "URL=cant.syt node server.js",
     "export": "next export"
   },
   "keywords": [],

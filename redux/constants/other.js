@@ -3,19 +3,19 @@ export let urlGQLws
 export let urlMain
 export let urlSubscribe
 export let applicationKey
-if(process.env.URL==='azyk.store') {
+if(process.env.URL==='cant.syt') {
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `wss://${process.env.URL}:3000/graphql`
     urlSubscribe = `https://${process.env.URL}:3000/subscribe`
     urlMain = `https://${process.env.URL}`
-    applicationKey = 'BDbYgfB_0iu1aqu7AHHTervMZnvSjYQtZsm-kKCQ9NH58DU-iRKDk0U-tiio1NzHi25ceaatYrM4c6Oqj1KvnXM'
+    applicationKey = 'BGAa2sPjcH6RvApWTvZYAQrukcpGsXG2FEk4FIj5j6JWLBjHtaJBPFyPrZH63ku9jFX-k0oNh923YtrGf-a42rU'
 }
 else {
     urlGQL = `http://${process.env.URL}:3000/graphql`
     urlGQLws = `ws://${process.env.URL}:3000/graphql`
     urlMain = `http://${process.env.URL}`
     urlSubscribe = `http://${process.env.URL}:3000/subscribe`
-    applicationKey = 'BK-3F2fhksf0HPhIXEp9gZ0y1jaR7pyq_i3mEIIimN1IIEwsAeZBz6Iv7WZRhKMr7o-3spBGpZ0XY1WlwCD7Sfc'
+    applicationKey = 'BPF2bHqRtmYohlJ_6KQ28skt8HDQN8uAwF4C2HaORxWRwNKmMik8ZrTyizcU3_Ousd6UjPu1061hjCPAkhQit_Y'
 }
 
 export const validMail = (mail) =>

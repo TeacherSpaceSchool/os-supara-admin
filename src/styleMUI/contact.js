@@ -4,6 +4,7 @@ export default makeStyles({
         margin: '20px'
     },
     row:{
+        alignItems: 'baseline',
         display: 'flex',
         flexDirection: 'row',
     },

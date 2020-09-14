@@ -1,6 +1,6 @@
 {
-  "short_name": "AZYK.STORE",
-  "name": "AZYK.STORE",
+  "short_name": "cant.syt",
+  "name": "cant.syt",
   "icons": [
     {
       "src": "/static/192x192.png",
@@ -20,6 +20,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ffb300",
+  "theme_color": "#009ADC",
   "background_color": "#ffffff"
 }

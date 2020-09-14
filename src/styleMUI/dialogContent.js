@@ -13,7 +13,7 @@ export default theme => ({
         fontFamily: 'Roboto',
         whiteSpace: 'pre-wrap',
         cursor: 'pointer',
-        borderBottom: '1px dashed #ffb300',
+        borderBottom: '1px dashed #009ADC',
         userSelect: 'none',
     },
     showAds: {
@@ -30,7 +30,7 @@ export default theme => ({
         fontSize: '1rem',
         fontFamily: 'Roboto',
         cursor: 'pointer',
-        border: '1px solid #ffb300',
+        border: '1px solid #009ADC',
         userSelect: 'none',
         boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)'
 },
@@ -90,9 +90,9 @@ export default theme => ({
         wordBreak: 'break-all'
     },
     row: {
+        alignItems: 'baseline',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'baseline'
     },
     fabGeo: {
         position: 'fixed',
@@ -109,7 +109,7 @@ export default theme => ({
         whiteSpace: 'pre-wrap',
         cursor: 'pointer',
         userSelect: 'none',
-        borderBottom: '1px dashed #ffb300'
+        borderBottom: '1px dashed #009ADC'
     },
     counterbtn: {
         marginRight: 10,

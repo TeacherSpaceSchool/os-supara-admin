@@ -34,9 +34,6 @@ export function signup(payload) {
                            role
                            status
                            login
-                           organization
-                           client
-                           employment
                            _id
                         }
                     }`})
@@ -94,9 +91,6 @@ export function signin(payload) {
                            role
                            status
                            login
-                           organization
-                           client
-                           employment
                            _id
                         }
                     }`})
@@ -202,9 +196,6 @@ export function setProfile() {
                            role
                            status
                            login
-                           organization
-                           client
-                           employment
                            _id
                           }
                     }`
@@ -231,9 +222,6 @@ export async function getProfile(client) {
                           role
                           status
                           login
-                          organization
-                           client
-                           employment
                           _id
                          }
                    }`

@@ -69,6 +69,10 @@ export const pdDDMMYYHHMMCancel = (date) =>
     date = `${date.getDate()<10?'0':''}${date.getDate()}.${date.getMonth()<9?'0':''}${date.getMonth()+1}.${date.getYear()-100} ${date.getHours()<10?'0':''}${date.getHours()}:${date.getMinutes()<10?'0':''}${date.getMinutes()}`
     return date
 }
+export const differenceDates = (date1, date2) =>
+{
+    return (new Date(date1) - new Date(date2)) / (1000 * 60 * 60 * 24)
+}
 export const validMail = (mail) =>
 {
     return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
@@ -77,3 +81,4 @@ export const validPhone = (phone) =>
 {
     return /^[+]{1}996[0-9]{9}$/.test(phone);
 }
+export const currencys = ['сом', 'тенге', 'рубль', 'доллар', 'евро',  'вон', 'гривна', 'дирхам', 'драм', 'иена', 'крона', 'лари', 'лев', 'манат', 'песо', 'реал', 'рупия', 'сомони', 'сум', 'форинт', 'франк', 'шекель', 'шиллинг', 'юань','фунт']
