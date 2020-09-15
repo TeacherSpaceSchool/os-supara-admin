@@ -41,34 +41,11 @@ const App = React.memo(props => {
     },[mainWindow])
 
     Router.events.on('routeChangeStart', async (url, err)=>{
-
-        if(router.asPath!==url&&(router.asPath.includes('applications')||router.asPath.includes('divisions'))) {
-            if(!sessionStorage.scrollPostionStore)
-                sessionStorage.scrollPostionStore = JSON.stringify({})
-            let scrollPostionStore = JSON.parse(sessionStorage.scrollPostionStore)
-            let appBody = (document.getElementsByClassName('App-body'))[0]
-            scrollPostionStore[router.asPath] = appBody.scrollTop
-            sessionStorage.scrollPostionStore = JSON.stringify(scrollPostionStore)
-        }
-
-
         if (!router.pathname.includes(url)&&!router.asPath.includes(url)&&!reloadPage)
             setReloadPage(true)
         if (err&&err.cancelled&&reloadPage)
             setReloadPage(false)
     })
-
-    Router.events.on('routeChangeComplete', (url) => {
-        if(sessionStorage.scrollPostionStore) {
-            let appBody = (document.getElementsByClassName('App-body'))[0]
-            appBody.scroll({
-                top: (JSON.parse(sessionStorage.scrollPostionStore))[url],
-                left: 0,
-                behavior: 'instant'
-            });
-        }
-
-    });
 
     const containerRef = useBottomScrollListener(async()=>{
         if(checkPagination) {
@@ -78,7 +55,7 @@ const App = React.memo(props => {
         }
     });
 
-
+/*
     let subscriptionDataRes = useSubscription(subscriptionData);
     useEffect( ()=>{
         if (
@@ -280,7 +257,7 @@ const App = React.memo(props => {
 
         }
     },[subscriptionDataRes.data])
-
+*/
     return(
         <div ref={mainWindow} className='App'>
             <Drawer unread={unread} setUnread={setUnread}/>
