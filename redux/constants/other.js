@@ -1,9 +1,11 @@
 export let urlGQL
+export let urlGQLSSR
 export let urlGQLws
 export let urlMain
 export let urlSubscribe
 export let applicationKey
 if(process.env.URL==='os-kantsut.xyz') {
+    urlGQLSSR = `http://localhost:4000/graphql`
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `wss://${process.env.URL}:3000/graphql`
     urlSubscribe = `https://${process.env.URL}:3000/subscribe`
@@ -11,6 +13,7 @@ if(process.env.URL==='os-kantsut.xyz') {
     applicationKey = 'BGAa2sPjcH6RvApWTvZYAQrukcpGsXG2FEk4FIj5j6JWLBjHtaJBPFyPrZH63ku9jFX-k0oNh923YtrGf-a42rU'
 }
 else {
+    urlGQLSSR = `http://localhost:3000/graphql`
     urlGQL = `http://${process.env.URL}:3000/graphql`
     urlGQLws = `ws://${process.env.URL}:3000/graphql`
     urlMain = `http://${process.env.URL}`
