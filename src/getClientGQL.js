@@ -10,14 +10,11 @@ import { createUploadLink } from 'apollo-upload-client'
 //import { urlGQL, urlGQLws } from '../redux/constants/other';
 
 export const getClientGqlSsr = (req) => {
-    console.log(`getClientGqlSsr${1}`)
     const uploadLink = createUploadLink({
         uri: urlGQL,
         fetch: fetch,
         credentials: 'include'
     });
-    console.log(uploadLink)
-    console.log(`getClientGqlSsr${2}`)
     const authLink = setContext((_, { headers }) => {
         return {
             headers: {
@@ -26,14 +23,10 @@ export const getClientGqlSsr = (req) => {
             }
         }
     });
-    console.log(authLink)
-    console.log(`getClientGqlSsr${3}`)
     const link = ApolloLink.from([
         authLink,
         uploadLink
     ]);
-    console.log(link)
-    console.log(`getClientGqlSsr${4}`)
     return new ApolloClient({
         ssrMode: true,
         link: link,

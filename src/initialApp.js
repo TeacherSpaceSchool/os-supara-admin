@@ -9,6 +9,7 @@ export default async (ctx)=>{
         ctx.store.getState().app.isMobileApp = ['mobile', 'tablet'].includes(ua.device.type)||checkMobile(ua.ua)
         ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
         if (ctx.store.getState().user.authenticated) {
+            console.log(await getClientGqlSsr(ctx.req))
             ctx.store.getState().user.profile = await getProfile(await getClientGqlSsr(ctx.req))
         }
         else {
