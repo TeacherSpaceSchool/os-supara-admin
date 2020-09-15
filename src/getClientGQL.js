@@ -11,7 +11,7 @@ import { createUploadLink } from 'apollo-upload-client'
 
 export const getClientGqlSsr = (req) => {
     const uploadLink = createUploadLink({
-        uri: /*urlGQL*/`https://31.186.54.3:3000/graphql`,
+        uri: urlGQL,
         fetch: fetch,
         credentials: 'include'
     });
