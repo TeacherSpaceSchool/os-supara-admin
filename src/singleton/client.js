@@ -18,7 +18,6 @@ import {
 
 export class SingletonApolloClient {
     constructor(req) {
-        console.log(urlGQL)
         if (!!SingletonApolloClient.instance) {
             return SingletonApolloClient.instance;
         }

@@ -10,9 +10,8 @@ import { createUploadLink } from 'apollo-upload-client'
 //import { urlGQL, urlGQLws } from '../redux/constants/other';
 
 export const getClientGqlSsr = (req) => {
-    console.log(urlGQL)
     const uploadLink = createUploadLink({
-        uri: urlGQL,
+        uri: /*urlGQL*/`https://31.186.54.3:3000/graphql`,
         fetch: fetch,
         credentials: 'include'
     });
