@@ -13,14 +13,14 @@ export default async (ctx)=>{
         ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
         console.log(`ctx.req${4}`)
         if (ctx.store.getState().user.authenticated) {
-            console.log(`ctx.req${5.1}`)
+            console.log(`ctx.req${5.11}`)
             ctx.store.getState().user.profile = await getProfile(await getClientGqlSsr(ctx.req))
-            console.log(`ctx.req${5.1}`)
+            console.log(`ctx.req${5.12}`)
         }
         else {
-            console.log(`ctx.req${5.2}`)
+            console.log(`ctx.req${5.21}`)
             ctx.store.getState().user.profile = {}
-            console.log(`ctx.req${5.2}`)
+            console.log(`ctx.req${5.22}`)
         }
     }
     ctx.store.getState().app.search = ''
