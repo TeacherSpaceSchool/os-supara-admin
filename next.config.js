@@ -10,21 +10,11 @@ module.exports =
                         importScripts: ['/sw-push-listener.js'],
                         runtimeCaching: [
                             {
-                                urlPattern: /^http?.*\/images\/.*/,
+                                urlPattern: /.*\.(png|gif|jpg|jpeg|svg)/,
                                 handler: 'NetworkOnly',
                             },
-                            /*{
-                                urlPattern: /^https?.*\.!(png|gif|jpg|jpeg|svg)/,
-                                handler: 'NetworkFirst',
-                                options: {
-                                    cacheName: 'cache',
-                                    expiration: {
-                                        maxAgeSeconds: 5*24*60*60
-                                    }
-                                },
-                            },*/
                             {
-                                urlPattern: /^https?.*/,
+                                urlPattern: /^https?.*\.!(png|gif|jpg|jpeg|svg)/,
                                 handler: 'NetworkFirst',
                                 options: {
                                     cacheName: 'cache',
