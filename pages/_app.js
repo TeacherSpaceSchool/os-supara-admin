@@ -24,13 +24,19 @@ export default withRedux(configureStore, { debug: false })(
 
         render() {
             const { Component, pageProps, store } = this.props;
+            console.log(`_app.js${1}`)
             new SingletonStore(store)
+            console.log('_app.js')
             if(process.browser){
+                console.log(`browser_app.js${1}`)
                 checkDisableSubscribe()
+                console.log(`browser_app.js${2}`)
                 register(true)
+                console.log(`browser_app.js${3}`)
             }
+            console.log(`_app.js${2}`)
             let client = process.browser?new SingletonApolloClient().getClient():getClientGqlSsr()
-
+            console.log(`_app.js${3}`)
             return (
                 <React.Fragment>
                     <ApolloProvider client={client}>

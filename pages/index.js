@@ -47,7 +47,9 @@ function mapStateToProps (state) {
 }
 
 Index.getInitialProps = async function(ctx) {
+    console.log(`index.js${1}`)
     await initialApp(ctx)
+    console.log(`index.js${2}`)
     return {};
 };
 
