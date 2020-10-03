@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getDivisions } from '../src/gql/division'
@@ -20,20 +20,37 @@ const Divisions = React.memo((props) => {
     let [list, setList] = useState(data.divisions);
     const { search } = props.app;
     const height = 252
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const initialRender = useRef(true);
+    let [paginationWork, setPaginationWork] = useState(true);
     useEffect(()=>{
         (async()=>{
-            setPagination(100)
-            setList((await getDivisions({search: search})).divisions)
+            if(initialRender.current) {
+                initialRender.current = false;
+            } else {
+                if(searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async()=>{
+                    setList((await getDivisions({search: search, skip: 0})).divisions)
+                    forceCheck()
+                    setPaginationWork(true);
+                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
         })()
     },[search])
     useEffect(()=>{
-        setPagination(100)
         forceCheck()
     },[list])
-    let [pagination, setPagination] = useState(100);
-    const checkPagination = ()=>{
-        if(pagination<list.length){
-            setPagination(pagination+100)
+    const checkPagination = async()=>{
+        if(paginationWork){
+            let addedList = (await getDivisions({search: search, skip: list.length})).divisions
+            if(addedList.length>0){
+                setList([...list, ...addedList])
+            }
+            else
+                setPaginationWork(false)
         }
     }
     return (
@@ -49,12 +66,8 @@ const Divisions = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/divisions`}/>
             </Head>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего: ${list.length}`}
-                </div>
                 <CardDivision heads={data.heads} suppliers={data.suppliers} specialists={data.specialists} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
-                        if (idx <= pagination) {
                             if(element.suppliers)
                                 element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
                             else
@@ -71,7 +84,6 @@ const Divisions = React.memo((props) => {
                                                   idx={idx} element={element}/>
                                 </LazyLoad>
                             )
-                        }
                     }
                 ):null}
             </div>
@@ -93,7 +105,7 @@ Divisions.getInitialProps = async function(ctx) {
         }
     return {
         data: {
-            ...await getDivisions({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getDivisions({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getSuppliers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getHeads(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getSpecialists(ctx.req?await getClientGqlSsr(ctx.req):undefined)

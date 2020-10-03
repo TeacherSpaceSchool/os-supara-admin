@@ -226,7 +226,6 @@ export async function getProfile(client) {
                          }
                    }`
             })
-        console.log('end')
         return result.data.getStatus
     } catch(error) {
         console.error(error)

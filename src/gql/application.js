@@ -134,6 +134,22 @@ export const getUnloadingApplication = async(element, client)=>{
     }
 }
 
+export const getItemsFromApplications = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        itemsFromApplications
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const deleteApplication = async(_id)=>{
     try{
         const client = new SingletonApolloClient().getClient()

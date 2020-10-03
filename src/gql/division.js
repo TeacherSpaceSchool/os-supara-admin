@@ -9,8 +9,8 @@ export const getDivisions = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!) {
-                        divisions(search: $search) {
+                    query ($search: String!, $skip: Int) {
+                        divisions(search: $search, skip: $skip) {
                             _id
                             createdAt
                             name

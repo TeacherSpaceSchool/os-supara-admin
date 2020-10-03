@@ -9,8 +9,8 @@ export const getItems = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($category: ID, $search: String!) {
-                        items(category: $category, search: $search) {
+                    query ($category: ID, $search: String!, $skip: Int) {
+                        items(category: $category, search: $search, skip: $skip) {
                             _id
                             createdAt 
                             category
@@ -21,6 +21,25 @@ export const getItems = async(element, client)=>{
                         filterItem {
                            name
                            value
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const unloadingItem = async({document}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document},
+                mutation: gql`
+                    mutation ($document: Upload!) {
+                        unloadingIntegrate1C(document: $document) {
+                            data
                         }
                     }`,
             })

@@ -9,8 +9,8 @@ export const getRoles = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!) {
-                        roles(search: $search) {
+                    query ($search: String!, $skip: Int) {
+                        roles(search: $search, skip: $skip) {
                             _id
                             createdAt
                             name

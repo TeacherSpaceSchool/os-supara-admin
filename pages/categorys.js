@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getCategorys } from '../src/gql/category'
@@ -19,21 +19,38 @@ const Categorys = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.categorys);
     const { search } = props.app;
-    let height = 252
+    let height = 310
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const initialRender = useRef(true);
+    let [paginationWork, setPaginationWork] = useState(true);
     useEffect(()=>{
         (async()=>{
-            setPagination(100)
-            setList((await getCategorys({search: search})).categorys)
+            if(initialRender.current) {
+                initialRender.current = false;
+            } else {
+                if(searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async()=>{
+                    setList((await getCategorys({search: search, skip: 0})).categorys)
+                    forceCheck()
+                    setPaginationWork(true);
+                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
         })()
     },[search])
     useEffect(()=>{
-        setPagination(100)
         forceCheck()
     },[list])
-    let [pagination, setPagination] = useState(100);
-    const checkPagination = ()=>{
-        if(pagination<list.length){
-            setPagination(pagination+100)
+    const checkPagination = async()=>{
+        if(paginationWork){
+            let addedList = (await getCategorys({search: search, skip: list.length})).categorys
+            if(addedList.length>0){
+                setList([...list, ...addedList])
+            }
+            else
+                setPaginationWork(false)
         }
     }
     return (
@@ -49,16 +66,12 @@ const Categorys = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/categorys`}/>
             </Head>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего: ${list.length}`}
-                </div>
                 <CardCategory suppliers={data.suppliers} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
-                    if(idx<=pagination)
-                        if(element.suppliers)
-                            element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
-                        else
-                            element.suppliers = []
+                    if(element.suppliers)
+                        element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
+                    else
+                        element.suppliers = []
                     return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardPlaceholder height={height}/>}>
                                 <CardCategory suppliers={data.suppliers} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
@@ -84,7 +97,7 @@ Categorys.getInitialProps = async function(ctx) {
         }
     return {
         data: {
-            ...await getCategorys({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getCategorys({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getSuppliers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

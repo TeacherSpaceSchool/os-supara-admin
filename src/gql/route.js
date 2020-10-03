@@ -9,8 +9,8 @@ export const getRoutes = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query($search: String!) {
-                        routes(search: $search) {
+                    query($search: String!, $skip: Int) {
+                        routes(search: $search, skip: $skip) {
                             _id
                             createdAt
                             roles

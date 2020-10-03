@@ -90,6 +90,19 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
+                                    ['снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/itemsfromapplications'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname.includes('itemsfromapplications')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <ListItemText primary={'Лист закупки'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
                                     ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
                                         <>
                                         <Link href={'/waybills'}>
@@ -239,6 +252,19 @@ const MyDrawer = React.memo((props) => {
                                     </ListItem>
                                 </Link>
                                 <Divider/>
+                                {
+                                    ['admin', 'менеджер'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/unloadingitem'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/unloadingitem'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <ListItemText primary={'Загрузка товаров'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
                                 {
                                     ['admin', 'менеджер'].includes(profile.role)?
                                         <>

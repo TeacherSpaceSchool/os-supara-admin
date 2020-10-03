@@ -9,8 +9,8 @@ export const getCategorys = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!) {
-                        categorys(search: $search) {
+                    query ($search: String!, $skip: Int) {
+                        categorys(search: $search, skip: $skip) {
                             _id
                             createdAt
                             name

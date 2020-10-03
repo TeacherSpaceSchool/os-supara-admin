@@ -9,8 +9,8 @@ export const getUnits = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!) {
-                        units(search: $search) {
+                    query ($search: String!, $skip: Int) {
+                        units(search: $search, skip: $skip) {
                             _id
                             createdAt
                             name

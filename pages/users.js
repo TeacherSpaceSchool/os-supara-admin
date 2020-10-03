@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getUsers } from '../src/gql/user'
@@ -19,21 +19,38 @@ const Users = React.memo((props) => {
     const { data} = props;
     let [list, setList] = useState(data.users);
     const { search, filter  } = props.app;
-    let height = 100
+    let height = 352
+    let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const initialRender = useRef(true);
+    let [paginationWork, setPaginationWork] = useState(true);
     useEffect(()=>{
         (async()=>{
-            setPagination(100)
-            setList((await getUsers({search: search, filter: filter})).users)
+            if(initialRender.current) {
+                initialRender.current = false;
+            } else {
+                if(searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async()=>{
+                    setList((await getUsers({search: search, filter: filter, skip: 0})).users)
+                    forceCheck()
+                    setPaginationWork(true);
+                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
         })()
     },[search, filter])
     useEffect(()=>{
-        setPagination(100)
         forceCheck()
     },[list])
-    let [pagination, setPagination] = useState(100);
-    const checkPagination = ()=>{
-        if(pagination<list.length){
-            setPagination(pagination+100)
+    const checkPagination = async()=>{
+        if(paginationWork){
+            let addedList = (await getUsers({search: search, filter: filter, skip: list.length})).users
+            if(addedList.length>0){
+                setList([...list, ...addedList])
+            }
+            else
+                setPaginationWork(false)
         }
     }
     const roles = ['менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'генеральный директор', 'финансовый директор', 'начальник отдела', ...data.roles.map(element=>element.name)]
@@ -50,12 +67,8 @@ const Users = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/users`}/>
             </Head>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего: ${list.length}`}
-                </div>
                 <CardUser roles={roles} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
-                    if(idx<=pagination)
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardUserPlaceholder height={height}/>}>
                                 <CardUser roles={roles} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
@@ -82,7 +95,7 @@ Users.getInitialProps = async function(ctx) {
         }
     return {
         data: {
-            ...await getUsers({search: '', filter: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getUsers({search: '', filter: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getRoles({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

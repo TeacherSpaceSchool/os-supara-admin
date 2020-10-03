@@ -9,8 +9,8 @@ export const getUsers = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!, $filter: String!) {
-                        users(search: $search, filter: $filter) {
+                    query ($search: String!, $filter: String!, $skip: Int) {
+                        users(search: $search, filter: $filter, skip: $skip) {
                             _id
                             createdAt
                             login
