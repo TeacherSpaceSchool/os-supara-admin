@@ -38,7 +38,7 @@ export const unloadingItem = async({document}, client)=>{
                 variables: {document: document},
                 mutation: gql`
                     mutation ($document: Upload!) {
-                        unloadingIntegrate1C(document: $document) {
+                        unloadingItem(document: $document) {
                             data
                         }
                     }`,
