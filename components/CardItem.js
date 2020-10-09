@@ -23,10 +23,6 @@ const CardItem = React.memo((props) => {
         setName(event.target.value)
     };
     let [category, setCategory] = useState(element?element.category:undefined);
-    let [GUID, setGUID] = useState(element?element.GUID:'');
-    let handleGUID =  (event) => {
-        setGUID(event.target.value)
-    };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     return (
@@ -56,15 +52,6 @@ const CardItem = React.memo((props) => {
                                     'aria-label': 'description',
                                 }}
                             />
-                            <TextField
-                                label='GUID'
-                                value={GUID}
-                                className={classes.input}
-                                onChange={handleGUID}
-                                inputProps={{
-                                    'aria-label': 'description',
-                                }}
-                            />
                         </div>
                     </CardContent>
                 </CardActionArea>
@@ -76,7 +63,6 @@ const CardItem = React.memo((props) => {
                                 let editElement = {_id: element._id}
                                 if(name.length>0&&name!==element.name)editElement.name = name
                                 if(category&&category._id!==element.category._id)editElement.category = category._id
-                                if(GUID.length>0&&GUID!==element.GUID)editElement.GUID = GUID
                                 const action = async() => {
                                     await setItem(editElement)
                                 }
@@ -100,9 +86,8 @@ const CardItem = React.memo((props) => {
                             <Button onClick={async()=> {
                                 if (name.length>0&&category) {
                                     const action = async() => {
-                                        let res = (await addItem({GUID: GUID, name: name, category: category._id})).addItem
+                                        let res = (await addItem({name: name, category: category._id})).addItem
                                         if(res) {
-                                            setGUID('')
                                             setName('')
                                             setCategory(undefined)
                                             setList([res, ...list])

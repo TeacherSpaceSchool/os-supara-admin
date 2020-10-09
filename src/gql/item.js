@@ -16,7 +16,6 @@ export const getItems = async(element, client)=>{
                             category
                                 {_id name}
                             name
-                            GUID
                         }
                         filterItem {
                            name
@@ -63,7 +62,6 @@ export const getItemsTrash = async(element, client)=>{
                             category
                                 {_id name}
                             name
-                            GUID
                         }
                     }`,
             })
@@ -87,7 +85,6 @@ export const getItem = async(element, client)=>{
                             category
                                 {_id name}
                             name
-                            GUID
                         }
                     }`,
             })
@@ -120,8 +117,8 @@ export const addItem = async(element, subCategory)=>{
         let res = await client.mutate({
             variables: {...element, subCategory: subCategory},
             mutation : gql`
-                    mutation ($name: String!, $category: ID!, $GUID: String) {
-                        addItem(name: $name, category: $category, GUID: $GUID) {
+                    mutation ($name: String!, $category: ID!) {
+                        addItem(name: $name, category: $category) {
                             _id
                             createdAt 
                             category
@@ -141,8 +138,8 @@ export const setItem = async(element)=>{
         await client.mutate({
             variables: {...element},
             mutation : gql`
-                    mutation ($_id: ID!, $name: String, $category: ID, $GUID: String) {
-                        setItem(_id: $_id, name: $name, category: $category, GUID: $GUID) {
+                    mutation ($_id: ID!, $name: String, $category: ID) {
+                        setItem(_id: $_id, name: $name, category: $category) {
                              data
                         }
                     }`})

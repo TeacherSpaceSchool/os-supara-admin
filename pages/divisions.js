@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getDivisions } from '../src/gql/division'
-import { getSuppliers, getSpecialists, getHeads } from '../src/gql/user'
+import { getSuppliers, getSpecialists, getHeads, getStaffs } from '../src/gql/user'
 import pageListStyle from '../src/styleMUI/list'
 import CardDivision from '../components/CardDivision'
 import { urlMain } from '../redux/constants/other'
@@ -19,7 +19,7 @@ const Divisions = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.divisions);
     const { search } = props.app;
-    const height = 252
+    const height = 376
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
@@ -66,7 +66,7 @@ const Divisions = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/divisions`}/>
             </Head>
             <div className={classes.page}>
-                <CardDivision heads={data.heads} suppliers={data.suppliers} specialists={data.specialists} list={list} setList={setList}/>
+                <CardDivision heads={data.heads} suppliers={data.suppliers} staffs={data.staffs} specialists={data.specialists} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
                             if(element.suppliers)
                                 element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
@@ -76,11 +76,15 @@ const Divisions = React.memo((props) => {
                                 element.specialists = element.specialists.map(specialist=>specialist._id?specialist._id:specialist)
                             else
                                 element.specialists = []
+                            if(element.staffs)
+                                element.staffs = element.staffs.map(staff=>staff._id?staff._id:staff)
+                            else
+                                element.staffs = []
                             return (
                                 <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height}
                                           offset={[height, 0]} debounce={0} once={true}
                                           placeholder={<CardDivisionPlaceholder height={height}/>}>
-                                    <CardDivision heads={data.heads} suppliers={data.suppliers} specialists={data.specialists} key={element._id} setList={setList} list={list}
+                                    <CardDivision heads={data.heads} suppliers={data.suppliers} staffs={data.staffs} specialists={data.specialists} key={element._id} setList={setList} list={list}
                                                   idx={idx} element={element}/>
                                 </LazyLoad>
                             )
@@ -108,7 +112,8 @@ Divisions.getInitialProps = async function(ctx) {
             ...await getDivisions({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getSuppliers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getHeads(ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getSpecialists(ctx.req?await getClientGqlSsr(ctx.req):undefined)
+            ...await getSpecialists(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getStaffs(ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
 };

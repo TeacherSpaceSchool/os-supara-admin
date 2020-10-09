@@ -23,6 +23,14 @@ export const getDivisions = async(element, client)=>{
                                 role
                                 status
                             }
+                            staffs{
+                                _id
+                                createdAt
+                                login
+                                name
+                                role
+                                status
+                            }
                             specialists{
                                 _id
                                 createdAt
@@ -76,6 +84,14 @@ export const getDivisionsForRoute = async(client)=>{
                                 role
                                 status
                             }
+                            staffs{
+                                _id
+                                createdAt
+                                login
+                                name
+                                role
+                                status
+                            }
                             head{
                                 _id
                                 createdAt
@@ -107,6 +123,14 @@ export const getDivision = async(element, client)=>{
                             name
                             del
                             suppliers{
+                                _id
+                                createdAt
+                                login
+                                name
+                                role
+                                status
+                            }
+                            staffs{
                                 _id
                                 createdAt
                                 login
@@ -160,6 +184,14 @@ export const getDivisionsTrash = async(element, client)=>{
                                 role
                                 status
                             }
+                            staffs{
+                                _id
+                                createdAt
+                                login
+                                name
+                                role
+                                status
+                            }
                             specialists{
                                 _id
                                 createdAt
@@ -191,13 +223,21 @@ export const addDivision = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($name: String!, $suppliers: [ID]!, $specialists: [ID]!, $head: ID) {
-                        addDivision(name: $name, suppliers: $suppliers, specialists: $specialists, head: $head) {
+                    mutation ($name: String!, $suppliers: [ID]!, $specialists: [ID]!, $staffs: [ID]!, $head: ID) {
+                        addDivision(name: $name, suppliers: $suppliers, staffs: $staffs, specialists: $specialists, head: $head) {
                             _id
                             createdAt
                             name
                             del
                             suppliers{
+                                _id
+                                createdAt
+                                login
+                                name
+                                role
+                                status
+                            }
+                            staffs{
                                 _id
                                 createdAt
                                 login
@@ -235,8 +275,8 @@ export const setDivision = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $name: String, $suppliers: [ID], $specialists: [ID], $head: ID) {
-                        setDivision(_id: $_id, name: $name, suppliers: $suppliers, specialists: $specialists, head: $head) {
+                    mutation ($_id: ID!, $name: String, $suppliers: [ID], $specialists: [ID], $head: ID, $staffs: [ID]) {
+                        setDivision(_id: $_id, name: $name, suppliers: $suppliers, specialists: $specialists, head: $head, staffs: $staffs) {
                              data
                         }
                     }`})

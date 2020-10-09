@@ -16,7 +16,6 @@ export const getCategorys = async(element, client)=>{
                             name
                             del
                             term
-                            GUID
                             suppliers{
                                 _id
                                 createdAt
@@ -48,7 +47,6 @@ export const getCategorysTrash = async(element, client)=>{
                             name
                             del
                             term
-                            GUID
                             suppliers{
                                 _id
                                 createdAt
@@ -80,7 +78,6 @@ export const getCategory = async(element, client)=>{
                             name
                             del
                             term
-                            GUID
                             suppliers{
                                 _id
                                 createdAt
@@ -136,10 +133,9 @@ export const addCategory = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($term: Int!, $name: String!, $suppliers: [ID]!, $GUID: String) {
-                        addCategory(term: $term, name: $name, suppliers: $suppliers, GUID: $GUID) {
+                    mutation ($term: Int!, $name: String!, $suppliers: [ID]!) {
+                        addCategory(term: $term, name: $name, suppliers: $suppliers) {
                             _id
-                            GUID
                             createdAt
                             name
                             del
@@ -166,8 +162,8 @@ export const setCategory = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $term: Int, $name: String, $GUID: String, $suppliers: [ID]) {
-                        setCategory(_id: $_id, term: $term, name: $name, GUID: $GUID, suppliers: $suppliers) {
+                    mutation ($_id: ID!, $term: Int, $name: String, $suppliers: [ID]) {
+                        setCategory(_id: $_id, term: $term, name: $name, suppliers: $suppliers) {
                              data
                         }
                     }`})

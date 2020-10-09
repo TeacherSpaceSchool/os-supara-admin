@@ -21,7 +21,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const CardDivision = React.memo((props) => {
     const classes = cardStyle();
-    const { element, setList, idx, list, suppliers, specialists, heads } = props;
+    const { element, setList, idx, list, suppliers, specialists, heads, staffs } = props;
     const { isMobileApp } = props.app;
     let [name, setName] = useState(element?element.name:'');
     let handleName =  (event) => {
@@ -30,6 +30,10 @@ const CardDivision = React.memo((props) => {
     let [newSuppliers, setNewSuppliers] = useState(element?element.suppliers:[]);
     const handleNewSuppliers = (event) => {
         setNewSuppliers(event.target.value);
+    };
+    let [newStaffs, setNewStaffs] = useState(element?element.staffs:[]);
+    const handleNewStaffs = (event) => {
+        setNewStaffs(event.target.value);
     };
     let [head, setHead] = useState(element?element.head:undefined);
     let [newSpecialists, setNewSpecialists] = useState(element?element.specialists:[]);
@@ -123,6 +127,30 @@ const CardDivision = React.memo((props) => {
                                             ))}
                                         </Select>
                                     </FormControl>
+                                    <FormControl className={classes.input}>
+                                        <InputLabel>Сотрудники</InputLabel>
+                                        <Select
+                                            multiple
+                                            value={newStaffs}
+                                            onChange={handleNewStaffs}
+                                            input={<Input/>}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 500,
+                                                        width: 250,
+                                                    },
+                                                },
+                                            }}
+                                        >
+                                            {staffs.map((staff) => (
+                                                <MenuItem key={staff._id} value={staff._id}
+                                                          style={{background: newStaffs.includes(staff._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                    {staff.name}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
                                     </>
                             }
                         </div>
@@ -146,7 +174,7 @@ const CardDivision = React.memo((props) => {
                                 :
                             <>
                             <Button onClick={async()=>{
-                                let editElement = {_id: element._id, suppliers: newSuppliers, specialists: newSpecialists}
+                                let editElement = {_id: element._id, suppliers: newSuppliers, specialists: newSpecialists, staffs: newStaffs}
                                 head = head?head._id:head
                                 if(name.length>0&&name!==element.name)editElement.name = name
                                 if(head!==element.head)editElement.head = head
@@ -174,10 +202,11 @@ const CardDivision = React.memo((props) => {
                             <Button onClick={async()=> {
                                 if (name.length>0) {
                                     const action = async() => {
-                                        let category = (await addDivision({name: name, head: head?head._id:head, suppliers: newSuppliers, specialists: newSpecialists})).addDivision
+                                        let category = (await addDivision({name: name, head: head?head._id:head, staffs: newStaffs, suppliers: newSuppliers, specialists: newSpecialists})).addDivision
                                         setName('')
                                         setNewSpecialists([])
                                         setNewSuppliers([])
+                                        setNewStaffs([])
                                         setHead(undefined)
                                         setList([category, ...list])
                                     }

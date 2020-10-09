@@ -19,7 +19,7 @@ const Items = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.items);
     const { search, filter } = props.app;
-    let height = 260
+    let height = 202
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);

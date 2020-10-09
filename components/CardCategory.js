@@ -35,10 +35,6 @@ const CardCategory = React.memo((props) => {
     let handleTerm =  (event) => {
         setTerm(checkInt(event.target.value))
     };
-    let [GUID, setGUID] = useState(element?element.GUID:'');
-    let handleGUID =  (event) => {
-        setGUID(event.target.value)
-    };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     return (
@@ -101,15 +97,6 @@ const CardCategory = React.memo((props) => {
                                     </FormControl>
                                     </>
                             }
-                            <TextField
-                                label='GUID'
-                                value={GUID}
-                                className={classes.input}
-                                onChange={handleGUID}
-                                inputProps={{
-                                    'aria-label': 'description',
-                                }}
-                            />
                         </div>
                     </CardContent>
                 </CardActionArea>
@@ -134,7 +121,6 @@ const CardCategory = React.memo((props) => {
                                 let editElement = {_id: element._id, suppliers: newSuppliers}
                                 if(name.length>0&&name!==element.name)editElement.name = name
                                 if(term!==undefined&&term!==element.term)editElement.term = term
-                                if(GUID!==undefined&&GUID!==element.GUID)editElement.GUID = GUID
                                 const action = async() => {
                                     await setCategory(editElement)
                                 }
@@ -158,7 +144,7 @@ const CardCategory = React.memo((props) => {
                             <Button onClick={async()=> {
                                 if (term !== undefined && name.length > 0) {
                                     const action = async() => {
-                                        let category = (await addCategory({GUID: GUID, term: term, name: name, suppliers: newSuppliers})).addCategory
+                                        let category = (await addCategory({term: term, name: name, suppliers: newSuppliers})).addCategory
                                         setTerm(0)
                                         setName('')
                                         setList([category, ...list])

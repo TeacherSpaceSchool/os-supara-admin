@@ -57,6 +57,31 @@ export const getSuppliers = async(client)=>{
     }
 }
 
+export const getStaffs = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
+                        staffs {
+                            _id
+                            createdAt
+                            login
+                            name
+                            role
+                            status
+                            del
+                            GUID
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
 export const getHeads = async(client)=>{
     try{
         client = client? client : new SingletonApolloClient().getClient()

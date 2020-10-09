@@ -19,7 +19,7 @@ const Categorys = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.categorys);
     const { search } = props.app;
-    let height = 310
+    let height = 252
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
