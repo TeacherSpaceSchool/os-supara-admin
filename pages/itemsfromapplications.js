@@ -41,7 +41,6 @@ const ItemsFromApplications = React.memo((props) => {
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showLoad } = props.appActions;
     let [zoom1, setZoom1] = useState(1);
-    console.log(data)
     return (
         <App pageName='Лист закупки'>
             <Head>
