@@ -17,7 +17,7 @@ const ShippingList =  React.memo(
             <div className={classes.main} style={{width: width}}>
                 {
                     suppliers.map((supplier, idx) =>
-                        <Button variant="contained" key={idx} color="primary" onClick={()=>{showMiniDialog(false);setSupplier(supplier)}} className={classes.button}>
+                        <Button size='small' key={idx} color="primary" onClick={()=>{showMiniDialog(false);setSupplier(supplier)}} className={classes.button}>
                             {supplier.name}
                         </Button>
                     )

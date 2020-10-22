@@ -11,6 +11,8 @@ import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../../redux/actions/mini_dialog'
 import { addApplication, getUnloadingApplication, setApplication, getApplication, deleteApplication } from '../../src/gql/application'
 import { getCategorys } from '../../src/gql/category'
+import { getDivisions } from '../../src/gql/division'
+import { getSubdivisions } from '../../src/gql/subdivision'
 import { getItems } from '../../src/gql/item'
 import { getUnits } from '../../src/gql/unit'
 import TextField from '@material-ui/core/TextField';
@@ -64,6 +66,24 @@ const Application = React.memo((props) => {
         setPaymentType(event.target.value)
     })
     let [comment, setComment] = useState(data.application?data.application.comment:'');
+    let [division, setDivision] = useState(data.application?data.application.division:undefined);
+    let handleDivision = async (division) => {
+        setSubdivision(undefined)
+        setDivision(division)
+        if(division) {
+            setSubdivisions((await getSubdivisions({search: '', division: division._id})).subdivisions)
+        }
+        else {
+            setSubdivisions([])
+        }
+    };
+    let [subdivision, setSubdivision] = useState(data.application?data.application.subdivision:undefined);
+    let handleSubdivision = async (subdivision) => {
+        if(subdivision) {
+            setSubdivision(subdivision)
+        }
+    };
+    let [subdivisions, setSubdivisions] = useState([]);
     let [official, setOfficial] = useState(data.application?data.application.official:true);
     let [zoom1, setZoom1] = useState(1);
     let [showTable1, setShowTable1] = useState(true);
@@ -162,26 +182,82 @@ const Application = React.memo((props) => {
                                 <Autocomplete
                                     size='small'
                                     className={classes.input}
-                                    options={data.categorys}
+                                    options={data.divisions}
                                     getOptionLabel={option => option.name}
-                                    value={category}
+                                    value={division}
                                     onChange={(event, newValue) => {
-                                        handleCategory(newValue)
+                                        handleDivision(newValue)
                                     }}
                                     disabled={router.query.id!=='new'}
                                     noOptionsText='Ничего не найдено'
                                     renderInput={params => (
-                                        <TextField {...params} label='Категория' variant='outlined' fullWidth />
+                                        <TextField {...params} label='Подразделение' variant='outlined' fullWidth />
                                     )}
                                 />
                             </div>
+                            {
+                                subdivisions.length?
+                                    <div className={classes.row}>
+                                        <Autocomplete
+                                            size='small'
+                                            className={classes.input}
+                                            options={subdivisions}
+                                            getOptionLabel={option => option.name}
+                                            value={subdivision}
+                                            onChange={(event, newValue) => {
+                                                handleSubdivision(newValue)
+                                            }}
+                                            disabled={router.query.id!=='new'}
+                                            noOptionsText='Ничего не найдено'
+                                            renderInput={params => (
+                                                <TextField {...params} label='Подразделение' variant='outlined' fullWidth />
+                                            )}
+                                        />
+                                    </div>
+                                    :
+                                    null
+                            }
+                            {
+                                !items.length||!category?
+                                    <div className={classes.row}>
+                                        <Autocomplete
+                                            size='small'
+                                            className={classes.input}
+                                            options={data.categorys}
+                                            getOptionLabel={option => option.name}
+                                            value={category}
+                                            onChange={(event, newValue) => {
+                                                handleCategory(newValue)
+                                            }}
+                                            disabled={router.query.id!=='new'}
+                                            noOptionsText='Ничего не найдено'
+                                            renderInput={params => (
+                                                <TextField {...params} label='Категория' variant='outlined' fullWidth />
+                                            )}
+                                        />
+                                    </div>
+                                    :
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>Категория:&nbsp;</div>
+                                        <div className={classes.value}>{category.name}</div>
+                                    </div>
+                            }
                             </>
                             :
                             <>
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Подразделение:&nbsp;</div>
-                                <div className={classes.value}>{data.application.division.name}</div>
+                                <div className={classes.value}>{division.name}</div>
                             </div>
+                            {
+                                subdivision&&subdivision.length?
+                                    <div className={classes.row}>
+                                        <div className={classes.nameField}>Под-подразделение:&nbsp;</div>
+                                        <div className={classes.value}>{subdivision}</div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             <div className={classes.row}>
                                 <div className={classes.nameField}>Категория:&nbsp;</div>
                                 <div className={classes.value}>{data.application.category.name}</div>
@@ -222,10 +298,7 @@ const Application = React.memo((props) => {
                             </div>
                     }
                     {
-                        profile.role==='специалист'?
-                            null
-                            :
-                            'обработка'===data.application.status&&['admin', 'менеджер', 'снабженец'].includes(profile.role)?
+                            (router.query.id==='new'||'обработка'===data.application.status)&&['admin', 'специалист', 'менеджер', 'снабженец'].includes(profile.role)?
                                 <>
                                 <div className={classes.row} style={{alignItems: 'flex-end'}}>
                                     <div className={classes.nameField}>Официально:&nbsp;</div>
@@ -261,6 +334,29 @@ const Application = React.memo((props) => {
                                         :
                                         null
                                 }
+                                <div className={classes.row}>
+                                    <div className={classes.nameField}>Тип оплаты:&nbsp;</div>
+                                    <Select
+                                        style={{fontSize: '0.875rem'}}
+                                        value={paymentType}
+                                        onChange={handlePaymentType}
+                                        input={<Input/>}
+                                        MenuProps={{
+                                            PaperProps: {
+                                                style: {
+                                                    maxHeight: 500,
+                                                    width: 250,
+                                                },
+                                            },
+                                        }}
+                                    >
+                                        {paymentTypes.map((paymentType) => (
+                                            <MenuItem key={paymentType} value={paymentType}>
+                                                {paymentType}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </div>
                                 </>
                                 :
                                 <>
@@ -291,41 +387,11 @@ const Application = React.memo((props) => {
                                     <div className={classes.nameField}>Официально:&nbsp;</div>
                                     <div className={classes.value}>{data.application.official?'да':'нет'}</div>
                                 </div>
-                                </>
-                    }
-                    {
-                        profile.role==='специалист'?
-                            null
-                            :
-                            'обработка'===data.application.status&&['admin', 'менеджер', 'снабженец'].includes(profile.role)?
-                                <div className={classes.row}>
-                                    <div className={classes.nameField}>Тип оплаты:&nbsp;</div>
-                                    <Select
-                                        style={{fontSize: '0.875rem'}}
-                                        value={paymentType}
-                                        onChange={handlePaymentType}
-                                        input={<Input/>}
-                                        MenuProps={{
-                                            PaperProps: {
-                                                style: {
-                                                    maxHeight: 500,
-                                                    width: 250,
-                                                },
-                                            },
-                                        }}
-                                    >
-                                        {paymentTypes.map((paymentType) => (
-                                            <MenuItem key={paymentType} value={paymentType}>
-                                                {paymentType}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </div>
-                                :
                                 <div className={classes.row}>
                                     <div className={classes.nameField}>Тип оплаты:&nbsp;</div>
                                     <div className={classes.value}>{data.application.paymentType}</div>
                                 </div>
+                                </>
                     }
                     <div className={classes.row}>
                         <div className={classes.nameField}>Сумма:&nbsp;</div>
@@ -683,15 +749,22 @@ const Application = React.memo((props) => {
                         {
                             router.query.id==='new'||['отмена', 'обработка'].includes(data.application.status)?
                                     <Button color='primary' onClick={()=>{
-                                        let check = !((items.filter(item=>!item.name.length||!item.unit.length||!item.currency.length||!item.price||!item.count)).length>0)
-                                        if (items.length>0&&check&&category) {
+                                        let check = !((items.filter(item=>!item.name.length||!item.unit.length||!item.currency.length||!item.count)).length>0)
+                                        if (division&&items.length>0&&check&&category) {
                                             const action = async() => {
-                                                if(router.query.id==='new')
+                                                if(router.query.id==='new') {
                                                     await addApplication({
                                                         category: category._id,
+                                                        division: division._id,
+                                                        ...subdivision ? {subdivision: subdivision.name} : {},
                                                         items: items,
-                                                        comment: comment
+                                                        comment: comment,
+                                                        note: note,
+                                                        budget: budget,
+                                                        paymentType: paymentType,
+                                                        official: official
                                                     })
+                                                }
                                                 else {
                                                     routes = routes.map(route=>{return {
                                                         role: route.role,
@@ -808,7 +881,8 @@ Application.getInitialProps = async function(ctx) {
             ),
             ...await getSuppliers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getCategorys({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getUnits({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
+            ...await getUnits({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getDivisions({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
 
         }
     };

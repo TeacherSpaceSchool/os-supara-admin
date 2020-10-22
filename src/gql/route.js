@@ -1,6 +1,5 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
-import { SingletonStore } from '../singleton/store';
 
 export const getRoutes = async(element, client)=>{
     try{
@@ -14,7 +13,7 @@ export const getRoutes = async(element, client)=>{
                             _id
                             createdAt
                             roles
-                            division {_id name}
+                            specialists {_id name}
                           }
                     }`,
             })
@@ -30,8 +29,8 @@ export const setRoute = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $roles: [String]!, $division: ID) {
-                        setRoute(_id: $_id, roles: $roles, division: $division) {
+                    mutation ($_id: ID!, $roles: [String]!, $specialists: [ID]) {
+                        setRoute(_id: $_id, roles: $roles, specialists: $specialists) {
                              data
                         }
                     }`})
@@ -46,12 +45,12 @@ export const addRoute = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($roles: [String]!, $division: ID!) {
-                        addRoute(roles: $roles, division: $division) {
+                    mutation ($roles: [String]!, $specialists: [ID]!) {
+                        addRoute(roles: $roles, specialists: $specialists) {
                             _id
                             createdAt
                             roles
-                            division {_id name}
+                            specialists {_id name}
                         }
                     }`})
         return res.data

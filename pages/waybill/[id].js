@@ -39,6 +39,7 @@ const Waybill = React.memo((props) => {
     let [application, setApplication] = useState(data.waybill?data.waybill.application:undefined);
     let [seller, setSeller] = useState(data.waybill?data.waybill.seller:undefined);
     let [preview, setPreview] = useState(data.waybill?data.waybill.patent:'');
+    let [comment, setComment] = useState(data.waybill?data.waybill.comment:'');
     let [patent, setPatent] = useState(undefined);
     let [items, setItems] = useState(data.waybill?data.waybill.items:[]);
     let handleChangePatent = ((event) => {
@@ -443,6 +444,17 @@ const Waybill = React.memo((props) => {
                                     color='primary'
                                     inputProps={{ 'aria-label': 'primary checkbox' }}
                                 />
+                                <Input
+                                    className={classes.inputTable}
+                                    inputProps={{
+                                        readOnly: 'специалист'!==profile.role || data.waybill.acceptSpecialist
+                                    }}
+                                    multiline={true}
+                                    value={comment}
+                                    onChange={(event) => {
+                                        setComment(event.target.value)
+                                    }}
+                                />
                             </div>
                             </>
                     }
@@ -492,6 +504,7 @@ const Waybill = React.memo((props) => {
                                                     }
                                                     if (seller && seller !== data.waybill.seller) element.seller = seller
                                                     if (patent) element.patent = patent
+                                                    if (comment !== data.waybill.comment) element.comment = comment
                                                     if (acceptSpecialist && acceptSpecialist !== data.waybill.acceptSpecialist) element.acceptSpecialist = acceptSpecialist
                                                     await setWaybill(element)
                                                 }

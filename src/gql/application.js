@@ -15,6 +15,7 @@ export const getApplications = async(element, client)=>{
                             createdAt
                             status
                             number
+                            subdivision
                             division {_id name}
                             category {_id name}
                             budget
@@ -57,6 +58,7 @@ export const getApplicationsForWaybill = async(client)=>{
                             createdAt
                             status
                             number
+                            subdivision
                             division {_id name}
                             category {_id name}
                             budget
@@ -93,6 +95,7 @@ export const getApplication = async(element, client)=>{
                             status
                             number
                             division {_id name suppliers {_id name}}
+                            subdivision
                             category {_id name}
                             budget
                             note
@@ -172,8 +175,8 @@ export const addApplication = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($category: ID!, $comment: String!, $items: [InputItems]!) {
-                        addApplication(category: $category, comment: $comment, items: $items) {
+                    mutation ($category: ID!, $comment: String!, $division: ID!, $subdivision: String, $items: [InputItems]!, $budget: Boolean, $paymentType: String, $official: Boolean, $note: Upload) {
+                        addApplication(category: $category, comment: $comment, division: $division, subdivision: $subdivision, items: $items, budget: $budget, paymentType: $paymentType, official: $official, note: $note) {
                             data
                         }
                     }`})

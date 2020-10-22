@@ -93,9 +93,11 @@ const ItemsFromApplications = React.memo((props) => {
                                     </div>
                                 </div>
                                 <div className={classes.cell} style={{width: 80}}>
-                                    <Link key={data.itemsFromApplications[0]} href='/application/[id]' as={`/application/${data.itemsFromApplications[0]}`}>
+                                    <Link key={data.itemsFromApplications[0]} href='/application/[id]' as={`/application/${row[0]}`}>
                                         <a>
-                                            {row[1]}
+                                            <b>
+                                                {row[1]}
+                                            </b>
                                         </a>
                                     </Link>
                                 </div>

@@ -18,11 +18,15 @@ import IconButton from '@material-ui/core/IconButton';
 import VerticalAlignBottom from '@material-ui/icons/VerticalAlignBottom';
 import VerticalAlignTop from '@material-ui/icons/VerticalAlignTop';
 import Delete from '@material-ui/icons/Delete';
-import divisions from '../pages/divisions';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
 
 const CardApplicationRoute = React.memo((props) => {
     const classes = cardStyle();
-    const { element, roles, setList, idx, list, divisionsForRoute } = props;
+    const { element, roles, setList, idx, list, specialistsForRoute } = props;
     const { isMobileApp } = props.app;
     let [newRoles, setNewRoles] = useState(element?element.roles:[]);
     let [freeRoles, setFreeRoles] = useState(roles);
@@ -34,25 +38,39 @@ const CardApplicationRoute = React.memo((props) => {
             setFreeRoles([...freeRoles])
         })()
     },[newRoles,])
-    let [division, setDivision] = useState(element?element.division:undefined);
+    let [specialists, setSpecialists] = useState(element?element.specialists:[]);
+    const handleSpecialists = (event) => {
+        setSpecialists(event.target.value);
+    };
     return (
             <Card className={isMobileApp?classes.cardM:classes.cardD}>
                 <CardActionArea>
                     <CardContent>
                         <div className={classes.column}>
-                            <Autocomplete
-                                defaultValue={division}
-                                className={classes.input}
-                                options={divisionsForRoute}
-                                getOptionLabel={option => option.name}
-                                onChange={(event, newValue) => {
-                                    setDivision(newValue)
-                                }}
-                                noOptionsText='Ничего не найдено'
-                                renderInput={params => (
-                                    <TextField {...params} label='Выберите категорию' variant='outlined' fullWidth />
-                                )}
-                            />
+                            <FormControl className={classes.input}>
+                                <InputLabel>Специалисты</InputLabel>
+                                <Select
+                                    multiple
+                                    value={specialists}
+                                    onChange={handleSpecialists}
+                                    input={<Input/>}
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 500,
+                                                width: 250,
+                                            },
+                                        },
+                                    }}
+                                >
+                                    {specialistsForRoute.map((specialist) => (
+                                        <MenuItem key={specialist._id} value={specialist._id}
+                                                  style={{background: specialists.includes(specialist._id) ? '#f5f5f5' : '#ffffff'}}>
+                                            {specialist.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                             {
                                 newRoles.map((element, idx) =>
                                     <div style={{alignItems: 'end'}} key={idx} className={classes.row}>
@@ -127,8 +145,7 @@ const CardApplicationRoute = React.memo((props) => {
                         element!==undefined?
                             <>
                             <Button onClick={async()=>{
-                                let editElement = {_id: element._id, roles: newRoles}
-                                if(division&&division._id!==element.division._id)editElement.division = division._id
+                                let editElement = {_id: element._id, roles: newRoles, specialists: specialists}
                                 const action = async() => {
                                     await setRoute(editElement)
                                 }
@@ -150,11 +167,11 @@ const CardApplicationRoute = React.memo((props) => {
                             </Button>
                             </>:
                             <Button onClick={async()=> {
-                                if (division) {
+                                if (specialists.length) {
                                     const action = async() => {
-                                        let res = (await addRoute({roles: newRoles, division: division._id})).addRoute
+                                        let res = (await addRoute({roles: newRoles, specialists: specialists})).addRoute
                                         setNewRoles([])
-                                        setDivision(undefined)
+                                        setSpecialists([])
                                         setList([res, ...list])
                                     }
                                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)

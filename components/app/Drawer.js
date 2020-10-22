@@ -69,7 +69,7 @@ const MyDrawer = React.memo((props) => {
                         <Collapse in={uncover['Документы']} timeout='auto' unmountOnExit>
                             <List component='div' disablePadding>
                                 <Link href={'/applications'}>
-                                    <ListItem style={{marginLeft: 16, background:router.pathname.includes('application')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                    <ListItem style={{marginLeft: 16, background:router.pathname.includes('application')&&!router.pathname.includes('itemsfromapplications')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                         <Badge color='secondary' variant='dot' invisible={!unread.applications}/>
                                         <ListItemText primary={'Заявки'} />
                                     </ListItem>
@@ -199,11 +199,11 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
                                         <>
-                                        <Link href={'/users'}>
-                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/users'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
-                                                <ListItemText primary={'Пользователи'} />
+                                        <Link href={'/subdivisions'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/subdivisions'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <ListItemText primary={'Под-подразделения'} />
                                             </ListItem>
                                         </Link>
                                         <Divider/>
@@ -211,6 +211,12 @@ const MyDrawer = React.memo((props) => {
                                         :
                                         null
                                 }
+                                <Link href={'/users'}>
+                                    <ListItem style={{marginLeft: 16, background:router.pathname==='/users'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                        <ListItemText primary={'Пользователи'} />
+                                    </ListItem>
+                                </Link>
+                                <Divider/>
                                 {
                                     ['admin', 'менеджер'].includes(profile.role)?
                                         <>

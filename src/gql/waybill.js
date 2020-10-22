@@ -18,6 +18,7 @@ export const getWaybillsForExpenseReport = async(client)=>{
                             acceptSpecialist
                             application {_id number amount {name value}}
                             seller
+                            comment
                             patent
                             specialist {_id name}
                             supplier {_id name}
@@ -46,6 +47,7 @@ export const getWaybills = async(element, client)=>{
                             status
                             number
                             dateClose
+                            comment
                             acceptSpecialist
                             application {_id number amount {name value}}
                             seller
@@ -107,6 +109,7 @@ export const getWaybill = async(element, client)=>{
                             application {_id number amount {name value} items {name unit price count comment status currency}}
                             seller
                             patent
+                            comment
                             specialist {_id name}
                             supplier {_id name}
                             items {name unit price count comment status currency GUID} 
@@ -158,8 +161,8 @@ export const setWaybill = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $acceptSpecialist: Date, $seller: String, $patent: Upload, $items: [InputItems]) {
-                        setWaybill(_id: $_id, acceptSpecialist: $acceptSpecialist, seller: $seller, patent: $patent, items: $items) {
+                    mutation ($_id: ID!, $acceptSpecialist: Date, $comment: String, $seller: String, $patent: Upload, $items: [InputItems]) {
+                        setWaybill(_id: $_id, acceptSpecialist: $acceptSpecialist, comment: $comment, seller: $seller, patent: $patent, items: $items) {
                              data
                         }
                     }`})

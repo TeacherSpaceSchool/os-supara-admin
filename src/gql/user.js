@@ -18,6 +18,7 @@ export const getUsers = async(element, client)=>{
                             role
                             status
                             del
+                            phone
                             GUID
                         }
                         filterUser {
@@ -47,6 +48,7 @@ export const getSuppliers = async(client)=>{
                             role
                             status
                             del
+                            phone
                             GUID
                         }
                     }`,
@@ -68,6 +70,7 @@ export const getStaffs = async(client)=>{
                             _id
                             createdAt
                             login
+                            phone
                             name
                             role
                             status
@@ -94,6 +97,7 @@ export const getHeads = async(client)=>{
                             createdAt
                             login
                             name
+                            phone
                             role
                             status
                             del
@@ -121,6 +125,7 @@ export const getSpecialists = async(client)=>{
                             name
                             role
                             status
+                            phone
                             del
                             GUID
                         }
@@ -144,6 +149,7 @@ export const getUsersTrash = async(element, client)=>{
                             _id
                             createdAt
                             login
+                            phone
                             name
                             role
                             status
@@ -172,6 +178,7 @@ export const getUser = async(element, client)=>{
                             login
                             name
                             role
+                            phone
                             status
                             del
                             GUID
@@ -238,8 +245,8 @@ export const addUser = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($login: String!, $GUID: String, $name: String!, $role: String!, $password: String!) {
-                        addUser(login: $login, GUID: $GUID, name: $name, role: $role, password: $password) {
+                    mutation ($phone: String, $login: String!, $GUID: String, $name: String!, $role: String!, $password: String!) {
+                        addUser(phone: $phone, login: $login, GUID: $GUID, name: $name, role: $role, password: $password) {
                             _id
                             createdAt
                             login
@@ -261,8 +268,8 @@ export const setUser = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $GUID: String, $login: String, $name: String, $role: String, $password: String) {
-                        setUser(_id: $_id, GUID: $GUID, login: $login, name: $name, role: $role, password: $password) {
+                    mutation ($_id: ID!, $phone: String, $GUID: String, $login: String, $name: String, $role: String, $password: String) {
+                        setUser(_id: $_id, phone: $phone, GUID: $GUID, login: $login, name: $name, role: $role, password: $password) {
                              data
                         }
                     }`})

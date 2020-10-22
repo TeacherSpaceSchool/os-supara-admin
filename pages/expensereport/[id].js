@@ -87,9 +87,9 @@ const ExpenseReport = React.memo((props) => {
     let [outCashbox, setOutCashbox] = useState(data.expenseReport?data.expenseReport.outCashbox?data.expenseReport.outCashbox:data.expenseReport.balanceStart.map(balance=>{return {name: balance.name, value: 0}}):[]);
     let [acceptHead, setAcceptHead] = useState(data.expenseReport?data.expenseReport.acceptHead:undefined);
     let [zoom1, setZoom1] = useState(1);
-    let [showTable1, setShowTable1] = useState(false);
+    let [showTable1, setShowTable1] = useState(true);
     let [zoom2, setZoom2] = useState(1);
-    let [showTable2, setShowTable2] = useState(false);
+    let [showTable2, setShowTable2] = useState(true);
     useEffect(()=>{
         if(process.browser) {
             if (initialRender1.current)
@@ -536,31 +536,13 @@ const ExpenseReport = React.memo((props) => {
                                         <div className={classes.cell} style={{width: isMobileApp?150:`calc((100vw - 1044px) / 2 + 100px)`}}>
                                             {
                                                 router.query.id==='new'?
-                                                    <Autocomplete
-                                                        size='small'
+                                                    <Input
                                                         className={classes.inputTable}
-                                                        options={itemsName}
-                                                        getOptionLabel={option => option.name}
-                                                        onChange={(event, newValue) => {
-                                                            addedItems[idx].name = newValue.name
-                                                            addedItems[idx].GUID = newValue.GUID
+                                                        value={item.name}
+                                                        onChange={(event)=>{
+                                                            addedItems[idx].name = event.target.value
                                                             setAddedItems([...addedItems])
                                                         }}
-                                                        noOptionsText='Ничего не найдено'
-                                                        renderInput={params => (
-                                                            <TextField {...params} label='Выберите' variant='outlined' fullWidth
-                                                                       onChange={handleChange}
-                                                                       InputProps={{
-                                                                           ...params.InputProps,
-                                                                           endAdornment: (
-                                                                               <React.Fragment>
-                                                                                   {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                                                                   {params.InputProps.endAdornment}
-                                                                               </React.Fragment>
-                                                                           ),
-                                                                       }}
-                                                            />
-                                                        )}
                                                     />
                                                     :
                                                     <div className={classes.value}>{item.name}</div>

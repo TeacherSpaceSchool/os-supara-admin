@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { getRoutes } from '../src/gql/route'
 import { getRoles } from '../src/gql/role'
-import { getDivisionsForRoute } from '../src/gql/division'
+import { getSpecialists } from '../src/gql/user'
 import pageListStyle from '../src/styleMUI/list'
 import CardRoute from '../components/CardRoute'
 import { urlMain } from '../redux/constants/other'
@@ -68,13 +68,17 @@ const Routes = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/routes`}/>
             </Head>
             <div className={classes.page}>
-                <CardRoute divisionsForRoute={data.divisionsForRoute} roles={roles} setList={setList} list={list}/>
+                <CardRoute specialistsForRoute={data.specialists} roles={roles} setList={setList} list={list}/>
                 {list?list.map((element, idx)=> {
+                    if(element.specialists)
+                        element.specialists = element.specialists.map(specialist=>specialist._id?specialist._id:specialist)
+                    else
+                        element.specialists = []
                     return (
                         <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height}
                                   offset={[height, 0]} debounce={0} once={true}
                                           placeholder={<CardRoutePlaceholder height={height}/>}>
-                                    <CardRoute divisionsForRoute={data.divisionsForRoute} roles={roles} key={element._id} setList={setList} list={list}
+                                    <CardRoute specialistsForRoute={data.specialists} roles={roles} key={element._id} setList={setList} list={list}
                                                   idx={idx} element={element}/>
                                 </LazyLoad>
                             )
@@ -102,7 +106,7 @@ Routes.getInitialProps = async function(ctx) {
         data: {
             ...await getRoutes({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getRoles({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getDivisionsForRoute(ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getSpecialists(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
 };

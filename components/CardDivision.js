@@ -128,7 +128,7 @@ const CardDivision = React.memo((props) => {
                                         </Select>
                                     </FormControl>
                                     <FormControl className={classes.input}>
-                                        <InputLabel>Сотрудники</InputLabel>
+                                        <InputLabel>Утверждение</InputLabel>
                                         <Select
                                             multiple
                                             value={newStaffs}
