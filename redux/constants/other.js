@@ -4,7 +4,7 @@ export let urlGQLws
 export let urlMain
 export let urlSubscribe
 export let applicationKey
-if(process.env.URL==='os-kantsut.xyz') {
+if(process.env.URL==='os-supara.xyz') {
     urlGQLSSR = `http://localhost:4000/graphql`
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `wss://${process.env.URL}:3000/graphql`

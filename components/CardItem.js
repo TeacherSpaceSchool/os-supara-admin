@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import { addItem, deleteItem, setItem } from '../src/gql/item'
+import { checkFloat } from '../src/lib'
 import TextField from '@material-ui/core/TextField';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
@@ -16,12 +17,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const CardItem = React.memo((props) => {
     const classes = cardStyle();
-    const { element, setList, idx, list, categorys } = props;
+    const { element, /*setList, idx, list, categorys*/ } = props;
     const { isMobileApp } = props.app;
     let [name, setName] = useState(element?element.name:'');
-    let handleName =  (event) => {
-        setName(event.target.value)
-    };
     let [category, setCategory] = useState(element?element.category:undefined);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
@@ -30,7 +28,7 @@ const CardItem = React.memo((props) => {
                 <CardActionArea>
                     <CardContent>
                         <div className={classes.column}>
-                            <Autocomplete
+                            {/*<Autocomplete
                                 defaultValue={category}
                                 className={classes.input}
                                 options={categorys}
@@ -42,12 +40,22 @@ const CardItem = React.memo((props) => {
                                 renderInput={params => (
                                     <TextField {...params} label='Выберите категорию' variant='outlined' fullWidth />
                                 )}
+                            />*/}
+                            <TextField
+                                label='Категория'
+                                value={category.name}
+                                className={classes.input}
+                                inputProps={{
+                                    'aria-label': 'description',
+                                }}
                             />
                             <TextField
-                                label='Имя'
+                                label='Название'
                                 value={name}
                                 className={classes.input}
-                                onChange={handleName}
+                                onChange={(event) => {
+                                    //setName(event.target.value)
+                                }}
                                 inputProps={{
                                     'aria-label': 'description',
                                 }}
@@ -59,7 +67,7 @@ const CardItem = React.memo((props) => {
                     {
                         element!==undefined?
                             <>
-                            <Button onClick={async()=>{
+                            {/*<Button onClick={async()=>{
                                 let editElement = {_id: element._id}
                                 if(name.length>0&&name!==element.name)editElement.name = name
                                 if(category&&category._id!==element.category._id)editElement.category = category._id
@@ -81,8 +89,9 @@ const CardItem = React.memo((props) => {
                                 showMiniDialog(true)
                             }}>
                                 Удалить
-                            </Button>
-                            </>:
+                            </Button>*/}
+                            </>
+                            :
                             <Button onClick={async()=> {
                                 if (name.length>0&&category) {
                                     const action = async() => {
@@ -101,7 +110,8 @@ const CardItem = React.memo((props) => {
                             }
                             } size='small' color='primary'>
                                 Добавить
-                            </Button>}
+                            </Button>
+                    }
                 </CardActions>
             </Card>
     );

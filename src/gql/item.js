@@ -13,10 +13,27 @@ export const getItems = async(element, client)=>{
                         items(category: $category, search: $search, skip: $skip) {
                             _id
                             createdAt 
+                            lastPrice {name value}
                             category
                                 {_id name}
                             name
+                            GUID
                         }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getFilterItem = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
                         filterItem {
                            name
                            value
@@ -62,6 +79,7 @@ export const getItemsTrash = async(element, client)=>{
                             category
                                 {_id name}
                             name
+                            lastPrice {name value}
                         }
                     }`,
             })
@@ -85,6 +103,7 @@ export const getItem = async(element, client)=>{
                             category
                                 {_id name}
                             name
+                            lastPrice {name value}
                         }
                     }`,
             })

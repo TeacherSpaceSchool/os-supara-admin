@@ -1,6 +1,10 @@
-import { SHOW_DRAWER, SET_FILTER, SET_SORT, SET_SEARCH, SET_IS_MOBILE_APP, SHOW_LOAD, SET_COUNT_BASKET, SET_DATE } from '../constants/app'
+import {
+    SHOW_DRAWER, SET_FILTER, SET_SORT, SET_SEARCH, SET_IS_MOBILE_APP, SHOW_LOAD, SET_COUNT_BASKET, SET_DATE,
+    SET_IMAGES_LIGHTBOX, SET_INDEX_LIGHTBOX, SET_SHOW_LIGHTBOX, SHOW_APPBAR
+} from '../constants/app'
 
 const initialState = {
+    showAppBar: true,
     drawer: false,
     search: '',
     filter: '',
@@ -8,7 +12,10 @@ const initialState = {
     isMobileApp: undefined,
     load: false,
     countBasket: 0,
-    date: ''
+    date: '',
+    showLightbox: false,
+    imagesLightbox: [],
+    indexLightbox: 0,
 }
 
 export default function mini_dialog(state = initialState, action) {
@@ -29,6 +36,14 @@ export default function mini_dialog(state = initialState, action) {
             return {...state, countBasket: action.payload}
         case SET_DATE:
             return {...state, date: action.payload}
+        case SHOW_APPBAR:
+            return {...state, showAppBar: action.payload}
+        case SET_SHOW_LIGHTBOX:
+            return {...state, showLightbox: action.payload}
+        case SET_INDEX_LIGHTBOX:
+            return {...state, indexLightbox: action.payload}
+        case SET_IMAGES_LIGHTBOX:
+            return {...state, imagesLightbox: action.payload}
         default:
             return state
     }

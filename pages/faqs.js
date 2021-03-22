@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import CardFaq from '../components/CardFaq';
 import pageListStyle from '../src/styleMUI/list'
@@ -17,11 +17,23 @@ const Faqs = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.faqs);
+    const initialRender = useRef(true);
     const { search, } = props.app;
-    const { profile } = props.user;
+    const { profile, pinCode } = props.user;
     useEffect(()=>{
         (async()=>{
-            setList((await getFaqs({search: search})).faqs)
+            if(!initialRender.current&&pinCode) {
+                setList((await getFaqs({search: search})).faqs)
+            }
+        })()
+    },[pinCode])
+    useEffect(()=>{
+        (async()=>{
+            if(initialRender.current) {
+                initialRender.current = false;
+            } else {
+                setList((await getFaqs({search: search})).faqs)
+            }
         })()
     },[  search, ])
     useEffect(()=>{
@@ -48,9 +60,6 @@ const Faqs = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/faq`}/>
             </Head>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего: ${list.length}`}
-                </div>
                 {profile.role==='admin'?<CardFaq setList={setList}/>:null}
                 {list?list.map((element, idx)=> {
                         if(idx<=pagination)

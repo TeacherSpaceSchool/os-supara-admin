@@ -8,7 +8,6 @@ export default makeStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `url(${urlMain}/static/zadnifon.jpg)`
     },
     message: {
         flexDirection: 'column',

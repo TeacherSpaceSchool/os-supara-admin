@@ -37,6 +37,33 @@ export default makeStyles({
         margin: 10,
         width: 100
     },
+    noteImageDiv: {
+        position: 'relative'
+    },
+    noteImage: {
+        marginLeft: 10,
+        width: 80,
+        height: 80,
+        cursor: 'pointer'
+    },
+    noteImageButton: {
+        top: 0,
+        right: 0,
+        position: 'absolute',
+        marginLeft: 10,
+        width: 24,
+        height: 24,
+        cursor: 'pointer',
+        color: 'white',
+        fontWeight: 'bold',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    noteImageList: {
+        display: 'flex',
+        overflowX: 'auto'
+    },
     cell: {
         display: 'flex',
         alignItems: 'center',
@@ -77,6 +104,7 @@ export default makeStyles({
         '&::-webkit-scrollbar': {
             display: 'none'
         },
+        overflowY: 'hidden'
     },
     input: {
         fontSize: '0.875rem',

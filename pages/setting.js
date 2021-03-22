@@ -1,18 +1,41 @@
 import Head from 'next/head';
-import React  from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
-import { getSetting } from '../src/gql/setting'
+import { getSetting, clearStorage } from '../src/gql/setting'
 import pageListStyle from '../src/styleMUI/list'
 import CardSetting from '../components/CardSetting'
 import { urlMain } from '../redux/constants/other'
 import Router from 'next/router'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import Fab from '@material-ui/core/Fab';
+import ClearIcon from '@material-ui/icons/Clear';
+import * as mini_dialogActions from '../redux/actions/mini_dialog'
+import * as appActions from '../redux/actions/app'
+import { bindActionCreators } from 'redux'
+import Confirmation from '../components/dialog/Confirmation'
 
 const Setting = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+    const initialRender = useRef(true);
+    const { pinCode } = props.user;
+    const { showLoad } = props.appActions;
+    let [setting, setSetting] = useState(data.setting);
+    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setSetting((await getSetting()).setting)
+            }
+        })()
+    },[pinCode])
+    useEffect(()=>{
+        (async()=>{
+            if(initialRender.current) initialRender.current = false;
+        })()
+    },[])
     return (
         <App pageName='Настройки'>
             <Head>
@@ -26,7 +49,23 @@ const Setting = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/setting`}/>
             </Head>
             <div className={classes.page}>
-                <CardSetting element={data.setting}/>
+                {
+                    setting?
+                        <CardSetting element={setting}/>
+                        :
+                        null
+                }
+                <Fab color='primary' aria-label='add' className={classes.fab} onClick={()=>{
+                    const action = async() => {
+                        await showLoad(true)
+                        await clearStorage()
+                        await showLoad(false)
+                    }
+                    setMiniDialog('Очистить базу?', <Confirmation action={action}/>)
+                    showMiniDialog(true)
+                }}>
+                    <ClearIcon />
+                </Fab>
             </div>
         </App>
     )
@@ -54,7 +93,15 @@ Setting.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 
-export default connect(mapStateToProps)(Setting);
+function mapDispatchToProps(dispatch) {
+    return {
+        mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
+        appActions: bindActionCreators(appActions, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Setting);

@@ -1,6 +1,6 @@
 {
-  "short_name": "os-kantsut",
-  "name": "os-kantsut",
+  "short_name": "os-supara",
+  "name": "os-supara",
   "icons": [
     {
       "src": "/static/192x192.png",
@@ -20,6 +20,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#009ADC",
+  "theme_color": "#E67124",
   "background_color": "#ffffff"
 }

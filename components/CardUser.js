@@ -36,10 +36,6 @@ const CardUser = React.memo((props) => {
     let handleLogin =  (event) => {
         setLogin(event.target.value)
     };
-    let [GUID, setGUID] = useState(element?element.GUID:'');
-    let handleGUID =  (event) => {
-        setGUID(event.target.value)
-    };
     let [role, setRole] = useState(element?element.role:'');
     let handleRole =  (event) => {
         setRole(event.target.value)
@@ -100,6 +96,19 @@ const CardUser = React.memo((props) => {
                                             />
                                     }
                                     {
+                                        element?
+                                            <TextField
+                                                label='PIN-код'
+                                                value={element.pinCode}
+                                                className={classes.input}
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
+                                            :
+                                            null
+                                    }
+                                    {
                                         element&&element.del?
                                             <div className={classes.value}>{name}</div>
                                             :
@@ -128,27 +137,25 @@ const CardUser = React.memo((props) => {
                                             />
                                     }
                                     {
-                                        element&&element.del?
-                                            <div className={classes.value}>{role}</div>
+                                        element?
+                                            <TextField
+                                                label='Роль'
+                                                value={role}
+                                                className={classes.input}
+                                                inputProps={{
+                                                    'aria-label': 'description',
+                                                }}
+                                            />
                                             :
                                             <FormControl className={classes.input}>
                                                 <InputLabel>Роль</InputLabel>
                                                 <Select value={role} onChange={handleRole}>
-                                                    {roles.map((element, idx) =>
-                                                        <MenuItem key={idx} value={element}>{element}</MenuItem>
-                                                    )}
+                                                    {roles.map((element, idx) => {
+                                                        return <MenuItem key={idx} value={element}>{element}</MenuItem>
+                                                    })}
                                                 </Select>
                                             </FormControl>
                                     }
-                                    <TextField
-                                        label='GUID'
-                                        value={GUID}
-                                        className={classes.input}
-                                        onChange={handleGUID}
-                                        inputProps={{
-                                            'aria-label': 'description',
-                                        }}
-                                    />
                                 </div>
                                 :
                                 <div className={classes.column}>
@@ -188,6 +195,22 @@ const CardUser = React.memo((props) => {
                                         :
                                         <>
                                         <Button onClick={async()=>{
+                                            let editElement = {_id: element._id}
+                                            if(name.length>0&&name!==element.name)editElement.name = name
+                                            if(element.phone&&phone.length>0&&phone!==element.phone)editElement.phone = phone
+                                            if(login.length>0&&login!==element.login)editElement.login = login
+                                            if(role!==element.role)editElement.role = role
+                                            if(status!==element.status)editElement.status = status
+                                            if(password.length>0)editElement.password = password
+                                            const action = async() => {
+                                                await setUser(editElement)
+                                            }
+                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                            showMiniDialog(true)
+                                        }} size='small' color='primary'>
+                                            Сохранить
+                                        </Button>
+                                        <Button onClick={async()=>{
                                             const action = async() => {
                                                 await onoffUser([element._id])
                                                 setStatus(status==='active'?'deactive':'active')
@@ -197,42 +220,29 @@ const CardUser = React.memo((props) => {
                                         }} size='small' color={status==='active'?'primary':'secondary'}>
                                             {status==='active'?'Отключить':'Включить'}
                                         </Button>
-                                        <Button onClick={async()=>{
-                                            let editElement = {_id: element._id}
-                                            if(name.length>0&&name!==element.name)editElement.name = name
-                                            if(phone.length>0&&phone!==element.phone)editElement.phone = phone
-                                            if(login.length>0&&login!==element.login)editElement.login = login
-                                            if(role!==element.role)editElement.role = role
-                                            if(status!==element.status)editElement.status = status
-                                            if(password.length>0)editElement.password = password
-                                            if(GUID&&GUID.length>0&&GUID!==element.GUID)editElement.GUID = GUID
-                                            const action = async() => {
-                                                await setUser(editElement)
-                                            }
-                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                            showMiniDialog(true)
-                                        }} size='small' color='primary'>
-                                            Сохранить
-                                        </Button>
-                                        <Button size='small' color='primary' onClick={()=>{
-                                            const action = async() => {
-                                                await deleteUser([element._id])
-                                                list.splice(idx, 1);
-                                                setList([...list])
-                                            }
-                                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                                            showMiniDialog(true)
-                                        }}>
-                                            Удалить
-                                        </Button>
+                                        {
+                                            role!=='снабженец'?
+                                                <Button size='small' color='primary' onClick={()=>{
+                                                    const action = async() => {
+                                                        await deleteUser([element._id])
+                                                        list.splice(idx, 1);
+                                                        setList([...list])
+                                                    }
+                                                    setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                                    showMiniDialog(true)
+                                                }}>
+                                                    Удалить
+                                                </Button>
+                                                :
+                                                null
+                                        }
                                         </>
                                     :
                                     <Button onClick={async()=> {
                                         if (name.length>0&&login.length>0&&password.length>0&&role.length>0) {
                                             const action = async() => {
-                                                let user = (await addUser({GUID: GUID, phone: phone, name: name, login: login, password: password, role: role})).addUser
+                                                let user = (await addUser({phone: phone, name: name, login: login, password: password, role: role})).addUser
                                                 if(user) {
-                                                    setGUID('')
                                                     setName('')
                                                     setLogin('')
                                                     setPassword('')

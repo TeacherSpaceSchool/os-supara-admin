@@ -3,7 +3,9 @@ import {
     UNAUTHENTICATED,
     SET_PROFILE,
     SET_AUTH,
-    ERROR_AUTHENTICATED
+    ERROR_AUTHENTICATED,
+    SETED_PIN_CODE,
+    REMOVED_PIN_CODE
 } from '../constants/user'
 import {
     SHOW_MINI_DIALOG
@@ -144,6 +146,18 @@ export function checkAuthenticated() {
             dispatch ({type: UNAUTHENTICATED});
         }
     };
+}
+
+export function setedPinCode() {
+    return {
+        type: SETED_PIN_CODE
+    }
+}
+
+export function removedPinCode() {
+    return {
+        type: REMOVED_PIN_CODE
+    }
 }
 
 export function setAuthenticated(auth) {

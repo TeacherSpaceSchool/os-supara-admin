@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://os-kantsut.xyz/sitemap.xml
+Sitemap: https://os-supara.xyz/sitemap.xml

@@ -19,14 +19,6 @@ export const getExpenseReports = async(element, client)=>{
                             supplier {_id name}
                             sync
                         }
-                        filterExpenseReport{
-                           name
-                           value
-                        }
-                        sortExpenseReport{
-                           name
-                           field
-                        }
                     }`,
             })
         return res.data
@@ -71,7 +63,8 @@ export const getExpenseReport = async(element, client)=>{
                             acceptHead
                             applications {_id number amount {name value} createdAt}
                             waybills { _id createdAt number seller patent amount {name value} items {name unit price count comment status currency} }
-                            cashConsumables {_id number amount currencyType createdAt}
+                            cashConsumables {_id number amount currencyType createdAt comment}
+                            cashExchanges {_id createdAt number supplier {_id name} comment exchangeFrom sync currencyTypeFrom exchangeTo currencyTypeTo exchangeRate currencyTypeRate note}
                             supplier {_id name}
                             balanceStart {name value}
                             receivedAmount {name value}

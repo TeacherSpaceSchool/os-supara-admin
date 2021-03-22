@@ -1,6 +1,5 @@
 import { gql } from 'apollo-boost';
 import { SingletonApolloClient } from '../singleton/client';
-import { SingletonStore } from '../singleton/store';
 
 export const getSetting = async(client)=>{
     try{
@@ -12,7 +11,6 @@ export const getSetting = async(client)=>{
                         setting {
                             _id
                             createdAt 
-                            supplier
                         }
                     }`,
             })
@@ -30,6 +28,21 @@ export const setSetting = async(element)=>{
             mutation : gql`
                     mutation ($supplier: String) {
                         setSetting(supplier: $supplier) {
+                             data
+                        }
+                    }`})
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const clearStorage = async()=>{
+    try{
+        const client = new SingletonApolloClient().getClient()
+        await client.mutate({
+            mutation : gql`
+                    mutation {
+                        clearStorage {
                              data
                         }
                     }`})

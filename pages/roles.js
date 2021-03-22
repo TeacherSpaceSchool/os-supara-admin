@@ -18,10 +18,24 @@ const Roles = React.memo((props) => {
     const { data } = props;
     let [list, setList] = useState(data.roles);
     const { search } = props.app;
+    const { pinCode } = props.user;
     let height = 100
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=>{
+        setList((await getRoles({search: search, skip: 0})).roles)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -30,10 +44,7 @@ const Roles = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getRoles({search: search, skip: 0})).roles)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -98,6 +109,7 @@ Roles.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

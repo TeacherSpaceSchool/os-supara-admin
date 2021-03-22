@@ -68,6 +68,11 @@ export default makeStyles({
             display: 'none'
         },
     },
+    pinRightTop: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
     status: {
         marginBottom: 5,
         padding: 4,

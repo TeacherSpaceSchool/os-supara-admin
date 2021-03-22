@@ -29,6 +29,13 @@ const SetSuplier =  React.memo(
                         shrink: true,
                     }}
                     value={dateChange}
+                    onKeyPress={async(event) => {
+                        if (event.key === 'Enter'){
+                            if(dateChange.length)
+                                await setDate(new Date(dateChange))
+                            showMiniDialog(false);
+                        }
+                    }}
                     inputProps={{
                         'aria-label': 'description',
                     }}
@@ -37,7 +44,8 @@ const SetSuplier =  React.memo(
                 <br/>
                 <div>
                     <Button variant="contained" color="primary" onClick={async()=>{
-                       await setDate(new Date(dateChange))
+                        if(dateChange.length)
+                            await setDate(new Date(dateChange))
                        showMiniDialog(false);
                     }} className={classes.button}>
                         Сохранить

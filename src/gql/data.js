@@ -41,6 +41,21 @@ export const subscriptionData = gql`
                 budget
                 currencyType
             } 
+        cashExchange 
+            {
+                _id
+                createdAt
+                number
+                supplier {_id name}
+                comment
+                exchangeFrom
+                sync
+                currencyTypeFrom
+                exchangeTo
+                currencyTypeTo
+                exchangeRate
+                note
+            } 
         waybill 
             {
                 _id
@@ -78,6 +93,24 @@ export const subscriptionData = gql`
                 outCashbox {name value}
                 balanceEnd {name value}
             }
+            memorandum
+             {
+                            _id
+                            createdAt
+                            status
+                            number
+                            name
+                            comment
+                            note
+                            term
+                            who {_id name}
+                            whom {_id name}
+                            notifiables {_id name}
+                            routes {user {_id} confirmation cancel comment}
+                            approve
+                            completed
+                            checked
+                        }
     }
   }
 `

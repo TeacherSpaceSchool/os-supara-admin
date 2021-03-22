@@ -1,13 +1,13 @@
-let notificationUrl = 'https://os-kantsut.xyz';
+let notificationUrl = 'https://os-supara.xyz';
 //notification registered feature for getting update automatically from server api
 self.addEventListener('push', function (event) {
     let _data = event.data ?
         event.data.json()
         :
-        {title: 'os-kantsut.xyz', message: 'Не забудьте сделать свой заказ', tag: 'os-kantsut.xyz', url: 'https://os-kantsut.xyz', icon: 'https://os-kantsut.xyz/static/192x192.png'};
+        {title: 'os-supara.xyz', message: 'Не забудьте сделать свой заказ', tag: 'os-supara.xyz', url: 'https://os-supara.xyz', icon: 'https://os-supara.xyz/static/192x192.png'};
     event.waitUntil(
         self.registration.showNotification(_data.title, {
-            badge: 'https://os-kantsut.xyz/static/192x192.png',
+            badge: 'https://os-supara.xyz/static/192x192.png',
             body: _data.message,
             icon: _data.icon,
             tag: _data.tag,
@@ -22,7 +22,7 @@ self.addEventListener('push', function (event) {
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
 
-    fetch('https://os-kantsut.xyz:3000/push/clicknotification', {
+    fetch('https://os-supara.xyz:3000/push/clicknotification', {
         method: 'post',
         headers: {
             'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'

@@ -25,36 +25,11 @@ const CardSetting = React.memo((props) => {
         setSupplier(event.target.value)
     })
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
-    const { showSnackBar } = props.snackbarActions;
     return (
             <Card className={isMobileApp?classes.cardM:classes.cardD}>
                 <CardActionArea>
                     <CardContent>
                         <div className={classes.column} style={{width: '100%'}}>
-                            <div className={classes.row} style={{width: '100%'}}>
-                                <div className={classes.nameField}>Снабженец:&nbsp;</div>
-                                <Select
-                                    className={classes.input}
-                                    style={{fontSize: '0.875rem'}}
-                                    value={supplier}
-                                    onChange={handleSupplier}
-                                    input={<Input/>}
-                                    MenuProps={{
-                                        PaperProps: {
-                                            style: {
-                                                maxHeight: 500,
-                                                width: 250,
-                                            },
-                                        },
-                                    }}
-                                >
-                                    {suppliers.map((supplier) => (
-                                        <MenuItem key={supplier} value={supplier}>
-                                            {supplier}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </div>
                         </div>
                     </CardContent>
                 </CardActionArea>

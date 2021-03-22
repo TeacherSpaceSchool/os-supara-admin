@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
-import { getSubdivisions } from '../src/gql/subdivision'
+import { getSubdivisions, getFilterSubdivisions } from '../src/gql/subdivision'
 import pageListStyle from '../src/styleMUI/list'
 import CardSubdivision from '../components/CardSubdivision'
 import { urlMain } from '../redux/constants/other'
@@ -17,12 +17,30 @@ import { getDivisions } from '../src/gql/division'
 const Subdivisions = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+    const { pinCode } = props.user;
     let [list, setList] = useState(data.subdivisions);
+    let [divisions, setDivisions] = useState(data.divisions);
+    let [filterSubdivision, setFilterSubdivision] = useState(data.filterSubdivision);
     const { search, filter } = props.app;
     let height = 202
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=>{
+        setList((await getSubdivisions({search: search, skip: 0, ...filter?{division: filter}:{}})).subdivisions)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setDivisions((await getDivisions({search: ''})).divisions)
+                setFilterSubdivision((await getFilterSubdivisions()).filterSubdivision)
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -31,10 +49,7 @@ const Subdivisions = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getSubdivisions({search: search, skip: 0, ...filter?{category: filter}:{}})).subdivisions)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -54,7 +69,7 @@ const Subdivisions = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} filters={data.filterSubdivision} searchShow={true} pageName='Под-подразделения'>
+        <App checkPagination={checkPagination} filters={filterSubdivision} searchShow={true} pageName='Под-подразделения'>
             <Head>
                 <title>Под-подразделения</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
@@ -66,11 +81,11 @@ const Subdivisions = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/subdivisions`}/>
             </Head>
             <div className={classes.page}>
-                <CardSubdivision divisions={data.divisions} list={list} setList={setList}/>
+                <CardSubdivision divisions={divisions} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardSubdivisionPlaceholder height={height}/>}>
-                                <CardSubdivision divisions={data.divisions} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
+                                <CardSubdivision divisions={divisions} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
                             </LazyLoad>
                         )}
                 ):null}
@@ -94,6 +109,7 @@ Subdivisions.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getSubdivisions({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getFilterSubdivisions(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getDivisions({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
@@ -102,6 +118,7 @@ Subdivisions.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

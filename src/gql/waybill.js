@@ -56,14 +56,6 @@ export const getWaybills = async(element, client)=>{
                             supplier {_id name}
                             amount {name value}
                         }
-                        filterWaybill{
-                           name
-                           value
-                        }
-                        sortWaybill{
-                           name
-                           field
-                        }
                     }`,
             })
         return res.data
@@ -145,7 +137,7 @@ export const addWaybill = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($application: ID!, $seller: String!, $patent: Upload, $items: [InputItems]!) {
+                    mutation ($application: ID!, $seller: String!, $patent: [String], $items: [InputItems]!) {
                         addWaybill(application: $application, seller: $seller, patent: $patent, items: $items) {
                             data
                         }
@@ -161,7 +153,7 @@ export const setWaybill = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $acceptSpecialist: Date, $comment: String, $seller: String, $patent: Upload, $items: [InputItems]) {
+                    mutation ($_id: ID!, $acceptSpecialist: Date, $comment: String, $seller: String, $patent: [String], $items: [InputItems]) {
                         setWaybill(_id: $_id, acceptSpecialist: $acceptSpecialist, comment: $comment, seller: $seller, patent: $patent, items: $items) {
                              data
                         }

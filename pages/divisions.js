@@ -18,11 +18,33 @@ const Divisions = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.divisions);
+    let [suppliers, setSuppliers] = useState(data.suppliers);
+    let [heads, setHeads] = useState(data.heads);
+    let [specialists, setSpecialists] = useState(data.specialists);
+    let [staffs, setStaffs] = useState(data.staffs);
     const { search } = props.app;
+    const { pinCode } = props.user;
     const height = 376
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=>{
+        setList((await getDivisions({search: search, skip: 0})).divisions)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setSuppliers((await getSuppliers()).suppliers)
+                setHeads((await getHeads()).heads)
+                setSpecialists((await getSpecialists()).specialists)
+                setStaffs((await getStaffs()).staffs)
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -31,10 +53,7 @@ const Divisions = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getDivisions({search: search, skip: 0})).divisions)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -66,7 +85,7 @@ const Divisions = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/divisions`}/>
             </Head>
             <div className={classes.page}>
-                <CardDivision heads={data.heads} suppliers={data.suppliers} staffs={data.staffs} specialists={data.specialists} list={list} setList={setList}/>
+                <CardDivision heads={heads} suppliers={suppliers} staffs={staffs} specialists={specialists} list={list} setList={setList}/>
                 {list?list.map((element, idx)=> {
                             if(element.suppliers)
                                 element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
@@ -84,7 +103,7 @@ const Divisions = React.memo((props) => {
                                 <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height}
                                           offset={[height, 0]} debounce={0} once={true}
                                           placeholder={<CardDivisionPlaceholder height={height}/>}>
-                                    <CardDivision heads={data.heads} suppliers={data.suppliers} staffs={data.staffs} specialists={data.specialists} key={element._id} setList={setList} list={list}
+                                    <CardDivision heads={heads} suppliers={suppliers} staffs={staffs} specialists={specialists} key={element._id} setList={setList} list={list}
                                                   idx={idx} element={element}/>
                                 </LazyLoad>
                             )
@@ -121,6 +140,7 @@ Divisions.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

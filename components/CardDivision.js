@@ -69,7 +69,7 @@ const CardDivision = React.memo((props) => {
                                     <Autocomplete
                                         defaultValue={head}
                                         className={classes.input}
-                                        options={heads}
+                                        options={[...heads, ...staffs]}
                                         getOptionLabel={option => option.name}
                                         onChange={(event, newValue) => {
                                             setHead(newValue)

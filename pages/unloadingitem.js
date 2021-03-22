@@ -9,8 +9,6 @@ import * as snackbarActions from '../redux/actions/snackbar'
 import { urlMain } from '../redux/constants/other'
 import initialApp from '../src/initialApp'
 import Router from 'next/router'
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
 import { unloadingItem } from '../src/gql/item'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -47,29 +45,32 @@ const UnloadingItem = React.memo((props) => {
             <Card className={classes.page}>
                 <CardContent className={classes.column} style={isMobileApp?{}:{justifyContent: 'start', alignItems: 'flex-start'}}>
                     <div className={classes.row}>
-                        Формат xlsx: название товара, GUID товара из 1С, название категории, GUID категории из 1С.
+                        Формат xlsx: название товара, GUID товара из 1C, название категории, GUID категории из 1C.
                     </div>
                     <div className={classes.row}>
-                        <Button size='small' color='primary' onClick={()=>{documentRef.current.click()}}>
+                        <Button size='small' color={document?'primary':'secondary'} onClick={()=>{documentRef.current.click()}}>
                             {document?document.name:'Прикрепить файл'}
                         </Button>
                     </div>
                     <br/>
-                    <Button variant='contained' size='small' color='primary' onClick={async()=>{
-                        if(document) {
-                            const action = async() => {
-                                let res = await unloadingItem({
-                                    document: document
-                                });
-                                if(res.unloadingItem.data==='OK')
-                                    showSnackBar('Все данные загруженны')
+                    <div className={classes.row}>
+                        <Button variant='contained' size='small' color='primary' onClick={async()=>{
+                            if(document) {
+                                const action = async() => {
+                                    let res = await unloadingItem({
+                                        document: document
+                                    });
+                                    if(res.unloadingItem.data==='OK')
+                                        showSnackBar('Все данные загруженны')
+                                }
+                                setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                showMiniDialog(true)
                             }
-                            setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
-                            showMiniDialog(true)
-                        }
-                    }}>
-                        Загрузить
-                    </Button>
+                            else showSnackBar('Прикрепите документ')
+                        }}>
+                            Загрузить
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
             <input

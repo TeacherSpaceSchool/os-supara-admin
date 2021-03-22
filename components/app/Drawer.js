@@ -28,15 +28,9 @@ const MyDrawer = React.memo((props) => {
     let variant = isMobileApp?'temporary' : 'permanent';
     const open = isMobileApp?drawer:true;
     const router = useRouter();
-    let [uncover, setUncover] = useState({'Объекты': false, 'Инструменты': false, 'Документы': false, 'Статистика': false});
+    let [uncover, setUncover] = useState('');
     const uncoverItem = (item)=>{
-        if(uncover[item])
-            uncover = {'Объекты': false, 'Инструменты': false, 'Документы': false, 'Статистика': false}
-        else {
-            uncover = {'Объекты': false, 'Инструменты': false, 'Документы': false, 'Статистика': false}
-            uncover[item] = true
-        }
-        setUncover({...uncover})
+        setUncover(uncover!==item?item:'')
     };
     return (
         <Drawer
@@ -60,16 +54,16 @@ const MyDrawer = React.memo((props) => {
                 authenticated?
                     <List>
                         <Divider />
-                        <ListItem style={{background: (router.pathname.includes('expensereport')||router.pathname.includes('waybill')||router.pathname.includes('application')||router.pathname.includes('cashconsumable'))&&router.pathname!=='/routes'?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Документы')}}>
+                        <ListItem style={{background: (router.pathname.includes('cashexchange')||router.pathname.includes('memorandum')||router.pathname.includes('expensereport')||router.pathname.includes('waybill')||router.pathname.includes('application')&&router.pathname!=='/autoapplications'||router.pathname.includes('cashconsumable'))&&router.pathname!=='/routes'?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Документы')}}>
                             <ListItemText primary='Документы' />
-                            <ListItemIcon>{uncover['Документы']?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
-                            <Badge color='secondary' variant='dot' invisible={!unread.applications&&!unread.cashConsumables&&!unread.waybills&&!unread.expenseReports}/>
+                            <ListItemIcon>{uncover==='Документы'?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
+                            <Badge color='secondary' variant='dot' invisible={!unread.applications&&!unread.cashConsumables&&!unread.waybills&&!unread.expenseReports&&!unread.memorandums}/>
                         </ListItem>
                         <Divider/>
-                        <Collapse in={uncover['Документы']} timeout='auto' unmountOnExit>
+                        <Collapse in={uncover==='Документы'} timeout='auto' unmountOnExit>
                             <List component='div' disablePadding>
                                 <Link href={'/applications'}>
-                                    <ListItem style={{marginLeft: 16, background:router.pathname.includes('application')&&!router.pathname.includes('itemsfromapplications')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                    <ListItem style={{marginLeft: 16, background:router.pathname.includes('application')&&router.pathname!=='/autoapplications'&&!router.pathname.includes('itemsfromapplications')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                         <Badge color='secondary' variant='dot' invisible={!unread.applications}/>
                                         <ListItemText primary={'Заявки'} />
                                     </ListItem>
@@ -82,6 +76,20 @@ const MyDrawer = React.memo((props) => {
                                             <ListItem style={{marginLeft: 16, background:router.pathname.includes('cashconsumable')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
                                                 <Badge color='secondary' variant='dot' invisible={!unread.cashConsumables}/>
                                                 <ListItemText primary={'Кассовые расходники'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    ['admin', 'менеджер', 'кассир', 'бухгалтерия', 'снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/cashexchanges'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname.includes('cashexchange')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <Badge color='secondary' variant='dot' invisible={!unread.cashexchange}/>
+                                                <ListItemText primary={'Конвертация денежных средств'} />
                                             </ListItem>
                                         </Link>
                                         <Divider/>
@@ -130,6 +138,13 @@ const MyDrawer = React.memo((props) => {
                                         :
                                         null
                                 }
+                                <Link href={'/memorandums'}>
+                                    <ListItem style={{marginLeft: 16, background:router.pathname.includes('memorandum')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                        <Badge color='secondary' variant='dot' invisible={!unread.memorandums}/>
+                                        <ListItemText primary={'Служебные записки'} />
+                                    </ListItem>
+                                </Link>
+                                <Divider/>
                             </List>
                         </Collapse>
                         {
@@ -137,14 +152,14 @@ const MyDrawer = React.memo((props) => {
                                 <>
                                 <ListItem style={{background: ['/categorys', '/divisions', '/units', '/items', '/routes', '/users', '/roles'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Объекты')}}>
                                     <ListItemText primary='Объекты' />
-                                    <ListItemIcon>{uncover['Объекты']?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
+                                    <ListItemIcon>{uncover==='Объекты'?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
                                 </ListItem>
                                 <Divider/>
                                 </>
                                 :
                                 null
                         }
-                        <Collapse in={uncover['Объекты']} timeout='auto' unmountOnExit>
+                        <Collapse in={uncover==='Объекты'} timeout='auto' unmountOnExit>
                             <List component='div' disablePadding>
                                 {
                                     ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
@@ -218,6 +233,19 @@ const MyDrawer = React.memo((props) => {
                                 </Link>
                                 <Divider/>
                                 {
+                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/sellers'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/sellers'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <ListItemText primary={'Поставщики'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
                                     ['admin', 'менеджер'].includes(profile.role)?
                                         <>
                                         <Link href={'/roles'}>
@@ -245,12 +273,25 @@ const MyDrawer = React.memo((props) => {
                                 }
                             </List>
                         </Collapse>
-                        <ListItem style={{background: ['/faqs', '/errors', '/trash', '/setting'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Инструменты')}}>
+                        <ListItem style={{background: ['/faqs', '/errors', '/trash', '/setting', '/autoapplications', '/unloadinguser', '/unloadingitem'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Инструменты')}}>
                             <ListItemText primary='Инструменты' />
-                            <ListItemIcon>{uncover['Инструменты']?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
+                            <ListItemIcon>{uncover==='Инструменты'?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
                         </ListItem>
                         <Divider/>
-                        <Collapse in={uncover['Инструменты']} timeout='auto' unmountOnExit>
+                        <Collapse in={uncover==='Инструменты'} timeout='auto' unmountOnExit>
+                            {
+                                ['admin', 'менеджер'].includes(profile.role)?
+                                    <>
+                                    <Link href={'/autoapplications'}>
+                                        <ListItem style={{marginLeft: 16, background:router.pathname==='/autoapplications'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                            <ListItemText primary={'Автозакуп'} />
+                                        </ListItem>
+                                    </Link>
+                                    <Divider/>
+                                    </>
+                                    :
+                                    null
+                            }
                             <List component='div' disablePadding>
                                 <Link href={'/faqs'}>
                                     <ListItem style={{marginLeft: 16, background:router.pathname==='/faqs'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -259,7 +300,20 @@ const MyDrawer = React.memo((props) => {
                                 </Link>
                                 <Divider/>
                                 {
-                                    ['admin', 'менеджер'].includes(profile.role)?
+                                    'admin'===profile.role?
+                                        <>
+                                        <Link href={'/unloadinguser'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/unloadinguser'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <ListItemText primary={'Загрузка снабженцев'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    'admin'===profile.role?
                                         <>
                                         <Link href={'/unloadingitem'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/unloadingitem'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -271,7 +325,7 @@ const MyDrawer = React.memo((props) => {
                                         :
                                         null
                                 }
-                                {
+                                {/*
                                     ['admin', 'менеджер'].includes(profile.role)?
                                         <>
                                         <Link href={'/trash'}>
@@ -283,7 +337,7 @@ const MyDrawer = React.memo((props) => {
                                         </>
                                         :
                                         null
-                                }
+                                */}
                                 {
                                     ['admin', 'менеджер'].includes(profile.role)?
                                         <>
@@ -313,33 +367,75 @@ const MyDrawer = React.memo((props) => {
                             </List>
                         </Collapse>
                         {
-                            ['admin', 'менеджер', 'снабженец'].includes(profile.role)?
+                            ['admin', 'менеджер', 'снабженец', 'завсклада'].includes(profile.role)?
                                 <>
-                                <ListItem style={{background: ['/balances', '/statisticsupplier'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Статистика')}}>
+                                <ListItem style={{background: router.pathname.includes('balance')||router.pathname.includes('statistic')||router.pathname.includes('storage')?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Статистика')}}>
                                     <ListItemText primary='Статистика' />
-                                    <ListItemIcon>{uncover['Статистика']?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
+                                    <ListItemIcon>{uncover==='Статистика'?<UnfoldMoreIcon color='inherit'/>:<UnfoldLessIcon color='inherit'/>}</ListItemIcon>
                                     <Badge color='secondary' variant='dot' invisible={!unread.balances}/>
                                 </ListItem>
                                 <Divider/>
                                 </>
                             :null
                         }
-                        <Collapse in={uncover['Статистика']} timeout='auto' unmountOnExit>
+                        <Collapse in={uncover==='Статистика'} timeout='auto' unmountOnExit>
                             <List component='div' disablePadding>
-                                <Link href={'/balances'}>
-                                    <ListItem style={{marginLeft: 16, background:router.pathname==='/balances'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
-                                        <Badge color='secondary' variant='dot' invisible={!unread.balances}/>
-                                        <ListItemText primary={'Баланс'} />
-                                    </ListItem>
-                                </Link>
-                                <Divider/>
-                                <Link href={'/statisticsupplier'}>
-                                    <ListItem style={{marginLeft: 16, background:router.pathname==='/statisticsupplier'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
-                                        <Badge color='secondary' variant='dot' invisible={!unread.balances}/>
-                                        <ListItemText primary={'Статистика снабженцев'} />
-                                    </ListItem>
-                                </Link>
-                                <Divider/>
+                                {
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/balances'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/balances'||router.pathname==='/balancehistory'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <Badge color='secondary' variant='dot' invisible={!unread.balances}/>
+                                                <ListItemText primary={'Баланс'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/balances1C'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/balances1C'||router.pathname==='/balance1Chistory'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <Badge color='secondary' variant='dot' invisible={!unread.balances1C}/>
+                                                <ListItemText primary={'Баланс 1C'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    ['admin', 'менеджер', 'снабженец', 'завсклада'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/storage'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname.includes('storage')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <Badge color='secondary' variant='dot' invisible={!unread.storage}/>
+                                                <ListItemText primary={'Склад'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)?
+                                        <>
+                                        <Link href={'/statisticsupplier'}>
+                                            <ListItem style={{marginLeft: 16, background:router.pathname==='/statisticsupplier'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
+                                                <Badge color='secondary' variant='dot' invisible={!unread.balances}/>
+                                                <ListItemText primary={'Статистика снабженцев'} />
+                                            </ListItem>
+                                        </Link>
+                                        <Divider/>
+                                    </>
+                                    :
+                                    null
+                                }
                             </List>
                         </Collapse>
                     </List>

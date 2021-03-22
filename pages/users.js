@@ -2,28 +2,51 @@ import Head from 'next/head';
 import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
-import { getUsers } from '../src/gql/user'
+import { getUsers, getFilterUsers } from '../src/gql/user'
 import { getRoles } from '../src/gql/role'
 import pageListStyle from '../src/styleMUI/list'
 import CardUser from '../components/CardUser'
 import { urlMain } from '../redux/constants/other'
-import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
 import CardUserPlaceholder from '../components/CardPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
+import Router from 'next/router'
 
 const Users = React.memo((props) => {
     const classes = pageListStyle();
     const { data} = props;
     let [list, setList] = useState(data.users);
+    let [filters, setFilters] = useState(data.filterUser);
     const { search, filter  } = props.app;
-    const { profile  } = props.user;
+    const { profile, pinCode } = props.user;
     let height = 'admin'===profile.role?352:113
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    let [roles, setRoles] = useState(['менеджер', 'специалист', 'бухгалтерия', 'кассир', 'завсклад', 'генеральный директор', 'финансовый директор', 'начальник отдела', ...data.roles?data.roles.map(element=>element.name):[]]);
+    const getList = async()=> {
+        setList((await getUsers({search: search, filter: filter, skip: 0})).users)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setFilters((await getFilterUsers()).filterUser)
+                setRoles(['менеджер', 'специалист', 'бухгалтерия', 'кассир', 'завсклад', 'генеральный директор', 'финансовый директор', 'начальник отдела', ...(await getRoles({search: ''})).roles.map(element=>element.name)])
+            }
+        })()
+    },[pinCode])
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[filter, pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -32,15 +55,12 @@ const Users = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getUsers({search: search, filter: filter, skip: 0})).users)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
         })()
-    },[search, filter])
+    },[search])
     useEffect(()=>{
         forceCheck()
     },[list])
@@ -54,9 +74,8 @@ const Users = React.memo((props) => {
                 setPaginationWork(false)
         }
     }
-    const roles = ['менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'генеральный директор', 'финансовый директор', 'начальник отдела', ...data.roles.map(element=>element.name)]
     return (
-        <App checkPagination={checkPagination} searchShow={true} filters={data.filterUser} pageName='Пользователи'>
+        <App checkPagination={checkPagination} searchShow={true} filters={filters} pageName='Пользователи'>
             <Head>
                 <title>Пользователи</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
@@ -88,10 +107,21 @@ const Users = React.memo((props) => {
 
 Users.getInitialProps = async function(ctx) {
     await initialApp(ctx)
+    if(!ctx.store.getState().user.authenticated)
+        if(ctx.res) {
+            ctx.res.writeHead(302, {
+                Location: '/'
+            })
+            ctx.res.end()
+        }
+        else {
+            Router.push('/')
+        }
     ctx.store.getState().app.filter = ''
     return {
         data: {
             ...await getUsers({search: '', filter: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getFilterUsers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getRoles({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };

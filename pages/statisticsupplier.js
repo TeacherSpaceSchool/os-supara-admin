@@ -6,7 +6,7 @@ import pageListStyle from '../src/styleMUI/list'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Router from 'next/router'
-import { urlMain } from '../redux/constants/other'
+import {checkInt, urlMain} from '../redux/constants/other'
 import initialApp from '../src/initialApp'
 import Table from '../components/app/Table'
 import { getStatisticSupplier } from '../src/gql/statistic'
@@ -20,6 +20,7 @@ const SupplierStatistic = React.memo((props) => {
 
     const classes = pageListStyle();
     const { isMobileApp } = props.app;
+    const { pinCode } = props.user;
     let [date, setDate] = useState(pdDatePicker(new Date()));
     let [dateStart, setDateStart] = useState(pdDatePicker(undefined));
     let [dateEnd, setDateEnd] = useState(pdDatePicker(undefined));
@@ -29,43 +30,45 @@ const SupplierStatistic = React.memo((props) => {
     const { showLoad } = props.appActions;
     useEffect(()=>{
         (async()=>{
-            await showLoad(true)
+            if(pinCode) {
+                await showLoad(true)
 
-            if(date){
-                dateStart= new Date(date)
-                dateStart.setHours(3, 0, 0, 0)
-                if(dateType==='year') {
-                    dateStart.setMonth(0)
-                    dateStart.setDate(1)
-                    dateEnd = new Date(dateStart)
-                    dateEnd.setFullYear(dateEnd.getFullYear() + 1)
+                if (date) {
+                    dateStart = new Date(date)
+                    dateStart.setHours(3, 0, 0, 0)
+                    if (dateType === 'year') {
+                        dateStart.setMonth(0)
+                        dateStart.setDate(1)
+                        dateEnd = new Date(dateStart)
+                        dateEnd.setFullYear(dateEnd.getFullYear() + 1)
+                    }
+                    else if (dateType === 'day') {
+                        dateEnd = new Date(dateStart)
+                        dateEnd.setDate(dateEnd.getDate() + 1)
+                    }
+                    else {
+                        dateStart.setDate(1)
+                        dateEnd = new Date(dateStart)
+                        dateEnd.setMonth(dateEnd.getMonth() + 1)
+                    }
+                    setDateEnd(dateEnd)
+                    setDateStart(dateStart)
                 }
-                else if(dateType==='day') {
-                    dateEnd = new Date(dateStart)
-                    dateEnd.setDate(dateEnd.getDate() + 1)
-                }
-                else {
-                    dateStart.setDate(1)
-                    dateEnd = new Date(dateStart)
-                    dateEnd.setMonth(dateEnd.getMonth()+1)
-                }
-                setDateEnd(dateEnd)
-                setDateStart(dateStart)
+
+                setStatisticSupplier((await getStatisticSupplier({
+                    dateStart: date ? date : null,
+                    dateType: dateType,
+                })).statisticSupplier)
+                await showLoad(false)
             }
-
-            setStatisticSupplier((await getStatisticSupplier({
-                dateStart: date ? date : null,
-                dateType: dateType,
-            })).statisticSupplier)
-            await showLoad(false)
         })()
-    },[date, dateType])
+    },[date, dateType, pinCode])
     useEffect(()=>{
-        if(process.browser){
+        if(process.browser&&pinCode){
             let appBody = document.getElementsByClassName('App-body')
             appBody[0].style.paddingBottom = '0px'
         }
-    },[process.browser])
+    },[process.browser, pinCode])
 
     const filters = [{name: 'Все', value: false}, {name: 'Online', value: true}]
     return (
@@ -119,7 +122,7 @@ const SupplierStatistic = React.memo((props) => {
                 {
                     statisticSupplier?
                         <>
-                        {`Заявок: ${statisticSupplier.row[0].data[0]+statisticSupplier.row[0].data[1]+statisticSupplier.row[0].data[2]}`}
+                        {`Заявок: ${checkInt(statisticSupplier.row[0].data[0])+checkInt(statisticSupplier.row[0].data[1])+checkInt(statisticSupplier.row[0].data[2])}`}
                         {
                             showStat?
                                 <>

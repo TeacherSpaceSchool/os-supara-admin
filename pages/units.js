@@ -21,7 +21,21 @@ const Units = React.memo((props) => {
     let height = 100
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
+    const { pinCode } = props.user;
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=> {
+        setList((await getUnits({search: search, skip: 0})).units)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -30,10 +44,7 @@ const Units = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getUnits({search: search, skip: 0})).units)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -98,6 +109,7 @@ Units.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

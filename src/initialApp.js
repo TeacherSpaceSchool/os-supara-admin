@@ -1,5 +1,5 @@
 import { getProfile } from '../redux/actions/user'
-import { checkAuth, checkMobile } from '../src/lib'
+import { getJWT, checkMobile } from '../src/lib'
 import uaParserJs from 'ua-parser-js';
 import { getClientGqlSsr } from '../src/getClientGQL'
 
@@ -7,7 +7,7 @@ export default async (ctx)=>{
     if (ctx.req) {
         let ua = uaParserJs(ctx.req.headers['user-agent'])
         ctx.store.getState().app.isMobileApp = ['mobile', 'tablet'].includes(ua.device.type)||checkMobile(ua.ua)
-        ctx.store.getState().user.authenticated = checkAuth(ctx.req.headers.cookie)
+        ctx.store.getState().user.authenticated = getJWT(ctx.req.headers.cookie)
         if (ctx.store.getState().user.authenticated) {
             ctx.store.getState().user.profile = await getProfile(await getClientGqlSsr(ctx.req))
         }

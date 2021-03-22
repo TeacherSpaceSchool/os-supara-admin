@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import { connect } from 'react-redux'
-import { getItems } from '../src/gql/item'
+import { getItems, getFilterItem } from '../src/gql/item'
 import { getCategorys } from '../src/gql/category'
 import pageListStyle from '../src/styleMUI/list'
 import CardItem from '../components/CardItem'
@@ -16,13 +16,31 @@ import initialApp from '../src/initialApp'
 
 const Items = React.memo((props) => {
     const classes = pageListStyle();
+    const { pinCode } = props.user;
     const { data } = props;
     let [list, setList] = useState(data.items);
+    let [filters, setFilters] = useState(data.filterItem);
+    let [categorys, setCategorys] = useState(data.categorys);
     const { search, filter } = props.app;
     let height = 202
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=> {
+        setList((await getItems({search: search, skip: 0, ...filter?{category: filter}:{}})).items)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setFilters((await getFilterItem()).filterItem)
+                setCategorys((await getCategorys({search: ''})).categorys)
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -31,10 +49,7 @@ const Items = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getItems({search: search, skip: 0, ...filter?{category: filter}:{}})).items)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -54,7 +69,7 @@ const Items = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} filters={data.filterItem} searchShow={true} pageName='Товары'>
+        <App checkPagination={checkPagination} filters={filters} searchShow={true} pageName='Товары'>
             <Head>
                 <title>Товары</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
@@ -66,11 +81,11 @@ const Items = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/items`}/>
             </Head>
             <div className={classes.page}>
-                <CardItem categorys={data.categorys} list={list} setList={setList}/>
+                {/*<CardItem categorys={categorys} list={list} setList={setList}/>*/}
                 {list?list.map((element, idx)=> {
                         return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardItemPlaceholder height={height}/>}>
-                                <CardItem categorys={data.categorys} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
+                                <CardItem categorys={categorys} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
                             </LazyLoad>
                         )}
                 ):null}
@@ -94,6 +109,7 @@ Items.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getItems({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
+            ...await getFilterItem(ctx.req?await getClientGqlSsr(ctx.req):undefined),
             ...await getCategorys({search: ''}, ctx.req?await getClientGqlSsr(ctx.req):undefined)
         }
     };
@@ -102,6 +118,7 @@ Items.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user
     }
 }
 

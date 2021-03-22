@@ -5,42 +5,39 @@ import { connect } from 'react-redux'
 import applicationStyle from '../src/styleMUI/list'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import * as mini_dialogActions from '../redux/actions/mini_dialog'
 import { getItemsFromApplications } from '../src/gql/application'
-import { getCategorys } from '../src/gql/category'
-import { getItems } from '../src/gql/item'
-import { getUnits } from '../src/gql/unit'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Input from '@material-ui/core/Input';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { urlMain } from '../redux/constants/other'
-import Confirmation from '../components/dialog/Confirmation'
-import SetSuplier from '../components/dialog/SetSuplier'
-import { useRouter } from 'next/router'
 import * as snackbarActions from '../redux/actions/snackbar'
 import Router from 'next/router'
 import { getClientGqlSsr } from '../src/getClientGQL'
-import {  pdDDMMYYHHMM, checkInt, differenceDates, currencys } from '../src/lib'
 import initialApp from '../src/initialApp'
-import { getSuppliers } from '../src/gql/user'
 import * as appActions from '../redux/actions/app'
 import Link from 'next/link';
 
 const ItemsFromApplications = React.memo((props) => {
-    const { profile } = props.user;
     const classes = applicationStyle();
     const { data } = props;
-    const router = useRouter()
     const { isMobileApp } = props.app;
-    const { showSnackBar } = props.snackbarActions;
-    const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
-    const { showLoad } = props.appActions;
     let [zoom1, setZoom1] = useState(1);
+    let [itemsFromApplications, setItemsFromApplications] = useState(data.itemsFromApplications);
+    const { pinCode } = props.user;
+    const initialRender = useRef(true);
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                setItemsFromApplications((await getItemsFromApplications()).itemsFromApplications)
+            }
+        })()
+    },[pinCode])
+    useEffect(()=>{
+        (async()=>{
+            if(initialRender.current) {
+                initialRender.current = false;
+            }
+        })()
+    },[])
     return (
         <App pageName='Лист закупки'>
             <Head>
@@ -57,7 +54,7 @@ const ItemsFromApplications = React.memo((props) => {
                 <CardContent className={classes.page}>
                     <div className={classes.tableName}>
                         <div className={classes.nameField}>
-                            Товары&nbsp;({data.itemsFromApplications.length}):&nbsp;
+                            Товары&nbsp;({itemsFromApplications.length}):&nbsp;
                         </div>
                         {
                             isMobileApp?
@@ -84,7 +81,7 @@ const ItemsFromApplications = React.memo((props) => {
                                 <div className={classes.nameTable}>Количество</div>
                             </div>
                         </div>
-                        {data.itemsFromApplications.map((row, idx) =>
+                        {itemsFromApplications.map((row, idx) =>
                             <div className={classes.tableRow} key={idx}
                                  style={{width: '100%'}}>
                                 <div className={classes.cell} style={{width: 20}}>
@@ -93,7 +90,7 @@ const ItemsFromApplications = React.memo((props) => {
                                     </div>
                                 </div>
                                 <div className={classes.cell} style={{width: 80}}>
-                                    <Link key={data.itemsFromApplications[0]} href='/application/[id]' as={`/application/${row[0]}`}>
+                                    <Link key={itemsFromApplications[0]} href='/application/[id]' as={`/application/${row[0]}`}>
                                         <a>
                                             <b>
                                                 {row[1]}

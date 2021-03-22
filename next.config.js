@@ -35,7 +35,7 @@ module.exports =
                             }
                         ]
                     },
-                    ...(process.env.URL==='os-kantsut.xyz'?{
+                    ...(process.env.URL==='os-supara.xyz'?{
                         onDemandEntries : {
                             maxInactiveAge :  1000*60*60*24*10,
                             pagesBufferLength: 2,

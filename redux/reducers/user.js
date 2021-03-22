@@ -3,13 +3,16 @@ import {
     UNAUTHENTICATED,
     SET_PROFILE,
     ERROR_AUTHENTICATED,
-    SET_AUTH
+    SET_AUTH,
+    SETED_PIN_CODE,
+    REMOVED_PIN_CODE
 } from '../constants/user'
 
 const initialState = {
     authenticated: undefined,
     profile: {},
     error: false,
+    pinCode: false,
 }
 
 export default function user(state = initialState, action) {
@@ -28,6 +31,11 @@ export default function user(state = initialState, action) {
 
         case ERROR_AUTHENTICATED:
             return { ...state, authenticated: false, error: true  };
+
+        case SETED_PIN_CODE:
+            return { ...state, pinCode: true  };
+        case REMOVED_PIN_CODE:
+            return { ...state, pinCode: false  };
 
         case SET_PROFILE:
             return { ...state, profile: action.payload };

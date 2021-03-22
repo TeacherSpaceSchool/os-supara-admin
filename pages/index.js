@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, {useEffect} from 'react';
+import React  from 'react';
 import App from '../layouts/App';
 import initialApp from '../src/initialApp'
 import { urlMain } from '../redux/constants/other'
@@ -9,22 +9,16 @@ import { connect } from 'react-redux'
 const Index = React.memo((props) => {
     const { isMobileApp } = props.app;
     const classes = pageListStyle();
-    useEffect(()=>{
-        if(process.browser){
-            let appBody = document.getElementsByClassName('App-body')
-            appBody[0].style.paddingBottom = '0px'
-        }
-    },[process.browser])
     return (
-        <App pageName='Кант-Сут'>
+        <App pageName='Супара'>
             <Head>
-                <title>Кант-Сут</title>
+                <title>Супара</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
-                <meta property='og:title' content='Кант-Сут' />
+                <meta property='og:title' content='Супара' />
                 <meta property='og:description' content='Система предназначена для ведения списка заявок на приобретение' />
                 <meta property='og:type' content='website' />
                 <meta property='og:image' content={`${urlMain}/static/512x512.png`} />
-                <meta property="og:url" content={`${urlMain}/index`} />
+                <meta property='og:url' content={`${urlMain}/index`} />
                 <link rel='canonical' href={`${urlMain}/index`}/>
             </Head>
             <div className={classes.page}>
@@ -48,7 +42,7 @@ function mapStateToProps (state) {
 
 Index.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    return {};
+    return {data: {}};
 };
 
 export default connect(mapStateToProps)(Index);

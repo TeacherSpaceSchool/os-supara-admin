@@ -3,40 +3,47 @@ const regexpUA = /(Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|iOS|M
 export const checkMobile = (ua)=>{
     return regexpUA.exec(ua)!==null
 }
-const regexpAuth = /(\s)?jwt=(\S)+(;)?/
-export const checkAuth = (auth)=>{
-    return regexpAuth.exec(auth)!==null
-}
-export const getJWT = (auth)=>{
-    let res = regexpAuth.exec(auth)
-    return res!==null?res[0].trim().replace('jwt=', ''):undefined
+export const getJWT = (cookie)=>{
+    let name = 'jwt=';
+    let decodedCookie = decodeURIComponent(cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return undefined;
 }
 export const checkInt = (int) => {
     if(int&&int.length>1&&int[0]==='0')
         int = int.substring(1)
-    return isNaN(parseInt(int))?0:parseInt(int)
-}
-export const getGeoDistance = (lat1, lon1, lat2, lon2) => {
-    lat1 = parseFloat(lat1)
-    lon1 = parseFloat(lon1)
-    lat2 = parseFloat(lat2)
-    lon2 = parseFloat(lon2)
-    let deg2rad = Math.PI / 180;
-    lat1 *= deg2rad;
-    lon1 *= deg2rad;
-    lat2 *= deg2rad;
-    lon2 *= deg2rad;
-    let diam = 12742000; // Diameter of the earth in km (2 * 6371)
-    let dLat = lat2 - lat1;
-    let dLon = lon2 - lon1;
-    let a = (
-        (1 - Math.cos(dLat)) +
-        (1 - Math.cos(dLon)) * Math.cos(lat1) * Math.cos(lat2)
-    ) / 2;
-    return parseInt(diam * Math.asin(Math.sqrt(a)))
+    int = parseInt(int)
+    return isNaN(int)?0:int
 }
 export const checkFloat = (float) => {
-    return isNaN(parseFloat(float))?0:parseFloat(float)
+    float = parseFloat(float)
+    return isNaN(float)?0:Math.round(float * 1000)/1000
+}
+export const inputFloat = (str) => {
+    if(!str.length)
+        return '0'
+    let oldStr = str.substring(0, str.length-1)
+    let newChr = str[str.length-1]
+    if(!['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', ','].includes(newChr))
+        return oldStr
+    if(','===newChr) {
+        str = oldStr+'.'
+        newChr = '.'
+    }
+    if(newChr==='.'&&oldStr.includes('.'))
+        return oldStr
+    if(str.length===2&&str[0]==='0'&&newChr!=='.')
+        return str[1]
+    return str
 }
 export const pdDDMMYYYY = (date) =>
 {

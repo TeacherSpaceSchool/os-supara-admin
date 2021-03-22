@@ -30,14 +30,6 @@ export const getApplications = async(element, client)=>{
                             supplier {_id name}
                             routes {role confirmation cancel comment}
                         }
-                        filterApplication{
-                           name
-                           value
-                        }
-                        sortApplication{
-                           name
-                           field
-                        }
                     }`,
             })
         return res.data
@@ -175,8 +167,8 @@ export const addApplication = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($category: ID!, $comment: String!, $division: ID!, $subdivision: String, $items: [InputItems]!, $budget: Boolean, $paymentType: String, $official: Boolean, $note: Upload) {
-                        addApplication(category: $category, comment: $comment, division: $division, subdivision: $subdivision, items: $items, budget: $budget, paymentType: $paymentType, official: $official, note: $note) {
+                    mutation ($category: ID!, $comment: String!, $term: String!, $division: ID!, $subdivision: String, $items: [InputItems]!, $budget: Boolean, $paymentType: String, $official: Boolean, $note: [String]) {
+                        addApplication(category: $category, comment: $comment, term: $term, division: $division, subdivision: $subdivision, items: $items, budget: $budget, paymentType: $paymentType, official: $official, note: $note) {
                             data
                         }
                     }`})
@@ -191,8 +183,8 @@ export const setApplication = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $budget: Boolean, $comment: String, $paymentType: String, $official: Boolean, $note: Upload, $supplier: ID, $items: [InputItems], $routes: [InputRoutes]) {
-                        setApplication(budget: $budget, comment: $comment, paymentType: $paymentType, official: $official, _id: $_id, note: $note, supplier: $supplier, items: $items, routes: $routes) {
+                    mutation ($_id: ID!, $budget: Boolean, $term: String, $comment: String, $paymentType: String, $official: Boolean, $note: [String], $supplier: ID, $items: [InputItems], $routes: [InputRoutes]) {
+                        setApplication(budget: $budget, comment: $comment, term: $term, paymentType: $paymentType, official: $official, _id: $_id, note: $note, supplier: $supplier, items: $items, routes: $routes) {
                              data
                         }
                     }`})

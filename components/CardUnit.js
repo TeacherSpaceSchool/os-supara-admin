@@ -78,9 +78,7 @@ const CardUnit = React.memo((props) => {
                                     showMiniDialog(true)
                                 } else
                                     showSnackBar('Заполните все поля')
-
-                            }
-                            } size='small' color='primary'>
+                            }} size='small' color='primary'>
                                 Добавить
                             </Button>}
                 </CardActions>

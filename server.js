@@ -19,5 +19,5 @@ app.prepare()
                 handle(req, res, parsedUrl)
             }
         })
-            .listen(process.env.URL==='os-kantsut.xyz'?5000:80)
+            .listen(process.env.URL==='os-supara.xyz'?5000:80)
     })

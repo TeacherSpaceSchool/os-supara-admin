@@ -40,6 +40,7 @@ const Sign =  React.memo(
         return (
             <div className={classes.main}>
                 <TextField
+                    autoFocus={true}
                     style={{width: width}}
                     id='standard-search'
                     label='Логин'
@@ -57,6 +58,10 @@ const Sign =  React.memo(
                         type={hide ? 'password' : 'text' }
                         value={passEnter}
                         onChange={handlePassEnter}
+                        onKeyPress={event => {
+                            if (event.key === 'Enter'&&loginEnter.length>0&&passEnter.length>0)
+                                    signin({login: loginEnter, password: passEnter})
+                        }}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton aria-label="Toggle password visibility" onClick={handleHide}>

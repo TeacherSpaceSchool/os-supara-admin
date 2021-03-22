@@ -18,66 +18,40 @@ import IconButton from '@material-ui/core/IconButton';
 import VerticalAlignBottom from '@material-ui/icons/VerticalAlignBottom';
 import VerticalAlignTop from '@material-ui/icons/VerticalAlignTop';
 import Delete from '@material-ui/icons/Delete';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
 
 const CardApplicationRoute = React.memo((props) => {
     const classes = cardStyle();
-    const { element, roles, setList, idx, list, specialistsForRoute } = props;
+    const { element, roles, setList, idx, list, divisionsForRoute } = props;
     const { isMobileApp } = props.app;
     let [newRoles, setNewRoles] = useState(element?element.roles:[]);
-    let [freeRoles, setFreeRoles] = useState(roles);
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
-    useEffect(()=>{
-        (async()=>{
-            freeRoles = roles.filter(role=>!newRoles.includes(role))
-            setFreeRoles([...freeRoles])
-        })()
-    },[newRoles,])
-    let [specialists, setSpecialists] = useState(element?element.specialists:[]);
-    const handleSpecialists = (event) => {
-        setSpecialists(event.target.value);
-    };
+    let [division, setDivision] = useState(element?element.division:undefined);
     return (
             <Card className={isMobileApp?classes.cardM:classes.cardD}>
                 <CardActionArea>
                     <CardContent>
                         <div className={classes.column}>
-                            <FormControl className={classes.input}>
-                                <InputLabel>Специалисты</InputLabel>
-                                <Select
-                                    multiple
-                                    value={specialists}
-                                    onChange={handleSpecialists}
-                                    input={<Input/>}
-                                    MenuProps={{
-                                        PaperProps: {
-                                            style: {
-                                                maxHeight: 500,
-                                                width: 250,
-                                            },
-                                        },
-                                    }}
-                                >
-                                    {specialistsForRoute.map((specialist) => (
-                                        <MenuItem key={specialist._id} value={specialist._id}
-                                                  style={{background: specialists.includes(specialist._id) ? '#f5f5f5' : '#ffffff'}}>
-                                            {specialist.name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <Autocomplete
+                                defaultValue={division}
+                                className={classes.input}
+                                options={divisionsForRoute}
+                                getOptionLabel={option => option.name}
+                                onChange={(event, newValue) => {
+                                    setDivision(newValue)
+                                }}
+                                noOptionsText='Ничего не найдено'
+                                renderInput={params => (
+                                    <TextField {...params} label='Выберите подразделение' variant='outlined' fullWidth />
+                                )}
+                            />
                             {
                                 newRoles.map((element, idx) =>
                                     <div style={{alignItems: 'end'}} key={idx} className={classes.row}>
                                         <Autocomplete
                                             value={newRoles[idx]}
                                             className={classes.halfInput}
-                                            options={freeRoles}
+                                            options={roles}
                                             getOptionLabel={option => option}
                                             onChange={(event, newValue) => {
                                                 newRoles[idx]=newValue
@@ -145,7 +119,8 @@ const CardApplicationRoute = React.memo((props) => {
                         element!==undefined?
                             <>
                             <Button onClick={async()=>{
-                                let editElement = {_id: element._id, roles: newRoles, specialists: specialists}
+                                let editElement = {_id: element._id, roles: newRoles}
+                                if(division&&division._id!==element.division._id)editElement.division = division._id
                                 const action = async() => {
                                     await setRoute(editElement)
                                 }
@@ -167,11 +142,11 @@ const CardApplicationRoute = React.memo((props) => {
                             </Button>
                             </>:
                             <Button onClick={async()=> {
-                                if (specialists.length) {
+                                if (division) {
                                     const action = async() => {
-                                        let res = (await addRoute({roles: newRoles, specialists: specialists})).addRoute
+                                        let res = (await addRoute({roles: newRoles, division: division._id})).addRoute
                                         setNewRoles([])
-                                        setSpecialists([])
+                                        setDivision(undefined)
                                         setList([res, ...list])
                                     }
                                     setMiniDialog('Вы уверены?', <Confirmation action={action}/>)

@@ -4,16 +4,12 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getCashConsumables } from '../src/gql/cashConsumable'
 import pageListStyle from '../src/styleMUI/list'
-import CardCashConsumable from '../components/CardCashConsumable'
 import { urlMain } from '../redux/constants/other'
 import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardCashConsumablePlaceholder from '../components/CardPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { pdDDMMYY } from '../src/lib'
 
@@ -23,9 +19,22 @@ const CashConsumables = React.memo((props) => {
     const initialRender = useRef(true);
     let [list, setList] = useState(data.cashConsumables);
     const { search, date } = props.app;
-    const { profile } = props.user;
+    const { pinCode } = props.user;
     const height = 50
     let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const getList = async()=> {
+        setList((await getCashConsumables({search: search, date: date, skip: 0})).cashConsumables)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode, date])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -34,15 +43,12 @@ const CashConsumables = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getCashConsumables({search: search, date: date, skip: 0})).cashConsumables)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
         })()
-    },[search, date])
+    },[search])
     useEffect(()=>{
         forceCheck()
     },[list])
@@ -73,7 +79,7 @@ const CashConsumables = React.memo((props) => {
                 <div>
                 <div className={classes.tableRow} style={{width: 410}}>
                     <div className={classes.cell} style={{width: 50}}><div className={classes.nameTable}>Номер</div></div>
-                    <div className={classes.cell} style={{width: 60}}><div className={classes.nameTable}>Выплата</div></div>
+                    <div className={classes.cell} style={{width: 60}}><div className={classes.nameTable}>Дата</div></div>
                     <div className={classes.cell} style={{width: 120}}><div className={classes.nameTable}>Снабженец</div></div>
                     <div className={classes.cell} style={{width: 100}}><div className={classes.nameTable}>Сумма</div></div>
                 </div>

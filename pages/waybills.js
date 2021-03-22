@@ -4,18 +4,40 @@ import App from '../layouts/App';
 import { connect } from 'react-redux'
 import { getWaybills } from '../src/gql/waybill'
 import pageListStyle from '../src/styleMUI/list'
-import CardWaybill from '../components/CardWaybill'
 import { urlMain } from '../redux/constants/other'
 import Router from 'next/router'
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import CardWaybillPlaceholder from '../components/CardPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
 import { pdDDMMYY } from '../src/lib'
+const filters = [
+    {
+        name: 'Все',
+        value: ''
+    },
+    {
+        name: 'Обработка',
+        value: 'обработка'
+    },
+    {
+        name: 'Принят',
+        value: 'принят'
+    }
+]
+const sorts = [
+    {
+        name: 'Дата создания',
+        field: 'createdAt'
+    },
+    {
+        name: 'Дата закрытия',
+        field: 'dateClose'
+    },
+]
 
 const Waybills = React.memo((props) => {
     const classes = pageListStyle();
@@ -23,9 +45,22 @@ const Waybills = React.memo((props) => {
     const initialRender = useRef(true);
     let [list, setList] = useState(data.waybills);
     const { search, filter, sort, date } = props.app;
-    const { profile } = props.user;
+    const { profile, pinCode } = props.user;
     let height = 100
     let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const getList = async()=> {
+        setList((await getWaybills({search: search, filter: filter, sort: sort, date: date, skip: 0})).waybills)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[filter, sort, pinCode, date])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -34,15 +69,12 @@ const Waybills = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getWaybills({search: search, filter: filter, sort: sort, date: date, skip: 0})).waybills)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
         })()
-    },[filter, sort, search, date])
+    },[search])
     useEffect(()=>{
         forceCheck()
     },[list])
@@ -62,7 +94,7 @@ const Waybills = React.memo((props) => {
         'принят': 'green'
     }
     return (
-        <App setList={setList} list={list} checkPagination={checkPagination} dates={true} filters={data.filterWaybill} sorts={data.sortWaybill} searchShow={true} pageName='Накладные'>
+        <App setList={setList} list={list} checkPagination={checkPagination} dates={true} filters={filters} sorts={sorts} searchShow={true} pageName='Накладные'>
             <Head>
                 <title>Накладные</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
@@ -75,9 +107,9 @@ const Waybills = React.memo((props) => {
             </Head>
             <center>
             <div>
-                <div className={classes.tableRow} style={{width: 790}}>
+                <div className={classes.tableRow} style={{width: 800}}>
                     <div className={classes.cell} style={{width: 50}}><div className={classes.nameTable}>Номер</div></div>
-                    <div className={classes.cell} style={{width: 70}}><div className={classes.nameTable}>Статус</div></div>
+                    <div className={classes.cell} style={{width: 80}}><div className={classes.nameTable}>Статус</div></div>
                     <div className={classes.cell} style={{width: 60}}><div className={classes.nameTable}>Подача</div></div>
                     <div className={classes.cell} style={{width: 60}}><div className={classes.nameTable}>Принят</div></div>
                     <div className={classes.cell} style={{width: 50}}><div className={classes.nameTable}>Заявка</div></div>
@@ -89,13 +121,13 @@ const Waybills = React.memo((props) => {
                     return(
                         <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}>
                             <Link href='/waybill/[id]' as={`/waybill/${element._id}`}>
-                                <div className={classes.tableRow} style={{width: 790, cursor: 'pointer', background: 'white'}}>
+                                <div className={classes.tableRow} style={{width: 800, cursor: 'pointer', background: 'white'}}>
                                     <div className={classes.cell} style={{width: 50}}>
                                         <div className={classes.value} style={{marginLeft: 0, marginBottom: 0}}>
                                             {element.number}
                                         </div>
                                     </div>
-                                    <div className={classes.cell} style={{fontWeight: 'bold', color: statusColor[element.status], width: 70}}>
+                                    <div className={classes.cell} style={{fontWeight: 'bold', color: statusColor[element.status], width: 80}}>
                                         {element.status}
                                     </div>
                                     <div className={classes.cell} style={{width: 60}}>

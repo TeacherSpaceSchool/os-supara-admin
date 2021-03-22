@@ -9,8 +9,8 @@ export const getUsers = async(element, client)=>{
             .query({
                 variables: element,
                 query: gql`
-                    query ($search: String!, $filter: String!, $skip: Int) {
-                        users(search: $search, filter: $filter, skip: $skip) {
+                    query ($search: String!, $filter: String!, $skip: Int, $all: Boolean) {
+                        users(search: $search, filter: $filter, skip: $skip, all: $all) {
                             _id
                             createdAt
                             login
@@ -19,11 +19,61 @@ export const getUsers = async(element, client)=>{
                             status
                             del
                             phone
-                            GUID
+                            pinCode
                         }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const getFilterUsers = async(client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .query({
+                query: gql`
+                    query {
                         filterUser {
                            name
                            value
+                        }
+                    }`,
+            })
+        return res.data
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const sendPinCode = async(pinCode)=>{
+    try{
+        let res = await new SingletonApolloClient().getClient()
+            .query({
+                variables: {pinCode},
+                query: gql`
+                    query ($pinCode: String) {
+                        sendPinCode(pinCode: $pinCode) 
+                    }`,
+            })
+        return res.data.sendPinCode
+    } catch(err){
+        console.error(err)
+    }
+}
+
+export const unloadingUser = async({document}, client)=>{
+    try{
+        client = client? client : new SingletonApolloClient().getClient()
+        let res = await client
+            .mutate({
+                variables: {document: document},
+                mutation: gql`
+                    mutation ($document: Upload!) {
+                        unloadingUser(document: $document) {
+                            data
                         }
                     }`,
             })
@@ -49,7 +99,6 @@ export const getSuppliers = async(client)=>{
                             status
                             del
                             phone
-                            GUID
                         }
                     }`,
             })
@@ -75,7 +124,6 @@ export const getStaffs = async(client)=>{
                             role
                             status
                             del
-                            GUID
                         }
                     }`,
             })
@@ -101,7 +149,6 @@ export const getHeads = async(client)=>{
                             role
                             status
                             del
-                            GUID
                         }
                     }`,
             })
@@ -127,7 +174,6 @@ export const getSpecialists = async(client)=>{
                             status
                             phone
                             del
-                            GUID
                         }
                     }`,
             })
@@ -154,7 +200,6 @@ export const getUsersTrash = async(element, client)=>{
                             role
                             status
                             del
-                            GUID
                           }
                     }`,
             })
@@ -181,7 +226,6 @@ export const getUser = async(element, client)=>{
                             phone
                             status
                             del
-                            GUID
                           }
                     }`,
             })
@@ -245,8 +289,8 @@ export const addUser = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($phone: String, $login: String!, $GUID: String, $name: String!, $role: String!, $password: String!) {
-                        addUser(phone: $phone, login: $login, GUID: $GUID, name: $name, role: $role, password: $password) {
+                    mutation ($phone: String, $login: String!, $name: String!, $role: String!, $password: String!) {
+                        addUser(phone: $phone, login: $login, name: $name, role: $role, password: $password) {
                             _id
                             createdAt
                             login
@@ -254,6 +298,7 @@ export const addUser = async(element)=>{
                             role
                             status
                             del
+                            pinCode
                         }
                     }`})
         return res.data
@@ -268,8 +313,8 @@ export const setUser = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $GUID: String, $login: String, $name: String, $role: String, $password: String) {
-                        setUser(_id: $_id, phone: $phone, GUID: $GUID, login: $login, name: $name, role: $role, password: $password) {
+                    mutation ($_id: ID!, $phone: String, $login: String, $name: String, $role: String, $password: String) {
+                        setUser(_id: $_id, phone: $phone, login: $login, name: $name, role: $role, password: $password) {
                              data
                         }
                     }`})

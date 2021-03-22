@@ -15,15 +15,6 @@ export const getCategorys = async(element, client)=>{
                             createdAt
                             name
                             del
-                            term
-                            suppliers{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                           }
                     }`,
             })
@@ -46,15 +37,6 @@ export const getCategorysTrash = async(element, client)=>{
                             createdAt
                             name
                             del
-                            term
-                            suppliers{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                           }
                     }`,
             })
@@ -77,15 +59,6 @@ export const getCategory = async(element, client)=>{
                             createdAt
                             name
                             del
-                            term
-                            suppliers{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                           }
                     }`,
             })
@@ -133,21 +106,12 @@ export const addCategory = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($term: Int!, $name: String!, $suppliers: [ID]!) {
-                        addCategory(term: $term, name: $name, suppliers: $suppliers) {
+                    mutation ($name: String!) {
+                        addCategory(name: $name) {
                             _id
                             createdAt
                             name
                             del
-                            term
-                            suppliers{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                         }
                     }`})
         return res.data
@@ -162,8 +126,8 @@ export const setCategory = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $term: Int, $name: String, $suppliers: [ID]) {
-                        setCategory(_id: $_id, term: $term, name: $name, suppliers: $suppliers) {
+                    mutation ($_id: ID!, $name: String) {
+                        setCategory(_id: $_id, name: $name) {
                              data
                         }
                     }`})

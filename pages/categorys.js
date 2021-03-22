@@ -12,17 +12,30 @@ import { forceCheck } from 'react-lazyload';
 import CardPlaceholder from '../components/CardPlaceholder'
 import { getClientGqlSsr } from '../src/getClientGQL'
 import initialApp from '../src/initialApp'
-import { getSuppliers } from '../src/gql/user'
 
 const Categorys = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
+    const { pinCode } = props.user;
     let [list, setList] = useState(data.categorys);
     const { search } = props.app;
     let height = 252
     let [searchTimeOut, setSearchTimeOut] = useState(null);
     const initialRender = useRef(true);
     let [paginationWork, setPaginationWork] = useState(true);
+    const getList = async()=>{
+        setList((await getCategorys({search: search, skip: 0})).categorys)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -31,10 +44,7 @@ const Categorys = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getCategorys({search: search, skip: 0})).categorys)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -66,15 +76,11 @@ const Categorys = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/categorys`}/>
             </Head>
             <div className={classes.page}>
-                <CardCategory suppliers={data.suppliers} list={list} setList={setList}/>
+                {/*<CardCategory list={list} setList={setList}/>*/}
                 {list?list.map((element, idx)=> {
-                    if(element.suppliers)
-                        element.suppliers = element.suppliers.map(supplier=>supplier._id?supplier._id:supplier)
-                    else
-                        element.suppliers = []
                     return(
                             <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardPlaceholder height={height}/>}>
-                                <CardCategory suppliers={data.suppliers} key={element._id} setList={setList} list={list} idx={idx} element={element}/>
+                                <CardCategory key={element._id} setList={setList} list={list} idx={idx} element={element}/>
                             </LazyLoad>
                         )}
                 ):null}
@@ -98,7 +104,6 @@ Categorys.getInitialProps = async function(ctx) {
     return {
         data: {
             ...await getCategorys({search: '', skip: 0}, ctx.req?await getClientGqlSsr(ctx.req):undefined),
-            ...await getSuppliers(ctx.req?await getClientGqlSsr(ctx.req):undefined),
         }
     };
 };
@@ -106,6 +111,7 @@ Categorys.getInitialProps = async function(ctx) {
 function mapStateToProps (state) {
     return {
         app: state.app,
+        user: state.user,
     }
 }
 

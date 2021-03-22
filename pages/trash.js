@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import App from '../layouts/App';
 import pageListStyle from '../src/styleMUI/list'
 import {getUsersTrash} from '../src/gql/user'
@@ -23,6 +23,8 @@ const Trash = React.memo((props) => {
     const classes = pageListStyle();
     const { data } = props;
     let [list, setList] = useState(data.usersTrash);
+    const initialRender = useRef(true);
+    const { pinCode } = props.user;
     let [type, setType] = useState('Пользователи');
     let [paginationWork, setPaginationWork] = useState(true);
     const { search, filter } = props.app;
@@ -33,28 +35,36 @@ const Trash = React.memo((props) => {
         }
     }
     let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const getList = async()=> {
+        if (filter === 'Категории') list = (await getCategorysTrash({search: search})).categorysTrash
+        else if (filter === 'Подразделение') list = (await getDivisionsTrash({search: search})).divisionsTrash
+        else if (filter === 'Пользователи') list = (await getUsersTrash({search: search})).usersTrash
+        setList(list)
+        setType(filter)
+        forceCheck()
+        setPaginationWork(true);
+        setPagination(100);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant'});
+    }
     useEffect(()=>{
         (async()=>{
-            if(searchTimeOut)
-                clearTimeout(searchTimeOut)
-            searchTimeOut = setTimeout(async()=>{
-                if(filter==='Категории'){
-                    list = (await getCategorysTrash({search: search})).categorysTrash
-                }
-                else if(filter==='Подразделение'){
-                    list = (await getDivisionsTrash({search: search})).divisionsTrash
-                }
-                else if(filter==='Пользователи'){
-                    list = (await getUsersTrash({search: search})).usersTrash
-                }
-                setList(list)
-                setType(filter)
-                forceCheck()
-                setPaginationWork(true);
-                setPagination(100);
-                (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
-            }, 500)
-            setSearchTimeOut(searchTimeOut)
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode])
+    useEffect(()=>{
+        (async()=>{
+            if(initialRender.current) {
+                initialRender.current = false;
+            } else {
+                if (searchTimeOut)
+                    clearTimeout(searchTimeOut)
+                searchTimeOut = setTimeout(async () => {
+                    await getList()
+                }, 500)
+                setSearchTimeOut(searchTimeOut)
+            }
         })()
     },[filter, search])
     const filters = [
@@ -74,9 +84,6 @@ const Trash = React.memo((props) => {
                 <meta property='og:url' content={`${urlMain}/trash`} />
                 <link rel='canonical' href={`${urlMain}/trash`}/>
             </Head>
-            <div className='count'>
-                {`Всего: ${list.length}`}
-            </div>
             <div className={classes.page}>
                 {list?list.map((element, idx)=> {
                     return(

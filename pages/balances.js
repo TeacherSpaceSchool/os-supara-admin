@@ -18,9 +18,23 @@ const Balances = React.memo((props) => {
     const { data } = props;
     const initialRender = useRef(true);
     let [list, setList] = useState(data.balances);
+    const { pinCode } = props.user;
     const { search } = props.app;
-    let height = 70
+    let height = 116
     let [searchTimeOut, setSearchTimeOut] = useState(null);
+    const getList = async()=> {
+        setList((await getBalances({search: search, skip: 0})).balances)
+        forceCheck()
+        setPaginationWork(true);
+        (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+    }
+    useEffect(()=>{
+        (async()=>{
+            if(!initialRender.current&&pinCode) {
+                await getList()
+            }
+        })()
+    },[pinCode])
     useEffect(()=>{
         (async()=>{
             if(initialRender.current) {
@@ -29,10 +43,7 @@ const Balances = React.memo((props) => {
                 if(searchTimeOut)
                     clearTimeout(searchTimeOut)
                 searchTimeOut = setTimeout(async()=>{
-                    setList((await getBalances({search: search, skip: 0})).balances)
-                    forceCheck()
-                    setPaginationWork(true);
-                    (document.getElementsByClassName('App-body'))[0].scroll({top: 0, left: 0, behavior: 'instant' });
+                    await getList()
                 }, 500)
                 setSearchTimeOut(searchTimeOut)
             }
@@ -53,7 +64,7 @@ const Balances = React.memo((props) => {
         }
     }
     return (
-        <App checkPagination={checkPagination} sorts={data.sortBalance} searchShow={true} pageName='Баланс'>
+        <App checkPagination={checkPagination} searchShow={true} pageName='Баланс'>
             <Head>
                 <title>Баланс</title>
                 <meta name='description' content='Система предназначена для ведения списка заявок на приобретение' />
@@ -65,13 +76,10 @@ const Balances = React.memo((props) => {
                 <link rel='canonical' href={`${urlMain}/balances`}/>
             </Head>
             <div className={classes.page}>
-                <div className='count'>
-                    {`Всего: ${list.length}`}
-                </div>
                 {list?list.map((element)=> {
                     return(
                         <LazyLoad scrollContainer={'.App-body'} key={element._id} height={height} offset={[height, 0]} debounce={0} once={true}  placeholder={<CardBalancePlaceholder height={height}/>}>
-                            <CardBalance key={element._id} element={element}/>
+                            <CardBalance history key={element._id} element={element}/>
                         </LazyLoad>
                     )}
                 ):null}

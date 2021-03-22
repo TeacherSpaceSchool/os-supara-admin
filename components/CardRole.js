@@ -46,7 +46,7 @@ const CardRole = React.memo((props) => {
                             <>
                             <Button onClick={async()=>{
                                 let editElement = {_id: element._id}
-                                if(name.length>0&&name!==element.name&&!['admin', 'менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'генеральный директор', 'финансовый директор', 'начальник отдела'].includes(name))editElement.name = name
+                                if(name.length>0&&name!==element.name&&!['admin', 'менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'завсклад', 'генеральный директор', 'финансовый директор', 'начальник отдела'].includes(name))editElement.name = name
                                 const action = async() => {
                                     await setRole(editElement)
                                 }
@@ -66,9 +66,10 @@ const CardRole = React.memo((props) => {
                             }}>
                                 Удалить
                             </Button>
-                            </>:
+                            </>
+                            :
                             <Button onClick={async()=> {
-                                if (name.length>0&&!['admin', 'менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'генеральный директор', 'финансовый директор', 'начальник отдела'].includes(name)) {
+                                if (name.length>0&&!['admin', 'менеджер', 'специалист', 'бухгалтерия', 'кассир', 'снабженец', 'завсклад', 'генеральный директор', 'финансовый директор', 'начальник отдела'].includes(name)) {
                                     const action = async() => {
                                         let category = (await addRole({name: name})).addRole
                                         setName('')
