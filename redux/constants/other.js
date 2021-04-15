@@ -5,20 +5,20 @@ export let urlMain
 export let urlSubscribe
 export let applicationKey
 if(process.env.URL==='os-supara.xyz') {
-    urlGQLSSR = `http://localhost:4000/graphql`
+    urlGQLSSR = `http://${process.env.URL}:4000/graphql`
     urlGQL = `https://${process.env.URL}:3000/graphql`
     urlGQLws = `wss://${process.env.URL}:3000/graphql`
     urlSubscribe = `https://${process.env.URL}:3000/subscribe`
     urlMain = `https://${process.env.URL}`
-    applicationKey = 'BGAa2sPjcH6RvApWTvZYAQrukcpGsXG2FEk4FIj5j6JWLBjHtaJBPFyPrZH63ku9jFX-k0oNh923YtrGf-a42rU'
+    applicationKey = 'BJ98zcvUMdWyQuG3XFo2VQhERi8dhJBMrC4tePvAVA8mC40X7Mut1v5SvasOyA0P9d0cUuxWakyi1BRDdzbEzmg'
 }
 else {
-    urlGQLSSR = `http://localhost:3000/graphql`
+    urlGQLSSR = `http://${process.env.URL}:3000/graphql`
     urlGQL = `http://${process.env.URL}:3000/graphql`
     urlGQLws = `ws://${process.env.URL}:3000/graphql`
     urlMain = `http://${process.env.URL}`
     urlSubscribe = `http://${process.env.URL}:3000/subscribe`
-    applicationKey = 'BPF2bHqRtmYohlJ_6KQ28skt8HDQN8uAwF4C2HaORxWRwNKmMik8ZrTyizcU3_Ousd6UjPu1061hjCPAkhQit_Y'
+    applicationKey = 'BE3fU94F3TygJ3Eoly6tYcvWR1YJTVAdhX8CITGKLBWIfDuhT8CJofEXKvnJfDFhDqDcIb4KXHV5rptewyMqIAU'
 }
 
 export const validMail = (mail) =>

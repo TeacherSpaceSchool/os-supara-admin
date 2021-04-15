@@ -192,16 +192,11 @@ const Memorandums = React.memo((props) => {
                 ):null}
             </div>
             </center>
-            {
-                profile.role!=='admin'?
-                    <Link href='/memorandum/[id]' as={`/memorandum/new`}>
-                        <Fab color='primary' aria-label='add' className={classes.fab}>
-                            <AddIcon />
-                        </Fab>
-                    </Link>
-                    :
-                    null
-            }
+            <Link href='/memorandum/[id]' as={`/memorandum/new`}>
+                <Fab color='primary' aria-label='add' className={classes.fab}>
+                    <AddIcon />
+                </Fab>
+            </Link>
         </App>
     )
 })

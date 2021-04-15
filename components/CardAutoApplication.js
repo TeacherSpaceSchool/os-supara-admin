@@ -158,7 +158,9 @@ const CardAutoApplication = React.memo((props) => {
                                                                     setNewItems([...newItems])
                                                                 }}>
                                                                     {days.map((element, idx) => {
-                                                                        return <MenuItem key={idx} value={element}>{element}</MenuItem>
+                                                                        return <MenuItem key={idx} value={element}>
+                                                                        {element}
+                                                                            </MenuItem>
                                                                     })}
                                                                 </Select>
                                                             </FormControl>

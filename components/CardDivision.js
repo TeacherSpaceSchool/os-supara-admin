@@ -97,7 +97,7 @@ const CardDivision = React.memo((props) => {
                                         >
                                             {suppliers.map((supplier) => (
                                                 <MenuItem key={supplier._id} value={supplier._id}
-                                                          style={{background: newSuppliers.includes(supplier._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                          style={{background: newSuppliers.includes(supplier._id) ? '#e671242b' : '#ffffff'}}>
                                                     {supplier.name}
                                                 </MenuItem>
                                             ))}
@@ -121,7 +121,7 @@ const CardDivision = React.memo((props) => {
                                         >
                                             {specialists.map((specialist) => (
                                                 <MenuItem key={specialist._id} value={specialist._id}
-                                                          style={{background: newSpecialists.includes(specialist._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                          style={{background: newSpecialists.includes(specialist._id) ? '#e671242b' : '#ffffff'}}>
                                                     {specialist.name}
                                                 </MenuItem>
                                             ))}
@@ -145,7 +145,7 @@ const CardDivision = React.memo((props) => {
                                         >
                                             {staffs.map((staff) => (
                                                 <MenuItem key={staff._id} value={staff._id}
-                                                          style={{background: newStaffs.includes(staff._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                          style={{background: newStaffs.includes(staff._id) ? '#e671242b' : '#ffffff'}}>
                                                     {staff.name}
                                                 </MenuItem>
                                             ))}

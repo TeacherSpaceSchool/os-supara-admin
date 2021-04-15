@@ -78,7 +78,7 @@ const Application = React.memo((props) => {
             showSnackBar('Файл слишком большой')
         }
     })
-    const paymentTypes = ['перечисления', 'наличные']
+    const paymentTypes = ['перечисления', 'наличные', 'бартер']
     let [paymentType, setPaymentType] = useState(data.application?data.application.paymentType:'перечисления');
     let handlePaymentType = (async (event) => {
         setPaymentType(event.target.value)

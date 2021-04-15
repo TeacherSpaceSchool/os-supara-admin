@@ -412,7 +412,7 @@ const Memorandum = React.memo((props) => {
                                                 {users.map((user) => {
                                                     if((!whom||user._id!==whom._id)&&user._id!==profile._id)
                                                         return <MenuItem key={user._id} value={user._id}
-                                                                  style={{background: notifiables.includes(user._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                                  style={{background: notifiables.includes(user._id) ? '#e671242b' : '#ffffff'}}>
                                                             {user.name}
                                                         </MenuItem>
                                                 })}
@@ -492,7 +492,7 @@ const Memorandum = React.memo((props) => {
                                                 {users.map((user) => {
                                                     if((!whom||user._id!==whom._id)&&notifiables.includes(user._id))
                                                         return <MenuItem key={user._id} value={user._id}
-                                                                         style={{background: newRoutes.includes(user._id) ? '#f5f5f5' : '#ffffff'}}>
+                                                                         style={{background: newRoutes.includes(user._id) ? '#e671242b' : '#ffffff'}}>
                                                             {user.name}
                                                         </MenuItem>
                                                 })}

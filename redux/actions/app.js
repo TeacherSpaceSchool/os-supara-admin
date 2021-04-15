@@ -14,16 +14,16 @@ export function setFilter(data) {
     }
 }
 
-export function setShowLightbox(data) {
+export function setShowAppBar(data) {
     return {
-        type: SET_SHOW_LIGHTBOX,
+        type: SHOW_APPBAR,
         payload: data
     }
 }
 
-export function setShowAppBar(data) {
+export function setShowLightbox(data) {
     return {
-        type: SHOW_APPBAR,
+        type: SET_SHOW_LIGHTBOX,
         payload: data
     }
 }
