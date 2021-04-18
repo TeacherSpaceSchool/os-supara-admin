@@ -39,7 +39,7 @@ const PinCode =  React.memo(
                 setTimeout(()=>{
                     pinCodeInputRef.current.focus()
                     pinCodeInputRef.current.click()
-                }, 100)
+                }, 1000)
             }
         },[process.browser])
         return (
