@@ -29,8 +29,11 @@ const PinCode =  React.memo(
                 if(await sendPinCode(pinCode)) {
                     setedPinCode()
                 }
-                else
+                else {
                     setError(true)
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(200);
+                }
             }
             else
                 setError(true)
