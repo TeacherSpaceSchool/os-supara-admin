@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -8,16 +8,13 @@ import * as userActions from '../../redux/actions/user'
 import { sendPinCode } from '../../src/gql/user'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const PinCode =  React.memo(
     (props) =>{
         const { classes } = props;
         let [pinCode, setPinCode] = useState('');
-        let [colorPinCode, setColorPinCode] = useState('#E67124');
         let [error, setError] = useState(false);
         let handlePinCode =  (event) => {
             if(event.target.value.length<5)
@@ -29,11 +26,8 @@ const PinCode =  React.memo(
                 if(await sendPinCode(pinCode)) {
                     setedPinCode()
                 }
-                else {
+                else
                     setError(true)
-                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
-                        navigator.vibrate(200);
-                }
             }
             else
                 setError(true)
@@ -45,8 +39,11 @@ const PinCode =  React.memo(
                     if(await sendPinCode(pinCode)) {
                         setedPinCode()
                     }
-                    else
+                    else {
                         setError(true)
+                        if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                            navigator.vibrate(200);
+                    }
                 }
                 setPinCode(pinCode)
             }
