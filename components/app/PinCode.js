@@ -72,44 +72,44 @@ const PinCode =  React.memo(
                                 </div>
                                 <br/>
                                 <div className={classes.row}>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('1')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('1')}}>
                                         1
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('2')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('2')}}>
                                         2
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('3')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('3')}}>
                                         3
                                     </Button>
                                 </div>
                                 <div className={classes.row}>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('4')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('4')}}>
                                         4
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('5')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('5')}}>
                                         5
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('6')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('6')}}>
                                         6
                                     </Button>
                                 </div>
                                 <div className={classes.row}>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('7')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('7')}}>
                                         7
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('8')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('8')}}>
                                         8
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('9')}}>
+                                    <Button  style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('9')}}>
                                         9
                                     </Button>
                                 </div>
                                 <div className={classes.row} style={{alignItems: 'center'}}>
-                                    <Button  size='large' style={{margin: 10}}/>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{buttonPinCode('0')}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}}/>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('0')}}>
                                         0
                                     </Button>
-                                    <Button  size='large' style={{margin: 10}} onClick={()=>{setPinCode('');setError(false)}}>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{setPinCode('');setError(false)}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
                                     </Button>
                                 </div>
