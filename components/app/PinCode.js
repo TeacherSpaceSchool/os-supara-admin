@@ -23,9 +23,8 @@ const PinCode =  React.memo(
         const { setedPinCode } = props.userActions;
         const checkPinCode = async()=> {
             if(pinCode.length===4){
-                if(await sendPinCode(pinCode)) {
+                if(await sendPinCode(pinCode))
                     setedPinCode()
-                }
                 else
                     setError(true)
             }
