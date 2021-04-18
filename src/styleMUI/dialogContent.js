@@ -1,4 +1,16 @@
 export default theme => ({
+
+    inputPinCode:{
+        width: 20,
+        height: 20,
+        margin: 10,
+        border: '2px solid rgba(0, 0, 0, 0.5)',
+        borderRadius: 25
+    },
+    buttonPinCode:{
+        margin: 10
+    },
+
     main:{
         display: 'flex',
         justifyContent: 'center',
