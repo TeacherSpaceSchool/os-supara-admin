@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -14,6 +14,7 @@ import dialogContentStyle from '../../src/styleMUI/dialogContent'
 const PinCode =  React.memo(
     (props) =>{
         const { classes } = props;
+        const buttonPinCodeLock = useRef(false);
         let [pinCode, setPinCode] = useState('');
         let [error, setError] = useState(false);
         let handlePinCode =  (event) => {
@@ -32,23 +33,27 @@ const PinCode =  React.memo(
                 setError(true)
         }
         const buttonPinCode = async(button)=> {
-            if(pinCode.length<4){
-                pinCode += button
-                if(pinCode.length===4){
-                    if(await sendPinCode(pinCode)) {
-                        setedPinCode()
-                    }
-                    else {
-                        setError(true)
-                        if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
-                            navigator.vibrate(200);
+            if(!buttonPinCodeLock.current) {
+                buttonPinCodeLock.current = true
+                if (pinCode.length < 4) {
+                    pinCode += button
+                    setPinCode(pinCode)
+                    if (pinCode.length === 4) {
+                        if (await sendPinCode(pinCode)) {
+                            setedPinCode()
+                        }
+                        else {
+                            setError(true)
+                            if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                                navigator.vibrate(200);
+                        }
                     }
                 }
-                setPinCode(pinCode)
-            }
-            else {
-                setPinCode(button)
-                setError(false)
+                else {
+                    setPinCode(button)
+                    setError(false)
+                }
+                buttonPinCodeLock.current = false
             }
         }
         const { isMobileApp } = props.app;
