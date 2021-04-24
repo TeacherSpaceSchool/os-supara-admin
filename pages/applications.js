@@ -206,7 +206,7 @@ const Applications = React.memo((props) => {
                 ):null}
             </div>
             {
-                profile.role==='специалист'?
+                profile.addApplication?
                     <Link href='/application/[id]' as={`/application/new`}>
                         <Fab color='primary' aria-label='add' className={classes.fab}>
                             <AddIcon />

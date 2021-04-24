@@ -91,7 +91,7 @@ const Units = React.memo((props) => {
 
 Units.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'менеджер', 'специалист', 'снабженец'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'менеджер', 'снабженец'].includes(ctx.store.getState().user.profile.role)&&!ctx.store.getState().user.profile.addApplication)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

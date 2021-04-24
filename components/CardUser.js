@@ -21,6 +21,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const CardUser = React.memo((props) => {
     const classes = cardStyle();
@@ -28,6 +29,7 @@ const CardUser = React.memo((props) => {
     const { isMobileApp } = props.app;
     const { profile } = props.user;
     let [status, setStatus] = useState(element?element.status:'deactive');
+    let [addApplication, setAddApplication] = useState(element?element.addApplication:false);
     let [hide, setHide] = useState('password');
     let handleHide =  () => {
         setHide(!hide)
@@ -156,6 +158,16 @@ const CardUser = React.memo((props) => {
                                                 </Select>
                                             </FormControl>
                                     }
+                                    <div className={classes.row} style={{alignItems: 'flex-end'}}>
+                                        <div className={classes.nameField}>Подача заявки:&nbsp;</div>
+                                        <Checkbox
+                                            size='small'
+                                            checked={addApplication}
+                                            onChange={()=>{setAddApplication(!addApplication)}}
+                                            color='primary'
+                                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        />
+                                    </div>
                                 </div>
                                 :
                                 <div className={classes.column}>
@@ -170,6 +182,15 @@ const CardUser = React.memo((props) => {
                                     <div className={classes.row}>
                                         <div className={classes.nameField}>Телефон:&nbsp;</div>
                                         <div className={classes.value}>{phone}</div>
+                                    </div>
+                                    <div className={classes.row} style={{alignItems: 'flex-end'}}>
+                                        <div className={classes.nameField}>Подача заявки:&nbsp;</div>
+                                        <Checkbox
+                                            size='small'
+                                            checked={addApplication}
+                                            color='primary'
+                                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        />
                                     </div>
                                 </div>
                         }
@@ -201,6 +222,7 @@ const CardUser = React.memo((props) => {
                                             if(login.length>0&&login!==element.login)editElement.login = login
                                             if(role!==element.role)editElement.role = role
                                             if(status!==element.status)editElement.status = status
+                                            if(addApplication!==element.addApplication)editElement.addApplication = addApplication
                                             if(password.length>0)editElement.password = password
                                             const action = async() => {
                                                 await setUser(editElement)
@@ -241,8 +263,9 @@ const CardUser = React.memo((props) => {
                                     <Button onClick={async()=> {
                                         if (name.length>0&&login.length>0&&password.length>0&&role.length>0) {
                                             const action = async() => {
-                                                let user = (await addUser({phone: phone, name: name, login: login, password: password, role: role})).addUser
+                                                let user = (await addUser({addApplication, phone, name, login, password, role})).addUser
                                                 if(user) {
+                                                    setAddApplication(false)
                                                     setName('')
                                                     setLogin('')
                                                     setPassword('')

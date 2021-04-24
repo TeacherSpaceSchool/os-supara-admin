@@ -540,7 +540,7 @@ const Waybill = React.memo((props) => {
                                             size='small'
                                             checked={acceptSpecialist}
                                             onChange={() => {
-                                                if(['admin', 'менеджер', 'специалист'].includes(profile.role)&&!waybill.acceptSpecialist) {
+                                                if((['admin', 'менеджер'].includes(profile.role)||profile.addApplication)&&!waybill.acceptSpecialist) {
                                                     setAcceptSpecialist(!acceptSpecialist)
                                                 }
                                             }}
@@ -550,7 +550,7 @@ const Waybill = React.memo((props) => {
                                         <Input
                                             className={classes.inputTable}
                                             inputProps={{
-                                                readOnly: 'специалист'!==profile.role || waybill.acceptSpecialist
+                                                readOnly: !profile.addApplication || waybill.acceptSpecialist
                                             }}
                                             multiline={true}
                                             value={comment}
@@ -672,7 +672,7 @@ const Waybill = React.memo((props) => {
 
 Waybill.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'менеджер', 'специалист', 'снабженец'].includes(ctx.store.getState().user.profile.role))
+    if(!['admin', 'менеджер', 'снабженец'].includes(ctx.store.getState().user.profile.role)&&!ctx.store.getState().user.profile.addApplication)
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

@@ -111,7 +111,7 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/waybills'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname.includes('waybill')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -148,7 +148,7 @@ const MyDrawer = React.memo((props) => {
                             </List>
                         </Collapse>
                         {
-                            ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                            ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                 <>
                                 <ListItem style={{background: ['/categorys', '/divisions', '/units', '/items', '/routes', '/users', '/roles'].includes(router.pathname)?'#f5f5f5':'#ffffff'}} button onClick={()=>{uncoverItem('Объекты')}}>
                                     <ListItemText primary='Объекты' />
@@ -162,7 +162,7 @@ const MyDrawer = React.memo((props) => {
                         <Collapse in={uncover==='Объекты'} timeout='auto' unmountOnExit>
                             <List component='div' disablePadding>
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/units'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/units'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -175,7 +175,7 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/categorys'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/categorys'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -214,7 +214,7 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/subdivisions'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/subdivisions'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -233,7 +233,7 @@ const MyDrawer = React.memo((props) => {
                                 </Link>
                                 <Divider/>
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/sellers'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/sellers'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>
@@ -259,7 +259,7 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    ['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication?
                                         <>
                                         <Link href={'/items'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname==='/items'?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>

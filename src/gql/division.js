@@ -31,67 +31,6 @@ export const getDivisions = async(element, client)=>{
                                 role
                                 status
                             }
-                            specialists{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                            head{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                          }
-                    }`,
-            })
-        return res.data
-    } catch(err){
-        console.error(err)
-    }
-}
-
-export const getDivisionsForRoute = async(client)=>{
-    try{
-        client = client? client : new SingletonApolloClient().getClient()
-        let res = await client
-            .query({
-                query: gql`
-                    query {
-                        divisionsForRoute {
-                            _id
-                            createdAt
-                            name
-                            del
-                            suppliers{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                            specialists{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                            staffs{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                             head{
                                 _id
                                 createdAt
@@ -131,14 +70,6 @@ export const getDivision = async(element, client)=>{
                                 status
                             }
                             staffs{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                            specialists{
                                 _id
                                 createdAt
                                 login
@@ -192,14 +123,6 @@ export const getDivisionsTrash = async(element, client)=>{
                                 role
                                 status
                             }
-                            specialists{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
                             head{
                                 _id
                                 createdAt
@@ -223,8 +146,8 @@ export const addDivision = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($name: String!, $suppliers: [ID]!, $specialists: [ID]!, $staffs: [ID]!, $head: ID) {
-                        addDivision(name: $name, suppliers: $suppliers, staffs: $staffs, specialists: $specialists, head: $head) {
+                    mutation ($name: String!, $suppliers: [ID]!, $staffs: [ID]!, $head: ID) {
+                        addDivision(name: $name, suppliers: $suppliers, staffs: $staffs, head: $head) {
                             _id
                             createdAt
                             name
@@ -238,14 +161,6 @@ export const addDivision = async(element)=>{
                                 status
                             }
                             staffs{
-                                _id
-                                createdAt
-                                login
-                                name
-                                role
-                                status
-                            }
-                            specialists{
                                 _id
                                 createdAt
                                 login
@@ -275,8 +190,8 @@ export const setDivision = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $name: String, $suppliers: [ID], $specialists: [ID], $head: ID, $staffs: [ID]) {
-                        setDivision(_id: $_id, name: $name, suppliers: $suppliers, specialists: $specialists, head: $head, staffs: $staffs) {
+                    mutation ($_id: ID!, $name: String, $suppliers: [ID], $head: ID, $staffs: [ID]) {
+                        setDivision(_id: $_id, name: $name, suppliers: $suppliers, head: $head, staffs: $staffs) {
                              data
                         }
                     }`})

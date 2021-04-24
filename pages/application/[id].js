@@ -325,7 +325,7 @@ const Application = React.memo((props) => {
                                         <div className={classes.value}>{_application.category.name}</div>
                                     </div>
                                     <div style={{cursor: 'pointer'}} className={classes.row} onClick={() => {
-                                        if (_application.status === 'обработка'&&!['специалист', 'снабженец'].includes(profile.role)) {
+                                        if (_application.status === 'обработка') {
                                             setMiniDialog('Снабженец', <SetSuplier suppliers={division.suppliers} setSupplier={setSupplier}/>)
                                             showMiniDialog(true)
                                         }
@@ -340,7 +340,7 @@ const Application = React.memo((props) => {
                                     </>
                             }
                             {
-                                !_application.status||['отмена', 'обработка'].includes(_application.status)&&profile.role==='специалист'?
+                                !_application.status||['отмена', 'обработка'].includes(_application.status)&&profile.addApplication?
                                     <div className={classes.row}>
                                         <div className={classes.nameField}>Обоснование:&nbsp;&nbsp;&nbsp;</div>
                                         <Input
@@ -363,7 +363,7 @@ const Application = React.memo((props) => {
                                         null
                             }
                             {
-                                (router.query.id==='new'||'обработка'===_application.status)&&['admin', 'специалист', 'менеджер', 'снабженец'].includes(profile.role)?
+                                (router.query.id==='new'||'обработка'===_application.status)&&(['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication)?
                                     <>
                                     <div className={classes.row} style={{alignItems: 'flex-end'}}>
                                         <div className={classes.nameField}>Официально:&nbsp;</div>
@@ -439,7 +439,7 @@ const Application = React.memo((props) => {
                                                 <div className={classes.nameField}>Записка:</div>
                                                 <div className={classes.noteImageList}>
                                                     {
-                                                        _application.status==='обработка'&&profile.role==='специалист'?
+                                                        _application.status==='обработка'&&profile.addApplication?
                                                             <img className={classes.noteImage} src='/static/add.png' onClick={()=>{noteRef.current.click()}} />
                                                             :
                                                             null
@@ -452,7 +452,7 @@ const Application = React.memo((props) => {
                                                             setIndexLightbox(idx)
                                                         }}/>
                                                             {
-                                                                _application.status==='обработка'&&profile.role==='специалист'?
+                                                                _application.status==='обработка'&&profile.addApplication?
                                                                     <div className={classes.noteImageButton} style={{background: 'red'}} onClick={()=>{
                                                                         note.splice(idx, 1)
                                                                         setNote([...note])
@@ -689,7 +689,7 @@ const Application = React.memo((props) => {
                                                     />
                                                 </div>
                                                 {
-                                                    !_application.status||(['отмена', 'обработка'].includes(_application.status)&&['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role))?
+                                                    !_application.status||(['отмена', 'обработка'].includes(_application.status)&&(['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication))?
                                                         <div className={classes.cell} style={{width: 64, fontSize: '0.875rem'}}>
                                                             <Button color='secondary' size='small' onClick={()=>{
                                                                 items.splice(idx, 1)
@@ -912,7 +912,7 @@ const Application = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    _application.status==='обработка'&&['admin', 'менеджер', 'специалист', 'снабженец'].includes(profile.role)?
+                                    _application.status==='обработка'&&(['admin', 'менеджер', 'снабженец'].includes(profile.role)||profile.addApplication)?
                                         <Button size='small' color='primary' onClick={()=>{
                                             const action = async() => {
                                                 await deleteApplication([router.query.id])

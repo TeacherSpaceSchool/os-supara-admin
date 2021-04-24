@@ -211,6 +211,7 @@ export function setProfile() {
                            status
                            login
                            _id
+                           addApplication
                           }
                     }`
                 })
@@ -237,6 +238,7 @@ export async function getProfile(client) {
                           status
                           login
                           _id
+                          addApplication
                          }
                    }`
             })

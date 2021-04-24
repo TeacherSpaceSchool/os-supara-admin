@@ -21,7 +21,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const CardDivision = React.memo((props) => {
     const classes = cardStyle();
-    const { element, setList, idx, list, suppliers, specialists, heads, staffs } = props;
+    const { element, setList, idx, list, suppliers, heads, staffs } = props;
     const { isMobileApp } = props.app;
     let [name, setName] = useState(element?element.name:'');
     let handleName =  (event) => {
@@ -36,10 +36,6 @@ const CardDivision = React.memo((props) => {
         setNewStaffs(event.target.value);
     };
     let [head, setHead] = useState(element?element.head:undefined);
-    let [newSpecialists, setNewSpecialists] = useState(element?element.specialists:[]);
-    const handleNewSpecialists = (event) => {
-        setNewSpecialists(event.target.value);
-    };
     const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
     const { showSnackBar } = props.snackbarActions;
     return (
@@ -104,31 +100,7 @@ const CardDivision = React.memo((props) => {
                                         </Select>
                                     </FormControl>
                                     <FormControl className={classes.input}>
-                                        <InputLabel>Специалисты</InputLabel>
-                                        <Select
-                                            multiple
-                                            value={newSpecialists}
-                                            onChange={handleNewSpecialists}
-                                            input={<Input/>}
-                                            MenuProps={{
-                                                PaperProps: {
-                                                    style: {
-                                                        maxHeight: 500,
-                                                        width: 250,
-                                                    },
-                                                },
-                                            }}
-                                        >
-                                            {specialists.map((specialist) => (
-                                                <MenuItem key={specialist._id} value={specialist._id}
-                                                          style={{background: newSpecialists.includes(specialist._id) ? '#e671242b' : '#ffffff'}}>
-                                                    {specialist.name}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                    <FormControl className={classes.input}>
-                                        <InputLabel>Утверждение</InputLabel>
+                                        <InputLabel>Сотрудники</InputLabel>
                                         <Select
                                             multiple
                                             value={newStaffs}
@@ -174,7 +146,7 @@ const CardDivision = React.memo((props) => {
                                 :
                             <>
                             <Button onClick={async()=>{
-                                let editElement = {_id: element._id, suppliers: newSuppliers, specialists: newSpecialists, staffs: newStaffs}
+                                let editElement = {_id: element._id, suppliers: newSuppliers, staffs: newStaffs}
                                 head = head?head._id:head
                                 if(name.length>0&&name!==element.name)editElement.name = name
                                 if(head!==element.head)editElement.head = head
@@ -202,9 +174,8 @@ const CardDivision = React.memo((props) => {
                             <Button onClick={async()=> {
                                 if (name.length>0) {
                                     const action = async() => {
-                                        let category = (await addDivision({name: name, head: head?head._id:head, staffs: newStaffs, suppliers: newSuppliers, specialists: newSpecialists})).addDivision
+                                        let category = (await addDivision({name: name, head: head?head._id:head, staffs: newStaffs, suppliers: newSuppliers})).addDivision
                                         setName('')
-                                        setNewSpecialists([])
                                         setNewSuppliers([])
                                         setNewStaffs([])
                                         setHead(undefined)

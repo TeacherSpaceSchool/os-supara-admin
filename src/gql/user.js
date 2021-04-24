@@ -20,6 +20,7 @@ export const getUsers = async(element, client)=>{
                             del
                             phone
                             pinCode
+                            addApplication
                         }
                     }`,
             })
@@ -289,8 +290,8 @@ export const addUser = async(element)=>{
         let res = await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($phone: String, $login: String!, $name: String!, $role: String!, $password: String!) {
-                        addUser(phone: $phone, login: $login, name: $name, role: $role, password: $password) {
+                    mutation ($phone: String, $login: String!, $addApplication: Boolean!, $name: String!, $role: String!, $password: String!) {
+                        addUser(phone: $phone, login: $login, name: $name, addApplication: $addApplication, role: $role, password: $password) {
                             _id
                             createdAt
                             login
@@ -299,6 +300,7 @@ export const addUser = async(element)=>{
                             status
                             del
                             pinCode
+                            addApplication
                         }
                     }`})
         return res.data
@@ -313,8 +315,8 @@ export const setUser = async(element)=>{
         await client.mutate({
             variables: element,
             mutation : gql`
-                    mutation ($_id: ID!, $phone: String, $login: String, $name: String, $role: String, $password: String) {
-                        setUser(_id: $_id, phone: $phone, login: $login, name: $name, role: $role, password: $password) {
+                    mutation ($_id: ID!, $phone: String, $login: String, $addApplication: Boolean, $name: String, $role: String, $password: String) {
+                        setUser(_id: $_id, phone: $phone, login: $login, addApplication: $addApplication, name: $name, role: $role, password: $password) {
                              data
                         }
                     }`})
