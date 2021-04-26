@@ -125,7 +125,7 @@ const MyDrawer = React.memo((props) => {
                                         null
                                 }
                                 {
-                                    ['admin', 'менеджер', 'начальник отдела', 'снабженец'].includes(profile.role)?
+                                    /*['admin', 'менеджер', 'начальник отдела', 'снабженец'].includes(*/profile.role/*)*/?
                                         <>
                                         <Link href={'/expensereports'}>
                                             <ListItem style={{marginLeft: 16, background:router.pathname.includes('expensereport')?'#f5f5f5':'#ffffff'}} button onClick={()=>{showDrawer(false)}}>

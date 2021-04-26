@@ -82,7 +82,7 @@ const CardAutoApplication = React.memo((props) => {
                                     <Autocomplete
                                         defaultValue={specialist}
                                         className={classes.input}
-                                        options={division.specialists}
+                                        options={division.staffs}
                                         getOptionLabel={option => option.name}
                                         onChange={(event, newValue) => {
                                             setSpecialist(newValue)

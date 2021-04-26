@@ -175,7 +175,7 @@ const ExpenseReports = React.memo((props) => {
 
 ExpenseReports.getInitialProps = async function(ctx) {
     await initialApp(ctx)
-    if(!['admin', 'менеджер', 'начальник отдела', 'снабженец'].includes(ctx.store.getState().user.profile.role))
+    if(!/*['admin', 'менеджер', 'начальник отдела', 'снабженец'].includes*/(ctx.store.getState().user.profile.role))
         if(ctx.res) {
             ctx.res.writeHead(302, {
                 Location: '/'

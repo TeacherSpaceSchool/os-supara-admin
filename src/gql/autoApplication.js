@@ -13,7 +13,7 @@ export const getAutoApplications = async(element, client)=>{
                             _id
                             createdAt
                             roles
-                            division {_id name suppliers {_id name} specialists {_id name}}
+                            division {_id name suppliers {_id name} staffs {_id name}}
                             supplier {_id name}
                             specialist {_id name}
                             items {item name type triggerCount triggerDays count unit GUID}
@@ -53,7 +53,7 @@ export const addAutoApplication = async(element)=>{
                             _id
                             createdAt
                             roles
-                            division {_id name suppliers {_id name} specialists {_id name}}
+                            division {_id name suppliers {_id name} staffs {_id name}}
                             supplier {_id name}
                             specialist {_id name}
                             items {item name type triggerCount triggerDays count unit GUID}
