@@ -363,7 +363,6 @@ const App = React.memo(props => {
                         {props.children}
                     </div>
                     <FullDialog/>
-                    <Dialog />
                     <SnackBar/>
                     {load||reloadPage?
                         <div className='load'>
@@ -385,6 +384,7 @@ const App = React.memo(props => {
                     :
                     <PinCode/>
             }
+            <Dialog />
             <audio src='/alert.mp3' ref={alert}/>
         </div>
     )

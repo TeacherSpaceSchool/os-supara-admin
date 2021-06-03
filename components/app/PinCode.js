@@ -10,10 +10,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import dialogContentStyle from '../../src/styleMUI/dialogContent'
+import * as mini_dialogActions from '../../redux/actions/mini_dialog'
+import Confirmation from '../dialog/Confirmation'
 
 const PinCode =  React.memo(
     (props) =>{
         const { classes } = props;
+        const { setMiniDialog, showMiniDialog } = props.mini_dialogActions;
         const buttonPinCodeLock = useRef(false);
         let [pinCode, setPinCode] = useState('');
         let [error, setError] = useState(false);
@@ -21,7 +24,7 @@ const PinCode =  React.memo(
             if(event.target.value.length<5)
                 setPinCode(event.target.value)
         };
-        const { setedPinCode } = props.userActions;
+        const { setedPinCode, logout } = props.userActions;
         const checkPinCode = async()=> {
             if(pinCode.length===4){
                 if(await sendPinCode(pinCode))
@@ -109,7 +112,15 @@ const PinCode =  React.memo(
                                     </Button>
                                 </div>
                                 <div className={classes.row} style={{alignItems: 'center'}}>
-                                    <Button style={{margin: 10, fontSize: '1.25rem'}}/>
+                                    <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{
+                                        const action = async() => {
+                                            logout(true)
+                                        }
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }}>
+                                        <svg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='#000000'><path d='M0 0h24v24H0z' fill='none'/><path d='M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z'/></svg>
+                                    </Button>
                                     <Button style={{margin: 10, fontSize: '1.25rem'}} onClick={()=>{buttonPinCode('0')}}>
                                         0
                                     </Button>
@@ -137,9 +148,20 @@ const PinCode =  React.memo(
                                 />
                                 {error?null:<br/>}
                                 <br/>
-                                <Button variant='contained' color='primary' onClick={checkPinCode} className={classes.button}>
-                                    Войти
-                                </Button>
+                                <div className={classes.row}>
+                                    <Button variant='contained' color='primary' onClick={checkPinCode} className={classes.button}>
+                                        Войти
+                                    </Button>
+                                    <Button variant='contained' color='secondary' onClick={()=>{
+                                        const action = async() => {
+                                            logout(true)
+                                        }
+                                        setMiniDialog('Вы уверены?', <Confirmation action={action}/>)
+                                        showMiniDialog(true)
+                                    }} className={classes.button}>
+                                        Выйти
+                                    </Button>
+                                </div>
                                 </>
                         }
                     </DialogContent>
@@ -157,6 +179,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
+        mini_dialogActions: bindActionCreators(mini_dialogActions, dispatch),
     }
 }
 
