@@ -39,6 +39,8 @@ const PinCode =  React.memo(
             if(!buttonPinCodeLock.current) {
                 buttonPinCodeLock.current = true
                 if (pinCode.length < 4) {
+                    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate)
+                        navigator.vibrate(10);
                     pinCode += button
                     setPinCode(pinCode)
                     if (pinCode.length === 4) {
@@ -51,6 +53,7 @@ const PinCode =  React.memo(
                                 navigator.vibrate(200);
                         }
                     }
+
                 }
                 else {
                     setPinCode(button)
