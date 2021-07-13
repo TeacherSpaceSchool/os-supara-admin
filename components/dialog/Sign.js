@@ -49,6 +49,10 @@ const Sign =  React.memo(
                     margin='normal'
                     value={loginEnter}
                     onChange={handleLoginEnter}
+                    onKeyPress={event => {
+                        if (event.key === 'Enter'&&loginEnter.length>0&&passEnter.length>0)
+                            signin({login: loginEnter, password: passEnter})
+                    }}
                 />
                 <br/>
                 <FormControl style={{width: width}} className={classNames(classes.margin, classes.textField)}>

@@ -28,7 +28,17 @@ const MyDrawer = React.memo((props) => {
     let variant = isMobileApp?'temporary' : 'permanent';
     const open = isMobileApp?drawer:true;
     const router = useRouter();
-    let [uncover, setUncover] = useState('');
+    let [uncover, setUncover] = useState(
+        (router.pathname.includes('cashexchange')||router.pathname.includes('memorandum')||router.pathname.includes('expensereport')||router.pathname.includes('waybill')||router.pathname.includes('application')&&router.pathname!=='/autoapplications'||router.pathname.includes('cashconsumable'))&&router.pathname!=='/routes'?'Документы'
+        :
+            ['/categorys', '/divisions', '/units', '/items', '/routes', '/users', '/roles'].includes(router.pathname)?'Объекты'
+            :
+                ['/faqs', '/errors', '/trash', '/setting', '/autoapplications', '/unloadinguser', '/unloadingitem'].includes(router.pathname)?'Инструменты'
+                    :
+                    router.pathname.includes('balance')||router.pathname.includes('statistic')||router.pathname.includes('storage')?'Статистика'
+                        :
+                        ''
+    );
     const uncoverItem = (item)=>{
         setUncover(uncover!==item?item:'')
     };
